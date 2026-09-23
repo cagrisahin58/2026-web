@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YZM205 Web 2026</title>
+<meta name="yayin" content="2026-09-23T20:23:28">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ink:#121A2B; --ground:#F5F7FB; --surface:#FFFFFF; --surface-2:#EEF2F8; --line:#D9DEE8; --muted:#5B6577;
+  --theory:#2352D9; --theory-soft:#E4EAFB; --lab:#0A6F62; --lab-soft:#DDF3EF; --ship:#8F5600; --ship-soft:#FBEBD2; --ai:#7A3DD6; --ai-soft:#EEE6FB;
+  --focus:#2352D9;
+  --display:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif; --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#E7ECF5; --ground:#0E131D; --surface:#161C29; --surface-2:#1D2535; --line:#2A3345; --muted:#9AA5B8;
+    --theory:#7B97FF; --theory-soft:#1B2545; --lab:#3FC4B0; --lab-soft:#123430; --ship:#F0A93B; --ship-soft:#3A2A10; --ai:#B48CFF; --ai-soft:#2C1F4A;
+    --focus:#7B97FF; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E7ECF5; --ground:#0E131D; --surface:#161C29; --surface-2:#1D2535; --line:#2A3345; --muted:#9AA5B8;
+  --theory:#7B97FF; --theory-soft:#1B2545; --lab:#3FC4B0; --lab-soft:#123430; --ship:#F0A93B; --ship-soft:#3A2A10; --ai:#B48CFF; --ai-soft:#2C1F4A;
+  --focus:#7B97FF; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:16px/1.55 var(--body)}
+main{max-width:720px;margin:0 auto;padding:40px 16px 56px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.15;margin:10px 0 12px;letter-spacing:-.01em}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+p{margin:0 0 12px;max-width:62ch}
+a{color:var(--theory)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+ul{list-style:none;padding:0;margin:24px 0;display:grid;gap:10px}
+li a{display:grid;gap:4px;padding:14px 16px;border:1px solid var(--line);border-left:4px solid var(--c,var(--theory));border-radius:12px;background:var(--surface);color:inherit;text-decoration:none}
+li a:hover{border-color:var(--c,var(--theory))}
+li strong{font-family:var(--display);font-size:1.08rem}
+li span{color:var(--muted);font-size:.92rem}
+.k{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:var(--c,var(--theory))}
+li .kilit{display:grid;gap:4px;padding:14px 16px;border:1px dashed var(--line);border-left:4px solid var(--line);border-radius:12px;color:var(--muted)}
+li .kilit .k{color:var(--muted)}
+li .kilit strong{font-family:var(--display);font-size:1.08rem}
+li .kilit .acilis{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:var(--c,var(--theory))}
+footer{color:var(--muted);font-size:.86rem;border-top:1px solid var(--line);padding-top:16px}
+footer p{margin:0 0 6px}
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Muş Alparslan Üniversitesi · Yazılım Mühendisliği 2. sınıf · 2026–2027 Güz</div>
+  <h1>YZM205 Web Tasarımı ve Programlama</h1>
+  <p>Perşembe 10:00–11:45 teori, 15:00–16:45 lab, derslik BLD-104. Ders notları tarayıcıda açılan sayfalardır ve her hafta buraya eklenir.</p>
+  <ul>
+    <li><a href="docs/syllabus.html" style="--c:var(--theory)"><span class="k">DERS PLANI</span><strong>Ders planı</strong><span>14 haftalık plan, proje, değerlendirme, lab teslimi, yapay zekâ kuralları</span></a></li>
+    <li><a href="weeks/hafta-00-kurulum/" style="--c:var(--lab)"><span class="k">HAFTA 0</span><strong>Kurulum</strong><span>Bilgisayarını derse hazırla. 1 Ekim'den önce evde yap, yaklaşık 40 dakika.</span></a></li>
+    <li><a href="weeks/hafta-01/" style="--c:var(--ai)"><span class="k">HAFTA 1 · 24 EYLÜL</span><strong>Tanışma</strong><span>Yapay zekâ çağında web yazılımcısı olmak. Bilgisayar gerekmez.</span></a></li>
+    <li><div class="kilit" style="--c:var(--ship)" aria-disabled="true"><span class="k">HAFTA 2 · 1 EKİM</span><strong>HTML</strong><span>Sayfanın iskeleti</span><span class="acilis">1 Ekim'de açılır</span></div></li>
+    <li><div class="kilit" style="--c:var(--theory)" aria-disabled="true"><span class="k">HAFTA 3 · 8 EKİM</span><strong>CSS</strong><span>Sayfaya görünüş vermek</span><span class="acilis">8 Ekim'de açılır</span></div></li>
+    <li><div class="kilit" style="--c:var(--lab)" aria-disabled="true"><span class="k">HAFTA 4 · 15 EKİM</span><strong>JavaScript 1</strong><span>Dilin temelleri</span><span class="acilis">15 Ekim'de açılır</span></div></li>
+    <li><div class="kilit" style="--c:var(--lab)" aria-disabled="true"><span class="k">HAFTA 5 · 22 EKİM</span><strong>JavaScript 2</strong><span>Sayfayı canlandırmak. Takımlar kurulur (M0).</span><span class="acilis">22 Ekim'de açılır</span></div></li>
+    <li><div class="kilit" style="--c:var(--ship)" aria-disabled="true"><span class="k">HAFTA 7 · 5 KASIM</span><strong>Sunucu</strong><span>Tarayıcının konuştuğu program: Node.js ve Express</span><span class="acilis">5 Kasım'da açılır</span></div></li>
+    <li><div class="kilit" style="--c:var(--theory)" aria-disabled="true"><span class="k">ARA SINAV · 9–13 KASIM</span><strong>Ara sınav hazırlık</strong><span>Sınavın biçimi, örnek uygulama görevi, 30 pratik soru</span><span class="acilis">Sınavdan önce açılır</span></div></li>
+    <li><div class="kilit" style="--c:var(--theory)" aria-disabled="true"><span class="k">HAFTA 8 · 19 KASIM</span><strong>Veritabanı</strong><span>Veriyi saklamak: SQLite</span><span class="acilis">19 Kasım'da açılır</span></div></li>
+    <li><div class="kilit" style="--c:var(--ship)" aria-disabled="true"><span class="k">HAFTA 9 · 26 KASIM</span><strong>Git ve GitHub</strong><span>Takım çalışması: commit, dal, pull request, çakışma</span><span class="acilis">26 Kasım'da açılır</span></div></li>
+    <li><div class="kilit" style="--c:var(--ai)" aria-disabled="true"><span class="k">HAFTA 10 · 3 ARALIK</span><strong>Yapay zekâ ile geliştirme</strong><span>Copilot ajan modu. İlk sürüm yayında (M1).</span><span class="acilis">3 Aralık'ta açılır</span></div></li>
+    <li><div class="kilit" style="--c:var(--theory)" aria-disabled="true"><span class="k">HAFTA 11 · 10 ARALIK</span><strong>Güvenlik ve giriş</strong><span>Hash, oturum, XSS, enjeksiyon, gizli anahtar</span><span class="acilis">10 Aralık'ta açılır</span></div></li>
+    <li><div class="kilit" style="--c:var(--ai)" aria-disabled="true"><span class="k">HAFTA 12 · 17 ARALIK</span><strong>Uygulamaya yapay zekâ</strong><span>Dil modeli API'si sunucudan. Çalışan sürüm (M2).</span><span class="acilis">17 Aralık'ta açılır</span></div></li>
+    <li><div class="kilit" style="--c:var(--ship)" aria-disabled="true"><span class="k">HAFTA 13 · 24 ARALIK</span><strong>Yayına alma</strong><span>Render ile internete koymak, React'a bakış, Demo Günü hazırlığı</span><span class="acilis">24 Aralık'ta açılır</span></div></li>
+    <li><div class="kilit" style="--c:var(--lab)" aria-disabled="true"><span class="k">HAFTA 14 · 31 ARALIK</span><strong>Demo Günü</strong><span>14 takım, 7 dakika demo ve 3 dakika soru. Final teslimi (M3).</span><span class="acilis">Demo Günü'nden önce açılır</span></div></li>
+  </ul>
+  <footer>
+    <p>YZM205 Web Tasarımı ve Programlama · Muş Alparslan Üniversitesi · Arş. Gör. Çağrı ŞAHİN</p>
+    <p>Kaynak dosyalar: <a href="https://github.com/cagrisahin58/2026-web">github.com/cagrisahin58/2026-web</a></p>
+  </footer>
+</main>
+</body>
+</html>

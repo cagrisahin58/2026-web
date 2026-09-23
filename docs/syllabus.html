@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>YZM205 Ders Planı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ink:#121A2B; --ground:#F5F7FB; --surface:#FFFFFF; --surface-2:#EEF2F8; --line:#D9DEE8; --muted:#5B6577;
+  --theory:#2352D9; --theory-soft:#E4EAFB; --lab:#0A6F62; --lab-soft:#DDF3EF; --ship:#8F5600; --ship-soft:#FBEBD2; --ai:#7A3DD6; --ai-soft:#EEE6FB;
+  --focus:#2352D9; --shadow:0 1px 2px rgba(18,26,43,.06),0 8px 24px -12px rgba(18,26,43,.18);
+  --display:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif; --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#E7ECF5; --ground:#0E131D; --surface:#161C29; --surface-2:#1D2535; --line:#2A3345; --muted:#9AA5B8;
+    --theory:#7B97FF; --theory-soft:#1B2545; --lab:#3FC4B0; --lab-soft:#123430; --ship:#F0A93B; --ship-soft:#3A2A10; --ai:#B48CFF; --ai-soft:#2C1F4A;
+    --focus:#7B97FF; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E7ECF5; --ground:#0E131D; --surface:#161C29; --surface-2:#1D2535; --line:#2A3345; --muted:#9AA5B8;
+  --theory:#7B97FF; --theory-soft:#1B2545; --lab:#3FC4B0; --lab-soft:#123430; --ship:#F0A93B; --ship-soft:#3A2A10; --ai:#B48CFF; --ai-soft:#2C1F4A;
+  --focus:#7B97FF; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--ink);font:15px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--theory);text-decoration-thickness:1px;text-underline-offset:2px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(1.9rem,5vw,3rem);font-weight:800}
+h2{font-size:clamp(1.35rem,2.6vw,1.75rem);font-weight:700}
+h3{font-size:1.08rem;font-weight:700}
+p{margin:0}
+p+p{margin-top:10px}
+ul,ol{margin:0;padding-left:1.2em}
+li{margin:.25em 0}
+code{font-family:var(--mono);font-size:.9em;background:var(--surface-2);padding:1px 5px;border-radius:4px}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:clamp(16px,4vw,32px)}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.lede{max-width:68ch;font-size:1.03rem}
+.muted{color:var(--muted)}
+
+/* Üst çubuk ve bölüm menüsü */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--ground) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:10px 16px;min-height:56px;flex-wrap:wrap;padding-block:8px}
+.brand{font-family:var(--display);font-weight:800;font-size:1.02rem;white-space:nowrap;display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
+.brand .dot{width:10px;height:10px;border-radius:50%;background:var(--theory);box-shadow:0 0 0 4px var(--theory-soft)}
+nav.jump{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1 1 320px;min-width:0}
+nav.jump::-webkit-scrollbar{display:none}
+nav.jump a{color:var(--muted);text-decoration:none;font:500 .86rem/1 var(--body);padding:9px 10px;border-radius:999px;white-space:nowrap}
+nav.jump a:hover{color:var(--ink);background:var(--surface-2)}
+.btn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 .86rem/1 var(--body);padding:9px 14px;border-radius:10px;cursor:pointer}
+.btn:hover{background:var(--surface-2)}
+.btn.primary{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.btn.primary:hover{opacity:.92;background:var(--ink)}
+.btn.small{padding:7px 10px;font-size:.8rem}
+
+main{padding-block:28px 64px}
+main>section{scroll-margin-top:120px}
+main>section+section{margin-top:52px}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;margin-bottom:14px}
+
+/* Açılış */
+.hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px;align-items:end}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.72rem;font-weight:500;padding:4px 9px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);max-width:100%;overflow-wrap:anywhere}
+.chip.theory{background:var(--theory-soft);border-color:transparent;color:var(--theory)}
+.chip.lab{background:var(--lab-soft);border-color:transparent;color:var(--lab)}
+.chip.ship{background:var(--ship-soft);border-color:transparent;color:var(--ship)}
+.chip.ai{background:var(--ai-soft);border-color:transparent;color:var(--ai)}
+.now{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+.now .row{display:flex;align-items:center;gap:14px;margin-top:8px}
+.now .big{font-family:var(--display);font-size:2.6rem;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.now .btn{margin-top:14px}
+.updated{margin-top:14px;font-size:.88rem}
+
+/* Amaç ve ritim */
+.cards2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;min-width:0}
+.card h3{margin-bottom:8px}
+.block .when{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;margin-bottom:6px}
+.block.theory{border-top:3px solid var(--theory)} .block.theory .when{color:var(--theory)}
+.block.lab{border-top:3px solid var(--lab)} .block.lab .when{color:var(--lab)}
+.steps{list-style:none;padding:0;display:grid;gap:8px;margin-top:10px}
+.steps li{display:grid;grid-template-columns:62px minmax(0,1fr);gap:10px;align-items:start;margin:0}
+.steps .k{font-family:var(--mono);font-size:.72rem;font-weight:500;padding:3px 0;text-align:center;border-radius:6px;background:var(--lab-soft);color:var(--lab)}
+.callout{border-left:3px solid var(--theory);background:var(--surface);border-radius:0 10px 10px 0;padding:12px 16px;font-size:.94rem;margin-top:14px}
+.callout.ship{border-left-color:var(--ship)}
+.callout.ai{border-left-color:var(--ai)}
+
+/* Haftalar */
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.toolbar .spacer{flex:1}
+.timeline{display:grid;gap:10px}
+details.week{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;scroll-margin-top:120px}
+details.week[open]{box-shadow:var(--shadow)}
+details.week.next{border-color:var(--theory);box-shadow:0 0 0 3px var(--theory-soft)}
+details.week.off{background:var(--surface-2)}
+details.week summary{list-style:none;display:grid;grid-template-columns:74px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 16px;cursor:pointer}
+details.week summary::-webkit-details-marker{display:none}
+.num{font-family:var(--display);font-weight:800;font-size:1.9rem;line-height:1;font-variant-numeric:tabular-nums}
+.num small{display:block;font-family:var(--mono);font-size:.64rem;font-weight:500;color:var(--muted);letter-spacing:.04em;margin-top:4px;white-space:nowrap}
+.wtitle{font-family:var(--display);font-weight:700;font-size:1.06rem}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.tags .chip{font-size:.66rem;padding:2px 7px}
+.flags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
+.caret{width:22px;height:22px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted);transition:transform .2s;font-size:.8rem}
+details.week[open] .caret{transform:rotate(180deg)}
+.week-body{border-top:1px solid var(--line);padding:16px 16px 18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.col h4{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin:0 0 6px;display:flex;align-items:center;gap:8px}
+.col h4::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--line)}
+.col.theory h4{color:var(--theory)} .col.theory h4::before{background:var(--theory)}
+.col.lab h4{color:var(--lab)} .col.lab h4::before{background:var(--lab)}
+.col p{font-size:.94rem}
+.ms{grid-column:1/-1;display:flex;gap:10px;align-items:flex-start;background:var(--ship-soft);border-radius:10px;padding:10px 14px;font-size:.93rem}
+.ms .flag{font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.08em;color:var(--ship);white-space:nowrap;margin-top:2px}
+.links{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.93rem}
+.period{display:grid;grid-template-columns:74px minmax(0,1fr);gap:14px;align-items:start;background:var(--theory-soft);border:1px dashed var(--theory);border-radius:14px;padding:14px 16px;scroll-margin-top:120px}
+.period.next{box-shadow:0 0 0 3px var(--theory-soft);border-style:solid}
+.period .pl{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;color:var(--theory);font-weight:500;line-height:1.35}
+.period .pt{font-family:var(--display);font-weight:700;font-size:1.02rem}
+.period .px{font-size:.92rem;margin-top:2px}
+
+/* Proje */
+.track{display:grid;grid-template-columns:repeat(15,minmax(0,1fr));gap:4px;margin:16px 0 6px}
+.track .cell{height:34px;border-radius:6px;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;font-family:var(--mono);font-size:.66rem;color:var(--muted);text-align:center;line-height:1.1;min-width:0}
+.track .cell.m{background:var(--ship-soft);border-color:var(--ship);color:var(--ship);font-weight:500}
+.track .cell.exam{background:var(--theory-soft);border-color:var(--theory);color:var(--theory)}
+.track .cell.off{opacity:.55}
+.mslist{display:grid;gap:10px;margin-top:14px}
+.msrow{display:grid;grid-template-columns:70px minmax(0,1fr);gap:14px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.msrow .code{font-family:var(--display);font-weight:800;font-size:1.35rem;line-height:1.1;color:var(--ship)}
+.msrow .code small{display:block;font-family:var(--mono);font-weight:500;font-size:.64rem;letter-spacing:.04em;color:var(--muted);white-space:nowrap;margin-top:3px}
+.msrow .when{font-weight:600}
+
+/* Tablolar */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+.tablewrap table{min-width:560px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500;color:var(--muted)}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.b{font-weight:600}
+
+/* Not çubuğu */
+.bar{display:flex;height:44px;border-radius:10px;overflow:hidden;border:1px solid var(--line);margin:14px 0 10px}
+.bar div{display:grid;place-items:center;font-family:var(--mono);font-size:.74rem;font-weight:500;color:#fff;min-width:0;white-space:nowrap;overflow:hidden}
+.bar .gap{flex:0 0 4px;background:var(--ground)}
+.barlegend{display:flex;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:.74rem;color:var(--muted);flex-wrap:wrap}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px;margin-top:14px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:.93rem}
+.fact .k{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px}
+
+/* Teslim ve kontrol listesi */
+.check{list-style:none;padding:0;display:grid;gap:6px}
+.check li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;align-items:start;font-size:.94rem;margin:0}
+.check li::before{content:"";width:14px;height:14px;margin-top:4px;border-radius:4px;border:1.5px solid var(--lab);background:var(--lab-soft)}
+.due{font-family:var(--display);font-weight:800;font-size:1.25rem;margin:2px 0 6px}
+
+/* Yapay zekâ notu */
+.notebar{display:flex;justify-content:flex-end;margin-top:10px}
+.note{margin:6px 0 0;white-space:pre-wrap;font-family:var(--mono);font-size:.86rem;line-height:1.7;background:var(--surface-2);padding:14px 16px;border-radius:10px;overflow-x:auto}
+.copied{font-size:.82rem;color:var(--lab);margin-top:6px;min-height:1.2em}
+
+footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--muted);font-size:.86rem}
+
+@media (max-width:760px){
+  .hero,.cards2,.week-body{grid-template-columns:minmax(0,1fr)}
+  details.week summary{grid-template-columns:58px minmax(0,1fr);gap:10px}
+  .flags{grid-column:1/-1;justify-content:flex-start}
+  .caret{display:none}
+  .period{grid-template-columns:minmax(0,1fr)}
+  .track{grid-template-columns:repeat(8,minmax(0,1fr))}
+  .num{font-size:1.6rem}
+  #themeBtn{margin-left:auto}
+  .top{position:relative}
+  nav.jump{order:3;flex-basis:100%;flex-wrap:wrap;overflow:visible}
+  nav.jump a{padding:8px 9px}
+  .top .wrap{row-gap:4px}
+  main>section,details.week,.period{scroll-margin-top:16px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{
+  .top,.toolbar,.btn{display:none!important}
+  details.week{break-inside:avoid}
+  body{background:#fff;color:#000}
+}
+</style>
+<style>.kilitli{opacity:.6;cursor:not-allowed;text-decoration:none}a.kilitli,span.kilitli.btn{pointer-events:none}</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#basla"><span class="dot" aria-hidden="true"></span><span>YZM205 · Ders planı</span></a>
+    <nav class="jump" aria-label="Bölümler" id="jump"></nav>
+    <button class="btn small" type="button" id="themeBtn" aria-label="Temayı değiştir">Koyu tema</button>
+  </div>
+</header>
+
+<main class="wrap" id="main"><noscript><p>Bu sayfanın içeriği JavaScript ile çiziliyor. Tarayıcında JavaScript kapalıysa ders planının metin hâlini <a href="https://github.com/cagrisahin58/2026-web/blob/main/SYLLABUS.md">GitHub'da SYLLABUS.md</a> dosyasından okuyabilirsin.</p></noscript></main>
+
+<footer><div class="wrap" id="footer"></div></footer>
+
+<script id="data">
+window.SYLLABUS = {
+  course: {
+    code: "YZM205",
+    title: "YZM205 Web Tasarımı ve Programlama",
+    subtitle: "Ders planı",
+    institution: "Muş Alparslan Üniversitesi · Mühendislik-Mimarlık Fakültesi · Yazılım Mühendisliği 2. sınıf",
+    term: "2026–2027 Güz",
+    meta: [
+      {kind:"theory", text:"Perşembe 10:00–11:45 teori"},
+      {kind:"lab", text:"Perşembe 15:00–16:45 lab"},
+      {text:"Derslik BLD-104"},
+      {kind:"ship", text:"4 kişilik takım projesi"},
+      {text:"Arş. Gör. Çağrı ŞAHİN"}
+    ],
+    updated: "Güncelleme: 23 Eylül 2026"
+  },
+
+  purpose: [
+    "WhatsApp Web, YouTube, e-Devlet: her gün açtığın bu sitelerin hepsi birer web uygulaması. Dönemin sonunda sen de takımınla birlikte küçük ama gerçek bir web uygulaması yapıp internete koymuş olacaksın. Sayfaları tarayıcıda açılan, arkasında bir sunucu ve bir veritabanı çalışan bir uygulama. Bugün kodun bir kısmını yapay zekâ yazabiliyor. Neyin yapılacağına karar vermek, çıkan kodu anlamak ve doğru çalışıp çalışmadığını kontrol etmek yine insanın işi. Bu derste o insan olmayı öğreneceksin.",
+    "Peki yapay zekâ bir sayfayı saniyeler içinde yazabiliyorsa HTML'i, CSS'i, JavaScript'i neden tek tek öğreniyoruz? Çünkü yapay zekâ çoğu zaman neredeyse doğru kod verir ve aradaki küçük hatayı ancak kodu okuyabilen biri fark eder. O yüzden Hafta 2 ile Hafta 9 arasında kodu önce sen yazarsın. Temeller oturunca, Hafta 10'dan itibaren kodlama ajanıyla daha hızlı çalışırsın. Kuralların ayrıntısı aşağıda, [Yapay zekâ kuralları](#yapay-zeka) başlığında."
+  ],
+
+  rhythm: {
+    theory: {when:"10:00–11:45 · 105 dakika", title:"Sabah: konu ve canlı örnek", text:"Hoca yeni kavramları o haftanın ders notundan anlatır ve canlı örnekle gösterir. 105 dakikanın ortasında 10 dakika ara verilir."},
+    lab: {when:"15:00–16:45 · 105 dakika", title:"Öğleden sonra: lab", text:"Kendi dizüstünle gelirsin, kampüs Wi-Fi'ına bağlanırsın. Arada 5 dakika ara verilir. Her lab üç adımdan oluşur."},
+    steps: [
+      {k:"YAP", text:"Haftanın konusunu adım adım uygulayıp kendi çalışan sayfanı ya da kodunu ortaya çıkarırsın."},
+      {k:"BOZ", text:"İçine bilerek üç hata konmuş bir kodu alır, hataları bulup düzeltirsin."},
+      {k:"ANLAT", text:"Haftanın bir sorusunu yanındaki arkadaşına 60 saniyede kendi cümlelerinle anlatırsın."}
+    ],
+    notes: "Ders notu slayt değil, tarayıcıda açılan bir sayfa. İçinde küçük denemeler (simülasyonlar) ve cevabı açıklanan sorular var. Soruların bir kısmını derste birlikte çözeriz, kalanını evde sen çözersin. Lab bitmeden teslim formunu doldurursun, ayrıntısı [Lab teslimi](#teslim) başlığında."
+  },
+
+  planNote: "Tarihler Perşembe günleridir. 29 Ekim Cumhuriyet Bayramı olduğu için Hafta 6'da ders yok. 9–13 Kasım vize haftasıdır, o hafta da ders yapılmaz. Puanlanan 11 lab var: Hafta 2, 3, 4, 5, 7, 8, 9, 10, 11, 12 ve 13.",
+
+  weeks: [
+    {n:1, date:"2026-09-24", title:"Tanışma: yapay zekâ çağında web yazılımcısı olmak",
+      tags:["tanışma","dönemin haritası","sohbet"],
+      learn:"Sabah konu anlatımı yok. Dersi, dönemin haritasını ve takım projesini tanırsın. HTML, CSS, JavaScript, sunucu, veritabanı ve yapay zekâya birer küçük tadımlık bakarız.",
+      lab:"Öğleden sonra bilgisayar yok: dörtlü masalarda tanışırız, kampüs hayatından site fikirleri çıkarırız ve yapay zekâ çağında bu işi neden öğrendiğimizi konuşuruz. Puan yok, teslim yok. Bilgisayarlı ilk ders 1 Ekim. O güne kadar Hafta 0 kurulum sayfasındaki beş adımı evde yaparsın.",
+      links:[{href:"../weeks/hafta-01/", label:"Hafta 1 ders notu"},{href:"../weeks/hafta-00-kurulum/", label:"Hafta 0 kurulum sayfası"}]},
+    {n:2, date:"2026-10-01", title:"HTML: sayfanın iskeleti", graded:true,
+      tags:["metin dosyası","etiket, öğe, nitelik","belge iskeleti","başlık, paragraf, liste","bağlantı, görsel, dosya yolu","header, nav, main, footer"],
+      learn:"Bir web sayfasının aslında bir metin dosyası olduğunu görürsün. Tarayıcının bu dosyayı sunucudan nasıl alıp ekrana çizdiğini anlarsın. Etiket, öğe ve niteliğin ne olduğunu ve etiketlerin iç içe nasıl geçtiğini öğrenirsin. Bir HTML belgesinin iskeletini satır satır yazarsın. Başlık, paragraf ve liste kullanırsın. Bağlantı ve görsel eklerken dosya yolunun mantığını çözersin. Sayfanı header (üst kısım), nav (menü), main (ana içerik) ve footer (alt kısım) bölümlerine ayırırsın.",
+      lab:"Kişisel sayfanı adım adım yaparsın, GitHub'a web arayüzünden yükleyip GitHub Pages ile yayınlarsın. Boz adımında bozuk bir sitede üç hata ararsın."},
+    {n:3, date:"2026-10-08", title:"CSS: sayfaya görünüş vermek", graded:true,
+      tags:["HTML'e bağlama","seçiciler","renk, yazı tipi, boşluk","kutu modeli","Flexbox","media query"],
+      learn:"CSS'in ne olduğunu ve HTML'e nasıl bağlandığını öğrenirsin. Seçicilerle (etiket ve sınıf) hangi öğeyi biçimlendireceğini söylersin. Renk, yazı tipi ve boşluk verirsin. Her öğenin bir kutu olduğunu görürsün. Bu kutunun dış boşluğu margin, çerçevesi border, iç boşluğu padding adını taşır. Flexbox adlı CSS yöntemiyle öğeleri yan yana dizersin. Ekran genişliğine göre devreye giren tek bir kuralla, yani bir media query ile sayfanı telefonda da düzgün gösterirsin.",
+      lab:"Kişisel sayfanı biçimlendirirsin. Boz adımında bozuk bir stil dosyasında üç hata bulursun."},
+    {n:4, date:"2026-10-15", title:"JavaScript 1: dilin temelleri", graded:true,
+      tags:["konsol","let, const, türler","if","for","fonksiyon","dizi"],
+      learn:"İlk JavaScript kodunu tarayıcı konsolunda çalıştırırsın. Değişken (let, const) ve veri türlerini, koşulu (if), döngüyü (for), fonksiyonu ve diziyi JavaScript'te yazarsın. Bu fikirlerin çoğunu YZM103'ten tanıyorsun. Burada aynı fikirlerin JavaScript'te nasıl yazıldığını görürsün.",
+      lab:"Küçük hesaplayıcılar yaparsın: not ortalaması, KDV, çarpım tablosu. Boz adımında bozuk bir kodda üç hata bulursun."},
+    {n:5, date:"2026-10-22", title:"JavaScript 2: sayfayı canlandırmak", graded:true,
+      tags:["DOM","querySelector","metin ve sınıf","click, input","formdan değer","listeye ekleme"],
+      learn:"DOM'un ne olduğunu öğrenirsin. DOM, tarayıcının sayfadaki öğeleri JavaScript'in erişebileceği biçimde tuttuğu yapıdır. querySelector ile bir öğe seçer, metnini ve sınıfını değiştirirsin. click ve input olaylarını dinlersin. Formdan değer okur, listeye yeni öğe eklersin.",
+      lab:"Bir yapılacaklar listesi uygulaması yaparsın. Boz adımında bozuk bir kodda üç hata bulursun.",
+      project:{code:"M0", text:"Dört kişilik takımlar dersin öğle arasında kurulur, labın sonunda takım adı ve fikir netleşir. Her takım proje fikrini, uygulamanın kimin için olduğunu ve üç ekranın kâğıt üzerindeki taslağını Pazar 25 Ekim 23:59'a kadar ayrı bir M0 formuyla teslim eder."}},
+    {n:6, date:"2026-10-29", title:"Ders yok (Cumhuriyet Bayramı)", off:true,
+      learn:"Ders ve lab yok. Takımın ilk buluşmasını bu hafta kendi aranızda yaparsınız."},
+    {n:7, date:"2026-11-05", title:"Sunucu: tarayıcının konuştuğu program", graded:true,
+      tags:["HTTP","Node.js","Express","rota","JSON","fetch"],
+      learn:"HTTP, tarayıcı ile sunucunun konuşurken uyduğu kurallardır. Tarayıcı bir istek gönderir, sunucu bir yanıt döner. Veri isteyen GET ile veri gönderen POST'un farkını görürsün. “Tamam” anlamına gelen 200 ile “bulunamadı” anlamına gelen 404'ü tanırsın. Verinin JSON biçiminde, yani programların kolayca okuduğu düz bir metin olarak nasıl taşındığını öğrenirsin. Bilgisayarına Node.js kurarsın. Node.js, JavaScript'i tarayıcının dışında çalıştıran programdır. Express kütüphanesiyle ilk sunucunu yazarsın. Sunucunda bir rota, yani `/soz` gibi bir adres tanımlayıp oradan JSON döndürürsün. Sonra sayfandaki JavaScript'ten fetch komutuyla kendi sunucuna istek gönderirsin.",
+      lab:"Kendi küçük API'ni yaparsın. API, başka bir programın senin sunucuna soru sorup cevap aldığı kapıdır. Seninki örneğin günün sözünü verebilir. Boz adımında bozuk bir sunucuda üç hata bulursun."},
+    {n:8, date:"2026-11-19", title:"Veritabanı: veriyi saklamak", graded:true,
+      tags:["tablo, satır, sütun","birincil anahtar","SQL","SQLite","sunucu ve veritabanı"],
+      learn:"Tablo, satır ve sütunun ne olduğunu öğrenirsin. Birincil anahtar, her satırı ötekilerden ayıran değerdir, çoğu zaman bir numara. Veritabanıyla SQL dilinde konuşursun. SQL ile veri okursun (SELECT), eklersin (INSERT), süzersin (WHERE), sıralarsın (ORDER BY), güncellersin (UPDATE) ve silersin (DELETE). Veritabanı olarak tek bir dosyada duran SQLite'ı kullanırsın. Sunucundan veritabanına yazıp okursun.",
+      lab:"Bir ziyaretçi defteri yaparsın: form, sunucu, veritabanı ve liste birbirine bağlanır. Boz adımında bozuk bir sorguda üç hata bulursun."},
+    {n:9, date:"2026-11-26", title:"Git ve GitHub ile takım çalışması", graded:true,
+      tags:["commit, push, pull","branch","pull request","conflict"],
+      learn:"Bilgisayarına Git kurarsın. Git, dosyalarında yaptığın her değişikliğin geçmişini tutan programdır. Yaptığın değişikliği commit ile kaydeder, push ile GitHub'a gönderir, pull ile takım arkadaşının değişikliğini alırsın. Ana kodu bozmadan çalışmak için kendi dalını (branch) açarsın. İşin bitince pull request ile değişikliğini takıma “bakın, uygunsa ekleyelim” diye sunarsın. İki kişi aynı satırı değiştirdiğinde çıkan çakışmayı (conflict) çözersin.",
+      lab:"Takım deposu kurulur, herkes bir dal açıp pull request gönderir. Bilerek çıkarılmış bir çakışmayı çözersin.",
+      project:{code:"DEPO", text:"Takım deposu açılır."}},
+    {n:10, date:"2026-12-03", title:"Yapay zekâ ile geliştirme", graded:true,
+      tags:["yapay zekâ nasıl kod yazar","iyi istem","kodlama ajanı","kodu okumak ve test etmek"],
+      learn:"Yapay zekânın nasıl kod yazdığını ve nerede yanıldığını görürsün. İstem, yapay zekâya yazdığın istektir. İyi istem yazmayı öğrenirsin: bağlam verirsin, tek bir görev istersin, açıklama istersin. Kodlama ajanı, verdiğin göreve göre dosyalarını kendisi değiştiren yapay zekâdır. Onunla (Copilot ajan modu) çalışırsın. Üretilen kodu okur ve test edersin.",
+      lab:"Ajanla projene bir özellik eklersin ve her satırını açıklarsın. Ajanın bıraktığı üç hatayı bulursun.",
+      project:{code:"M1", text:"HTML, CSS ve JavaScript ile yapılmış prototip (uygulamanın ilk deneme sürümü), takım deposundan yayında."}},
+    {n:11, date:"2026-12-10", title:"Güvenlik ve kullanıcı girişi", graded:true,
+      tags:["hash","oturum ve çerez","XSS","SQL enjeksiyonu","gizli anahtarlar"],
+      learn:"Parolanın neden düz metin olarak saklanmadığını öğrenirsin. Hash, parolayı geri çözülemeyen bir karakter dizisine çevirir. Çerez, tarayıcının bir site için sakladığı küçük nottur. Oturum da sitenin, giriş yaptığını bu not sayesinde hatırlamasıdır. İki açığı tanırsın. XSS'te saldırgan sayfaya kendi JavaScript kodunu sokar. SQL enjeksiyonunda form kutusuna yazdığı metinle veritabanı sorgusunu değiştirir. Gizli anahtarlar, bir servise bağlanmak için kullanılan şifre gibi metinlerdir. Bunların neden koda ve depoya yazılmadığını öğrenirsin.",
+      lab:"Ziyaretçi defterine kullanıcı girişi eklersin. İçindeki açıkları bulup kapatırsın."},
+    {n:12, date:"2026-12-17", title:"Web uygulamasına yapay zekâ eklemek", graded:true,
+      tags:["dil modeli API'si","anahtar sunucuda","sunucudan istek","çıktıyı doğrulamak"],
+      learn:"Dil modeli, sohbet eden yapay zekâ programlarının arkasındaki modeldir. Bir dil modeli API'sinin, yani programının modele soru sorduğu kapının ne olduğunu öğrenirsin. API anahtarının neden sunucuda kalması gerektiğini görürsün. Sunucundan modele istek atarsın. Modelin cevabına körü körüne güvenmez, kullanmadan önce doğrularsın.",
+      lab:"Projene küçük bir yapay zekâ özelliği eklersin.",
+      project:{code:"M2", text:"Sunucusu ve veritabanı bağlı, çalışan sürüm."}},
+    {n:13, date:"2026-12-24", title:"Yayına alma ve modern araçlara bakış", graded:true,
+      tags:["yayına alma","ortam değişkeni","çerçeveler (tanıtım)"],
+      learn:"Sunucunu ve veritabanını internete koymayı öğrenirsin. Ortam değişkeni, kodun içine değil sunucunun ayarlarına yazılan bir değerdir. Gizli bilgileri ve ayarları bununla kodun dışında tutarsın. Çerçeve, büyük bir uygulamayı düzenli yazmak için hazır bir yapıdır. React gibi çerçevelerin hangi sorunu çözdüğüne kısa bir tanıtımla bakarsın.",
+      lab:"Yayın yolunu birlikte kurarız. Projeni yayına alır, son hazırlığı yaparsın.",
+      project:{code:"DONDURMA", text:"Final kodu 30 Aralık 23:59'da dondurulur. Bu saatten sonra takım deposuna yapılan değişiklik değerlendirilmez."}},
+    {n:14, date:"2026-12-31", title:"Demo Günü",
+      tags:["Demo Günü"],
+      learn:"Sabah ve öğleden sonra blokları Demo Günü'ne ayrılır. 14 takımın her biri 7 dakika demo yapar, ardından 3 dakika soru gelir. Toplam 140 dakika.",
+      project:{code:"M3", text:"Final teslimi."}}
+  ],
+
+  periods: [
+    {id:"vize", after:7, label:"VİZE HAFTASI", dates:"9–13 Kasım", start:"2026-11-09", end:"2026-11-13", title:"Ders yok, ara sınav", text:"Ara sınav bu haftadır ve Hafta 2–5 konularını kapsar. Sınavın biçimi [Değerlendirme](#degerlendirme) başlığında. Hazırlık için ara sınav sayfası: örnek görev ve 30 pratik soru."},
+    {id:"final", after:14, label:"FİNAL HAFTASI", dates:"4–15 Ocak 2027", start:"2027-01-04", end:"2027-01-15", title:"Final sınavı ve kod savunmaları", text:"Final sınavı ve bireysel kod savunmaları bu iki haftada yapılır. Savunma öğrenci başına 15 dakikadır."},
+    {id:"but", after:14, label:"BÜTÜNLEME", dates:"18–22 Ocak 2027", start:"2027-01-18", end:"2027-01-22", title:"Bütünleme sınavı", text:"Bütünleme sınavı final sınavının yerine geçer ve onunla aynı biçimdedir. Proje ve savunma notların korunur."}
+  ],
+
+  project: {
+    team: "56 kişiyiz. Dört kişilik 14 takım kuracağız. Takımlar Hafta 5'te kurulur.",
+    what: "Her takım gerçek bir kullanıcı için birkaç sayfalık bir web uygulaması yapar. Ön yüz HTML, CSS ve JavaScript ile yazılır. Arkada bir Express sunucusu ve bir SQLite veritabanı çalışır. Uygulamada küçük bir yapay zekâ özelliği bulunur. Dönem sonunda uygulama yayındadır, yani herkes adresinden açabilir.",
+    ideas: "Fikir örnekleri: kulüp etkinliklerine kayıt, kantin siparişi, ders notu paylaşımı, laboratuvar cihazı rezervasyonu.",
+    milestones: [
+      {code:"M0", week:5, date:"22 Ekim, teslim Pazar 25 Ekim 23:59", text:"Takım, proje fikri, kullanıcı ve üç ekranın kâğıt taslağı"},
+      {code:"M1", week:10, date:"3 Aralık, teslim Pazar 6 Aralık 23:59", text:"HTML, CSS ve JavaScript prototip, takım deposundan yayında"},
+      {code:"M2", week:12, date:"17 Aralık, teslim Pazar 20 Aralık 23:59", text:"Sunucusu ve veritabanı bağlı, çalışan sürüm"},
+      {code:"M3", week:14, date:"31 Aralık", text:"Demo Günü ve final teslimi: yayındaki uygulama, README (projeyi tanıtan metin dosyası), kısa rapor"}
+    ],
+    freeze: "Final kodu 30 Aralık 23:59'da dondurulur. Final raporunda yapay zekâ kullanımını anlatan bir bölüm zorunludur.",
+    individual: "Ara teslimlerde (M0, M1, M2) takım notu, senin bireysel katkınla çarpılır. Takımda iş yapmayan, takımın aldığı notu olduğu gibi almaz.",
+    rubric: [
+      {dim:"Çalışan ürün", desc:"Uygulama yayında açılıyor ve söz verdiği işi yapıyor mu?"},
+      {dim:"Kod kalitesi ve anlayış", desc:"Kod okunaklı mı, takımdaki herkes kendi yazdığı kısmı açıklayabiliyor mu?"},
+      {dim:"Takım çalışması", desc:"İş takım deposunda paylaşılmış mı, herkes katkı vermiş mi?"},
+      {dim:"Kullanıcı deneyimi", desc:"Kullanıcı uygulamayı zorlanmadan kullanabiliyor mu?"},
+      {dim:"Yapay zekâ kullanımının dürüst kaydı", desc:"Raporda yapay zekânın nerede ve nasıl kullanıldığı açıkça yazılmış mı?"}
+    ]
+  },
+
+  grading: {
+    items: [
+      {name:"Ara sınav (9–13 Kasım)", points:15, color:"theory", group:"yil", desc:"60 dakika bilgisayarda uygulamalı (yapay zekâ kapalı, ders notları açık) ve 30 dakika kâğıt üzerinde kavram soruları. Kapsam Hafta 2–5."},
+      {name:"Haftalık lab", points:12, color:"lab", group:"yil", desc:"11 lab (Hafta 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13). En düşük 2 lab notun silinir. Her labda çalışan sayfa ya da kod, bozuk kodun düzeltmesi ve kısa yapay zekâ notu teslim edilir."},
+      {name:"Proje ara teslimleri (M0, M1, M2)", points:13, color:"ship", group:"yil", desc:"Takım notu, bireysel katkınla çarpılır."},
+      {name:"Final sınavı", points:25, color:"theory-dark", group:"son", desc:"80 dakika uygulamalı (yapay zekâ serbest) ve 40 dakika yazılı (yapay zekâ kapalı)."},
+      {name:"Proje final teslimi (M3)", points:20, color:"ship-dark", group:"son", desc:"Demo Günü, yayındaki uygulama, README ve kısa rapor (yapay zekâ kullanımı bölümü zorunlu)."},
+      {name:"Bireysel kod savunması", points:15, color:"ai", group:"son", desc:"15 dakika: projeni anlatırsın, bir kodu açıklarsın, küçük bir değişiklik yaparsın. 0–4 ölçeğiyle puanlanır."}
+    ],
+    totals: "Yıl içi notun 40 puandır (15 + 12 + 13). Yarıyıl sonu notun 60 puandır (25 + 20 + 15). Yarıyıl sonu notu 50'nin altında kalan öğrenci dersten kalır.",
+    attendance: "Devam şartı teoride en az %70, uygulamada en az %80. Lab teslimin uygulama yoklaması sayılır. En düşük iki lab notunun silinmesi devam şartını değiştirmez."
+  },
+
+  submit: {
+    intro: "Her lab haftasında iki teslim var ve ikisi de aynı Google Form ile yapılır. Formun bağlantısı derste ve sınıf kanalında paylaşılır.",
+    steps: [
+      {title:"Lab sonu teslimi", due:"Perşembe 16:45", text:"Labda o ana kadar yaptığını gönderirsin. Bu teslim uygulama yoklaması sayılır."},
+      {title:"Tam teslim", due:"Pazar 23:59", text:"Labın bitmiş hâlini gönderirsin."}
+    ],
+    example: "Örnek olarak Hafta 2'de lab sonu teslimi 1 Ekim Perşembe 16:45'e, tam teslim 4 Ekim Pazar 23:59'a kadardır.",
+    fields: ["Ad soyad","Öğrenci numarası","GitHub kullanıcı adı","Teslim türü (lab sonu ya da tam teslim)","Yayındaki sayfanın adresi (o hafta yayın varsa)","Deponun adresi (Hafta 2'de açtığın kullaniciadi.github.io deposu ya da labda söylenen depo)","Yapay zekâ notu"]
+  },
+
+  ai: {
+    paras: [
+      "Bu derste yapay zekâ yardımcındır. Her haftanın ders notunda “Yapay zekâyla çalış” kutusu var. O kutu, o hafta yapay zekâya ne sorabileceğini örnek istemlerle gösterir.",
+      "Hafta 2 ile Hafta 9 arasında kodu önce sen yazarsın. Yapay zekâya bir satırın ne işe yaradığını sorabilirsin. Aldığın hata mesajını açıklatabilir, konuyu anlayıp anlamadığını görmek için seni sınamasını isteyebilirsin. Bütün sayfayı ya da bütün kodu ona yazdırmazsın.",
+      "Hafta 10'dan itibaren kodlama ajanıyla kod ürettirmek serbesttir. Tek şart, üretilen kodun her satırını açıklayabilmendir. Açıklayamadığın kod senin kodun değildir. Kod savunmasında da bu yüzden kendi projenden bir kodu açıklamanı ve üzerinde küçük bir değişiklik yapmanı isteriz."
+    ],
+    phases: [
+      {kind:"theory", when:"Hafta 2–9", title:"Önce sen yazarsın", text:"Yapay zekâ yol gösterir, kodu sen yazarsın."},
+      {kind:"ai", when:"Hafta 10–14", title:"Kodlama ajanı serbest", text:"Ajan kod üretebilir. Teslim ettiğin kodun sorumlusu yine sensin."}
+    ],
+    exams: [
+      {exam:"Ara sınav", part:"60 dakika bilgisayarda uygulamalı", ai:"Kapalı (ders notları açık)"},
+      {exam:"Ara sınav", part:"30 dakika kâğıt üzerinde kavram soruları", ai:"Kapalı"},
+      {exam:"Final sınavı", part:"80 dakika uygulamalı", ai:"Serbest"},
+      {exam:"Final sınavı", part:"40 dakika yazılı", ai:"Kapalı"}
+    ],
+    noteIntro: "Her lab teslimine üç satırlık bir yapay zekâ notu eklersin:",
+    noteTemplate: "Ne sordum:\nİşe yaradı mı, neyi değiştirdim:\nKendi başıma ne öğrendim:"
+  },
+
+  toolsIntro: "Dönem boyunca kullanacağımız araçlar aşağıda. VS Code'u, Live Server ve GitHub Copilot Chat eklentilerini kurup GitHub hesabını açmayı 1 Ekim'den önce evde yaparsın. Adım adım anlatım [kurulum sayfasında](../weeks/hafta-00-kurulum/). Eksik kalanı Hafta 2 labının başında birlikte bitiririz. Hafta 12'de kullanacağımız dil modeli servisini ve Hafta 13'teki yayın yolunu o haftanın dersinde birlikte kuracağız.",
+  tools: [
+    {name:"VS Code", role:"Kodunu yazdığın editör", week:"Hafta 0 (evde)"},
+    {name:"Live Server", role:"VS Code eklentisi. Sayfanı tarayıcıda açar, dosyayı kaydettikçe sayfayı yeniler.", week:"Hafta 0 (evde)"},
+    {name:"Chrome ya da Edge DevTools", role:"Tarayıcının içindeki geliştirici araçları. Sayfanın kodunu ve hatalarını görürsün.", week:"Hafta 0 (evde)"},
+    {name:"GitHub Copilot", role:"VS Code içindeki yapay zekâ yardımcısı. Copilot Chat her hafta, ajan modu Hafta 10'dan itibaren.", week:"Hafta 0 (evde)"},
+    {name:"GitHub ve GitHub Pages", role:"Kodunu sakladığın ve sayfanı yayınladığın yer. Git'i Hafta 9'da bilgisayarına kurarsın.", week:"Hafta 0 (hesap), Hafta 2 (yayın)"},
+    {name:"Google Form", role:"Haftalık lab teslimi", week:"Hafta 2"},
+    {name:"Node.js ve Express", role:"Sunucunu yazdığın ortam ve kütüphane", week:"Hafta 7"},
+    {name:"SQLite", role:"Verileri sakladığın veritabanı", week:"Hafta 8"}
+  ],
+
+  footer: "YZM205 Web Tasarımı ve Programlama · Muş Alparslan Üniversitesi · Arş. Gör. Çağrı ŞAHİN · Güncelleme: 23 Eylül 2026"
+};
+</script>
+<script>
+(function(){
+  var root = document.documentElement;
+
+  // ---- tema: açık / koyu, tercih bu tarayıcıda hatırlanır ----
+  try{ var saved = localStorage.getItem('yzm205.theme'); if(saved==='light'||saved==='dark') root.setAttribute('data-theme', saved); }catch(e){}
+  var themeBtn = document.getElementById('themeBtn');
+  function effectiveTheme(){
+    var a = root.getAttribute('data-theme'); if(a) return a;
+    return (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+  }
+  function syncThemeBtn(){ themeBtn.textContent = effectiveTheme()==='dark' ? 'Açık tema' : 'Koyu tema'; }
+  themeBtn.addEventListener('click', function(){
+    var next = effectiveTheme()==='dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try{ localStorage.setItem('yzm205.theme', next); }catch(e){}
+    syncThemeBtn();
+  });
+  syncThemeBtn();
+
+  var D = window.SYLLABUS;
+  var main = document.getElementById('main');
+  if(!D){ main.textContent = 'İçerik yüklenemedi.'; return; }
+
+  var esc = function(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); };
+  var md = function(s){ return esc(s).replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,'<a href="$2">$1</a>'); };
+  var chips = function(arr){ return (arr||[]).map(function(c){ return '<span class="chip '+esc(c.kind||'')+'">'+esc(c.text||c)+'</span>'; }).join(''); };
+
+  // ---- tarih yardımcıları ----
+  var AY = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+  var day = function(s){ var p = s.split('-').map(Number); return new Date(p[0],p[1]-1,p[2]); };
+  var human = function(s){ var d = day(s); return d.getDate()+' '+AY[d.getMonth()]; };
+  var today = new Date(); today.setHours(0,0,0,0);
+
+  // Sıradaki ders: bitiş tarihi bugünden önce olmayan ilk hafta ya da dönem
+  var items = D.weeks.map(function(w){ return {type:'week', ref:w, start:day(w.date), end:day(w.date)}; })
+    .concat(D.periods.map(function(p){ return {type:'period', ref:p, start:day(p.start), end:day(p.end)}; }))
+    .sort(function(a,b){ return a.start-b.start; });
+  var next = null;
+  for(var i=0;i<items.length;i++){ if(items[i].end >= today){ next = items[i]; break; } }
+  var nextWeek = next && next.type==='week' ? next.ref.n : null;
+  var nextPeriod = next && next.type==='period' ? next.ref.id : null;
+
+  var SECTIONS = [
+    {id:'amac', label:'Amaç'},{id:'ritim', label:'Haftalık ritim'},{id:'plan', label:'14 hafta'},
+    {id:'proje', label:'Proje'},{id:'degerlendirme', label:'Değerlendirme'},{id:'teslim', label:'Lab teslimi'},
+    {id:'yapay-zeka', label:'Yapay zekâ'},{id:'araclar', label:'Araçlar'}
+  ];
+
+  // ---- açılış ----
+  function hero(){
+    var c = D.course, box;
+    if(next && next.type==='week'){
+      var w = next.ref, isToday = +next.start===+today;
+      box = '<div class="eyebrow">'+(isToday?'Bugün':'Sıradaki ders')+' · '+esc(human(w.date))+' Perşembe</div>'+
+        '<div class="row"><div class="big">'+w.n+'</div><div><div style="font-weight:600">'+esc(w.title)+'</div>'+
+        '<div class="muted" style="font-size:.9rem">'+(w.off?'Ders yok':'10:00 teori · 15:00 lab · BLD-104')+'</div></div></div>'+
+        '<button class="btn primary" type="button" data-goto="'+w.n+'">Haftayı aç</button>';
+    } else if(next){
+      var p = next.ref;
+      box = '<div class="eyebrow">'+esc(p.label)+' · '+esc(p.dates)+'</div><div class="row"><div><div style="font-weight:600">'+esc(p.title)+'</div>'+
+        '<div class="muted" style="font-size:.9rem">'+md(p.text)+'</div></div></div>'+
+        '<button class="btn primary" type="button" data-goto-period="'+esc(p.id)+'">Takvimde göster</button>';
+    } else {
+      box = '<div class="eyebrow">Dönem</div><div class="row"><div><div style="font-weight:600">Dönem tamamlandı</div>'+
+        '<div class="muted" style="font-size:.9rem">Projelerin yayında kalsın, portföyünde dursun.</div></div></div>';
+    }
+    return '<section class="hero" id="basla">'+
+      '<div><div class="eyebrow">'+esc(c.institution)+' · '+esc(c.term)+'</div>'+
+      '<h1 style="margin-top:10px">'+esc(c.title)+'</h1>'+
+      '<p class="lede" style="margin-top:10px">'+esc(c.subtitle)+'</p>'+
+      '<div class="meta">'+chips(c.meta)+'</div>'+
+      '<p class="updated muted">'+esc(c.updated)+'</p></div>'+
+      '<aside class="now" aria-label="Sıradaki ders">'+box+'</aside></section>';
+  }
+
+  function purpose(){
+    return '<section id="amac"><div class="section-head"><h2>Dersin amacı</h2></div>'+
+      D.purpose.map(function(p){ return '<p class="lede">'+md(p)+'</p>'; }).join('')+'</section>';
+  }
+
+  function rhythm(){
+    var R = D.rhythm;
+    return '<section id="ritim"><div class="section-head"><h2>Haftalık ritim</h2><span class="muted">Her Perşembe iki blok</span></div>'+
+      '<div class="cards2">'+
+        '<div class="card block theory"><div class="when">'+esc(R.theory.when)+'</div><h3>'+esc(R.theory.title)+'</h3><p>'+md(R.theory.text)+'</p></div>'+
+        '<div class="card block lab"><div class="when">'+esc(R.lab.when)+'</div><h3>'+esc(R.lab.title)+'</h3><p>'+md(R.lab.text)+'</p>'+
+          '<ol class="steps">'+R.steps.map(function(s){ return '<li><span class="k">'+esc(s.k)+'</span><span>'+md(s.text)+'</span></li>'; }).join('')+'</ol></div>'+
+      '</div><div class="callout">'+md(R.notes)+'</div></section>';
+  }
+
+  function weekRow(w){
+    var isNext = w.n===nextWeek, flags = '';
+    if(isNext) flags += '<span class="chip theory">Sıradaki</span>';
+    if(w.off) flags += '<span class="chip">Tatil</span>';
+    if(w.graded) flags += '<span class="chip lab">Lab puanlı</span>';
+    if(w.project && /^M\d$/.test(w.project.code)) flags += '<span class="chip ship">'+esc(w.project.code)+'</span>';
+    var body = '<div class="col theory"><h4>'+(w.n===1?'Sabah':(w.off||w.n===14?'Bu hafta':'Bu hafta öğreneceklerin'))+'</h4><p>'+md(w.learn)+'</p></div>';
+    if(w.lab) body += '<div class="col lab"><h4>'+(w.n===1?'Öğleden sonra':'Lab · Yap · Boz · Anlat')+'</h4><p>'+md(w.lab)+'</p></div>';
+    if(w.project){
+      var flag = /^M\d$/.test(w.project.code) ? 'PROJE · '+w.project.code : 'PROJE';
+      body += '<div class="ms"><span class="flag">'+esc(flag)+'</span><span>'+md(w.project.text)+'</span></div>';
+    }
+    if(w.links) body += '<div class="links">'+w.links.map(function(l){ return '<a href="'+esc(l.href)+'">'+esc(l.label)+'</a>'; }).join('')+'</div>';
+    return '<details class="week'+(isNext?' next':'')+(w.off?' off':'')+'" id="hafta-'+w.n+'">'+
+      '<summary><div class="num">'+String(w.n).padStart(2,'0')+'<small>'+esc(human(w.date))+'</small></div>'+
+      '<div><div class="wtitle">'+esc(w.title)+'</div>'+(w.tags?'<div class="tags">'+chips(w.tags)+'</div>':'')+'</div>'+
+      '<div class="flags">'+flags+'<span class="caret" aria-hidden="true">&#8964;</span></div></summary>'+
+      '<div class="week-body">'+body+'</div></details>';
+  }
+  function periodRow(p){
+    var isNext = p.id===nextPeriod;
+    return '<div class="period'+(isNext?' next':'')+'" id="donem-'+esc(p.id)+'"><div class="pl">'+esc(p.label)+'<br>'+esc(p.dates)+
+      (isNext?'<br><span class="chip theory" style="margin-top:6px">Sıradaki</span>':'')+'</div>'+
+      '<div><div class="pt">'+esc(p.title)+'</div><div class="px">'+md(p.text)+'</div></div></div>';
+  }
+  function plan(){
+    var rows = '';
+    D.weeks.forEach(function(w){ rows += weekRow(w); D.periods.filter(function(p){ return p.after===w.n; }).forEach(function(p){ rows += periodRow(p); }); });
+    return '<section id="plan"><div class="section-head"><h2>14 haftalık plan</h2></div>'+
+      '<p class="lede" style="margin-bottom:14px">'+md(D.planNote)+'</p>'+
+      '<div class="toolbar"><div class="tags"><span class="chip">Konu</span><span class="chip lab">Lab</span><span class="chip ship">Proje teslimi</span></div>'+
+      '<div class="spacer"></div><button class="btn" type="button" id="openAll">Tümünü aç</button><button class="btn" type="button" id="closeAll">Tümünü kapat</button></div>'+
+      '<div class="timeline">'+rows+'</div></section>';
+  }
+
+  function project(){
+    var P = D.project, cells = '';
+    D.weeks.forEach(function(w){
+      var m = P.milestones.filter(function(x){ return x.week===w.n; })[0];
+      cells += '<div class="cell'+(m?' m':'')+(w.off?' off':'')+'" title="Hafta '+w.n+' · '+esc(human(w.date))+'">'+(m?esc(m.code):w.n)+'</div>';
+      D.periods.filter(function(p){ return p.after===w.n && p.id==='vize'; }).forEach(function(){ cells += '<div class="cell exam" title="Vize haftası">VİZE</div>'; });
+    });
+    return '<section id="proje"><div class="section-head"><h2>Dönem projesi</h2><span class="muted">4 kişilik takımlar · 14 takım</span></div>'+
+      '<p class="lede">'+md(P.team)+'</p><p class="lede">'+md(P.what)+'</p><p class="lede">'+md(P.ideas)+'</p>'+
+      '<div class="track" role="img" aria-label="Kilometre taşları: M0 Hafta 5, M1 Hafta 10, M2 Hafta 12, M3 Hafta 14">'+cells+'</div>'+
+      '<div class="mslist">'+P.milestones.map(function(m){ return '<div class="msrow"><div class="code">'+esc(m.code)+'<small>Hafta '+m.week+'</small></div><div><div class="when">'+esc(m.date)+'</div><div class="muted" style="font-size:.93rem">'+md(m.text)+'</div></div></div>'; }).join('')+'</div>'+
+      '<div class="callout ship">'+md(P.freeze)+' '+md(P.individual)+'</div>'+
+      '<h3 style="margin:22px 0 10px">Final teslimi şu başlıklarla değerlendirilir</h3>'+
+      '<div class="tablewrap"><table><thead><tr><th>Başlık</th><th>Neye bakılır?</th></tr></thead><tbody>'+
+      P.rubric.map(function(r){ return '<tr><td class="b">'+esc(r.dim)+'</td><td>'+md(r.desc)+'</td></tr>'; }).join('')+'</tbody></table></div></section>';
+  }
+
+  function grading(){
+    var G = D.grading;
+    var colors = {theory:'var(--theory)', lab:'var(--lab)', ship:'var(--ship)', ai:'var(--ai)', 'theory-dark':'color-mix(in srgb, var(--theory) 65%, #000)', 'ship-dark':'color-mix(in srgb, var(--ship) 70%, #000)'};
+    var yil = G.items.filter(function(g){ return g.group==='yil'; }), son = G.items.filter(function(g){ return g.group==='son'; });
+    var sum = function(a){ return a.reduce(function(t,g){ return t+g.points; },0); };
+    var seg = function(g){ return '<div style="flex:'+g.points+';background:'+colors[g.color]+'" title="'+esc(g.name)+': '+g.points+' puan">'+g.points+'</div>'; };
+    return '<section id="degerlendirme"><div class="section-head"><h2>Değerlendirme</h2><span class="muted">Toplam 100 puan</span></div>'+
+      '<div class="bar" role="img" aria-label="Not dağılımı: yıl içi '+sum(yil)+', yarıyıl sonu '+sum(son)+'">'+yil.map(seg).join('')+'<div class="gap"></div>'+son.map(seg).join('')+'</div>'+
+      '<div class="barlegend"><span>Yıl içi · '+sum(yil)+' puan</span><span>Yarıyıl sonu · '+sum(son)+' puan</span></div>'+
+      '<div class="tablewrap" style="margin-top:14px"><table><thead><tr><th>Bileşen</th><th>Puan</th><th>Açıklama</th></tr></thead><tbody>'+
+      G.items.map(function(g){ return '<tr><td class="b"><span aria-hidden="true" style="display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:8px;background:'+colors[g.color]+'"></span>'+esc(g.name)+'</td><td class="n">'+g.points+'</td><td>'+md(g.desc)+'</td></tr>'; }).join('')+
+      '</tbody></table></div>'+
+      '<div class="facts"><div class="fact"><span class="k">Geçme</span>'+md(G.totals)+'</div><div class="fact"><span class="k">Devam</span>'+md(G.attendance)+'</div></div></section>';
+  }
+
+  function submit(){
+    var S = D.submit;
+    return '<section id="teslim"><div class="section-head"><h2>Lab teslimi</h2><span class="muted">Aynı Google Form, iki adım</span></div>'+
+      '<p class="lede">'+md(S.intro)+'</p>'+
+      '<div class="cards2" style="margin-top:14px">'+S.steps.map(function(s,i){ return '<div class="card"><div class="eyebrow">Adım '+(i+1)+' · '+esc(s.title)+'</div><div class="due">'+esc(s.due)+'</div><p>'+md(s.text)+'</p></div>'; }).join('')+'</div>'+
+      '<div class="callout">'+md(S.example)+'</div>'+
+      '<div class="card" style="margin-top:14px"><h3>Formda dolduracakların</h3><ul class="check">'+S.fields.map(function(f){ return '<li>'+md(f)+'</li>'; }).join('')+'</ul></div></section>';
+  }
+
+  function ai(){
+    var A = D.ai;
+    return '<section id="yapay-zeka"><div class="section-head"><h2>Yapay zekâ kuralları</h2><span class="muted">Yardımcı, merkez değil</span></div>'+
+      A.paras.map(function(p){ return '<p class="lede">'+md(p)+'</p>'; }).join('')+
+      '<div class="cards2" style="margin-top:14px">'+A.phases.map(function(ph){ return '<div class="card block '+(ph.kind==='ai'?'':'theory')+'" style="'+(ph.kind==='ai'?'border-top:3px solid var(--ai)':'')+'"><div class="when" style="'+(ph.kind==='ai'?'color:var(--ai)':'')+'">'+esc(ph.when)+'</div><h3>'+esc(ph.title)+'</h3><p>'+md(ph.text)+'</p></div>'; }).join('')+'</div>'+
+      '<h3 style="margin:22px 0 10px">Sınavlarda yapay zekâ</h3>'+
+      '<div class="tablewrap"><table><thead><tr><th>Sınav</th><th>Bölüm</th><th>Yapay zekâ</th></tr></thead><tbody>'+
+      A.exams.map(function(e){ return '<tr><td class="b">'+esc(e.exam)+'</td><td>'+esc(e.part)+'</td><td>'+esc(e.ai)+'</td></tr>'; }).join('')+'</tbody></table></div>'+
+      '<h3 style="margin:22px 0 4px">Haftalık yapay zekâ notu</h3><p>'+md(A.noteIntro)+'</p>'+
+      '<div class="notebar"><button class="btn small" type="button" id="copyNote" aria-describedby="aiNote">Kopyala</button></div>'+
+      '<pre class="note" id="aiNote">'+esc(A.noteTemplate)+'</pre>'+
+      '<div class="copied" id="copyMsg" aria-live="polite"></div></section>';
+  }
+
+  function tools(){
+    return '<section id="araclar"><div class="section-head"><h2>Araçlar</h2><span class="muted">Yalnız kullandıklarımız</span></div>'+
+      '<p class="lede" style="margin-bottom:14px">'+md(D.toolsIntro)+'</p>'+
+      '<div class="tablewrap"><table><thead><tr><th>Araç</th><th>Ne işe yarar?</th><th>İlk kullandığımız hafta</th></tr></thead><tbody>'+
+      D.tools.map(function(t){ return '<tr><td class="b">'+esc(t.name)+'</td><td>'+md(t.role)+'</td><td>'+esc(t.week)+'</td></tr>'; }).join('')+'</tbody></table></div></section>';
+  }
+
+  // ---- sayfayı kur ----
+  document.getElementById('jump').innerHTML = SECTIONS.map(function(s){ return '<a href="#'+s.id+'">'+esc(s.label)+'</a>'; }).join('');
+  main.innerHTML = hero()+purpose()+rhythm()+plan()+project()+grading()+submit()+ai()+tools();
+  document.getElementById('footer').textContent = D.footer;
+
+  function openWeek(n, scroll){
+    var el = document.getElementById('hafta-'+n); if(!el) return;
+    el.open = true;
+    if(scroll) el.scrollIntoView({block:'start'});
+  }
+  if(nextWeek) openWeek(nextWeek, false);
+
+  document.addEventListener('click', function(e){
+    var g = e.target.closest('[data-goto]');
+    if(g){ openWeek(+g.getAttribute('data-goto'), true); history.replaceState(null,'','#hafta-'+g.getAttribute('data-goto')); return; }
+    var gp = e.target.closest('[data-goto-period]');
+    if(gp){ var el = document.getElementById('donem-'+gp.getAttribute('data-goto-period')); if(el) el.scrollIntoView({block:'start'}); return; }
+    if(e.target.id==='openAll' || e.target.id==='closeAll'){
+      var open = e.target.id==='openAll';
+      document.querySelectorAll('details.week').forEach(function(d){ d.open = open; });
+    }
+  });
+
+  // yapay zekâ notunu panoya kopyala
+  var copyBtn = document.getElementById('copyNote'), copyMsg = document.getElementById('copyMsg');
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    var ok = false; try{ ok = document.execCommand('copy'); }catch(err){ ok = false; }
+    document.body.removeChild(ta); return ok;
+  }
+  copyBtn.addEventListener('click', function(){
+    var text = D.ai.noteTemplate;
+    var done = function(ok){ copyMsg.textContent = ok ? 'Kopyalandı. Teslim formundaki yapay zekâ notu alanına yapıştır.' : 'Kopyalanamadı. Metni seçip elle kopyala.'; };
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){ done(fallbackCopy(text)); });
+    } else { done(fallbackCopy(text)); }
+  });
+
+  // adres #hafta-N ise o haftayı aç
+  function fromHash(){
+    var m = /^#hafta-(\d+)$/.exec(location.hash);
+    if(m) openWeek(+m[1], true);
+  }
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
+  window.addEventListener('beforeprint', function(){ document.querySelectorAll('details.week').forEach(function(d){ d.open = true; }); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hafta 0 · Kurulum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ink:#121A2B; --ground:#F5F7FB; --surface:#FFFFFF; --surface-2:#EEF2F8; --line:#D9DEE8; --muted:#5B6577;
+  --theory:#2352D9; --theory-soft:#E4EAFB; --lab:#0A6F62; --lab-soft:#DDF3EF; --ship:#8F5600; --ship-soft:#FBEBD2; --ai:#7A3DD6; --ai-soft:#EEE6FB;
+  --err:#B3261E; --err-soft:#FBE4E1;
+  --focus:#2352D9; --shadow:0 1px 2px rgba(18,26,43,.06),0 8px 24px -12px rgba(18,26,43,.18);
+  --display:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif; --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#E7ECF5; --ground:#0E131D; --surface:#161C29; --surface-2:#1D2535; --line:#2A3345; --muted:#9AA5B8;
+    --theory:#7B97FF; --theory-soft:#1B2545; --lab:#3FC4B0; --lab-soft:#123430; --ship:#F0A93B; --ship-soft:#3A2A10; --ai:#B48CFF; --ai-soft:#2C1F4A;
+    --err:#FF7A66; --err-soft:#3A1A16;
+    --focus:#7B97FF; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E7ECF5; --ground:#0E131D; --surface:#161C29; --surface-2:#1D2535; --line:#2A3345; --muted:#9AA5B8;
+  --theory:#7B97FF; --theory-soft:#1B2545; --lab:#3FC4B0; --lab-soft:#123430; --ship:#F0A93B; --ship-soft:#3A2A10; --ai:#B48CFF; --ai-soft:#2C1F4A;
+  --err:#FF7A66; --err-soft:#3A1A16;
+  --focus:#7B97FF; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--ink);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--theory);text-decoration-thickness:1px;text-underline-offset:2px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(2.1rem,5.4vw,3.4rem);font-weight:800}
+h2{font-size:clamp(1.4rem,2.8vw,1.85rem);font-weight:700}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+ol,ul{margin:0;padding-left:1.3em}
+li{margin:.3em 0}
+code{font-family:var(--mono);font-size:.9em;background:var(--surface-2);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+kbd{font-family:var(--mono);font-size:.84em;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;background:var(--surface);white-space:nowrap}
+.wrap{max-width:1000px;margin:0 auto;padding-inline:clamp(16px,4vw,32px)}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.prose{max-width:68ch}
+.muted{color:var(--muted)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:14px;min-height:56px;flex-wrap:wrap;padding-block:8px}
+.brand{font-family:var(--display);font-weight:800;font-size:1.02rem;white-space:nowrap;display:flex;align-items:center;gap:10px}
+.brand .dot{width:10px;height:10px;border-radius:50%;background:var(--lab);box-shadow:0 0 0 4px var(--lab-soft)}
+nav.jump{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto;max-width:100%}
+nav.jump::-webkit-scrollbar{display:none}
+nav.jump a{color:var(--muted);font:500 .86rem/1 var(--body);padding:9px 11px;border-radius:999px;text-decoration:none;white-space:nowrap}
+nav.jump a:hover{color:var(--ink);background:var(--surface-2)}
+main{padding-block:28px 64px}
+section+section{margin-top:48px}
+section[id]{scroll-margin-top:calc(72px + env(safe-area-inset-top,0px))}
+.hero{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:28px;align-items:start}
+.hero .prose{margin-top:14px;font-size:1.04rem}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.74rem;font-weight:500;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);white-space:nowrap}
+.chip.lab{background:var(--lab-soft);border-color:transparent;color:var(--lab)}
+.chip.ship{background:var(--ship-soft);border-color:transparent;color:var(--ship)}
+.chip.theory{background:var(--theory-soft);border-color:transparent;color:var(--theory)}
+.chip.ai{background:var(--ai-soft);border-color:transparent;color:var(--ai)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.progress{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+.progress .big{font-family:var(--display);font-size:2.6rem;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;margin-top:6px}
+.bar{height:8px;border-radius:999px;background:var(--surface-2);overflow:hidden;margin-top:10px}
+.bar div{height:100%;background:var(--lab);width:0;transition:width .3s}
+.btn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 .86rem/1 var(--body);padding:9px 14px;border-radius:10px;cursor:pointer}
+.btn:hover{background:var(--surface-2)}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.time{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+.tl{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.tl .row{display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;padding:11px 16px;border-top:1px solid var(--line);align-items:baseline}
+.tl .row:first-child{border-top:0}
+.tl .t{font-family:var(--mono);font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.tl .row.ara{background:var(--surface-2)}
+.steps{display:grid;gap:16px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 20px 18px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:start}
+.step.done{border-color:var(--lab)}
+.step .num{font-family:var(--display);font-weight:800;font-size:1.7rem;line-height:1;color:var(--muted);width:36px;padding-top:2px;font-variant-numeric:tabular-nums}
+.step.done .num{color:var(--lab)}
+.step h3{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.step .why{color:var(--muted);margin-top:6px;max-width:70ch}
+.step .body{margin-top:14px;display:grid;gap:12px}
+.lbl{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-bottom:4px}
+.lbl.do{color:var(--theory)}
+.lbl.see{color:var(--lab)}
+.lbl.fix{color:var(--ship)}
+.see-box{background:var(--lab-soft);border-radius:10px;padding:10px 14px}
+.fix-box{background:var(--ship-soft);border-radius:10px;padding:10px 14px}
+.see-box .lbl.see,.fix-box .lbl.fix{color:inherit;opacity:.85}
+.see-box{color:var(--ink)}
+.fix-box{color:var(--ink)}
+details.os{border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+details.os summary{cursor:pointer;padding:9px 14px;font-weight:500;font-size:.94rem}
+details.os .in{padding:0 14px 12px}
+.check{display:flex;align-items:flex-start;gap:10px;margin-top:16px;padding-top:12px;border-top:1px dashed var(--line);font-weight:500;cursor:pointer}
+.check input,.testlist input{width:18px;height:18px;accent-color:var(--lab);margin-top:3px;flex:none}
+.testlist{list-style:none;padding:0;display:grid;gap:8px}
+.testlist li{margin:0}
+.testlist label{display:flex;gap:10px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer}
+.testlist label:has(input:checked){border-color:var(--lab)}
+.testnote{margin-top:12px;font-weight:500}
+.faqs{display:grid;gap:8px}
+details.faq{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+details.faq summary{cursor:pointer;padding:12px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{content:"+";font-family:var(--mono);color:var(--muted)}
+details.faq[open] summary::after{content:"−"}
+details.faq .ans{padding:0 16px 14px;display:grid;gap:8px}
+.callout{border-left:3px solid var(--theory);background:var(--surface);border-radius:0 10px 10px 0;padding:12px 16px}
+footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--muted);font-size:.86rem}
+@media (max-width:760px){.hero{grid-template-columns:1fr}.step{grid-template-columns:minmax(0,1fr)}.step .num{width:auto}.tl .row{grid-template-columns:minmax(0,1fr);gap:2px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+@media print{.top,#resetBtn{display:none!important}.step{break-inside:avoid}body{background:#fff;color:#000}}
+</style>
+<style>.kilitli{opacity:.6;cursor:not-allowed;text-decoration:none}a.kilitli,span.kilitli.btn{pointer-events:none}</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="dot" aria-hidden="true"></span>YZM205 · Hafta 0</div>
+    <nav class="jump" aria-label="Bölümler">
+      <a href="#akis">Akış</a><a href="#adimlar">Beş adım</a><a href="#test">Kurulum testi</a><a href="#sorunlar">Sık sorunlar</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" aria-labelledby="baslik">
+    <div>
+      <div class="eyebrow">YZM205 Web Tasarımı ve Programlama · 2026–2027 Güz</div>
+      <h1 id="baslik" style="margin-top:10px">Kurulum</h1>
+      <p class="prose">Bilgisayarlı ilk dersimiz Perşembe 1 Ekim. O güne kadar bu beş adımı evde, kendi bilgisayarında yap. Hepsi yaklaşık 40 dakika sürer. Sırayla git, her adımın sonundaki kutuyu işaretle.</p>
+      <p class="prose">Takıldığın adımı olduğu yerde bırak. 1 Ekim labının ilk 20 dakikasında eksikleri birlikte bitiriyoruz. e-Devlet'ten öğrenci belgeni indirip telefonuna kaydet, 2. adımda işine yarayacak.</p>
+      <p class="prose">Terminal yok, komut yazmak yok. Her şeyi tarayıcıda ve pencerelerde tıklayarak yapacaksın. Başka araçları ihtiyaç duyduğumuz hafta kuracağız. Kendi bilgisayarın yoksa labda bir arkadaşınla eşli çalışırsın.</p>
+      <div class="meta">
+        <span class="chip lab">1 Ekim'den önce · evde</span>
+        <span class="chip theory">kendi dizüstün</span>
+        <span class="chip ship">yaklaşık 40 dakika</span>
+      </div>
+    </div>
+    <aside class="progress" aria-label="İlerleme">
+      <div class="eyebrow">İlerleme</div>
+      <div class="big" aria-live="polite" aria-atomic="true"><span id="doneCount">0</span><span class="muted" style="font-size:1.2rem">/<span id="doneTotal">5</span></span></div>
+      <div class="bar"><div id="bar"></div></div>
+      <p class="muted" style="font-size:.9rem;margin-top:10px" id="progressNote" aria-live="polite">Henüz başlamadın. 1. adımdan başla.</p>
+      <p class="muted" style="font-size:.84rem;margin-top:8px">Her adımın sonundaki kutuyu işaretle. Sayaç nerede kaldığını bu tarayıcıda hatırlar.</p>
+      <button class="btn" id="resetBtn" type="button" style="margin-top:12px">İşaretleri sıfırla</button>
+    </aside>
+  </section>
+
+  <section id="akis" aria-labelledby="akis-h">
+    <div class="section-head"><h2 id="akis-h">Sıra ve süre</h2><span class="time">evde · yaklaşık 40 dk</span></div>
+    <div class="tl">
+      <div class="row"><div class="t">10 dk</div><div>1. GitHub hesabı, okul e-postası, iki adımlı doğrulama</div></div>
+      <div class="row"><div class="t">8 dk</div><div>2. GitHub Education başvurusu. Onay birkaç gün sürebilir, beklemeden 3. adıma geç.</div></div>
+      <div class="row"><div class="t">10 dk</div><div>3. VS Code'u indirip kurmak</div></div>
+      <div class="row"><div class="t">8 dk</div><div>4. Live Server eklentisi ve Copilot girişi</div></div>
+      <div class="row"><div class="t">2 dk</div><div>5. Chrome ya da Edge, DevTools</div></div>
+      <div class="row"><div class="t">3 dk</div><div>Kurulum testi</div></div>
+      <div class="row ara"><div class="t">1 Ekim</div><div>Labın ilk 20 dakikasında eksikleri birlikte bitiriyoruz, sonra kişisel sayfana başlıyorsun.</div></div>
+    </div>
+  </section>
+
+  <section id="adimlar" aria-labelledby="adimlar-h">
+    <div class="section-head"><h2 id="adimlar-h">Beş adım</h2><span class="time">yaklaşık 40 dk</span></div>
+    <p class="prose" style="margin-bottom:14px">Menü ve düğme adlarını ekranda göreceğin gibi İngilizce yazıyoruz. Türkçe Windows'ta bazı pencereler Türkçe açılır. O yerlerde Türkçe adı parantez içinde verdik.</p>
+    <div class="steps">
+
+      <article class="step" data-step="1">
+        <div class="num">1</div>
+        <div>
+          <h3>GitHub hesabı <span class="chip">yaklaşık 10 dk</span></h3>
+          <p class="why">Sayfalarını ve projeni bütün dönem GitHub'da saklayıp internete açacaksın. Education başvurusu ve Copilot girişi de bu hesapla yapılıyor. Copilot, kod yazarken soru sorabildiğin yapay zekâ yardımcısı. Onu 4. adımda kuracağız.</p>
+          <div class="body">
+            <div>
+              <div class="lbl do">Yapılacaklar</div>
+              <ol>
+                <li><a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a> adresini aç. E-posta olarak kişisel adresini (ör. Gmail) yaz. Mezun olduktan sonra da bu hesabı kullanacaksın, okul adresini birazdan ikinci adres olarak ekleyeceğiz. Bir parola ve bir kullanıcı adı seç. Kullanıcı adını dikkatli seç, çünkü Hafta 2'de sayfanın adresi <code>kullaniciadi.github.io</code> olacak. Kullanıcı adında yalnız İngilizce harf, rakam ve tire olabilir.</li>
+                <li>GitHub insan olduğunu anlamak için küçük bir bulmaca sorabilir. Ekrandaki talimatı izle. Sonra e-postana bir doğrulama kodu ya da bağlantısı gelir. Onu girip hesabı aç.</li>
+                <li>Sağ üstteki profil resmine tıkla, <strong>Settings</strong>'i seç. Soldaki menüde <strong>Emails</strong>'e gir. Hesabı okul adresinle açtıysan bu alt adımı ve sonraki iki alt adımı atla.</li>
+                <li><strong>Add email address</strong> kutusuna okul e-postanı (<code>@alparslan.edu.tr</code> ile biten) yaz ve <strong>Add</strong>'e bas.</li>
+                <li>Okul e-postanı aç. GitHub'dan gelen iletideki bağlantıya tıkla.</li>
+                <li>Yine Settings içinde <strong>Password and authentication</strong>'a gir, <strong>Enable two-factor authentication</strong>'a bas. GitHub parolanı yeniden sorarsa yaz.</li>
+                <li>Telefonuna <strong>Google Authenticator</strong> uygulamasını kur. Uygulama mağazasında bu adla ara. Ekrandaki karekodu bu uygulamayla okut. Uygulamanın gösterdiği altı haneli kodu GitHub'a yaz.</li>
+                <li>GitHub sana kurtarma kodları (recovery codes) verir. <strong>Download</strong> ile indir, kaybetmeyeceğin bir yere koy. Sonra <strong>I have saved my recovery codes</strong>'a bas.</li>
+              </ol>
+            </div>
+            <div class="see-box">
+              <div class="lbl see">Ekranda ne göreceksin</div>
+              <p>Okul e-postandaki bağlantıya tıklayınca GitHub açılır ve üstte bir onay şeridi belirir. Emails sayfasında okul adresin listede durur, yanında <em>Unverified</em> yazısı kalmaz. Password and authentication sayfasında iki adımlı doğrulamanın açık olduğu yazar. GitHub'a yeni bir cihazdan girdiğinde parolandan sonra telefonundaki altı haneli kodu sorar.</p>
+            </div>
+            <div class="fix-box">
+              <div class="lbl fix">Olmadıysa</div>
+              <p>Doğrulama iletisi gelmediyse okul e-postanın gereksiz (spam) klasörüne bak. Orada da yoksa Emails sayfasında okul adresinin altındaki <strong>Resend verification email</strong> bağlantısına bas. Adresi yanlış yazdıysan silip yeniden ekle.</p>
+            </div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="1"> Hesabım açık, okul e-postam doğrulandı, iki adımlı doğrulama çalışıyor.</label>
+        </div>
+      </article>
+
+      <article class="step" data-step="2">
+        <div class="num">2</div>
+        <div>
+          <h3>GitHub Education başvurusu <span class="chip">yaklaşık 10 dk</span> <span class="chip ship">erken başla</span></h3>
+          <p class="why">GitHub öğrencilere bazı araçları ücretsiz açıyor. Başvurun onaylanınca bunlar hesabına tanımlanır. Copilot'un öğrenci planı da aralarında.</p>
+          <div class="body">
+            <div>
+              <div class="lbl do">Yapılacaklar</div>
+              <ol>
+                <li>Derse gelmeden önce öğrenci belgeni hazırla. e-Devlet'e girip öğrenci belgeni indir ve telefonuna ya da bilgisayarına kaydet. e-Devlet şifre ve telefon ister, bunu labda yapmaya kalkarsan vakit kaybedersin. Öğrenci kimliğini de yanında getir.</li>
+                <li><a href="https://github.com/settings/education/benefits" target="_blank" rel="noopener">github.com/settings/education/benefits</a> adresini aç. <strong>GitHub Education</strong> başlığının altında <strong>Start an application</strong>'a bas.</li>
+                <li>Form rolünü sorarsa <strong>Student</strong>'ı seç.</li>
+                <li>Okul kutusuna yalnız <code>Alparslan</code> yaz ve çıkan listeden üniversitemizi seç. "Muş" diye ş harfiyle ararsan liste boş kalabilir. E-posta olarak 1. adımda eklediğin okul adresini seç.</li>
+                <li>Form öğrenci olduğunu gösteren bir belge isterse e-Devlet öğrenci belgeni ya da üzerinde tarih olan öğrenci kimliğini kullan. Form belgeyi kamerayla çekmeni isteyebilir. O zaman belgeyi kameraya tut. Tarih ve yazılar okunaklı olsun, belgenin tamamı kareye girsin.</li>
+                <li><strong>Submit application</strong>'a bas.</li>
+              </ol>
+            </div>
+            <div class="see-box">
+              <div class="lbl see">Ekranda ne göreceksin</div>
+              <p>Başvurun aynı sayfada listelenir ve durumu orada görünür. Sonuç birkaç gün sürebilir. Beklerken dersin hiçbir işi aksamaz: Copilot'a girdiğinde öğrenci planın yoksa hesabın ücretsiz planla (Copilot Free) açılır, onay gelince öğrenci planına geçer.</p>
+            </div>
+            <div class="fix-box">
+              <div class="lbl fix">Olmadıysa</div>
+              <p>Başvuru reddedilirse gelen iletideki nedeni oku ve aşağıdaki sık sorunlar bölümüne bak. Çoğu zaman daha net, tarihli bir belgeyle yeniden başvurmak yeter.</p>
+            </div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="2"> Başvurumu gönderdim. Onayı beklemek de bu adımı bitirmiş sayılır.</label>
+        </div>
+      </article>
+
+      <article class="step" data-step="3">
+        <div class="num">3</div>
+        <div>
+          <h3>VS Code <span class="chip">yaklaşık 10 dk</span></h3>
+          <p class="why">Kodunu VS Code adlı editörde yazacaksın. Her lab onun içinde geçecek.</p>
+          <div class="body">
+            <div>
+              <div class="lbl do">Yapılacaklar (Windows)</div>
+              <ol>
+                <li>VS Code'un resmî indirme sayfasını aç: <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener">code.visualstudio.com/download</a>. Başka sitelerden indirme.</li>
+                <li><strong>Windows</strong> düğmesine bas. İnen dosyanın adı <code>VSCodeUserSetup</code> ile başlar. Bu kurulum yönetici izni istemez.</li>
+                <li>İnen dosyaya çift tıkla. Lisans sayfasında <strong>Anlaşmayı kabul ediyorum</strong> (I accept the agreement) seçeneğini işaretle. <strong>Sonraki</strong> (Next) ile ilerle.</li>
+                <li>Ek görevler sayfasında <strong>Code İle Aç</strong> (Open with Code) yazan iki kutuyu da işaretle. Hafta 2'de bir klasöre sağ tıklayıp onu doğrudan VS Code'da açabileceksin. Öteki işaretlere dokunma.</li>
+                <li><strong>Kur</strong> (Install) düğmesine bas. Kurulum bitince <strong>Bitti</strong> (Finish) düğmesine bas.</li>
+                <li>VS Code kendiliğinden açılmazsa Başlat menüsüne "Visual Studio Code" yaz ve aç.</li>
+              </ol>
+            </div>
+            <details class="os">
+              <summary>macOS kullanıyorsan</summary>
+              <div class="in">
+                <ol>
+                  <li>Aynı indirme sayfasında <strong>Mac</strong> düğmesine bas.</li>
+                  <li>İnen dosyayı aç. <strong>Visual Studio Code</strong> simgesini Applications (Uygulamalar) klasörüne sürükle.</li>
+                  <li>Applications klasöründe simgeye çift tıklayıp aç.</li>
+                </ol>
+              </div>
+            </details>
+            <details class="os">
+              <summary>Ubuntu kullanıyorsan</summary>
+              <div class="in">
+                <ol>
+                  <li>Aynı indirme sayfasında <code>.deb</code> paketini indir.</li>
+                  <li>İnen dosyaya çift tıkla. Açılan yazılım merkezinde kur düğmesine bas. Çift tıklayınca hiçbir şey açılmazsa labda elini kaldır.</li>
+                  <li>Uygulamalar listesinden Visual Studio Code'u aç.</li>
+                </ol>
+              </div>
+            </details>
+            <div class="see-box">
+              <div class="lbl see">Ekranda ne göreceksin</div>
+              <p>VS Code bir karşılama sekmesiyle (Welcome) açılır. Pencerenin solunda alt alta simgeler dizilir, en altta durum çubuğu (status bar) denen ince bir şerit vardır. Sonraki adımda bu ikisini kullanacaksın. Sağ altta Türkçe dil paketini kurmayı öneren bir bildirim çıkarsa kapat. Menüleri sayfadaki gibi İngilizce bırakıyoruz.</p>
+            </div>
+            <div class="fix-box">
+              <div class="lbl fix">Olmadıysa</div>
+              <p>İnen dosyayı bulamıyorsan tarayıcıda <kbd>Ctrl</kbd>+<kbd>J</kbd> ile indirilenler listesini aç ve dosyaya oradan tıkla. Kurulum yarıda hata verirse dosyayı sil, sayfadan yeniden indir. Yine olmuyorsa labda elini kaldır, birlikte bakarız.</p>
+            </div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="3"> VS Code açılıyor.</label>
+        </div>
+      </article>
+
+      <article class="step" data-step="4">
+        <div class="num">4</div>
+        <div>
+          <h3>VS Code içinde Live Server ve Copilot <span class="chip">yaklaşık 12 dk</span></h3>
+          <p class="why">Live Server, yazdığın sayfayı tarayıcıda açar ve her kaydedişte yeniler. Takıldığın yerde de Copilot'a soracaksın.</p>
+          <div class="body">
+            <div>
+              <div class="lbl do">Yapılacaklar: Live Server</div>
+              <ol>
+                <li>VS Code'un solundaki simgelerden <strong>Extensions</strong>'a (eklentiler) tıkla. Simgesi birbirine yaslanmış küçük karelerdir. Klavyeyle <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd> da açar (macOS'ta <kbd>⇧⌘X</kbd>).</li>
+                <li>Üstteki arama kutusuna <code>Live Server</code> yaz. Listede yayıncısı <strong>Ritwick Dey</strong> olanı seç.</li>
+                <li><strong>Install</strong>'a bas. VS Code yayıncıya güvenip güvenmediğini sorarsa yayıncı adının Ritwick Dey olduğunu kontrol et ve <strong>Trust Publisher &amp; Install</strong>'a bas.</li>
+              </ol>
+            </div>
+            <div>
+              <div class="lbl do">Yapılacaklar: Copilot</div>
+              <ol start="4">
+                <li>Aynı arama kutusuna bu kez <code>GitHub Copilot</code> yaz. Yayıncısı <strong>GitHub</strong> olan <strong>GitHub Copilot</strong> eklentisi güncel VS Code ile birlikte gelir ve listede kurulu görünür. Yanında <strong>Install</strong> düğmesi görürsen bas.</li>
+                <li>Pencerenin en altındaki durum çubuğunda, sağ tarafta Copilot simgesini bul. Farenle üstüne gel ve <strong>Use AI Features</strong>'ı seç.</li>
+                <li>Açılan pencerede <strong>Continue with GitHub</strong>'a bas. Tarayıcı açılır. 1. adımda açtığın hesapla giriş yap ve VS Code'a izin ver. Tarayıcı VS Code'u açmak için izin isterse onu da ver.</li>
+                <li>VS Code'a dön ve sohbet panelini aç. Pencerenin en üstünde, ortadaki arama kutusunun yanında sohbet menüsü durur. Ona tıkla ve <strong>Open Chat</strong>'i seç. Kısayolu da var: <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>I</kbd> (macOS'ta <kbd>⌃⌘I</kbd>).</li>
+                <li>Panelin altındaki kutuya "Merhaba, bana Türkçe cevap verir misin?" yaz ve Enter'a bas.</li>
+              </ol>
+            </div>
+            <div class="see-box">
+              <div class="lbl see">Ekranda ne göreceksin</div>
+              <p>Live Server'ın sayfasında <strong>Install</strong> düğmesi kaybolur, yerine bir dişli simgesi gelir. Durum çubuğunda <strong>Go Live</strong> yazısı belirir. Onu Hafta 1'deki ilk HTML dosyanı açarken kullanacaksın. Extensions listesinde GitHub Copilot da kurulu görünür. Sohbet panelinde yazdığın cümlenin altına Copilot'un Türkçe cevabı gelir.</p>
+            </div>
+            <div class="fix-box">
+              <div class="lbl fix">Olmadıysa</div>
+              <p>Durum çubuğunda Copilot simgesi yoksa sol alttaki kişi simgesine (<strong>Accounts</strong>) tıkla ve <strong>Sign in with GitHub to use GitHub Copilot</strong>'ı seç. Yanlış hesapla girdiysen aynı menüden <strong>Sign out</strong> de ve doğru hesapla yeniden gir.</p>
+            </div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="4"> Live Server kurulu, Copilot sohbeti bana cevap verdi.</label>
+        </div>
+      </article>
+
+      <article class="step" data-step="5">
+        <div class="num">5</div>
+        <div>
+          <h3>Chrome ya da Edge ve DevTools <span class="chip">yaklaşık 5 dk</span></h3>
+          <p class="why">Yazdığın sayfayı ekrana tarayıcı çizer. DevTools ise tarayıcının içindeki alet çantası. Açık sayfanın kodunu gösterir ve üzerinde deneme yapmanı sağlar.</p>
+          <div class="body">
+            <div>
+              <div class="lbl do">Yapılacaklar</div>
+              <ol>
+                <li>Chrome ya da Edge'i aç. Edge Windows'ta hazır gelir. Chrome kullanmak istiyorsan <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">google.com/chrome</a> adresinden kur.</li>
+                <li>Dersin sitesini aç: <a href="https://cagrisahin58.github.io/2026-web/" target="_blank" rel="noopener">cagrisahin58.github.io/2026-web</a>.</li>
+                <li><kbd>F12</kbd>'ye bas (macOS'ta <kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>I</kbd>). Edge ilk seferde DevTools'u açmak isteyip istemediğini sorarsa açmayı onayla.</li>
+                <li>Açılan panelin üstündeki sekmelerden <strong>Elements</strong>'e, sonra <strong>Console</strong>'a tıkla. Chrome Türkçeyse bu sekmelerin adı <strong>Öğeler</strong> ve <strong>Konsol</strong> olur. Panelin üstünde DevTools'un dilini değiştirmeyi öneren bir şerit çıkarsa düğmelerine basmadan devam et.</li>
+                <li>Paneli kapatmak için yeniden <kbd>F12</kbd>'ye bas.</li>
+              </ol>
+            </div>
+            <div class="see-box">
+              <div class="lbl see">Ekranda ne göreceksin</div>
+              <p>Sayfanın yanında ya da altında kodla dolu bir panel açılır. Elements sekmesinde sayfanın HTML kodunu görürsün. Hafta 2'de bu kodu yazmayı öğreneceğiz.</p>
+            </div>
+            <div class="fix-box">
+              <div class="lbl fix">Olmadıysa</div>
+              <p>Bazı dizüstülerde <kbd>F12</kbd> ses ya da ekran parlaklığı tuşu gibi çalışır. O zaman <kbd>Fn</kbd> tuşuna basılı tutup <kbd>F12</kbd>'ye bas. Olmazsa sayfada bir yazının üstüne sağ tıkla ve <strong>Inspect</strong>'i (Türkçe menüde İncele) seç.</p>
+            </div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="5"> DevTools'u açtım, Elements (Öğeler) ve Console (Konsol) sekmelerini buldum.</label>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="test" aria-labelledby="test-h">
+    <div class="section-head"><h2 id="test-h">Kurulum testi</h2><span class="time">yaklaşık 3 dk</span></div>
+    <p class="prose" style="margin-bottom:14px">Adımlar bittiyse aşağıdakileri sırayla dene. Her biri tuttuğunda kutuyu işaretle. Tutmayan satır olursa o adıma geri dön. Bu işaretler de ilerleme sayacı gibi bu tarayıcıda saklanır.</p>
+    <ul class="testlist">
+      <li><label><input type="checkbox" data-test="1"> Settings, Password and authentication sayfasında iki adımlı doğrulamanın açık olduğu yazıyor.</label></li>
+      <li><label><input type="checkbox" data-test="2"> Settings, Emails sayfasında okul adresim var ve yanında Unverified yazmıyor.</label></li>
+      <li><label><input type="checkbox" data-test="3"> Education başvurum benefits sayfasında görünüyor.</label></li>
+      <li><label><input type="checkbox" data-test="4"> VS Code açılıyor ve Extensions listesinde Live Server kurulu görünüyor.</label></li>
+      <li><label><input type="checkbox" data-test="5"> Copilot sohbeti açılıyor ve soruma cevap veriyor.</label></li>
+      <li><label><input type="checkbox" data-test="6"> Chrome ya da Edge'de <kbd>F12</kbd> ile DevTools açılıyor.</label></li>
+    </ul>
+    <p class="testnote muted" id="testNote" aria-live="polite">0/6 kontrol tamam.</p>
+  </section>
+
+  <section id="sorunlar" aria-labelledby="sorunlar-h">
+    <div class="section-head"><h2 id="sorunlar-h">Sık karşılaşılan sorunlar</h2></div>
+    <div class="faqs">
+      <details class="faq"><summary>Okul e-postama doğrulama iletisi gelmiyor</summary><div class="ans"><p>Önce gereksiz (spam) klasörüne bak. Sonra GitHub'da Settings, Emails sayfasını aç ve okul adresinin doğru yazıldığını kontrol et. Doğruysa adresin altındaki <strong>Resend verification email</strong> ile iletiyi yeniden iste.</p></div></details>
+      <details class="faq"><summary>İki adımlı doğrulama kodu kabul edilmiyor</summary><div class="ans"><p>Doğrulayıcı uygulama kodları saate göre üretir. Telefonunun saati elle ayarlanmışsa kodlar tutmaz. Telefonun ayarlarında tarih ve saati otomatik yap, yeni gelen kodu yaz.</p><p>Telefonuna hiç ulaşamıyorsan 1. adımda indirdiğin kurtarma kodlarından biriyle giriş yaparsın. Her kurtarma kodu bir kez kullanılır.</p></div></details>
+      <details class="faq"><summary>Education başvurum reddedildi</summary><div class="ans"><p>Ret iletisinde neden yazar. GitHub'ın saydığı nedenlerin başında, belgenin okulla bağını açıkça göstermemesi geliyor. Okul e-postası da neden olabilir, örneğin aynı adres daha önce başka bir başvuruda kullanılmışsa.</p><p>Okul e-postanın 1. adımda doğrulandığından emin ol, yeni tarihli ve okunaklı bir belgeyle yeniden başvur. Bu arada Copilot'u ücretsiz planla kullanmaya devam edersin.</p></div></details>
+      <details class="faq"><summary>Extensions'ta Live Server diye birden çok eklenti çıkıyor</summary><div class="ans"><p>Adı benzeyen başka eklentiler de var. Listedeki her satırda eklentinin altında yayıncısının adı yazar. Yayıncısı <strong>Ritwick Dey</strong> olan <strong>Live Server</strong>'ı kur, ötekilere dokunma.</p></div></details>
+      <details class="faq"><summary>Copilot simgesi yok ya da sohbet sürekli giriş istiyor</summary><div class="ans"><p>Sol alttaki <strong>Accounts</strong> menüsüne tıkla. Orada hiç hesap yoksa <strong>Sign in with GitHub to use GitHub Copilot</strong>'ı seç. Başka bir GitHub hesabı görünüyorsa <strong>Sign out</strong> de ve 1. adımda açtığın hesapla yeniden gir.</p></div></details>
+      <details class="faq"><summary>F12'ye basınca DevTools açılmıyor</summary><div class="ans"><p>Dizüstünde F tuşları ses ve parlaklık için ayrılmış olabilir. <kbd>Fn</kbd> tuşunu basılı tutup <kbd>F12</kbd>'ye bas. Yine olmazsa <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd> dene ya da sayfada sağ tıklayıp <strong>Inspect</strong> (İncele) seç.</p></div></details>
+    </div>
+    <div class="callout" style="margin-top:16px">Kurulum bitti mi? 1 Ekim Perşembe <span class="kilitli" title="1 Ekim'de açılır">Hafta 2 sayfasıyla</span> devam ediyoruz: sabah HTML, öğleden sonra internette senin adınla açılan ilk sayfan.</div>
+  </section>
+</main>
+
+<footer><div class="wrap">YZM205 Web Tasarımı ve Programlama · Muş Alparslan Üniversitesi · Arş. Gör. Çağrı ŞAHİN</div></footer>
+
+<script>
+(function(){
+  var KEY = 'yzm205.h0.done';
+  var VER = 2;
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('input[data-done]'));
+  var tests = Array.prototype.slice.call(document.querySelectorAll('input[data-test]'));
+  var total = boxes.length;
+  var done = {};
+  var tested = {};
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (saved && saved.v === VER) {
+      if (saved.steps) done = saved.steps;
+      if (saved.tests) tested = saved.tests;
+    }
+  } catch (e) { done = {}; tested = {}; }
+
+  function save(){
+    try { localStorage.setItem(KEY, JSON.stringify({ v: VER, steps: done, tests: tested })); } catch (e) {}
+  }
+
+  function paint(){
+    var n = 0;
+    boxes.forEach(function(b){
+      var on = !!done[b.dataset.done];
+      b.checked = on;
+      b.closest('.step').classList.toggle('done', on);
+      if (on) n++;
+    });
+    document.getElementById('doneCount').textContent = n;
+    document.getElementById('doneTotal').textContent = total;
+    document.getElementById('bar').style.width = (100 * n / total) + '%';
+    var note = document.getElementById('progressNote');
+    if (n === 0) note.textContent = 'Henüz başlamadın. 1. adımdan başla.';
+    else if (n < total) {
+      note.textContent = (total - n) + ' adım kaldı.';
+      if (!done['2']) note.textContent += ' Education başvurusunu gönderdiysen 2. adımı işaretleyebilirsin.';
+    }
+    else note.textContent = 'Bütün adımlar tamam. Sayfanın sonundaki kurulum testini de yap.';
+  }
+
+  var testNote = document.getElementById('testNote');
+  function paintTests(){
+    var k = 0;
+    tests.forEach(function(t){
+      var on = !!tested[t.dataset.test];
+      t.checked = on;
+      if (on) k++;
+    });
+    testNote.textContent = k === tests.length
+      ? 'Hepsi tamam. Bilgisayarın derse hazır.'
+      : k + '/' + tests.length + ' kontrol tamam.';
+  }
+
+  boxes.forEach(function(b){
+    b.addEventListener('change', function(){
+      done[b.dataset.done] = b.checked;
+      save();
+      paint();
+    });
+  });
+
+  tests.forEach(function(t){
+    t.addEventListener('change', function(){
+      tested[t.dataset.test] = t.checked;
+      save();
+      paintTests();
+    });
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    done = {};
+    tested = {};
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    paint();
+    paintTests();
+  });
+
+  paint();
+  paintTests();
+})();
+</script>
+</body>
+</html>

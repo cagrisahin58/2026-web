@@ -1,0 +1,1375 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hafta 1 · Yapay zekâ çağında web yazılımcısı olmak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ink:#121A2B; --ground:#F5F7FB; --surface:#FFFFFF; --surface-2:#EEF2F8; --line:#D9DEE8; --muted:#5B6577;
+  --theory:#2352D9; --theory-soft:#E4EAFB; --lab:#0A6F62; --lab-soft:#DDF3EF; --ship:#8F5600; --ship-soft:#FBEBD2; --ai:#7A3DD6; --ai-soft:#EEE6FB;
+  --srv:#A1356B; --srv-soft:#F8E3EE; --db:#4A6510; --db-soft:#E8F0D4;
+  --err:#B3261E; --err-soft:#FBE4E1;
+  --focus:#2352D9; --shadow:0 1px 2px rgba(18,26,43,.06),0 8px 24px -12px rgba(18,26,43,.18);
+  --display:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif; --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#E7ECF5; --ground:#0E131D; --surface:#161C29; --surface-2:#1D2535; --line:#2A3345; --muted:#9AA5B8;
+    --theory:#7B97FF; --theory-soft:#1B2545; --lab:#3FC4B0; --lab-soft:#123430; --ship:#F0A93B; --ship-soft:#3A2A10; --ai:#B48CFF; --ai-soft:#2C1F4A;
+    --srv:#F28DC0; --srv-soft:#3A1A2C; --db:#B3D86C; --db-soft:#233012;
+    --err:#FF7A66; --err-soft:#3A1A16;
+    --focus:#7B97FF; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E7ECF5; --ground:#0E131D; --surface:#161C29; --surface-2:#1D2535; --line:#2A3345; --muted:#9AA5B8;
+  --theory:#7B97FF; --theory-soft:#1B2545; --lab:#3FC4B0; --lab-soft:#123430; --ship:#F0A93B; --ship-soft:#3A2A10; --ai:#B48CFF; --ai-soft:#2C1F4A;
+  --srv:#F28DC0; --srv-soft:#3A1A2C; --db:#B3D86C; --db-soft:#233012;
+  --err:#FF7A66; --err-soft:#3A1A16;
+  --focus:#7B97FF; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--ink);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--theory);text-decoration-thickness:1px;text-underline-offset:2px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(2.1rem,5.4vw,3.5rem);font-weight:800}
+h2{font-size:clamp(1.4rem,2.8vw,1.9rem);font-weight:700}
+h3{font-size:1.1rem;font-weight:700}
+p{margin:0}
+ul,ol{margin:0;padding-left:1.25em}
+li{margin:.3em 0}
+code{font-family:var(--mono);font-size:.9em;background:var(--surface-2);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+kbd{font-family:var(--mono);font-size:.85em;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;background:var(--surface)}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:clamp(16px,4vw,32px)}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.lede{max-width:64ch;font-size:1.1rem}
+.muted{color:var(--muted)}
+.prose{max-width:70ch;display:grid;gap:12px}
+.small{font-size:.9rem}
+.sr{position:absolute;left:-9999px}
+.sr:focus{position:static;left:auto;display:inline-block;padding:6px 10px;background:var(--surface);border:1px solid var(--line);border-radius:8px;font-size:.86rem}
+
+/* üst menü */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--ground) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:10px;min-height:56px;padding-block:6px}
+.brand{font-family:var(--display);font-weight:800;font-size:1rem;white-space:nowrap;display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
+.brand .dot{width:10px;height:10px;border-radius:50%;background:var(--ship);box-shadow:0 0 0 4px var(--ship-soft)}
+nav.jump{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1 1 auto;min-width:0}
+nav.jump::-webkit-scrollbar{display:none}
+nav.jump a{color:var(--muted);font:500 .85rem/1 var(--body);padding:9px 10px;border-radius:999px;text-decoration:none;white-space:nowrap}
+nav.jump a:hover{color:var(--ink);background:var(--surface-2)}
+.themebtn{flex:0 0 auto}
+main{padding-block:28px 64px}
+section[id]{scroll-margin-top:72px}
+section+section{margin-top:56px}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px 16px;flex-wrap:wrap;margin-bottom:16px}
+.time{font-family:var(--mono);font-size:.78rem;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 10px;white-space:nowrap}
+
+/* ortak bileşenler */
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.74rem;font-weight:500;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);white-space:nowrap}
+.chip.theory{background:var(--theory-soft);border-color:transparent;color:var(--theory)}
+.chip.lab{background:var(--lab-soft);border-color:transparent;color:var(--lab)}
+.chip.ship{background:var(--ship-soft);border-color:transparent;color:var(--ship)}
+.chip.ai{background:var(--ai-soft);border-color:transparent;color:var(--ai)}
+.chip.srv{background:var(--srv-soft);border-color:transparent;color:var(--srv)}
+.chip.db{background:var(--db-soft);border-color:transparent;color:var(--db)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0}
+.card h3{margin-bottom:8px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.callout{border-left:3px solid var(--ship);background:var(--surface);border-radius:0 12px 12px 0;padding:12px 16px;font-size:.95rem}
+.callout.ai{border-left-color:var(--ai)}
+.callout.lab{border-left-color:var(--lab)}
+.callout.info{border-left-color:var(--theory)}
+.btn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 .88rem/1.2 var(--body);padding:9px 14px;border-radius:10px;cursor:pointer}
+.btn:hover{background:var(--surface-2)}
+.btn.primary{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.btn.primary:hover{opacity:.9;background:var(--ink)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn[aria-pressed="true"]{background:var(--theory-soft);border-color:var(--theory);color:var(--theory)}
+.row-btns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+input[type=text]{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:9px 12px;min-width:0;width:100%}
+label.f{display:grid;gap:5px;font-size:.88rem;color:var(--muted)}
+pre.code{margin:0;background:#121A2B;color:#E7ECF5;border-radius:10px;padding:12px 14px;font-family:var(--mono);font-size:.84rem;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;position:relative}
+:root[data-theme="dark"] pre.code{background:#0A0E16}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) pre.code{background:#0A0E16}}
+pre.code.hascopy{padding-right:84px}
+pre.code .copy{position:absolute;top:8px;right:8px;appearance:none;border:1px solid rgba(255,255,255,.3);background:transparent;color:inherit;border-radius:7px;font:500 .74rem/1 var(--body);padding:6px 8px;cursor:pointer}
+pre.code .copy:hover{background:rgba(255,255,255,.12)}
+.saw{margin-top:12px;font-size:.95rem;background:var(--lab-soft);color:var(--ink);border-radius:10px;padding:10px 14px}
+.saw b{color:var(--lab);font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:.93rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500;color:var(--muted)}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.sim{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:16px 18px;display:grid;gap:14px;min-width:0}
+.sim-title{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sim-title h3{font-size:1.05rem}
+
+/* hero */
+.hero{display:grid;gap:18px}
+.hero h1 span{color:var(--ship)}
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+
+/* Bugün kutusu */
+.today{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow)}
+.today .cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 26px;margin-top:10px}
+.today h3{font-size:1rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.today ol{list-style:none;padding:0;margin-top:8px;display:grid;gap:2px}
+.today li{display:grid;grid-template-columns:70px minmax(0,1fr);gap:10px;font-size:.93rem;margin:0;padding:5px 0;border-bottom:1px dashed var(--line)}
+.today li:last-child{border-bottom:0}
+.today li b{font-family:var(--mono);font-weight:500;font-size:.8rem;color:var(--muted);padding-top:2px}
+.today li.brk{color:var(--muted)}
+
+/* ısınma oyunu */
+.apps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.app{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 .92rem/1.25 var(--body);padding:12px 10px;border-radius:12px;cursor:pointer;text-align:left;display:grid;gap:4px;min-width:0}
+.app .ic{font-family:var(--display);font-weight:800;font-size:1.1rem;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--surface-2);color:var(--muted)}
+.app[aria-pressed="true"]{border-color:var(--ship);background:var(--ship-soft)}
+.app[aria-pressed="true"] .ic{background:var(--ship);color:var(--surface)}
+.parts{display:grid;gap:6px}
+.part{display:grid;grid-template-columns:104px minmax(0,1fr);gap:10px;align-items:start;font-size:.93rem;padding:8px 10px;border-radius:10px;background:var(--surface-2)}
+.part .chip{justify-content:center}
+.tally{font-family:var(--display);font-weight:700;font-size:1.05rem}
+.five{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.five .card{padding:12px 14px}
+.five .card p{font-size:.9rem;margin-top:6px}
+
+/* katman simülasyonu */
+.layer-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start}
+.stagebox{background:var(--surface-2);border-radius:12px;padding:14px;min-height:260px}
+.kantin{background:#fff;color:#000;padding:10px 12px;border-radius:2px;font-family:"Times New Roman",Times,serif;font-size:16px;line-height:1.35}
+.kantin h4{font-size:1.5em;margin:.3em 0;font-weight:700}
+.kantin ul{padding-left:1.4em;margin:.5em 0}
+.kantin li{margin:.2em 0}
+.kantin button{font:13px Arial,sans-serif;padding:1px 6px;margin-left:6px;cursor:pointer}
+.kantin .sepet{margin-top:.6em}
+.kantin.css{font-family:var(--body);background:#FFFDF8;border-radius:14px;padding:16px 18px;box-shadow:0 10px 24px -14px rgba(0,0,0,.35);border:1px solid #F0E3CC}
+.kantin.css h4{font-family:var(--display);color:#0A6F62;font-size:1.35rem;margin:0 0 10px}
+.kantin.css ul{list-style:none;padding:0;display:grid;gap:8px}
+.kantin.css li{display:flex;justify-content:space-between;align-items:center;gap:8px;background:#fff;border:1px solid #EFE6D6;border-radius:10px;padding:8px 10px;font-size:.95rem}
+.kantin.css button{background:#E07A1F;color:#fff;border:0;border-radius:8px;padding:6px 10px;font:600 .8rem var(--body)}
+.kantin.css .sepet{font-family:var(--mono);font-size:.85rem;background:#0A6F62;color:#fff;border-radius:8px;padding:6px 10px;display:inline-block;margin-top:12px}
+.kantin .bump{animation:bump .35s}
+@keyframes bump{50%{transform:scale(1.12)}}
+.layerinfo{display:grid;gap:10px}
+.layerinfo .when{font-family:var(--mono);font-size:.78rem}
+.hint{font-size:.88rem;color:var(--muted);min-height:1.4em}
+
+/* adres çubuğu */
+.urlbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.urlbar input{font-family:var(--mono);font-size:.92rem}
+.road{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr) minmax(0,1fr);gap:8px;align-items:stretch}
+.node{background:var(--surface-2);border:2px solid transparent;border-radius:12px;padding:10px;display:grid;gap:6px;align-content:start;text-align:center;font-size:.86rem;transition:border-color .3s}
+.node.on{border-color:var(--theory)}
+.node .nt{font-family:var(--display);font-weight:700;font-size:.98rem;overflow-wrap:anywhere;hyphens:auto}
+.lane{position:relative;border-top:2px dashed var(--line);border-bottom:2px dashed var(--line);border-radius:4px;min-height:70px;overflow:hidden}
+.packet{position:absolute;top:50%;left:4px;transform:translateY(-50%);max-width:calc(100% - 8px);background:var(--theory);color:#fff;font:500 .72rem/1.25 var(--mono);padding:5px 8px;border-radius:8px;opacity:0;transition:left .9s ease,opacity .3s;white-space:normal;text-align:center}
+.packet.back{background:var(--lab)}
+.packet.show{opacity:1}
+.packet.right{left:calc(100% - 4px);transform:translate(-100%,-50%)}
+.mini{background:#fff;border:1px solid var(--line);border-radius:8px;height:74px;overflow:hidden;text-align:left}
+.mini .mb{height:10px;background:#e9edf3;border-bottom:1px solid #d9dee8}
+.mini .ml{height:7px;border-radius:3px;background:#d9dee8;margin:6px 8px 0;opacity:0;transition:opacity .4s}
+.mini .ml.h{height:10px;width:55%;background:#0A6F62}
+.mini .ml.w2{width:80%}.mini .ml.w3{width:65%}
+.mini.draw .ml{opacity:1}
+.mini.draw .ml:nth-child(3){transition-delay:.2s}.mini.draw .ml:nth-child(4){transition-delay:.4s}.mini.draw .ml:nth-child(5){transition-delay:.6s}
+.steppills{display:flex;gap:6px;flex-wrap:wrap}
+.steppills button{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--muted);font:500 .8rem/1 var(--mono);padding:7px 10px;border-radius:999px;cursor:pointer}
+.steppills button[aria-current="step"]{background:var(--theory);border-color:var(--theory);color:#fff}
+.steptext{background:var(--surface-2);border-radius:12px;padding:12px 14px;display:grid;gap:6px}
+.steptext .st{font-family:var(--display);font-weight:700;font-size:1.05rem}
+.steptext .an{font-size:.9rem;color:var(--muted)}
+
+/* ziyaretçi defteri */
+.gb{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr) minmax(0,1fr);gap:10px}
+.gbcol{border:2px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:10px;align-content:start;min-width:0;transition:border-color .3s,box-shadow .3s}
+.gbcol.pulse{box-shadow:0 0 0 4px var(--theory-soft);border-color:var(--theory)}
+.gbcol h4{margin:0;font:600 .95rem var(--display);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.gbfront{border-color:color-mix(in srgb,var(--lab) 40%,var(--line))}
+.gbsrv{border-color:color-mix(in srgb,var(--srv) 40%,var(--line))}
+.gbdb{border-color:color-mix(in srgb,var(--db) 40%,var(--line))}
+.msgs{list-style:none;padding:0;margin:0;display:grid;gap:6px;max-height:200px;overflow:auto}
+.msgs li{margin:0;background:var(--surface-2);border-radius:10px;padding:7px 10px;font-size:.88rem;overflow-wrap:anywhere}
+.msgs li b{display:block;font-size:.8rem;color:var(--muted)}
+.log{font-family:var(--mono);font-size:.76rem;display:grid;gap:4px;max-height:220px;overflow:auto}
+.log div{background:var(--surface-2);border-radius:6px;padding:5px 7px;overflow-wrap:anywhere}
+.log div.bad{background:var(--err-soft);color:var(--err)}
+.dbt{font-size:.8rem}
+.dbt th,.dbt td{padding:5px 6px;overflow-wrap:anywhere}
+.dbt tr.new td{background:var(--db-soft);transition:background 1.5s}
+.gbstatus{font-size:.86rem;min-height:1.3em}
+.gbstatus.bad{color:var(--err)}
+
+/* iki istek */
+.prompt-bubble{background:var(--ai-soft);border-radius:14px 14px 14px 4px;padding:10px 14px;font-size:.95rem;max-width:560px}
+.prompt-bubble b{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;color:var(--ai);text-transform:uppercase;font-weight:500}
+.browser{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;color:#1b1b1b}
+.browser .bb{display:flex;gap:6px;align-items:center;background:#EEF1F6;padding:7px 10px;border-bottom:1px solid #D9DEE8}
+.browser .bb i{width:9px;height:9px;border-radius:50%;background:#C9CFDA;display:block}
+.browser .bb span{margin-left:6px;font:500 .72rem var(--mono);color:#5B6577;background:#fff;border-radius:6px;padding:2px 8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.vague{font-family:Arial,sans-serif}
+.vague .vnav{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:10px 14px;background:#1f2937;color:#fff;font-size:.8rem}
+.vague .vnav span{opacity:.8}
+.vague .vhero{padding:22px 14px;text-align:center;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff}
+.vague .vhero h5{font-size:1.3rem;margin:0 0 6px}
+.vague .vhero p{font-size:.82rem;opacity:.9}
+.vague .vbody{padding:12px 14px;font-size:.8rem;color:#555}
+.clear{font-family:var(--body);padding:14px}
+.clear h5{font-family:var(--display);font-size:1.25rem;margin:0 0 4px;color:#0A6F62}
+.clear .sub{font-size:.82rem;color:#5B6577;margin-bottom:10px}
+.clear ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.clear li{margin:0;border:1px solid #EFE6D6;background:#FFFDF8;border-radius:10px;padding:8px 10px;display:flex;justify-content:space-between;gap:6px;font-size:.88rem}
+.clear li b{color:#8F5600;white-space:nowrap}
+.guesses{display:grid;gap:6px}
+.guess{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start;font-size:.92rem}
+.guess .chip{min-width:84px;justify-content:center}
+
+/* neredeyse doğru */
+.bugs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.bug{border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:10px;align-content:start;min-width:0;background:var(--surface)}
+.bug .ask{font-size:.9rem}
+.bug .ask b{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;color:var(--ai);text-transform:uppercase;font-weight:500;display:block}
+.bug .files{font-size:.82rem;color:var(--muted)}
+.lines{display:grid;gap:2px;background:#121A2B;border-radius:10px;padding:8px}
+:root[data-theme="dark"] .lines{background:#0A0E16}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lines{background:#0A0E16}}
+.ln{appearance:none;display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;text-align:left;background:transparent;border:1px solid transparent;color:#E7ECF5;font:.82rem/1.5 var(--mono);padding:4px 6px;border-radius:6px;cursor:pointer;white-space:pre-wrap;overflow-wrap:anywhere}
+.ln:hover{background:rgba(255,255,255,.08)}
+.ln .n{color:#8A95A8;user-select:none}
+.ln.right{background:rgba(63,196,176,.22);border-color:#3FC4B0}
+.ln.wrong{background:rgba(255,122,102,.22);border-color:#FF7A66}
+.ln[disabled]{cursor:default}
+.bug .exp{display:none;font-size:.9rem;border-left:3px solid var(--lab);background:var(--lab-soft);border-radius:0 10px 10px 0;padding:8px 12px}
+.bug.done .exp{display:block}
+
+/* kim yapar */
+.pool{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:8px}
+.bins{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.bin{border:2px dashed var(--line);border-radius:14px;padding:12px;display:grid;gap:8px;align-content:start;min-height:120px}
+.bin.ai{border-color:color-mix(in srgb,var(--ai) 55%,var(--line))}
+.bin.you{border-color:color-mix(in srgb,var(--ship) 55%,var(--line))}
+.bin h4{margin:0;font:700 1rem var(--display);display:flex;justify-content:space-between;gap:8px}
+.bin .empty{font-size:.86rem;color:var(--muted)}
+.wcard{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:grid;gap:8px;min-width:0}
+.wcard .wt{font-weight:500;font-size:.94rem}
+.wcard .wb{display:flex;gap:6px;flex-wrap:wrap}
+.wcard .wb .btn{padding:6px 10px;font-size:.8rem}
+.wcard .we{display:none;font-size:.86rem;border-radius:8px;padding:6px 10px}
+.wcard.checked .we{display:block}
+.wcard.ok{border-color:var(--lab)}
+.wcard.ok .we{background:var(--lab-soft)}
+.wcard.diff{border-color:var(--ship)}
+.wcard.diff .we{background:var(--ship-soft)}
+
+/* yol haritası */
+.weeks{display:grid;grid-template-columns:repeat(auto-fill,minmax(60px,1fr));gap:6px}
+.wk{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:8px 6px;cursor:pointer;display:grid;gap:2px;text-align:center;font:inherit}
+.wk .wn{font-family:var(--display);font-weight:800;font-size:1.25rem;line-height:1}
+.wk .wd{font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.wk.off{opacity:.65;border-style:dashed}
+.wk.now{box-shadow:inset 0 0 0 2px var(--ship)}
+.wk[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.wk[aria-pressed="true"] .wd{color:var(--ground)}
+.wkpanel{background:var(--surface-2);border-radius:14px;padding:14px 16px;display:grid;gap:8px;min-height:130px}
+.wkpanel .wh{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.wkpanel .wh h3{font-size:1.15rem}
+.wkpanel .can{font-size:1rem}
+.wkpanel .taste{font-size:.9rem;color:var(--muted)}
+.ms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.ms div{background:var(--surface-2);border-radius:10px;padding:8px 10px;font-size:.86rem}
+.ms b{font-family:var(--mono);font-weight:500;display:block;color:var(--ship)}
+
+/* zaman çizelgesi ve etkinlikler */
+.tl{display:grid;gap:8px}
+.tl .row{display:grid;grid-template-columns:92px minmax(0,1fr);gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.tl .row .t{font-family:var(--mono);font-size:.8rem;color:var(--muted);padding-top:2px;white-space:nowrap}
+.tl .row .h{font-weight:600}
+.tl .row p{font-size:.94rem;margin-top:4px}
+.tl .row.kur{border-left:4px solid var(--ship)} .tl .row.ara{border-left:4px solid var(--line)} .tl .row.dok{border-left:4px solid var(--lab)}
+.acts{display:grid;gap:14px}
+.sohbet{display:grid;gap:8px}
+.sohbet details{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:0}
+.sohbet summary{cursor:pointer;font-weight:600;padding:12px 14px;list-style:none;display:flex;gap:10px;align-items:center}
+.sohbet summary::-webkit-details-marker{display:none}
+.sohbet summary::before{content:"+";font-family:var(--mono);color:var(--ai);font-weight:500;width:18px;flex:0 0 18px}
+.sohbet details[open] summary::before{content:"–"}
+.sohbet .ans{padding:0 14px 14px;font-size:.96rem}
+.fkOut{background:var(--ship-soft);border-radius:10px;padding:12px 14px;font-size:1.02rem;min-height:44px}
+.fkOut b{color:var(--ship)}
+.act{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px}
+.act .num{font-family:var(--display);font-weight:800;font-size:1.6rem;line-height:1;color:var(--lab);width:32px}
+.act h3{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.act .body{display:grid;gap:10px;margin-top:10px;font-size:.96rem}
+
+/* sorular */
+.qgroup{display:grid;gap:10px;margin-top:18px}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.qhead h3{font-size:1.05rem}
+.score{font-family:var(--mono);font-size:.85rem;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:10px;min-width:0}
+.q .qt{font-weight:600;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px}
+.q .qt .qn{font-family:var(--mono);font-size:.8rem;color:var(--muted);padding-top:3px}
+.q .tag{font-family:var(--mono);font-size:.7rem;color:var(--ship)}
+.q .chip,.bug .chip{justify-self:start}
+pre.code.numbered .cl{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px}
+pre.code.numbered .cn{color:#8A95A8;user-select:none}
+.opts{display:grid;gap:6px}
+.opt{appearance:none;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:.95rem/1.4 var(--body);padding:9px 12px;border-radius:10px;cursor:pointer;display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px}
+.opt .l{font-family:var(--mono);color:var(--muted);font-size:.85rem;padding-top:1px}
+.opt:hover:not([disabled]){background:var(--surface-2)}
+.opt[disabled]{cursor:default}
+.opt.right{border-color:var(--lab);background:var(--lab-soft)}
+.opt.wrong{border-color:var(--err);background:var(--err-soft)}
+.opt.right .l,.opt.wrong .l{color:inherit}
+.q .exp{display:none;font-size:.93rem;border-left:3px solid var(--theory);background:var(--surface-2);border-radius:0 10px 10px 0;padding:9px 12px}
+.q.done .exp{display:block}
+.q .verdict{font-weight:600}
+.q .verdict.y{color:var(--lab)} .q .verdict.n{color:var(--err)}
+
+.next{background:linear-gradient(135deg,var(--theory-soft),var(--lab-soft));border-radius:18px;padding:22px 22px;display:grid;gap:10px}
+.next h2{font-size:clamp(1.3rem,2.6vw,1.7rem)}
+.brkband{display:flex;align-items:center;gap:14px;color:var(--muted);font-family:var(--mono);font-size:.85rem}
+.brkband::before,.brkband::after{content:"";flex:1;border-top:1px dashed var(--line)}
+footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--muted);font-size:.86rem}
+
+@media (max-width:900px){.five{grid-template-columns:repeat(2,minmax(0,1fr))}.apps{grid-template-columns:repeat(2,minmax(0,1fr))}.ms{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){
+  .grid2,.grid3,.today .cols,.layer-wrap,.gb,.bugs,.bins{grid-template-columns:minmax(0,1fr)}
+  .tl .row{grid-template-columns:minmax(0,1fr);gap:4px}
+  .act{grid-template-columns:minmax(0,1fr)}
+  .part{grid-template-columns:minmax(0,1fr);gap:4px}
+  .part .chip{justify-self:start}
+  .road{grid-template-columns:minmax(0,1fr) minmax(0,.9fr) minmax(0,1fr);gap:6px}
+  .node{padding:8px 6px;font-size:.78rem}
+  .node .nt{font-size:.84rem}
+}
+@media (max-width:460px){.five{grid-template-columns:minmax(0,1fr)}.ms{grid-template-columns:minmax(0,1fr)}.today li{grid-template-columns:58px minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+@media print{.top,.copy,.themebtn{display:none!important}body{background:#fff;color:#000}.card,.q,.act,.sim{break-inside:avoid}}
+</style>
+<style>.kilitli{opacity:.6;cursor:not-allowed;text-decoration:none}a.kilitli,span.kilitli.btn{pointer-events:none}</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="sr" href="#merhaba">İçeriğe atla</a>
+    <a class="brand" href="../../"><span class="dot" aria-hidden="true"></span>YZM205 · Hafta 1</a>
+    <nav class="jump" aria-label="Bölümler">
+      <a href="#bugun">Bugün</a><a href="#merhaba">Merhaba</a><a href="#katmanlar">Katmanlar</a><a href="#adres">Adres çubuğu</a><a href="#yapay-zeka">Yapay zekâ</a><a href="#yol">Yol haritası</a><a href="#nasil">Nasıl çalışacağız</a><a href="#sina">Kendini sına</a><a href="#ogleden-sonra">Öğleden sonra</a><a href="#gelecek">Gelecek hafta</a>
+    </nav>
+    <button class="btn themebtn" id="themeBtn" type="button" aria-label="Temayı değiştir">Tema: otomatik</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" aria-labelledby="baslik">
+    <div class="eyebrow">Hafta 1 · Perşembe 24 Eylül 2026 · BLD-104</div>
+    <h1 id="baslik">Yapay zekâ çağında <span>web yazılımcısı</span> olmak</h1>
+    <p class="lede">Bugün konu anlatımı yok. Önce tanışıp dönemin haritasına bakacağız. Sonra web'in her parçasından birer lokma tadacağız. Dersten çıkarken aklında tek bir cümle kalsın istiyorum: bunu ben de yapabilirim.</p>
+    <div class="stack" aria-label="Bugün tadına bakacağın parçalar">
+      <span class="chip ship">HTML</span><span class="chip theory">CSS</span><span class="chip lab">JavaScript</span><span class="chip srv">Sunucu</span><span class="chip db">Veritabanı</span><span class="chip ai">Yapay zekâ</span>
+    </div>
+    <div class="meta">
+      <span class="chip">Sabah 10:00–11:45 · tanışma ve tadımlık</span>
+      <span class="chip">Öğleden sonra 15:00–16:45 · sohbet</span>
+      <span class="chip theory">Bilgisayar gerekmez, telefon yeter</span>
+      <span class="chip lab">Bugün puan yok, teslim yok</span>
+    </div>
+  </section>
+
+  <section id="bugun" aria-labelledby="bugun-h">
+    <div class="today">
+      <div class="section-head" style="margin-bottom:0"><h2 id="bugun-h">Bugün</h2><span class="muted small">Dakikalar dersin başından sayılır</span></div>
+      <div class="cols">
+        <div>
+          <h3>Sabah <span class="chip theory">10:00–11:45</span></h3>
+          <ol>
+            <li><b>0–15</b><span><a href="#merhaba">Merhaba</a> ve ısınma oyunu</span></li>
+            <li><b>15–30</b><span><a href="#katmanlar">Bir web sayfası nelerden oluşur?</a></span></li>
+            <li><b>30–45</b><span><a href="#adres">Adres çubuğuna yazınca ne olur?</a> Ziyaretçi defteri</span></li>
+            <li class="brk"><b>45–55</b><span>Ara</span></li>
+            <li><b>55–78</b><span><a href="#yapay-zeka">Yapay zekâ çağında yazılımcı olmak</a></span></li>
+            <li><b>78–93</b><span><a href="#yol">Bu dönemki yolculuğun</a></span></li>
+            <li><b>93–103</b><span><a href="#nasil">Nasıl çalışacağız</a></span></li>
+            <li><b>103–105</b><span><a href="#sina">Kendini sına</a></span></li>
+          </ol>
+        </div>
+        <div>
+          <h3>Öğleden sonra <span class="chip lab">15:00–16:45</span></h3>
+          <ol>
+            <li><b>0–25</b><span><a href="#ogleden-sonra">Dörtlü masalar: tanışma turu</a></span></li>
+            <li><b>25–45</b><span>Hangi siteyi yapardın? Fikir kartı</span></li>
+            <li class="brk"><b>45–55</b><span>Ara</span></li>
+            <li><b>55–80</b><span>Sohbet: yapay zekâ varken bu işi neden öğreniyoruz?</span></li>
+            <li><b>80–95</b><span>Projeksiyonda web'in içi</span></li>
+            <li><b>95–105</b><span>Gelecek haftaya hazırlık</span></li>
+          </ol>
+          <p class="muted small" style="margin-top:10px">Bugün bilgisayar getirmene gerek yok. Bu sayfa telefonda da çalışır, oyunları ve soruları oradan açabilirsin.</p>
+          <p class="muted small" style="margin-top:6px">Her bölümün sonunda birkaç soru var. Her bölümden bir soruyu derste çözüyoruz, hafta testinden birini de. Kalanı evde.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. MERHABA -->
+  <section id="merhaba" aria-labelledby="merhaba-h">
+    <div class="section-head"><h2 id="merhaba-h">Merhaba</h2><span class="time">0–15 dk</span></div>
+    <div class="prose">
+      <p>Ben Arş. Gör. Çağrı Şahin. Bu dönem YZM205 Web Tasarımı ve Programlama dersinde birlikteyiz. Her Perşembe iki kez buluşacağız: sabah 10:00'da konuyu canlı örneklerle konuşacağız, öğleden sonra 15:00'te laboratuvarda aynı konuyu kendi bilgisayarında yapacaksın. Bugün bilgisayar yok, tanışma ve sohbet var. Bilgisayarlı ilk dersimiz 1 Ekim. Sınıfta 56 kişiyiz. Hafta 5'te (22 Ekim) dörder kişilik takımlar kuruyoruz, dönemin geri kalanında takımınla gerçek bir web uygulaması yapacaksın.</p>
+      <p>Web'i hiç bilmiyorsan doğru yerdesin. YZM103'te değişken, koşul, döngü ve fonksiyon gördün. Bu kadarı yeter. Gerisini burada adım adım kuracağız.</p>
+    </div>
+
+    <div class="sim" style="margin-top:18px" id="warmup">
+      <div class="sim-title"><span class="chip ship">Isınma oyunu</span><h3>Bugün hangi uygulamaları kullandın?</h3></div>
+      <p class="small muted">Sabahtan beri tarayıcıda ya da telefonda açtıklarına dokun. Her birinin web sürümünün perde arkasında neler çalıştığı sağda belirecek.</p>
+      <div class="grid2">
+        <div class="apps" id="apps" role="group" aria-label="Uygulamalar"></div>
+        <div style="display:grid;gap:10px;align-content:start">
+          <p class="tally" id="tally" aria-live="polite">Henüz bir uygulama seçmedin.</p>
+          <div class="parts" id="parts"></div>
+          <div class="row-btns"><button class="btn" type="button" id="appsReset">Temizle</button></div>
+        </div>
+      </div>
+      <p class="saw"><b>Ne gördün?</b> Birbirine hiç benzemeyen bu sitelerin hepsi aynı beş parçadan yapılıyor. Telefondaki uygulamaların görünen yüzü başka dillerle yazılır, ama arkadaki sunucu ve veritabanı yine aynı. Bu dönem o beş parçayı tek tek öğreneceksin.</p>
+    </div>
+
+    <div class="five" style="margin-top:16px">
+      <div class="card"><span class="chip ship">HTML</span><p>Sayfada ne olduğunu söyleyen metin: burada bir başlık var, şurada bir düğme var.</p></div>
+      <div class="card"><span class="chip theory">CSS</span><p>Sayfanın nasıl görüneceğini söyleyen kurallar: renk, yazı tipi, boşluk, düzen.</p></div>
+      <div class="card"><span class="chip lab">JavaScript</span><p>Sayfaya davranış kazandıran programlama dili: düğmeye basınca bir şey olsun.</p></div>
+      <div class="card"><span class="chip srv">Sunucu</span><p>İnternette sürekli açık bekleyen ve gelen isteklere cevap veren program.</p></div>
+      <div class="card"><span class="chip db">Veritabanı</span><p>Bilgiyi düzenli bir tablo gibi saklayan yer. Sayfayı kapatsan da bilgi kaybolmaz.</p></div>
+    </div>
+  </section>
+
+  <!-- 2. KATMANLAR -->
+  <section id="katmanlar" aria-labelledby="katman-h">
+    <div class="section-head"><h2 id="katman-h">Bir web sayfası nelerden oluşur?</h2><span class="time">15–30 dk</span></div>
+    <div class="prose">
+      <p>Bir insan düşün. Önce iskeleti var, boyunu ve duruşunu o belirler. Üstüne giydiği kıyafet nasıl göründüğünü belirler, kasları da hareket etmesini sağlar. Web sayfası da böyle üç katmanla kurulur: HTML iskelet, CSS kıyafet, JavaScript kaslar.</p>
+      <p>Aşağıda küçük bir kantin menüsü var. Katmanları sırayla aç ve her seferinde "Ekle" düğmelerine bas.</p>
+    </div>
+
+    <div class="sim" style="margin-top:16px" id="layers">
+      <div class="sim-title"><span class="chip theory">Simülasyon</span><h3>Kantin menüsü, katman katman</h3></div>
+      <div class="row-btns" role="group" aria-label="Katman seç">
+        <button class="btn" type="button" data-layer="html" aria-pressed="true">1. Yalnız HTML</button>
+        <button class="btn" type="button" data-layer="css" aria-pressed="false">2. HTML + CSS</button>
+        <button class="btn" type="button" data-layer="js" aria-pressed="false">3. HTML + CSS + JavaScript</button>
+      </div>
+      <div class="layer-wrap">
+        <div class="stagebox">
+          <div class="kantin" id="kantin">
+            <h4>Kantin Menüsü</h4>
+            <ul>
+              <li><span>Simit, 15 TL</span><button type="button" data-price="15">Ekle</button></li>
+              <li><span>Çay, 10 TL</span><button type="button" data-price="10">Ekle</button></li>
+              <li><span>Kaşarlı tost, 40 TL</span><button type="button" data-price="40">Ekle</button></li>
+              <li><span>Ayran, 20 TL</span><button type="button" data-price="20">Ekle</button></li>
+            </ul>
+            <div class="sepet" id="sepet" aria-live="polite">Sepet: 0 ürün, 0 TL</div>
+          </div>
+          <p class="hint" id="layerHint" aria-live="polite" style="margin-top:10px"></p>
+        </div>
+        <div class="layerinfo">
+          <div class="when" id="layerWhen"></div>
+          <p id="layerText"></p>
+          <pre class="code" id="layerCode"></pre>
+          <p class="small muted">Kodu şimdi anlaman gerekmiyor. Her katmanın ne kadar kısa olduğuna bak.</p>
+        </div>
+      </div>
+      <p class="saw"><b>Ne gördün?</b> HTML olmadan ortada hiçbir şey yok. CSS görünüşü, JavaScript davranışı ekliyor ve ikisi de HTML'in üstüne kuruluyor.</p>
+    </div>
+
+    <div class="qgroup" data-quiz="katman"></div>
+  </section>
+
+  <!-- 3. ADRES ÇUBUĞU -->
+  <section id="adres" aria-labelledby="adres-h">
+    <div class="section-head"><h2 id="adres-h">Adres çubuğuna yazınca ne olur?</h2><span class="time">30–45 dk</span></div>
+    <div class="prose">
+      <p>Bir lokantadasın. Garsona siparişini veriyorsun, garson mutfağa gidiyor, mutfak tabakları hazırlıyor, garson da tabakları masana diziyor. Adres çubuğuna bir adres yazdığında olan budur. Garsonun adı tarayıcı: Chrome, Edge gibi, sayfaları açıp ekrana çizen program. Mutfağın adı sunucu.</p>
+    </div>
+
+    <div class="sim" style="margin-top:16px" id="addr">
+      <div class="sim-title"><span class="chip theory">Animasyon</span><h3>Dört adımda bir sayfa</h3></div>
+      <div class="urlbar">
+        <label class="sr" for="addrInput">Adres</label>
+        <input type="text" id="addrInput" value="cagrisahin58.github.io/2026-web" spellcheck="false" autocomplete="off">
+        <button class="btn primary" type="button" id="addrGo">Git</button>
+      </div>
+      <div class="road" aria-hidden="true">
+        <div class="node" id="nodeBrowser">
+          <span class="nt">Senin bilgisayarın</span>
+          <span class="muted">tarayıcı</span>
+          <div class="mini" id="mini"><div class="mb"></div><div class="ml h"></div><div class="ml w2"></div><div class="ml w3"></div><div class="ml w2"></div></div>
+        </div>
+        <div class="lane"><div class="packet" id="packet">istek</div></div>
+        <div class="node" id="nodeServer">
+          <span class="nt">Sunucu</span>
+          <span class="muted">internetteki bilgisayar</span>
+          <span class="chip ship" style="justify-self:center">index.html</span>
+          <span class="chip theory" style="justify-self:center">stil.css</span>
+          <span class="chip lab" style="justify-self:center">kod.js</span>
+        </div>
+      </div>
+      <div class="steppills" role="group" aria-label="Adımlar">
+        <button type="button" data-step="0">1 Yazarsın</button>
+        <button type="button" data-step="1">2 Sorar</button>
+        <button type="button" data-step="2">3 Gönderir</button>
+        <button type="button" data-step="3">4 Çizer</button>
+      </div>
+      <div class="steptext" aria-live="polite">
+        <span class="st" id="stepTitle">Adres yaz ve Git'e bas</span>
+        <span id="stepBody">Ya da adımlara tek tek tıkla.</span>
+        <span class="an" id="stepAn"></span>
+      </div>
+      <div class="row-btns">
+        <button class="btn" type="button" id="addrPrev">Önceki adım</button>
+        <button class="btn" type="button" id="addrNext">Sonraki adım</button>
+      </div>
+      <p class="saw"><b>Ne gördün?</b> Her sayfa açılışında bu dört adım yaşanıyor, çoğu zaman göz açıp kapayıncaya kadar. Ekranda gördüğün sayfa, sunucudan gelen dosyaları tarayıcının kendisinin çizmesiyle oluştu.</p>
+    </div>
+
+    <div class="prose" style="margin-top:22px">
+      <p>Şimdi bir adım öteye gidelim. Bazı sayfalar yalnız dosya göstermez, senin yazdığını da saklar. Bir yorum yazdığında, bir form doldurduğunda üç parça birlikte çalışır. Ön yüz, tarayıcıda gördüğün ve dokunduğun kısım. Sunucu, gelen bilgiyi kontrol edip ne yapılacağına karar veren program. Veritabanı, bilginin saklandığı tablo.</p>
+    </div>
+
+    <div class="sim" style="margin-top:16px" id="guestbook">
+      <div class="sim-title"><span class="chip db">Simülasyon</span><h3>Ziyaretçi defteri</h3></div>
+      <p class="small muted">Bir mesaj yaz ve gönder. Mesajın üç parçadan sırayla geçişini izle. Boş mesaj göndermeyi de dene. Bu bir canlandırma, arkasında gerçek bir veritabanı yok. Sayfayı yenileyince defter baştan başlar.</p>
+      <div class="gb">
+        <div class="gbcol gbfront" id="gbFront">
+          <h4><span class="chip lab">Ön yüz</span> tarayıcıda</h4>
+          <label class="f">Adın<input type="text" id="gbName" maxlength="24" placeholder="Deniz" autocomplete="off"></label>
+          <label class="f">Mesajın<input type="text" id="gbMsg" maxlength="80" placeholder="Kantinin tostu çok iyi" autocomplete="off"></label>
+          <div class="row-btns"><button class="btn primary" type="button" id="gbSend">Gönder</button><button class="btn" type="button" id="gbReset">Baştan başla</button></div>
+          <p class="gbstatus" id="gbStatus" aria-live="polite"></p>
+          <ul class="msgs" id="gbList" aria-label="Defterdeki mesajlar"></ul>
+        </div>
+        <div class="gbcol gbsrv" id="gbSrv">
+          <h4><span class="chip srv">Sunucu</span> ne yapıyor?</h4>
+          <div class="log" id="gbLog" aria-live="polite"></div>
+        </div>
+        <div class="gbcol gbdb" id="gbDb">
+          <h4><span class="chip db">Veritabanı</span> mesajlar tablosu</h4>
+          <div class="tablewrap"><table class="dbt"><thead><tr><th>no</th><th>ad</th><th>mesaj</th></tr></thead><tbody id="gbRows"></tbody></table></div>
+        </div>
+      </div>
+      <p class="saw"><b>Ne gördün?</b> Mesaj ön yüzde yazıldı, sunucuda kontrol edildi, veritabanında saklandı. Gerçek bir veritabanında sayfayı kapatsan da satır tabloda kalırdı. Hafta 7 ve 8'de bunu kendin yapacaksın.</p>
+    </div>
+
+    <div class="qgroup" data-quiz="adres"></div>
+  </section>
+
+  <div class="brkband" style="margin-top:44px">45–55 dk · on dakika ara</div>
+
+  <!-- 4. YAPAY ZEKA -->
+  <section id="yapay-zeka" aria-labelledby="yz-h">
+    <div class="section-head"><h2 id="yz-h">Yapay zekâ çağında yazılımcı olmak</h2><span class="time">55–78 dk</span></div>
+    <div class="prose">
+      <p>Bir yazılımcının günü birkaç yıl öncesine göre çok değişti. Kodun bir kısmını artık yapay zekâ yazıyor. Sen ne istediğini anlatıyorsun, o birkaç saniyede bir taslak çıkarıyor. Yapay zekâya yazdığın bu isteğe istem deniyor.</p>
+      <p>Yapay zekâ bunu nasıl yapıyor? Çok büyük miktarda metin ve kod okuyarak hangi kelimenin ardından hangi kelimenin geldiğini öğrenmiş. Sana cevap verirken her adımda en olası devamı tahmin ediyor. Tahmin çoğu zaman iyi. Bazen de neredeyse doğru ama tam değil.</p>
+      <p>Bu yüzden yazılımcıya ihtiyaç bitmedi. İşin en zor kısmı hâlâ insanda duruyor. Neyin yapılacağına sen karar veriyorsun. Çıkan kodu okuyup anlamak ve gerçekten doğru çalıştığını kontrol etmek de senin işin.</p>
+    </div>
+
+    <div class="grid3" style="margin-top:16px">
+      <div class="card"><div class="eyebrow">Kullanım</div><p style="font-family:var(--display);font-weight:800;font-size:2.2rem;line-height:1.1;color:var(--ai)">%84</p><p class="small">Stack Overflow'un (yazılımcıların soru sorduğu büyük bir site) 2025 geliştirici anketine katılanların %84'ü yapay zekâ araçlarını kullanıyor ya da kullanmayı planlıyor.</p><p class="small" style="margin-top:6px"><a href="https://survey.stackoverflow.co/2025/ai" target="_blank" rel="noopener">Kaynak: Stack Overflow 2025</a></p></div>
+      <div class="card"><div class="eyebrow">Kodun payı</div><p style="font-family:var(--display);font-weight:800;font-size:2.2rem;line-height:1.1;color:var(--ai)">%29</p><p class="small">State of JS 2025 anketine katılan JavaScript geliştiricileri, yazdıkları kodun ortalama %29'unun yapay zekâdan geldiğini söylüyor.</p><p class="small" style="margin-top:6px"><a href="https://2025.stateofjs.com/" target="_blank" rel="noopener">Kaynak: State of JS 2025</a></p></div>
+      <div class="card"><div class="eyebrow">En büyük şikâyet</div><p style="font-family:var(--display);font-weight:800;font-size:2.2rem;line-height:1.1;color:var(--ai)">%66</p><p class="small">Aynı Stack Overflow anketinde en sık seçilen şikâyet "neredeyse doğru ama tam değil" cevaplar oldu. Katılanların %66'sı bunu işaretledi.</p><p class="small" style="margin-top:6px"><a href="https://survey.stackoverflow.co/2025/ai" target="_blank" rel="noopener">Kaynak: Stack Overflow 2025</a></p></div>
+    </div>
+    <p class="prose" style="margin-top:14px">Üç sayıyı yan yana koy. Yazılımcıların çoğu yapay zekâ kullanıyor ya da kullanmayı düşünüyor, kodun azımsanmayacak bir kısmını o yazıyor. En çok şikâyet edilen şey de doğruya çok benzeyen yanlışlar. Aşağıdaki üç oyun tam da bu noktada.</p>
+
+    <div class="sim" style="margin-top:18px" id="twoasks">
+      <div class="sim-title"><span class="chip ai">Karşılaştırma</span><h3>İki istek, iki sonuç</h3></div>
+      <div class="row-btns" role="group" aria-label="İstek seç">
+        <button class="btn" type="button" data-ask="vague" aria-pressed="true">Belirsiz istek</button>
+        <button class="btn" type="button" data-ask="clear" aria-pressed="false">Açık istek</button>
+      </div>
+      <div class="prompt-bubble" id="askBubble"></div>
+      <div class="grid2">
+        <div class="browser" id="askPreview"></div>
+        <div style="display:grid;gap:8px;align-content:start">
+          <p style="font-weight:600">Yapay zekâ neyi kendisi tahmin etti?</p>
+          <div class="guesses" id="askGuesses"></div>
+        </div>
+      </div>
+      <p class="small muted">İki sonuç da bu ders için önceden hazırlandı. Gerçek bir yapay zekâ her seferinde biraz farklı bir şey üretir.</p>
+      <p class="saw"><b>Ne gördün?</b> Yapay zekâ ne istediğini bilmezse tahmin eder. İstek ne kadar açıksa tahmin edeceği şey o kadar azalır.</p>
+    </div>
+
+    <div class="sim" style="margin-top:18px" id="almost">
+      <div class="sim-title"><span class="chip ai">Oyun</span><h3>Neredeyse doğru</h3></div>
+      <p class="small muted">Her kutuda bir istek ve yapay zekânın yazdığı kod var. Her kodda tek bir hata saklı. Hatalı satıra tıkla. İlk tıklaman sayılır. İlk iki kodu derste birlikte çözüyoruz, son ikisi evde.</p>
+      <div class="qhead"><span class="score" id="almostScore" aria-live="polite">Bulunan: 0 / 4</span><button class="btn" type="button" id="almostReset">Yeniden dene</button></div>
+      <div class="bugs" id="bugs"></div>
+      <p class="saw"><b>Ne gördün?</b> Dört kod da ilk bakışta düzgün duruyor. Hatayı yakalayan şey, ne istendiğini bilen ve kodu satır satır okuyan göz oldu.</p>
+    </div>
+
+    <div class="sim" style="margin-top:18px" id="who">
+      <div class="sim-title"><span class="chip ai">Oyun</span><h3>Kim yapar?</h3></div>
+      <p class="small muted">Her kartın altındaki düğmelerden birini seç. Kart seçtiğin kutuya geçer, fikrini değiştirirsen öbür düğmeye bas. Bitirince önerilen cevaba bak.</p>
+      <div class="pool" id="whoPool" aria-label="Yerleşmemiş kartlar"></div>
+      <div class="bins">
+        <div class="bin ai"><h4><span>Yapay zekâ yardım edebilir</span><span class="chip ai" id="binAiCount">0</span></h4><div id="binAi" style="display:grid;gap:8px"></div></div>
+        <div class="bin you"><h4><span>Karar senin</span><span class="chip ship" id="binYouCount">0</span></h4><div id="binYou" style="display:grid;gap:8px"></div></div>
+      </div>
+      <div class="qhead">
+        <div class="row-btns"><button class="btn primary" type="button" id="whoCheck">Önerilen cevabı göster</button><button class="btn" type="button" id="whoReset">Sıfırla</button></div>
+        <span class="score" id="whoScore" aria-live="polite">6 karttan 0 tanesini yerleştirdin</span>
+      </div>
+      <p class="saw"><b>Ne gördün?</b> Yapay zekâ taslak yazmakta ve açıklamakta güçlü bir yardımcı. Neyin yapılacağına ve sonucun doğru olduğuna karar veren, sorumluluğu taşıyan yine sensin.</p>
+    </div>
+
+    <div class="qgroup" data-quiz="yz"></div>
+  </section>
+
+  <!-- 5. YOL HARİTASI -->
+  <section id="yol" aria-labelledby="yol-h">
+    <div class="section-head"><h2 id="yol-h">Bu dönemki yolculuğun</h2><span class="time">78–93 dk</span></div>
+    <div class="prose">
+      <p>On dört hafta boyunca her hafta küçük bir basamak çıkacağız. Önce sayfanın iskeletini, sonra görünüşünü, sonra davranışını öğreneceksin. Ardından sunucuya ve veritabanına geçeceğiz, en sonunda da hepsini takımınla tek bir uygulamada birleştireceksin. Bir haftaya tıkla, o haftanın sonunda neyi yapabileceğini gör.</p>
+    </div>
+
+    <div class="sim" style="margin-top:16px" id="roadmap">
+      <div class="sim-title"><span class="chip ship">Yol haritası</span><h3>14 hafta, basamak basamak</h3></div>
+      <div class="weeks" id="weeks" role="group" aria-label="Haftalar"></div>
+      <div class="wkpanel" id="wkPanel" aria-live="polite"></div>
+      <p class="saw"><b>Ne gördün?</b> Her hafta bir öncekinin üstüne kuruluyor. Tek başına büyük görünen proje, on dört küçük adıma bölününce yapılabilir hale geliyor.</p>
+    </div>
+
+    <div class="grid2" style="margin-top:16px">
+      <div class="card">
+        <h3>Takım projesi</h3>
+        <p>Hafta 5'te (22 Ekim) dörder kişilik takımlar kuruyoruz, sınıfta 14 takım olacak. Dönemin geri kalanında takımınla gerçek bir kullanıcı için birkaç sayfalık bir web uygulaması yapıp internete koyacaksın. Uygulamanın içinde bu dönem öğrendiğin her parça olacak: HTML, CSS, JavaScript, sunucu, veritabanı ve küçük bir yapay zekâ özelliği.</p>
+        <p class="small" style="margin-top:12px;font-weight:600">Kilometre taşları (proje teslim tarihleri)</p>
+        <div class="ms" style="margin-top:6px">
+          <div><b>M0 · 22 Eki</b>takım, fikir, kâğıt taslak</div>
+          <div><b>M1 · 3 Ara</b>ilk sürüm yayında</div>
+          <div><b>M2 · 17 Ara</b>sunucu ve veritabanı bağlı</div>
+          <div><b>M3 · 31 Ara</b>Demo Günü</div>
+        </div>
+        <p class="small muted" style="margin-top:10px">Demo Günü 31 Aralık. Her takım 7 dakika ürününü gösterir, 3 dakika soru cevaplar.</p>
+      </div>
+      <div class="card">
+        <h3>Bir fikir örneği: kampüs kayıp eşya panosu</h3>
+        <p>Kütüphanede şemsiyeni unuttun. Panoya bir ilan bırakıyorsun: ne, nerede, ne zaman. Şemsiyeyi bulan kişi ilana mesaj yazıyor. İlanlar veritabanında duruyor, sunucu yeni ilanı kaydediyor, ön yüz de listeyi gösteriyor. Yapay zekâ özelliği küçük: aceleyle yazılmış ilan metnini düzgün bir cümleye çeviriyor.</p>
+        <p class="small muted" style="margin-top:10px">Fikri takımın bulacak. Kullanıcısı gerçek olsun: bir kulüp, bir kantin, bir yurt katı.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. NASIL ÇALIŞACAĞIZ -->
+  <section id="nasil" aria-labelledby="nasil-h">
+    <div class="section-head"><h2 id="nasil-h">Nasıl çalışacağız</h2><span class="time">93–103 dk</span></div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Haftalık ritim</h3>
+        <p>Sabah dersinde konuyu canlı örneklerle konuşuruz. Öğleden sonraki labın üç durağı var. Yap: adım adım bir şey kurarsın. Boz: bilerek bozulmuş bir kodda hataları bulursun. Anlat: yaptığını yan masadakine bir dakikada anlatırsın.</p>
+        <p style="margin-top:8px">Lab teslimi aynı Google Form'la iki adımda: Perşembe 16:45'e kadar lab sonu teslimi, Pazar 23:59'a kadar tamamı. Form bağlantısı derste ve sınıf kanalında paylaşılır.</p>
+      </div>
+      <div class="card">
+        <h3>Yapay zekâ kuralları</h3>
+        <p>Yapay zekâ bu derste yardımcın. Hafta 2 ile 9 arasında kodu önce sen yazarsın. Yapay zekâya açıklama sorabilir, hata mesajını sorabilir, kendini sınatabilirsin. Bütün sayfayı ya da bütün kodu ona yazdırmazsın. Hafta 10'dan sonra kodlama ajanıyla (senin yerine dosya açıp kod yazabilen yapay zekâ yardımcısı) kod ürettirmek serbest, tek şartla: her satırını açıklayabilmek.</p>
+        <p style="margin-top:8px;font-weight:600">Açıklayamadığın kod senin değil.</p>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-top:14px">
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Bileşen</th><th>Puan</th></tr></thead>
+          <tbody>
+            <tr><td>Ara sınav (9–13 Kasım, Hafta 2–5 konuları)</td><td class="num">15</td></tr>
+            <tr><td>Haftalık lab (11 lab, en düşük 2'si silinir)</td><td class="num">12</td></tr>
+            <tr><td>Proje ara teslimleri (M0, M1, M2)</td><td class="num">13</td></tr>
+            <tr><td>Final sınavı</td><td class="num">25</td></tr>
+            <tr><td>Proje final teslimi (M3, Demo Günü)</td><td class="num">20</td></tr>
+            <tr><td>Bireysel kod savunması (15 dakika)</td><td class="num">15</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>Devam ve yapay zekâ notu</h3>
+        <p>Devam şartı teoride en az %70, uygulamada en az %80. Lab teslimin o haftanın uygulama yoklaması sayılır.</p>
+        <p style="margin-top:8px">Her lab teslimine üç satırlık bir yapay zekâ notu eklersin:</p>
+        <ol style="margin-top:6px">
+          <li>Ne sordum?</li>
+          <li>İşe yaradı mı, neyi değiştirdim?</li>
+          <li>Kendi başıma ne öğrendim?</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="qgroup" data-quiz="nasil"></div>
+  </section>
+
+  <!-- 7. KENDİNİ SINA -->
+  <section id="sina" aria-labelledby="sina-h">
+    <div class="section-head"><h2 id="sina-h">Kendini sına</h2><span class="time">103–105 dk</span></div>
+    <p class="prose">On iki soru, bugünün hepsinden biraz. Derste birini birlikte çözüyoruz, kalanı evde. Yanlış yapmak serbest: her cevabın altında neden doğru ya da yanlış olduğu yazıyor.</p>
+    <div class="qgroup" data-quiz="sina"></div>
+  </section>
+
+  <!-- ÖĞLEDEN SONRA -->
+  <section id="ogleden-sonra" aria-labelledby="os-h">
+    <div class="section-head"><h2 id="os-h">Öğleden sonra: tanışma ve sohbet</h2><span class="time">15:00–16:45</span></div>
+    <p class="prose">Bugün bilgisayar açmıyoruz. Puan yok, teslim yok. Öğleden sonra birbirimizi tanıyacağız, kampüs hayatından site fikirleri çıkaracağız ve yapay zekâ çağında bu işi neden öğrendiğimizi konuşacağız. Sayfayı telefonundan açarsan aşağıdaki fikir kartını ve sabahki soruları oradan da kullanabilirsin.</p>
+
+    <div class="tl" style="margin-top:14px">
+      <div class="row dok"><div class="t">0–25 dk</div><div><div class="h">Dörtlü masalar: tanışma turu</div><p>Rastgele dörder kişi oturuyoruz. Önce masada, sonra sınıfa karşı kısa bir tanışma.</p></div></div>
+      <div class="row dok"><div class="t">25–45 dk</div><div><div class="h">Hangi siteyi yapardın?</div><p>Her masa kampüs hayatından bir sorun seçer ve bir cümlelik bir site fikri kurar.</p></div></div>
+      <div class="row ara"><div class="t">45–55 dk</div><div><div class="h">Ara</div></div></div>
+      <div class="row kur"><div class="t">55–80 dk</div><div><div class="h">Sohbet: yapay zekâ varken bu işi neden öğreniyoruz?</div><p>Altı soru, açık konuşma. Cevapların özeti aşağıdaki kartlarda.</p></div></div>
+      <div class="row dok"><div class="t">80–95 dk</div><div><div class="h">Projeksiyonda web'in içi</div><p>Bir haber sitesinin manşetini birlikte değiştiriyoruz. Önce tahmin, sonra deneme.</p></div></div>
+      <div class="row kur"><div class="t">95–105 dk</div><div><div class="h">Gelecek haftaya hazırlık</div><p>1 Ekim'e neyle geleceksin, evde ne yapacaksın.</p></div></div>
+    </div>
+
+    <div class="acts" style="margin-top:16px">
+      <article class="act">
+        <div class="num">1</div>
+        <div>
+          <h3>Dörtlü masalar: tanışma turu <span class="chip lab">25 dk</span></h3>
+          <p class="muted small" style="margin-top:4px">Bugünkü masa arkadaşın proje takımın olmak zorunda değil. Takımları Hafta 5'te kuruyoruz. Bugün yalnız tanışıyoruz.</p>
+          <div class="body">
+            <ol>
+              <li>Sınıfa girdiğin sırayla dörder kişi bir masaya oturun. Tanıdığınla aynı masaya düşmediysen daha iyi.</li>
+              <li>Beş dakika masada konuşun. Herkes dört şey söyler: adı, nereli olduğu, telefonunda en çok kullandığı uygulama, bu dersten beklediği tek şey.</li>
+              <li>Sonra her masa sınıfa bir dakikada kendini tanıtır. Sen kendini değil, yanındakini tanıtırsın. Örnek: "Bu Elif, Bitlisli, en çok YouTube kullanıyor, dersten kendi sitesini yapmayı bekliyor."</li>
+            </ol>
+            <p class="saw" style="margin-top:0"><b>Ne gördün?</b> Masalarda sayılan uygulamaların hepsinin arkasında sabah gördüğün aynı beş parça var: HTML, CSS, JavaScript, sunucu, veritabanı. Bu dönem o parçaların her birine dokunacaksın.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="act">
+        <div class="num">2</div>
+        <div>
+          <h3>Hangi siteyi yapardın? <span class="chip lab">20 dk</span></h3>
+          <p class="muted small" style="margin-top:4px">Bir web uygulamasını tarif etmek için kod bilmek gerekmez. Kim kullanacak, ekranda ne görecek, ne yapıp çıkacak: bu üçünü bilmek gerekir.</p>
+          <div class="body">
+            <ol>
+              <li>Masa olarak kampüs hayatından bir sorun seçin. Örnekler: kayıp eşya, kantinde sıra ve günün menüsü, yurtta çamaşırhane sırası, kulüp etkinliklerinin duyurusu, ders notlarını paylaşmak, ikinci el kitap alıp satmak, ring saatleri.</li>
+              <li>Üç soruya birer cümleyle cevap verin: Bu siteyi kim kullanacak? Açılınca ilk ekranda ne görünecek? Kullanıcı ne yapıp çıkacak?</li>
+              <li>Aşağıdaki fikir kartına yazın. Kart cümleyi sizin için kurar. Her masa cümlesini sınıfa okur, tahtaya yazıyoruz.</li>
+            </ol>
+            <div class="sim" id="fikir">
+              <div class="sim-title"><span class="chip ship">Fikir kartı</span><h3>Üç boşluk, bir site fikri</h3></div>
+              <div class="grid3">
+                <label class="f">Sorun<input type="text" id="fkSorun" maxlength="60" placeholder="kampüste kaybolan eşyalar" autocomplete="off"></label>
+                <label class="f">Kim kullanacak<input type="text" id="fkKim" maxlength="60" placeholder="eşyasını kaybeden ve bulan öğrenciler" autocomplete="off"></label>
+                <label class="f">Ne yapıp çıkacak<input type="text" id="fkNe" maxlength="80" placeholder="fotoğraflı bir ilan bırakıp iletişim bilgisi alacak" autocomplete="off"></label>
+              </div>
+              <div class="row-btns"><button class="btn primary" type="button" id="fkKur">Cümleyi kur</button><button class="btn" type="button" id="fkOrnek">Bana bir örnek ver</button></div>
+              <p class="fkOut" id="fkOut" aria-live="polite">Üç boşluğu doldur, cümleyi kur.</p>
+              <p class="saw" style="margin-top:0"><b>Ne gördün?</b> Kurduğun cümle bir yazılım projesinin ilk satırı. Hafta 5'te takımınla proje fikrini yazarken tam olarak bu üç soruya cevap vereceksin. Bugün tahtaya yazılan fikirler o gün işine yarayacak.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="act">
+        <div class="num">3</div>
+        <div>
+          <h3>Sohbet: yapay zekâ varken bu işi neden öğreniyoruz? <span class="chip ai">25 dk</span></h3>
+          <p class="muted small" style="margin-top:4px">Sınıfta önce siz konuşursunuz, sonra kartı açıp benim cevabımı okuruz. Kartlar ders sonrası da burada durur.</p>
+          <div class="body">
+            <div class="sohbet">
+              <details class="soru"><summary>Yapay zekâ kodu yazıyorsa ben ne yapacağım?</summary><div class="ans"><p>Sabahki "Kim yapar?" oyununu hatırla. Kodun harflerini yazmak işin bir parçası, ama en küçük parçası. Neyin yapılacağına karar vermek, çıkan kodun doğru çalıştığını kontrol etmek ve sonuca imza atmak insanın işi. Yapay zekâ neredeyse doğru kod yazar. Neredeyse doğruyu doğrudan ayıran kişi, ne istendiğini ve kodun ne dediğini bilen kişidir. O kişi olmayı öğreneceksin.</p></div></details>
+              <details class="soru"><summary>Web'i 2026'da öğrenmek hâlâ mantıklı mı?</summary><div class="ans"><p>Telefonundaki uygulamaların çoğu, bankanın sitesi, e-Devlet, üniversitenin öğrenci sistemi, hatta yapay zekâ sohbet araçlarının kendisi tarayıcıda ya da web teknolojisiyle çalışıyor. Sunucu, veritabanı ve arayüz mantığı yalnız web'de değil, her yazılım işinde karşına çıkacak. Bu ders o mantığı ilk kez göreceğin yer.</p></div></details>
+              <details class="soru"><summary>İngilizcem zayıf, olur mu?</summary><div class="ans"><p>Olur. Bu dönem kullanacağın etiket ve komut sayısı az ve hepsini bu sayfalarda Türkçe açıklıyoruz. Hata mesajlarını yapay zekâya Türkçe sorabilirsin, sana Türkçe anlatır. Ders Türkçe, notlar Türkçe, sınav Türkçe. İngilizce sözcükler zamanla tanıdık gelmeye başlar, ezberlemen gerekmez.</p></div></details>
+              <details class="soru"><summary>Programlamada zorlandım, bu ders de öyle mi?</summary><div class="ans"><p>İlk iki hafta HTML ve CSS var. Orada döngü yok, koşul yok. Bir satır yazarsın, ekranda hemen görürsün. JavaScript'e geçtiğimizde YZM103'teki değişken, koşul ve döngü aynen geri gelir, ama bu kez sonuçlarını sayfada görürsün. Her hafta az kavram var ve her kavramı derste birlikte deniyoruz.</p></div></details>
+              <details class="soru"><summary>Yapay zekâ ödevimi yaparsa kim anlar?</summary><div class="ans"><p>Dönem sonunda 15 dakikalık bireysel bir kod savunması var: projeni anlatırsın, bir kod parçasını açıklarsın, küçük bir değişikliği orada yaparsın. Açıklayamadığın kod orada belli olur. Bu yüzden kural basit: açıklayamadığın kod senin değil. Yapay zekâyı kullan, ama her satırı anlayarak kullan.</p></div></details>
+              <details class="soru"><summary>Bu dersten sonra ne iş yapılır?</summary><div class="ans"><p>Ekranda görünen kısmı yapan ön yüz geliştiricisi, sunucu ve veritabanını kuran arka uç geliştiricisi, ikisini birden yapan tam yığın geliştiricisi, yazılımı test eden test mühendisi, neyin yapılacağına karar veren ürün yöneticisi. Hepsi bu dersteki parçaların üstüne kurulur. Memleketindeki bir işletmenin sitesini yapmak da bu işin başlangıcı sayılır.</p></div></details>
+            </div>
+            <p class="saw" style="margin-top:0"><b>Ne gördün?</b> Yapay zekâ bu derste yardımcın. Kararı veren, kontrol eden ve sorumluluğu taşıyan sensin. Dönem boyunca bu iki rolü birlikte çalıştıracağız.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="act">
+        <div class="num">4</div>
+        <div>
+          <h3>Projeksiyonda web'in içi <span class="chip">15 dk</span></h3>
+          <p class="muted small" style="margin-top:4px">Bunu ben projeksiyonda yapıyorum, sen tahmin ediyorsun. Gelecek hafta aynı şeyi kendi bilgisayarında yapacaksın.</p>
+          <div class="body">
+            <ol>
+              <li>Bir haber sitesi açıyorum. Manşetin üstüne sağ tıklayıp <strong>İncele</strong>'yi seçiyorum. Yanda açılan panelde manşetin kodu görünüyor.</li>
+              <li>Koddaki yazıyı değiştiriyorum: "YZM205 öğrencileri ilk web sayfalarını yaptı". Sayfada manşet değişti.</li>
+              <li>Şimdi sen tahmin et: sayfayı yenilersem ne olur? Elini kaldır. Yeni manşet kalır mı, eskisi geri gelir mi? Değişiklik başka okurlarda görünür mü?</li>
+              <li>Yeniliyoruz ve bakıyoruz.</li>
+              <li>Son olarak bu sayfanın kendi kaynağını açıyorum. Sayfa dediğimiz şeyin uzun bir metin dosyası olduğunu görüyorsun. Gelecek hafta böyle bir dosyayı sen yazacaksın.</li>
+            </ol>
+            <p class="saw" style="margin-top:0"><b>Ne gördün?</b> Eski manşet geri geldi. Tarayıcı sunucudan dosyaların bir kopyasını almış ve onu çizmişti. Değiştirdiğimiz kopya yalnız bu bilgisayardaydı. Siteyi kimse için değiştirmedik.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="act">
+        <div class="num">5</div>
+        <div>
+          <h3>Gelecek haftaya hazırlık <span class="chip ship">10 dk</span></h3>
+          <p class="muted small" style="margin-top:4px">1 Ekim'den itibaren her Perşembe bilgisayar başındayız.</p>
+          <div class="body">
+            <ol>
+              <li>1 Ekim Perşembe dizüstünü ve şarj aletini getir. Kendi bilgisayarın yoksa labda bir arkadaşınla eşli çalışırsın.</li>
+              <li>Gelmeden önce <a href="../hafta-00-kurulum/">Hafta 0 kurulum sayfasındaki</a> beş adımı evde yap. Yaklaşık 40 dakika sürer. Terminal yok, komut yok, her şey tıklamayla.</li>
+              <li>Takıldığın adımı olduğu yerde bırak. 1 Ekim labının ilk 20 dakikasında birlikte bitiriyoruz.</li>
+              <li>Sabahki soruları evde çöz. Her cevabın altında açıklaması var, yanlış yapmak serbest.</li>
+            </ol>
+            <div class="callout info">Sorun varsa sınıf kanalından yaz. Gelecek haftanın ders notu: <span class="kilitli" title="1 Ekim'de açılır">Hafta 2, HTML</span>.</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- GELECEK HAFTA -->
+  <section id="gelecek" aria-labelledby="gelecek-h">
+    <div class="next">
+      <div class="eyebrow">Gelecek hafta · Perşembe 1 Ekim</div>
+      <h2 id="gelecek-h">HTML: sayfanın iskeleti</h2>
+      <p class="prose">Bilgisayarlı ilk ders. Bir web sayfasının aslında bir metin dosyası olduğunu göreceğiz: etiket nedir, başlık, paragraf, liste, bağlantı ve görsel nasıl yazılır. Günün sonunda internette senin adınla açılan bir sayfan olacak. Dizüstünü getir, kurulumu evde yap.</p>
+      <div class="row-btns"><span class="btn primary kilitli" title="1 Ekim'de açılır" style="text-decoration:none">Hafta 2'ye geç (1 Ekim'de açılır)</span><a class="btn" href="../hafta-00-kurulum/" style="text-decoration:none">Kurulum rehberi</a></div>
+    </div>
+  </section>
+
+</main>
+
+<footer><div class="wrap">YZM205 Web Tasarımı ve Programlama · Muş Alparslan Üniversitesi · Arş. Gör. Çağrı ŞAHİN</div></footer>
+
+<script>
+(function(){
+  "use strict";
+  const $ = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+
+  /* ---------- tema ---------- */
+  const themeBtn = $("#themeBtn");
+  const themeNames = { auto: "otomatik", light: "açık", dark: "koyu" };
+  let theme = "auto";
+  try { theme = localStorage.getItem("yzm205.theme") || "auto"; } catch (e) {}
+  function applyTheme() {
+    if (theme === "auto") document.documentElement.removeAttribute("data-theme");
+    else document.documentElement.setAttribute("data-theme", theme);
+    themeBtn.textContent = "Tema: " + themeNames[theme];
+  }
+  themeBtn.addEventListener("click", () => {
+    theme = theme === "auto" ? "light" : theme === "light" ? "dark" : "auto";
+    try { localStorage.setItem("yzm205.theme", theme); } catch (e) {}
+    applyTheme();
+  });
+  applyTheme();
+
+  /* ---------- kopyala ---------- */
+  $$("pre.code .copy").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const text = Array.from(btn.parentElement.childNodes).filter(n => n !== btn).map(n => n.textContent).join("").trim();
+      try { await navigator.clipboard.writeText(text); btn.textContent = "Kopyalandı"; }
+      catch (e) { btn.textContent = "Seçip kopyala"; }
+      setTimeout(() => { btn.textContent = "Kopyala"; }, 1600);
+    });
+  });
+
+  /* ---------- 1. ısınma oyunu ---------- */
+  const APPS = [
+    { id: "wa", ic: "W", name: "WhatsApp Web", p: ["sohbet listesi, mesaj kutusu, gönder düğmesi", "mesaj balonlarının sağa ve sola yaslanması, yeşil tonlar", "yazdığın mesajın anında listeye düşmesi", "mesajını arkadaşının cihazına ulaştırır", "hesabınla ilgili kalıcı bilgiler"] },
+    { id: "yt", ic: "Y", name: "YouTube", p: ["video başlığı, açıklama, yorum kutusu", "kapak resimlerinin ızgara gibi dizilmesi", "oynat, durdur, ses çubuğu", "aradığın videoyu bulup gönderir", "videolar, beğeniler, yorumlar"] },
+    { id: "ed", ic: "e", name: "e-Devlet", p: ["giriş formu, hizmet listesi", "kurumsal renkler ve sayfa düzeni", "formda eksik bıraktığın alanı uyarması", "kimliğini kontrol eder, belgeni hazırlar", "belgelerin dayandığı kayıtlar"] },
+    { id: "ig", ic: "I", name: "Instagram", p: ["gönderi, açıklama, yorumlar", "kare fotoğraflar, yuvarlak profil resmi", "kalbe basınca kırmızıya dönmesi", "akışına hangi gönderilerin geleceğini seçer ve gönderir", "gönderiler, takipler, beğeniler"] },
+    { id: "sh", ic: "S", name: "Alışveriş sitesi", p: ["ürün adı, fiyat, sepete ekle düğmesi", "ürün kartları, indirim etiketinin rengi", "sepetteki ürün sayısının artması", "siparişi alır, stoğa bakar", "ürünler, siparişler, adresler"] },
+    { id: "ob", ic: "Ö", name: "Üniversitenin öğrenci sistemi", p: ["ders listesi, not tablosu", "tablonun satır satır düzeni", "bir menüye tıklayınca alt menünün açılması", "kimliğini doğrular, notlarını getirir", "dersler, notlar, devamsızlık"] },
+    { id: "mp", ic: "H", name: "Harita", p: ["arama kutusu, yol tarifi paneli", "panelin haritanın üstünde durması", "haritayı sürükleyip yakınlaştırmak", "iki nokta arasındaki yolu hesaplar", "yollar, işletmeler, yorumlar"] },
+    { id: "nw", ic: "N", name: "Haber sitesi", p: ["manşet, haber metni, fotoğraf", "manşetin büyük ve kalın yazılması", "\"daha fazla yükle\" düğmesi", "en son haberleri gönderir", "haber arşivi"] }
+  ];
+  const PARTS = [["HTML", "ship"], ["CSS", "theory"], ["JavaScript", "lab"], ["Sunucu", "srv"], ["Veritabanı", "db"]];
+  const picked = new Set();
+  let lastApp = null;
+  const appsBox = $("#apps");
+  APPS.forEach(a => {
+    const b = el("button", "app");
+    b.type = "button";
+    b.setAttribute("aria-pressed", "false");
+    b.dataset.app = a.id;
+    b.append(el("span", "ic", a.ic), el("span", null, a.name));
+    b.querySelector(".ic").setAttribute("aria-hidden", "true");
+    b.addEventListener("click", () => {
+      if (picked.has(a.id)) { picked.delete(a.id); if (lastApp === a.id) lastApp = Array.from(picked).pop() || null; }
+      else { picked.add(a.id); lastApp = a.id; }
+      renderApps();
+    });
+    appsBox.append(b);
+  });
+  function renderApps() {
+    $$(".app", appsBox).forEach(b => b.setAttribute("aria-pressed", picked.has(b.dataset.app) ? "true" : "false"));
+    const parts = $("#parts");
+    parts.innerHTML = "";
+    const n = picked.size;
+    if (!n) { $("#tally").textContent = "Henüz bir uygulama seçmedin."; return; }
+    const a = APPS.find(x => x.id === lastApp);
+    $("#tally").textContent = n === 1 ? "Seçtiğin uygulama: " + a.name : n + " uygulama seçtin. Web sürümlerinin hepsi aynı beş parçadan yapılıyor. Son seçtiğin: " + a.name;
+    PARTS.forEach((pt, i) => {
+      const row = el("div", "part");
+      row.append(el("span", "chip " + pt[1], pt[0]), el("span", null, a.p[i]));
+      parts.append(row);
+    });
+  }
+  $("#appsReset").addEventListener("click", () => { picked.clear(); lastApp = null; renderApps(); });
+
+  /* ---------- 2. katmanlar ---------- */
+  const LAYERS = {
+    html: { when: "Hafta 2'de", chip: "ship", text: "Yalnız HTML: tarayıcı içeriği kendi varsayılan yazı tipiyle, alt alta dizer. Her şey orada ama süssüz.", hint: "Düğme var ama basınca bir şey olmuyor. Davranışı JavaScript verecek.",
+      code: '<h2>Kantin Menüsü</h2>\n<ul>\n  <li>Simit, 15 TL <button>Ekle</button></li>\n  <li>Çay, 10 TL <button>Ekle</button></li>\n</ul>\n<p id="sepet">Sepet: 0 ürün</p>' },
+    css: { when: "Hafta 3'te", chip: "theory", text: "CSS eklendi: aynı içerik şimdi bir kart gibi görünüyor. Renkler, boşluklar, yuvarlak köşeler geldi. İçerik tek harf değişmedi.", hint: "Düğmeler güzelleşti ama hâlâ bir şey yapmıyor.",
+      code: 'ul      { list-style: none; padding: 0; }\nh2     { color: teal; }\nli      { display: flex; justify-content: space-between; }\nbutton  { background: orange; color: white; }' },
+    js: { when: "Hafta 4 ve 5'te", chip: "lab", text: "JavaScript eklendi: düğmeler artık çalışıyor. Her Ekle'de sepet güncelleniyor.", hint: "Ekle'ye bas, sepeti izle.",
+      code: 'let adet = 0, tutar = 0;\nfor (const dugme of dugmeler) {\n  dugme.addEventListener("click", () => {\n    adet = adet + 1;\n    tutar = tutar + Number(dugme.dataset.price);\n    sepet.textContent = "Sepet: " + adet + " ürün, " + tutar + " TL";\n  });\n}' }
+  };
+  let layer = "html", cartN = 0, cartT = 0;
+  const kantin = $("#kantin"), sepet = $("#sepet");
+  function renderLayer() {
+    const L = LAYERS[layer];
+    $$("#layers [data-layer]").forEach(b => b.setAttribute("aria-pressed", b.dataset.layer === layer ? "true" : "false"));
+    kantin.className = "kantin" + (layer === "html" ? "" : " css");
+    $("#layerWhen").innerHTML = "";
+    $("#layerWhen").append(el("span", "chip " + L.chip, "Bunu " + L.when + " öğreneceksin"));
+    $("#layerText").textContent = L.text;
+    $("#layerCode").textContent = L.code;
+    $("#layerHint").textContent = "";
+    if (layer !== "js") { cartN = 0; cartT = 0; }
+    sepet.textContent = "Sepet: " + cartN + " ürün, " + cartT + " TL";
+  }
+  $$("#layers [data-layer]").forEach(b => b.addEventListener("click", () => { layer = b.dataset.layer; renderLayer(); }));
+  $$("button[data-price]", kantin).forEach(b => b.addEventListener("click", () => {
+    if (layer !== "js") { $("#layerHint").textContent = LAYERS[layer].hint; return; }
+    cartN += 1; cartT += Number(b.dataset.price);
+    sepet.textContent = "Sepet: " + cartN + " ürün, " + cartT + " TL";
+    sepet.classList.remove("bump"); void sepet.offsetWidth; sepet.classList.add("bump");
+    $("#layerHint").textContent = "Sepet güncellendi. Bunu yapan birkaç satır JavaScript.";
+  }));
+  renderLayer();
+
+  /* ---------- 3. adres çubuğu ---------- */
+  const addrInput = $("#addrInput"), packet = $("#packet"), mini = $("#mini");
+  const STEPS = [
+    { t: "1. Sen yazarsın", b: a => "Adres çubuğuna " + a + " yazıp Enter'a basıyorsun. Adres, sayfanın internetteki yeri.", an: "Lokantada: siparişini garsona verdin." },
+    { t: "2. Tarayıcı sunucuya sorar", b: a => "Tarayıcı, adresin gösterdiği sunucuya bir istek gönderir: \"Şu sayfanın dosyalarını verir misin?\"", an: "Lokantada: garson siparişi mutfağa götürdü." },
+    { t: "3. Sunucu dosyaları gönderir", b: a => "Sunucu istenen dosyaları bulur ve geri yollar: bir HTML dosyası, bir CSS dosyası, bir JavaScript dosyası, belki birkaç resim. Hepsi sıradan dosyalar.", an: "Lokantada: mutfak tabakları hazırlayıp garsona verdi." },
+    { t: "4. Tarayıcı ekrana çizer", b: a => "Tarayıcı dosyaları okur. HTML'den sayfada ne olduğunu, CSS'ten nasıl görüneceğini, JavaScript'ten nasıl davranacağını öğrenir ve sayfayı ekrana çizer.", an: "Lokantada: garson tabakları masana dizdi. Afiyet olsun." }
+  ];
+  let step = -1, timer = null;
+  function addr() { const v = addrInput.value.trim(); return v ? v : "bir adres"; }
+  function renderStep() {
+    $$("#addr .steppills button").forEach(b => { if (Number(b.dataset.step) === step) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current"); });
+    $("#nodeBrowser").classList.toggle("on", step === 0 || step === 3);
+    $("#nodeServer").classList.toggle("on", step === 1 || step === 2);
+    packet.className = "packet";
+    mini.classList.toggle("draw", step === 3);
+    if (step === 1) { packet.textContent = "istek"; packet.classList.add("show"); requestAnimationFrame(() => requestAnimationFrame(() => packet.classList.add("right"))); }
+    else if (step === 2) { packet.textContent = "dosyalar"; packet.classList.add("back", "show", "right"); requestAnimationFrame(() => requestAnimationFrame(() => packet.classList.remove("right"))); }
+    if (step < 0) { $("#stepTitle").textContent = "Adres yaz ve Git'e bas"; $("#stepBody").textContent = "Ya da adımlara tek tek tıkla."; $("#stepAn").textContent = ""; }
+    else { const S = STEPS[step]; $("#stepTitle").textContent = S.t; $("#stepBody").textContent = S.b(addr()); $("#stepAn").textContent = S.an; }
+    $("#addrPrev").disabled = step <= 0;
+    $("#addrNext").disabled = step >= 3;
+  }
+  function stopPlay() { if (timer) { clearInterval(timer); timer = null; } }
+  function play() {
+    stopPlay(); step = 0; renderStep();
+    timer = setInterval(() => { if (step >= 3) { stopPlay(); return; } step += 1; renderStep(); }, 2200);
+  }
+  $("#addrGo").addEventListener("click", play);
+  addrInput.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); play(); } });
+  $("#addrPrev").addEventListener("click", () => { stopPlay(); if (step > 0) { step -= 1; renderStep(); } });
+  $("#addrNext").addEventListener("click", () => { stopPlay(); if (step < 3) { step += 1; renderStep(); } });
+  $$("#addr .steppills button").forEach(b => b.addEventListener("click", () => { stopPlay(); step = Number(b.dataset.step); renderStep(); }));
+  renderStep();
+
+  /* ---------- 3b. ziyaretçi defteri ---------- */
+  const SEED = [["Deniz", "Kantinin tostu çok iyi"], ["Mert", "Kütüphane cumartesi açık mı?"]];
+  let rows = [], nextId = 1, busy = false;
+  const gbRows = $("#gbRows"), gbList = $("#gbList"), gbLog = $("#gbLog"), gbStatus = $("#gbStatus");
+  function logLine(text, bad) { const d = el("div", bad ? "bad" : null, text); gbLog.append(d); gbLog.scrollTop = gbLog.scrollHeight; }
+  function pulse(id) { const c = $(id); c.classList.add("pulse"); setTimeout(() => c.classList.remove("pulse"), 700); }
+  function drawDb(newId) {
+    gbRows.innerHTML = "";
+    rows.forEach(r => { const tr = el("tr", r.id === newId ? "new" : null); tr.append(el("td", "num", String(r.id)), el("td", null, r.ad), el("td", null, r.mesaj)); gbRows.append(tr); });
+    if (newId) setTimeout(() => { const tr = gbRows.querySelector("tr.new"); if (tr) tr.classList.remove("new"); }, 1600);
+  }
+  function drawList() {
+    gbList.innerHTML = "";
+    rows.slice().reverse().forEach(r => { const li = el("li"); li.append(el("b", null, r.ad), document.createTextNode(r.mesaj)); gbList.append(li); });
+  }
+  function gbInit() {
+    rows = SEED.map((s, i) => ({ id: i + 1, ad: s[0], mesaj: s[1] })); nextId = rows.length + 1;
+    gbLog.innerHTML = ""; logLine("Sunucu açık, istek bekliyor.");
+    gbStatus.textContent = ""; gbStatus.className = "gbstatus";
+    $("#gbName").value = ""; $("#gbMsg").value = "";
+    drawDb(null); drawList(); busy = false; $("#gbSend").disabled = false;
+  }
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  async function gbSend() {
+    if (busy) return;
+    busy = true; $("#gbSend").disabled = true;
+    const ad = $("#gbName").value.trim() || "İsimsiz";
+    const mesaj = $("#gbMsg").value.trim();
+    gbStatus.className = "gbstatus"; gbStatus.textContent = "Gönderiliyor...";
+    pulse("#gbFront");
+    await wait(700);
+    pulse("#gbSrv");
+    logLine("Yeni mesaj geldi. Gönderen: " + ad);
+    await wait(700);
+    if (!mesaj) {
+      logLine("Mesaj boş. Boş mesaj kaydedilmez, ön yüze hata dönüyorum.", true);
+      await wait(500);
+      gbStatus.className = "gbstatus bad"; gbStatus.textContent = "Sunucu mesajı kabul etmedi: mesaj boş olamaz.";
+      pulse("#gbFront");
+      busy = false; $("#gbSend").disabled = false; return;
+    }
+    logLine("Mesaj boş değil. Veritabanına yazıyorum.");
+    await wait(700);
+    const id = nextId++;
+    rows.push({ id: id, ad: ad, mesaj: mesaj });
+    pulse("#gbDb"); drawDb(id);
+    await wait(900);
+    pulse("#gbSrv");
+    logLine("Kaydedildi (no " + id + "). Güncel listeyi ön yüze gönderiyorum.");
+    await wait(700);
+    pulse("#gbFront"); drawList();
+    gbStatus.textContent = "Mesajın deftere eklendi.";
+    $("#gbMsg").value = "";
+    busy = false; $("#gbSend").disabled = false;
+  }
+  $("#gbSend").addEventListener("click", gbSend);
+  $("#gbMsg").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); gbSend(); } });
+  $("#gbReset").addEventListener("click", gbInit);
+  gbInit();
+
+  /* ---------- 4a. iki istek ---------- */
+  const ASKS = {
+    vague: {
+      prompt: "Bana site yap.",
+      url: "index.html",
+      build(box) {
+        const w = el("div", "vague");
+        const nav = el("div", "vnav"); nav.append(el("strong", null, "MyBrand"), el("span", null, "Home · About Us · Services · Contact"));
+        const hero = el("div", "vhero"); hero.append(el("h5", null, "Welcome to My Website"), el("p", null, "We build amazing solutions for your business."));
+        const body = el("div", "vbody", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.");
+        w.append(nav, hero, body); box.append(w);
+      },
+      guesses: [["dil", "İngilizce yazdı, çünkü dili sen söylemedin."], ["konu", "Bir şirket sitesi uydurdu. Aklında kantin vardı, bilemezdi."], ["içerik", "Gerçek içerik yerine anlamsız yer tutucu metin (Lorem ipsum) koydu."], ["telefon", "Telefonda nasıl görüneceği hiç konuşulmadı."]]
+    },
+    clear: {
+      prompt: "Türkçe, tek sayfa, kantin menüsü. Başlık, 5 ürün, fiyatlar. Telefonda da düzgün görünsün.",
+      url: "kantin/index.html",
+      build(box) {
+        const w = el("div", "clear");
+        w.append(el("h5", null, "Kantin Menüsü"), el("p", "sub", "Bugün 08:30–17:00 arası açığız"));
+        const ul = el("ul");
+        [["Simit", "15 TL"], ["Çay", "10 TL"], ["Kaşarlı tost", "40 TL"], ["Ayran", "20 TL"], ["Poğaça", "20 TL"]].forEach(p => { const li = el("li"); li.append(el("span", null, p[0]), el("b", null, p[1])); ul.append(li); });
+        w.append(ul); box.append(w);
+      },
+      guesses: [["renk", "Renkleri o seçti. Sen söylemedin, o da tahmin etti."], ["saat", "Açılış saatini uydurdu. Kontrol etmezsen yanlış bilgi yayına çıkar."], ["fiyat", "Fiyatları sen verseydin tahmin etmesine gerek kalmazdı."]]
+    }
+  };
+  function renderAsk(k) {
+    const A = ASKS[k];
+    $$("#twoasks [data-ask]").forEach(b => b.setAttribute("aria-pressed", b.dataset.ask === k ? "true" : "false"));
+    const bub = $("#askBubble"); bub.innerHTML = ""; bub.append(el("b", null, "İstem"), document.createTextNode(A.prompt));
+    const pv = $("#askPreview"); pv.innerHTML = "";
+    const bb = el("div", "bb"); bb.append(el("i"), el("i"), el("i"), el("span", null, A.url)); pv.append(bb); A.build(pv);
+    const g = $("#askGuesses"); g.innerHTML = "";
+    A.guesses.forEach(x => { const r = el("div", "guess"); r.append(el("span", "chip ai", x[0]), el("span", null, x[1])); g.append(r); });
+  }
+  $$("#twoasks [data-ask]").forEach(b => b.addEventListener("click", () => renderAsk(b.dataset.ask)));
+  renderAsk("vague");
+
+  /* ---------- 4b. neredeyse doğru ---------- */
+  const BUGS = [
+    { yer: "derste", ask: "Menüye Hakkımda sayfasına giden bir bağlantı ekle.", files: "Klasördeki dosyalar: index.html, hakkimda.html, stil.css",
+      lines: ['<nav>', '  <a href="index.html">Ana sayfa</a>', '  <a href="hakkimda.htm">Hakkımda</a>', '</nav>'], bad: 2,
+      exp: "3. satırda dosya adı hakkimda.htm yazılmış, klasördeki dosya ise hakkimda.html. Tek bir harf eksik ve bağlantıya tıklayan \"sayfa bulunamadı\" görür. 2. satır doğru: index.html klasörde var." },
+    { yer: "derste", ask: "Sepetteki ürünün toplam tutarını hesapla.", files: "Beklenen çıktı: 3 tane 40 TL'lik tost için 120 TL",
+      lines: ['const fiyat = 40;   // tost', 'const adet = 3;', 'const toplam = fiyat + adet;', 'console.log(toplam + " TL");'], bad: 2,
+      exp: "3. satırda fiyat ile adet toplanmış, çarpılması gerekirdi. Kod hiç hata vermeden çalışır ve konsola (tarayıcının programcıya mesaj gösterdiği panel) 43 TL yazar. Ne istendiğini bilmeyen biri bunu fark etmez. 4. satır doğru: sayının yanına \" TL\" ekliyor." },
+    { yer: "evde", ask: "Kulüp duyurusuna afiş görselini koy.", files: "Klasördeki dosyalar: index.html, img/afis.png",
+      lines: ['<h1>Satranç Kulübü</h1>', '<p>Turnuva cuma günü saat 14:00\'te.</p>', '<img src="img/afis.jpg" alt="Satranç turnuvası afişi">'], bad: 2,
+      exp: "3. satır afis.jpg istiyor, klasördeki dosya afis.png. Uzantı yanlış olduğu için görselin yerinde kırık bir simge çıkar. Alt metni ise gayet iyi: görseli göremeyen biri ne olduğunu anlar." },
+    { yer: "evde", ask: "Kantin sayfasına tost fotoğrafı ekle. Ekran okuyucu (yazıyı sesli okuyan program) kullananlar da anlasın.", files: "Klasördeki dosyalar: index.html, tost.jpg",
+      lines: ['<h2>Günün menüsü</h2>', '<img src="tost.jpg" alt="resim">', '<p>Kaşarlı tost, 40 TL</p>'], bad: 1,
+      exp: "2. satırdaki alt metni \"resim\" diyor. Ekran okuyucu kullanan biri yalnız \"resim\" duyar ve neyin fotoğrafı olduğunu öğrenemez. Daha iyisi: alt=\"Ortadan ikiye kesilmiş kaşarlı tost\". Dosya adı doğru, görsel açılıyor." }
+  ];
+  let found = 0;
+  function renderBugs() {
+    const box = $("#bugs"); box.innerHTML = ""; found = 0; $("#almostScore").textContent = "Bulunan: 0 / " + BUGS.length;
+    BUGS.forEach((B, bi) => {
+      const card = el("div", "bug");
+      const ask = el("p", "ask"); ask.append(el("b", null, "İstek " + (bi + 1)), document.createTextNode(B.ask));
+      const files = el("p", "files", B.files);
+      const lines = el("div", "lines"); lines.setAttribute("role", "group"); lines.setAttribute("aria-label", "Kod satırları, hatalı olana tıkla");
+      const exp = el("p", "exp"); exp.setAttribute("aria-live", "polite");
+      B.lines.forEach((L, li) => {
+        const b = el("button", "ln"); b.type = "button";
+        b.append(el("span", "n", String(li + 1)), el("span", null, L));
+        b.setAttribute("aria-label", "Satır " + (li + 1) + ": " + L);
+        b.addEventListener("click", () => {
+          if (card.classList.contains("done")) return;
+          card.classList.add("done");
+          const ok = li === B.bad;
+          $$(".ln", lines).forEach((x, xi) => { x.disabled = true; if (xi === B.bad) x.classList.add("right"); });
+          if (!ok) b.classList.add("wrong");
+          if (ok) found += 1;
+          exp.textContent = (ok ? "Buldun. " : "Tıkladığın satır sağlam, hata yeşil işaretli satırda. ") + B.exp;
+          $("#almostScore").textContent = "Bulunan: " + found + " / " + BUGS.length;
+        });
+        lines.append(b);
+      });
+      card.append(el("span", "chip " + (B.yer === "derste" ? "lab" : "ship"), B.yer), ask, files, lines, exp); box.append(card);
+    });
+  }
+  $("#almostReset").addEventListener("click", renderBugs);
+  renderBugs();
+
+  /* ---------- 4c. kim yapar ---------- */
+  const WHO = [
+    { t: "Bir sayfanın ilk kod taslağını yazmak", a: "ai", e: "Taslak çıkarmak yapay zekânın hızlı olduğu bir iş. Taslağın işe yarayıp yaramadığına yine sen bakarsın." },
+    { t: "Kullanıcının gerçekte ne istediğine karar vermek", a: "you", e: "Kullanıcıyla konuşan, derdini dinleyen sensin. Yapay zekâ kullanıcını tanımaz, olsa olsa tahmin eder." },
+    { t: "İngilizce bir hata mesajını anlaşılır Türkçeyle açıklamak", a: "ai", e: "Kısa ve İngilizce hata mesajlarını açıklatmak, yapay zekânın bu dönem en çok işine yarayacak kullanımlarından biri." },
+    { t: "Uygulamanın kullanıcının istediğini yapıp yapmadığına karar vermek", a: "you", e: "Neyin doğru olduğunu bilen sensin. 43 TL gösteren sepete itiraz etmek için 120 TL beklendiğini bilmek gerekir." },
+    { t: "Testleri çalıştırıp sonucu özetlemek", a: "ai", e: "Test, kodun doğru çalışıp çalışmadığını otomatik deneyen küçük bir program. Onu çalıştırmak mekanik bir iş, yapay zekâ yapabilir. Testin yeterli olup olmadığına ise sen karar verirsin." },
+    { t: "Sonucun doğru olduğuna imza atıp teslim etmek", a: "you", e: "Teslim ettiğin kodun sorumlusu sensin. Kod savunması, dönem sonunda projeni ve kodunu 15 dakikada anlattığın bireysel görüşme. Oradaki soruları yapay zekâ değil, sen cevaplayacaksın." }
+  ];
+  let whoState = {}, whoChecked = false;
+  function renderWho(focusIdx, focusSide) {
+    const pool = $("#whoPool"), binAi = $("#binAi"), binYou = $("#binYou");
+    pool.innerHTML = ""; binAi.innerHTML = ""; binYou.innerHTML = "";
+    let placed = 0, match = 0;
+    WHO.forEach((w, i) => {
+      const side = whoState[i];
+      const c = el("div", "wcard");
+      c.append(el("span", "wt", w.t));
+      const bw = el("div", "wb");
+      const b1 = el("button", "btn", "Yapay zekâ yardım edebilir"); b1.type = "button"; b1.setAttribute("aria-pressed", side === "ai" ? "true" : "false"); b1.dataset.side = "ai";
+      const b2 = el("button", "btn", "Karar senin"); b2.type = "button"; b2.setAttribute("aria-pressed", side === "you" ? "true" : "false"); b2.dataset.side = "you";
+      [b1, b2].forEach(b => b.addEventListener("click", () => { whoState[i] = b.dataset.side; renderWho(i, b.dataset.side); }));
+      bw.append(b1, b2); c.append(bw);
+      if (side) placed += 1;
+      if (whoChecked) {
+        const ok = side === w.a;
+        if (ok) match += 1;
+        c.classList.add("checked", ok ? "ok" : "diff");
+        const pre = side ? (ok ? "Önerilen cevapla aynı. " : "Önerilen cevap: " + (w.a === "ai" ? "yapay zekâ yardım edebilir. " : "karar senin. ")) : "Bunu yerleştirmedin. Önerilen cevap: " + (w.a === "ai" ? "yapay zekâ yardım edebilir. " : "karar senin. ");
+        c.append(el("p", "we", pre + w.e));
+      }
+      (side === "ai" ? binAi : side === "you" ? binYou : pool).append(c);
+      if (focusIdx === i) setTimeout(() => { const f = c.querySelector('[data-side="' + focusSide + '"]'); if (f) f.focus(); }, 0);
+    });
+    if (!binAi.children.length) binAi.append(el("p", "empty", "Henüz kart yok."));
+    if (!binYou.children.length) binYou.append(el("p", "empty", "Henüz kart yok."));
+    $("#binAiCount").textContent = binAi.querySelectorAll(".wcard").length;
+    $("#binYouCount").textContent = binYou.querySelectorAll(".wcard").length;
+    $("#whoScore").textContent = whoChecked ? WHO.length + " kartın " + match + " tanesi önerilen cevapla aynı" : WHO.length + " karttan " + placed + " tanesini yerleştirdin";
+  }
+  $("#whoCheck").addEventListener("click", () => { whoChecked = true; renderWho(); });
+  $("#whoReset").addEventListener("click", () => { whoState = {}; whoChecked = false; renderWho(); });
+  renderWho();
+
+  /* ---------- 5. yol haritası ---------- */
+  const WEEKS = [
+    { n: "1", d: "24 Eyl", t: "Tanışma", c: "Web'in hangi parçalardan oluştuğunu anlatabilir, dönemin haritasını bilir, sınıf arkadaşlarını tanımaya başlamış olursun.", tag: "bugün" },
+    { n: "2", d: "1 Eki", t: "HTML: sayfanın iskeleti", c: "Kendi kişisel sayfanı yazıp internette senin adınla açılan bir adrese koyabileceksin.", taste: "HTML, sayfadaki her şeyi etiketlerle işaretleyen dil. Gelecek hafta ilk on satırını yazacaksın." },
+    { n: "3", d: "8 Eki", t: "CSS: sayfaya görünüş vermek", c: "Sayfana renk, yazı tipi ve düzen verip telefonda da düzgün görünmesini sağlayabileceksin.", taste: "Kantin menüsünü çıplak listeden karta çeviren şey birkaç satır CSS'ti." },
+    { n: "4", d: "15 Eki", t: "JavaScript 1: dilin temelleri", c: "Tarayıcıda küçük hesaplayıcılar yazabileceksin: not ortalaması, KDV, çarpım tablosu.", taste: "YZM103'te gördüğün değişken, koşul ve döngü burada da aynı mantıkla çalışıyor." },
+    { n: "5", d: "22 Eki", t: "JavaScript 2: sayfayı canlandırmak", c: "Düğmeye basınca değişen bir sayfa, yani çalışan bir yapılacaklar listesi yapabileceksin. Aynı hafta takımını kurup proje fikrini kâğıda dökeceksin (M0).", taste: "Kantin sepetinin sayması bu haftanın konusu." },
+    { n: "6", d: "29 Eki", t: "Ders yok: Cumhuriyet Bayramı", c: "Takımınla ilk buluşmanı yaparsın.", off: true },
+    { n: "7", d: "5 Kas", t: "Sunucu: tarayıcının konuştuğu program", c: "JavaScript'le kendi küçük sunucunu yazıp tarayıcıdan ona soru sorabileceksin, örneğin \"günün sözü nedir?\"", taste: "Adres çubuğundaki dört adımın mutfak tarafını bu hafta sen kuruyorsun." },
+    { n: "Vize", d: "9–13 Kas", t: "Ara sınav haftası", c: "Hafta 2–5 konuları. Bilgisayarda uygulamalı bir kısım ve kâğıt üzerinde kavram soruları. Ders yok.", off: true },
+    { n: "8", d: "19 Kas", t: "Veritabanı: veriyi saklamak", c: "Ziyaretçi defterini baştan sona kendin kurabileceksin: form, sunucu, veritabanı, liste.", taste: "Bugün simülasyonda gördüğün defterin gerçeği." },
+    { n: "9", d: "26 Kas", t: "Git ve GitHub ile takım çalışması", c: "Takım arkadaşlarınla aynı kod üzerinde, birbirinizin işini ezmeden çalışabileceksin.", taste: "Git, kodunun her kaydını tarihiyle saklayan bir defter gibi. Bir şeyi bozarsan dünkü hâline dönebilirsin." },
+    { n: "10", d: "3 Ara", t: "Yapay zekâ ile geliştirme", c: "Kodlama ajanına projene bir özellik ekletip ürettiği her satırı açıklayabileceksin. Takımınızın ilk sürümü yayında olacak (M1).", taste: "Kodlama ajanı, senin yerine dosya açıp kod yazabilen bir yapay zekâ yardımcısı." },
+    { n: "11", d: "10 Ara", t: "Güvenlik ve kullanıcı girişi", c: "Ziyaretçi defterine kullanıcı girişi ekleyip en bilinen güvenlik açıklarını kapatabileceksin.", taste: "Parolalar neden düz yazıyla saklanmaz, bu haftanın ilk sorusu." },
+    { n: "12", d: "17 Ara", t: "Web uygulamasına yapay zekâ eklemek", c: "Projene küçük bir yapay zekâ özelliği ekleyebileceksin. Sunucusu ve veritabanı bağlı sürüm hazır olacak (M2).", taste: "Kayıp eşya panosundaki ilan düzeltici gibi bir özellik." },
+    { n: "13", d: "24 Ara", t: "Yayına alma ve modern araçlara bakış", c: "Projeni sunucusu ve veritabanıyla internete koyabileceksin. Final kodu 30 Aralık 23:59'da dondurulur.", taste: "Hafta 7–8'de kendi bilgisayarında çalıştırdığın sunucu ve veritabanı bu hafta internete çıkıyor." },
+    { n: "14", d: "31 Ara", t: "Demo Günü", c: "Takımınla ürününü 7 dakikada gösterip 3 dakika soru cevaplayacaksın.", taste: "Dönemin finali. On dört takım, on dört ürün." }
+  ];
+  let wkSel = 0;
+  const weeksBox = $("#weeks");
+  WEEKS.forEach((w, i) => {
+    const b = el("button", "wk" + (w.off ? " off" : "") + (i === 0 ? " now" : "")); b.type = "button";
+    b.append(el("span", "wn", w.n), el("span", "wd", w.d));
+    b.setAttribute("aria-label", (w.n === "Vize" ? "Vize haftası" : "Hafta " + w.n) + ", " + w.d + ": " + w.t);
+    b.addEventListener("click", () => { wkSel = i; renderWeek(); });
+    weeksBox.append(b);
+  });
+  function renderWeek() {
+    $$(".wk", weeksBox).forEach((b, i) => b.setAttribute("aria-pressed", i === wkSel ? "true" : "false"));
+    const w = WEEKS[wkSel], p = $("#wkPanel"); p.innerHTML = "";
+    const h = el("div", "wh");
+    h.append(el("span", "chip" + (w.off ? "" : " ship"), (w.n === "Vize" ? "Vize" : "Hafta " + w.n) + " · " + w.d));
+    if (w.tag) h.append(el("span", "chip lab", w.tag));
+    h.append(el("h3", null, w.t));
+    p.append(h);
+    p.append(el("p", "can", (w.off ? "" : "Bu haftanın sonunda: ") + w.c));
+    if (w.taste) p.append(el("p", "taste", w.taste));
+  }
+  renderWeek();
+
+  /* ---------- sorular ---------- */
+  const QUIZ = {
+    katman: { title: "Katmanlar üzerine üç soru", qs: [
+      { q: "Kantin kartında Ekle düğmesine basınca sepetteki sayı artıyor. Bu işi hangi katman yapar?", o: ["HTML", "CSS", "JavaScript"], a: 2,
+        e: "Davranış JavaScript'in işi: tıklamayı yakalar, sayıyı artırır, yazıyı günceller. CSS'i seçtiysen: CSS düğmenin rengini ve şeklini belirler ama saymayı bilmez. Simülasyonda CSS açıkken düğme güzeldi ama sessizdi." },
+      { q: "CSS dosyası bir hata yüzünden yüklenmedi, HTML ve JavaScript yerinde. Ne görürsün?", o: ["Tamamen boş, yalnız beyaz bir ekran", "Süssüz, alt alta dizilmiş içerik ve yine çalışan düğmeler", "Güzel görünen ama düğmelerine basınca hiçbir şey olmayan bir sayfa", "Etiketleriyle birlikte kodun kendisi, düz yazı olarak"], a: 1,
+        e: "İçerik HTML'de olduğu için yerinde durur, davranış JavaScript'te olduğu için düğmeler çalışır. Yalnız görünüş gider. Boş sayfa bekleyen çok olur: sayfa ancak HTML gelmezse boş kalır. Düğmelerin duracağını düşünen de olur, ama düğmeyi CSS değil JavaScript çalıştırır." },
+      { q: "Kartın başlığını \"Kantin Menüsü\" yerine \"Bugünün Menüsü\" yapmak istiyorsun. Hangi katmanda değişiklik yaparsın?", o: ["HTML: başlığın metni orada yazılı", "CSS: başlığın ekranda nasıl göründüğünü o belirliyor", "JavaScript: sayfada değişen her şeyi o yapıyor"], a: 0,
+        e: "Başlığın metni HTML'de yazılı, o satırı değiştirirsin. CSS'i seçen çok olur, çünkü değişikliği ekranda görürsün. Ama CSS yalnız rengi, boyutu ve düzeni belirler, yazının ne olduğunu değil. JavaScript tıklama gibi bir şey olduğunda sayfayı değiştirir, başlığın metnini baştan yazan o değil." }
+    ]},
+    adres: { title: "Adres çubuğu ve defter üzerine üç soru", qs: [
+      { q: "Kampüs Wi-Fi'ı tam sen Enter'a bastığın anda koptu. Dört adımdan hangisinde iş durur?", o: ["1. adımda: adres çubuğuna yazı yazılamaz", "2. adımda: tarayıcının isteği sunucuya ulaşamaz, bu yüzden hiçbir dosya gelmez", "4. adımda: dosyalar geldi ama tarayıcı onları çizemez"], a: 1,
+        e: "Tarayıcı sunucuya ancak internet üzerinden sorabilir. Bağlantı yoksa istek yola çıkamaz, sunucu hiçbir şey duymaz ve 3. ile 4. adıma hiç sıra gelmez. 4. adımı seçen çok olur, çünkü ekranda sayfa yerine bir hata görürsün. Ama çizilecek dosya hiç gelmedi, tarayıcının çizmesinde bir sorun yok. Garson mutfağa gidemediyse tabak da gelmez." },
+      { q: "Ziyaretçi defterindeki mesajın bir hafta sonra hâlâ görünmesini hangi parça sağlar?", o: ["Ön yüz", "Sunucu", "Veritabanı"], a: 2,
+        e: "Saklamak veritabanının işi. Mesaj bir tabloya satır olarak yazılır ve orada kalır. Sunucuyu seçtiysen: sunucu mesajı alır, kontrol eder, veritabanına iletir, ama mesajı saklayan o değil." },
+      { q: "Boş mesajla Gönder'e bastın, \"mesaj boş olamaz\" uyarısı geldi. Simülasyonda bu kontrolü kim yaptı?", o: ["Ön yüz", "Sunucu", "Veritabanı"], a: 1,
+        e: "Günlük sütununda gördüğün gibi sunucu mesajı açtı, boş olduğunu gördü ve kaydetmeden geri çevirdi. Uyarı ön yüzde göründüğü için ön yüzü seçen çok olur, ama ön yüz yalnız sunucunun cevabını gösterdi." }
+    ]},
+    yz: { title: "Yapay zekâ üzerine dört soru", qs: [
+      { q: "Yapay zekâya yalnız \"Bana site yap\" yazarsan ne olur?", o: ["Aklından geçeni anlar ve tam onu yapar", "Her seferinde aynı hazır şablonu verir", "Hata verir, hiçbir şey üretmez", "Söylemediğin her şeyi kendi tahminiyle doldurur"], a: 3,
+        e: "Dil, konu, içerik gibi söylemediğin her şeyi tahmin eder. İki istek karşılaştırmasında İngilizce bir şirket sitesi çıkmasının nedeni bu. Hazır şablon diyen de olur, ama gerçek bir yapay zekâ her seferinde biraz farklı bir şey üretir. Aklını okuyamaz, yalnız yazdığını okur." },
+      { q: "Yapay zekâ \"bir simit ve iki ayranın tutarı\" için bu kodu yazdı. Konsolda ne yazar?", tag: "Bu kodun çıktısı ne?", code: "const simit = 15;\nconst ayran = 20;\nconsole.log(simit + ayran * 2);", o: ["70", "55", "simit + ayran * 2", "35"], a: 1,
+        e: "Matematikte olduğu gibi çarpma önce yapılır: 20 × 2 = 40, sonra 15 eklenir, sonuç 55. Bu tutar da doğru. 70 diyen, soldan sağa toplayıp sonra çarptı. 35 diyen çarpmayı hiç yapmadı. Kodu kontrol etmek, sonucu elle hesaplayıp karşılaştırmak demek." },
+      { q: "Klasörde index.html ve menu.html var. Hata hangi satırda?", tag: "Hata hangi satırda?", num: true, code: "<h1>Kulüp Duyuruları</h1>\n<p>Satranç turnuvası var.</p>\n<a href=\"menü.html\">Kantin menüsü</a>", o: ["1. satır", "2. satır", "3. satır", "Hata yok, üç satır da doğru"], a: 2,
+        e: "Bağlantı menü.html diyor, dosyanın adı menu.html. Bilgisayar için ü ile u farklı harfler, bağlantı kırılır. Türkçe karakterleri dosya adına hiç koymamak en güvenlisi. 1. ve 2. satırdaki Türkçe karakterler sorun değil, onlar sayfanın içeriği." },
+      { q: "Yapay zekâ, girilen notların ortalamasını hesaplayan bir kod yazdı. 50 ve 100 ile denedin, ekranda 75 çıktı. Sonra 40, 60 ve 80 ile denedin, ekranda 90 çıktı. Ne yaparsın?", o: ["İlk deneme doğru çıktığı için kodu teslim ederim", "Hata mesajı çıkmadığına göre kod doğrudur, teslim ederim", "Elle hesaplarım: 40, 60 ve 80'in ortalaması 60. Kod yanlış, nerede yanıldığını bulmadan teslim etmem", "Kodu yapay zekâya yeniden yazdırır, yeni kodu denemeden teslim ederim"], a: 2,
+        e: "(40 + 60 + 80) / 3 = 60, ekrandaki 90 yanlış. Kod büyük ihtimalle toplamı hep 2'ye bölüyor: iki notla doğru, üç notla yanlış sonuç veriyor. İlk denemeye güvenen çok olur, ama tek bir örneğin tutması kodun doğru olduğunu göstermez. Hata mesajının çıkmaması da bir şey kanıtlamaz, 43 TL yazan sepet kodu da hiç hata vermemişti. Kontrol, sonucu elle hesaplayıp karşılaştırmaktır. Açıklayamadığın ve denemediğin kod senin değil." }
+    ]},
+    nasil: { title: "Dönem ve kurallar üzerine üç soru", qs: [
+      { q: "Demo Günü ne zaman?", o: ["17 Aralık", "24 Aralık", "31 Aralık"], a: 2,
+        e: "31 Aralık Perşembe, dönemin son dersi. 24 Aralık yayına alma haftası, projeyi o hafta internete koyarsın. 17 Aralık ise M2 teslimi. Final kodu 30 Aralık 23:59'da dondurulur." },
+      { q: "Hafta 2 ile 9 arasında yapay zekâyı nasıl kullanırsın?", o: ["Kodu önce kendim yazarım, takıldığımda ona açıklama sorarım", "Sayfanın tamamını ona yazdırır, sonra satır satır okurum", "Hiç kullanmam, çünkü bu haftalarda yapay zekâ yasak"], a: 0,
+        e: "Yapay zekâ yasak değil, yardımcı. Açıklama sorabilir, hata mesajını sorabilir, kendini sınatabilirsin. İkinci seçenek en çok karıştırılanı: yazdırıp okumak öğrenmek gibi gelir, ama bu haftalarda amaç kodu kendi elinle kurmak. Bütün kodu ona yazdırırsan öğrenen sen olmazsın." },
+      { q: "Lab günü saat 16:40. Sayfan yarım kaldı. Ne yaparsın?", o: ["Bitmeden göndermem, Pazar günü tamamını bir kerede gönderirim", "Yarım hâliyle formu şimdi gönderirim, tamamını Pazar 23:59'a kadar aynı formdan yollarım", "Akşam bitirip gece gönderirim, o da lab sonu teslimi sayılır"], a: 1,
+        e: "16:45 teslimi o günün uygulama yoklaması sayılır ve işin bitmiş olması gerekmez: o ana kadar yaptığını gönderirsin. Tamamı Pazar 23:59'a kadar gelir. \"Bitmeden göndermem\" diyen çok olur, çünkü yarım işi göstermek istemezsin. Ama o zaman o haftanın yoklaması yazılmaz ve uygulamada en az %80 devam şartı var." }
+    ]},
+    sina: { title: "Hafta testi", qs: [
+      { q: "Arkadaşın \"e-Devlet açılmıyor, tarayıcım bozuldu\" diyor. Aynı tarayıcıda YouTube sorunsuz açılıyor. Sorun büyük ihtimalle nerede?", o: ["Tarayıcıda. Bir siteyi açamayan tarayıcı bozuktur", "Hiçbir yerde. YouTube açılıyorsa e-Devlet de açılıyordur, arkadaşın yanlış görmüş", "e-Devlet'in sunucusunda ya da yazılan adreste. Tarayıcı çalışıyor, çünkü YouTube'u isteyip çizebiliyor"], a: 2,
+        e: "Garson çalışıyor: YouTube'un mutfağına gidip tabağı getirebiliyor. e-Devlet'te takılıyorsa ya o mutfak cevap vermiyor ya da adres yanlış yazılmış. Tarayıcıyı suçlayan çok olur, çünkü sorunu tarayıcının penceresinde görürsün. Ama tarayıcı yalnız isteyen ve çizen programdır. Sunucudan cevap gelmezse çizecek bir şeyi olmaz." },
+      { q: "instagram.com'u tarayıcıda açtın, kalbe bastın ve kalp kırmızı oldu. Rengin değişmesine hangi katman karar verdi?", o: ["HTML: kalbi ve rengini sayfaya en baştan yazdı", "JavaScript: tıklamayı yakaladı ve kalbin durumunu değiştirdi", "Veritabanı: beğeniyi sakladı ve rengi kendisi değiştirdi"], a: 1,
+        e: "Tıklamaya tepki vermek JavaScript'in işi. Kırmızının tonunu CSS belirler, JavaScript \"şimdi kırmızı ol\" der. Veritabanı beğeniyi saklar ama ekrandaki rengi değiştiren o değildir." },
+      { q: "Tarayıcı bu HTML'i aldığında ekranda ne görünür?", tag: "Bu kodun çıktısı ne?", code: "<h1>Merhaba</h1>\n<p>Muş'tan selamlar</p>", o: ["Etiketleriyle birlikte kodun kendisi, iki satır halinde", "İki satır da aynı boyda, düz yazıyla: \"Merhaba\" ve \"Muş'tan selamlar\"", "Büyük ve kalın bir başlık olarak \"Merhaba\", altında normal yazıyla \"Muş'tan selamlar\""], a: 2,
+        e: "Tarayıcı etiketleri ekranda göstermez, onları talimat olarak okur: h1 başlık, p paragraf. h1 harfleri büyük harfe çevirmez, yazıyı büyük boyutta ve kalın gösterir. Kodun kendisini görmek için DevTools'u açman gerekir." },
+      { q: "Derste bir haber sitesinin manşetini DevTools ile değiştirdik ve sayfayı yeniledik. Ne oldu?", o: ["Eski manşet geri geldi, değişiklik yalnız o bilgisayardaydı", "Değişiklik o siteyi açan bütün okurlara görünür", "Değişiklik senin bilgisayarında kalıcı olarak kaydedilir"], a: 0,
+        e: "Değiştirdiğin, sunucudan senin tarayıcına gelmiş kopyaydı. Yenileyince tarayıcı dosyaları sunucudan yeniden ister ve asıl hâli gelir. Herkese görünür sanan çok olur, ama sunucudaki dosyaya hiç dokunmadın." },
+      { q: "Günlük dille sunucu nedir?", o: ["İstek geldiğinde cevap veren, sürekli açık bekleyen bir program", "Senin bilgisayarında sayfayı açıp ekrana çizen program", "Kampüsteki Wi-Fi modemi, internete bağlanmanı sağlayan kutu"], a: 0,
+        e: "Sunucu bir programdır, lokantadaki mutfak gibi siparişi bekler ve hazırlar. Sayfayı ekrana çizen program tarayıcıdır, garson. İkisini karıştıran çok olur. Sunucu genelde güçlü bir bilgisayarda çalışır ama modem değildir. Hafta 7'de kendi bilgisayarında bir tane çalıştıracaksın." },
+      { q: "Sabahki ziyaretçi defteri sayfayı yenileyince baştan başlıyor. Gerçek bir sitede yazdığın mesaj yenileyince neden kaybolmaz?", o: ["Gerçek sitede mesaj sunucu üzerinden veritabanına yazılır. Yenileyince tarayıcı listeyi yeniden ister ve kayıtlı satırlar geri gelir", "Gerçek sitede mesaj senin tarayıcında saklanır, tarayıcı onu unutmaz", "Gerçek sitelerde sayfa yenilenmez, o yüzden hiçbir şey kaybolmaz"], a: 0,
+        e: "Kalıcılığı sağlayan veritabanı. Mesaj bir tabloya satır olarak yazılır ve sayfayı kim, ne zaman açarsa açsın sunucu o satırları okuyup gönderir. Mesajın tarayıcıda durduğunu düşünen çok olur. Öyle olsaydı mesajını yalnız sen görürdün, arkadaşın kendi telefonundan açınca göremezdi. DevTools'la değiştirdiğimiz manşetin yenileyince kaybolması da aynı nedenle: tarayıcıdaki kopya kalıcı değil." },
+      { q: "Neredeyse doğru kod neden tamamen yanlış koddan daha tehlikelidir?", o: ["Tarayıcı onu hiç açmaz ve sayfa bembeyaz kalır", "Hata vermeden çalışır, yanlışı ancak ne istendiğini bilen biri fark eder", "Yapay zekâ onu fark edip bir sonraki cevapta kendisi düzeltir"], a: 1,
+        e: "43 TL yazan sepet kodunu hatırla: hiç hata vermedi. Bembeyaz kalan bir sayfa hemen göze batar, o yüzden daha az tehlikelidir. Yapay zekâ senin ne istediğini bilmediği için yanlışı kendisi fark etmez. Stack Overflow 2025 anketinde katılanların %66'sı bu şikâyeti seçti. En sık seçilen şikâyet bu oldu." },
+      { q: "Bu istemi okuyan yapay zekâ neyi hâlâ kendisi tahmin etmek zorunda kalır?", tag: "Bu istemde eksik ne?", code: "Türkçe, tek sayfa bir kantin menüsü yap.\nBaşlık ve ürünler olsun.\nTelefonda da düzgün görünsün.", o: ["Sayfanın dilini", "Telefonda nasıl görüneceğini", "Hiçbir şeyi, istem yeterince açık", "Ürünlerin adlarını ve fiyatlarını"], a: 3,
+        e: "Dil ve telefon istemde yazıyor, ama hangi ürünlerin olduğu ve kaça satıldığı yazmıyor. Yapay zekâ bunları kendisi uydurur ve kontrol etmezsen yanlış fiyat yayına çıkar. \"Hiçbir şeyi\" diyen çok olur, çünkü istem düzgün görünüyor. Açık görünen bir istemde de eksik olabilir. İki istek karşılaştırmasında açık istemin bile açılış saatini uydurduğunu görmüştün." },
+      { q: "Tarayıcı bu satırı aldığında ekranda ne görünür?", tag: "Bu kodun çıktısı ne?", code: "<a href=\"https://www.youtube.com\">YouTube</a>", o: ["Satırın tamamı, etiketleriyle birlikte düz yazı olarak", "Tıklanınca YouTube'u açan \"YouTube\" yazısı", "YouTube'un ana sayfası, bu sayfanın içinde küçük bir pencerede", "Mavi ve altı çizili olarak https://www.youtube.com adresi"], a: 1,
+        e: "a etiketi bağlantı demek. Ekranda yalnız iki etiketin arasındaki yazı görünür, href ise tıklanınca gidilecek adres. Adresin kendisinin görüneceğini düşünen olur, ama href ekranda yazılmaz. Bağlantı yalnız bir kapıdır, YouTube'u sayfanın içine getirmez." },
+      { q: "Bireysel kod savunmasında ne yaparsın?", o: ["Projeni anlatır, bir kodu açıklar, küçük bir değişikliği orada yaparsın", "Yalnız kâğıt üzerinde, yapay zekâ kapalı yazılı bir sınava girersin", "Takımın sunumu bir arkadaşın yapar, sen yalnız soruları dinlersin"], a: 0,
+        e: "Savunma 15 dakika ve bireysel: kendi projeni anlatırsın, bir kod parçasını açıklarsın, küçük bir değişikliği orada yaparsın. Yazılı sorular sınavlarda sorulur, savunmada değil. Takımda çalışmış olman kendi payını açıklama sorumluluğunu kaldırmaz." },
+      { q: "Sayfada <h2>Kantin Menüsü</h2> başlığı var. Stil dosyasına aşağıdaki kural eklendi. Ekranda ne değişir?", tag: "Bu kodun çıktısı ne?", code: "h2 { color: teal; }", o: ["Başlığın yazısı \"teal\" olur", "Başlığa tıklanınca rengi değişir", "Sayfadaki bütün yazılar teal renge döner", "Başlığın rengi yeşilimsi maviye (teal) döner, yazısı aynı kalır"], a: 3,
+        e: "color yazının rengini değiştirir, metnin kendisini değil. Kuralın başındaki h2, kuralın yalnız h2 başlıklarına uygulanacağını söyler, o yüzden öbür yazılar aynı kalır. Tıklamaya tepki vermek ise JavaScript'in işi. Katmanlar simülasyonundaki CSS kodunda da aynı satır vardı." },
+      { q: "Adres çubuğuna yazdığında sunucu tarayıcıya ne gönderir?", o: ["Yalnız sayfanın adresini, gerisini tarayıcı kendisi bulur", "Sayfanın ekranda çizilmiş hâlinin hazır bir resmini", "Sayfanın dosyalarını: HTML, CSS, JavaScript, resimler"], a: 2,
+        e: "Sunucu dosyaları gönderir, sayfayı çizen tarayıcıdır. Hazır bir resim gelseydi DevTools'ta manşeti değiştiremezdin, çünkü değiştireceğin bir kod olmazdı." }
+    ]}
+  };
+  const LETTERS = ["A", "B", "C", "D"];
+  function renderQuiz(box) {
+    const set = QUIZ[box.dataset.quiz];
+    box.innerHTML = "";
+    const head = el("div", "qhead");
+    const score = el("span", "score"); score.setAttribute("aria-live", "polite");
+    const reset = el("button", "btn", "Yeniden dene"); reset.type = "button";
+    const right = el("div", "row-btns"); right.append(score, reset);
+    head.append(el("h3", null, set.title), right);
+    box.append(head);
+    let answered = 0, correct = 0;
+    const upd = () => { score.textContent = "Doğru: " + correct + " / " + set.qs.length + (answered < set.qs.length ? " · cevaplanan " + answered : ""); };
+    set.qs.forEach((Q, qi) => {
+      const card = el("div", "q");
+      const qt = el("div", "qt"); qt.append(el("span", "qn", String(qi + 1)), el("span", null, Q.q));
+      card.append(qt);
+      if (qi === 0) card.append(el("span", "chip lab", "derste birlikte"));
+      if (Q.tag) card.append(el("span", "tag", Q.tag));
+      if (Q.code) {
+        const pre = el("pre", "code" + (Q.num ? " numbered" : ""));
+        if (Q.num) Q.code.split("\n").forEach((L, li) => { const r = el("span", "cl"); r.append(el("span", "cn", String(li + 1)), el("span", null, L)); pre.append(r); });
+        else pre.textContent = Q.code;
+        card.append(pre);
+      }
+      const opts = el("div", "opts"); opts.setAttribute("role", "group"); opts.setAttribute("aria-label", "Seçenekler");
+      const exp = el("div", "exp"); exp.setAttribute("aria-live", "polite");
+      Q.o.forEach((o, oi) => {
+        const b = el("button", "opt"); b.type = "button";
+        b.append(el("span", "l", LETTERS[oi]), el("span", null, o));
+        b.addEventListener("click", () => {
+          if (card.classList.contains("done")) return;
+          card.classList.add("done");
+          const ok = oi === Q.a;
+          $$(".opt", opts).forEach((x, xi) => { x.disabled = true; if (xi === Q.a) x.classList.add("right"); });
+          if (!ok) b.classList.add("wrong");
+          answered += 1; if (ok) correct += 1;
+          exp.innerHTML = "";
+          exp.append(el("span", "verdict " + (ok ? "y" : "n"), ok ? "Doğru. " : "Doğru cevap " + LETTERS[Q.a] + ". "), document.createTextNode(Q.e));
+          upd();
+        });
+        opts.append(b);
+      });
+      card.append(opts, exp);
+      box.append(card);
+    });
+    reset.addEventListener("click", () => renderQuiz(box));
+    upd();
+  }
+  $$("[data-quiz]").forEach(renderQuiz);
+
+  /* ---------- fikir kartı ---------- */
+  const FK_ORNEK = [
+    ["kampüste kaybolan eşyalar", "eşyasını kaybeden ve bulan öğrenciler", "fotoğraflı bir ilan bırakıp iletişim bilgisi alacak"],
+    ["kantinde günün menüsünü bilmemek", "öğle arasında kantine inecek öğrenciler", "menüyü ve yoğunluğu görüp gitmeye karar verecek"],
+    ["yurtta çamaşırhane sırası", "yurtta kalan öğrenciler", "boş makineyi görüp kendine bir saat ayıracak"],
+    ["kulüp etkinliklerini duymamak", "kulüplere ilgi duyan öğrenciler", "bu haftaki etkinlikleri görüp katılacağım diyecek"],
+    ["ikinci el ders kitabı bulmak", "kitap arayan ve satan öğrenciler", "kitabını ilan verip alıcısıyla anlaşacak"],
+    ["ring saatlerini bilmemek", "kampüsle şehir arasında gidip gelen herkes", "sıradaki ringin saatini ve durağını görecek"]
+  ];
+  const fkS = $("#fkSorun"), fkK = $("#fkKim"), fkN = $("#fkNe"), fkO = $("#fkOut");
+  if (fkS) {
+    let fkI = 0;
+    const kur = () => {
+      const sorun = fkS.value.trim(), kim = fkK.value.trim(), ne = fkN.value.trim();
+      const eksik = [!sorun && "sorunu", !kim && "kimin kullanacağını", !ne && "ne yapıp çıkacağını"].filter(Boolean);
+      fkO.innerHTML = "";
+      if (eksik.length) { fkO.append(document.createTextNode("Şunu da yaz: " + eksik.join(", ") + ".")); return; }
+      const parca = (t, x) => { const b = el("b", null, x); return [document.createTextNode(t), b]; };
+      fkO.append(...parca("", kim.charAt(0).toUpperCase() + kim.slice(1)), ...parca(" için, ", sorun), ...parca(" sorununu çözen bir site: kullanıcı açar, ", ne), document.createTextNode("."));
+    };
+    $("#fkKur").addEventListener("click", kur);
+    [fkS, fkK, fkN].forEach(i => i.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); kur(); } }));
+    $("#fkOrnek").addEventListener("click", () => {
+      const o = FK_ORNEK[fkI % FK_ORNEK.length]; fkI += 1;
+      fkS.value = o[0]; fkK.value = o[1]; fkN.value = o[2]; kur();
+    });
+  }
+})();
+</script>
+</body>
+</html>
