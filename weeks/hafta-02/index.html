@@ -1,0 +1,1409 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hafta 2 · HTML: sayfanın iskeleti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/ders.css">
+<style>
+/* Hafta 2'ye özel simülasyon stilleri */
+.ince{margin-top:14px}
+.hero-demo .frame iframe{height:150px}
+.hero-demo pre.code{font-size:.8rem}
+.hero-demo .l.hot{animation:yan 1.4s ease-out}
+#heroBtn code{background:color-mix(in srgb,currentColor 20%,transparent);color:inherit}
+@keyframes yan{from{background:rgba(240,169,59,.6)}to{background:rgba(240,169,59,.16)}}
+
+/* etiket anatomisi */
+.anat{display:flex;flex-wrap:wrap;gap:2px;font-family:var(--mono);font-size:.95rem;background:var(--code-bg);border-radius:10px;padding:12px}
+.anat button{appearance:none;border:1px solid transparent;background:transparent;color:#E7ECF5;font:inherit;padding:3px 4px;border-radius:6px;cursor:pointer}
+.anat button:hover{border-color:#5B6577}
+.anat button[aria-pressed="true"]{background:#2352D9;color:#fff}
+.anat-out{min-height:3.2em;font-size:.95rem;background:var(--surface-2);border-radius:10px;padding:10px 12px}
+
+/* ağaç */
+.tree,.tree ul{list-style:none;margin:0;padding-left:0}
+.tree ul{padding-left:18px;border-left:1px dashed var(--line);margin-left:8px}
+.tree li{margin:3px 0;overflow-wrap:anywhere}
+.tree .tg{display:inline-block;font-family:var(--mono);font-size:.8rem;background:var(--theory-soft);color:var(--theory);border-radius:6px;padding:1px 7px;font-weight:500}
+.tree .tg.hot{background:var(--err-soft);color:var(--err)}
+.tree .at{font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-left:4px}
+.tree .tx{font-size:.86rem;color:var(--ink)}
+.treebox{background:var(--surface-2);border-radius:10px;padding:10px 12px;max-height:320px;overflow:auto}
+.msgs{display:grid;gap:6px;font-size:.9rem}
+.msgs div{padding:7px 10px;border-radius:8px;background:var(--err-soft);color:var(--ink);border-left:3px solid var(--err)}
+.msgs div.okm{background:var(--lab-soft);border-left-color:var(--lab)}
+
+/* iskelet */
+.skel{display:grid;gap:4px}
+.skel .sl{display:grid;grid-template-columns:2ch minmax(0,1fr) auto;gap:10px;align-items:center;padding:5px 8px;border-radius:8px;background:var(--surface-2)}
+.skel .sl .no{font-family:var(--mono);font-size:.74rem;color:var(--muted);text-align:right}
+.skel .sl code{background:transparent;padding:0;white-space:pre;overflow:hidden;text-overflow:ellipsis}
+.skel .sl.off code{text-decoration:line-through;opacity:.45}
+.skel .sl .btn{padding:6px 9px;font-size:.78rem}
+.mock{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;color:#111}
+.mock .tabs{display:flex;background:#DEE3EB;padding:6px 8px 0}
+.mock .tab{background:#fff;border-radius:8px 8px 0 0;padding:6px 12px;font:500 .8rem/1.2 var(--body);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mock .pg{padding:12px 14px;min-height:120px;font-family:"Times New Roman",serif}
+.mock .pg h4{font:700 1.5rem/1.2 "Times New Roman",serif;margin:0 0 8px;color:#111;letter-spacing:0;text-transform:none}
+.mock .pg p{font-size:1rem}
+.effects{display:grid;gap:6px;font-size:.92rem}
+.effects div{padding:8px 10px;border-radius:8px;background:var(--surface-2)}
+.effects div.bad{background:var(--err-soft)}
+.effects div.meh{background:var(--ship-soft)}
+.effects div b{font-family:var(--mono);font-weight:500;font-size:.8rem}
+
+/* dosya yolu */
+.ftree{font-family:var(--mono);font-size:.86rem;line-height:1.7;background:var(--surface-2);border-radius:10px;padding:10px 12px;white-space:pre;overflow-x:auto;margin:0}
+.ftree .hl-from{background:var(--theory-soft);color:var(--theory);border-radius:4px;padding:0 3px}
+.ftree .hl-to{background:var(--lab-soft);color:var(--lab);border-radius:4px;padding:0 3px}
+.pathres{font-size:.94rem;border-radius:10px;padding:10px 12px;background:var(--surface-2);min-height:2.6em}
+.pathres.ok{background:var(--lab-soft)}
+.pathres.bad{background:var(--err-soft)}
+.pathres.warn{background:var(--ship-soft)}
+.pathres p{margin-bottom:6px}
+.pathres ol{margin-top:6px}
+
+/* büyük/küçük harf */
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.box{border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center;background:var(--surface-2);min-width:0}
+.box .img{height:110px;display:grid;place-items:center;margin:6px 0;background:#fff;border-radius:8px;color:#5B6577;font-size:.82rem}
+.box .img svg{height:100px;width:auto}
+.box .st{font-family:var(--mono);font-size:.8rem}
+.box .st.ok{color:var(--lab)} .box .st.bad{color:var(--err)}
+
+/* bölüm atama */
+.assign{display:grid;gap:8px}
+.acard{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.acard.right{border-color:var(--lab);background:var(--lab-soft)}
+.acard.wrong{border-color:var(--err);background:var(--err-soft)}
+.acard .t{font-size:.94rem;font-weight:500}
+.acard .opts{display:flex;flex-wrap:wrap;gap:6px}
+.acard .opts .btn{font-family:var(--mono);font-size:.78rem;padding:6px 9px}
+.acard .why{font-size:.88rem;display:none}
+.acard.checked .why{display:block}
+.layout{display:grid;gap:6px;font-size:.82rem}
+.layout .reg{border:2px dashed var(--line);border-radius:10px;padding:6px 8px;min-height:40px}
+.layout .reg b{font-family:var(--mono);font-weight:500;font-size:.72rem;color:var(--muted);display:block}
+.layout .reg span{display:inline-block;background:var(--surface-2);border-radius:6px;padding:1px 6px;margin:2px 2px 0 0}
+
+/* lab ve yapay zekâ kutusu */
+.bug{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:8px;background:var(--surface)}
+.bug h4{font-family:var(--body);font-size:.98rem;font-weight:600;letter-spacing:0}
+.ai-box{background:var(--ai-soft);border-radius:16px;padding:18px 20px;display:grid;gap:12px}
+.ai-box h2{color:var(--ai)}
+.callout .chip{margin-right:6px}
+@media (max-width:480px){
+  .two{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+</head>
+<body data-week="2">
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="dot" aria-hidden="true"></span>YZM205 · Hafta 2<span class="long">&nbsp;· HTML</span></div>
+    <nav class="jump" aria-label="Bölümler">
+      <a href="#bugun">Bugün</a><a href="#hedef">Hedef</a><a href="#metin">1 Metin</a><a href="#etiket">2 Etiket</a><a href="#iskelet">3 İskelet</a><a href="#liste">4 Liste</a><a href="#yol">5 Yol</a><a href="#bolumler">6 Bölümler</a><a href="#yapay-zeka">Yapay zekâ</a><a href="#lab">Lab</a><a href="#yayin">Yayın</a><a href="#bozuk">Boz</a><a href="#teslim">Teslim</a><a href="#test">Test</a><a href="#kartlar">Kartlar</a>
+    </nav>
+    <button class="themebtn" id="themeBtn" type="button">Koyu tema</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" aria-labelledby="baslik">
+    <div>
+      <div class="eyebrow">YZM205 Web Tasarımı ve Programlama · Hafta 2 · Perşembe 8 Ekim 2026 · BLD-104</div>
+      <h1 id="baslik">HTML: sayfanın iskeleti</h1>
+      <p class="lede">Sabah HTML'in temelini göreceğiz: etiketler, belge iskeleti, başlık ve listeler, bağlantılar, görseller ve sayfa bölümleri. Öğleden sonra labda kendi kişisel sayfanı yazıp internete koyacaksın. Akşam telefonundan kendi adresini açıp sayfanı görebileceksin.</p>
+      <div class="meta">
+        <span class="chip theory">Teori 10:00–11:45</span>
+        <span class="chip lab">Lab 15:00–16:45</span>
+        <span class="chip ship">Teslim: Pazar 11 Ekim 23:59</span>
+      </div>
+      <div class="meta">
+        <div class="ring" id="ring"><span data-pct>%0</span></div>
+        <span class="badge" id="badge" hidden data-text="HTML iskeleti tamam"></span>
+        <span class="small muted">Bu haftanın ilerlemesi: soru grupları ve lab adımları. Tarayıcında saklanır, puan değildir.</span>
+      </div>
+    </div>
+    <div class="hero-demo">
+      <span class="lbl">Canlı gösterim</span>
+      <pre class="code" id="heroKod" aria-label="Üç satırlık HTML dosyası"></pre>
+      <div class="frame">
+        <div class="bar"><i></i><span>etkinlik.html</span></div>
+        <iframe id="heroFrame" title="Üç satırın tarayıcıdaki çizimi" sandbox=""></iframe>
+      </div>
+      <div class="btnrow"><button class="btn primary" type="button" id="heroBtn">Etiket ekle</button></div>
+      <p class="small muted" id="heroDurum" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section id="bugun" aria-labelledby="bugun-h">
+    <div class="section-head"><h2 id="bugun-h">Bugün</h2><span class="muted">Dakika dakika akış</span></div>
+    <div class="today">
+      <div class="grid2">
+        <div class="card">
+          <h3>Sabah · konu anlatımı</h3>
+          <div class="tl">
+            <div class="row" data-start="10:00" data-end="10:07" data-day="4"><span class="t">10:00–10:07</span><div><a href="#hedef">Bugünün hedefi</a><span class="s">Akşam senin adınla açılan bir sayfa</span></div></div>
+            <div class="row" data-start="10:07" data-end="10:24" data-day="4"><span class="t">10:07–10:24</span><div><a href="#metin">1. Web sayfası bir metin dosyasıdır</a><span class="s">Canlı editör</span></div></div>
+            <div class="row" data-start="10:24" data-end="10:45" data-day="4"><span class="t">10:24–10:45</span><div><a href="#etiket">2. Etiket, öğe, nitelik</a><span class="s">Etiketin parçaları, etiket ağacı</span></div></div>
+            <div class="row pause" data-start="10:45" data-end="10:55" data-day="4"><span class="t">10:45–10:55</span><div>Ara</div></div>
+            <div class="row" data-start="10:55" data-end="11:08" data-day="4"><span class="t">10:55–11:08</span><div><a href="#iskelet">3. Belge iskeleti satır satır</a><span class="s">Satırı sil, ne olduğunu gör</span></div></div>
+            <div class="row" data-start="11:08" data-end="11:15" data-day="4"><span class="t">11:08–11:15</span><div><a href="#liste">4. Başlık, paragraf, liste</a><span class="s">Kısa tablo ve editörde deneme</span></div></div>
+            <div class="row" data-start="11:15" data-end="11:35" data-day="4"><span class="t">11:15–11:35</span><div><a href="#yol">5. Bağlantı, görsel, dosya yolu</a><span class="s">Yol bulucu, büyük/küçük harf</span></div></div>
+            <div class="row" data-start="11:35" data-end="11:45" data-day="4"><span class="t">11:35–11:45</span><div><a href="#bolumler">6. Sayfa bölümleri</a><span class="s">Parçaları bölümlere yerleştir</span></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Öğleden sonra · lab</h3>
+          <div class="tl">
+            <div class="row" data-start="15:00" data-end="15:20" data-day="4"><span class="t">15:00–15:20</span><div><a href="#lab">Kurulum kontrolü ve hazırlık</a><span class="s">Beş kontrol, eksikleri bitir, klasörü aç</span></div></div>
+            <div class="row" data-start="15:20" data-end="15:50" data-day="4"><span class="t">15:20–15:50</span><div><a href="#yap">YAP: kişisel sayfa</a><span class="s">Yedi adımda iki sayfalık site</span></div></div>
+            <div class="row pause" data-start="15:50" data-end="15:55" data-day="4"><span class="t">15:50–15:55</span><div>Ara</div></div>
+            <div class="row" data-start="15:55" data-end="16:15" data-day="4"><span class="t">15:55–16:15</span><div><a href="#yayin">Yayın</a><span class="s">GitHub'a yükle, GitHub Pages ile aç</span></div></div>
+            <div class="row" data-start="16:15" data-end="16:35" data-day="4"><span class="t">16:15–16:35</span><div><a href="#bozuk">BOZ: bozuk site</a><span class="s">Üç hatayı bul ve düzelt. 15. adım yetişmezse Pazar'a kadar evde.</span></div></div>
+            <div class="row" data-start="16:35" data-end="16:45" data-day="4"><span class="t">16:35–16:45</span><div><a href="#anlat">ANLAT ve teslim</a><span class="s">60 saniyelik anlatım, lab sonu formu</span></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="muted" style="max-width:80ch">Her simülasyon bir tahminle açılır: önce sınıfça tahmin ederiz, sonra çalıştırıp bakarız. Her bölümün sonunda sorular var. "Derste" işaretli olanı o bölümün sonunda birlikte çözeceğiz. Kalan sorular, hafta testi ve kavram kartları evde senin. "Evde" çipli kutulardaki iki dakikalık denemeleri de akşam kendi bilgisayarında yaparsın. Bir bölüm erken biterse hafta testinin ilk beş sorusuna birlikte bakarız. Her soruda cevabı seçince açıklaması açılır.</p>
+      <div class="grid2">
+        <div class="card">
+          <span class="lbl">Önceki hafta</span>
+          <p>Hafta 1'de bir sitenin hangi parçalardan oluştuğunu ve adres çubuğuna yazınca neler olduğunu gördük. Hatırlamak istersen <a href="../hafta-01/">Hafta 1 ders notu</a>.</p>
+        </div>
+        <div class="card">
+          <span class="lbl">Bugün yanında olsun</span>
+          <p>Dizüstün, şarj aleti, <a href="../hafta-00-kurulum/">Hafta 0</a>'daki beş adımı evde yapmış olman (VS Code, Live Server, GitHub hesabı), GitHub şifren ve iki adımlı doğrulama için telefonun. Kurulumda yarım kalan adım varsa labın ilk 20 dakikasında birlikte bitiriyoruz.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hedef" aria-labelledby="hedef-h">
+    <div class="section-head"><h2 id="hedef-h">Günün sonunda internette senin adınla bir sayfa</h2><span class="chip theory">10:00–10:07 · 7 dk</span></div>
+    <div class="grid2">
+      <div class="prose">
+        <p>Bu akşam telefonunun tarayıcısına bir adres yazacaksın ve karşına kendi yazdığın sayfa çıkacak. Adres şuna benzeyecek: <code>https://kullaniciadi.github.io</code>. <code>kullaniciadi</code> yerine senin GitHub kullanıcı adın gelir.</p>
+        <p>Örnekteki sayfa, labın sonunda elinde olacak sayfanın taslağı. Süs yok, yazı tipi ve renkler tarayıcının varsayılan hâlinde. Doğru, çünkü bugün yalnız HTML yazıyoruz. HTML sayfanın yapısını tanımlar: neyin başlık, neyin liste, neyin bağlantı olduğunu söyler. Sayfaya görünüş vermek CSS'in işi, onu Hafta 3'te öğreneceksin.</p>
+        <p>Sabah bu iskeleti kurmak için gereken her şeyi tek tek göreceğiz. Öğleden sonra aynı şeyleri bu kez kendi sayfan için yazacaksın.</p>
+      </div>
+      <div class="frame" aria-label="Labın sonunda elinde olacak sayfanın önizlemesi">
+        <div class="bar"><i></i><span>https://kullaniciadi.github.io</span></div>
+        <iframe id="heroPreview" title="Kişisel sayfa örneği" sandbox="" style="height:300px"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1 -->
+  <section id="metin" aria-labelledby="metin-h">
+    <div class="section-head"><span class="num">1</span><h2 id="metin-h">Web sayfası bir metin dosyasıdır</h2><span class="chip theory">10:07–10:24 · 17 dk</span></div>
+    <div class="prose">
+      <p>Hafta 1'de adres çubuğuna bir adres yazınca olan dört adımı görmüştük. Bugün 3. adımda gelen dosyanın içine bakıyoruz.</p>
+    </div>
+    <div class="grid4" style="margin:12px 0">
+      <div class="card small"><span class="lbl">1</span>Sen adresi yazarsın.</div>
+      <div class="card small"><span class="lbl">2</span>Tarayıcı sunucuya dosyayı isteyen bir mesaj, yani istek gönderir.</div>
+      <div class="card small"><span class="lbl">3</span>Sunucu dosyayı yanıt olarak geri gönderir.</div>
+      <div class="card small"><span class="lbl">4</span>Tarayıcı dosyayı okuyup ekrana çizer.</div>
+    </div>
+    <div class="prose">
+      <p>Sunucunun 3. adımda gönderdiği şey sıradan bir metin dosyası. Sunucu, internete bağlı bir bilgisayarda sürekli çalışıp gelen isteklere dosya gönderen programdır. Tarayıcı ise Chrome ya da Edge gibi, gelen dosyayı okuyup ekrana çizen program. Dosya kendi bilgisayarındaysa arada sunucu yok: çift tıkladığında tarayıcı dosyayı doğrudan diskten okur.</p>
+      <p>HTML'in açılımı <i>HyperText Markup Language</i>, Türkçesiyle "hipermetin işaretleme dili". Programlama dili olmadığı için hesap yapmaz, döngü kurmaz. Yaptığı tek iş, metnin hangi parçasının başlık, hangisinin paragraf olduğunu işaretlemek.</p>
+      <p>Derste projeksiyonda Not Defteri'ni açıp şu iki satırı yazacağız ve dosyayı <code>etkinlik.html</code> adıyla kaydedeceğiz:</p>
+    </div>
+    <div class="lines" style="margin-top:10px">
+      <div class="ln"><span class="n">1</span><code>&lt;h1>Kulüp etkinlikleri&lt;/h1></code><p>Bu bir başlık. Tarayıcı onu büyük ve kalın çizer.</p></div>
+      <div class="ln"><span class="n">2</span><code>&lt;p>Bu hafta satranç turnuvası var.&lt;/p></code><p>Bu bir paragraf. Normal boyutta düz yazı olur.</p></div>
+    </div>
+    <div class="prose" style="margin-top:12px">
+      <p>Dosyaya çift tıklayınca tarayıcı açılır ve büyük bir "Kulüp etkinlikleri" başlığının altında bir cümle görürsün. <code>&lt;h1></code> ya da <code>&lt;p></code> yazıları ekrana gelmez, çünkü tarayıcı onları okuyup uygular. Aynı dosyayı Not Defteri'yle açtığında ise ham metni işaretleriyle birlikte görürsün. Dosya aynı, onu okuyan program farklı.</p>
+      <div class="analogy"><b>Gerçek sistemde</b><p>e-Devlet'in ana sayfasını aç ve <kbd>Ctrl</kbd>+<kbd>U</kbd>'ya bas. Yeni sekmede açılan, sunucunun senin tarayıcına gönderdiği metnin kendisi: satır satır etiketler ve aralarında yazılar. Ekrandaki sayfayı tarayıcı bu metinden çizdi. 3. bölümde aynı metne bir kez daha bakacağız.</p></div>
+      <h3>Neden resim değil de metin?</h3>
+      <p>Sunucu sana neden hazır bir ekran resmi göndermiyor da düz metin gönderiyor? Çünkü senin ekranını bilmiyor. Aynı dosya telefonunda dar bir sütuna, dizüstünde geniş bir sayfaya dizilir. Resim gelseydi yazıyı seçip kopyalayamazdın, ekran okuyucu da sesli okuyacak bir yazı bulamazdı.</p>
+    </div>
+
+    <div class="sim" style="margin-top:18px" id="sim-editor">
+      <div class="sim-head"><h3>Canlı HTML editörü</h3><span class="chip lab">Dene</span></div>
+      <div class="sim-body" id="edBody">
+        <div class="btnrow" role="group" aria-label="Hazır örnekler">
+          <button class="btn" type="button" data-preset="etkinlik">Etkinlik sayfası</button>
+          <button class="btn" type="button" data-preset="kulup">Kulüp duyurusu</button>
+          <button class="btn" type="button" data-preset="bos">Boş sayfa</button>
+        </div>
+        <div class="sim-cols">
+          <label class="f"><span>Sol taraf: senin yazdığın metin</span><textarea rows="12" spellcheck="false" aria-label="HTML kodu"></textarea></label>
+          <div><span class="lbl">Sağ taraf: tarayıcının çizdiği</span><div class="frame"><div class="bar"><i></i><span>etkinlik.html</span></div><iframe title="Canlı önizleme" sandbox=""></iframe></div></div>
+        </div>
+        <p class="small muted">Buraya yazdığın kod yalnız sağdaki kutunun içinde çalışır, ders notunun geri kalanına karışmaz. Bir kelimeyi değiştir, bir etiketi sil, ne olduğuna bak.</p>
+      </div>
+    </div>
+
+    <div class="callout info" style="margin-top:16px"><span class="chip">Evde · iki dakika</span> Hafta 1'de projeksiyonda izlediğin manşet denemesini şimdi kendin yap. Bir haber sitesini aç, manşetin üstüne sağ tıkla, <strong>İncele</strong>'yi seç. Yanda açılan panelde manşetin kodunu görürsün. Yazıya çift tıklayıp kendi cümleni yaz ve Enter'a bas, manşet değişir. Sonra <kbd>F5</kbd> ile yenile: eski manşet geri geldi. Paneldeki, tarayıcının o metinden kurduğu ağaç. Değiştirdiğin tarayıcındaki kopyaydı, sunucudaki dosya olduğu gibi duruyor.</div>
+
+    <div class="callout warn" style="margin-top:16px">Tarayıcıya bakmadan önce dosyayı kaydet (<kbd>Ctrl</kbd>+<kbd>S</kbd>). Tarayıcı diskteki dosyayı okur, editörde açık duran kaydedilmemiş hâlini göremez. "Değiştirdim ama sayfa aynı" durumunda ilk bakılacak yer kaydetme. Bir de dosyanın adının sonuna bak, <code>.txt</code> kalmış olabilir. Adın sonu <code>.html</code> değilse Windows onu metin dosyası sanar ve Not Defteri'yle açar. Windows bilinen uzantıları gizlediği için <code>etkinlik.html.txt</code> dosyası sana <code>etkinlik.html</code> diye görünebilir. Dosya gezgininde Görünüm menüsünden dosya adı uzantılarını aç, adın gerçekte nasıl bittiğini ancak o zaman görürsün.</div>
+
+    <div class="quiz" data-quiz="metin"></div>
+  </section>
+
+  <!-- 2 -->
+  <section id="etiket" aria-labelledby="etiket-h">
+    <div class="section-head"><span class="num">2</span><h2 id="etiket-h">Etiket, öğe, nitelik</h2><span class="chip theory">10:24–10:45 · 21 dk</span></div>
+    <div class="prose">
+      <p>Tarayıcı metnin hangi parçasının başlık, hangisinin bağlantı olduğunu etiketlere bakarak anlar. Açılı parantez içine yazılmış bir ada <b>etiket</b> (tag) denir. <code>&lt;p></code> açılış etiketi, <code>&lt;/p></code> kapanış etiketidir. İkisinin tek farkı kapanıştaki eğik çizgi (<code>/</code>). Aradaki metin <b>içerik</b>tir.</p>
+      <p>Açılış etiketi, içerik ve kapanış etiketinin hepsine birden <b>öğe</b> (element) diyoruz. <code>&lt;p>Merhaba&lt;/p></code> tek bir paragraf öğesidir.</p>
+      <p>Açılış etiketinin içine yazılan ek bilginin adı <b>nitelik</b> (attribute). Hep aynı biçimde yazılır: <code>ad="değer"</code>. Bugün dört nitelik göreceksin: bağlantının gideceği adresi söyleyen <code>href</code>, görselin dosyasını söyleyen <code>src</code>, görseli sözle anlatan <code>alt</code> ve sayfanın dilini söyleyen <code>lang</code>.</p>
+    </div>
+    <div class="lines" style="margin-top:12px">
+      <div class="ln"><span class="n">1</span><code>&lt;p>Satranç kulübü &lt;strong>Salı&lt;/strong> toplanıyor.&lt;/p></code><p>Bir paragraf öğesi. İçinde bir de <code>strong</code> öğesi var, "Salı" kalın ve vurgulu görünür.</p></div>
+      <div class="ln"><span class="n">2</span><code>&lt;a href="https://tr.wikipedia.org">Vikipedi&lt;/a></code><p><code>a</code> bağlantı etiketi. <code>href</code> niteliği tıklayınca gidilecek adresi tutar. Ekranda yalnız "Vikipedi" görünür.</p></div>
+      <div class="ln"><span class="n">3</span><code>&lt;img src="afis.svg" alt="Turnuva afişi: Perşembe 15:00, kütüphane"></code><p><code>img</code> görsel etiketi. İçeriği olmadığı için kapanış etiketi de yoktur. Görsel dosyası <code>src</code> ile, görselin sözlü anlatımı <code>alt</code> ile verilir.</p></div>
+    </div>
+
+    <div class="sim" style="margin-top:18px" id="sim-anat">
+      <div class="sim-head"><h3>Etiketin parçaları</h3><span class="chip lab">Tıkla</span></div>
+      <div class="sim-body" id="anatBody">
+        <div class="btnrow" role="group" aria-label="Örnek seç">
+          <button class="btn" type="button" data-anat="0" aria-pressed="true">Bağlantı</button>
+          <button class="btn" type="button" data-anat="1" aria-pressed="false">Görsel</button>
+        </div>
+        <div class="anat" role="group" aria-label="Kodun parçaları"></div>
+        <div class="anat-out" aria-live="polite">Kodun bir parçasına tıkla.</div>
+      </div>
+    </div>
+
+    <div class="prose" style="margin-top:22px">
+      <h3>İç içe öğeler</h3>
+      <p>Etiketler iç içe geçebilir. Yukarıdaki ilk satırda <code>strong</code>, <code>p</code>'nin içindeydi. Kural şu: bir öğenin içinde açılan öğe, dıştaki kapanmadan önce kapanır. En son açılan etiket ilk kapanır.</p>
+    </div>
+    <div class="grid2" style="margin-top:10px">
+      <div><span class="lbl">Doğru</span><pre class="code">&lt;p>Toplantı &lt;strong>Salı&lt;/strong> günü.&lt;/p></pre></div>
+      <div><span class="lbl">Yanlış: kapanışlar çaprazlanmış</span><pre class="code">&lt;p>Toplantı &lt;strong>Salı günü.&lt;/p>&lt;/strong></pre></div>
+    </div>
+    <div class="prose" style="margin-top:12px">
+      <p>Tarayıcı yanlış yazılmış HTML'de durmaz, hata mesajı da göstermez. Eksik ya da çapraz kapanışı kendi kurallarıyla onarıp sayfanın ağacını buna göre kurar. Onarımın sonucu bazen yazanın istediğiyle örtüşür, bazen örtüşmez.</p>
+      <h3>Tarayıcı neden ilk hatada durmuyor?</h3>
+      <p>İnternetteki sayfaların birçoğunda küçük yazım hataları var. Tarayıcı ilk hatada dursaydı o sayfalar hiç açılmazdı, bu yüzden tarayıcılar eksik kapanışı tamamlayıp sayfayı yine de çiziyor. Aynı davranış senin hatanı da saklıyor ve sayfa bir yerde bozulana kadar haberin olmuyor. Aşağıdaki araç yazdığın kodun yanında tarayıcının ondan kurduğu ağacı gösteriyor.</p>
+    </div>
+
+    <div class="sim" style="margin-top:16px" id="sim-tree">
+      <div class="sim-head"><h3>Etiket ağacı görselleştirici</h3><span class="chip lab">Dene</span></div>
+      <div class="sim-body" id="treeBody">
+        <div class="btnrow" role="group" aria-label="Hazır örnekler">
+          <button class="btn" type="button" data-tree="dogru">Doğru iç içe</button>
+          <button class="btn" type="button" data-tree="capraz">Çapraz kapanış</button>
+          <button class="btn" type="button" data-tree="kapanmamis">Kapanmamış strong</button>
+        </div>
+        <label class="f"><span>Kod (değiştirebilirsin)</span><textarea rows="6" spellcheck="false" aria-label="Ağacı çizilecek HTML kodu"></textarea></label>
+        <div class="sim-cols">
+          <div><span class="lbl">Tarayıcının kurduğu ağaç</span><div class="treebox"><ul class="tree" aria-live="polite"></ul></div></div>
+          <div style="display:grid;gap:10px;align-content:start">
+            <div><span class="lbl">Kodda gözüme çarpanlar</span><div class="msgs"></div></div>
+            <div><span class="lbl">Görünüm</span><div class="frame"><iframe title="Ağaç örneğinin görünümü" sandbox="" style="height:150px"></iframe></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout info" style="margin-top:16px"><span class="chip">Evde · iki dakika</span> Akşam tanıdık bir sitede aynı parçaları bul. Vikipedi'de bir makaledeki resme sağ tıkla ve İncele'yi seç. Panelde <code>&lt;img</code> ile başlayan satırda <code>src</code> niteliğini göreceksin. <code>alt</code> var mı, içi dolu mu, ona da bak: her büyük site iyi alt metni yazmıyor.</div>
+
+    <div class="callout warn" style="margin-top:16px">Kapanış etiketinde eğik çizgiyi unutmak kolay: <code>&lt;li>Turnuva&lt;li></code>. Tarayıcı ikinci <code>&lt;li></code>'yi yeni, boş bir madde sanar. Nitelik değerinin tırnağını kapatmamak da sık görülür: <code>&lt;a href="index.html>Ana sayfa&lt;/a></code>. Tarayıcı bir sonraki tırnağa kadar her şeyi adresin parçası sayar. Sonrasında hiç tırnak yoksa bağlantı ve altındaki bütün yazı ekrandan kaybolur.</div>
+
+    <div class="quiz" data-quiz="etiket"></div>
+  </section>
+
+  <div class="brk">10:45–10:55 · Ara</div>
+
+  <!-- 3 -->
+  <section id="iskelet" aria-labelledby="iskelet-h" style="margin-top:40px">
+    <div class="section-head"><span class="num">3</span><h2 id="iskelet-h">Belge iskeleti satır satır</h2><span class="chip theory">10:55–11:08 · 13 dk</span></div>
+    <div class="prose">
+      <p>Her HTML sayfası aynı birkaç satırla başlar ve bu satırlara belge iskeleti diyoruz. İskeletin iki ana parçası var: sayfanın adı ve harflerin nasıl okunacağı gibi bilgileri taşıyan <code>head</code>, ekranda görünen her şeyi taşıyan <code>body</code>. Öğleden sonra kendi sayfanı tam olarak bu iskeletle başlatacaksın.</p>
+    </div>
+    <div class="lines" style="margin-top:12px">
+      <div class="ln"><span class="n">1</span><code>&lt;!doctype html></code><p>"Bu belge modern HTML ile yazıldı" der. Etiket değil, tarayıcıya verilen bir işaret. Her zaman en üstte durur.</p></div>
+      <div class="ln"><span class="n">2</span><code>&lt;html lang="tr"></code><p>Bütün sayfayı saran öğe. <code>lang="tr"</code> sayfanın Türkçe olduğunu söyler. Ekran okuyucu (görme engelli kullanıcılar için metni sesli okuyan program) bu bilgiye göre okur.</p></div>
+      <div class="ln"><span class="n">3</span><code>&lt;head></code><p>Sayfanın başı. Buraya yazılanlar ekranda sayfanın içinde görünmez, sayfa hakkında bilgi verir.</p></div>
+      <div class="ln"><span class="n">4</span><code>  &lt;meta charset="utf-8"></code><p>Dosyanın hangi karakter kodlamasıyla yazıldığını söyler. UTF-8, Türkçe harfleri de içeren kodlama. Satır eksikse ç, ş, ğ gibi harfler bozuk görünebilir.</p></div>
+      <div class="ln"><span class="n">5</span><code>  &lt;title>Satranç Kulübü&lt;/title></code><p>Tarayıcı sekmesinde görünen ad. Sık kullanılanlara eklerken ve arama sonuçlarında da bu yazı çıkar.</p></div>
+      <div class="ln"><span class="n">6</span><code>&lt;/head></code><p>Baş bitti.</p></div>
+      <div class="ln"><span class="n">7</span><code>&lt;body></code><p>Sayfanın gövdesi. Ekranda görmek istediğin her şey buraya yazılır.</p></div>
+      <div class="ln"><span class="n">8</span><code>  &lt;h1>Bu haftaki etkinlikler&lt;/h1></code><p>Görünen içerik: bir başlık.</p></div>
+      <div class="ln"><span class="n">9</span><code>&lt;/body></code><p>Gövde bitti.</p></div>
+      <div class="ln"><span class="n">10</span><code>&lt;/html></code><p>Bütün sayfayı saran öğe kapandı.</p></div>
+    </div>
+
+    <div class="sim" style="margin-top:18px" id="sim-skel">
+      <div class="sim-head"><h3>Satırı sil, ne olduğunu gör</h3><span class="chip lab">Dene</span></div>
+      <div class="sim-body" id="skelBody">
+        <div class="sim-cols">
+          <div><span class="lbl">İskelet (bir satırın yanındaki düğmeye bas)</span><div class="skel"></div></div>
+          <div style="display:grid;gap:10px;align-content:start">
+            <div><span class="lbl">Tarayıcıda</span>
+              <div class="mock"><div class="tabs"><div class="tab" id="skTab">Satranç Kulübü</div></div><div class="pg" id="skPg"></div></div>
+            </div>
+            <div><span class="lbl">Ne değişti?</span><div class="effects" aria-live="polite"></div></div>
+          </div>
+        </div>
+        <div class="btnrow"><button class="btn" type="button" id="skReset">Hepsini geri koy</button></div>
+      </div>
+    </div>
+
+    <div class="prose" style="margin-top:22px">
+      <h3>Tarayıcı Türkçe harfleri nasıl okur?</h3>
+      <p>Bilgisayar harfleri değil sayıları saklar. Sen <code>ş</code> yazıp kaydettiğinde dosyaya iki sayı yazılır. Tarayıcı dosyayı açınca bu sayıları harfe geri çevirmek için bir tablo seçer ve <code>meta charset="utf-8"</code> ona hangi tabloyu kullanacağını söyler. Satır yoksa tarayıcı tahmin eder, yanlış tabloya bakarsa <code>ş</code> için yazılmış iki sayı iki ayrı garip işarete döner: <code>ÅŸ</code> tam olarak böyle çıkar.</p>
+    </div>
+
+    <div class="callout info" style="margin-top:16px"><span class="chip theory">Derste, projeksiyonda</span> 1. bölümde e-Devlet'te <kbd>Ctrl</kbd>+<kbd>U</kbd> ile açtığın ham metne dönüp tek bir arama yapalım: <kbd>Ctrl</kbd>+<kbd>F</kbd> ile <code>&lt;html lang</code> ara. Karşına çıkan satır, sayfanın dilini bizim 2. satırımızla aynı biçimde söylüyor. Aynı dosyanın en üstünde doctype da var, bazı sitelerde büyük harfle yazılır ve anlamı değişmez.</div>
+
+    <div class="callout warn" style="margin-top:16px">Ekranda görünsün diye yazdığın her şey <code>body</code>'ye girer. <code>head</code>'e bir başlık ya da paragraf koyarsan tarayıcı çoğu zaman onu <code>body</code>'ye taşır ve ekranda yine görürsün. Ekranda görünmesi tarayıcının düzeltmesi sayesinde, kodun kendisi yine yanlış. Ders notunun kaynağını açarsan <code>head</code>'de fazladan satırlar görürsün: yazı tipi ve stil dosyası bağlantıları, bir de <code>viewport</code>. Onları CSS haftasında öğreneceğiz.</div>
+
+    <div class="quiz" data-quiz="iskelet"></div>
+  </section>
+
+  <!-- 4 -->
+  <section id="liste" aria-labelledby="liste-h">
+    <div class="section-head"><span class="num">4</span><h2 id="liste-h">Başlık, paragraf, liste</h2><span class="chip theory">11:08–11:15 · 7 dk</span></div>
+    <div class="prose">
+      <p>Kulübün etkinlik sayfasında en üstte sayfanın adı, altında bölüm başlıkları, madde madde bilgiler ve numaralı kayıt adımları duruyor. HTML'de bu parçaların her birinin kendi etiketi var.</p>
+    </div>
+    <div class="tablewrap" style="margin-top:12px">
+      <table>
+        <thead><tr><th>Etiket</th><th>Ne işe yarar</th><th>Örnek</th></tr></thead>
+        <tbody>
+          <tr><td><code>h1</code> … <code>h6</code></td><td>Başlık. <code>h1</code> sayfanın ana başlığı, <code>h2</code> onun alt başlığı, böyle <code>h6</code>'ya kadar iner.</td><td><code>&lt;h2>İlgi alanlarım&lt;/h2></code></td></tr>
+          <tr><td><code>p</code></td><td>Paragraf.</td><td><code>&lt;p>Muş'ta okuyorum.&lt;/p></code></td></tr>
+          <tr><td><code>ul</code></td><td>Sırasız liste. Maddelerin önünde nokta olur.</td><td>Getirmen gerekenler, ilgi alanları</td></tr>
+          <tr><td><code>ol</code></td><td>Sıralı liste. Maddeler numaralanır.</td><td>Kayıt adımları, turnuva sıralaması</td></tr>
+          <tr><td><code>li</code></td><td>Listenin bir maddesi. Yalnız <code>ul</code> ya da <code>ol</code>'un içinde durur.</td><td><code>&lt;li>Satranç&lt;/li></code></td></tr>
+          <tr><td><code>strong</code></td><td>Önemli yazı. Kalın görünür.</td><td><code>&lt;strong>Salı&lt;/strong></code></td></tr>
+          <tr><td><code>em</code></td><td>Vurgulu yazı. Eğik görünür.</td><td><code>&lt;em>mutlaka&lt;/em></code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose" style="margin-top:12px">
+      <p>Başlık seviyesini yazının büyüklüğüne göre değil, önem sırasına göre seç. Sayfanın ana başlığı <code>h1</code>, bölüm başlıkları <code>h2</code>. Yazının büyüklüğünü sonra CSS ile istediğin gibi ayarlarsın.</p>
+    </div>
+
+    <div class="sim" style="margin-top:16px" id="sim-editor2">
+      <div class="sim-head"><h3>Listeyi editörde dene</h3><span class="chip lab">Dene</span></div>
+      <div class="sim-body" id="ed2Body">
+        <div class="btnrow" role="group" aria-label="Hazır örnekler">
+          <button class="btn" type="button" data-preset="liste">Üye kaydı</button>
+          <button class="btn" type="button" data-preset="basliklar">Başlık seviyeleri</button>
+        </div>
+        <div class="sim-cols">
+          <label class="f"><span>Kod</span><textarea rows="12" spellcheck="false" aria-label="Liste örneği kodu"></textarea></label>
+          <div><span class="lbl">Görünüm</span><div class="frame"><div class="bar"><i></i><span>kayit.html</span></div><iframe title="Liste örneğinin görünümü" sandbox=""></iframe></div></div>
+        </div>
+        <p class="small muted">Deneme: <code>ol</code> yazan iki yeri <code>ul</code> yap. Numaralar noktaya dönüşür. Sonra geri al ve <code>Kayıt adımları</code> listesinin ortasına kendin bir <code>&lt;li></code> satırı daha yaz, numaralara bak.</p>
+      </div>
+    </div>
+
+    <div class="prose" style="margin-top:22px">
+      <h3>Numaraları neden elle yazmıyoruz?</h3>
+      <p>Elle yazsaydın araya yeni bir adım eklediğinde bütün numaraları tek tek düzeltmen gerekirdi. <code>ol</code>'da numaraları tarayıcı kendisi sayar. Ekran okuyucu da listeye gelince "liste, üç madde" der ve kullanıcı kaç madde olduğunu baştan bilir.</p>
+    </div>
+
+    <div class="callout info" style="margin-top:16px"><span class="chip">Evde · iki dakika</span> Vikipedi'de bir makalenin başlığına sağ tıkla ve İncele'yi seç: makalenin adı bir <code>h1</code>, bölüm başlıkları <code>h2</code>. Bir haber sitesinin üst menüsüne de bak. Menü bağlantıları çoğu zaman bir <code>ul</code>'nin içindeki <code>li</code>'lerdir ama önlerinde nokta yoktur, çünkü noktaları CSS gizlemiştir. Bir içeriği liste yapan önündeki nokta olmuyor, madde madde oluşu oluyor.</div>
+
+    <div class="callout warn" style="margin-top:16px">Labda en çok şuna takılacaksın: listenin içine <code>li</code> olmadan yazı koymak, örneğin <code>&lt;ul>&lt;p>Öğrenci kartı&lt;/p>&lt;/ul></code>. <code>ul</code> ve <code>ol</code>'un doğrudan içinde yalnız <code>li</code> durur.</div>
+
+    <div class="quiz" data-quiz="liste"></div>
+  </section>
+
+  <!-- 5 -->
+  <section id="yol" aria-labelledby="yol-h">
+    <div class="section-head"><span class="num">5</span><h2 id="yol-h">Bağlantı, görsel ve dosya yolu</h2><span class="chip theory">11:15–11:35 · 20 dk</span></div>
+    <div class="prose">
+      <p>Bağlantı <code>a</code> etiketiyle, görsel <code>img</code> etiketiyle eklenir. İkisinin de bir dosyayı ya da adresi göstermesi gerekiyor: <code>a</code> bunu <code>href</code> ile, <code>img</code> ise <code>src</code> ile yapar. Tarayıcı sayfada bir <code>img</code> görünce <code>src</code>'de yazan dosyayı ayrıca ister. Adı ya da klasörü yanlış yazdıysan o dosya bulunamaz ve görselin yerinde kırık bir simge kalır.</p>
+    </div>
+    <div class="lines" style="margin-top:12px">
+      <div class="ln"><span class="n">1</span><code>&lt;a href="https://tr.wikipedia.org">Vikipedi&lt;/a></code><p>Tam adres. <code>https://</code> ile başlar ve dünyanın neresinden açarsan aç aynı yeri gösterir. Başka bir siteye bağlantı böyle verilir.</p></div>
+      <div class="ln"><span class="n">2</span><code>&lt;a href="projeler.html">Projelerim&lt;/a></code><p>Göreli yol. "Benimle aynı klasördeki <code>projeler.html</code>" demek. Kendi sitenin sayfaları arasındaki bağlantılar böyle verilir.</p></div>
+      <div class="ln"><span class="n">3</span><code>&lt;img src="img/avatar.svg" alt="Profil resmi yerine konmuş basit bir insan çizimi"></code><p>"Benim klasörümdeki <code>img</code> klasörüne gir, oradaki <code>avatar.svg</code>'yi al" demek.</p></div>
+    </div>
+    <div class="prose" style="margin-top:14px">
+      <h3>Göreli yolu okumak</h3>
+      <p>Göreli yol her zaman içinde yazıldığı dosyanın bulunduğu klasörden başlar. Üç kural yeter. Aynı klasördeki bir dosya için yalnız adını yazarsın: <code>projeler.html</code>. Bir klasörün içine girmek için klasörün adını ve eğik çizgi yazarsın: <code>img/avatar.svg</code>. Bir üst klasöre çıkmak için <code>../</code> yazarsın: <code>../index.html</code>.</p>
+      <p>Klasörleri ayıran işaret her zaman eğik çizgi (<code>/</code>). Windows'un dosya gezgininde bunun yerine ters eğik çizgi (<code>\</code>) görürsün. Tarayıcılar onu <code>/</code> işaretine çevirir, ama bu bir hata düzeltmesi. Doğru yazım <code>/</code>.</p>
+    </div>
+
+    <div class="sim" style="margin-top:16px" id="sim-path">
+      <div class="sim-head"><h3>Dosya yolu bulucu</h3><span class="chip lab">Dene</span></div>
+      <div class="sim-body" id="pathBody">
+        <div class="sim-cols">
+          <div><span class="lbl">Klasör ağacı</span><pre class="ftree" aria-label="Örnek sitenin klasör ağacı"></pre></div>
+          <div style="display:grid;gap:10px;align-content:start">
+            <label class="f"><span>Bulunduğun dosya</span><select id="pFrom"></select></label>
+            <label class="f"><span>Gitmek istediğin dosya</span><select id="pTo"></select></label>
+            <label class="f"><span>Yolu yaz (Enter ile kontrol)</span><input type="text" id="pIn" autocomplete="off" spellcheck="false" placeholder="ör. img/avatar.svg"></label>
+            <div class="btnrow"><button class="btn primary" type="button" id="pCheck">Kontrol et</button><button class="btn" type="button" id="pShow">Cevabı göster</button><button class="btn" type="button" id="pRand">Yeni görev</button></div>
+          </div>
+        </div>
+        <div class="pathres" id="pRes" aria-live="polite">Bir görev seç, yolu yaz ve kontrol et.</div>
+      </div>
+    </div>
+
+    <div class="prose" style="margin-top:22px">
+      <h3>Tarayıcı göreli yolu nasıl okur?</h3>
+      <p>Tarayıcı göreli yolu görünce onu tam bir adrese çevirir. Açık olan sayfanın adresine bakar, sondaki dosya adını atar ve senin yazdığın yolu onun yerine koyar. <code>.../blog/ilk-yazi.html</code> sayfasında <code>index.html</code> yazdıysan tarayıcı sunucudan <code>.../blog/index.html</code>'i ister, orada öyle bir dosya yoksa 404 gelir. Tarayıcının tam olarak neyi istediğini hata sayfasının adres çubuğunda her zaman okuyabilirsin.</p>
+      <h3>Afis.svg ile afis.svg aynı dosya mı?</h3>
+      <p>Windows'a göre aynı, çünkü Windows dosya adlarında büyük ve küçük harfi ayırmaz. <code>Afis.svg</code> adlı bir dosyayı <code>afis.svg</code> diye istersen yine bulur. GitHub Pages'in sunucusu ise ikisini ayrı dosya sayar. GitHub'ın kendi belgesi de bunun bir örneğini verir: ana sayfanın adını <code>index.html</code> yerine <code>Index.html</code> yazarsan site açılmaz. Ortaya tanıdık bir durum çıkar: sayfa kendi bilgisayarında kusursuz, internette görsel kırık.</p>
+    </div>
+
+    <div class="sim" style="margin-top:14px" id="sim-case">
+      <div class="sim-head"><h3>Aynı istek, iki bilgisayar</h3><span class="chip lab">Dene</span></div>
+      <div class="sim-body" id="caseBody">
+        <div class="sim-cols">
+          <label class="f"><span>Klasördeki dosyanın adı</span><select id="cFile"><option>img/Afis.svg</option><option>img/afis.svg</option></select></label>
+          <label class="f"><span>Kodda yazan: <code>&lt;img src="…"></code></span><input type="text" id="cSrc" value="img/afis.svg" spellcheck="false" autocomplete="off"></label>
+        </div>
+        <div class="two" aria-live="polite">
+          <div class="box"><strong>Senin bilgisayarın (Windows)</strong><div class="img" id="cWin"></div><div class="st" id="cWinSt"></div></div>
+          <div class="box"><strong>GitHub Pages sunucusu</strong><div class="img" id="cGh"></div><div class="st" id="cGhSt"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prose" style="margin-top:22px">
+      <h3>İyi bir alt metni</h3>
+      <p><code>alt</code> metni iki kişi için yazılır. Görseli göremeyen ve ekran okuyucuyla gezen kullanıcı için, bir de görsel yüklenemediğinde sayfaya bakan herkes için. Görsel açılmazsa tarayıcı onun yerine alt metnini gösterir. İyi bir alt metni görselde ne olduğunu anlatır. "resim", "foto" ya da dosyanın adı bir şey anlatmaz. Zayıf ve iyi alt metni örneklerini labda, kendi görselini eklediğin 4. adımda göreceksin.</p>
+    </div>
+
+    <div class="callout info" style="margin-top:16px"><span class="chip">Evde · iki dakika</span> Okuduğun ders notunun adres çubuğuna bak: <code>.../weeks/hafta-02/</code> yazıyor. Sayfanın en altındaki "Önceki hafta: Hafta 1" bağlantısına sağ tıkla, İncele'yi seç ve <code>href="../hafta-01/"</code> yazdığını gör. Bir üst klasöre, <code>weeks</code>'e çık, oradan <code>hafta-01</code>'e gir: yolun anlattığı bu. Sonda dosya adı olmadığı için sunucu o klasördeki <code>index.html</code>'i gönderir, labda ana sayfanın adını bu yüzden <code>index.html</code> koyuyorsun.</div>
+
+    <div class="callout warn" style="margin-top:16px">Görselin kırıksa önce harflere bak: yayında <code>Afis.svg</code> ile <code>afis.svg</code> iki ayrı dosya. Sonra niteliğe bak. <code>img</code>'de dosya <code>src</code> ile verilir, <code>href</code> bağlantının niteliği. Yolu ters eğik çizgiyle (<code>img\afis.svg</code>) yazdıysan tarayıcı bu hatayı düzeltir, ama doğru yazım <code>img/afis.svg</code>. Tahmin yürütmek yerine tarayıcıya sor: kırık simgeye sağ tıkla, İncele'yi seç ve <code>src</code>'de yazanı oku. Sonra VS Code'un solundaki dosya listesinde aynı adı bul ve harf harf karşılaştır. <code>src</code>'ye bilgisayarındaki tam yeri de (<code>C:/Users/Ece/Desktop/...</code>) yazma. O klasör yalnız senin bilgisayarında var, GitHub'ın sunucusunda yok.</div>
+
+    <div class="quiz" data-quiz="yol"></div>
+  </section>
+
+  <!-- 6 -->
+  <section id="bolumler" aria-labelledby="bolumler-h">
+    <div class="section-head"><span class="num">6</span><h2 id="bolumler-h">Sayfa bölümleri: header, nav, main, footer</h2><span class="chip theory">11:35–11:45 · 10 dk</span></div>
+    <div class="prose">
+      <div class="analogy"><b>Gerçek sistemde</b><p>Trendyol'u, e-Devlet'i ya da üniversitenin sitesini açıp sayfayı yukarıdan aşağı kaydır. Çoğunda aynı düzeni görürsün: en üstte sitenin adı ya da logosu, onun yanında ya da altında bölümlere götüren bağlantılar, ortada o sayfanın asıl içeriği, en altta iletişim bilgileri ve telif satırı. HTML bu dört bölümün her birine ayrı bir etiket veriyor.</p></div>
+      <p><code>header</code> sayfanın üst kısmıdır, sitenin adı burada durur. <code>nav</code> sitenin sayfaları arasında gezdiren bağlantı grubudur ve çoğu zaman <code>header</code>'ın içinde durur. <code>main</code> sayfanın asıl içeriği, her sayfada tek bir tane olur. <code>footer</code> en alttaki kısımdır, yazarın adı, yıl ya da son güncelleme bilgisi buraya yazılır.</p>
+    </div>
+    <div class="lines" style="margin-top:12px">
+      <div class="ln"><span class="n">1</span><code>&lt;header></code><p>Üst kısım başlıyor.</p></div>
+      <div class="ln"><span class="n">2</span><code>  &lt;h1>Ece'nin sayfası&lt;/h1></code><p>Sitenin adı.</p></div>
+      <div class="ln"><span class="n">3</span><code>  &lt;nav>&lt;a href="index.html">Ana sayfa&lt;/a> &lt;a href="projeler.html">Projeler&lt;/a>&lt;/nav></code><p>Menü: sayfalar arası bağlantılar.</p></div>
+      <div class="ln"><span class="n">4</span><code>&lt;/header></code><p>Üst kısım bitti.</p></div>
+      <div class="ln"><span class="n">5</span><code>&lt;main></code><p>Asıl içerik başlıyor.</p></div>
+      <div class="ln"><span class="n">6</span><code>  &lt;p>Merhaba, ben Ece.&lt;/p></code><p>Sayfanın anlattığı şey.</p></div>
+      <div class="ln"><span class="n">7</span><code>&lt;/main></code><p>Asıl içerik bitti.</p></div>
+      <div class="ln"><span class="n">8</span><code>&lt;footer>&lt;p>Ece · 2026&lt;/p>&lt;/footer></code><p>Alt kısım.</p></div>
+    </div>
+    <div class="prose" style="margin-top:14px">
+      <h3>Neden hepsine div demiyoruz?</h3>
+      <p>HTML'de <code>div</code> diye adı olmayan, genel bir kutu da var. Sayfanın her parçasını <code>div</code> ile sarsan ekranda aynı görüntüyü alırsın. Fark, sayfayı okuyan programlarda ortaya çıkıyor. Ekran okuyucu kullanan biri tek tuşla "asıl içeriğe atla" diyebilir, ama bunun için sayfada bir <code>main</code> olmalı. Arama motorları da sayfayı yorumlarken bu etiketlerden yararlanır. Kodu altı ay sonra açan sen de <code>&lt;/div>&lt;/div>&lt;/div></code> yığını yerine hangi kutunun nerede bittiğini hemen görürsün.</p>
+      <p>Tarayıcı sayfayı çizerken görünmeyen bir liste de hazırlar: sayfanın hangi kısmı menü, hangi kısmı asıl içerik. Ekran okuyucu bu listeyi okur. <code>nav</code> ve <code>main</code> bu listeye "burada menü var", "asıl içerik burada başlıyor" diye yazılır, <code>div</code> ise hiçbir şey eklemez. Hepsine <code>div</code> dersen ekran aynı kalır ama o liste boş kalır.</p>
+    </div>
+
+    <div class="sim" style="margin-top:16px" id="sim-assign">
+      <div class="sim-head"><h3>Bölüm atama</h3><span class="chip lab">Dene</span></div>
+      <div class="sim-body" id="assignBody">
+        <p class="small">Ece'nin sayfasındaki her parçayı doğru bölüme yerleştir, sonra kontrol et.</p>
+        <div class="sim-cols">
+          <div class="assign"></div>
+          <div><span class="lbl">Sayfanın düzeni</span>
+            <div class="layout">
+              <div class="reg" data-reg="header"><b>header</b></div>
+              <div class="reg" data-reg="nav"><b>nav</b></div>
+              <div class="reg" data-reg="main"><b>main</b></div>
+              <div class="reg" data-reg="footer"><b>footer</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="btnrow"><button class="btn primary" type="button" id="aCheck">Kontrol et</button><button class="btn" type="button" id="aReset">Sıfırla</button><span class="qscore" id="aScore" aria-live="polite"></span></div>
+      </div>
+    </div>
+
+    <div class="callout info" style="margin-top:16px"><span class="chip">Evde · iki dakika</span> Sevdiğin bir haber sitesinin üst menüsüne sağ tıkla ve İncele'yi seç. Panelde seçili satırın birkaç satır yukarısına çık: menünün çoğu zaman bir <code>nav</code>'ın, onun da bir <code>header</code>'ın içinde durduğunu görürsün. En alttaki künye satırını da incele, büyük ihtimalle bir <code>footer</code>'dadır. Bazı büyük sitelerde her şey <code>div</code>'dir. Ekranda farkı göremezsin, ancak kaynağa bakınca anlarsın.</div>
+
+    <div class="callout warn" style="margin-top:16px">Her sayfada tek bir <code>main</code> olur ve asıl içeriğin hepsi onun içine girer. Labda iki sayfayı bölümlere ayırırken bir sayfaya iki <code>main</code> koymak ya da içeriğin bir kısmını <code>main</code>'in dışında unutmak kolay. İki hata da ekranda belirti vermez, sayfa yine düzgün görünür. Kontrol etmek için İncele panelinde <code>&lt;main></code> satırının üstüne gel: tarayıcı sayfada <code>main</code>'in kapladığı alanı renkle boyar. Asıl içeriğin bir kısmı boyanan alanın dışında kalıyorsa <code>&lt;/main></code> yanlış yerde kapanmış.</div>
+
+    <div class="quiz" data-quiz="bolumler"></div>
+  </section>
+
+  <!-- Yapay zekâ -->
+  <section id="yapay-zeka" aria-labelledby="yz-h">
+    <div class="ai-box">
+      <h2 id="yz-h">Yapay zekâyla çalış</h2>
+      <p style="max-width:72ch">Bu hafta kodu sen yazıyorsun. VS Code'daki Copilot Chat'e anlamadığın bir satırı açıklatabilir, bir hatanın nedenini sorabilir, kendini sınatabilirsin. "Sayfamı sen yaz" dersen yazdırdığın sayfayı açıklayamazsın ve bu hafta öğrenmen gereken şeyi atlamış olursun. Aşağıdaki üç istemi kopyalayıp kendi koduna göre değiştir:</p>
+      <pre class="code hascopy">Şu satırı parça parça açıkla, yeni kod yazma:
+&lt;img src="img/avatar.svg" alt="Profil resmi yerine konmuş basit bir insan çizimi"></pre>
+      <pre class="code hascopy">Sayfamdaki görsel kendi bilgisayarımda görünüyor ama GitHub Pages'te kırık. Kodu düzeltme. Bana hangi ihtimallere bakmam gerektiğini sırayla sor, cevabı ben bulayım.</pre>
+      <pre class="code hascopy">HTML belge iskeleti hakkında bana 3 soruluk bir mini test hazırla. Soruları tek tek sor, cevabımı bekle, sonra neden doğru ya da yanlış olduğunu açıkla.</pre>
+      <p style="max-width:72ch">Haftalık yapay zekâ notun üç satır: ne sordun, işe yaradı mı ve neyi değiştirdin, kendi başına ne öğrendin. Notu teslim formuna yazacaksın.</p>
+    </div>
+  </section>
+
+  <!-- LAB -->
+  <section id="lab" aria-labelledby="lab-h">
+    <div class="section-head"><h2 id="lab-h">Lab: kişisel sayfanı yaz ve yayınla</h2><span class="chip lab">15:00–16:45</span><span class="progress-pill" id="labProg" aria-live="polite">0 / 18 adım</span></div>
+    <p class="lede">Öğleden sonra önce kurulumu kontrol ediyoruz, sonra üç iş var. YAP: iki sayfalık kişisel siteni yaz. Yayın: onu GitHub Pages ile internete koy. BOZ: üç hatası olan bir siteyi düzelt. Her adımın altındaki kutuyu işaretledikçe nerede kaldığın bu tarayıcıda saklanır.</p>
+
+    <div class="subhead"><h3>Kurulum kontrolü ve hazırlık</h3><span class="chip lab">15:00–15:20 · 20 dk</span></div>
+    <div class="steps">
+      <article class="step" data-step="h0">
+        <div class="sn">0a</div>
+        <div class="sb">
+          <h3>Beş kontrol</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Hafta 0'daki kurulumu evde yaptın. Şimdi beş şeye bak: VS Code açılıyor mu, sağ altta <strong>Go Live</strong> düğmesi var mı, tarayıcıda github.com'a giriş yapabiliyor musun, VS Code'da Copilot sohbet paneli açılıyor mu, <kbd>F12</kbd> ile DevTools geliyor mu.</span></div>
+            <div><b>Neden</b><span>Beşini de bugün sırayla kullanacağız. Eksik olanı şimdi fark etmek, 16:00'da yayın adımında fark etmekten iyidir.</span></div>
+            <div><b>Ekranda</b><span>Beşi de tutuyorsa kutuyu işaretle ve bir sonraki adıma geç. Kalan zamanı kişisel sayfana ayır.</span></div>
+            <div><b>Olmadıysa</b><span>Eksik adımı <a href="../hafta-00-kurulum/">Hafta 0 sayfasından</a> açıp şimdi bitir, takılırsan bana ya da yan masadaki arkadaşına sor. 15:20'de hâlâ bitmediyse yanındakiyle eşli çalış: sayfayı onun bilgisayarında birlikte yazarsınız, sen akşam kendi bilgisayarında tekrar edersin ve Pazar teslimine yetişir.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="h0"> Beş kontrol de tuttu ya da eşli çalışmaya karar verdim.</label>
+        </div>
+      </article>
+      <article class="step" data-step="h1">
+        <div class="sn">0b</div>
+        <div class="sb">
+          <h3>Klasörü aç, VS Code'da çalıştır</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Masaüstünde boş bir yere sağ tıkla, Yeni, sonra Klasör. Adını <code>kisisel-sayfa</code> koy. İçine bir klasör daha aç: <code>img</code>. VS Code'u aç, File menüsünden Open Folder ile <code>kisisel-sayfa</code> klasörünü seç. Soldaki dosya listesinin üstündeki yeni dosya simgesine tıkla ve adını <code>index.html</code> yaz.</span></div>
+            <div><b>Neden</b><span>Sitenin bütün dosyaları tek bir klasörde duracak. Yayına koyarken bu klasörün içindeki dosyaları yükleyeceksin. Ana sayfanın adı <code>index.html</code> olmalı, çünkü GitHub Pages siteyi açarken bu dosyayı arar.</span></div>
+            <div><b>Ekranda</b><span>VS Code'un solunda <code>KISISEL-SAYFA</code> başlığı, altında <code>img</code> klasörü ve boş bir <code>index.html</code>.</span></div>
+            <div><b>Olmadıysa</b><span>VS Code "bu klasörün yazarlarına güveniyor musun" diye sorarsa klasör senin olduğu için güvendiğini söyle. Dosya adının sonuna <code>.txt</code> eklendiyse dosyaya sağ tıklayıp adını düzelt.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="h1"> Klasör VS Code'da açık, <code>index.html</code> ve <code>img</code> hazır.</label>
+        </div>
+      </article>
+    </div>
+
+    <div class="subhead" id="yap"><h3>YAP: kişisel sayfa adım adım</h3><span class="chip lab">15:20–15:50 · 30 dk</span></div>
+    <div class="steps">
+      <article class="step" data-step="y1">
+        <div class="sn">1</div>
+        <div class="sb">
+          <h3>İskelet</h3>
+          <pre class="code hascopy">&lt;!doctype html>
+&lt;html lang="tr">
+&lt;head>
+  &lt;meta charset="utf-8">
+  &lt;title>Adın Soyadın&lt;/title>
+&lt;/head>
+&lt;body>
+
+&lt;/body>
+&lt;/html></pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Kodu <code>index.html</code>'e yapıştır, <code>Adın Soyadın</code> yerine kendi adını yaz, kaydet. Sonra soldaki listede <code>index.html</code>'e sağ tıkla ve <code>Open with Live Server</code> seç.</span></div>
+            <div><b>Neden</b><span>Sabah 3. bölümde gördüğün iskelet. Live Server senin bilgisayarında çalışan küçük bir sunucu. Adres çubuğunda <code>127.0.0.1:5500</code> gibi bir adres görmen bu yüzden. Dosyaya çift tıklayınca arada sunucu yok, Live Server'la açınca var. Sayfayı her kaydettiğinde kendiliğinden de yeniler.</span></div>
+            <div><b>Ekranda</b><span>Tarayıcıda boş, beyaz bir sayfa. Sekmede kendi adın yazıyor.</span></div>
+            <div><b>Olmadıysa</b><span><code>Open with Live Server</code> seçeneği yoksa eklenti kurulu değildir. <a href="../hafta-00-kurulum/">Hafta 0</a>'daki eklenti adımına dön. Sekmede adın yerine dosya adı görünüyorsa <code>title</code> satırını ve kaydettiğini kontrol et.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="y1"> Sekmede adım görünüyor.</label>
+        </div>
+      </article>
+
+      <article class="step" data-step="y2">
+        <div class="sn">2</div>
+        <div class="sb">
+          <h3>Başlık ve kısa tanıtım</h3>
+          <pre class="code hascopy">&lt;h1>Merhaba, ben Adın&lt;/h1>
+&lt;p>Muş Alparslan Üniversitesi Yazılım Mühendisliği 2. sınıftayım. Web sayfası yapmayı öğreniyorum.&lt;/p></pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>İki satırı <code>&lt;body></code> ile <code>&lt;/body></code> arasına yapıştır. Tanıtım cümlesini kendine göre değiştir, iki üç cümle yeter.</span></div>
+            <div><b>Neden</b><span>Sayfanın tek bir ana başlığı (<code>h1</code>) olur. Paragraf seni birkaç cümleyle tanıtır.</span></div>
+            <div><b>Ekranda</b><span>Büyük, kalın bir başlık ve altında düz bir paragraf.</span></div>
+            <div><b>Olmadıysa</b><span>Hiçbir şey görünmüyorsa dosyayı kaydetmemişsindir ya da satırları <code>title</code>'ın içine yapıştırmışsındır. Görünen içerik her zaman <code>body</code>'ye yazılır. <code>head</code>'e yapıştırdıysan tarayıcı düzeltip gösterebilir, sen yine de <code>body</code>'ye taşı. Türkçe harfler bozuksa <code>meta charset</code> satırı eksiktir.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="y2"> Başlığım ve tanıtımım görünüyor.</label>
+        </div>
+      </article>
+
+      <article class="step" data-step="y3">
+        <div class="sn">3</div>
+        <div class="sb">
+          <h3>İlgi alanları listesi</h3>
+          <pre class="code hascopy">&lt;h2>İlgi alanlarım&lt;/h2>
+&lt;ul>
+  &lt;li>Satranç&lt;/li>
+  &lt;li>Fotoğrafçılık&lt;/li>
+  &lt;li>Futbol&lt;/li>
+&lt;/ul></pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Paragrafın altına yapıştır, maddeleri kendi ilgi alanlarınla değiştir. İstersen madde ekle.</span></div>
+            <div><b>Neden</b><span>İlgi alanlarının bir sırası yok, bu yüzden sırasız liste (<code>ul</code>). Bölümün başlığı <code>h2</code>, çünkü ana başlığın bir alt başlığı.</span></div>
+            <div><b>Ekranda</b><span>"İlgi alanlarım" başlığı ve önünde nokta olan maddeler.</span></div>
+            <div><b>Olmadıysa</b><span>Fazladan boş bir nokta görüyorsan bir <code>&lt;/li></code>'de eğik çizgi eksik. Maddeler tek satırda yan yana çıkıyorsa <code>&lt;li></code> etiketlerini unutmuşsun.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="y3"> Listem görünüyor.</label>
+        </div>
+      </article>
+
+      <article class="step" data-step="y4">
+        <div class="sn">4</div>
+        <div class="sb">
+          <h3>Fotoğraf ya da avatar</h3>
+          <pre class="code hascopy">&lt;img src="img/avatar.svg" alt="Profil resmi yerine konmuş basit bir insan çizimi" width="160"></pre>
+          <div class="tablewrap">
+            <table>
+              <thead><tr><th>Görsel</th><th>Zayıf alt</th><th>İyi alt</th></tr></thead>
+              <tbody>
+                <tr><td>Kampüs kütüphanesinin fotoğrafı</td><td><code>alt="resim"</code></td><td><code>alt="Kütüphanenin giriş katındaki uzun çalışma masaları"</code></td></tr>
+                <tr><td>Kendi vesikalık fotoğrafın</td><td><code>alt="IMG_2041.jpg"</code></td><td><code>alt="Ece, kampüs bahçesinde gülümsüyor"</code></td></tr>
+                <tr><td>Kulüp afişi</td><td><code>alt="afiş"</code></td><td><code>alt="Satranç kulübü afişi: Perşembe 15:00, kütüphane"</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Kendi fotoğrafını koymak istemiyorsan hazır avatarı indir: <a href="lab/malzeme/avatar.svg" download>avatar.svg</a>. Dosyayı <code>img</code> klasörüne taşı ve kodu listenin altına yapıştır. Kendi fotoğrafını koyacaksan dosyanın adını <code>ben.jpg</code> yap, <code>img</code>'ye koy, <code>src</code>'yi <code>img/ben.jpg</code> ve <code>alt</code>'ı fotoğrafı anlatan bir cümle yap.</span></div>
+            <div><b>Neden</b><span><code>src</code> görselin dosyasını gösteren göreli yol. <code>alt</code> görseli sözle anlatır. <code>width</code> görselin genişliğini piksel olarak söyler, telefonla çekilmiş büyük bir fotoğraf sayfayı kaplamasın diye.</span></div>
+            <div><b>Ekranda</b><span>Listenin altında küçük bir resim.</span></div>
+            <div><b>Olmadıysa</b><span>Resim yerine kırık görsel simgesi ve alt metni görüyorsan yol yanlış. Dosya gerçekten <code>img</code> klasöründe mi, adı kodda yazanla harf harf aynı mı, bak. Dosyanın adında boşluk ya da Türkçe harf varsa değiştir.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="y4"> Resmim görünüyor, alt metnim anlamlı.</label>
+        </div>
+      </article>
+
+      <article class="step" data-step="y5">
+        <div class="sn">5</div>
+        <div class="sb">
+          <h3>Sevdiğin bir siteye bağlantı</h3>
+          <pre class="code hascopy">&lt;p>Sık girdiğim bir site: &lt;a href="https://tr.wikipedia.org">Vikipedi&lt;/a>&lt;/p></pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Görselin altına yapıştır. Adresi ve bağlantı metnini sevdiğin bir siteyle değiştir. Adresi tarayıcının adres çubuğundan kopyala.</span></div>
+            <div><b>Neden</b><span>Başka bir siteye giden bağlantı tam adresle verilir, <code>https://</code> ile başlar. Bağlantı metni gideceğin yeri anlatmalı. "buraya tıkla" bir şey anlatmaz.</span></div>
+            <div><b>Ekranda</b><span>Altı çizili, mavi bir "Vikipedi" yazısı. Tıklayınca site açılır.</span></div>
+            <div><b>Olmadıysa</b><span>Bağlantıdan sonraki bütün yazı mavi ve altı çiziliyse <code>&lt;/a></code> eksik. Tıklayınca "bulunamadı" diyorsa adresin başında <code>https://</code> var mı, bak.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="y5"> Bağlantım doğru siteyi açıyor.</label>
+        </div>
+      </article>
+
+      <article class="step" data-step="y6">
+        <div class="sn">6</div>
+        <div class="sb">
+          <h3>İkinci sayfa: projeler.html</h3>
+          <pre class="code hascopy">&lt;!doctype html>
+&lt;html lang="tr">
+&lt;head>
+  &lt;meta charset="utf-8">
+  &lt;title>Projelerim · Adın Soyadın&lt;/title>
+&lt;/head>
+&lt;body>
+  &lt;h1>Projelerim&lt;/h1>
+  &lt;p>İlk projem bu kişisel sayfa. Hafta 2'de HTML ile yazdım.&lt;/p>
+  &lt;p>&lt;a href="index.html">Ana sayfaya dön&lt;/a>&lt;/p>
+&lt;/body>
+&lt;/html></pre>
+          <pre class="code hascopy">&lt;p>&lt;a href="projeler.html">Projelerim&lt;/a>&lt;/p></pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span><code>index.html</code> ile aynı klasörde <code>projeler.html</code> adında yeni bir dosya aç, ilk kodu yapıştır. İkinci satırı <code>index.html</code>'de tanıtım paragrafının altına ekle. İki dosyayı da kaydet.</span></div>
+            <div><b>Neden</b><span>İki sayfa aynı klasörde olduğu için birbirine yalnız dosya adıyla bağlanır: <code>projeler.html</code> ve <code>index.html</code>. Klasöre girmek ya da çıkmak yok.</span></div>
+            <div><b>Ekranda</b><span>Ana sayfada "Projelerim" bağlantısı. Tıklayınca projeler sayfası açılır, oradaki bağlantı seni geri getirir.</span></div>
+            <div><b>Olmadıysa</b><span>"Cannot GET" ya da "bulunamadı" görüyorsan <code>href</code>'teki adda bir harf eksik, fazla ya da yanlış. Sol taraftaki dosya listesindeki adla karşılaştır. Büyük/küçük harf farkını Live Server göstermez, onu yayında görürsün.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="y6"> İki sayfa arasında gidip gelebiliyorum.</label>
+        </div>
+      </article>
+
+      <article class="step" data-step="y7">
+        <div class="sn">7</div>
+        <div class="sb">
+          <h3>Bölümlere ayır: header, nav, main, footer</h3>
+          <p>Saat 15:50 olduysa ve bu adım bitmediyse yarıda bırak, yayına geç. Sitenin 1–6. adımlardaki hâli de yayınlanır. Bölümleri sonra ekleyip dosyaları yeniden yüklersin.</p>
+          <pre class="code hascopy">&lt;body>
+  &lt;header>
+    &lt;h1>Merhaba, ben Adın&lt;/h1>
+    &lt;nav>
+      &lt;a href="index.html">Ana sayfa&lt;/a>
+      &lt;a href="projeler.html">Projelerim&lt;/a>
+    &lt;/nav>
+  &lt;/header>
+  &lt;main>
+    (tanıtım, liste, görsel ve bağlantı burada kalır)
+  &lt;/main>
+  &lt;footer>
+    &lt;p>Adın Soyadın · 2026&lt;/p>
+  &lt;/footer>
+&lt;/body></pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span><code>index.html</code>'in <code>body</code>'sini bu düzene getir. Kodu olduğu gibi yapıştırma: <code>h1</code>'i <code>header</code>'ın içine al, 6. adımdaki "Projelerim" paragrafını sil (artık menüde var), geri kalan içeriği <code>main</code>'in içine taşı, parantez içindeki satırı sil. Sonra <code>projeler.html</code>'e geç ve aynı düzeni kur. Oradaki <code>header</code>'da <code>h1</code> "Projelerim" olsun, eski <code>h1</code>'i sil. Paragrafı <code>main</code>'e taşı. "Ana sayfaya dön" bağlantısı artık menüde olduğu için onu da sil.</span></div>
+            <div><b>Neden</b><span>Sabah 6. bölümde gördüğün düzen. İki sayfada aynı menünün olması, ziyaretçinin hangi sayfada olursa olsun öbürüne geçebilmesini sağlar.</span></div>
+            <div><b>Ekranda</b><span>Görünüşte neredeyse hiçbir şey değişmez. Başlığın altında iki bağlantı ve en altta adın. Değişen, kodun düzeni.</span></div>
+            <div><b>Olmadıysa</b><span>Yazıların bir kısmı kaybolduysa bir kapanış etiketini yanlış yere koymuşsundur. Sabahki etiket ağacı aracına kodu yapıştırıp neyin nerede kapandığına bak.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="y7"> İki sayfada da header, nav, main ve footer var.</label>
+        </div>
+      </article>
+    </div>
+
+    <div class="brk">15:50–15:55 · Ara</div>
+  </section>
+
+  <section id="yayin" aria-labelledby="yayin-h" style="margin-top:40px">
+    <div class="section-head"><h2 id="yayin-h">Yayın: GitHub Pages</h2><span class="chip lab">15:55–16:15 · 20 dk</span></div>
+    <div class="prose">
+      <p>Şu an sayfan yalnız senin bilgisayarında. İnternetten açılabilmesi için dosyaların bir sunucuda durması gerekiyor. GitHub Pages, GitHub'daki bir deponun (repository, dosyalarını sakladığın klasör) içindeki HTML dosyalarını internete açan bir hizmet. Depo adını <code>kullaniciadi.github.io</code> koyarsan sitenin adresi de <code>https://kullaniciadi.github.io</code> olur. Her hesabın böyle bir tane kullanıcı sitesi olabilir.</p>
+      <p>Bugün terminal ya da Git komutu kullanmıyoruz. Her şeyi GitHub'ın web sitesinden, fareyle yapacaksın. Git'i Hafta 9'da öğreneceğiz. Adımların GitHub'daki resmî anlatımı: <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener">GitHub Pages sitesi oluşturmak</a> ve <a href="https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository" target="_blank" rel="noopener">depoya dosya eklemek</a>.</p>
+    </div>
+    <div class="steps" style="margin-top:14px">
+      <article class="step" data-step="p1">
+        <div class="sn">8</div>
+        <div class="sb">
+          <h3>Depoyu aç</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>github.com'a gir. Sağ üst köşedeki artı (<code>+</code>) simgesine tıkla, <code>New repository</code> seç. <code>Owner</code> kısmında kendi hesabın seçili olsun. <code>Repository name</code> kutusuna <code>kullaniciadi.github.io</code> yaz, <code>kullaniciadi</code> yerine kendi GitHub adını koy. Görünürlük olarak <code>Public</code> seç. <code>Add README</code> seçeneğini aç (On). <code>Create repository</code> düğmesine bas.</span></div>
+            <div><b>Neden</b><span>GitHub bir deponun kullanıcı sitesi olduğunu adından anlar. Ad bire bir <code>kullaniciadi.github.io</code> olmalı. GitHub adında büyük harf varsa depo adında onları küçük harfe çevir. Depo herkese açık olsun, çünkü teslimde kodunu açıp okuyacağız.</span></div>
+            <div><b>Ekranda</b><span>Yeni deponun sayfası. Dosya listesinde yalnız <code>README.md</code> var.</span></div>
+            <div><b>Olmadıysa</b><span>"already exists" uyarısı çıkıyorsa bu adla bir deposu zaten açmışsın, onu kullan. Adı yanlış yazdıysan deponun Settings sayfasının en üstündeki ad kutusundan düzeltebilirsin.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="p1"> <code>kullaniciadi.github.io</code> depom açıldı.</label>
+        </div>
+      </article>
+
+      <article class="step" data-step="p2">
+        <div class="sn">9</div>
+        <div class="sb">
+          <h3>Dosyaları yükle</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Deponun sayfasında dosya listesinin üstündeki <code>Add file</code> menüsünü aç, <code>Upload files</code> seç. Windows'un dosya gezgininde <code>kisisel-sayfa</code> klasörünün <b>içine</b> gir. <code>index.html</code>, <code>projeler.html</code> ve <code>img</code> klasörünü birlikte seç ve tarayıcıdaki yükleme alanına sürükle. Altta <code>Commit message</code> kutusuna "Kişisel sayfa ilk sürüm" gibi kısa bir açıklama yaz. Doğrudan <code>main</code> dalına kaydetme seçeneği seçili kalsın ve alttaki onay düğmesine bas. Düğmede <code>Commit changes</code> ya da <code>Propose changes</code> yazabilir.</span></div>
+            <div><b>Neden</b><span>GitHub Pages ana sayfayı deponun en üst düzeyinde arar. <code>kisisel-sayfa</code> klasörünün kendisini sürüklersen dosyalar bir klasörün içinde kalır ve site açılmaz. Yükleyeceğin şey klasörün içindeki dosyalar.</span></div>
+            <div><b>Ekranda</b><span>Dosya listesinde <code>README.md</code>'nin yanında <code>index.html</code>, <code>projeler.html</code> ve <code>img</code> klasörü.</span></div>
+            <div><b>Olmadıysa</b><span>Listede <code>kisisel-sayfa</code> adında bir klasör görüyorsan klasörün kendisini sürüklemişsin. Dosyaları bu kez klasörün içinden seçip yeniden yükle. <code>img</code> klasörü görünmüyorsa klasörü ayrıca sürükle.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="p2"> Dosyalarım deponun en üst düzeyinde.</label>
+        </div>
+      </article>
+
+      <article class="step" data-step="p3">
+        <div class="sn">10</div>
+        <div class="sb">
+          <h3>Pages ayarını kontrol et</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Deponun adının altındaki <code>Settings</code> sekmesine tıkla. Soldaki menüde <code>Code, planning, and automation</code> başlığının altındaki <code>Pages</code>'e gir. <code>Build and deployment</code> kısmında <code>Source</code> olarak <code>Deploy from a branch</code> seçili olsun. Dal (branch) olarak <code>main</code>, klasör olarak kök (<code>/</code>) seçili olsun. Değilse bunları seç ve <code>Save</code>'e bas.</span></div>
+            <div><b>Neden</b><span>Seçtiğin ayar GitHub'a "sitemi <code>main</code> dalının en üst klasöründen yayınla" der. Dosyaları oraya yükledin.</span></div>
+            <div><b>Ekranda</b><span>Pages sayfasında sitenin adresi ve bir süre sonra <code>Visit site</code> düğmesi.</span></div>
+            <div><b>Olmadıysa</b><span><code>Settings</code> sekmesini göremiyorsan pencere dar olabilir. Sekmelerin sonundaki üç nokta menüsüne bak.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="p3"> Pages ayarı <code>main</code> ve kök klasörde.</label>
+        </div>
+      </article>
+
+      <article class="step" data-step="p4">
+        <div class="sn">11</div>
+        <div class="sb">
+          <h3>Adresi aç</h3>
+          <pre class="code hascopy">https://kullaniciadi.github.io</pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Pages sayfasındaki <code>Visit site</code> düğmesine bas ya da adresi kendi kullanıcı adınla tarayıcıya yaz. Telefonundan da aç.</span></div>
+            <div><b>Neden</b><span>Sayfan artık GitHub'ın sunucusunda duruyor ve senin bilgisayarın kapalıyken de açılıyor. Sabahki dört adımın hepsi gerçekten oluyor.</span></div>
+            <div><b>Ekranda</b><span>Kendi sayfan, internette. Adres çubuğunda <code>kullaniciadi.github.io</code>. Telefonda yazılar küçük görünebilir. Bunu Hafta 3'te tek bir satırla düzelteceğiz.</span></div>
+            <div><b>Olmadıysa</b><span>Yayının gelmesi birkaç dakika sürebilir. Beklerken BOZ kısmına geç, sonra dön. 404 sayfası görüyorsan önce 10 dakika bekleyip yenile. Hâlâ 404 ise dosyanın adı tam olarak <code>index.html</code> mi (küçük harfle), deponun en üst düzeyinde mi, bak. Görsel kırıksa <code>src</code>'deki ad ile yüklediğin dosyanın adını harf harf karşılaştır.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="p4"> Sayfam internette açılıyor.</label>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="bozuk" aria-labelledby="bozuk-h">
+    <div class="section-head"><h2 id="bozuk-h">BOZ: bozuk site</h2><span class="chip lab">16:15–16:35 · 20 dk</span></div>
+    <div class="prose">
+      <p>Ece adında bir öğrencinin iki sayfalık sitesi. İçinde tam üç hata var. Biri yalnız yayındaki sitede görünüyor, Windows'ta (ve çoğu Mac'te) kendi bilgisayarında göremezsin. Hataları bul, düzelt ve düzelttiğin siteyi kendi deponda yayınla. Son adım (15) labda yetişmezse onu Pazar'a kadar evde yaparsın.</p>
+    </div>
+    <div class="steps" style="margin-top:14px">
+      <article class="step" data-step="b1">
+        <div class="sn">12</div>
+        <div class="sb">
+          <h3>İndir ve aç</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span><a href="lab/bozuk-site.zip" download>bozuk-site.zip</a> dosyasını indir. İndirilenler klasöründe zip'e sağ tıkla, Tümünü ayıkla ile masaüstüne çıkar. Açtığın klasörün içinde doğrudan <code>index.html</code> görmelisin. <code>bozuk-site</code>'nin içinde bir <code>bozuk-site</code> daha varsa içtekini kullan. VS Code'da File menüsünden Open Folder ile <code>bozuk-site</code> klasörünü aç. <code>index.html</code>'e sağ tıklayıp <code>Open with Live Server</code> seç. Yan sekmede aynı sitenin yayındaki hâlini aç: <a href="https://cagrisahin58.github.io/2026-web/weeks/hafta-02/lab/bozuk-site/" target="_blank" rel="noopener">yayındaki bozuk site</a>.</span></div>
+            <div><b>Neden</b><span>Hataların biri yalnız sunucuda ortaya çıkıyor. İki hâli yan yana görürsen farkı yakalarsın.</span></div>
+            <div><b>Ekranda</b><span>İki sekmede de "Ece'nin sayfası". Bir yerde bir şeyler tuhaf.</span></div>
+            <div><b>Olmadıysa</b><span>Zip'in içindeki dosyalara doğrudan çift tıkladıysan önce zip'i dışarı çıkar. Zip'in içinden açılan dosyalar düzgün çalışmaz.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="b1"> İki sekmede de siteyi açtım.</label>
+        </div>
+      </article>
+
+      <article class="step" data-step="b2">
+        <div class="sn">13</div>
+        <div class="sb">
+          <h3>Üç belirti, üç hata</h3>
+          <p>Önce kendin ara. Takılırsan ipuçlarını sırayla aç. İlk ipucu nereye bakacağını, ikincisi neden bozulduğunu söyler.</p>
+          <div class="bug">
+            <h4>Belirti 1: Menüdeki bir bağlantı hata sayfası açıyor</h4>
+            <details class="hint"><summary>İpucu 1: Nereye bakmalı?</summary><div>Ana sayfadaki menüde "Hakkımda"ya tıkla. Açılan hata sayfasının adres çubuğundaki dosya adını oku. Sonra VS Code'un solundaki dosya listesine bak ve iki adı harf harf karşılaştır.</div></details>
+            <details class="hint"><summary>İpucu 2: Neden?</summary><div>Bağlantının <code>href</code>'ine yazılan ad klasördeki dosyanın adıyla bire bir aynı olmalı. Tek harf farkı, tarayıcının olmayan bir dosyayı istemesi demek. Sunucu da "böyle bir dosya yok" (404) cevabı verir. Kendi bilgisayarında da, internette de bozuk görünür.</div></details>
+          </div>
+          <div class="bug">
+            <h4>Belirti 2: Kulüp afişi yayındaki sitede görünmüyor</h4>
+            <details class="hint"><summary>İpucu 1: Nereye bakmalı?</summary><div>Afiş Live Server'da görünüyor, yayındaki sitede görünmüyor. <code>img</code> etiketinin <code>src</code> niteliğindeki dosya adını, <code>img</code> klasörünün içindeki dosyanın adıyla harf harf karşılaştır.</div></details>
+            <details class="hint"><summary>İpucu 2: Neden?</summary><div>Windows büyük ve küçük harfi ayırmadığı için dosyayı yine bulur. GitHub Pages'in sunucusu ayırır. Onun için adında tek bir harfin büyüklüğü farklı olan iki ad, iki ayrı dosya demek. Kodu ya da dosyanın adını değiştirip ikisini aynı yapman gerekiyor.</div></details>
+          </div>
+          <div class="bug">
+            <h4>Belirti 3: Yazının bir kısmı olması gerekenden kalın</h4>
+            <details class="hint"><summary>İpucu 1: Nereye bakmalı?</summary><div>Kalın yazının ilk başladığı kelimeyi bul. O cümlenin kaynak koddaki satırına git. O satırda açılan her etiketin bir kapanışı var mı, tek tek say.</div></details>
+            <details class="hint"><summary>İpucu 2: Neden?</summary><div>Açılıp kapatılmayan bir <code>strong</code>, tarayıcıya "bundan sonrası önemli" der ve tarayıcı kalınlığı sonraki her paragrafa, listeye, hatta en alttaki satıra taşır. Sabahki etiket ağacı aracındaki "Kapanmamış strong" örneğini hatırla. Kapanışı nereye koyacağına cümlenin anlamı karar verir.</div></details>
+          </div>
+          <label class="check"><input type="checkbox" data-done="b2"> Üç hatayı da buldum.</label>
+        </div>
+      </article>
+
+      <article class="step" data-step="b3">
+        <div class="sn">14</div>
+        <div class="sb">
+          <h3>Düzelt ve kendi bilgisayarında dene</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Üç hatayı VS Code'da düzelt ve kaydet. Live Server'da iki sayfa arasında gidip gel, kalın yazının yalnız olması gereken yerde kaldığını gör.</span></div>
+            <div><b>Neden</b><span>Yüklemeden önce kendi bilgisayarında denemek, her değişiklikten sonra GitHub'ı beklemekten hızlıdır. Ama Windows'ta görsel hatasını kendi bilgisayarında göremezsin. Onu adları karşılaştırarak kontrol et.</span></div>
+            <div><b>Ekranda</b><span>"Hakkımda" bağlantısı sayfayı açıyor, yalnız bir iki kelime kalın.</span></div>
+            <div><b>Olmadıysa</b><span>Değişiklik görünmüyorsa dosyayı kaydetmemişsindir. VS Code'da sekme adının yanındaki nokta kaydedilmemiş değişiklik demek.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="b3"> Düzeltilmiş site kendi bilgisayarımda doğru çalışıyor.</label>
+        </div>
+      </article>
+
+      <article class="step" data-step="b4">
+        <div class="sn">15</div>
+        <div class="sb">
+          <h3>Kendi deponda yayınla</h3>
+          <pre class="code hascopy">https://kullaniciadi.github.io/bozuk-site/</pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span><code>kullaniciadi.github.io</code> depona dön, <code>Add file</code>, sonra <code>Upload files</code>. Bu kez <code>bozuk-site</code> klasörünün <b>kendisini</b> sürükle. Commit mesajına "Bozuk site düzeltildi" yaz ve onayla. Birkaç dakika sonra yukarıdaki adresi kendi kullanıcı adınla aç.</span></div>
+            <div><b>Neden</b><span>Kişisel sayfanda dosyaların en üstte olmasını istedik. Bu kez sitenin <code>bozuk-site</code> adında bir alt klasörde durmasını istiyoruz, adresin sonundaki <code>/bozuk-site/</code> da oradan geliyor.</span></div>
+            <div><b>Ekranda</b><span>Kendi adresinde Ece'nin sitesi: afiş görünüyor, "Hakkımda" açılıyor, kalın yazı yerli yerinde.</span></div>
+            <div><b>Olmadıysa</b><span>Afiş hâlâ görünmüyorsa GitHub'daki depoda <code>bozuk-site/img</code> klasörüne gir ve dosyanın adını gör. Kodda yazan adla aynı mı? 404 alıyorsan depoda <code>bozuk-site</code> klasörünün içinde <code>index.html</code> var mı, bak. İçinde <code>index.html</code> yerine bir <code>bozuk-site</code> klasörü daha görüyorsan iç içe iki klasörün dıştakini yüklemişsin. Bilgisayarındaki içteki <code>bozuk-site</code>'yi yeniden yükle. Depoda kalan fazla klasör siteye zarar vermez.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="b4"> Düzeltilmiş site kendi adresimde açılıyor.</label>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="anlat" aria-labelledby="anlat-h">
+    <div class="section-head"><h2 id="anlat-h">ANLAT</h2><span class="chip lab">16:35–16:45 · 10 dk</span></div>
+    <div class="steps">
+      <article class="step" data-step="a1">
+        <div class="sn">16</div>
+        <div class="sb">
+          <h3>60 saniye: "Bir bağlantı neden kırılır?"</h3>
+          <p>Yan masadaki arkadaşına bir dakikada anlat, sonra o sana anlatsın. Kendi sitende ya da bozuk sitede gördüğün bir örnekle başla. Anlatırken şunlara değinmeye çalış:</p>
+          <ul>
+            <li>Tarayıcı <code>href</code> ya da <code>src</code>'de yazanı harfi harfine ister.</li>
+            <li>Göreli yol bulunduğun dosyanın klasöründen başlar.</li>
+            <li>Kendi bilgisayarında çalışıp internette çalışmayan bir durum ve nedeni.</li>
+          </ul>
+          <label class="check"><input type="checkbox" data-done="a1"> Anlattım ve dinledim.</label>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="teslim" aria-labelledby="teslim-h">
+    <div class="section-head"><h2 id="teslim-h">Teslim</h2></div>
+    <div class="grid2">
+      <div class="card">
+        <span class="chip ship">Perşembe 8 Ekim · 16:45</span>
+        <h3 style="margin-top:10px">Lab sonu teslimi</h3>
+        <p>Labın bitiminde o ana kadar yaptığını formla gönder. Sayfan yayındaysa adresini, değilse deponun adresini yaz. Lab sonu teslimi uygulama yoklaması yerine geçer.</p>
+      </div>
+      <div class="card">
+        <span class="chip ship">Pazar 11 Ekim · 23:59</span>
+        <h3 style="margin-top:10px">Tam teslim</h3>
+        <p>Aynı formu bu kez tam hâliyle gönder: kişisel sayfan yayında, düzeltilmiş bozuk site <code>kullaniciadi.github.io/bozuk-site/</code> adresinde, yapay zekâ notun yazılı.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3>Form</h3>
+      <p>İki teslim de aynı Google Form ile yapılır. Formun bağlantısı derste ve sınıf kanalında paylaşılır. Formda şunları dolduracaksın:</p>
+      <ul style="margin-top:8px">
+        <li>Ad soyad ve öğrenci numarası</li>
+        <li>GitHub kullanıcı adı</li>
+        <li>Teslim türü (lab sonu ya da tam teslim)</li>
+        <li>Yayındaki sayfanın adresi: <code>https://kullaniciadi.github.io</code></li>
+        <li>Deponun adresi: <code>https://github.com/kullaniciadi/kullaniciadi.github.io</code></li>
+        <li>Düzeltilmiş bozuk sitenin adresi: <code>https://kullaniciadi.github.io/bozuk-site/</code> (lab sonunda yetişmediyse Pazar teslimine bırak)</li>
+        <li>Üç satırlık yapay zekâ notu</li>
+      </ul>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3>Göndermeden önce kontrol listesi</h3>
+      <ul>
+        <li>Adresim başka bir bilgisayardan ya da telefondan açılıyor.</li>
+        <li>İki sayfada da iskelet tam: doctype, <code>lang="tr"</code>, <code>charset</code>, <code>title</code>.</li>
+        <li>Görselim internette görünüyor ve alt metni ne olduğunu anlatıyor.</li>
+        <li>Menüdeki iki bağlantı da çalışıyor.</li>
+        <li>Bozuk sitenin üç hatası kendi adresimde düzelmiş görünüyor.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="test" aria-labelledby="test-h">
+    <div class="section-head"><h2 id="test-h">Hafta testi</h2><span class="muted">Bir bölüm erken biterse ilk 5 soru derste, kalanı evde</span></div>
+    <div class="quiz" data-quiz="test" style="margin-top:0"></div>
+  </section>
+
+  <section id="kartlar" aria-labelledby="kartlar-h">
+    <div class="section-head"><h2 id="kartlar-h">Kavram kartları</h2><span class="time">evde · tekrar için</span></div>
+    <p class="prose">Kartın ön yüzünde bir terim var. Önce kendi cümlenle ne olduğunu söyle, sonra karta tıklayıp arka yüzle karşılaştır.</p>
+    <div class="kartlar ince">
+      <button class="kart" type="button"><span class="kart-on">Metin dosyası</span><span class="kart-arka"><span>Web sayfası düz yazıdan oluşan bir dosyadır. Tarayıcı onu okur ve ekrana kendisi çizer.</span></span></button>
+      <button class="kart" type="button"><span class="kart-on">Etiket</span><span class="kart-arka"><span>Açılı parantez içindeki ad: <code>&lt;p></code> açılış, <code>&lt;/p></code> kapanış. Sardığı metnin ne olduğunu söyler.</span></span></button>
+      <button class="kart" type="button"><span class="kart-on">Öğe</span><span class="kart-arka"><span>Açılış etiketi, içerik ve kapanış etiketinin bütünü: <code>&lt;p>Merhaba&lt;/p></code>.</span></span></button>
+      <button class="kart" type="button"><span class="kart-on">Nitelik</span><span class="kart-arka"><span>Açılış etiketine <code>ad="değer"</code> biçiminde yazılan ek bilgi: <code>href</code>, <code>src</code>, <code>alt</code>, <code>lang</code>.</span></span></button>
+      <button class="kart" type="button"><span class="kart-on">İç içe geçme</span><span class="kart-arka"><span>Bir öğe başka bir öğenin içinde durabilir. En son açılan etiket ilk kapanır.</span></span></button>
+      <button class="kart" type="button"><span class="kart-on">doctype</span><span class="kart-arka"><span><code>&lt;!doctype html></code> en üstteki satır. Tarayıcıya belgenin modern HTML olduğunu söyler.</span></span></button>
+      <button class="kart" type="button"><span class="kart-on">charset</span><span class="kart-arka"><span><code>&lt;meta charset="utf-8"></code> harflerin hangi tabloyla okunacağını söyler. Yoksa ş ve ç bozulabilir.</span></span></button>
+      <button class="kart" type="button"><span class="kart-on">Göreli yol</span><span class="kart-arka"><span>Bulunduğun dosyanın klasöründen başlayan yol: <code>img/afis.svg</code>, <code>../index.html</code>.</span></span></button>
+      <button class="kart" type="button"><span class="kart-on">Alt metni</span><span class="kart-arka"><span>Görseli sözle anlatan <code>alt</code> niteliği. Görsel görülemediğinde onun yerine geçer.</span></span></button>
+      <button class="kart" type="button"><span class="kart-on">header, nav, main, footer</span><span class="kart-arka"><span>Sayfanın dört bölümü: üst kısım, menü, asıl içerik ve alt kısım. Ekran okuyucu sayfayı bunlardan tanır.</span></span></button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><a href="../hafta-01/">Önceki hafta: Hafta 1</a> · <a href="../../">Ders ana sayfası</a></div>
+    <div>YZM205 Web Tasarımı ve Programlama · Muş Alparslan Üniversitesi · Arş. Gör. Çağrı ŞAHİN</div>
+  </div>
+</footer>
+
+<script src="../../assets/ders.js"></script>
+<script>
+/* ---------- sorular ---------- */
+window.QUIZ = {
+metin:{title:'Kendini sına: metin dosyası',start:1,qs:[
+ {d:1,q:'Derste Not Defteri’nde şu iki satır yazıldı ve dosya `etkinlik.html` adıyla kaydedildi. Bu dosya için hangisi doğru?',c:['<h1>Kulüp etkinlikleri</h1>','<p>Bu hafta satranç turnuvası var.</p>'],o:['Düz bir metin dosyası. Etiketler hangi parçanın başlık, hangisinin paragraf olduğunu söyler','Bir program. Tarayıcı onu YZM103’teki kodlar gibi çalıştırır ve hesap yapar','Hazır bir sayfa resmi. Not Defteri onu yalnız saklar, tarayıcı resmi olduğu gibi ekrana koyar'],a:0,e:'HTML bir işaretleme dilidir: metnin parçalarını işaretler, hesap yapmaz, döngü kurmaz. Tarayıcı dosyayı okur ve etiketlere bakarak başlığı büyük, paragrafı normal çizer. “Program” seçeneğini işaretlediysen YZM103’te yazdığın kodlarla karıştırıyorsun, onlar çalışan programlardı. Dosyada çalışacak bir komut yok, yalnız işaretlenmiş metin var. Resim olsaydı canlı editörde bir kelimeyi değiştirince görüntü değişmezdi.'},
+ {q:'Aynı `etkinlik.html` dosyasını önce masaüstünden çift tıklayarak, akşam da `https://kullaniciadi.github.io/etkinlik.html` adresinden açtın. İki durumun farkı ne?',o:['İlkinde tarayıcı dosyayı diskten okur, ikincisinde sunucudan ister. İki durumda da sayfayı çizen tarayıcıdır','İlkinde sayfayı Not Defteri çizer, ikincisinde tarayıcı. İnternetten gelen dosyayı her zaman tarayıcı açar','İlkinde sayfayı tarayıcı çizer, ikincisinde sunucu çizip hazır hâlini gönderir'],a:0,e:'Sunucu yalnız dosyayı gönderir, çizmek her zaman tarayıcının işi. Fark dosyanın nereden geldiğinde: kendi diskin ya da GitHub’ın sunucusu. İnternetten gelen sayfa “hazır” gibi görünse de sunucu onu çizip göndermiyor. Öyle olsaydı DevTools’ta manşeti değiştiremezdin, değiştirecek bir metin olmazdı. Not Defteri ise dosyayı ham metin olarak gösterir, etiketleri uygulamaz.'},
+ {q:'DevTools’ta bir haber sitesinin manşetini değiştirdin, sonra F5’e bastın. Eski manşet geri geldi. Neden?',o:['Değişikliği kaydetmedin. DevTools açıkken Ctrl+S’ye basmış olsaydın yeni manşet kalırdı','Tarayıcı sayfayı sunucudan yeniden istedi. Senin değiştirdiğin, tarayıcındaki kopyaydı','Site değişikliği fark etti ve kendi manşetini geri yükledi'],a:1,e:'Sunucudaki dosyaya hiç dokunmadın. Tarayıcı gelen metni kendi belleğinde tutup çiziyordu, sen o kopyayı değiştirdin. F5 “dosyayı yeniden iste” demek, sunucu da asıl hâlini gönderdi. Ctrl+S’yi seçtiysen VS Code alışkanlığını buraya taşıyorsun. Burada Ctrl+S’ye bassan bile kendi bilgisayarına bir kopya kaydedersin, haber sitesinin sunucusu değişmez.'},
+ {q:'Şu iki satırı yazıp dosyayı `duyuru.txt` adıyla kaydettin ve çift tıkladın. Ne görürsün?',c:['<h1>Duyuru</h1>','<p>Toplantı Salı günü.</p>'],o:['Tarayıcı açılır, büyük bir “Duyuru” başlığı ve altında bir cümle görürsün','Not Defteri açılır, etiketler dahil ham metni görürsün','Tarayıcı bir hata mesajı gösterir'],a:1,e:'Windows dosyayı hangi programın açacağına uzantıya bakarak karar verir. `.txt` metin dosyasıdır, Not Defteri açar ve yazdığını olduğu gibi gösterir. Başlıklı görünüm için dosyanın adı `.html` ile bitmeliydi.'}
+]},
+etiket:{title:'Kendini sına: etiket, öğe, nitelik',start:5,qs:[
+ {d:1,q:'Bu satırda kaç nitelik var?',c:['<img src="afis.svg" alt="Turnuva afişi: Perşembe 15:00, kütüphane">'],o:['Üç: `img`, `src` ve `alt`','İki: `src` ve `alt`','Bir: `src`. “Turnuva afişi” yazısı ise öğenin içeriği'],a:1,e:'Nitelik açılış etiketinin içinde `ad="değer"` biçiminde durur. Burada iki tane var: `src` ve `alt`. `img` etiketin adıdır, nitelik değil. “Bir” dediysen afişi anlatan yazıyı içerik saydın, oysa o yazı tırnak içinde, `alt`’ın değeri olarak duruyor. `img`’nin içeriği yok, bu yüzden kapanış etiketi de yok.'},
+ {q:'Hata hangi satırda?',c:['<ul>','  <li>HTML</li>','  <li>CSS</li>','  <li>JavaScript<li>','</ul>'],o:['1. satır','2. satır','4. satır','5. satır'],a:2,e:'4. satırda kapanış etiketinin eğik çizgisi unutulmuş: `<li>` yerine `</li>` olmalı. Tarayıcı ikinci `<li>`’yi yeni ve boş bir madde sanar. 1 ve 5. satırlar listenin açılışı ve kapanışı, doğru.'},
+ {q:'Bu kodda yanlış olan ne?',c:['<p>Toplantı <strong>saat 14:00</p></strong>'],o:['`strong`, `p`’nin içinde açılmış ama `p`’den sonra kapanmış, kapanışlar çaprazlanmış','`strong` bir paragrafın içinde kullanılamaz, önce paragraf kapanmalı, sonra kalın yazı başlamalı','Kapanış sırası önemli değil, kodda hata yok'],a:0,e:'İçte açılan öğe önce kapanır. `strong` `p`’nin içinde açıldıysa `</strong>`, `</p>`’den önce gelmeli. “strong paragraf içinde kullanılamaz” yanlış, bu çok olağan bir kullanım. Sorun yalnız kapanış sırası.'},
+ {q:'Tarayıcıda “Nasılsın?” nasıl görünür?',c:['<p>Merhaba <strong>Muş</p>','<p>Nasılsın?</p>'],o:['Normal yazı','Kalın yazı','Hiç görünmez'],a:1,e:'`strong` kapanmadı. Tarayıcı kalınlığı bir sonraki paragrafa da taşır, bu yüzden “Nasılsın?” kalın görünür. “Hiç görünmez” yanlış, çünkü tarayıcı metni silmez, yalnız neyin içinde olduğunu tahmin eder. Etiket ağacında bunu görmüştün.'},
+ {q:'Bu satırda kaç öğe var?',c:['<p>Satranç kulübü <strong>Salı</strong> toplanıyor.</p>'],o:['Dört: iki açılış etiketi ve iki kapanış etiketi','İki: `p` öğesi ve onun içindeki `strong` öğesi','Bir: `p`. `strong` yalnız yazıyı kalınlaştıran bir işaret, öğe sayılmaz'],a:1,e:'Öğe, açılış etiketi, içerik ve kapanış etiketinin bütünüdür. `<p>…</p>` bir öğe, içindeki `<strong>Salı</strong>` ikinci bir öğe. “Dört” dediysen etiketleri saydın: etiket parça, öğe bütün. Kalınlık yalnız görünüştür. `strong` sayfanın ağacında `p`’nin içinde ayrı bir dal olarak durur, etiket ağacı aracında bunu görebilirsin.'}
+]},
+iskelet:{title:'Kendini sına: belge iskeleti',start:10,qs:[
+ {d:1,q:'Sayfandaki Türkçe harfler “Ã§” gibi garip işaretlere dönüştü. Hangi satır eksik olabilir?',o:['`<title>`','`<meta charset="utf-8">`','`<!doctype html>`'],a:1,e:'`meta charset` dosyanın hangi kodlamayla yazıldığını söyler. Yoksa tarayıcı tahmin eder ve yanlış tahmin Türkçe harfleri bozar. `doctype` yanlış. O satır yoksa harfler bozulmaz, tarayıcı sayfayı eski bir uyumluluk kipinde çizer ve bunun etkisini daha çok CSS yazınca görürsün.'},
+ {q:'Sayfanı açtın. Sekmede sayfanın adı yerine adres ya da `index.html` yazıyor. Kodda ne eksik olabilir?',o:['`<meta charset="utf-8">` satırı','`<h1>` başlığı','`<title>` satırı'],a:2,e:'Sekmedeki ad `head`’in içindeki `title`’dan gelir. O satır yoksa tarayıcı sekmeye adresi ya da dosyanın adını yazar, “Satırı sil” simülasyonunda bunu gördün. İkisi de “başlık” gibi dursa da `h1` sayfanın içinde görünen başlıktır, sekmeye karışmaz. `meta charset` ise yalnız harflerin doğru okunmasıyla ilgilidir.'},
+ {q:'Hata hangi satırda?',c:['<!doctype html>','<html lang="tr">','<head>','  <meta charset="utf-8">','  <h1>Satranç Kulübü</h1>','</head>','<body>','  <p>Toplantı Salı 15:00’te.</p>','</body>','</html>'],o:['2. satır','4. satır','5. satır','8. satır'],a:2,e:'5. satırdaki `h1` ekranda görünecek bir başlık, `body`’nin içinde olmalı. `head` yalnız sayfa hakkında bilgi taşır. 4. satırdaki `meta charset` ise tam da `head`’e ait, orada doğru.'},
+ {q:'`lang="tr"` niteliği en çok kimin işine yarar?',o:['Ekran okuyucuların ve çeviri araçlarının','Türkçe harflerin (ç, ş, ğ) her bilgisayarda doğru görünmesinin','Sekmedeki başlığın'],a:0,e:'`lang` sayfanın dilini söyler. Ekran okuyucu metni Türkçe kurallarla seslendirir, çeviri aracı sayfanın dilini bilir. Türkçe harflerin doğru görünmesi `lang`’ın değil `meta charset`’in işidir.'},
+ {q:'Bir paragrafı yanlışlıkla `head`’in içine yazdın ama ekranda yine göründü. Kod doğru mu?',o:['Hayır. Tarayıcı paragrafı tahmin edip `body`’ye taşıdı, kod yine yanlış','Evet. Ekranda doğru görünüyorsa tarayıcı kodu kabul etmiş demektir','Evet. `head` ile `body` arasında fark yok, ikisine yazılan da ekranda görünür'],a:0,e:'`head` sayfa hakkında bilgi taşır, görünen içerik `body`’ye yazılır. Tarayıcı yanlışı görünce durmaz, paragrafı kendi kuralıyla `body`’ye taşır. “Ekranda doğru görünen kod doğrudur” düşüncesi burada yanıltıyor. Çapraz kapanan etiketlerde de ekran doğru görünüyordu ama kod yanlıştı. Tarayıcının düzeltmesine güvenme, kaynağa bak.'}
+]},
+liste:{title:'Kendini sına: başlık, paragraf, liste',start:15,qs:[
+ {d:1,q:'Kulüp sayfasına turnuvada ilk üç sıraya giren takımlar yazılacak ve sıra önemli. Hangi kod doğru?',o:['`<ol><li>Kale</li><li>Fil</li><li>Vezir</li></ol>`','`<ul><li>Kale</li><li>Fil</li><li>Vezir</li></ul>`','`<ol>Kale Fil Vezir</ol>`'],a:0,e:'Sıra önemliyse sıralı liste `ol`, her madde de bir `li`. `ul`’li kodu seçtiysen maddeleri doğru ayırdın ama numarayı kaybettin, sıranın anlamı da onunla gitti. Üçüncü koddaki `ol`’un içinde `li` yok. Tarayıcı neyin madde olduğunu bilemez ve üç kelimeyi tek satırda, numarasız yazar.'},
+ {q:'İki satır da ekranda kalın görünür. Farkları ne?',c:['<h2>Duyuru</h2>','<p><strong>Duyuru</strong></p>'],o:['`h2` bir bölüm başlığıdır, ekran okuyucu onu başlık listesinde bulur. `strong` cümle içindeki önemli yazıdır','Fark yok. İkisi de kalın bir “Duyuru” yazısı, tarayıcı ve ekran okuyucu ikisini aynı okur','`strong` daha büyük ve kalın yazar, `h2` ise yalnız kalınlaştırır, boyutu değiştirmez'],a:0,e:'Etiketi görünüşe göre değil, anlamına göre seçersin. `h2` “burada yeni bir bölüm başlıyor” der, `strong` ise cümlenin içindeki önemli kelimeyi işaretler. Ekranda ikisi de kalın, fark sayfayı okuyan programlarda ortaya çıkıyor: ekran okuyucu kullanan biri sayfadaki başlıkların listesini çıkarabilir ve `strong` o listede görünmez. Görünüşü Hafta 3’te CSS ile istediğin gibi değiştirirsin.'},
+ {q:'Hata hangi satırda?',c:['<h1>Yanında olsun</h1>','<ul>','  <p>Öğrenci kartı</p>','  <li>Öğrenci numarası</li>','</ul>'],o:['1. satır','3. satır','4. satır'],a:1,e:'`ul`’nin doğrudan içinde yalnız `li` durur. 3. satırdaki `p` bir madde değil. `<li>Öğrenci kartı</li>` olmalı. 4. satır tam da olması gerektiği gibi.'},
+ {q:'Bir bölüm başlığı küçük görünsün diye `h2` yerine `h4` kullanmak doğru mu?',o:['Evet, çünkü h4 daha küçük görünür ve sayfanın düzeni bundan etkilenmez','Hayır, çünkü başlık seviyesi önem sırasını anlatır, büyüklük CSS’in işi','Fark etmez, ikisi de başlık'],a:1,e:'`h1`–`h6` sayfanın bölüm düzenini anlatır. Ekran okuyucular ve arama motorları bu düzene göre sayfayı okur. “Daha küçük görünür” doğru ama gerekçe yanlış. Büyüklüğü Hafta 3’te CSS ile ayarlayacaksın.'}
+]},
+yol:{title:'Kendini sına: bağlantı, görsel, yol',start:19,qs:[
+ {d:1,q:'`index.html`’den `blog/foto/kampus.jpg` görseline giden yol hangisi?',o:['`blog/foto/kampus.jpg`','`foto/kampus.jpg`','`kampus.jpg`','`blog/foto/kampus.JPG`'],a:0,e:'`index.html` sitenin ana klasöründe. Önce `blog`’a, sonra `foto`’ya girersin ve dosyayı alırsın. `foto/kampus.jpg` yazdıysan `foto`’yu `index.html`’in yanında sandın, o klasör `blog`’un içinde. Yalnız dosya adını yazarsan tarayıcı görseli `index.html`’in yanında arar. `blog/foto/kampus.JPG` Windows’ta açılır ama yayında kırılır, çünkü dosyanın adı küçük harfle `kampus.jpg`.'},
+ {q:'`blog/yazi.html` dosyasındasın. Bir üst klasördeki `index.html`’e bağlantı hangisi?',o:['`../index.html`','`index.html`','`blog/index.html`'],a:0,e:'`../` bir üst klasöre çıkar, orada `index.html` var. Yalnız `index.html` yazarsan tarayıcı onu `blog` klasörünün içinde arar ve bulamaz.'},
+ {q:'Görsel bilgisayarında görünüyor ama GitHub Pages’te kırık. Dosyanın adı `img/Afis.svg`, kodda `src="img/afis.svg"` yazıyor. Neden?',o:['GitHub Pages SVG dosyalarını göstermez, görseli PNG ya da JPG yapman gerekir','Görseller internette her zaman geç yüklenir','GitHub Pages büyük ve küçük harfi ayırır, `Afis.svg` ile `afis.svg` ayrı dosyalar'],a:2,e:'Windows harf büyüklüğünü ayırmaz, dosyayı yine bulur. GitHub Pages ayırır ve `afis.svg` adlı bir dosya bulamaz. “SVG göstermez” yanlış, adları aynı olsaydı görsel açılırdı.'},
+ {q:'Kulübün turnuva afişi için üç alt metni önerildi. Hangisi en iyisi ve neden?',o:['`alt="Turnuva afişi: Perşembe 15:00, kütüphane"`, çünkü afişteki bilgi görmeyene de ulaşır','`alt="afis.svg"`, çünkü dosyanın adında “afiş” geçiyor ve görselin ne olduğunu zaten söylüyor','`alt="resim"`, çünkü ekran okuyucu görselde ne olduğunu kendisi anlayıp kullanıcıya anlatır'],a:0,e:'Alt metni, görseli göremeyen kullanıcıya ve görsel yüklenemediğinde herkese görselin yerine geçer. Görselin ne olduğunu ve üstündeki bilgiyi anlatmalı. Dosya adında “afiş” kelimesi geçse de hangi etkinliğin afişi olduğunu, ne zaman ve nerede yapılacağını söylemez, `IMG_2041.jpg` gibi adlar ise hiçbir şey söylemez. Ekran okuyucuya güvenme: o, senin yazdığın alt metnini okur.'},
+ {q:'Hata hangi satırda?',c:['<h2>Turnuva</h2>','<img href="img/afis.svg" alt="Turnuva afişi: Perşembe 15:00, kütüphane">','<p>Kayıtlar Salı akşamı kapanıyor.</p>'],o:['1. satır','2. satır','3. satır'],a:1,e:'`img`’de görselin dosyası `src` ile verilir. `href` bağlantının (`a`) niteliğidir. Tarayıcı `img`’deki `href`’i tanımaz ve görsel hiç yüklenmez. Alt metni ise iyi yazılmış.'}
+]},
+bolumler:{title:'Kendini sına: sayfa bölümleri',start:24,qs:[
+ {d:1,q:'Hangi satır yanlış bölümde?',c:['<header>','  <h1>Ece’nin sayfası</h1>','</header>','<main>','  <nav><a href="index.html">Ana sayfa</a> <a href="projeler.html">Projeler</a></nav>','  <p>Merhaba, ben Ece.</p>','</main>'],o:['2. satır','5. satır','6. satır'],a:1,e:'5. satırdaki menü sitenin sayfaları arasında gezdirir ve her sayfada tekrar eder. Asıl içerik değil, `main`’den çıkıp `header`’ın içine girmeli. Ekranda bir fark görmezsin, bu yüzden bu hata gözden kaçar. 6. satır doğru yerde: sayfanın anlattığı şey `main`’e girer. 2. satırdaki site adı da `header`’da, olması gereken yerde.'},
+ {q:'Ece’nin `main`’inin son iki satırı şöyle. Ne yapmalı?',c:['  <p>Ece · 2026 · Son güncelleme: Ekim</p>','</main>'],o:['Satırı `main`’den çıkarıp `footer`’a taşımalı, çünkü künye asıl içerik değil','Olduğu gibi bırakmalı, çünkü sayfanın içindeki her yazı `main`’e girer','Satırı `header`’a taşımalı, çünkü yazarın adı orada durur'],a:0,e:'Yazarın adı, yıl ve güncelleme tarihi künye bilgisidir, asıl içerik değil. Künye `footer`’a girer. `header`’ı seçtiysen yazarın adını site adıyla karıştırdın, çünkü burada ikisinde de Ece geçiyor (“Ece’nin sayfası”). `header` siteyi tanıtır, `footer` sayfanın künyesini taşır. Bölüm atama denemesinde “Ece · 2026” satırını da `footer`’a koymuştun.'},
+ {q:'Sayfanın orta kısmını `div` yerine `main` ile sarmanın en büyük faydası ne?',o:['Sayfa daha güzel görünür, çünkü tarayıcı `main`’i ortalar ve kenarlarına boşluk koyar','Ekran okuyucu ve arama motoru sayfanın asıl içeriğini tanır','Sayfa daha hızlı açılır'],a:1,e:'`main` görünüşü değiştirmez, `div` ile aynı görünür. Fark sayfayı okuyan programlar için: ekran okuyucu “asıl içeriğe atla” diyebilir, arama motoru sayfayı yorumlarken bu etiketten yararlanır. “Daha güzel görünür” yanlış, görünüş CSS’in işi.'},
+ {q:'Ece `index.html`’yi şöyle düzenledi. Sorun ne?',c:['<main>','  <p>Merhaba, ben Ece.</p>','</main>','<main>','  <h2>İlgi alanlarım</h2>','  <ul><li>Satranç</li></ul>','</main>'],o:['Ekranda iki ayrı kutu görünür ve aralarında büyük bir boşluk kalır, sayfa ikiye bölünür','Sayfada iki `main` var. Asıl içeriğin hepsi tek bir `main`’in içinde olmalı','Sorun yok, her içerik parçası kendi `main`’ine girer'],a:1,e:'Her sayfanın tek bir asıl içeriği var, dolayısıyla tek bir `main`. 3. satırdaki `</main>` ile 4. satırdaki `<main>`’i silersin. “Sorun yok” demek kolay, çünkü ekranda hiçbir şey bozulmaz. Hata ekranda belirti vermez, yalnız kodda görünür. Ekran okuyucu “asıl içeriğe atla” dediğinde asıl içeriği tek parça olarak bulmak ister.'}
+]},
+test:{title:'Hafta testi',prefix:'T',start:1,dLabel:'Zaman kalırsa derste',qs:[
+ {d:1,q:'Ece “mutlaka” kelimesinin eğik görünmesini istedi ama kelime kalın çıktı. Hangi satırı yazmış olabilir?',o:['`<p>Salı günü <strong>mutlaka</strong> gel.</p>`','`<p>Salı günü <em>mutlaka</em> gel.</p>`','`<p>Salı günü mutlaka gel.</p>`'],a:0,e:'Kalın görünen `strong`, eğik görünen `em`. Ece yanlışlıkla `strong` yazmış, `em` yazmalıydı. `em`’li satırı seçtiysen iki etiketi ters hatırlıyorsun. O satır kelimeyi eğik gösterir, Ece’nin istediği tam oydu. Etiketsiz satırda kelime düz yazı olarak kalır.'},
+ {d:1,q:'Hangi satırda eksik var?',c:['<img src="img/avatar.svg" alt="Ece’nin avatarı">','<a href="projeler.html">Projelerim','<p>Hoş geldin.</p>'],o:['1. satır','2. satır','3. satır','Hiçbirinde, üç satır da tamam'],a:1,e:'2. satırda `</a>` yok. Tarayıcı bağlantıyı kapatmaz ve alttaki “Hoş geldin.” de mavi, altı çizili ve tıklanabilir olur. 1. satırı seçtiysen `img`’nin de kapanması gerektiğini düşünüyorsun. `img`’nin içine metin konmaz, bu yüzden kapanış etiketi yoktur, 1. satır olduğu gibi doğru.'},
+ {d:1,q:'`blog/ilk-yazi.html` sayfasındasın. `img` klasöründeki `Afis.svg` görselinin yayında da çalışacak yolu hangisi?',o:['`../img/Afis.svg`','`../img/afis.svg`','`img/Afis.svg`','`..img/Afis.svg`'],a:0,e:'`ilk-yazi.html` `blog` klasöründe. `../` ile bir üst klasöre çıkarsın, orada `img` var, dosyanın adı da büyük A ile `Afis.svg`. `../img/afis.svg` en sinsi olanı: Windows’ta çalışır, GitHub Pages’te kırık görünür, çünkü sunucu büyük ve küçük harfi ayırır. `img/Afis.svg` görseli `blog`’un içinde arar. `..img` ise eğik çizgisi unutulmuş bir yazım hatası.'},
+ {d:1,q:'Hata hangi satırda?',c:['<!doctype html>','<html lang="tr">','<head>','  <meta charset="utf-8">','  <title>Projelerim</title>','</head>','<body>','  <a href="index.html>Ana sayfa</a>','  <p>İlk projem bir hesap makinesi.</p>','</body>','</html>'],o:['2. satır','5. satır','8. satır','9. satır'],a:2,e:'8. satırda `href` değerinin tırnağı kapanmamış: `"index.html` diye başlıyor ama kapanan tırnak yok. Tarayıcı bir sonraki tırnağa kadar her şeyi adres sanır. Kodda sonrasında hiç tırnak olmadığı için bağlantı ve alttaki paragraf ekranda hiç görünmez. 2. satırdaki `lang="tr"` doğru yazılmış.'},
+ {d:1,q:'Bir alışveriş sitesinin en üstünde logo ve “Kadın · Erkek · Çocuk · Ev” bağlantıları, ortada ürünler, en altta “Hakkımızda · İletişim · © 2026” satırı var. “Kadın · Erkek · Çocuk · Ev” bağlantıları hangi etiketin içine yazılır?',o:['`header`’ın içindeki bir `nav`’a','`main`’e, çünkü ürünlere götürüyorlar','`footer`’a, çünkü hepsi bağlantı'],a:0,e:'Bu bağlantılar sitenin bölümleri arasında gezdirir ve her sayfada tekrar eder. Gezinme grubu `nav`’a girer, `nav` da çoğu zaman üstteki `header`’da durur. Bağlantıların ürünlere gitmesi onları `main`’e koymaz: `main` yalnız o sayfanın kendi içeriğini taşır, her sayfada aynı kalan menü oraya girmez. En alttaki satır ise künye, `footer`’a girer.'},
+ {q:'Bir paragrafta `<strong>Perşembe` yazıp kapatmayı unuttun. Ne olur?',o:['Tarayıcı paragrafın sonunda bir hata mesajı gösterir','“Perşembe” ve sonraki bütün yazı kalın olur','Yalnız “Perşembe” kalın olur'],a:1,e:'Tarayıcı hata mesajı göstermez, `strong`’u sonraki öğelere taşır. “Yalnız Perşembe kalın olur” doğru olsaydı hatayı kimse fark etmezdi. Bozuk sitedeki üçüncü belirti tam olarak buydu.'},
+ {q:'Sitenin dosyaları `kullaniciadi.github.io` adlı depoda. Tarayıcıya hangi adresi yazarsın?',o:['`https://kullaniciadi.github.io`','`https://github.com/kullaniciadi`','`https://github.com/kullaniciadi/kullaniciadi.github.io`'],a:0,e:'Kullanıcı sitesinin adresi deponun adıyla aynıdır. `github.com/kullaniciadi` senin GitHub profilin, sitenin kendisi değil. `github.com/kullaniciadi/kullaniciadi.github.io` ise deponun adresi. Dosyalarını orada görürsün ama sayfan orada çizilmez. Formda ikisini ayrı ayrı yazacaksın.'},
+ {q:'Dosyaları yükledin ama adres 404 veriyor. Depoda yalnız `README.md` ve `kisisel-sayfa` adlı bir klasör var. Neden?',o:['index.html deponun en üst düzeyinde değil, çünkü klasörün kendisi yüklenmiş','GitHub Pages yeni açılan depolarda ilk gün çalışmaz, ertesi günü beklemek gerekir','README.md dosyası siteyi engelliyor, çünkü GitHub önce onu gösterir'],a:0,e:'GitHub Pages ana sayfayı deponun en üstünde arar. Klasörün kendisi sürüklendiği için `index.html` onun içinde kaldı. Çözüm: dosyaları klasörün içinden seçip yeniden yüklemek. README siteyi engellemez.'},
+ {q:'Ekranda “Projelerim” yazısı var ama mavi değil ve tıklanmıyor. Neden?',c:['<nav>','  <a src="projeler.html">Projelerim</a>','</nav>'],o:['`a`’da adres `href` ile verilir, `src` yazılmış','`projeler.html` dosyası klasörde yok, tarayıcı bu yüzden bağlantıyı kapatmış','`a`, `nav`’ın içinde kullanılamaz'],a:0,e:'`src` görselin niteliğidir, tarayıcı `a`’daki `src`’yi tanımaz. Adresi olmayan bir `a` sıradan yazı gibi görünür ve tıklanmaz. Eksik dosya bu belirtiyi vermez: dosya olmasaydı bile yazı mavi ve tıklanabilir olurdu, tıklayınca 404 açılırdı. Tıklanmaması adresin hiç yazılmadığını gösteriyor. `img`’de `href` yazma hatasının tersi bu.'},
+ {q:'Bu dosya klasörde yok. Tarayıcıda ne görürsün?',c:['<img src="img/yok.svg" alt="Satranç kulübünün turnuva afişi">'],o:['Kırık görsel simgesi ve yanında “Satranç kulübünün turnuva afişi” yazısı','Hiçbir şey, o alan boş kalır','Sayfa hiç açılmaz, tarayıcı eksik dosya yüzünden bir hata sayfası gösterir'],a:0,e:'Görsel yüklenemeyince tarayıcı yerine alt metnini gösterir. Alt metninin bir işi de bu. Sayfanın geri kalanı normal açılır, tek bir eksik görsel sayfayı durdurmaz.'},
+ {q:'`blog/ilk-yazi.html` sayfasından `blog/foto/kampus.jpg` görseline giden yol hangisi?',o:['`foto/kampus.jpg`','`blog/foto/kampus.jpg`','`../foto/kampus.jpg`'],a:0,e:'Göreli yol, içinde yazıldığı dosyanın klasöründen başlar. `ilk-yazi.html` zaten `blog`’un içinde ve `foto` onun yanında, yalnız `foto`’ya girip dosyayı alırsın. `blog/foto/kampus.jpg`’yi seçtiysen yolun sitenin ana klasöründen başladığını düşünüyorsun. Tarayıcı bu yolu `blog`’un içinde arar ve orada ikinci bir `blog` klasörü bulamaz. `../` gereksiz, bir üst klasöre çıkınca `foto`’dan uzaklaşırsın.'},
+ {q:'Windows’ta `Afis.svg` dosyasını `afis.svg` diye istediğinde görsel açılıyor. Neden?',o:['Windows dosya adlarında büyük ve küçük harfi ayırmaz','Tarayıcı adı kendisi düzeltir, çünkü küçük harfle yazılmış adı büyük harfle de dener','SVG dosyalarında harf fark etmez'],a:0,e:'Harf farkını görmezden gelen tarayıcı değil, Windows’un dosya sistemi. GitHub Pages’in sunucusu bunu yapmaz, orada aynı kod kırık görsel verir.'},
+ {q:'Bu haftanın yapay zekâ kuralına uyan hangisi?',o:['Copilot’a “kişisel sayfamı baştan sona yaz” demek','Kendi yazdığın bir satırı Copilot’a açıklatmak','Bozuk sitenin hatalarını Copilot’a buldurup düzelttirmek'],a:1,e:'Hafta 2–9 arasında kodu sen yazarsın. Yapay zekâya açıklama sorabilir, hata mesajını sorabilir, kendini sınatabilirsin. Hataları ona buldurmak bu haftanın öğrenme işini ona devretmek olur.'},
+ {q:'Bu satırın sonuna hangi kapanışlar hangi sırayla gelmeli?',c:['<li><a href="turnuva.html"><strong>Perşembe turnuvası'],o:['`</strong></a></li>`','`</a></strong></li>`','`</li></a></strong>`'],a:0,e:'En son açılan ilk kapanır. Sırayla `li`, `a`, `strong` açıldı, kapanış bunun tersi: önce `</strong>`, sonra `</a>`, en son `</li>`. `</a></strong></li>` sırasında bütün etiketler kapanıyor ve ekran çoğu zaman doğru görünür, ama kapanışlar çaprazlanmış ve tarayıcı ağacı kendi kurallarına göre kurar. Etiket ağacı aracına yapıştırıp farkı görebilirsin.'}
+]}
+};
+
+(function(){
+'use strict';
+var esc=Ders.esc, fmt=Ders.fmt;
+function byId(id){ return document.getElementById(id); }
+
+/* ---------- hero: canlı gösterim ---------- */
+(function(){
+  var kod=byId('heroKod'), fr=byId('heroFrame'), btn=byId('heroBtn'), durum=byId('heroDurum'), adim=0;
+  var ADIM=[
+    {k:['Satranç Kulübü','<p>Bu hafta turnuva var.</p>','<p>Kayıtlar Salı akşamı kapanıyor.</p>'],hot:-1,b:'`<h1>` etiketini ekle',d:'1. satırda etiket yok. Tarayıcı onu sıradan bir yazı gibi çiziyor.'},
+    {k:['<h1>Satranç Kulübü</h1>','<p>Bu hafta turnuva var.</p>','<p>Kayıtlar Salı akşamı kapanıyor.</p>'],hot:0,b:'`<strong>` etiketini ekle',d:'Metin aynı, yalnız etiket eklendi. Tarayıcı 1. satırı artık başlık olarak çiziyor.'},
+    {k:['<h1>Satranç Kulübü</h1>','<p>Bu hafta <strong>turnuva</strong> var.</p>','<p>Kayıtlar Salı akşamı kapanıyor.</p>'],hot:1,b:'Baştan al',d:'“turnuva” kalın ve önemli. Etiket, sardığı yazının ne olduğunu tarayıcıya söylüyor.'}
+  ];
+  function ciz(){
+    var a=ADIM[adim];
+    kod.innerHTML=a.k.map(function(l,i){ return '<span class="l'+(i===a.hot?' hot':'')+'"><span class="no">'+(i+1)+'</span><span class="tx">'+esc(l)+'</span></span>'; }).join('');
+    fr.srcdoc='<!doctype html><html lang="tr"><head><meta charset="utf-8"></head><body style="font-family:serif;margin:10px 14px">'+a.k.join('\n')+'</body></html>';
+    btn.innerHTML=fmt(a.b);
+    durum.textContent=a.d;
+  }
+  btn.addEventListener('click',function(){ adim=(adim+1)%ADIM.length; ciz(); });
+  ciz();
+})();
+
+/* ---------- hedef: labın sonundaki sayfa ---------- */
+var HERO='<!doctype html><html lang="tr"><head><meta charset="utf-8"><title>Adın Soyadın</title></head><body><header><h1>Merhaba, ben Adın</h1><nav><a href="#">Ana sayfa</a> <a href="#">Projelerim</a></nav></header><main><p>Muş Alparslan Üniversitesi Yazılım Mühendisliği 2. sınıftayım. Web sayfası yapmayı öğreniyorum.</p><h2>İlgi alanlarım</h2><ul><li>Satranç</li><li>Fotoğrafçılık</li><li>Futbol</li></ul><p>Sık girdiğim bir site: <a href="#">Vikipedi</a></p></main><footer><p>Adın Soyadın · 2026</p></footer></body></html>';
+byId('heroPreview').srcdoc=HERO;
+
+/* ---------- canlı editör ---------- */
+var PRESETS={
+  etkinlik:'<h1>Satranç Kulübü</h1>\n<p>Bu hafta <strong>hızlı satranç turnuvası</strong> var.</p>\n<ul>\n  <li>Perşembe 15:00, kütüphane</li>\n  <li>Kayıt kulüp masasında</li>\n  <li>Oyuncu başına 5 dakika</li>\n</ul>',
+  kulup:'<h1>Haftalık toplantı</h1>\n<p>Toplantımız <em>Salı 15:00</em> saatinde, kütüphanede.</p>\n<p>Yeni gelenlere <strong>tahta ve saat</strong> bizden.</p>\n<h2>Bu hafta</h2>\n<ol>\n  <li>Açılışlar</li>\n  <li>Kısa turnuva</li>\n</ol>',
+  bos:'',
+  liste:'<h1>Üye kaydı</h1>\n<h2>Yanında olsun</h2>\n<ul>\n  <li>Öğrenci kartı</li>\n  <li>Öğrenci numarası</li>\n  <li>Vesikalık fotoğraf</li>\n</ul>\n<h2>Kayıt adımları</h2>\n<ol>\n  <li>Formu doldur.</li>\n  <li>Kulüp masasına teslim et.</li>\n  <li>Onay e-postasını bekle.</li>\n</ol>',
+  basliklar:'<h1>h1: Sayfanın ana başlığı</h1>\n<h2>h2: Bölüm başlığı</h2>\n<h3>h3: Alt bölüm başlığı</h3>\n<p>Bu bir paragraf. İçinde <strong>kalın</strong> ve <em>eğik</em> yazı var.</p>'
+};
+function initEditor(id,start){
+  var box=byId(id), ta=box.querySelector('textarea'), fr=box.querySelector('.sim-cols iframe'), timer=null;
+  function render(){ fr.srcdoc=ta.value||'<p style="color:#888;font-family:sans-serif">Sol tarafa bir şey yaz.</p>'; }
+  ta.addEventListener('input',function(){ clearTimeout(timer); timer=setTimeout(render,250); });
+  box.querySelectorAll('[data-preset]').forEach(function(b){ b.addEventListener('click',function(){ ta.value=PRESETS[b.dataset.preset]; render(); ta.focus(); }); });
+  ta.value=PRESETS[start]; render();
+  return { set:function(v){ clearTimeout(timer); ta.value=v; render(); } };
+}
+var ed1=initEditor('sim-editor','etkinlik');
+var ed2=initEditor('sim-editor2','liste');
+
+/* ---------- anatomi ---------- */
+var ANAT=[
+  [['<a','Açılış etiketinin başı. a, bağlantı (İngilizce "anchor", çapa) etiketinin adı.'],[' href','Niteliğin adı. href, bağlantının gideceği adresi tutar.'],['="https://tr.wikipedia.org"','Niteliğin değeri. Her zaman eşittir işaretinden sonra, tırnak içinde yazılır.'],['>','Açılış etiketi burada biter.'],['Vikipedi','İçerik. Ekranda görünen ve tıklanan yazı bu.'],['</a>','Kapanış etiketi. Başındaki eğik çizgi onu açılıştan ayırır. Kapanışta nitelik olmaz.']],
+  [['<img','Açılış etiketinin başı. img, görsel (İngilizce "image") etiketi.'],[' src="img/afis.svg"','src niteliği ve değeri. Görselin dosyasını gösteren yol.'],[' alt="Turnuva afişi: Perşembe 15:00, kütüphane"','alt niteliği ve değeri. Görsel görülemediğinde onun yerine geçen sözlü anlatım.'],['>','Etiket burada biter. img’nin içeriği ve kapanış etiketi yoktur. Görselin kendisi içerik gibidir.']]
+];
+var anat=(function(){
+  var box=byId('sim-anat'), code=box.querySelector('.anat'), out=box.querySelector('.anat-out');
+  function show(i){
+    code.innerHTML='';
+    ANAT[i].forEach(function(p){
+      var b=document.createElement('button'); b.type='button'; b.textContent=p[0]; b.setAttribute('aria-pressed','false');
+      b.addEventListener('click',function(){ code.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false');}); b.setAttribute('aria-pressed','true'); out.innerHTML='<code>'+esc(p[0].trim())+'</code> · '+esc(p[1]); });
+      code.appendChild(b);
+    });
+    out.textContent='Kodun bir parçasına tıkla.';
+  }
+  function pick(i){ box.querySelectorAll('[data-anat]').forEach(function(x){ x.setAttribute('aria-pressed',x.dataset.anat===String(i)?'true':'false'); }); show(i); }
+  box.querySelectorAll('[data-anat]').forEach(function(b){ b.addEventListener('click',function(){ pick(+b.dataset.anat); }); });
+  show(0);
+  return { pick:pick, say:function(h){ out.innerHTML=h; } };
+})();
+
+/* ---------- etiket ağacı ---------- */
+var TREE={
+  dogru:'<h1>Kulüp duyurusu</h1>\n<p>Toplantı <strong>Salı</strong> günü.</p>\n<ul>\n  <li>Satranç</li>\n  <li>Kitap</li>\n</ul>',
+  capraz:'<p>Toplantı <strong>Salı günü</p></strong>\n<p>Herkes gelsin.</p>',
+  kapanmamis:'<p>Toplantı <strong>Salı günü.</p>\n<p>Herkes gelsin.</p>\n<p>Tahtalar kulüpten.</p>'
+};
+var VOID={area:1,base:1,br:1,col:1,embed:1,hr:1,img:1,input:1,link:1,meta:1,source:1,track:1,wbr:1};
+function checkSource(src){
+  var msgs=[], stack=[], re=/<!--[\s\S]*?-->|<!doctype[^>]*>|<(\/?)([a-zA-Z][a-zA-Z0-9-]*)\b[^>]*>/gi, m;
+  while((m=re.exec(src))){
+    if(!m[2]) continue;
+    var name=m[2].toLowerCase(), close=m[1]==='/', line=src.slice(0,m.index).split('\n').length;
+    if(VOID[name]) continue;
+    if(!close){ stack.push({n:name,l:line}); continue; }
+    if(stack.length&&stack[stack.length-1].n===name){ var done=stack.pop(); if(done.cross!==undefined) msgs[done.cross]+=' Sonra kapanmış ama çok geç: kapanışlar çaprazlanmış.'; continue; }
+    var idx=-1; for(var i=stack.length-1;i>=0;i--){ if(stack[i].n===name){idx=i;break;} }
+    if(idx===-1){ msgs.push(line+'. satırda `</'+name+'>` var ama açık bir `<'+name+'>` yok.'); }
+    else{ var top=stack[stack.length-1]; msgs.push(line+'. satırda `</'+name+'>` geldi ama içeride açılan `<'+top.n+'>` ('+top.l+'. satır) henüz kapanmamıştı.'); if(top.cross===undefined) top.cross=msgs.length-1; stack.splice(idx,1); }
+  }
+  stack.forEach(function(s){ msgs.push(s.l+'. satırda açılan `<'+s.n+'>` hiç kapanmamış.'); });
+  return msgs;
+}
+function treeHTML(node,hot,depth){
+  if(depth>12) return '';
+  var h='';
+  node.childNodes.forEach(function(c){
+    if(c.nodeType===1){
+      var name=c.nodeName.toLowerCase(), at='';
+      for(var i=0;i<c.attributes.length;i++){ at+=' '+c.attributes[i].name+'="'+c.attributes[i].value+'"'; }
+      h+='<li><span class="tg'+(hot[name]?' hot':'')+'">'+esc(name)+'</span>'+(at?'<span class="at">'+esc(at.trim())+'</span>':'');
+      var inner=treeHTML(c,hot,depth+1); if(inner) h+='<ul>'+inner+'</ul>';
+      h+='</li>';
+    } else if(c.nodeType===3){
+      var t=c.nodeValue.replace(/\s+/g,' ').trim(); if(t) h+='<li class="tx">“'+esc(t)+'”</li>';
+    }
+  });
+  return h;
+}
+var tree=(function(){
+  var box=byId('sim-tree'), ta=box.querySelector('textarea'), ul=box.querySelector('.tree'), msgs=box.querySelector('.msgs'), fr=box.querySelector('.sim-cols iframe'), timer=null;
+  function render(){
+    var src=ta.value, doc=new DOMParser().parseFromString(src,'text/html');
+    var m=checkSource(src), hot={};
+    m.forEach(function(x){ var r=x.match(/`<\/?([a-z0-9-]+)>`/g); if(r) r.forEach(function(t){ hot[t.replace(/[`<>\/]/g,'')]=1; }); });
+    var rootNode=doc.head.childNodes.length?doc.documentElement:doc.body;
+    ul.innerHTML='<li><span class="tg">'+(rootNode===doc.body?'body':'html')+'</span><ul>'+treeHTML(rootNode,hot,0)+'</ul></li>';
+    msgs.innerHTML=m.length?m.map(function(x){return '<div>'+fmt(x)+'</div>';}).join(''):'<div class="okm">Her açılan etiket, doğru sırayla kapanmış.</div>';
+    fr.srcdoc=src;
+  }
+  function load(k){ clearTimeout(timer); ta.value=TREE[k]; render(); }
+  ta.addEventListener('input',function(){ clearTimeout(timer); timer=setTimeout(render,250); });
+  box.querySelectorAll('[data-tree]').forEach(function(b){ b.addEventListener('click',function(){ load(b.dataset.tree); }); });
+  load('dogru');
+  return { load:load };
+})();
+
+/* ---------- iskelet ---------- */
+var SKEL=[
+  {c:'<!doctype html>',k:'doctype'},
+  {c:'<html lang="tr">',k:'lang'},
+  {c:'<head>',k:'auto'},
+  {c:'  <meta charset="utf-8">',k:'charset'},
+  {c:'  <title>Satranç Kulübü</title>',k:'title'},
+  {c:'</head>',k:'auto'},
+  {c:'<body>',k:'auto'},
+  {c:'  <h1>Bu haftaki etkinlikler</h1>',k:'h1'},
+  {c:'  <p>Perşembe günü kütüphanede hızlı satranç turnuvası.</p>',k:'p'},
+  {c:'</body>',k:'auto'},
+  {c:'</html>',k:'auto'}
+];
+function mojibake(s){ try{ return new TextDecoder('windows-1252').decode(new TextEncoder().encode(s)); }catch(e){ return s.replace(/ü/g,'Ã¼').replace(/ç/g,'Ã§').replace(/ş/g,'ÅŸ').replace(/ğ/g,'ÄŸ').replace(/ı/g,'Ä±').replace(/ö/g,'Ã¶').replace(/Ç/g,'Ã‡'); } }
+var skel=(function(){
+  var box=byId('sim-skel'), list=box.querySelector('.skel'), eff=box.querySelector('.effects'), tab=byId('skTab'), pg=byId('skPg'), off={};
+  SKEL.forEach(function(l,i){
+    var row=document.createElement('div'); row.className='sl';
+    row.innerHTML='<span class="no">'+(i+1)+'</span><code>'+esc(l.c)+'</code>';
+    var b=document.createElement('button'); b.type='button'; b.className='btn'; b.textContent='Sil'; b.setAttribute('aria-label',(i+1)+'. satırı sil');
+    b.addEventListener('click',function(){ off[i]=!off[i]; paint(); });
+    row.appendChild(b); list.appendChild(row);
+  });
+  function paint(){
+    var rows=list.querySelectorAll('.sl'), src=[];
+    SKEL.forEach(function(l,i){ var r=rows[i], b=r.querySelector('button'); r.classList.toggle('off',!!off[i]); b.textContent=off[i]?'Geri koy':'Sil'; b.setAttribute('aria-label',(i+1)+'. satırı '+(off[i]?'geri koy':'sil')); if(!off[i]) src.push(l.c); });
+    var doc=new DOMParser().parseFromString(src.join('\n'),'text/html');
+    var gone={}; SKEL.forEach(function(l,i){ if(off[i]) gone[l.k]=(gone[l.k]||0)+1; });
+    var title=doc.title;
+    tab.textContent=title?title:'etkinlik.html';
+    var h1=doc.querySelector('h1'), p=doc.querySelector('p'), html='';
+    if(h1) html+='<h4>'+esc(gone.charset?mojibake(h1.textContent):h1.textContent)+'</h4>';
+    if(p) html+='<p>'+esc(gone.charset?mojibake(p.textContent):p.textContent)+'</p>';
+    pg.innerHTML=html||'<p style="color:#888">(sayfa boş)</p>';
+    var e=[];
+    if(gone.doctype) e.push(['meh','<b>doctype</b> Tarayıcı eski bir uyumluluk kipine geçti. Bu küçük sayfada fark görmezsin, CSS\'te bazı ölçüler farklı hesaplanır.']);
+    if(gone.lang) e.push(['bad','<b>lang</b> Sayfanın dili bilinmiyor. Ekran okuyucu kendi varsayılan diliyle, örneğin İngilizce kurallarıyla okuyabilir. "Perşembe" gibi bir kelime yabancı bir dilin kurallarıyla seslendirilir.']);
+    if(gone.charset) e.push(['bad','<b>meta charset</b> Tarayıcı dosyanın kodlamasını tahmin etmek zorunda kaldı. Tahmini yanlış olursa Türkçe harfler yukarıdaki gibi bozulur. Live Server ve GitHub Pages dosyanın UTF-8 olduğunu çoğu zaman ayrıca bildirir, bu yüzden sende bozulmayabilir. Dosya başka bir yolla açılırsa bozulabilir. Satırı yine de yaz.']);
+    if(gone.title) e.push(['bad','<b>title</b> Sekmede sayfanın adı yerine dosyanın adı görünüyor. Sık kullanılanlarda ve arama sonuçlarında da ad olmaz.']);
+    if(gone.auto) e.push(['','<b>head / body / html</b> Görünüşte bir şey değişmedi. Tarayıcı eksik öğeyi kendisi tamamladı. Yine de yazarız, çünkü kodu okuyan kişi sayfanın düzenini ancak böyle açıkça görür.']);
+    if(gone.h1||gone.p) e.push(['','<b>içerik</b> Silinen satırın içeriği sayfadan gitti. Beklediğin gibi.']);
+    eff.innerHTML=e.length?e.map(function(x){return '<div class="'+x[0]+'">'+x[1]+'</div>';}).join(''):'<div>Henüz bir satır silmedin. Soldaki düğmelerden birine bas.</div>';
+  }
+  byId('skReset').addEventListener('click',function(){ off={}; paint(); });
+  paint();
+  return { set:function(o){ off=o||{}; paint(); } };
+})();
+
+/* ---------- dosya yolu ---------- */
+var FILES=['index.html','projeler.html','img/avatar.svg','img/Afis.svg','blog/ilk-yazi.html','blog/foto/kampus.jpg'];
+var FTREE=[['kisisel-sayfa/',''],['├── index.html','index.html'],['├── projeler.html','projeler.html'],['├── img/',''],['│   ├── avatar.svg','img/avatar.svg'],['│   └── Afis.svg','img/Afis.svg'],['└── blog/',''],['    ├── ilk-yazi.html','blog/ilk-yazi.html'],['    └── foto/',''],['        └── kampus.jpg','blog/foto/kampus.jpg']];
+var TASKS=[['index.html','img/avatar.svg'],['index.html','projeler.html'],['blog/ilk-yazi.html','index.html'],['blog/ilk-yazi.html','img/Afis.svg'],['index.html','blog/foto/kampus.jpg'],['blog/ilk-yazi.html','blog/foto/kampus.jpg'],['projeler.html','blog/ilk-yazi.html']];
+function dirOf(f){ var i=f.lastIndexOf('/'); return i<0?'':f.slice(0,i); }
+function relPath(from,to){
+  var a=dirOf(from).split('/').filter(Boolean), b=to.split('/'), i=0;
+  while(i<a.length&&i<b.length-1&&a[i]===b[i]) i++;
+  var up=[]; for(var j=i;j<a.length;j++) up.push('..');
+  return up.concat(b.slice(i)).join('/');
+}
+var yol=(function(){
+  var ft=document.querySelector('#sim-path .ftree'), sf=byId('pFrom'), st=byId('pTo'), inp=byId('pIn'), res=byId('pRes'), ti=0;
+  FILES.filter(function(f){return /\.html$/.test(f);}).forEach(function(f){ var o=document.createElement('option'); o.value=f; o.textContent=f; sf.appendChild(o); });
+  FILES.forEach(function(f){ var o=document.createElement('option'); o.value=f; o.textContent=f; st.appendChild(o); });
+  function drawTree(){
+    ft.innerHTML=FTREE.map(function(r){ var cls=r[1]===sf.value?'hl-from':(r[1]===st.value?'hl-to':''); if(!cls) return esc(r[0]); var k=r[0].lastIndexOf(' ')+1; return esc(r[0].slice(0,k))+'<span class="'+cls+'">'+esc(r[0].slice(k))+'</span>'; }).join('\n');
+  }
+  function setTask(i){ ti=i; sf.value=TASKS[i][0]; st.value=TASKS[i][1]; inp.value=''; res.className='pathres'; res.textContent='Mavi işaretli dosyadasın, yeşil işaretli dosyaya gitmek istiyorsun. Yolu yaz.'; drawTree(); }
+  function explain(from,path){
+    var cur=dirOf(from).split('/').filter(Boolean), steps=['Başlangıç: <code>'+esc(from)+'</code> dosyasının klasörü, yani <code>'+esc(cur.length?'kisisel-sayfa/'+cur.join('/')+'/':'kisisel-sayfa/')+'</code>'];
+    path.split('/').forEach(function(s,idx,arr){
+      if(s==='..'){ cur.pop(); steps.push('<code>..</code> bir üst klasöre çık: <code>'+esc('kisisel-sayfa/'+(cur.length?cur.join('/')+'/':''))+'</code>'); }
+      else if(s==='.'||s==='') {}
+      else if(idx<arr.length-1){ cur.push(s); steps.push('<code>'+esc(s)+'/</code> bu klasöre gir'); }
+      else steps.push('<code>'+esc(s)+'</code> dosyasını al');
+    });
+    return '<ol>'+steps.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ol>';
+  }
+  function check(){
+    var from=sf.value, to=st.value, v=inp.value.trim();
+    if(from===to){ res.className='pathres bad'; res.textContent='Bulunduğun dosya ile gitmek istediğin dosya aynı. Başka bir hedef seç.'; return; }
+    if(!v){ res.className='pathres bad'; res.textContent='Önce bir yol yaz.'; return; }
+    var note='';
+    if(v.indexOf('\\')>=0){ note='<p>Ters eğik çizgi (<code>\\</code>) kullandın. Tarayıcılar onu <code>/</code> işaretine çevirir, ama bu bir hata düzeltmesi. Doğru yazım <code>/</code>.</p>'; v=v.replace(/\\/g,'/'); }
+    if(v.charAt(0)==='/'){ res.className='pathres bad'; res.innerHTML=note+'Başına <code>/</code> koyma. Bu derste yolları bulunduğun dosyaya göre, göreli yazıyoruz.'; return; }
+    if(/^[a-z]+:/i.test(v)){ res.className='pathres bad'; res.innerHTML=note+'Bu tam bir adres. Burada kendi sitenin içindeki bir dosyaya göreli yol yazıyoruz.'; return; }
+    var cur=dirOf(from).split('/').filter(Boolean), parts=v.split('/'), outside=false;
+    for(var i=0;i<parts.length;i++){ var s=parts[i]; if(s==='.'||s==='') continue; if(s==='..'){ if(!cur.length){outside=true;break;} cur.pop(); } else cur.push(s); }
+    if(outside){ res.className='pathres bad'; res.innerHTML=note+'Çok fazla <code>../</code> yazdın, sitenin klasörünün dışına çıktın. '+explain(from,v); return; }
+    var got=cur.join('/');
+    if(got===to){
+      if(note){ res.className='pathres warn'; res.innerHTML='Yol doğru dosyaya gidiyor.'+note+'Yolun <code>/</code> ile adım adım okunuşu:'+explain(from,v); return; }
+      res.className='pathres ok'; res.innerHTML='Doğru. Yolun adım adım okunuşu:'+explain(from,v); return; }
+    if(got.toLowerCase()===to.toLowerCase()){ res.className='pathres bad'; res.innerHTML=note+'Neredeyse. Yol doğru yere gidiyor ama harfler farklı: sen <code>'+esc(got)+'</code> yazdın, dosyanın adı <code>'+esc(to)+'</code>. Windows bunu bulur, GitHub Pages bulamaz.'; return; }
+    if(FILES.indexOf(got)>=0){ res.className='pathres bad'; res.innerHTML=note+'Bu yol başka bir dosyaya gidiyor: <code>'+esc(got)+'</code>.'+explain(from,v); return; }
+    res.className='pathres bad'; res.innerHTML=note+'Böyle bir dosya yok. Yolunun gösterdiği yer: <code>'+esc('kisisel-sayfa/'+got)+'</code>.'+explain(from,v);
+  }
+  sf.addEventListener('change',function(){ inp.value=''; drawTree(); });
+  st.addEventListener('change',function(){ inp.value=''; drawTree(); });
+  inp.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); check(); } });
+  byId('pCheck').addEventListener('click',check);
+  byId('pShow').addEventListener('click',function(){ if(sf.value===st.value){ check(); return; } var p=relPath(sf.value,st.value); inp.value=p; res.className='pathres ok'; res.innerHTML='Cevap: <code>'+esc(p)+'</code>'+explain(sf.value,p); });
+  byId('pRand').addEventListener('click',function(){ setTask((ti+1)%TASKS.length); });
+  setTask(0);
+  return { task:setTask, tryPath:function(v){ inp.value=v; check(); } };
+})();
+
+/* ---------- büyük/küçük harf ---------- */
+var AFIS='<svg viewBox="0 0 200 200" aria-hidden="true"><rect x="42" y="14" width="116" height="172" rx="6" fill="#FFFFFF" stroke="#1F3A5F" stroke-width="4"/><rect x="42" y="14" width="116" height="46" rx="6" fill="#1F3A5F"/><rect x="60" y="31" width="80" height="11" rx="3" fill="#F0A93B"/><circle cx="100" cy="88" r="12" fill="#1F3A5F"/><path d="M88 128 L94 102 H106 L112 128 Z" fill="#1F3A5F"/><rect x="80" y="128" width="40" height="8" rx="2" fill="#1F3A5F"/><rect x="62" y="150" width="76" height="7" rx="3" fill="#8E9AAB"/><rect x="72" y="164" width="56" height="7" rx="3" fill="#8E9AAB"/></svg>';
+var harf=(function(){
+  var sel=byId('cFile'), inp=byId('cSrc');
+  function paint(){
+    var file=sel.value, src=inp.value.trim().replace(/^\.\//,'');
+    var win=src.toLowerCase()===file.toLowerCase(), gh=src===file;
+    byId('cWin').innerHTML=win?AFIS:'Turnuva afişi (alt metni)';
+    byId('cGh').innerHTML=gh?AFIS:'Turnuva afişi (alt metni)';
+    var a=byId('cWinSt'), b=byId('cGhSt');
+    a.textContent=win?'Bulundu':'Dosya bulunamadı'; a.className='st '+(win?'ok':'bad');
+    b.textContent=gh?'200: bulundu':(win?'404: harfler farklı, bulunamadı':'404: bulunamadı'); b.className='st '+(gh?'ok':'bad');
+  }
+  sel.addEventListener('change',paint); inp.addEventListener('input',paint); paint();
+  return { set:function(f,s){ sel.value=f; inp.value=s; paint(); } };
+})();
+
+/* ---------- bölüm atama ---------- */
+var PARTS=[
+  {t:'Sitenin adı: “Ece’nin sayfası”',a:'header',e:'Sitenin adı sayfanın en üstünde siteyi tanıtır. Tanıtım alanı header’dır.'},
+  {t:'İlgi alanları listesi',a:'main',e:'Sayfanın asıl anlattığı şeylerden biri, main’e girer.'},
+  {t:'“Ece · 2026” satırı',a:'footer',e:'Yazarın adı ve yıl gibi künye bilgisi en alttaki footer’da durur.'},
+  {t:'Ana sayfa · Hakkımda · Projeler bağlantıları',a:'nav',e:'Sitenin sayfaları arasında gezdiren bağlantı grubu nav’dır.'},
+  {t:'“Satranç kulübü” başlığı ve turnuva afişi',a:'main',e:'Ziyaretçinin bu sayfaya geliş nedeni olan içerik main’dedir.'},
+  {t:'“Son güncelleme: Ekim 2026” yazısı',a:'footer',e:'Sayfa hakkında küçük bir bilgi. Künyenin parçası, footer’a gider.'}
+];
+var atama=(function(){
+  var box=byId('sim-assign'), list=box.querySelector('.assign'), score=byId('aScore'), pick={};
+  PARTS.forEach(function(p,i){
+    var c=document.createElement('div'); c.className='acard';
+    c.innerHTML='<div class="t">'+esc(p.t)+'</div><div class="opts" role="group" aria-label="'+esc(p.t)+' için bölüm"></div><div class="why"></div>';
+    ['header','nav','main','footer'].forEach(function(r){
+      var b=document.createElement('button'); b.type='button'; b.className='btn'; b.textContent=r; b.setAttribute('aria-pressed','false');
+      b.addEventListener('click',function(){ choose(i,r); });
+      c.querySelector('.opts').appendChild(b);
+    });
+    list.appendChild(c);
+  });
+  function choose(i,r){
+    var c=list.querySelectorAll('.acard')[i];
+    pick[i]=r; c.classList.remove('checked','right','wrong');
+    c.querySelectorAll('.opts .btn').forEach(function(x){x.setAttribute('aria-pressed',x.textContent===r?'true':'false');});
+    layout(); score.textContent='';
+  }
+  function layout(){
+    box.querySelectorAll('.reg').forEach(function(r){
+      var k=r.dataset.reg, items=PARTS.map(function(p,i){return pick[i]===k?'<span>'+esc(p.t.replace(/[“”]/g,''))+'</span>':'';}).join('');
+      r.innerHTML='<b>'+k+'</b>'+items;
+    });
+  }
+  function mark(i){
+    var p=PARTS[i], c=list.querySelectorAll('.acard')[i], ok=pick[i]===p.a;
+    c.classList.add('checked'); c.classList.toggle('right',ok); c.classList.toggle('wrong',!ok);
+    c.querySelector('.why').innerHTML=(ok?'Doğru. ':'Doğrusu <code>'+p.a+'</code>. ')+fmt(p.e);
+    return ok;
+  }
+  function reset(){ pick={}; list.querySelectorAll('.acard').forEach(function(c){ c.classList.remove('checked','right','wrong'); c.querySelectorAll('.btn').forEach(function(x){x.setAttribute('aria-pressed','false');}); }); score.textContent=''; layout(); }
+  byId('aCheck').addEventListener('click',function(){
+    var n=0, empty=0;
+    PARTS.forEach(function(p,i){ if(!pick[i]) empty++; if(mark(i)) n++; });
+    score.textContent=n+' / '+PARTS.length+' doğru'+(empty?' ('+empty+' parça boş)':'');
+  });
+  byId('aReset').addEventListener('click',reset);
+  layout();
+  return { choose:choose, mark:mark, reset:reset };
+})();
+
+/* ---------- tahmin kutuları: her simülasyon bir tahminle açılır ---------- */
+Ders.predict('edBody',{
+  q:'Etkinlik sayfasında 1. satırın sonundaki `</h1>` silinirse sağdaki sayfa ne olur?',
+  options:['Yalnız başlık bozulur, altındaki paragraf ve liste aynı kalır','Sayfa bembeyaz kalır, tarayıcı hiçbir şey çizmez','Başlıktan sonraki her şey de başlık gibi büyük ve kalın görünür'],
+  correct:2,
+  run:function(){ ed1.set(PRESETS.etkinlik.replace('</h1>','')); },
+  reset:function(){ ed1.set(PRESETS.etkinlik); },
+  seen:'Tek bir `</h1>` eksik olunca tarayıcı başlığın nerede bittiğini bilemedi ve altındaki her şeyi başlığın içine aldı. Soldaki metni değiştirdikçe sağdaki görüntü de değişiyor: tarayıcı dosyayı her seferinde baştan okuyup yeniden çiziyor. Sayfa dediğimiz şey o metinden ibaret. Şimdi `</h1>`’yi geri yaz ya da öteki hazır örnekleri aç.'
+});
+Ders.predict('anatBody',{
+  q:'Görsel örneğinde satırın sonuna bir de `</img>` yazarsan tarayıcı ne yapar?',
+  options:['Fazla kapanışı yok sayar, görsel aynı görünür','Görseli iki kez çizer','Görseli hiç çizmez, satırı bozuk sayar'],
+  correct:0,
+  run:function(){
+    var src='<p><img src="afis.svg" alt="Afiş"></img> Turnuva</p>', doc=new DOMParser().parseFromString(src,'text/html');
+    anat.pick(1);
+    anat.say('<code>'+esc(src)+'</code> satırından tarayıcının kurduğu ağaç:<ul class="tree"><li><span class="tg">body</span><ul>'+treeHTML(doc.body,{},0)+'</ul></li></ul>'+fmt('Ağaçta `</img>` için bir düğüm yok. Tarayıcı bu kapanışı tanımadı ve atladı.'));
+  },
+  reset:function(){ anat.pick(0); },
+  seen:'Her parçanın bir görevi var. Nitelik her zaman açılış etiketinin içinde durur, kapanış etiketinde asla nitelik olmaz. `img`’nin kapanışı yok, çünkü içine metin koymuyoruz. Fazladan yazılan `</img>` ağaçta iz bırakmadı: tarayıcı `img`’yi açılış etiketiyle bitmiş saydı ve kapanışı atladı. Şimdi iki örnekteki parçalara tek tek tıkla.'
+});
+Ders.predict('treeBody',{
+  q:'“Kapanmamış strong” örneğinde üç paragraf var ve ilkindeki `<strong>` hiç kapanmıyor. Kaç paragraf kalın görünür?',
+  options:['Yalnız ilki','Üçü de','Hiçbiri, tarayıcı hatalı etiketi siler'],
+  correct:1,
+  run:function(){ tree.load('kapanmamis'); },
+  reset:function(){ tree.load('dogru'); },
+  seen:'Tarayıcı ilk paragraf bitince `strong`’u yeniden açıyor ve sonraki paragrafların hepsini onun içine alıyor. Ağaçta bunu görüyorsun, bu yüzden bütün yazı kalınlaşıyor. Tek bir eksik `</strong>` sayfanın geri kalanını bozdu ve hiçbir yerde hata mesajı çıkmadı. Çapraz örnekte ise ekran doğru görünüyor ama kod yanlış. Tarayıcının düzeltmesine güvenme, kaynağa bak.'
+});
+Ders.predict('skelBody',{
+  q:'`<head>` ve `</head>` satırlarını birlikte silersen sekmede ne yazar?',
+  options:['Dosyanın adı, `etkinlik.html`','Sekme boş kalır, “Satranç Kulübü” yazısı sayfanın içine iner','Yine “Satranç Kulübü”'],
+  correct:2,
+  run:function(){ skel.set({2:true,5:true}); },
+  reset:function(){ skel.set({}); },
+  seen:'`head`, `body` ya da `html` satırını silince görünüşte hiçbir şey değişmiyor, çünkü tarayıcı eksik öğeyi kendisi tamamlıyor. `title` da `head`’in içine yerleşip sekmeye yazıldı. `meta charset`, `title` ve `lang` ise tamamlanamaz. Onları sen yazmazsan kimse yazmaz. Şimdi başka satırları da sil ve sağdaki değişikliklere bak.'
+});
+Ders.predict('ed2Body',{
+  q:'`Kayıt adımları` listesinde 1. ve 2. maddenin arasına yeni bir `<li>` eklersen “Kulüp masasına teslim et.” maddesinin numarası ne olur?',
+  options:['3 olur, tarayıcı numaraları baştan sayar','2 kalır, yeni madde numarasız görünür','Yeni madde de 2 olur, iki tane 2 görünür'],
+  correct:0,
+  run:function(){ ed2.set(PRESETS.liste.replace('<li>Formu doldur.</li>','<li>Formu doldur.</li>\n  <li>Formu imzala.</li>')); },
+  reset:function(){ ed2.set(PRESETS.liste); },
+  seen:'`ol`’da numaraları sen yazmıyorsun, tarayıcı her çizimde maddeleri baştan sayıyor. `ol` ile `ul` arasındaki tek fark maddelerin önündeki işaret. Hangisini seçeceğine içeriğin karar verir: sıra önemliyse `ol`, değilse `ul`.'
+});
+Ders.predict('pathBody',{
+  q:'`blog/ilk-yazi.html`’den ana sayfaya bağlantı verirken yalnız `index.html` yazarsan tarayıcı hangi dosyayı arar?',
+  options:['`kisisel-sayfa/index.html`, yani ana sayfayı','`kisisel-sayfa/blog/index.html` dosyasını','Önce `blog`’a bakar, bulamazsa ana klasöre geçer'],
+  correct:1,
+  run:function(){ yol.task(2); yol.tryPath('index.html'); },
+  reset:function(){ yol.task(0); },
+  seen:'Yalnız dosya adını yazınca tarayıcı onu bulunduğun klasörde, `blog`’un içinde aradı. Aynı hedefe giden yol, nereden baktığına göre değişiyor. `blog` klasöründeki bir sayfadan dışarıdaki bir dosyaya gitmek için önce `../` ile bir üst klasöre çıkman gerekiyor. Şimdi kutuya `../index.html` yaz ve yeniden kontrol et.'
+});
+Ders.predict('caseBody',{
+  q:'Klasördeki dosya `img/afis.svg`, kodda `img/afis.SVG` yazıyor. Uzantıdaki büyük harfler de sayılır mı?',
+  options:['Hayır, uzantı sayılmaz, görsel iki yerde de açılır','İki yerde de kırık görünür, uzantı her yerde küçük olmalı','Sayılır: Windows’ta açılır, GitHub Pages’te kırık görünür'],
+  correct:2,
+  run:function(){ harf.set('img/afis.svg','img/afis.SVG'); },
+  reset:function(){ harf.set('img/Afis.svg','img/afis.svg'); },
+  seen:'Uzantı da adın bir parçası. Harfler bire bir aynı olmadığında Windows yine de dosyayı buluyor, GitHub Pages bulamıyor. Dosya adlarını bu yüzden hep küçük harfle, boşluksuz ve Türkçe karakter kullanmadan ver: `ben.jpg`, `afis.svg`, `ilk-yazi.html`.'
+});
+Ders.predict('assignBody',{
+  q:'“Satranç kulübü” başlığı ve turnuva afişi menünün hemen altında, iri bir başlıkla duruyor. Hangi bölüme girer?',
+  options:['`header`, çünkü sayfanın en büyük başlığı','`main`, çünkü ziyaretçinin sayfaya geliş nedeni o','`nav`, çünkü menünün hemen altında duruyor'],
+  correct:1,
+  run:function(){ atama.choose(4,'main'); atama.mark(4); },
+  reset:function(){ atama.reset(); },
+  seen:'Bir parçanın hangi bölüme gideceğini sayfadaki yeri değil, görevi belirliyor. Sitenin adı tanıtır, menü gezdirir, asıl içerik anlatır, alt kısım künyeyi taşır. Şimdi öteki beş parçayı da yerleştir ve kontrol et.'
+});
+})();
+</script>
+</body>
+</html>

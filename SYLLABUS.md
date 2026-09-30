@@ -48,6 +48,8 @@ Bir web sayfasının aslında bir metin dosyası olduğunu görürsün. Tarayıc
 
 Labda kişisel sayfanı adım adım yaparsın, GitHub'a web arayüzünden yükleyip GitHub Pages ile yayınlarsın. Boz adımında bozuk bir sitede üç hata ararsın.
 
+[Hafta 2 ders notu](https://cagrisahin58.github.io/2026-web/weeks/hafta-02/)
+
 ### Hafta 3 · 15 Ekim · CSS: sayfaya görünüş vermek
 
 CSS'in ne olduğunu ve HTML'e nasıl bağlandığını öğrenirsin. Seçicilerle (etiket ve sınıf) hangi öğeyi biçimlendireceğini söylersin. Renk, yazı tipi ve boşluk verirsin. Her öğenin bir kutu olduğunu görürsün. Bu kutunun dış boşluğu margin, çerçevesi border, iç boşluğu padding adını taşır. Flexbox adlı CSS yöntemiyle öğeleri yan yana dizersin. Ekran genişliğine göre devreye giren tek bir kuralla, yani bir media query ile sayfanı telefonda da düzgün gösterirsin.

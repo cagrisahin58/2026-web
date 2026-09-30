@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" width="200" height="260">
+  <title>Satranç turnuvası afişi</title>
+  <rect width="200" height="260" rx="10" fill="#F7F4EC"/>
+  <rect x="10" y="10" width="180" height="240" rx="6" fill="#FFFFFF" stroke="#1F3A5F" stroke-width="4"/>
+  <rect x="10" y="10" width="180" height="62" rx="6" fill="#1F3A5F"/>
+  <text x="100" y="38" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#F0A93B">SATRANÇ KULÜBÜ</text>
+  <text x="100" y="60" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#FFFFFF">Hızlı satranç turnuvası</text>
+  <circle cx="100" cy="100" r="14" fill="#1F3A5F"/>
+  <path d="M86 150 L93 120 H107 L114 150 Z" fill="#1F3A5F"/>
+  <rect x="78" y="150" width="44" height="10" rx="2" fill="#1F3A5F"/>
+  <text x="100" y="192" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#1F3A5F">Perşembe 15:00</text>
+  <text x="100" y="214" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#3D4A5C">Kütüphane</text>
+  <text x="100" y="236" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#5B6577">Kayıt kulüp masasında</text>
+</svg>

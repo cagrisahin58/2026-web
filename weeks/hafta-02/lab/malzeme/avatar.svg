@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <title>Profil resmi yerine basit bir insan çizimi</title>
+  <circle cx="100" cy="100" r="100" fill="#DDF3EF"/>
+  <circle cx="100" cy="78" r="36" fill="#0A6F62"/>
+  <path d="M34 172 C44 130 72 118 100 118 C128 118 156 130 166 172 A100 100 0 0 1 34 172 Z" fill="#0A6F62"/>
+</svg>
