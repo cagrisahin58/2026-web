@@ -74,6 +74,30 @@ p{margin:0 0 12px;max-width:72ch}
 .alt a{padding:5px 11px;font-size:.84rem}
 footer{color:var(--muted);font-size:.86rem;border-top:1px solid var(--line);padding-top:16px;margin-top:40px}
 @media (max-width:560px){ .takim .bas{flex-direction:column} }
+
+/* yıl sonu sergi ve ödül duyurusu */
+.duyuru{position:relative;margin:18px 0 6px;padding:2px;border-radius:18px;background:linear-gradient(120deg,var(--ship),var(--ai),var(--theory),var(--lab),var(--ship));background-size:300% 300%;animation:kay 6s linear infinite,parla 2.4s ease-in-out infinite}
+.duyuru-ic{background:var(--surface);border-radius:16px;padding:18px 20px 16px}
+.duyuru-bas{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-bottom:8px}
+.duyuru-bas h2{font-size:1.3rem}
+.yanip{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:999px;background:var(--ship-soft);color:var(--ship);animation:yanip 1.2s steps(2,start) infinite}
+.yanip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ship)}
+.duyuru p{max-width:80ch}
+.oduller{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:12px}
+.odul{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;background:var(--surface-2)}
+.odul::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);transform:translateX(-120%);animation:isilti 3.6s ease-in-out infinite}
+.odul .sira{font-family:var(--display);font-weight:800;font-size:1.9rem;line-height:1;color:var(--c)}
+.odul .ne{font-weight:600;margin:6px 0 2px}
+.odul .kim{color:var(--muted);font-size:.9rem}
+.odul:nth-child(1){--c:#C48A00} .odul:nth-child(2){--c:#7A8494} .odul:nth-child(3){--c:#9A5B2B}
+.odul:nth-child(2)::after{animation-delay:.6s} .odul:nth-child(3)::after{animation-delay:1.2s}
+@keyframes kay{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+@keyframes parla{0%,100%{box-shadow:0 0 0 0 rgba(143,86,0,.0)}50%{box-shadow:0 0 22px 4px rgba(143,86,0,.35)}}
+@keyframes yanip{0%{opacity:1}50%{opacity:.35}100%{opacity:1}}
+@keyframes isilti{0%,55%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .odul::after{background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.14) 50%,transparent 70%)} }
+:root[data-theme="dark"] .odul::after{background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.14) 50%,transparent 70%)}
+@media (prefers-reduced-motion:reduce){ .duyuru,.yanip,.odul::after{animation:none} .odul::after{display:none} }
 </style>
 </head>
 <body>
@@ -86,6 +110,18 @@ footer{color:var(--muted);font-size:.86rem;border-top:1px solid var(--line);padd
     <nav><a class="btn" href="../">Ders ana sayfası</a><button class="btn" type="button" id="tema">Tema</button></nav>
   </div>
   <p>Dönem projesini dört kişilik takımlar yapar. Takımınızı buradan kaydedersiniz; kayıt sınıfta herkese görünür ve yedi gün boyunca düzenlenebilir.</p>
+
+  <section class="duyuru" aria-labelledby="odul-h">
+    <div class="duyuru-ic">
+      <div class="duyuru-bas"><span class="yanip">Ödül var</span><h2 id="odul-h">Yıl sonu proje sergisi ve ödüller</h2></div>
+      <p>Dönem sonunda projeler, bütün üniversitenin gezdiği bir proje sergisinde sergilenebilecek. Yaptığınız uygulamayı yalnız hoca değil, kampüs görecek. Ders kapsamında en iyi üç proje de ödüllendirilecek:</p>
+      <div class="oduller">
+        <div class="odul"><div class="sira">1.</div><div class="ne">6 aylık Claude Pro üyeliği</div><div class="kim">Birinci takımın dört üyesinin her birine (aylık 20 dolarlık paket)</div></div>
+        <div class="odul"><div class="sira">2.</div><div class="ne">1 aylık Claude Pro üyeliği</div><div class="kim">İkinci takımın her üyesine</div></div>
+        <div class="odul"><div class="sira">3.</div><div class="ne">Gofret</div><div class="kim">Üçüncü takımın her üyesine, gerçekten</div></div>
+      </div>
+    </div>
+  </section>
 
   <div class="kural">
     <h2>Nasıl çalışır</h2>
