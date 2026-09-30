@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab grupları · YZM205</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ink:#121A2B; --ground:#F5F7FB; --surface:#FFFFFF; --surface-2:#EEF2F8; --line:#D9DEE8; --muted:#5B6577;
+  --theory:#2352D9; --theory-soft:#E4EAFB; --lab:#0A6F62; --lab-soft:#DDF3EF; --ship:#8F5600; --ship-soft:#FBEBD2; --ai:#7A3DD6; --ai-soft:#EEE6FB;
+  --err:#B42318; --err-soft:#FBE9E7; --focus:#2352D9;
+  --display:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif; --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#E7ECF5; --ground:#0E131D; --surface:#161C29; --surface-2:#1D2535; --line:#2A3345; --muted:#9AA5B8;
+    --theory:#7B97FF; --theory-soft:#1B2545; --lab:#3FC4B0; --lab-soft:#123430; --ship:#F0A93B; --ship-soft:#3A2A10; --ai:#B48CFF; --ai-soft:#2C1F4A;
+    --err:#FF8A80; --err-soft:#3A1A17; --focus:#7B97FF; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E7ECF5; --ground:#0E131D; --surface:#161C29; --surface-2:#1D2535; --line:#2A3345; --muted:#9AA5B8;
+  --theory:#7B97FF; --theory-soft:#1B2545; --lab:#3FC4B0; --lab-soft:#123430; --ship:#F0A93B; --ship-soft:#3A2A10; --ai:#B48CFF; --ai-soft:#2C1F4A;
+  --err:#FF8A80; --err-soft:#3A1A17; --focus:#7B97FF; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:16px/1.55 var(--body)}
+main{max-width:1040px;margin:0 auto;padding:32px 16px 64px}
+a{color:var(--theory)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,4.5vw,2.4rem);line-height:1.15;margin:8px 0 10px;letter-spacing:-.01em}
+h2{font-family:var(--display);font-size:1.25rem;margin:0}
+p{margin:0 0 12px;max-width:72ch}
+.ust{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin-bottom:6px}
+.ust nav{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;font:inherit;font-size:.92rem;font-weight:500;cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--theory)}
+.btn.primary{background:var(--theory);border-color:var(--theory);color:#fff}
+.btn:disabled{opacity:.5;cursor:default}
+.kural{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:18px 0}
+.kural ol{margin:8px 0 0;padding-left:22px}
+.kural li{margin:4px 0}
+.arac{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 12px}
+.arac input{flex:1 1 220px;min-width:0;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font:inherit;background:var(--surface);color:var(--ink)}
+.ozet{color:var(--muted);font-size:.92rem}
+.durum{padding:12px 14px;border-radius:12px;background:var(--surface-2);color:var(--muted);margin:10px 0}
+.durum.hata{background:var(--err-soft);color:var(--err)}
+.durum.iyi{background:var(--lab-soft);color:var(--lab)}
+.izgara{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:8px}
+.takim{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--c,var(--theory));border-radius:14px;padding:14px 16px 12px;display:flex;flex-direction:column;gap:8px;position:relative}
+.takim.vurgu{box-shadow:0 0 0 3px var(--ship-soft),0 0 0 4px var(--ship)}
+.takim .bas{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.takim h2{font-size:1.15rem;line-height:1.25}
+.takim .no{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;color:var(--c,var(--theory));text-transform:uppercase}
+.rozet{display:inline-block;font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;padding:3px 8px;border-radius:999px;background:var(--surface-2);color:var(--muted);white-space:nowrap}
+.rozet.kilit{background:var(--err-soft);color:var(--err)}
+.rozet.acik{background:var(--lab-soft);color:var(--lab)}
+.uyeler{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.uyeler li{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:baseline;font-size:.95rem}
+.uyeler .num{font-family:var(--mono);font-size:.86rem;color:var(--muted);background:var(--surface-2);padding:1px 7px;border-radius:6px}
+.konu{font-size:.95rem;color:var(--ink);margin:2px 0 0}
+.konu b{font-weight:600;color:var(--muted);font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;display:block;margin-bottom:2px}
+.baglar{display:flex;flex-wrap:wrap;gap:8px;font-size:.9rem}
+.baglar a{word-break:break-all}
+.baglar .yok{color:var(--muted)}
+.alt{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;padding-top:6px;border-top:1px dashed var(--line);font-size:.82rem;color:var(--muted)}
+.alt button{padding:5px 11px;font-size:.84rem}
+dialog{border:1px solid var(--line);border-radius:16px;padding:0;max-width:640px;width:calc(100% - 32px);background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:rgba(10,14,24,.55)}
+dialog form{padding:20px 22px 18px}
+dialog h2{margin-bottom:4px}
+.alan{display:grid;gap:4px;margin:10px 0}
+.alan label{font-size:.86rem;font-weight:600;color:var(--muted)}
+.alan input,.alan textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font:inherit;background:var(--surface);color:var(--ink)}
+.alan textarea{min-height:64px;resize:vertical}
+.alan small{color:var(--muted);font-size:.82rem}
+.uyegrid{display:grid;grid-template-columns:150px 1fr;gap:8px;margin:6px 0}
+.uyegrid .b{grid-column:1/-1;font-size:.8rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin-top:4px}
+.uyegrid input{border:1px solid var(--line);border-radius:10px;padding:8px 11px;font:inherit;background:var(--surface);color:var(--ink);min-width:0}
+.dugmeler{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:14px}
+.form-hata{color:var(--err);background:var(--err-soft);padding:10px 12px;border-radius:10px;font-size:.92rem;display:none}
+.kod-kutu{background:var(--lab-soft);border-radius:12px;padding:14px 16px;margin:10px 0}
+.kod-kutu .kod{font-family:var(--mono);font-size:1.7rem;letter-spacing:.2em;font-weight:600;color:var(--lab)}
+footer{color:var(--muted);font-size:.86rem;border-top:1px solid var(--line);padding-top:16px;margin-top:40px}
+@media (max-width:560px){ .uyegrid{grid-template-columns:1fr} .takim .bas{flex-direction:column} }
+</style>
+</head>
+<body>
+<main>
+  <div class="ust">
+    <div>
+      <div class="eyebrow">YZM205 · Dönem projesi</div>
+      <h1>Lab grupları</h1>
+    </div>
+    <nav><a class="btn" href="../">Ders ana sayfası</a><button class="btn" type="button" id="tema">Tema</button></nav>
+  </div>
+  <p>Dönem projesini dört kişilik takımlar yapar. Takımınızı burada kaydedin; kayıt sınıfta herkese görünür. Her takımın Drive'da bir dosya klasörü olur, taslak çizimlerinizi ve dosyalarınızı oraya koyarsınız.</p>
+
+  <div class="kural">
+    <h2>Nasıl çalışır</h2>
+    <ol>
+      <li>Takımdan bir kişi <b>Yeni takım kaydı</b> düğmesiyle formu doldurur: takım adı, dört üyenin numarası ve adı, proje konusu. Sınıf kodu derste söylenir.</li>
+      <li>Kayıt açılınca ekranda altı karakterlik bir <b>düzenleme kodu</b> çıkar. Onu takım grubunuza yapıştırın; kaydı sonradan değiştirmek için gerekir.</li>
+      <li>Kayıt açıldıktan sonra <span id="kilitGun">7</span> gün boyunca düzenlenebilir (üye, konu, site adresi). Sürenin sonunda kayıt kilitlenir; sonrasında değişiklik için hocaya yazarsınız.</li>
+      <li>Bir öğrenci yalnız bir takımda olabilir. Site adresi ve klasör bağlantısı sonradan da eklenebilir.</li>
+    </ol>
+  </div>
+
+  <div class="arac">
+    <button class="btn primary" type="button" id="yeniBtn">Yeni takım kaydı</button>
+    <input type="search" id="ara" placeholder="Öğrenci numaranı ya da takım adını yaz" aria-label="Takım ara" autocomplete="off">
+    <span class="ozet" id="ozet"></span>
+  </div>
+
+  <div id="durum" class="durum" aria-live="polite">Kayıtlar yükleniyor…</div>
+  <div class="izgara" id="liste"></div>
+
+  <footer>YZM205 Web Tasarımı ve Programlama · Muş Alparslan Üniversitesi · Arş. Gör. Çağrı ŞAHİN</footer>
+</main>
+
+<dialog id="dlg">
+  <form id="form" method="dialog" novalidate>
+    <h2 id="dlgBaslik">Yeni takım kaydı</h2>
+    <p class="ozet" id="dlgNot">Bütün alanlar takım adına doldurulur; yazdıklarınız sınıfa açık görünür.</p>
+    <div class="form-hata" id="formHata" role="alert"></div>
+    <div class="alan"><label for="fTakim">Takım adı</label><input id="fTakim" name="takim" maxlength="40" required placeholder="Örnek: Kale, Vezir, Kampüs Pusulası"></div>
+    <div class="uyegrid" id="uyeler"></div>
+    <div class="alan"><label for="fKonu">Proje konusu</label><textarea id="fKonu" name="konu" maxlength="300" required placeholder="Kim için, hangi sorunu çözen bir site? Örnek: Yurtta kalan öğrenciler için çamaşırhane sırasını gösteren ve sıra alınan bir uygulama."></textarea><small>Bir iki cümle yeter; sonradan değiştirebilirsiniz.</small></div>
+    <div class="alan"><label for="fSite">Sitenin adresi (varsa)</label><input id="fSite" name="site" type="url" maxlength="200" placeholder="https://takimadi.github.io/proje/"><small>GitHub Pages ya da yayın adresi. Hafta 10'dan itibaren dolu olmalı.</small></div>
+    <div class="alan" id="klasorAlan"><label for="fKlasor">Dosya klasörü (isteğe bağlı)</label><input id="fKlasor" name="klasor" type="url" maxlength="300" placeholder="Boş bırakırsanız sizin için bir Drive klasörü açılır"><small>Kendi Drive klasörünüzü kullanmak isterseniz bağlantısını yazın.</small></div>
+    <div class="alan" id="kodAlan"><label for="fKod">Sınıf kodu</label><input id="fKod" name="kod" maxlength="12" autocomplete="off" placeholder="Derste söylenen kod"></div>
+    <div class="dugmeler"><button class="btn" type="button" id="vazgec">Vazgeç</button><button class="btn primary" type="submit" id="gonder">Kaydet</button></div>
+  </form>
+</dialog>
+
+<dialog id="dlgKod">
+  <form method="dialog">
+    <h2>Takım kaydedildi</h2>
+    <p>Kaydınız sınıf listesinde. Aşağıdaki düzenleme kodunu takım grubunuza yapıştırın; kaydı değiştirmek için gerekecek. Kod bir daha gösterilmez.</p>
+    <div class="kod-kutu"><div class="eyebrow">Düzenleme kodu</div><div class="kod" id="kodGoster"></div></div>
+    <p id="klasorNot" class="ozet"></p>
+    <div class="dugmeler"><button class="btn primary" type="submit">Tamam, kodu kaydettim</button></div>
+  </form>
+</dialog>
+
+<script>
+(function () {
+  "use strict";
+
+  // Kayıt sistemi: Apps Script web uygulamasının adresi (…/exec). Boşsa sayfa yalnız açıklamayı gösterir.
+  const API_ADRES = "";
+
+  const $ = (s) => document.querySelector(s);
+  const esc = (s) => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  const RENK = ["--theory", "--lab", "--ship", "--ai"];
+  let takimlar = [], ayar = { takimBoyu: 4, kilitGun: 7 }, duzenlenen = null;
+
+  function tarih(iso) {
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return "";
+    return d.toLocaleDateString("tr-TR", { day: "numeric", month: "long" }) + " " + d.toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" });
+  }
+
+  function durum(metin, tur) {
+    const el = $("#durum");
+    el.className = "durum" + (tur ? " " + tur : "");
+    el.textContent = metin;
+    el.style.display = metin ? "" : "none";
+  }
+
+  async function istek(yol, govde) {
+    if (!API_ADRES) throw new Error("Kayıt sistemi henüz açılmadı. Hoca derste duyuracak.");
+    const secenek = govde ? { method: "POST", body: JSON.stringify(govde) } : { method: "GET" };
+    const r = await fetch(API_ADRES + yol, secenek);
+    const veri = await r.json();
+    if (!veri.ok) throw new Error(veri.hata || "Bilinmeyen hata.");
+    return veri;
+  }
+
+  async function yukle() {
+    try {
+      const v = await istek("?islem=liste");
+      takimlar = v.takimlar || [];
+      ayar = v.ayar || ayar;
+      $("#kilitGun").textContent = ayar.kilitGun;
+      durum("");
+      ciz();
+    } catch (e) {
+      durum(e.message, API_ADRES ? "hata" : "");
+      $("#yeniBtn").disabled = !API_ADRES;
+      ciz();
+    }
+  }
+
+  function ciz() {
+    const q = ($("#ara").value || "").trim().toLocaleLowerCase("tr");
+    const kutu = $("#liste");
+    const uyeSayisi = takimlar.reduce((t, x) => t + x.uyeler.length, 0);
+    $("#ozet").textContent = takimlar.length ? takimlar.length + " takım, " + uyeSayisi + " öğrenci" : "";
+    if (!takimlar.length) { kutu.innerHTML = ""; return; }
+    kutu.innerHTML = takimlar.map((t, i) => {
+      const eslesti = q && (t.takim.toLocaleLowerCase("tr").includes(q) || t.uyeler.some(u => u.no.includes(q) || u.ad.toLocaleLowerCase("tr").includes(q)));
+      const kilit = t.kilitli
+        ? '<span class="rozet kilit">Kilitli</span>'
+        : '<span class="rozet acik">' + esc(tarih(t.kilit)) + "'e kadar düzenlenebilir</span>";
+      const uyeler = t.uyeler.map(u => '<li><span class="num">' + esc(u.no) + '</span><span>' + esc(u.ad) + '</span></li>').join("");
+      const site = t.site ? '<a href="' + esc(t.site) + '" target="_blank" rel="noopener">Site</a>' : '<span class="yok">Site adresi henüz yok</span>';
+      const klasor = t.klasor ? '<a href="' + esc(t.klasor) + '" target="_blank" rel="noopener">Dosya klasörü</a>' : '<span class="yok">Klasör yok</span>';
+      return '<article class="takim' + (eslesti ? " vurgu" : "") + '" style="--c:var(' + RENK[i % RENK.length] + ')" data-id="' + esc(t.id) + '">'
+        + '<div class="bas"><div><div class="no">Takım ' + (i + 1) + '</div><h2>' + esc(t.takim) + '</h2></div>' + kilit + '</div>'
+        + '<ul class="uyeler">' + uyeler + '</ul>'
+        + '<p class="konu"><b>Konu</b>' + esc(t.konu) + '</p>'
+        + '<div class="baglar">' + site + ' · ' + klasor + '</div>'
+        + '<div class="alt"><span>Kayıt: ' + esc(tarih(t.olusturma)) + '</span>' + (t.kilitli ? "" : '<button class="btn" type="button" data-duzenle="' + esc(t.id) + '">Düzenle</button>') + '</div>'
+        + '</article>';
+    }).join("");
+    kutu.querySelectorAll("[data-duzenle]").forEach(b => b.addEventListener("click", () => formuAc(takimlar.find(t => t.id === b.dataset.duzenle))));
+    if (q) { const v = kutu.querySelector(".vurgu"); if (v) v.scrollIntoView({ block: "nearest" }); }
+  }
+
+  function uyeAlanlari(uyeler) {
+    const g = $("#uyeler");
+    let html = '<div class="b">Üyeler (' + ayar.takimBoyu + ' kişi): önce öğrenci numarası, sonra ad soyad</div>';
+    for (let i = 0; i < ayar.takimBoyu; i++) {
+      const u = (uyeler && uyeler[i]) || { no: "", ad: "" };
+      html += '<input inputmode="numeric" name="no' + i + '" placeholder="Öğrenci numarası" value="' + esc(u.no) + '" aria-label="' + (i + 1) + '. üyenin numarası">'
+        + '<input name="ad' + i + '" placeholder="Ad Soyad" value="' + esc(u.ad) + '" aria-label="' + (i + 1) + '. üyenin adı">';
+    }
+    g.innerHTML = html;
+  }
+
+  function formuAc(t) {
+    duzenlenen = t || null;
+    $("#formHata").style.display = "none";
+    $("#dlgBaslik").textContent = t ? "Kaydı düzenle: " + t.takim : "Yeni takım kaydı";
+    $("#dlgNot").textContent = t ? "Değişiklik için takımın düzenleme kodu gerekir." : "Bütün alanlar takım adına doldurulur; yazdıklarınız sınıfa açık görünür.";
+    $("#fTakim").value = t ? t.takim : "";
+    $("#fKonu").value = t ? t.konu : "";
+    $("#fSite").value = t ? t.site : "";
+    $("#fKlasor").value = t ? t.klasor : "";
+    $("#fKlasor").placeholder = t ? "" : "Boş bırakırsanız sizin için bir Drive klasörü açılır";
+    $("#fKod").value = "";
+    $("#kodAlan").querySelector("label").textContent = t ? "Düzenleme kodu" : "Sınıf kodu";
+    $("#fKod").placeholder = t ? "Kayıt açılırken verilen 6 karakter" : "Derste söylenen kod";
+    uyeAlanlari(t ? t.uyeler : null);
+    $("#dlg").showModal();
+    $("#fTakim").focus();
+  }
+
+  function formVerisi() {
+    const uyeler = [];
+    for (let i = 0; i < ayar.takimBoyu; i++) {
+      uyeler.push({ no: $("[name=no" + i + "]").value, ad: $("[name=ad" + i + "]").value });
+    }
+    return { takim: $("#fTakim").value, konu: $("#fKonu").value, site: $("#fSite").value, klasor: $("#fKlasor").value, uyeler };
+  }
+
+  $("#form").addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const hata = $("#formHata");
+    hata.style.display = "none";
+    const g = $("#gonder"); g.disabled = true; g.textContent = "Kaydediliyor…";
+    try {
+      const veri = formVerisi();
+      let sonuc;
+      if (duzenlenen) {
+        sonuc = await istek("", Object.assign({ islem: "duzenle", id: duzenlenen.id, kod: $("#fKod").value }, veri));
+      } else {
+        sonuc = await istek("", Object.assign({ islem: "olustur", sinifKodu: $("#fKod").value }, veri));
+      }
+      $("#dlg").close();
+      await yukle();
+      if (!duzenlenen && sonuc.kod) {
+        $("#kodGoster").textContent = sonuc.kod;
+        $("#klasorNot").textContent = sonuc.takim && sonuc.takim.klasor
+          ? "Dosya klasörünüz hazır; bağlantısı takım kartında."
+          : "Klasör açılamadı; kendi Drive klasörünüzün bağlantısını düzenleyerek ekleyebilirsiniz.";
+        $("#dlgKod").showModal();
+      } else {
+        durum("Kayıt güncellendi.", "iyi");
+        setTimeout(() => durum(""), 2500);
+      }
+    } catch (e) {
+      hata.textContent = e.message;
+      hata.style.display = "block";
+    } finally {
+      g.disabled = false; g.textContent = "Kaydet";
+    }
+  });
+
+  $("#vazgec").addEventListener("click", () => $("#dlg").close());
+  $("#yeniBtn").addEventListener("click", () => formuAc(null));
+  $("#ara").addEventListener("input", ciz);
+  $("#tema").addEventListener("click", () => {
+    const kok = document.documentElement;
+    const koyu = kok.dataset.theme ? kok.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    kok.dataset.theme = koyu ? "light" : "dark";
+    try { localStorage.setItem("yzm205.tema", kok.dataset.theme); } catch (e) {}
+  });
+  try { const t = localStorage.getItem("yzm205.tema"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+
+  uyeAlanlari(null);
+  yukle();
+})();
+</script>
+</body>
+</html>
