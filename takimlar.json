@@ -1,8 +1,33 @@
 {
-  "guncelleme": "2026-09-30T21:29:41.397Z",
+  "guncelleme": "2026-09-30T21:40:56.970Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
   },
-  "takimlar": []
+  "takimlar": [
+    {
+      "id": 2,
+      "takim": "deneme",
+      "uyeler": [
+        {
+          "no": "123",
+          "ad": "mehmet"
+        }
+      ],
+      "konu": "asdasd asda sd",
+      "site": "",
+      "klasor": "",
+      "olusturma": "2026-09-30T21:40:47.000Z",
+      "kilit": "2026-10-07T21:40:47.000Z",
+      "kilitli": false,
+      "durum": "hatali",
+      "hatalar": [
+        "Öğrenci numarası rakamlardan oluşmalı ve satır \"numara ad soyad\" biçiminde olmalı: \"123\".",
+        "Takım tam olarak 4 kişi olmalı (şu an 1 satır var)."
+      ],
+      "github": "https://github.com/cagrisahin58/2026-web/issues/2",
+      "yazar": "cagrisahin58",
+      "guncelleme": "2026-09-30T21:40:47Z"
+    }
+  ]
 }
