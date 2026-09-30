@@ -132,7 +132,7 @@ td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:now
 .today li b{font-family:var(--mono);font-weight:500;font-size:.8rem;color:var(--muted);padding-top:2px}
 .today li.brk{color:var(--muted)}
 
-/* ısınma oyunu */
+/* sınıf yoklaması */
 .apps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 .app{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 .92rem/1.25 var(--body);padding:12px 10px;border-radius:12px;cursor:pointer;text-align:left;display:grid;gap:4px;min-width:0}
 .app .ic{font-family:var(--display);font-weight:800;font-size:1.1rem;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--surface-2);color:var(--muted)}
@@ -149,19 +149,19 @@ td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:now
 /* katman simülasyonu */
 .layer-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start}
 .stagebox{background:var(--surface-2);border-radius:12px;padding:14px;min-height:260px}
-.kantin{background:#fff;color:#000;padding:10px 12px;border-radius:2px;font-family:"Times New Roman",Times,serif;font-size:16px;line-height:1.35}
-.kantin h4{font-size:1.5em;margin:.3em 0;font-weight:700}
-.kantin ul{padding-left:1.4em;margin:.5em 0}
-.kantin li{margin:.2em 0}
-.kantin button{font:13px Arial,sans-serif;padding:1px 6px;margin-left:6px;cursor:pointer}
-.kantin .sepet{margin-top:.6em}
-.kantin.css{font-family:var(--body);background:#FFFDF8;border-radius:14px;padding:16px 18px;box-shadow:0 10px 24px -14px rgba(0,0,0,.35);border:1px solid #F0E3CC}
-.kantin.css h4{font-family:var(--display);color:#0A6F62;font-size:1.35rem;margin:0 0 10px}
-.kantin.css ul{list-style:none;padding:0;display:grid;gap:8px}
-.kantin.css li{display:flex;justify-content:space-between;align-items:center;gap:8px;background:#fff;border:1px solid #EFE6D6;border-radius:10px;padding:8px 10px;font-size:.95rem}
-.kantin.css button{background:#E07A1F;color:#fff;border:0;border-radius:8px;padding:6px 10px;font:600 .8rem var(--body)}
-.kantin.css .sepet{font-family:var(--mono);font-size:.85rem;background:#0A6F62;color:#fff;border-radius:8px;padding:6px 10px;display:inline-block;margin-top:12px}
-.kantin .bump{animation:bump .35s}
+.kulup{background:#fff;color:#000;padding:10px 12px;border-radius:2px;font-family:"Times New Roman",Times,serif;font-size:16px;line-height:1.35}
+.kulup h4{font-size:1.5em;margin:.3em 0;font-weight:700}
+.kulup ul{padding-left:1.4em;margin:.5em 0}
+.kulup li{margin:.2em 0}
+.kulup button{font:13px Arial,sans-serif;padding:1px 6px;margin-left:6px;cursor:pointer}
+.kulup .secim{margin-top:.6em}
+.kulup.css{font-family:var(--body);background:#FFFDF8;border-radius:14px;padding:16px 18px;box-shadow:0 10px 24px -14px rgba(0,0,0,.35);border:1px solid #F0E3CC}
+.kulup.css h4{font-family:var(--display);color:#0A6F62;font-size:1.35rem;margin:0 0 10px}
+.kulup.css ul{list-style:none;padding:0;display:grid;gap:8px}
+.kulup.css li{display:flex;justify-content:space-between;align-items:center;gap:8px;background:#fff;border:1px solid #EFE6D6;border-radius:10px;padding:8px 10px;font-size:.95rem}
+.kulup.css button{background:#E07A1F;color:#fff;border:0;border-radius:8px;padding:6px 10px;font:600 .8rem var(--body)}
+.kulup.css .secim{font-family:var(--mono);font-size:.85rem;background:#0A6F62;color:#fff;border-radius:8px;padding:6px 10px;display:inline-block;margin-top:12px}
+.kulup .bump{animation:bump .35s}
 @keyframes bump{50%{transform:scale(1.12)}}
 .layerinfo{display:grid;gap:10px}
 .layerinfo .when{font-family:var(--mono);font-size:.78rem}
@@ -193,7 +193,7 @@ td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:now
 .steptext .st{font-family:var(--display);font-weight:700;font-size:1.05rem}
 .steptext .an{font-size:.9rem;color:var(--muted)}
 
-/* ziyaretçi defteri */
+/* etkinlik kayıt formu */
 .gb{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr) minmax(0,1fr);gap:10px}
 .gbcol{border:2px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:10px;align-content:start;min-width:0;transition:border-color .3s,box-shadow .3s}
 .gbcol.pulse{box-shadow:0 0 0 4px var(--theory-soft);border-color:var(--theory)}
@@ -345,7 +345,7 @@ pre.code.numbered .cn{color:#8A95A8;user-select:none}
 .brkband::before,.brkband::after{content:"";flex:1;border-top:1px dashed var(--line)}
 footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--muted);font-size:.86rem}
 
-@media (max-width:900px){.five{grid-template-columns:repeat(2,minmax(0,1fr))}.apps{grid-template-columns:repeat(2,minmax(0,1fr))}.ms{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.five{grid-template-columns:repeat(2,minmax(0,1fr))}.apps{grid-template-columns:repeat(2,minmax(0,1fr))}.apps .app:last-child:nth-child(odd){grid-column:1/-1}.ms{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){
   .grid2,.grid3,.today .cols,.layer-wrap,.gb,.bugs,.bins{grid-template-columns:minmax(0,1fr)}
   .tl .row{grid-template-columns:minmax(0,1fr);gap:4px}
@@ -378,14 +378,14 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
 <main class="wrap">
 
   <section class="hero" aria-labelledby="baslik">
-    <div class="eyebrow">Hafta 1 · Perşembe 24 Eylül 2026 · BLD-104</div>
+    <div class="eyebrow">Hafta 1 · Perşembe 1 Ekim 2026 · BLD-104</div>
     <h1 id="baslik">Yapay zekâ çağında <span>web yazılımcısı</span> olmak</h1>
-    <p class="lede">Bugün konu anlatımı yok. Önce tanışıp dönemin haritasına bakacağız. Sonra web'in her parçasından birer lokma tadacağız. Dersten çıkarken aklında tek bir cümle kalsın istiyorum: bunu ben de yapabilirim.</p>
-    <div class="stack" aria-label="Bugün tadına bakacağın parçalar">
+    <p class="lede">Bugün ayrıntılı konu anlatımı yok. Tanıştıktan sonra dönemin haritasına ve bir web uygulamasını oluşturan beş katmana bakacağız, yapay zekânın bu işte neyi değiştirdiğini de konuşacağız. Dersten çıktığında her gün kullandığın sitelerin nasıl çalıştığını kabaca anlatabilmeni istiyorum.</p>
+    <div class="stack" aria-label="Bugün kısaca göreceğin katmanlar">
       <span class="chip ship">HTML</span><span class="chip theory">CSS</span><span class="chip lab">JavaScript</span><span class="chip srv">Sunucu</span><span class="chip db">Veritabanı</span><span class="chip ai">Yapay zekâ</span>
     </div>
     <div class="meta">
-      <span class="chip">Sabah 10:00–11:45 · tanışma ve tadımlık</span>
+      <span class="chip">Sabah 10:00–11:45 · tanışma ve genel bakış</span>
       <span class="chip">Öğleden sonra 15:00–16:45 · sohbet</span>
       <span class="chip theory">Bilgisayar gerekmez, telefon yeter</span>
       <span class="chip lab">Bugün puan yok, teslim yok</span>
@@ -399,14 +399,14 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
         <div>
           <h3>Sabah <span class="chip theory">10:00–11:45</span></h3>
           <ol>
-            <li><b>0–15</b><span><a href="#merhaba">Merhaba</a> ve ısınma oyunu</span></li>
+            <li><b>0–15</b><span><a href="#merhaba">Merhaba</a> ve sınıf yoklaması</span></li>
             <li><b>15–30</b><span><a href="#katmanlar">Bir web sayfası nelerden oluşur?</a></span></li>
-            <li><b>30–45</b><span><a href="#adres">Adres çubuğuna yazınca ne olur?</a> Ziyaretçi defteri</span></li>
-            <li class="brk"><b>45–55</b><span>Ara</span></li>
-            <li><b>55–78</b><span><a href="#yapay-zeka">Yapay zekâ çağında yazılımcı olmak</a></span></li>
-            <li><b>78–93</b><span><a href="#yol">Bu dönemki yolculuğun</a></span></li>
-            <li><b>93–103</b><span><a href="#nasil">Nasıl çalışacağız</a></span></li>
-            <li><b>103–105</b><span><a href="#sina">Kendini sına</a></span></li>
+            <li><b>30–50</b><span><a href="#adres">Adres çubuğuna yazınca ne olur?</a> Etkinlik kayıt formu</span></li>
+            <li class="brk"><b>50–60</b><span>Ara</span></li>
+            <li><b>60–80</b><span><a href="#yapay-zeka">Yapay zekâ çağında yazılımcı olmak</a></span></li>
+            <li><b>80–92</b><span><a href="#yol">Bu dönemki yolculuğun</a></span></li>
+            <li><b>92–102</b><span><a href="#nasil">Nasıl çalışacağız</a></span></li>
+            <li><b>102–105</b><span><a href="#sina">Kendini sına</a></span></li>
           </ol>
         </div>
         <div>
@@ -419,8 +419,8 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
             <li><b>80–95</b><span>Projeksiyonda web'in içi</span></li>
             <li><b>95–105</b><span>Gelecek haftaya hazırlık</span></li>
           </ol>
-          <p class="muted small" style="margin-top:10px">Bugün bilgisayar getirmene gerek yok. Bu sayfa telefonda da çalışır, oyunları ve soruları oradan açabilirsin.</p>
-          <p class="muted small" style="margin-top:6px">Her bölümün sonunda birkaç soru var. Her bölümden bir soruyu derste çözüyoruz, hafta testinden birini de. Kalanı evde.</p>
+          <p class="muted small" style="margin-top:10px">Bugün bilgisayar getirmene gerek yok. Sayfa telefonda da çalışıyor, gösterimleri ve soruları oradan açabilirsin.</p>
+          <p class="muted small" style="margin-top:6px">Her bölümün sonundaki sorulardan birini ve hafta testinden bir soruyu derste çözüyoruz, kalanı evde.</p>
         </div>
       </div>
     </div>
@@ -430,13 +430,13 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
   <section id="merhaba" aria-labelledby="merhaba-h">
     <div class="section-head"><h2 id="merhaba-h">Merhaba</h2><span class="time">0–15 dk</span></div>
     <div class="prose">
-      <p>Ben Arş. Gör. Çağrı Şahin. Bu dönem YZM205 Web Tasarımı ve Programlama dersinde birlikteyiz. Her Perşembe iki kez buluşacağız: sabah 10:00'da konuyu canlı örneklerle konuşacağız, öğleden sonra 15:00'te laboratuvarda aynı konuyu kendi bilgisayarında yapacaksın. Bugün bilgisayar yok, tanışma ve sohbet var. Bilgisayarlı ilk dersimiz 1 Ekim. Sınıfta 56 kişiyiz. Hafta 5'te (22 Ekim) dörder kişilik takımlar kuruyoruz, dönemin geri kalanında takımınla gerçek bir web uygulaması yapacaksın.</p>
-      <p>Web'i hiç bilmiyorsan doğru yerdesin. YZM103'te değişken, koşul, döngü ve fonksiyon gördün. Bu kadarı yeter. Gerisini burada adım adım kuracağız.</p>
+      <p>Ben Arş. Gör. Çağrı Şahin. Bu dönem YZM205 Web Tasarımı ve Programlama dersinde birlikteyiz. Her Perşembe iki kez buluşacağız: sabah 10:00'da konuyu canlı örneklerle konuşacağız, öğleden sonra 15:00'te laboratuvarda aynı konuyu kendi bilgisayarında yapacaksın. Bugün bilgisayar kullanmayacağız, bilgisayarlı ilk dersimiz 8 Ekim'de. Sınıfta 56 kişiyiz ve Hafta 4'te (22 Ekim) dörder kişilik takımlar kuruyoruz. Dönemin geri kalanında takımınla gerçek bir kullanıcısı olan web uygulaması yapacaksın.</p>
+      <p>Daha önce hiç web sayfası yazmadıysan sorun değil. YZM103'te öğrendiğin değişken, koşul, döngü ve fonksiyon bu ders için yeterli bir başlangıç, gerisini burada adım adım kuracağız.</p>
     </div>
 
     <div class="sim" style="margin-top:18px" id="warmup">
-      <div class="sim-title"><span class="chip ship">Isınma oyunu</span><h3>Bugün hangi uygulamaları kullandın?</h3></div>
-      <p class="small muted">Sabahtan beri tarayıcıda ya da telefonda açtıklarına dokun. Her birinin web sürümünün perde arkasında neler çalıştığı sağda belirecek.</p>
+      <div class="sim-title"><span class="chip ship">Sınıf yoklaması</span><h3>Bugün telefonda ya da tarayıcıda açtığın sistemler</h3></div>
+      <p class="small muted">Sabahtan beri açtıklarını seç. Sağda, son seçtiğin sistemde her katmanın izini nerede görebileceğin yazıyor. HTML, CSS ve JavaScript satırları sistemin web sürümü için geçerli.</p>
       <div class="grid2">
         <div class="apps" id="apps" role="group" aria-label="Uygulamalar"></div>
         <div style="display:grid;gap:10px;align-content:start">
@@ -445,15 +445,15 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
           <div class="row-btns"><button class="btn" type="button" id="appsReset">Temizle</button></div>
         </div>
       </div>
-      <p class="saw"><b>Ne gördün?</b> Birbirine hiç benzemeyen bu sitelerin hepsi aynı beş parçadan yapılıyor. Telefondaki uygulamaların görünen yüzü başka dillerle yazılır, ama arkadaki sunucu ve veritabanı yine aynı. Bu dönem o beş parçayı tek tek öğreneceksin.</p>
+      <p class="saw"><b>Ne gördün?</b> Seçtiğin sistemlerin çoğu başka bir cihazdan girdiğinde de aynı bilgiyi getiriyor, bu da bilginin bir sunucuda durduğunu gösteriyor. Web sürümlerinin ekranda gördüğün kısmı HTML, CSS ve JavaScript ile kuruluyor, telefon uygulamalarında o kısım başka dillerle yazılsa da bilgi yine sunucudan ve veritabanından geliyor. Bu dönem beş katmanın her birini sırayla yazacaksın.</p>
     </div>
 
     <div class="five" style="margin-top:16px">
-      <div class="card"><span class="chip ship">HTML</span><p>Sayfada ne olduğunu söyleyen metin: burada bir başlık var, şurada bir düğme var.</p></div>
-      <div class="card"><span class="chip theory">CSS</span><p>Sayfanın nasıl görüneceğini söyleyen kurallar: renk, yazı tipi, boşluk, düzen.</p></div>
-      <div class="card"><span class="chip lab">JavaScript</span><p>Sayfaya davranış kazandıran programlama dili: düğmeye basınca bir şey olsun.</p></div>
-      <div class="card"><span class="chip srv">Sunucu</span><p>İnternette sürekli açık bekleyen ve gelen isteklere cevap veren program.</p></div>
-      <div class="card"><span class="chip db">Veritabanı</span><p>Bilgiyi düzenli bir tablo gibi saklayan yer. Sayfayı kapatsan da bilgi kaybolmaz.</p></div>
+      <div class="card"><span class="chip ship">HTML</span><p>Sayfada hangi öğelerin bulunduğunu işaretleyen dil: başlık, paragraf, liste, düğme, form.</p></div>
+      <div class="card"><span class="chip theory">CSS</span><p>Bu öğelerin nasıl görüneceğini belirleyen kurallar: renk, yazı tipi, boşluk, yerleşim.</p></div>
+      <div class="card"><span class="chip lab">JavaScript</span><p>Tarayıcıda, Hafta 7'den sonra sunucuda da çalıştıracağın programlama dili. Tarayıcıda tıklama gibi olayları yakalayıp sayfayı yenilemeden değiştirir.</p></div>
+      <div class="card"><span class="chip srv">Sunucu</span><p>Sürekli çalışan ve kendisine gelen isteklere yanıt veren program.</p></div>
+      <div class="card"><span class="chip db">Veritabanı</span><p>Bilgiyi tablolar halinde kalıcı olarak saklayan sistem. Sayfayı kapatsan da kayıt yerinde durur.</p></div>
     </div>
   </section>
 
@@ -461,12 +461,12 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
   <section id="katmanlar" aria-labelledby="katman-h">
     <div class="section-head"><h2 id="katman-h">Bir web sayfası nelerden oluşur?</h2><span class="time">15–30 dk</span></div>
     <div class="prose">
-      <p>Bir insan düşün. Önce iskeleti var, boyunu ve duruşunu o belirler. Üstüne giydiği kıyafet nasıl göründüğünü belirler, kasları da hareket etmesini sağlar. Web sayfası da böyle üç katmanla kurulur: HTML iskelet, CSS kıyafet, JavaScript kaslar.</p>
-      <p>Aşağıda küçük bir kantin menüsü var. Katmanları sırayla aç ve her seferinde "Ekle" düğmelerine bas.</p>
+      <p>Bir web sayfası üç tür metinden kurulur: HTML, CSS ve JavaScript. Çoğu zaman ayrı dosyalardır, tek dosyada da durabilirler. Tarayıcı önce HTML'i okuyup sayfadaki öğeleri sırayla oluşturur, CSS kuralları bu öğelerin rengini, boyutunu ve yerini belirler, JavaScript kodu da kullanıcı bir şey yaptığında öğeleri değiştirir. HTML gelmezse ortada sayfa olmaz. CSS gelmezse içerik süssüz görünür, JavaScript gelmezse sayfa tıklamaya tepki vermez.</p>
+      <p>Aşağıdaki örnek, bir öğrenci kulübünün etkinlik sayfası. Bu örnek sayfada içeriğin tamamı HTML'de duruyor, bu yüzden katmanları birbirinden ayrı açıp kapatabilirsin. Katmanları sırayla aç ve her seferinde "Katıl" düğmelerine bas.</p>
     </div>
 
     <div class="sim" style="margin-top:16px" id="layers">
-      <div class="sim-title"><span class="chip theory">Simülasyon</span><h3>Kantin menüsü, katman katman</h3></div>
+      <div class="sim-title"><span class="chip theory">Simülasyon</span><h3>Kulüp etkinlik sayfası, katman katman</h3></div>
       <div class="row-btns" role="group" aria-label="Katman seç">
         <button class="btn" type="button" data-layer="html" aria-pressed="true">1. Yalnız HTML</button>
         <button class="btn" type="button" data-layer="css" aria-pressed="false">2. HTML + CSS</button>
@@ -474,15 +474,15 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
       </div>
       <div class="layer-wrap">
         <div class="stagebox">
-          <div class="kantin" id="kantin">
-            <h4>Kantin Menüsü</h4>
+          <div class="kulup" id="kulup">
+            <h4>Bilgi Kulübü · Ekim etkinlikleri</h4>
             <ul>
-              <li><span>Simit, 15 TL</span><button type="button" data-price="15">Ekle</button></li>
-              <li><span>Çay, 10 TL</span><button type="button" data-price="10">Ekle</button></li>
-              <li><span>Kaşarlı tost, 40 TL</span><button type="button" data-price="40">Ekle</button></li>
-              <li><span>Ayran, 20 TL</span><button type="button" data-price="20">Ekle</button></li>
+              <li><span>Git atölyesi, 2 saat</span><button type="button" data-saat="2">Katıl</button></li>
+              <li><span>Mezunla söyleşi: ilk staj, 1 saat</span><button type="button" data-saat="1">Katıl</button></li>
+              <li><span>Linux kurulum günü, 3 saat</span><button type="button" data-saat="3">Katıl</button></li>
+              <li><span>Hackathon tanıtımı, 1 saat</span><button type="button" data-saat="1">Katıl</button></li>
             </ul>
-            <div class="sepet" id="sepet" aria-live="polite">Sepet: 0 ürün, 0 TL</div>
+            <div class="secim" id="secim" aria-live="polite">Seçtiğin: 0 etkinlik, 0 saat</div>
           </div>
           <p class="hint" id="layerHint" aria-live="polite" style="margin-top:10px"></p>
         </div>
@@ -493,7 +493,7 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
           <p class="small muted">Kodu şimdi anlaman gerekmiyor. Her katmanın ne kadar kısa olduğuna bak.</p>
         </div>
       </div>
-      <p class="saw"><b>Ne gördün?</b> HTML olmadan ortada hiçbir şey yok. CSS görünüşü, JavaScript davranışı ekliyor ve ikisi de HTML'in üstüne kuruluyor.</p>
+      <p class="saw"><b>Ne gördün?</b> İçeriğin tamamı HTML'de duruyor, CSS ve JavaScript o içeriğe başvurarak çalışıyor. CSS eklenince tek harf değişmeden görünüm değişti, sayaç ise ancak JavaScript gelince çalışmaya başladı.</p>
     </div>
 
     <div class="qgroup" data-quiz="katman"></div>
@@ -501,9 +501,10 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
 
   <!-- 3. ADRES ÇUBUĞU -->
   <section id="adres" aria-labelledby="adres-h">
-    <div class="section-head"><h2 id="adres-h">Adres çubuğuna yazınca ne olur?</h2><span class="time">30–45 dk</span></div>
+    <div class="section-head"><h2 id="adres-h">Adres çubuğuna yazınca ne olur?</h2><span class="time">30–50 dk</span></div>
     <div class="prose">
-      <p>Bir lokantadasın. Garsona siparişini veriyorsun, garson mutfağa gidiyor, mutfak tabakları hazırlıyor, garson da tabakları masana diziyor. Adres çubuğuna bir adres yazdığında olan budur. Garsonun adı tarayıcı: Chrome, Edge gibi, sayfaları açıp ekrana çizen program. Mutfağın adı sunucu.</p>
+      <p>Tarayıcı (Chrome, Edge), sayfaları sunucudan isteyip ekrana çizen programdır. Sunucudan bir şey isteyen programa istemci denir ve tarayıcı da istemci olarak çalışır. Adres çubuğuna bir adres yazıp Enter'a bastığında tarayıcı, o adresteki sunucuya bir istek gönderir: hangi sayfayı istediğini söyleyen kısa bir mesaj. Sunucunun döndürdüğü yanıtta sayfanın dosyaları bulunur, tarayıcı da sayfayı bu dosyalardan kurar.</p>
+      <p>Bunu kendi bilgisayarında görebilirsin. OBS'yi ya da herhangi bir siteyi açıp <kbd>F12</kbd> ile geliştirici araçlarını (DevTools) aç, Network sekmesine geçip sayfayı yenile. Listedeki her satır, tarayıcının gönderdiği bir istek ve sunucudan gelen yanıttır.</p>
     </div>
 
     <div class="sim" style="margin-top:16px" id="addr">
@@ -522,17 +523,17 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
         <div class="lane"><div class="packet" id="packet">istek</div></div>
         <div class="node" id="nodeServer">
           <span class="nt">Sunucu</span>
-          <span class="muted">internetteki bilgisayar</span>
+          <span class="muted">internetteki bir bilgisayarda çalışan program</span>
           <span class="chip ship" style="justify-self:center">index.html</span>
           <span class="chip theory" style="justify-self:center">stil.css</span>
           <span class="chip lab" style="justify-self:center">kod.js</span>
         </div>
       </div>
       <div class="steppills" role="group" aria-label="Adımlar">
-        <button type="button" data-step="0">1 Yazarsın</button>
-        <button type="button" data-step="1">2 Sorar</button>
-        <button type="button" data-step="2">3 Gönderir</button>
-        <button type="button" data-step="3">4 Çizer</button>
+        <button type="button" data-step="0">1 Adres</button>
+        <button type="button" data-step="1">2 İstek</button>
+        <button type="button" data-step="2">3 Yanıt</button>
+        <button type="button" data-step="3">4 Çizim</button>
       </div>
       <div class="steptext" aria-live="polite">
         <span class="st" id="stepTitle">Adres yaz ve Git'e bas</span>
@@ -543,49 +544,49 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
         <button class="btn" type="button" id="addrPrev">Önceki adım</button>
         <button class="btn" type="button" id="addrNext">Sonraki adım</button>
       </div>
-      <p class="saw"><b>Ne gördün?</b> Her sayfa açılışında bu dört adım yaşanıyor, çoğu zaman göz açıp kapayıncaya kadar. Ekranda gördüğün sayfa, sunucudan gelen dosyaları tarayıcının kendisinin çizmesiyle oluştu.</p>
+      <p class="saw"><b>Ne gördün?</b> Her sayfa açılışında bu dört adım tekrarlanıyor ve çoğu zaman bir saniyeden kısa sürüyor. Sunucu, ekrandaki sayfayı hazır görüntü halinde göndermedi. Tarayıcı, gelen dosyaları okuyup sayfayı kendisi çizdi.</p>
     </div>
 
     <div class="prose" style="margin-top:22px">
-      <p>Şimdi bir adım öteye gidelim. Bazı sayfalar yalnız dosya göstermez, senin yazdığını da saklar. Bir yorum yazdığında, bir form doldurduğunda üç parça birlikte çalışır. Ön yüz, tarayıcıda gördüğün ve dokunduğun kısım. Sunucu, gelen bilgiyi kontrol edip ne yapılacağına karar veren program. Veritabanı, bilginin saklandığı tablo.</p>
+      <p>Bazı sayfalar senin girdiğin bilgiyi de saklar. OBS'de ders seçtiğinde ya da bir etkinliğe kayıt formu doldurduğunda üç katman birlikte çalışır. Ön yüz, tarayıcıda gördüğün ve kullandığın kısımdır. Sunucu gelen bilgiyi kontrol edip kaydedilip kaydedilmeyeceğine karar verir, veritabanı da kabul edilen bilgiyi bir tabloya satır olarak yazar.</p>
     </div>
 
     <div class="sim" style="margin-top:16px" id="guestbook">
-      <div class="sim-title"><span class="chip db">Simülasyon</span><h3>Ziyaretçi defteri</h3></div>
-      <p class="small muted">Bir mesaj yaz ve gönder. Mesajın üç parçadan sırayla geçişini izle. Boş mesaj göndermeyi de dene. Bu bir canlandırma, arkasında gerçek bir veritabanı yok. Sayfayı yenileyince defter baştan başlar.</p>
+      <div class="sim-title"><span class="chip db">Simülasyon</span><h3>Etkinlik kayıt formu</h3></div>
+      <p class="small muted">Bilgi Kulübü'nün Git atölyesine kayıt ol ve kaydın üç katmandan sırayla geçişini izle. Ad alanını boş bırakıp göndermeyi de dene. Gösterimin arkasında gerçek bir veritabanı yok, sayfayı yenileyince liste baştan başlıyor.</p>
       <div class="gb">
         <div class="gbcol gbfront" id="gbFront">
           <h4><span class="chip lab">Ön yüz</span> tarayıcıda</h4>
-          <label class="f">Adın<input type="text" id="gbName" maxlength="24" placeholder="Deniz" autocomplete="off"></label>
-          <label class="f">Mesajın<input type="text" id="gbMsg" maxlength="80" placeholder="Kantinin tostu çok iyi" autocomplete="off"></label>
-          <div class="row-btns"><button class="btn primary" type="button" id="gbSend">Gönder</button><button class="btn" type="button" id="gbReset">Baştan başla</button></div>
+          <label class="f">Ad soyad<input type="text" id="gbName" maxlength="24" placeholder="Adın ve soyadın" autocomplete="off"></label>
+          <label class="f">Bölüm (isteğe bağlı)<input type="text" id="gbMsg" maxlength="80" placeholder="Yazılım Mühendisliği" autocomplete="off"></label>
+          <div class="row-btns"><button class="btn primary" type="button" id="gbSend">Kayıt ol</button><button class="btn" type="button" id="gbReset">Baştan başla</button></div>
           <p class="gbstatus" id="gbStatus" aria-live="polite"></p>
-          <ul class="msgs" id="gbList" aria-label="Defterdeki mesajlar"></ul>
+          <ul class="msgs" id="gbList" aria-label="Atölyeye kayıtlı olanlar"></ul>
         </div>
         <div class="gbcol gbsrv" id="gbSrv">
           <h4><span class="chip srv">Sunucu</span> ne yapıyor?</h4>
           <div class="log" id="gbLog" aria-live="polite"></div>
         </div>
         <div class="gbcol gbdb" id="gbDb">
-          <h4><span class="chip db">Veritabanı</span> mesajlar tablosu</h4>
-          <div class="tablewrap"><table class="dbt"><thead><tr><th>no</th><th>ad</th><th>mesaj</th></tr></thead><tbody id="gbRows"></tbody></table></div>
+          <h4><span class="chip db">Veritabanı</span> kayıtlar tablosu</h4>
+          <div class="tablewrap"><table class="dbt"><thead><tr><th>no</th><th>ad</th><th>bölüm</th></tr></thead><tbody id="gbRows"></tbody></table></div>
         </div>
       </div>
-      <p class="saw"><b>Ne gördün?</b> Mesaj ön yüzde yazıldı, sunucuda kontrol edildi, veritabanında saklandı. Gerçek bir veritabanında sayfayı kapatsan da satır tabloda kalırdı. Hafta 7 ve 8'de bunu kendin yapacaksın.</p>
+      <p class="saw"><b>Ne gördün?</b> Kayıt ön yüzde girildi, sunucuda kontrol edildi ve veritabanına yazıldı. Ad alanı boşken sunucu isteği geri çevirdi, tabloya satır eklenmedi. Gerçek sitelerde aynı kontrol çoğu zaman tarayıcıda da yapılır, ama tarayıcıdaki kontrol atlatılabildiği için son sözü yine sunucu söyler. Gerçek bir veritabanında sayfayı kapatsan da satır tabloda kalırdı. Hafta 7 ve 8'de aynı düzeni bir ziyaretçi defteri kurarak kendin yazacaksın.</p>
     </div>
 
     <div class="qgroup" data-quiz="adres"></div>
   </section>
 
-  <div class="brkband" style="margin-top:44px">45–55 dk · on dakika ara</div>
+  <div class="brkband" style="margin-top:44px">50–60 dk · on dakika ara</div>
 
   <!-- 4. YAPAY ZEKA -->
   <section id="yapay-zeka" aria-labelledby="yz-h">
-    <div class="section-head"><h2 id="yz-h">Yapay zekâ çağında yazılımcı olmak</h2><span class="time">55–78 dk</span></div>
+    <div class="section-head"><h2 id="yz-h">Yapay zekâ çağında yazılımcı olmak</h2><span class="time">60–80 dk</span></div>
     <div class="prose">
-      <p>Bir yazılımcının günü birkaç yıl öncesine göre çok değişti. Kodun bir kısmını artık yapay zekâ yazıyor. Sen ne istediğini anlatıyorsun, o birkaç saniyede bir taslak çıkarıyor. Yapay zekâya yazdığın bu isteğe istem deniyor.</p>
-      <p>Yapay zekâ bunu nasıl yapıyor? Çok büyük miktarda metin ve kod okuyarak hangi kelimenin ardından hangi kelimenin geldiğini öğrenmiş. Sana cevap verirken her adımda en olası devamı tahmin ediyor. Tahmin çoğu zaman iyi. Bazen de neredeyse doğru ama tam değil.</p>
-      <p>Bu yüzden yazılımcıya ihtiyaç bitmedi. İşin en zor kısmı hâlâ insanda duruyor. Neyin yapılacağına sen karar veriyorsun. Çıkan kodu okuyup anlamak ve gerçekten doğru çalıştığını kontrol etmek de senin işin.</p>
+      <p>Bir yazılımcının günü birkaç yıl öncesine göre çok değişti. Kodun bir kısmını artık yapay zekâ yazıyor: ne istediğini anlattığında birkaç saniyede bir taslak çıkarıyor. Yapay zekâya yazdığın bu isteğe istem deniyor.</p>
+      <p>Bu araçlar, çok büyük miktarda metin ve kod üzerinde eğitilerek bir metnin nasıl devam ettiğini tahmin etmeyi öğrendi. Cevap verirken olası devamlar arasından birini seçiyorlar, bu yüzden aynı isteğe her seferinde biraz farklı cevap verebiliyorlar. Çoğu zaman işe yarayan bu tahmin, bazen doğruya çok yakın olduğu halde yanlış bir sonuç veriyor.</p>
+      <p>Bu yüzden yazılımcıya hâlâ iş düşüyor. Neyin yapılacağına karar vermek, çıkan kodu okuyup anlamak ve gerçekten doğru çalıştığını denemek senin sorumluluğunda.</p>
     </div>
 
     <div class="grid3" style="margin-top:16px">
@@ -593,7 +594,7 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
       <div class="card"><div class="eyebrow">Kodun payı</div><p style="font-family:var(--display);font-weight:800;font-size:2.2rem;line-height:1.1;color:var(--ai)">%29</p><p class="small">State of JS 2025 anketine katılan JavaScript geliştiricileri, yazdıkları kodun ortalama %29'unun yapay zekâdan geldiğini söylüyor.</p><p class="small" style="margin-top:6px"><a href="https://2025.stateofjs.com/" target="_blank" rel="noopener">Kaynak: State of JS 2025</a></p></div>
       <div class="card"><div class="eyebrow">En büyük şikâyet</div><p style="font-family:var(--display);font-weight:800;font-size:2.2rem;line-height:1.1;color:var(--ai)">%66</p><p class="small">Aynı Stack Overflow anketinde en sık seçilen şikâyet "neredeyse doğru ama tam değil" cevaplar oldu. Katılanların %66'sı bunu işaretledi.</p><p class="small" style="margin-top:6px"><a href="https://survey.stackoverflow.co/2025/ai" target="_blank" rel="noopener">Kaynak: Stack Overflow 2025</a></p></div>
     </div>
-    <p class="prose" style="margin-top:14px">Üç sayıyı yan yana koy. Yazılımcıların çoğu yapay zekâ kullanıyor ya da kullanmayı düşünüyor, kodun azımsanmayacak bir kısmını o yazıyor. En çok şikâyet edilen şey de doğruya çok benzeyen yanlışlar. Aşağıdaki üç oyun tam da bu noktada.</p>
+    <p class="prose" style="margin-top:14px">Üç sayıyı yan yana koy. Yazılımcıların çoğu yapay zekâ kullanıyor ya da kullanmayı düşünüyor, kodun azımsanmayacak bir kısmını o yazıyor. En çok şikâyet edilen şey de doğruya çok benzeyen yanlışlar. Aşağıdaki iki gösterim bu şikâyetin nereden geldiğini ve nasıl yakalandığını gösteriyor. Üçüncüsü, "Kim yapar?", evde yapılacak ve fikri tek cümleye sığıyor: taslak yazarken yapay zekâ yardım eder, sonucun doğru olup olmadığına sen karar verirsin.</p>
 
     <div class="sim" style="margin-top:18px" id="twoasks">
       <div class="sim-title"><span class="chip ai">Karşılaştırma</span><h3>İki istek, iki sonuç</h3></div>
@@ -614,16 +615,16 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
     </div>
 
     <div class="sim" style="margin-top:18px" id="almost">
-      <div class="sim-title"><span class="chip ai">Oyun</span><h3>Neredeyse doğru</h3></div>
-      <p class="small muted">Her kutuda bir istek ve yapay zekânın yazdığı kod var. Her kodda tek bir hata saklı. Hatalı satıra tıkla. İlk tıklaman sayılır. İlk iki kodu derste birlikte çözüyoruz, son ikisi evde.</p>
+      <div class="sim-title"><span class="chip ai">Deneme</span><h3>Neredeyse doğru</h3></div>
+      <p class="small muted">Her kutuda bir istek ve yapay zekânın bu isteğe yazdığı kod var. Her kodda tek bir hata bulunuyor, hatalı satıra tıkla. Yalnız ilk tıklaman sayılıyor. İlk kodu derste birlikte çözüyoruz, kalan üçü evde.</p>
       <div class="qhead"><span class="score" id="almostScore" aria-live="polite">Bulunan: 0 / 4</span><button class="btn" type="button" id="almostReset">Yeniden dene</button></div>
       <div class="bugs" id="bugs"></div>
       <p class="saw"><b>Ne gördün?</b> Dört kod da ilk bakışta düzgün duruyor. Hatayı yakalayan şey, ne istendiğini bilen ve kodu satır satır okuyan göz oldu.</p>
     </div>
 
     <div class="sim" style="margin-top:18px" id="who">
-      <div class="sim-title"><span class="chip ai">Oyun</span><h3>Kim yapar?</h3></div>
-      <p class="small muted">Her kartın altındaki düğmelerden birini seç. Kart seçtiğin kutuya geçer, fikrini değiştirirsen öbür düğmeye bas. Bitirince önerilen cevaba bak.</p>
+      <div class="sim-title"><span class="chip ship">Evde</span><h3>Kim yapar?</h3></div>
+      <p class="small muted">Her kart için altındaki düğmelerden birini seç. Kart seçtiğin kutuya geçiyor, fikrin değişirse öbür düğmeye basman yeterli. Hepsini yerleştirince önerilen cevapla karşılaştır.</p>
       <div class="pool" id="whoPool" aria-label="Yerleşmemiş kartlar"></div>
       <div class="bins">
         <div class="bin ai"><h4><span>Yapay zekâ yardım edebilir</span><span class="chip ai" id="binAiCount">0</span></h4><div id="binAi" style="display:grid;gap:8px"></div></div>
@@ -633,7 +634,7 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
         <div class="row-btns"><button class="btn primary" type="button" id="whoCheck">Önerilen cevabı göster</button><button class="btn" type="button" id="whoReset">Sıfırla</button></div>
         <span class="score" id="whoScore" aria-live="polite">6 karttan 0 tanesini yerleştirdin</span>
       </div>
-      <p class="saw"><b>Ne gördün?</b> Yapay zekâ taslak yazmakta ve açıklamakta güçlü bir yardımcı. Neyin yapılacağına ve sonucun doğru olduğuna karar veren, sorumluluğu taşıyan yine sensin.</p>
+      <p class="saw"><b>Ne gördün?</b> Yapay zekâ taslak yazarken ve açıklama yaparken işini hızlandırıyor. Neyin yapılacağına ve sonucun doğru olup olmadığına karar verip sorumluluğu üstlenen yine sensin.</p>
     </div>
 
     <div class="qgroup" data-quiz="yz"></div>
@@ -641,42 +642,42 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
 
   <!-- 5. YOL HARİTASI -->
   <section id="yol" aria-labelledby="yol-h">
-    <div class="section-head"><h2 id="yol-h">Bu dönemki yolculuğun</h2><span class="time">78–93 dk</span></div>
+    <div class="section-head"><h2 id="yol-h">Bu dönemki yolculuğun</h2><span class="time">80–92 dk</span></div>
     <div class="prose">
-      <p>On dört hafta boyunca her hafta küçük bir basamak çıkacağız. Önce sayfanın iskeletini, sonra görünüşünü, sonra davranışını öğreneceksin. Ardından sunucuya ve veritabanına geçeceğiz, en sonunda da hepsini takımınla tek bir uygulamada birleştireceksin. Bir haftaya tıkla, o haftanın sonunda neyi yapabileceğini gör.</p>
+      <p>Dönem, sabahki beş katmanı sırayla ele alıyor. HTML ile sayfanın içeriğini, CSS ile görünümünü, JavaScript ile davranışını yazdıktan sonra sunucuya ve veritabanına geçeceğiz. Son haftalarda hepsini takımınla tek bir uygulamada birleştirip yayına alacaksın. Bir haftaya tıklayınca o haftanın sonunda neyi yapabileceğin görünüyor.</p>
     </div>
 
     <div class="sim" style="margin-top:16px" id="roadmap">
       <div class="sim-title"><span class="chip ship">Yol haritası</span><h3>14 hafta, basamak basamak</h3></div>
       <div class="weeks" id="weeks" role="group" aria-label="Haftalar"></div>
       <div class="wkpanel" id="wkPanel" aria-live="polite"></div>
-      <p class="saw"><b>Ne gördün?</b> Her hafta bir öncekinin üstüne kuruluyor. Tek başına büyük görünen proje, on dört küçük adıma bölününce yapılabilir hale geliyor.</p>
+      <p class="saw"><b>Ne gördün?</b> Her hafta bir öncekinin üstüne kuruluyor. Dönem sonundaki proje, her hafta öğrendiğin parça eklendikçe büyüyor.</p>
     </div>
 
     <div class="grid2" style="margin-top:16px">
       <div class="card">
         <h3>Takım projesi</h3>
-        <p>Hafta 5'te (22 Ekim) dörder kişilik takımlar kuruyoruz, sınıfta 14 takım olacak. Dönemin geri kalanında takımınla gerçek bir kullanıcı için birkaç sayfalık bir web uygulaması yapıp internete koyacaksın. Uygulamanın içinde bu dönem öğrendiğin her parça olacak: HTML, CSS, JavaScript, sunucu, veritabanı ve küçük bir yapay zekâ özelliği.</p>
-        <p class="small" style="margin-top:12px;font-weight:600">Kilometre taşları (proje teslim tarihleri)</p>
+        <p>Sınıfta dörder kişilik 14 takım olacak. Takımınla gerçek bir kullanıcı için birkaç sayfalık bir web uygulaması yapıp internete koyacaksın. Uygulamanın içinde bu dönem öğrendiğin her parça olacak: HTML, CSS, JavaScript, sunucu, veritabanı ve küçük bir yapay zekâ özelliği.</p>
+        <p class="small" style="margin-top:12px;font-weight:600">Kilometre taşları (ders günü ve teslim tarihi)</p>
         <div class="ms" style="margin-top:6px">
-          <div><b>M0 · 22 Eki</b>takım, fikir, kâğıt taslak</div>
-          <div><b>M1 · 3 Ara</b>ilk sürüm yayında</div>
-          <div><b>M2 · 17 Ara</b>sunucu ve veritabanı bağlı</div>
-          <div><b>M3 · 31 Ara</b>Demo Günü</div>
+          <div><b>M0 · 22 Eki</b>takım, fikir, kâğıt taslak<br><span class="muted">teslim Pazar 1 Kasım</span></div>
+          <div><b>M1 · 10 Ara</b>ilk sürüm yayında<br><span class="muted">teslim Pazar 13 Aralık</span></div>
+          <div><b>M2 · 24 Ara</b>sunucu ve veritabanı bağlı<br><span class="muted">teslim Pazar 27 Aralık</span></div>
+          <div><b>M3 · 7 Oca</b>Demo Günü ve final teslimi</div>
         </div>
-        <p class="small muted" style="margin-top:10px">Demo Günü 31 Aralık. Her takım 7 dakika ürününü gösterir, 3 dakika soru cevaplar.</p>
+        <p class="small muted" style="margin-top:10px">Demo Günü 7 Ocak. Her takım 7 dakika ürününü gösterir, 3 dakika soru cevaplar.</p>
       </div>
       <div class="card">
         <h3>Bir fikir örneği: kampüs kayıp eşya panosu</h3>
-        <p>Kütüphanede şemsiyeni unuttun. Panoya bir ilan bırakıyorsun: ne, nerede, ne zaman. Şemsiyeyi bulan kişi ilana mesaj yazıyor. İlanlar veritabanında duruyor, sunucu yeni ilanı kaydediyor, ön yüz de listeyi gösteriyor. Yapay zekâ özelliği küçük: aceleyle yazılmış ilan metnini düzgün bir cümleye çeviriyor.</p>
-        <p class="small muted" style="margin-top:10px">Fikri takımın bulacak. Kullanıcısı gerçek olsun: bir kulüp, bir kantin, bir yurt katı.</p>
+        <p>Eşyasını kampüste kaybeden öğrenci, neyi nerede ve ne zaman kaybettiğini yazan bir ilan bırakıyor, eşyayı bulan kişi de ilana mesaj yazıyor. Ön yüz ilan listesini ve formu gösteriyor, sunucu yeni ilanı kontrol edip kaydediyor, ilanlar veritabanındaki bir tabloda duruyor. Yapay zekâ özelliği küçük tutulmuş: aceleyle yazılmış ilan metnini düzgün bir cümleye çeviriyor.</p>
+        <p class="small muted" style="margin-top:10px">Fikri takımın bulacak. Kullanıcısı gerçek olsun: bir öğrenci kulübü, bir yurt katı, bir bölüm sekreterliği.</p>
       </div>
     </div>
   </section>
 
   <!-- 6. NASIL ÇALIŞACAĞIZ -->
   <section id="nasil" aria-labelledby="nasil-h">
-    <div class="section-head"><h2 id="nasil-h">Nasıl çalışacağız</h2><span class="time">93–103 dk</span></div>
+    <div class="section-head"><h2 id="nasil-h">Nasıl çalışacağız</h2><span class="time">92–102 dk</span></div>
     <div class="grid2">
       <div class="card">
         <h3>Haftalık ritim</h3>
@@ -685,7 +686,7 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
       </div>
       <div class="card">
         <h3>Yapay zekâ kuralları</h3>
-        <p>Yapay zekâ bu derste yardımcın. Hafta 2 ile 9 arasında kodu önce sen yazarsın. Yapay zekâya açıklama sorabilir, hata mesajını sorabilir, kendini sınatabilirsin. Bütün sayfayı ya da bütün kodu ona yazdırmazsın. Hafta 10'dan sonra kodlama ajanıyla (senin yerine dosya açıp kod yazabilen yapay zekâ yardımcısı) kod ürettirmek serbest, tek şartla: her satırını açıklayabilmek.</p>
+        <p>Yapay zekâ bu derste yardımcın. Hafta 2 ile 9 arasında kodu önce sen yazarsın. Yapay zekâya açıklama sorabilir, hata mesajını sorabilir, kendini sınatabilirsin. Bütün sayfayı ya da bütün kodu ona yazdırmazsın. Hafta 10'dan itibaren kodlama ajanıyla (senin yerine dosya açıp kod yazabilen yapay zekâ yardımcısı) kod ürettirmek serbest, tek şartla: her satırını açıklayabilmek.</p>
         <p style="margin-top:8px;font-weight:600">Açıklayamadığın kod senin değil.</p>
       </div>
     </div>
@@ -721,7 +722,7 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
 
   <!-- 7. KENDİNİ SINA -->
   <section id="sina" aria-labelledby="sina-h">
-    <div class="section-head"><h2 id="sina-h">Kendini sına</h2><span class="time">103–105 dk</span></div>
+    <div class="section-head"><h2 id="sina-h">Kendini sına</h2><span class="time">102–105 dk</span></div>
     <p class="prose">On iki soru, bugünün hepsinden biraz. Derste birini birlikte çözüyoruz, kalanı evde. Yanlış yapmak serbest: her cevabın altında neden doğru ya da yanlış olduğu yazıyor.</p>
     <div class="qgroup" data-quiz="sina"></div>
   </section>
@@ -729,7 +730,7 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
   <!-- ÖĞLEDEN SONRA -->
   <section id="ogleden-sonra" aria-labelledby="os-h">
     <div class="section-head"><h2 id="os-h">Öğleden sonra: tanışma ve sohbet</h2><span class="time">15:00–16:45</span></div>
-    <p class="prose">Bugün bilgisayar açmıyoruz. Puan yok, teslim yok. Öğleden sonra birbirimizi tanıyacağız, kampüs hayatından site fikirleri çıkaracağız ve yapay zekâ çağında bu işi neden öğrendiğimizi konuşacağız. Sayfayı telefonundan açarsan aşağıdaki fikir kartını ve sabahki soruları oradan da kullanabilirsin.</p>
+    <p class="prose">Bugün bilgisayar açmıyoruz, puan ya da teslim de yok. Öğleden sonra birbirimizi tanıyacağız, kampüs hayatından site fikirleri çıkaracağız ve yapay zekâ çağında bu işi neden öğrendiğimizi konuşacağız. Sayfayı telefonundan açarsan aşağıdaki fikir kartını ve sabahki soruları oradan da kullanabilirsin.</p>
 
     <div class="tl" style="margin-top:14px">
       <div class="row dok"><div class="t">0–25 dk</div><div><div class="h">Dörtlü masalar: tanışma turu</div><p>Rastgele dörder kişi oturuyoruz. Önce masada, sonra sınıfa karşı kısa bir tanışma.</p></div></div>
@@ -737,7 +738,7 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
       <div class="row ara"><div class="t">45–55 dk</div><div><div class="h">Ara</div></div></div>
       <div class="row kur"><div class="t">55–80 dk</div><div><div class="h">Sohbet: yapay zekâ varken bu işi neden öğreniyoruz?</div><p>Altı soru, açık konuşma. Cevapların özeti aşağıdaki kartlarda.</p></div></div>
       <div class="row dok"><div class="t">80–95 dk</div><div><div class="h">Projeksiyonda web'in içi</div><p>Bir haber sitesinin manşetini birlikte değiştiriyoruz. Önce tahmin, sonra deneme.</p></div></div>
-      <div class="row kur"><div class="t">95–105 dk</div><div><div class="h">Gelecek haftaya hazırlık</div><p>1 Ekim'e neyle geleceksin, evde ne yapacaksın.</p></div></div>
+      <div class="row kur"><div class="t">95–105 dk</div><div><div class="h">Gelecek haftaya hazırlık</div><p>8 Ekim'e neyle geleceksin, evde ne yapacaksın.</p></div></div>
     </div>
 
     <div class="acts" style="margin-top:16px">
@@ -745,14 +746,13 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
         <div class="num">1</div>
         <div>
           <h3>Dörtlü masalar: tanışma turu <span class="chip lab">25 dk</span></h3>
-          <p class="muted small" style="margin-top:4px">Bugünkü masa arkadaşın proje takımın olmak zorunda değil. Takımları Hafta 5'te kuruyoruz. Bugün yalnız tanışıyoruz.</p>
+          <p class="muted small" style="margin-top:4px">Bugünkü masa arkadaşların proje takımın olmak zorunda değil, bugün yalnız tanışıyoruz.</p>
           <div class="body">
             <ol>
-              <li>Sınıfa girdiğin sırayla dörder kişi bir masaya oturun. Tanıdığınla aynı masaya düşmediysen daha iyi.</li>
-              <li>Beş dakika masada konuşun. Herkes dört şey söyler: adı, nereli olduğu, telefonunda en çok kullandığı uygulama, bu dersten beklediği tek şey.</li>
-              <li>Sonra her masa sınıfa bir dakikada kendini tanıtır. Sen kendini değil, yanındakini tanıtırsın. Örnek: "Bu Elif, Bitlisli, en çok YouTube kullanıyor, dersten kendi sitesini yapmayı bekliyor."</li>
+              <li>Sınıfa girdiğin sırayla dörder kişi bir masaya oturun. Tanıdığın biriyle aynı masaya düşmemeye çalışın.</li>
+              <li>Beş dakika masada konuşun. Herkes adını, nereli olduğunu, telefonunda en çok kullandığı uygulamayı ve bu dersten beklediği tek şeyi söylesin.</li>
+              <li>Sonra her masa bir dakikada sınıfa tanıtılır. Herkes yanında oturan kişiyi tanıtır, örneğin: "Yanımdaki arkadaşım Bitlisli, en çok YouTube kullanıyor, bu dersten kendi sitesini yayına almayı bekliyor."</li>
             </ol>
-            <p class="saw" style="margin-top:0"><b>Ne gördün?</b> Masalarda sayılan uygulamaların hepsinin arkasında sabah gördüğün aynı beş parça var: HTML, CSS, JavaScript, sunucu, veritabanı. Bu dönem o parçaların her birine dokunacaksın.</p>
           </div>
         </div>
       </article>
@@ -761,11 +761,11 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
         <div class="num">2</div>
         <div>
           <h3>Hangi siteyi yapardın? <span class="chip lab">20 dk</span></h3>
-          <p class="muted small" style="margin-top:4px">Bir web uygulamasını tarif etmek için kod bilmek gerekmez. Kim kullanacak, ekranda ne görecek, ne yapıp çıkacak: bu üçünü bilmek gerekir.</p>
+          <p class="muted small" style="margin-top:4px">Bir web uygulamasını tarif etmek için kod bilmek gerekmez. Hangi sorunu çözdüğünü, kimin kullanacağını ve kullanıcının siteyi açıp ne yaptığını bilmek yeterli.</p>
           <div class="body">
             <ol>
-              <li>Masa olarak kampüs hayatından bir sorun seçin. Örnekler: kayıp eşya, kantinde sıra ve günün menüsü, yurtta çamaşırhane sırası, kulüp etkinliklerinin duyurusu, ders notlarını paylaşmak, ikinci el kitap alıp satmak, ring saatleri.</li>
-              <li>Üç soruya birer cümleyle cevap verin: Bu siteyi kim kullanacak? Açılınca ilk ekranda ne görünecek? Kullanıcı ne yapıp çıkacak?</li>
+              <li>Masa olarak kampüs hayatından bir sorun seçin. Örnekler: kayıp eşya, kütüphanede boş çalışma odası bulmak, yurtta çamaşırhane sırası, kulüp etkinliklerinin duyurusu, ders notlarını paylaşmak, ikinci el kitap alıp satmak, ring saatleri.</li>
+              <li>Üç soruya birer cümleyle cevap verin: Sorun ne? Siteyi kim kullanacak? Kullanıcı siteyi açıp ne yapar?</li>
               <li>Aşağıdaki fikir kartına yazın. Kart cümleyi sizin için kurar. Her masa cümlesini sınıfa okur, tahtaya yazıyoruz.</li>
             </ol>
             <div class="sim" id="fikir">
@@ -773,11 +773,11 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
               <div class="grid3">
                 <label class="f">Sorun<input type="text" id="fkSorun" maxlength="60" placeholder="kampüste kaybolan eşyalar" autocomplete="off"></label>
                 <label class="f">Kim kullanacak<input type="text" id="fkKim" maxlength="60" placeholder="eşyasını kaybeden ve bulan öğrenciler" autocomplete="off"></label>
-                <label class="f">Ne yapıp çıkacak<input type="text" id="fkNe" maxlength="80" placeholder="fotoğraflı bir ilan bırakıp iletişim bilgisi alacak" autocomplete="off"></label>
+                <label class="f">Siteyi açıp ne yapar<input type="text" id="fkNe" maxlength="80" placeholder="fotoğraflı bir ilan bırakır ve iletişim bilgisi alır" autocomplete="off"></label>
               </div>
               <div class="row-btns"><button class="btn primary" type="button" id="fkKur">Cümleyi kur</button><button class="btn" type="button" id="fkOrnek">Bana bir örnek ver</button></div>
               <p class="fkOut" id="fkOut" aria-live="polite">Üç boşluğu doldur, cümleyi kur.</p>
-              <p class="saw" style="margin-top:0"><b>Ne gördün?</b> Kurduğun cümle bir yazılım projesinin ilk satırı. Hafta 5'te takımınla proje fikrini yazarken tam olarak bu üç soruya cevap vereceksin. Bugün tahtaya yazılan fikirler o gün işine yarayacak.</p>
+              <p class="saw" style="margin-top:0"><b>Ne gördün?</b> Kurduğun cümle, bir yazılım projesinin ilk tanımı. Hafta 4'te takımınla proje fikrini yazarken bu üç soruyu yeniden cevaplayacaksın, bugün tahtaya yazılan fikirler o gün başlangıç noktası olacak.</p>
             </div>
           </div>
         </div>
@@ -790,14 +790,14 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
           <p class="muted small" style="margin-top:4px">Sınıfta önce siz konuşursunuz, sonra kartı açıp benim cevabımı okuruz. Kartlar ders sonrası da burada durur.</p>
           <div class="body">
             <div class="sohbet">
-              <details class="soru"><summary>Yapay zekâ kodu yazıyorsa ben ne yapacağım?</summary><div class="ans"><p>Sabahki "Kim yapar?" oyununu hatırla. Kodun harflerini yazmak işin bir parçası, ama en küçük parçası. Neyin yapılacağına karar vermek, çıkan kodun doğru çalıştığını kontrol etmek ve sonuca imza atmak insanın işi. Yapay zekâ neredeyse doğru kod yazar. Neredeyse doğruyu doğrudan ayıran kişi, ne istendiğini ve kodun ne dediğini bilen kişidir. O kişi olmayı öğreneceksin.</p></div></details>
-              <details class="soru"><summary>Web'i 2026'da öğrenmek hâlâ mantıklı mı?</summary><div class="ans"><p>Telefonundaki uygulamaların çoğu, bankanın sitesi, e-Devlet, üniversitenin öğrenci sistemi, hatta yapay zekâ sohbet araçlarının kendisi tarayıcıda ya da web teknolojisiyle çalışıyor. Sunucu, veritabanı ve arayüz mantığı yalnız web'de değil, her yazılım işinde karşına çıkacak. Bu ders o mantığı ilk kez göreceğin yer.</p></div></details>
-              <details class="soru"><summary>İngilizcem zayıf, olur mu?</summary><div class="ans"><p>Olur. Bu dönem kullanacağın etiket ve komut sayısı az ve hepsini bu sayfalarda Türkçe açıklıyoruz. Hata mesajlarını yapay zekâya Türkçe sorabilirsin, sana Türkçe anlatır. Ders Türkçe, notlar Türkçe, sınav Türkçe. İngilizce sözcükler zamanla tanıdık gelmeye başlar, ezberlemen gerekmez.</p></div></details>
-              <details class="soru"><summary>Programlamada zorlandım, bu ders de öyle mi?</summary><div class="ans"><p>İlk iki hafta HTML ve CSS var. Orada döngü yok, koşul yok. Bir satır yazarsın, ekranda hemen görürsün. JavaScript'e geçtiğimizde YZM103'teki değişken, koşul ve döngü aynen geri gelir, ama bu kez sonuçlarını sayfada görürsün. Her hafta az kavram var ve her kavramı derste birlikte deniyoruz.</p></div></details>
+              <details class="soru"><summary>Yapay zekâ kodu yazıyorsa ben ne yapacağım?</summary><div class="ans"><p>Sabahki "Kim yapar?" etkinliğini hatırla. Kodu yazıya dökmek işin bir parçası, ama en küçük parçası. Neyin yapılacağına karar vermek, çıkan kodun doğru çalıştığını kontrol etmek ve sonuca imza atmak insanın işi. Yapay zekâ neredeyse doğru kod yazar. Neredeyse doğruyu doğrudan ayıran kişi, ne istendiğini ve kodun ne dediğini bilen kişidir. O kişi olmayı öğreneceksin.</p></div></details>
+              <details class="soru"><summary>Web'i 2026'da öğrenmek hâlâ mantıklı mı?</summary><div class="ans"><p>Bankanın internet şubesi, e-Devlet, OBS, WhatsApp Web ve kullandığın yapay zekâ sohbet araçlarının web sürümleri tarayıcıda açılıyor. Telefon uygulamaları da gösterdikleri bilgiyi bir sunucuya istek gönderip yanıt alarak getiriyor. İstemci, sunucu ve veritabanı arasındaki bu iş bölümünü masaüstü ve mobil yazılımda da göreceksin, bu ders onunla ilk kez uğraşacağın yer.</p></div></details>
+              <details class="soru"><summary>İngilizcem zayıf, olur mu?</summary><div class="ans"><p>Olur. Bu dönem kullanacağın etiket ve komut sayısı az ve hepsini bu sayfalarda Türkçe açıklıyoruz. Hata mesajlarını yapay zekâya Türkçe sorabilirsin, sana Türkçe anlatır. Ders anlatımı da sınavlar da Türkçe. İngilizce sözcükler zamanla tanıdık gelmeye başlar, ezberlemen gerekmez.</p></div></details>
+              <details class="soru"><summary>Programlamada zorlandım, bu ders de öyle mi?</summary><div class="ans"><p>Hafta 2 ve 3'te HTML ve CSS var. Bunlarda döngü ya da koşul bulunmuyor, yazdığın her satırın sonucunu hemen ekranda görüyorsun. JavaScript'e geçtiğimizde YZM103'teki değişken, koşul ve döngü aynen geri gelir, ama bu kez sonuçlarını sayfada görürsün. Her hafta az kavram var ve her kavramı derste birlikte deniyoruz.</p></div></details>
               <details class="soru"><summary>Yapay zekâ ödevimi yaparsa kim anlar?</summary><div class="ans"><p>Dönem sonunda 15 dakikalık bireysel bir kod savunması var: projeni anlatırsın, bir kod parçasını açıklarsın, küçük bir değişikliği orada yaparsın. Açıklayamadığın kod orada belli olur. Bu yüzden kural basit: açıklayamadığın kod senin değil. Yapay zekâyı kullan, ama her satırı anlayarak kullan.</p></div></details>
               <details class="soru"><summary>Bu dersten sonra ne iş yapılır?</summary><div class="ans"><p>Ekranda görünen kısmı yapan ön yüz geliştiricisi, sunucu ve veritabanını kuran arka uç geliştiricisi, ikisini birden yapan tam yığın geliştiricisi, yazılımı test eden test mühendisi, neyin yapılacağına karar veren ürün yöneticisi. Hepsi bu dersteki parçaların üstüne kurulur. Memleketindeki bir işletmenin sitesini yapmak da bu işin başlangıcı sayılır.</p></div></details>
             </div>
-            <p class="saw" style="margin-top:0"><b>Ne gördün?</b> Yapay zekâ bu derste yardımcın. Kararı veren, kontrol eden ve sorumluluğu taşıyan sensin. Dönem boyunca bu iki rolü birlikte çalıştıracağız.</p>
+            <p class="saw" style="margin-top:0"><b>Ne gördün?</b> Yapay zekâ bu derste yardımcı rolünde, kararı verip sonucu kontrol eden sensin. Dönem boyunca bu iş bölümüyle çalışacağız.</p>
           </div>
         </div>
       </article>
@@ -813,9 +813,9 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
               <li>Koddaki yazıyı değiştiriyorum: "YZM205 öğrencileri ilk web sayfalarını yaptı". Sayfada manşet değişti.</li>
               <li>Şimdi sen tahmin et: sayfayı yenilersem ne olur? Elini kaldır. Yeni manşet kalır mı, eskisi geri gelir mi? Değişiklik başka okurlarda görünür mü?</li>
               <li>Yeniliyoruz ve bakıyoruz.</li>
-              <li>Son olarak bu sayfanın kendi kaynağını açıyorum. Sayfa dediğimiz şeyin uzun bir metin dosyası olduğunu görüyorsun. Gelecek hafta böyle bir dosyayı sen yazacaksın.</li>
+              <li>Sonra bu sayfanın kendi kaynağını açıyorum. Sayfa dediğimiz şeyin uzun bir metin dosyası olduğunu görüyorsun. Gelecek hafta böyle bir dosyayı sen yazacaksın.</li>
             </ol>
-            <p class="saw" style="margin-top:0"><b>Ne gördün?</b> Eski manşet geri geldi. Tarayıcı sunucudan dosyaların bir kopyasını almış ve onu çizmişti. Değiştirdiğimiz kopya yalnız bu bilgisayardaydı. Siteyi kimse için değiştirmedik.</p>
+            <details class="saw" style="margin-top:0"><summary style="cursor:pointer"><b>Ne gördün?</b> Yeniledikten sonra aç</summary><p style="margin-top:6px">Eski manşet geri geldi. Tarayıcı sunucudan dosyaların bir kopyasını almış ve onu çizmişti. Değiştirdiğimiz kopya yalnız bu bilgisayardaydı, siteyi kimse için değiştirmedik.</p></details>
           </div>
         </div>
       </article>
@@ -824,15 +824,15 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
         <div class="num">5</div>
         <div>
           <h3>Gelecek haftaya hazırlık <span class="chip ship">10 dk</span></h3>
-          <p class="muted small" style="margin-top:4px">1 Ekim'den itibaren her Perşembe bilgisayar başındayız.</p>
+          <p class="muted small" style="margin-top:4px">8 Ekim'den itibaren her Perşembe bilgisayar başındayız.</p>
           <div class="body">
             <ol>
-              <li>1 Ekim Perşembe dizüstünü ve şarj aletini getir. Kendi bilgisayarın yoksa labda bir arkadaşınla eşli çalışırsın.</li>
-              <li>Gelmeden önce <a href="../hafta-00-kurulum/">Hafta 0 kurulum sayfasındaki</a> beş adımı evde yap. Yaklaşık 40 dakika sürer. Terminal yok, komut yok, her şey tıklamayla.</li>
-              <li>Takıldığın adımı olduğu yerde bırak. 1 Ekim labının ilk 20 dakikasında birlikte bitiriyoruz.</li>
+              <li>8 Ekim Perşembe dizüstünü ve şarj aletini getir. Kendi bilgisayarın yoksa labda bir arkadaşınla eşli çalışırsın.</li>
+              <li>Gelmeden önce <a href="../hafta-00-kurulum/">Hafta 0 kurulum sayfasındaki</a> beş adımı evde yap. Yaklaşık 40 dakika sürüyor, terminal ya da komut gerekmiyor, her adım tıklamayla yapılıyor.</li>
+              <li>Takıldığın adımı olduğu yerde bırak. 8 Ekim labının ilk 20 dakikasında birlikte bitiriyoruz.</li>
               <li>Sabahki soruları evde çöz. Her cevabın altında açıklaması var, yanlış yapmak serbest.</li>
             </ol>
-            <div class="callout info">Sorun varsa sınıf kanalından yaz. Gelecek haftanın ders notu: <span class="kilitli" title="1 Ekim'de açılır">Hafta 2, HTML</span>.</div>
+            <div class="callout info">Sorun varsa sınıf kanalından yaz. Gelecek haftanın ders notu: <span class="kilitli" title="8 Ekim'de açılır">Hafta 2, HTML</span>.</div>
           </div>
         </div>
       </article>
@@ -842,10 +842,10 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
   <!-- GELECEK HAFTA -->
   <section id="gelecek" aria-labelledby="gelecek-h">
     <div class="next">
-      <div class="eyebrow">Gelecek hafta · Perşembe 1 Ekim</div>
+      <div class="eyebrow">Gelecek hafta · Perşembe 8 Ekim</div>
       <h2 id="gelecek-h">HTML: sayfanın iskeleti</h2>
       <p class="prose">Bilgisayarlı ilk ders. Bir web sayfasının aslında bir metin dosyası olduğunu göreceğiz: etiket nedir, başlık, paragraf, liste, bağlantı ve görsel nasıl yazılır. Günün sonunda internette senin adınla açılan bir sayfan olacak. Dizüstünü getir, kurulumu evde yap.</p>
-      <div class="row-btns"><span class="btn primary kilitli" title="1 Ekim'de açılır" style="text-decoration:none">Hafta 2'ye geç (1 Ekim'de açılır)</span><a class="btn" href="../hafta-00-kurulum/" style="text-decoration:none">Kurulum rehberi</a></div>
+      <div class="row-btns"><span class="btn primary kilitli" title="8 Ekim'de açılır" style="text-decoration:none">Hafta 2'ye geç (8 Ekim'de açılır)</span><a class="btn" href="../hafta-00-kurulum/" style="text-decoration:none">Kurulum rehberi</a></div>
     </div>
   </section>
 
@@ -887,16 +887,15 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
     });
   });
 
-  /* ---------- 1. ısınma oyunu ---------- */
+  /* ---------- 1. sınıf yoklaması ---------- */
   const APPS = [
-    { id: "wa", ic: "W", name: "WhatsApp Web", p: ["sohbet listesi, mesaj kutusu, gönder düğmesi", "mesaj balonlarının sağa ve sola yaslanması, yeşil tonlar", "yazdığın mesajın anında listeye düşmesi", "mesajını arkadaşının cihazına ulaştırır", "hesabınla ilgili kalıcı bilgiler"] },
-    { id: "yt", ic: "Y", name: "YouTube", p: ["video başlığı, açıklama, yorum kutusu", "kapak resimlerinin ızgara gibi dizilmesi", "oynat, durdur, ses çubuğu", "aradığın videoyu bulup gönderir", "videolar, beğeniler, yorumlar"] },
-    { id: "ed", ic: "e", name: "e-Devlet", p: ["giriş formu, hizmet listesi", "kurumsal renkler ve sayfa düzeni", "formda eksik bıraktığın alanı uyarması", "kimliğini kontrol eder, belgeni hazırlar", "belgelerin dayandığı kayıtlar"] },
-    { id: "ig", ic: "I", name: "Instagram", p: ["gönderi, açıklama, yorumlar", "kare fotoğraflar, yuvarlak profil resmi", "kalbe basınca kırmızıya dönmesi", "akışına hangi gönderilerin geleceğini seçer ve gönderir", "gönderiler, takipler, beğeniler"] },
-    { id: "sh", ic: "S", name: "Alışveriş sitesi", p: ["ürün adı, fiyat, sepete ekle düğmesi", "ürün kartları, indirim etiketinin rengi", "sepetteki ürün sayısının artması", "siparişi alır, stoğa bakar", "ürünler, siparişler, adresler"] },
-    { id: "ob", ic: "Ö", name: "Üniversitenin öğrenci sistemi", p: ["ders listesi, not tablosu", "tablonun satır satır düzeni", "bir menüye tıklayınca alt menünün açılması", "kimliğini doğrular, notlarını getirir", "dersler, notlar, devamsızlık"] },
-    { id: "mp", ic: "H", name: "Harita", p: ["arama kutusu, yol tarifi paneli", "panelin haritanın üstünde durması", "haritayı sürükleyip yakınlaştırmak", "iki nokta arasındaki yolu hesaplar", "yollar, işletmeler, yorumlar"] },
-    { id: "nw", ic: "N", name: "Haber sitesi", p: ["manşet, haber metni, fotoğraf", "manşetin büyük ve kalın yazılması", "\"daha fazla yükle\" düğmesi", "en son haberleri gönderir", "haber arşivi"] }
+    { id: "wa", ic: "W", name: "WhatsApp Web", p: ["sohbet listesi, mesaj kutusu ve gönder düğmesi, sağ tık İncele ile birer öğe olarak görünür", "mesaj balonlarının sağa ve sola yaslanması, renkleri, aralarındaki boşluk", "sayfa yenilenmeden yeni mesajın listeye eklenmesi", "başka bir şehirdeki arkadaşının yazdığı mesajın birkaç saniyede ekranına düşmesi, mesajın bir sunucu üzerinden geldiğini gösterir", "grup adları, üye listesi ve profil fotoğrafları"] },
+    { id: "yt", ic: "Y", name: "YouTube", p: ["video başlığı, açıklama ve yorum kutusu", "kapak görsellerinin ızgara halinde dizilmesi", "oynat, durdur ve ses çubuğunun tıklamaya tepki vermesi", "aramaya yazdığın kelimeye göre değişen sonuç listesi", "ertesi gün de yerinde duran yorumların ve beğenilerin"] },
+    { id: "ed", ic: "e", name: "e-Devlet", p: ["giriş formu ve hizmet listesi", "kurumsal renkler, yazı tipi ve sayfa düzeni", "sayfa yenilenmeden değişen her şey, açılan bir menü ya da beliren bir öneri listesi gibi, JavaScript'in işidir","kimlik doğrulandıktan sonra yalnız sana ait bilgilerin gelmesi", "belge sorgularken gelen, geçmiş yıllara ait kayıtlar"] },
+    { id: "ig", ic: "I", name: "Instagram (web)", p: ["gönderi, açıklama ve yorum alanı", "kare fotoğraflar ve yuvarlak profil resmi", "beğen simgesine basınca renginin anında değişmesi", "yenilediğinde akışa yeni gönderilerin gelmesi", "hesabının takip listesi ve eski gönderilerin"] },
+    { id: "ty", ic: "T", name: "Trendyol", p: ["ürün adı, fiyat ve sepete ekle düğmesi", "ürün kartları ve indirim etiketinin rengi", "sepet simgesindeki sayının sayfa yenilenmeden artması", "stokta kalmayan ürün için çıkan uyarı", "geçmiş siparişlerin ve kayıtlı adreslerin"] },
+    { id: "ob", ic: "Ö", name: "OBS", p: ["ders listesi ve not tablosu", "tablonun satır satır düzeni ve menünün yerleşimi", "sayfayı yenilemeden açılıp kapanan ya da içeriği değişen parçalar","öğrenci numaranla giriş yaptıktan sonra yalnız senin notlarının gelmesi", "önceki dönemlerin dersleri, notları ve devamsızlık bilgisi"] },
+    { id: "mp", ic: "G", name: "Google Haritalar", p: ["arama kutusu ve yol tarifi paneli", "panelin haritanın üstünde durması", "haritayı sürükleyip yakınlaştırınca görüntünün değişmesi", "iki nokta arasında hesaplanıp gelen yol ve süre", "işletmelerin adresleri, çalışma saatleri ve yorumları"] }
   ];
   const PARTS = [["HTML", "ship"], ["CSS", "theory"], ["JavaScript", "lab"], ["Sunucu", "srv"], ["Veritabanı", "db"]];
   const picked = new Set();
@@ -923,7 +922,7 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
     const n = picked.size;
     if (!n) { $("#tally").textContent = "Henüz bir uygulama seçmedin."; return; }
     const a = APPS.find(x => x.id === lastApp);
-    $("#tally").textContent = n === 1 ? "Seçtiğin uygulama: " + a.name : n + " uygulama seçtin. Web sürümlerinin hepsi aynı beş parçadan yapılıyor. Son seçtiğin: " + a.name;
+    $("#tally").textContent = n === 1 ? "Seçtiğin sistem: " + a.name : n + " sistem seçtin ve " + n + " tanesi de bir sunucuya bağlanıyor. Son seçtiğin: " + a.name;
     PARTS.forEach((pt, i) => {
       const row = el("div", "part");
       row.append(el("span", "chip " + pt[1], pt[0]), el("span", null, a.p[i]));
@@ -934,44 +933,44 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
 
   /* ---------- 2. katmanlar ---------- */
   const LAYERS = {
-    html: { when: "Hafta 2'de", chip: "ship", text: "Yalnız HTML: tarayıcı içeriği kendi varsayılan yazı tipiyle, alt alta dizer. Her şey orada ama süssüz.", hint: "Düğme var ama basınca bir şey olmuyor. Davranışı JavaScript verecek.",
-      code: '<h2>Kantin Menüsü</h2>\n<ul>\n  <li>Simit, 15 TL <button>Ekle</button></li>\n  <li>Çay, 10 TL <button>Ekle</button></li>\n</ul>\n<p id="sepet">Sepet: 0 ürün</p>' },
-    css: { when: "Hafta 3'te", chip: "theory", text: "CSS eklendi: aynı içerik şimdi bir kart gibi görünüyor. Renkler, boşluklar, yuvarlak köşeler geldi. İçerik tek harf değişmedi.", hint: "Düğmeler güzelleşti ama hâlâ bir şey yapmıyor.",
-      code: 'ul      { list-style: none; padding: 0; }\nh2     { color: teal; }\nli      { display: flex; justify-content: space-between; }\nbutton  { background: orange; color: white; }' },
-    js: { when: "Hafta 4 ve 5'te", chip: "lab", text: "JavaScript eklendi: düğmeler artık çalışıyor. Her Ekle'de sepet güncelleniyor.", hint: "Ekle'ye bas, sepeti izle.",
-      code: 'let adet = 0, tutar = 0;\nfor (const dugme of dugmeler) {\n  dugme.addEventListener("click", () => {\n    adet = adet + 1;\n    tutar = tutar + Number(dugme.dataset.price);\n    sepet.textContent = "Sepet: " + adet + " ürün, " + tutar + " TL";\n  });\n}' }
+    html: { when: "Hafta 2'de", chip: "ship", text: "Yalnız HTML: tarayıcı içeriği kendi varsayılan yazı tipiyle alt alta diziyor. Başlık, liste ve düğmeler yerinde, ama hiçbir biçim kuralı yok.", hint: "Düğme var ama basınca bir şey olmuyor. Tıklamaya tepki vermek JavaScript'in işi.",
+      code: '<h2>Bilgi Kulübü · Ekim etkinlikleri</h2>\n<ul>\n  <li>Git atölyesi, 2 saat\n    <button data-saat="2">Katıl</button></li>\n  <li>Mezunla söyleşi, 1 saat\n    <button data-saat="1">Katıl</button></li>\n</ul>\n<p id="secim">Seçtiğin: 0 etkinlik</p>' },
+    css: { when: "Hafta 3'te", chip: "theory", text: "CSS eklendi: aynı içerik şimdi kart düzeninde. Renkler, boşluklar ve yuvarlak köşeler geldi, HTML'deki metnin tek harfi bile değişmedi.", hint: "Düğmelerin görünümü değişti ama tıklamaya hâlâ tepki vermiyorlar.",
+      code: 'ul      { list-style: none; padding: 0; }\nh2      { color: teal; }\nli      { display: flex; justify-content: space-between; }\nbutton  { background: orange; color: white; }' },
+    js: { when: "Hafta 4 ve 5'te", chip: "lab", text: "JavaScript eklendi: her Katıl tıklamasını yakalayan kod, alttaki sayacı sayfayı yenilemeden güncelliyor.", hint: "Katıl'a bas, alttaki sayacı izle.",
+      code: 'let adet = 0, toplam = 0;\nfor (const dugme of dugmeler) {\n  dugme.addEventListener("click", () => {\n    adet = adet + 1;\n    toplam = toplam + Number(dugme.dataset.saat);\n    secim.textContent = "Seçtiğin: " + adet +\n      " etkinlik, " + toplam + " saat";\n  });\n}' }
   };
   let layer = "html", cartN = 0, cartT = 0;
-  const kantin = $("#kantin"), sepet = $("#sepet");
+  const kulup = $("#kulup"), secim = $("#secim");
   function renderLayer() {
     const L = LAYERS[layer];
     $$("#layers [data-layer]").forEach(b => b.setAttribute("aria-pressed", b.dataset.layer === layer ? "true" : "false"));
-    kantin.className = "kantin" + (layer === "html" ? "" : " css");
+    kulup.className = "kulup" + (layer === "html" ? "" : " css");
     $("#layerWhen").innerHTML = "";
     $("#layerWhen").append(el("span", "chip " + L.chip, "Bunu " + L.when + " öğreneceksin"));
     $("#layerText").textContent = L.text;
     $("#layerCode").textContent = L.code;
     $("#layerHint").textContent = "";
     if (layer !== "js") { cartN = 0; cartT = 0; }
-    sepet.textContent = "Sepet: " + cartN + " ürün, " + cartT + " TL";
+    secim.textContent = "Seçtiğin: " + cartN + " etkinlik, " + cartT + " saat";
   }
   $$("#layers [data-layer]").forEach(b => b.addEventListener("click", () => { layer = b.dataset.layer; renderLayer(); }));
-  $$("button[data-price]", kantin).forEach(b => b.addEventListener("click", () => {
+  $$("button[data-saat]", kulup).forEach(b => b.addEventListener("click", () => {
     if (layer !== "js") { $("#layerHint").textContent = LAYERS[layer].hint; return; }
-    cartN += 1; cartT += Number(b.dataset.price);
-    sepet.textContent = "Sepet: " + cartN + " ürün, " + cartT + " TL";
-    sepet.classList.remove("bump"); void sepet.offsetWidth; sepet.classList.add("bump");
-    $("#layerHint").textContent = "Sepet güncellendi. Bunu yapan birkaç satır JavaScript.";
+    cartN += 1; cartT += Number(b.dataset.saat);
+    secim.textContent = "Seçtiğin: " + cartN + " etkinlik, " + cartT + " saat";
+    secim.classList.remove("bump"); void secim.offsetWidth; secim.classList.add("bump");
+    $("#layerHint").textContent = "Sayaç güncellendi. Bunu yapan, yandaki birkaç satır JavaScript.";
   }));
   renderLayer();
 
   /* ---------- 3. adres çubuğu ---------- */
   const addrInput = $("#addrInput"), packet = $("#packet"), mini = $("#mini");
   const STEPS = [
-    { t: "1. Sen yazarsın", b: a => "Adres çubuğuna " + a + " yazıp Enter'a basıyorsun. Adres, sayfanın internetteki yeri.", an: "Lokantada: siparişini garsona verdin." },
-    { t: "2. Tarayıcı sunucuya sorar", b: a => "Tarayıcı, adresin gösterdiği sunucuya bir istek gönderir: \"Şu sayfanın dosyalarını verir misin?\"", an: "Lokantada: garson siparişi mutfağa götürdü." },
-    { t: "3. Sunucu dosyaları gönderir", b: a => "Sunucu istenen dosyaları bulur ve geri yollar: bir HTML dosyası, bir CSS dosyası, bir JavaScript dosyası, belki birkaç resim. Hepsi sıradan dosyalar.", an: "Lokantada: mutfak tabakları hazırlayıp garsona verdi." },
-    { t: "4. Tarayıcı ekrana çizer", b: a => "Tarayıcı dosyaları okur. HTML'den sayfada ne olduğunu, CSS'ten nasıl görüneceğini, JavaScript'ten nasıl davranacağını öğrenir ve sayfayı ekrana çizer.", an: "Lokantada: garson tabakları masana dizdi. Afiyet olsun." }
+    { t: "1. Adresi yazarsın", b: a => "Adres çubuğuna " + a + " yazıp Enter'a basıyorsun. Adres, istenen sayfanın hangi sunucuda ve o sunucunun neresinde durduğunu söylüyor.", an: "Gerçek sistemde: e-Devlet'e girerken yazdığın turkiye.gov.tr de böyle bir adres." },
+    { t: "2. Tarayıcı istek gönderir", b: a => "Tarayıcı, adresin gösterdiği sunucuya bir istek gönderir. İstekte hangi sayfanın istendiği yazar ve tarayıcı yanıt gelene kadar bekler.", an: "Gerçek sistemde: bağlantı yavaşken sekmenin başlığında dönen simge, tarayıcının yanıt beklediğini gösterir." },
+    { t: "3. Sunucu yanıt döndürür", b: a => "Sunucu yanıt olarak önce HTML dosyasını gönderir. Tarayıcı bu dosyada adı geçen CSS, JavaScript ve görsel dosyaları için ayrı ayrı istek gönderir, sunucu da her birini yanıtlar. Hepsi sıradan metin ve görsel dosyaları.", an: "Gerçek sistemde: DevTools'taki Network panelinde bir sayfa için gelen dosyaların her biri ayrı bir satırdır." },
+    { t: "4. Tarayıcı ekrana çizer", b: a => "Tarayıcı HTML'den sayfada hangi öğelerin olduğunu, CSS'ten bu öğelerin nasıl görüneceğini öğrenir ve sayfayı ekrana çizer. JavaScript kodu da çalışıp tıklama gibi olayları dinlemeye başlar.", an: "Gerçek sistemde: bir sayfada Ctrl+U ile açılan kaynak, tarayıcının çizmeden önce aldığı HTML'dir." }
   ];
   let step = -1, timer = null;
   function addr() { const v = addrInput.value.trim(); return v ? v : "bir adres"; }
@@ -982,7 +981,7 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
     packet.className = "packet";
     mini.classList.toggle("draw", step === 3);
     if (step === 1) { packet.textContent = "istek"; packet.classList.add("show"); requestAnimationFrame(() => requestAnimationFrame(() => packet.classList.add("right"))); }
-    else if (step === 2) { packet.textContent = "dosyalar"; packet.classList.add("back", "show", "right"); requestAnimationFrame(() => requestAnimationFrame(() => packet.classList.remove("right"))); }
+    else if (step === 2) { packet.textContent = "yanıt"; packet.classList.add("back", "show", "right"); requestAnimationFrame(() => requestAnimationFrame(() => packet.classList.remove("right"))); }
     if (step < 0) { $("#stepTitle").textContent = "Adres yaz ve Git'e bas"; $("#stepBody").textContent = "Ya da adımlara tek tek tıkla."; $("#stepAn").textContent = ""; }
     else { const S = STEPS[step]; $("#stepTitle").textContent = S.t; $("#stepBody").textContent = S.b(addr()); $("#stepAn").textContent = S.an; }
     $("#addrPrev").disabled = step <= 0;
@@ -1000,8 +999,8 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
   $$("#addr .steppills button").forEach(b => b.addEventListener("click", () => { stopPlay(); step = Number(b.dataset.step); renderStep(); }));
   renderStep();
 
-  /* ---------- 3b. ziyaretçi defteri ---------- */
-  const SEED = [["Deniz", "Kantinin tostu çok iyi"], ["Mert", "Kütüphane cumartesi açık mı?"]];
+  /* ---------- 3b. etkinlik kayıt formu ---------- */
+  const SEED = [["Deniz A.", "Yazılım Mühendisliği"], ["Mert Y.", "Bilgisayar Mühendisliği"]];
   let rows = [], nextId = 1, busy = false;
   const gbRows = $("#gbRows"), gbList = $("#gbList"), gbLog = $("#gbLog"), gbStatus = $("#gbStatus");
   function logLine(text, bad) { const d = el("div", bad ? "bad" : null, text); gbLog.append(d); gbLog.scrollTop = gbLog.scrollHeight; }
@@ -1026,33 +1025,33 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
   async function gbSend() {
     if (busy) return;
     busy = true; $("#gbSend").disabled = true;
-    const ad = $("#gbName").value.trim() || "İsimsiz";
-    const mesaj = $("#gbMsg").value.trim();
+    const ad = $("#gbName").value.trim();
+    const mesaj = $("#gbMsg").value.trim() || "belirtilmedi";
     gbStatus.className = "gbstatus"; gbStatus.textContent = "Gönderiliyor...";
     pulse("#gbFront");
     await wait(700);
     pulse("#gbSrv");
-    logLine("Yeni mesaj geldi. Gönderen: " + ad);
+    logLine("Yeni kayıt isteği geldi. Ad: " + (ad || "(boş)"));
     await wait(700);
-    if (!mesaj) {
-      logLine("Mesaj boş. Boş mesaj kaydedilmez, ön yüze hata dönüyorum.", true);
+    if (!ad) {
+      logLine("Ad alanı boş. Adı olmayan kayıt tutulmaz, ön yüze hata dönüyorum.", true);
       await wait(500);
-      gbStatus.className = "gbstatus bad"; gbStatus.textContent = "Sunucu mesajı kabul etmedi: mesaj boş olamaz.";
+      gbStatus.className = "gbstatus bad"; gbStatus.textContent = "Hata. Sunucu kaydı kabul etmedi: ad soyad boş olamaz.";
       pulse("#gbFront");
       busy = false; $("#gbSend").disabled = false; return;
     }
-    logLine("Mesaj boş değil. Veritabanına yazıyorum.");
+    logLine("Ad dolu. Veritabanına yeni satır yazıyorum.");
     await wait(700);
     const id = nextId++;
     rows.push({ id: id, ad: ad, mesaj: mesaj });
     pulse("#gbDb"); drawDb(id);
     await wait(900);
     pulse("#gbSrv");
-    logLine("Kaydedildi (no " + id + "). Güncel listeyi ön yüze gönderiyorum.");
+    logLine("Kaydedildi (no " + id + "). Güncel katılımcı listesini ön yüze gönderiyorum.");
     await wait(700);
     pulse("#gbFront"); drawList();
-    gbStatus.textContent = "Mesajın deftere eklendi.";
-    $("#gbMsg").value = "";
+    gbStatus.textContent = "Kaydedildi. Adın katılımcı listesinde.";
+    $("#gbName").value = ""; $("#gbMsg").value = "";
     busy = false; $("#gbSend").disabled = false;
   }
   $("#gbSend").addEventListener("click", gbSend);
@@ -1072,19 +1071,19 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
         const body = el("div", "vbody", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.");
         w.append(nav, hero, body); box.append(w);
       },
-      guesses: [["dil", "İngilizce yazdı, çünkü dili sen söylemedin."], ["konu", "Bir şirket sitesi uydurdu. Aklında kantin vardı, bilemezdi."], ["içerik", "Gerçek içerik yerine anlamsız yer tutucu metin (Lorem ipsum) koydu."], ["telefon", "Telefonda nasıl görüneceği hiç konuşulmadı."]]
+      guesses: [["dil", "İngilizce yazdı, çünkü sayfanın dilini belirtmedin."], ["konu", "Bir şirket sitesi uydurdu. Aklındaki kulüp etkinlik sayfasını bilmesinin yolu yoktu."], ["içerik", "Gerçek içerik yerine anlamsız yer tutucu metin (Lorem ipsum) koydu."], ["telefon", "Sayfanın telefonda nasıl görüneceği istemde hiç geçmedi."]]
     },
     clear: {
-      prompt: "Türkçe, tek sayfa, kantin menüsü. Başlık, 5 ürün, fiyatlar. Telefonda da düzgün görünsün.",
-      url: "kantin/index.html",
+      prompt: "Türkçe, tek sayfa, Bilgi Kulübü'nün ekim etkinlikleri: Git atölyesi, mezunla söyleşi, Linux kurulum günü, hackathon tanıtımı, kod okuma saati. Başlık ve her etkinliğin tarihi olsun. Telefonda da düzgün görünsün.",
+      url: "kulup/index.html",
       build(box) {
         const w = el("div", "clear");
-        w.append(el("h5", null, "Kantin Menüsü"), el("p", "sub", "Bugün 08:30–17:00 arası açığız"));
+        w.append(el("h5", null, "Bilgi Kulübü · Ekim etkinlikleri"), el("p", "sub", "Bütün etkinlikler konferans salonunda, saat 17:00'de"));
         const ul = el("ul");
-        [["Simit", "15 TL"], ["Çay", "10 TL"], ["Kaşarlı tost", "40 TL"], ["Ayran", "20 TL"], ["Poğaça", "20 TL"]].forEach(p => { const li = el("li"); li.append(el("span", null, p[0]), el("b", null, p[1])); ul.append(li); });
+        [["Git atölyesi", "6 Eki"], ["Mezunla söyleşi", "13 Eki"], ["Linux kurulum günü", "20 Eki"], ["Hackathon tanıtımı", "27 Eki"], ["Kod okuma saati", "30 Eki"]].forEach(p => { const li = el("li"); li.append(el("span", null, p[0]), el("b", null, p[1])); ul.append(li); });
         w.append(ul); box.append(w);
       },
-      guesses: [["renk", "Renkleri o seçti. Sen söylemedin, o da tahmin etti."], ["saat", "Açılış saatini uydurdu. Kontrol etmezsen yanlış bilgi yayına çıkar."], ["fiyat", "Fiyatları sen verseydin tahmin etmesine gerek kalmazdı."]]
+      guesses: [["renk", "Renkleri istemde belirtmediğin için kendisi seçti."], ["yer, saat", "Etkinliklerin yerini ve saatini uydurdu. Kontrol etmezsen yanlış bilgi yayına çıkar."], ["tarih", "Tarihleri sen verseydin tahmin etmesine gerek kalmazdı."]]
     }
   };
   function renderAsk(k) {
@@ -1101,18 +1100,18 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
 
   /* ---------- 4b. neredeyse doğru ---------- */
   const BUGS = [
-    { yer: "derste", ask: "Menüye Hakkımda sayfasına giden bir bağlantı ekle.", files: "Klasördeki dosyalar: index.html, hakkimda.html, stil.css",
-      lines: ['<nav>', '  <a href="index.html">Ana sayfa</a>', '  <a href="hakkimda.htm">Hakkımda</a>', '</nav>'], bad: 2,
-      exp: "3. satırda dosya adı hakkimda.htm yazılmış, klasördeki dosya ise hakkimda.html. Tek bir harf eksik ve bağlantıya tıklayan \"sayfa bulunamadı\" görür. 2. satır doğru: index.html klasörde var." },
-    { yer: "derste", ask: "Sepetteki ürünün toplam tutarını hesapla.", files: "Beklenen çıktı: 3 tane 40 TL'lik tost için 120 TL",
-      lines: ['const fiyat = 40;   // tost', 'const adet = 3;', 'const toplam = fiyat + adet;', 'console.log(toplam + " TL");'], bad: 2,
-      exp: "3. satırda fiyat ile adet toplanmış, çarpılması gerekirdi. Kod hiç hata vermeden çalışır ve konsola (tarayıcının programcıya mesaj gösterdiği panel) 43 TL yazar. Ne istendiğini bilmeyen biri bunu fark etmez. 4. satır doğru: sayının yanına \" TL\" ekliyor." },
-    { yer: "evde", ask: "Kulüp duyurusuna afiş görselini koy.", files: "Klasördeki dosyalar: index.html, img/afis.png",
-      lines: ['<h1>Satranç Kulübü</h1>', '<p>Turnuva cuma günü saat 14:00\'te.</p>', '<img src="img/afis.jpg" alt="Satranç turnuvası afişi">'], bad: 2,
-      exp: "3. satır afis.jpg istiyor, klasördeki dosya afis.png. Uzantı yanlış olduğu için görselin yerinde kırık bir simge çıkar. Alt metni ise gayet iyi: görseli göremeyen biri ne olduğunu anlar." },
-    { yer: "evde", ask: "Kantin sayfasına tost fotoğrafı ekle. Ekran okuyucu (yazıyı sesli okuyan program) kullananlar da anlasın.", files: "Klasördeki dosyalar: index.html, tost.jpg",
-      lines: ['<h2>Günün menüsü</h2>', '<img src="tost.jpg" alt="resim">', '<p>Kaşarlı tost, 40 TL</p>'], bad: 1,
-      exp: "2. satırdaki alt metni \"resim\" diyor. Ekran okuyucu kullanan biri yalnız \"resim\" duyar ve neyin fotoğrafı olduğunu öğrenemez. Daha iyisi: alt=\"Ortadan ikiye kesilmiş kaşarlı tost\". Dosya adı doğru, görsel açılıyor." }
+    { yer: "derste", ask: "Kulüp sitesinin menüsüne Etkinlikler sayfasına giden bir bağlantı ekle.", files: "Klasördeki dosyalar: index.html, etkinlikler.html, stil.css",
+      lines: ['<nav>', '  <a href="index.html">Ana sayfa</a>', '  <a href="etkinlikler.htm">Etkinlikler</a>', '</nav>'], bad: 2,
+      exp: "3. satırda dosya adı etkinlikler.htm yazılmış, klasördeki dosya ise etkinlikler.html. Bir harf eksik olduğu için sunucu bu adda dosya bulamaz ve bağlantıya tıklayan \"sayfa bulunamadı\" hatası görür. 2. satır doğru, index.html klasörde var." },
+    { yer: "evde", ask: "Atölyenin toplam süresini dakika olarak hesapla.", files: "Beklenen çıktı: 40'ar dakikalık 3 oturum için 120 dakika",
+      lines: ['const sure = 40;   // bir oturum, dakika', 'const oturum = 3;', 'const toplam = sure + oturum;', 'console.log(toplam + " dakika");'], bad: 2,
+      exp: "3. satırda süre ile oturum sayısı toplanmış, çarpılması gerekirdi. Kod hiç hata vermeden çalışır ve konsola (tarayıcının programcıya mesaj gösterdiği panel) 43 dakika yazar. Ne istendiğini bilmeyen biri bunu fark etmez. 4. satır doğru, sayının yanına \" dakika\" ekliyor." },
+    { yer: "evde", ask: "Kulüp duyurusuna hackathon afişini koy.", files: "Klasördeki dosyalar: index.html, img/afis.png",
+      lines: ['<h1>Bilgi Kulübü</h1>', '<p>Hackathon cuma günü saat 14:00\'te.</p>', '<img src="img/afis.jpg" alt="Hackathon afişi: cuma 14:00, konferans salonu">'], bad: 2,
+      exp: "3. satır afis.jpg istiyor, klasördeki dosya afis.png. Tarayıcı olmayan bir dosyayı istediği için görselin yerinde kırık bir simge çıkar. Alt metni ise iyi yazılmış: görseli göremeyen biri afişte ne yazdığını öğrenir." },
+    { yer: "evde", ask: "Etkinlik sayfasına geçen haftaki atölyenin fotoğrafını ekle. Ekran okuyucu (yazıyı sesli okuyan program) kullananlar da anlasın.", files: "Klasördeki dosyalar: index.html, atolye.jpg",
+      lines: ['<h2>Geçen hafta</h2>', '<img src="atolye.jpg" alt="resim">', '<p>Git atölyesine 32 kişi katıldı.</p>'], bad: 1,
+      exp: "2. satırdaki alt metni \"resim\" diyor. Ekran okuyucu kullanan biri yalnız \"resim\" duyar ve fotoğrafta ne olduğunu öğrenemez. Daha iyisi: alt=\"Laboratuvarda dizüstü bilgisayarlarıyla çalışan öğrenciler\". Dosya adı doğru, görsel açılıyor." }
   ];
   let found = 0;
   function renderBugs() {
@@ -1150,9 +1149,9 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
     { t: "Bir sayfanın ilk kod taslağını yazmak", a: "ai", e: "Taslak çıkarmak yapay zekânın hızlı olduğu bir iş. Taslağın işe yarayıp yaramadığına yine sen bakarsın." },
     { t: "Kullanıcının gerçekte ne istediğine karar vermek", a: "you", e: "Kullanıcıyla konuşan, derdini dinleyen sensin. Yapay zekâ kullanıcını tanımaz, olsa olsa tahmin eder." },
     { t: "İngilizce bir hata mesajını anlaşılır Türkçeyle açıklamak", a: "ai", e: "Kısa ve İngilizce hata mesajlarını açıklatmak, yapay zekânın bu dönem en çok işine yarayacak kullanımlarından biri." },
-    { t: "Uygulamanın kullanıcının istediğini yapıp yapmadığına karar vermek", a: "you", e: "Neyin doğru olduğunu bilen sensin. 43 TL gösteren sepete itiraz etmek için 120 TL beklendiğini bilmek gerekir." },
+    { t: "Uygulamanın kullanıcının istediğini yapıp yapmadığına karar vermek", a: "you", e: "Neyin doğru olduğunu bilen sensin. Toplam süreyi 43 dakika gösteren koda itiraz edebilmek için 120 dakika beklendiğini bilmek gerekir." },
     { t: "Testleri çalıştırıp sonucu özetlemek", a: "ai", e: "Test, kodun doğru çalışıp çalışmadığını otomatik deneyen küçük bir program. Onu çalıştırmak mekanik bir iş, yapay zekâ yapabilir. Testin yeterli olup olmadığına ise sen karar verirsin." },
-    { t: "Sonucun doğru olduğuna imza atıp teslim etmek", a: "you", e: "Teslim ettiğin kodun sorumlusu sensin. Kod savunması, dönem sonunda projeni ve kodunu 15 dakikada anlattığın bireysel görüşme. Oradaki soruları yapay zekâ değil, sen cevaplayacaksın." }
+    { t: "Sonucun doğru olduğuna imza atıp teslim etmek", a: "you", e: "Teslim ettiğin kodun sorumlusu sensin. Dönem sonundaki bireysel kod savunmasında projeni ve kodunu 15 dakikada anlatacak, soruları kendin cevaplayacaksın." }
   ];
   let whoState = {}, whoChecked = false;
   function renderWho(focusIdx, focusSide) {
@@ -1191,28 +1190,28 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
 
   /* ---------- 5. yol haritası ---------- */
   const WEEKS = [
-    { n: "1", d: "24 Eyl", t: "Tanışma", c: "Web'in hangi parçalardan oluştuğunu anlatabilir, dönemin haritasını bilir, sınıf arkadaşlarını tanımaya başlamış olursun.", tag: "bugün" },
-    { n: "2", d: "1 Eki", t: "HTML: sayfanın iskeleti", c: "Kendi kişisel sayfanı yazıp internette senin adınla açılan bir adrese koyabileceksin.", taste: "HTML, sayfadaki her şeyi etiketlerle işaretleyen dil. Gelecek hafta ilk on satırını yazacaksın." },
-    { n: "3", d: "8 Eki", t: "CSS: sayfaya görünüş vermek", c: "Sayfana renk, yazı tipi ve düzen verip telefonda da düzgün görünmesini sağlayabileceksin.", taste: "Kantin menüsünü çıplak listeden karta çeviren şey birkaç satır CSS'ti." },
-    { n: "4", d: "15 Eki", t: "JavaScript 1: dilin temelleri", c: "Tarayıcıda küçük hesaplayıcılar yazabileceksin: not ortalaması, KDV, çarpım tablosu.", taste: "YZM103'te gördüğün değişken, koşul ve döngü burada da aynı mantıkla çalışıyor." },
-    { n: "5", d: "22 Eki", t: "JavaScript 2: sayfayı canlandırmak", c: "Düğmeye basınca değişen bir sayfa, yani çalışan bir yapılacaklar listesi yapabileceksin. Aynı hafta takımını kurup proje fikrini kâğıda dökeceksin (M0).", taste: "Kantin sepetinin sayması bu haftanın konusu." },
-    { n: "6", d: "29 Eki", t: "Ders yok: Cumhuriyet Bayramı", c: "Takımınla ilk buluşmanı yaparsın.", off: true },
-    { n: "7", d: "5 Kas", t: "Sunucu: tarayıcının konuştuğu program", c: "JavaScript'le kendi küçük sunucunu yazıp tarayıcıdan ona soru sorabileceksin, örneğin \"günün sözü nedir?\"", taste: "Adres çubuğundaki dört adımın mutfak tarafını bu hafta sen kuruyorsun." },
-    { n: "Vize", d: "9–13 Kas", t: "Ara sınav haftası", c: "Hafta 2–5 konuları. Bilgisayarda uygulamalı bir kısım ve kâğıt üzerinde kavram soruları. Ders yok.", off: true },
-    { n: "8", d: "19 Kas", t: "Veritabanı: veriyi saklamak", c: "Ziyaretçi defterini baştan sona kendin kurabileceksin: form, sunucu, veritabanı, liste.", taste: "Bugün simülasyonda gördüğün defterin gerçeği." },
-    { n: "9", d: "26 Kas", t: "Git ve GitHub ile takım çalışması", c: "Takım arkadaşlarınla aynı kod üzerinde, birbirinizin işini ezmeden çalışabileceksin.", taste: "Git, kodunun her kaydını tarihiyle saklayan bir defter gibi. Bir şeyi bozarsan dünkü hâline dönebilirsin." },
-    { n: "10", d: "3 Ara", t: "Yapay zekâ ile geliştirme", c: "Kodlama ajanına projene bir özellik ekletip ürettiği her satırı açıklayabileceksin. Takımınızın ilk sürümü yayında olacak (M1).", taste: "Kodlama ajanı, senin yerine dosya açıp kod yazabilen bir yapay zekâ yardımcısı." },
-    { n: "11", d: "10 Ara", t: "Güvenlik ve kullanıcı girişi", c: "Ziyaretçi defterine kullanıcı girişi ekleyip en bilinen güvenlik açıklarını kapatabileceksin.", taste: "Parolalar neden düz yazıyla saklanmaz, bu haftanın ilk sorusu." },
-    { n: "12", d: "17 Ara", t: "Web uygulamasına yapay zekâ eklemek", c: "Projene küçük bir yapay zekâ özelliği ekleyebileceksin. Sunucusu ve veritabanı bağlı sürüm hazır olacak (M2).", taste: "Kayıp eşya panosundaki ilan düzeltici gibi bir özellik." },
-    { n: "13", d: "24 Ara", t: "Yayına alma ve modern araçlara bakış", c: "Projeni sunucusu ve veritabanıyla internete koyabileceksin. Final kodu 30 Aralık 23:59'da dondurulur.", taste: "Hafta 7–8'de kendi bilgisayarında çalıştırdığın sunucu ve veritabanı bu hafta internete çıkıyor." },
-    { n: "14", d: "31 Ara", t: "Demo Günü", c: "Takımınla ürününü 7 dakikada gösterip 3 dakika soru cevaplayacaksın.", taste: "Dönemin finali. On dört takım, on dört ürün." }
+    { n: "1", d: "1 Eki", t: "Tanışma", c: "Bir web uygulamasının beş katmanını ve adres çubuğuna yazınca olanları anlatabilir, dönemin planını bilir halde olacaksın.", tag: "bugün" },
+    { n: "2", d: "8 Eki", t: "HTML: sayfanın iskeleti", c: "Kendi kişisel sayfanı yazıp internette senin adınla açılan bir adrese koyabileceksin.", taste: "HTML, sayfadaki her öğeyi etiketlerle işaretleyen dil. Gelecek hafta ilk satırlarını yazacaksın." },
+    { n: "3", d: "15 Eki", t: "CSS: sayfaya görünüş vermek", c: "Sayfana renk, yazı tipi ve yerleşim verip telefonda da düzgün görünmesini sağlayabileceksin.", taste: "Etkinlik listesini süssüz metinden kart düzenine çeviren, birkaç satır CSS'ti." },
+    { n: "4", d: "22 Eki", t: "JavaScript 1: dilin temelleri", c: "Tarayıcıda küçük hesaplayıcılar yazabileceksin: not ortalaması, KDV, çarpım tablosu. Aynı hafta takımını kurup proje fikrini kâğıda dökeceksin, M0 teslimi Pazar 1 Kasım.", taste: "YZM103'te gördüğün değişken, koşul ve döngü burada da aynı mantıkla çalışıyor." },
+    { n: "Tatil", d: "29 Eki", t: "Ders yok: Cumhuriyet Bayramı", c: "Takımınla ilk buluşmanı yapıp M0 teslimini birlikte hazırlarsın.", off: true },
+    { n: "5", d: "5 Kas", t: "JavaScript 2: sayfayı canlandırmak", c: "Düğmeye basınca değişen bir sayfa, yani çalışan bir yapılacaklar listesi yapabileceksin.", taste: "Etkinlik sayfasındaki sayacın nasıl çalıştığı bu haftanın konusu." },
+    { n: "6", d: "9–13 Kas", t: "Ara sınav haftası", c: "Hafta 2–5 konuları. Bilgisayarda uygulamalı bir kısım ve kâğıt üzerinde kavram soruları. Ders yok.", off: true },
+    { n: "7", d: "19 Kas", t: "Sunucu: tarayıcının konuştuğu program", c: "JavaScript'le kendi küçük sunucunu yazıp tarayıcıdan ona istek gönderebileceksin, örneğin \"günün sözü nedir?\"", taste: "Adres çubuğundaki dört adımın sunucu tarafını bu hafta sen kuruyorsun." },
+    { n: "8", d: "26 Kas", t: "Veritabanı: veriyi saklamak", c: "Bir ziyaretçi defterini baştan sona kendin kurabileceksin: form, sunucu, veritabanı, liste.", taste: "Bugün izlediğin kayıt formuyla aynı düzen, bu kez gerçekten çalışan bir veritabanıyla." },
+    { n: "9", d: "3 Ara", t: "Git ve GitHub ile takım çalışması", c: "Takım arkadaşlarınla aynı kod üzerinde, birbirinizin işini ezmeden çalışabileceksin.", taste: "Git, kod klasöründeki değişiklikleri kayıt kayıt saklayan program. Her kayıtta kimin neyi ne zaman değiştirdiği durduğu için bir şey bozulduğunda önceki bir kayda dönebilirsin." },
+    { n: "10", d: "10 Ara", t: "Yapay zekâ ile geliştirme", c: "Kodlama ajanına projene bir özellik ekletip ürettiği her satırı açıklayabileceksin. Takımınızın ilk sürümü yayında olacak, M1 teslimi Pazar 13 Aralık.", taste: "Kodlama ajanı, senin yerine dosya açıp kod yazabilen bir yapay zekâ yardımcısı." },
+    { n: "11", d: "17 Ara", t: "Güvenlik ve kullanıcı girişi", c: "Ziyaretçi defterine kullanıcı girişi ekleyip en bilinen güvenlik açıklarını kapatabileceksin.", taste: "Parolalar neden düz yazıyla saklanmaz, bu haftanın ilk sorusu." },
+    { n: "12", d: "24 Ara", t: "Web uygulamasına yapay zekâ eklemek", c: "Projene küçük bir yapay zekâ özelliği ekleyebileceksin. Sunucusu ve veritabanı bağlı sürüm hazır olacak, M2 teslimi Pazar 27 Aralık.", taste: "Kayıp eşya panosundaki ilan düzeltici gibi bir özellik." },
+    { n: "13", d: "31 Ara", t: "Yayına alma ve modern araçlara bakış", c: "Projeni sunucusu ve veritabanıyla internete koyabileceksin. Final kodu 6 Ocak 23:59'da dondurulur.", taste: "Hafta 7–8'de kendi bilgisayarında çalıştırdığın sunucu ve veritabanı bu hafta internete çıkıyor." },
+    { n: "14", d: "7 Oca", t: "Demo Günü", c: "Takımınla ürününü 7 dakikada gösterip 3 dakika soru cevaplayacaksın. Demo Günü final haftasının içinde.", taste: "Dönemin son dersi: on dört takım, on dört ürün." }
   ];
   let wkSel = 0;
   const weeksBox = $("#weeks");
   WEEKS.forEach((w, i) => {
     const b = el("button", "wk" + (w.off ? " off" : "") + (i === 0 ? " now" : "")); b.type = "button";
     b.append(el("span", "wn", w.n), el("span", "wd", w.d));
-    b.setAttribute("aria-label", (w.n === "Vize" ? "Vize haftası" : "Hafta " + w.n) + ", " + w.d + ": " + w.t);
+    b.setAttribute("aria-label", (w.n === "Tatil" ? "Resmi tatil" : "Hafta " + w.n) + ", " + w.d + ": " + w.t);
     b.addEventListener("click", () => { wkSel = i; renderWeek(); });
     weeksBox.append(b);
   });
@@ -1220,7 +1219,7 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
     $$(".wk", weeksBox).forEach((b, i) => b.setAttribute("aria-pressed", i === wkSel ? "true" : "false"));
     const w = WEEKS[wkSel], p = $("#wkPanel"); p.innerHTML = "";
     const h = el("div", "wh");
-    h.append(el("span", "chip" + (w.off ? "" : " ship"), (w.n === "Vize" ? "Vize" : "Hafta " + w.n) + " · " + w.d));
+    h.append(el("span", "chip" + (w.off ? "" : " ship"), (w.n === "Tatil" ? "Tatil" : "Hafta " + w.n) + " · " + w.d));
     if (w.tag) h.append(el("span", "chip lab", w.tag));
     h.append(el("h3", null, w.t));
     p.append(h);
@@ -1232,64 +1231,64 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
   /* ---------- sorular ---------- */
   const QUIZ = {
     katman: { title: "Katmanlar üzerine üç soru", qs: [
-      { q: "Kantin kartında Ekle düğmesine basınca sepetteki sayı artıyor. Bu işi hangi katman yapar?", o: ["HTML", "CSS", "JavaScript"], a: 2,
-        e: "Davranış JavaScript'in işi: tıklamayı yakalar, sayıyı artırır, yazıyı günceller. CSS'i seçtiysen: CSS düğmenin rengini ve şeklini belirler ama saymayı bilmez. Simülasyonda CSS açıkken düğme güzeldi ama sessizdi." },
+      { q: "Etkinlik sayfasında Katıl düğmesine basınca alttaki sayaç artıyor. Bu işi hangi katman yapar?", o: ["HTML", "CSS", "JavaScript"], a: 2,
+        e: "Tıklamaya tepki vermek JavaScript'in işi: tıklamayı yakalayıp sayıyı artırıyor ve sayacın yazısını güncelliyor. CSS'i seçtiysen, CSS düğmenin rengini ve biçimini belirler ama sayı tutamaz. Simülasyonda CSS açıkken düğmenin görünümü değişmişti, tıklamaya ise hâlâ tepki vermiyordu." },
       { q: "CSS dosyası bir hata yüzünden yüklenmedi, HTML ve JavaScript yerinde. Ne görürsün?", o: ["Tamamen boş, yalnız beyaz bir ekran", "Süssüz, alt alta dizilmiş içerik ve yine çalışan düğmeler", "Güzel görünen ama düğmelerine basınca hiçbir şey olmayan bir sayfa", "Etiketleriyle birlikte kodun kendisi, düz yazı olarak"], a: 1,
-        e: "İçerik HTML'de olduğu için yerinde durur, davranış JavaScript'te olduğu için düğmeler çalışır. Yalnız görünüş gider. Boş sayfa bekleyen çok olur: sayfa ancak HTML gelmezse boş kalır. Düğmelerin duracağını düşünen de olur, ama düğmeyi CSS değil JavaScript çalıştırır." },
-      { q: "Kartın başlığını \"Kantin Menüsü\" yerine \"Bugünün Menüsü\" yapmak istiyorsun. Hangi katmanda değişiklik yaparsın?", o: ["HTML: başlığın metni orada yazılı", "CSS: başlığın ekranda nasıl göründüğünü o belirliyor", "JavaScript: sayfada değişen her şeyi o yapıyor"], a: 0,
-        e: "Başlığın metni HTML'de yazılı, o satırı değiştirirsin. CSS'i seçen çok olur, çünkü değişikliği ekranda görürsün. Ama CSS yalnız rengi, boyutu ve düzeni belirler, yazının ne olduğunu değil. JavaScript tıklama gibi bir şey olduğunda sayfayı değiştirir, başlığın metnini baştan yazan o değil." }
+        e: "Bu örnek sayfada içerik HTML'de olduğu için yerinde durur, davranış JavaScript'te olduğu için düğmeler çalışır ve yalnız görünüş gider. Boş sayfa bekleyen çok olur: HTML gelmezse ortada sayfa olmaz, ama burada eksik olan CSS. İçeriğini JavaScript ile kuran sitelerde durum farklıdır, orada JavaScript gelmezse sayfa boş kalabilir. Düğmelerin duracağını düşünen de olur, oysa tıklamaya tepkiyi JavaScript verir." },
+      { q: "Sayfanın başlığını \"Ekim etkinlikleri\" yerine \"Kasım etkinlikleri\" yapmak istiyorsun. Hangi katmanda değişiklik yaparsın?", o: ["HTML: başlığın metni orada yazılı", "CSS: başlığın ekranda nasıl göründüğünü o belirliyor", "JavaScript: sayfada değişen her şeyi o yapıyor"], a: 0,
+        e: "Başlığın metni HTML dosyasında yazılı, o satırı değiştirirsin. CSS'i seçen çok olur, çünkü değişikliği ekranda görürsün. Oysa CSS yalnız rengi, boyutu ve yerleşimi belirler, yazının ne olduğunu belirlemez. JavaScript de tıklama gibi bir olay olduğunda sayfayı değiştirir, sayfa açılırken gelen başlık metni HTML'den okunur." }
     ]},
-    adres: { title: "Adres çubuğu ve defter üzerine üç soru", qs: [
-      { q: "Kampüs Wi-Fi'ı tam sen Enter'a bastığın anda koptu. Dört adımdan hangisinde iş durur?", o: ["1. adımda: adres çubuğuna yazı yazılamaz", "2. adımda: tarayıcının isteği sunucuya ulaşamaz, bu yüzden hiçbir dosya gelmez", "4. adımda: dosyalar geldi ama tarayıcı onları çizemez"], a: 1,
-        e: "Tarayıcı sunucuya ancak internet üzerinden sorabilir. Bağlantı yoksa istek yola çıkamaz, sunucu hiçbir şey duymaz ve 3. ile 4. adıma hiç sıra gelmez. 4. adımı seçen çok olur, çünkü ekranda sayfa yerine bir hata görürsün. Ama çizilecek dosya hiç gelmedi, tarayıcının çizmesinde bir sorun yok. Garson mutfağa gidemediyse tabak da gelmez." },
-      { q: "Ziyaretçi defterindeki mesajın bir hafta sonra hâlâ görünmesini hangi parça sağlar?", o: ["Ön yüz", "Sunucu", "Veritabanı"], a: 2,
-        e: "Saklamak veritabanının işi. Mesaj bir tabloya satır olarak yazılır ve orada kalır. Sunucuyu seçtiysen: sunucu mesajı alır, kontrol eder, veritabanına iletir, ama mesajı saklayan o değil." },
-      { q: "Boş mesajla Gönder'e bastın, \"mesaj boş olamaz\" uyarısı geldi. Simülasyonda bu kontrolü kim yaptı?", o: ["Ön yüz", "Sunucu", "Veritabanı"], a: 1,
-        e: "Günlük sütununda gördüğün gibi sunucu mesajı açtı, boş olduğunu gördü ve kaydetmeden geri çevirdi. Uyarı ön yüzde göründüğü için ön yüzü seçen çok olur, ama ön yüz yalnız sunucunun cevabını gösterdi." }
+    adres: { title: "Adres çubuğu ve kayıt formu üzerine üç soru", qs: [
+      { q: "Kampüs Wi-Fi bağlantısı, Enter'a bastığın anda koptu. Dört adımdan hangisinde iş durur?", o: ["1. adımda: adres çubuğuna yazı yazılamaz", "2. adımda: istek sunucuya ulaşamadığı için hiçbir dosya gelmez", "4. adımda: dosyalar geldi ama tarayıcı onları çizemiyor, ekrana hata basıyor"], a: 1,
+        e: "Tarayıcının isteği sunucuya ancak ağ üzerinden ulaşabilir. Bağlantı yoksa istek yola çıkamaz, sunucu hiçbir şey almaz ve 3. ile 4. adıma sıra gelmez. 4. adımı seçen çok olur, çünkü ekranda sayfa yerine bir hata görürsün. Oysa o hatayı tarayıcı, yanıt gelmediği için kendisi gösteriyor, çizilecek bir dosya hiç gelmedi." },
+      { q: "Kayıt formundan gönderdiğin kayıt bir hafta sonra da katılımcı listesinde görünüyor. Kaydı bu süre boyunca saklayan hangi katman?", o: ["Ön yüz", "Sunucu", "Veritabanı"], a: 2,
+        e: "Kalıcı saklama veritabanının işi. Kayıt bir tabloya satır olarak yazılır ve orada kalır. Sunucuyu seçtiysen, sunucu kaydı alır, kontrol eder ve veritabanına yazar, ama bir hafta boyunca saklayan o değildir." },
+      { q: "Ad alanını boş bırakıp Kayıt ol'a bastın ve \"ad soyad boş olamaz\" uyarısı geldi. Simülasyonda bu kontrolü hangi katman yaptı?", o: ["Ön yüz", "Sunucu", "Veritabanı"], a: 1,
+        e: "Sunucu sütunundaki kayıtta gördüğün gibi sunucu isteği açtı, ad alanının boş olduğunu gördü ve kaydetmeden geri çevirdi. Uyarı ön yüzde göründüğü için ön yüzü seçen çok olur, ama bu simülasyonda ön yüz yalnız sunucunun yanıtını gösterdi. Gerçek sitelerde aynı kontrol tarayıcıda da yapılabilir, kaydı kabul edip etmeme kararı yine sunucudadır." }
     ]},
     yz: { title: "Yapay zekâ üzerine dört soru", qs: [
       { q: "Yapay zekâya yalnız \"Bana site yap\" yazarsan ne olur?", o: ["Aklından geçeni anlar ve tam onu yapar", "Her seferinde aynı hazır şablonu verir", "Hata verir, hiçbir şey üretmez", "Söylemediğin her şeyi kendi tahminiyle doldurur"], a: 3,
-        e: "Dil, konu, içerik gibi söylemediğin her şeyi tahmin eder. İki istek karşılaştırmasında İngilizce bir şirket sitesi çıkmasının nedeni bu. Hazır şablon diyen de olur, ama gerçek bir yapay zekâ her seferinde biraz farklı bir şey üretir. Aklını okuyamaz, yalnız yazdığını okur." },
-      { q: "Yapay zekâ \"bir simit ve iki ayranın tutarı\" için bu kodu yazdı. Konsolda ne yazar?", tag: "Bu kodun çıktısı ne?", code: "const simit = 15;\nconst ayran = 20;\nconsole.log(simit + ayran * 2);", o: ["70", "55", "simit + ayran * 2", "35"], a: 1,
-        e: "Matematikte olduğu gibi çarpma önce yapılır: 20 × 2 = 40, sonra 15 eklenir, sonuç 55. Bu tutar da doğru. 70 diyen, soldan sağa toplayıp sonra çarptı. 35 diyen çarpmayı hiç yapmadı. Kodu kontrol etmek, sonucu elle hesaplayıp karşılaştırmak demek." },
-      { q: "Klasörde index.html ve menu.html var. Hata hangi satırda?", tag: "Hata hangi satırda?", num: true, code: "<h1>Kulüp Duyuruları</h1>\n<p>Satranç turnuvası var.</p>\n<a href=\"menü.html\">Kantin menüsü</a>", o: ["1. satır", "2. satır", "3. satır", "Hata yok, üç satır da doğru"], a: 2,
-        e: "Bağlantı menü.html diyor, dosyanın adı menu.html. Bilgisayar için ü ile u farklı harfler, bağlantı kırılır. Türkçe karakterleri dosya adına hiç koymamak en güvenlisi. 1. ve 2. satırdaki Türkçe karakterler sorun değil, onlar sayfanın içeriği." },
-      { q: "Yapay zekâ, girilen notların ortalamasını hesaplayan bir kod yazdı. 50 ve 100 ile denedin, ekranda 75 çıktı. Sonra 40, 60 ve 80 ile denedin, ekranda 90 çıktı. Ne yaparsın?", o: ["İlk deneme doğru çıktığı için kodu teslim ederim", "Hata mesajı çıkmadığına göre kod doğrudur, teslim ederim", "Elle hesaplarım: 40, 60 ve 80'in ortalaması 60. Kod yanlış, nerede yanıldığını bulmadan teslim etmem", "Kodu yapay zekâya yeniden yazdırır, yeni kodu denemeden teslim ederim"], a: 2,
-        e: "(40 + 60 + 80) / 3 = 60, ekrandaki 90 yanlış. Kod büyük ihtimalle toplamı hep 2'ye bölüyor: iki notla doğru, üç notla yanlış sonuç veriyor. İlk denemeye güvenen çok olur, ama tek bir örneğin tutması kodun doğru olduğunu göstermez. Hata mesajının çıkmaması da bir şey kanıtlamaz, 43 TL yazan sepet kodu da hiç hata vermemişti. Kontrol, sonucu elle hesaplayıp karşılaştırmaktır. Açıklayamadığın ve denemediğin kod senin değil." }
+        e: "Dil, konu, içerik gibi istemde yazmayan her şeyi tahmin eder. İki istek karşılaştırmasında İngilizce bir şirket sitesi çıkmasının nedeni bu. Hazır şablon diyen de olur, ama gerçek bir yapay zekâ her seferinde biraz farklı bir şey üretir. Ne istediğini ancak istemde yazdığın kadarıyla bilebilir." },
+      { q: "Yapay zekâ, \"15 dakikalık açılış ve 20'şer dakikalık iki oturumun toplam süresi\" için bu kodu yazdı. Konsolda ne yazar?", tag: "Bu kodun çıktısı ne?", code: "const acilis = 15;\nconst oturum = 20;\nconsole.log(acilis + oturum * 2);", o: ["70", "55", "acilis + oturum * 2", "35"], a: 1,
+        e: "Matematikte olduğu gibi çarpma önce yapılır: 20 × 2 = 40, sonra 15 eklenir ve sonuç 55 olur. İstenen süre de bu. 70 diyen, soldan sağa toplayıp sonra çarptı. 35 diyen çarpmayı hiç yapmadı. Kodu kontrol etmek, sonucu elle hesaplayıp karşılaştırmak demek." },
+      { q: "Klasörde index.html ve uyeler.html var. Hata hangi satırda?", tag: "Hata hangi satırda?", num: true, code: "<h1>Kulüp Duyuruları</h1>\n<p>Hackathon kayıtları açıldı.</p>\n<a href=\"üyeler.html\">Üye listesi</a>", o: ["1. satır", "2. satır", "3. satır", "Hata yok, üç satır da doğru"], a: 2,
+        e: "Bağlantı üyeler.html diyor, dosyanın adı uyeler.html. Bilgisayar için ü ile u farklı harfler olduğundan sunucu bu adda dosya bulamaz ve bağlantı kırılır. Dosya adlarında Türkçe karakter kullanmamak en güvenlisi. 1. ve 2. satırdaki Türkçe karakterler sorun değil, onlar sayfanın içeriği." },
+      { q: "Yapay zekâ, girilen notların ortalamasını hesaplayan bir kod yazdı. 50 ve 100 ile denedin, ekranda 75 çıktı. Sonra 40, 60 ve 80 ile denedin, ekranda 90 çıktı. Ne yaparsın?", o: ["İlk deneme doğru çıktığı için teslim ederim, kod bir kez doğru çalıştıysa doğrudur", "Hata mesajı çıkmadığına göre teslim ederim, yanlış olsaydı tarayıcı uyarırdı", "Ortalamayı elle hesaplarım, 60 olmalı. Hatayı bulmadan teslim etmem", "Kodu yapay zekâya yeniden yazdırır, yeni kodu denemeden teslim ederim"], a: 2,
+        e: "(40 + 60 + 80) / 3 = 60, ekrandaki 90 yanlış. Kod büyük ihtimalle toplamı hep 2'ye bölüyor: iki notla doğru, üç notla yanlış sonuç veriyor. İlk denemeye güvenen çok olur, ama tek bir örneğin tutması kodun doğru olduğunu göstermez. Hata mesajının çıkmaması da bir şey kanıtlamaz, 43 dakika yazan süre kodu da hiç hata vermemişti. Kontrol, sonucu elle hesaplayıp karşılaştırmaktır. Açıklayamadığın ve denemediğin kod senin değil." }
     ]},
     nasil: { title: "Dönem ve kurallar üzerine üç soru", qs: [
-      { q: "Demo Günü ne zaman?", o: ["17 Aralık", "24 Aralık", "31 Aralık"], a: 2,
-        e: "31 Aralık Perşembe, dönemin son dersi. 24 Aralık yayına alma haftası, projeyi o hafta internete koyarsın. 17 Aralık ise M2 teslimi. Final kodu 30 Aralık 23:59'da dondurulur." },
+      { q: "Demo Günü ne zaman?", o: ["24 Aralık", "31 Aralık", "7 Ocak"], a: 2,
+        e: "Demo Günü 7 Ocak Perşembe, dönemin son dersi ve final haftasının içinde. 31 Aralık yayına alma haftası, projeyi o hafta internete koyarsın. 24 Aralık ise Hafta 12, M2'nin teslimi o haftanın Pazarı, 27 Aralık. Final kodu 6 Ocak 23:59'da dondurulur." },
       { q: "Hafta 2 ile 9 arasında yapay zekâyı nasıl kullanırsın?", o: ["Kodu önce kendim yazarım, takıldığımda ona açıklama sorarım", "Sayfanın tamamını ona yazdırır, sonra satır satır okurum", "Hiç kullanmam, çünkü bu haftalarda yapay zekâ yasak"], a: 0,
         e: "Yapay zekâ yasak değil, yardımcı. Açıklama sorabilir, hata mesajını sorabilir, kendini sınatabilirsin. İkinci seçenek en çok karıştırılanı: yazdırıp okumak öğrenmek gibi gelir, ama bu haftalarda amaç kodu kendi elinle kurmak. Bütün kodu ona yazdırırsan öğrenen sen olmazsın." },
-      { q: "Lab günü saat 16:40. Sayfan yarım kaldı. Ne yaparsın?", o: ["Bitmeden göndermem, Pazar günü tamamını bir kerede gönderirim", "Yarım hâliyle formu şimdi gönderirim, tamamını Pazar 23:59'a kadar aynı formdan yollarım", "Akşam bitirip gece gönderirim, o da lab sonu teslimi sayılır"], a: 1,
+      { q: "Lab günü saat 16:40. Sayfan yarım kaldı. Ne yaparsın?", o: ["Bitmeden göndermem, Pazar günü tamamını bir kerede gönderirim", "Yarım hâlini şimdi gönderirim, tamamını Pazar 23:59'a kadar", "Akşam bitirip gece gönderirim, o da lab sonu teslimi sayılır"], a: 1,
         e: "16:45 teslimi o günün uygulama yoklaması sayılır ve işin bitmiş olması gerekmez: o ana kadar yaptığını gönderirsin. Tamamı Pazar 23:59'a kadar gelir. \"Bitmeden göndermem\" diyen çok olur, çünkü yarım işi göstermek istemezsin. Ama o zaman o haftanın yoklaması yazılmaz ve uygulamada en az %80 devam şartı var." }
     ]},
     sina: { title: "Hafta testi", qs: [
-      { q: "Arkadaşın \"e-Devlet açılmıyor, tarayıcım bozuldu\" diyor. Aynı tarayıcıda YouTube sorunsuz açılıyor. Sorun büyük ihtimalle nerede?", o: ["Tarayıcıda. Bir siteyi açamayan tarayıcı bozuktur", "Hiçbir yerde. YouTube açılıyorsa e-Devlet de açılıyordur, arkadaşın yanlış görmüş", "e-Devlet'in sunucusunda ya da yazılan adreste. Tarayıcı çalışıyor, çünkü YouTube'u isteyip çizebiliyor"], a: 2,
-        e: "Garson çalışıyor: YouTube'un mutfağına gidip tabağı getirebiliyor. e-Devlet'te takılıyorsa ya o mutfak cevap vermiyor ya da adres yanlış yazılmış. Tarayıcıyı suçlayan çok olur, çünkü sorunu tarayıcının penceresinde görürsün. Ama tarayıcı yalnız isteyen ve çizen programdır. Sunucudan cevap gelmezse çizecek bir şeyi olmaz." },
+      { q: "Arkadaşın \"e-Devlet açılmıyor, tarayıcım bozuldu\" diyor. Aynı tarayıcıda YouTube sorunsuz açılıyor. Sorun büyük ihtimalle nerede?", o: ["Tarayıcıda. Bir siteyi açamayan tarayıcının ayarları bozulmuştur, yeniden kurmak gerekir", "Hiçbir yerde. YouTube açılıyorsa e-Devlet de açılıyordur, arkadaşın yanlış görmüş", "e-Devlet'in sunucusunda ya da adres çubuğuna yazılan adreste"], a: 2,
+        e: "Tarayıcı çalışıyor, çünkü YouTube'un sunucusuna istek gönderip gelen yanıtı çizebiliyor. e-Devlet'te takılıyorsa ya o sunucu yanıt vermiyor ya da adres yanlış yazılmış. Tarayıcıyı suçlayan çok olur, çünkü sorunu tarayıcının penceresinde görürsün. Oysa tarayıcı yalnız istek gönderip yanıtı çizen programdır ve sunucudan yanıt gelmezse çizecek bir şeyi olmaz." },
       { q: "instagram.com'u tarayıcıda açtın, kalbe bastın ve kalp kırmızı oldu. Rengin değişmesine hangi katman karar verdi?", o: ["HTML: kalbi ve rengini sayfaya en baştan yazdı", "JavaScript: tıklamayı yakaladı ve kalbin durumunu değiştirdi", "Veritabanı: beğeniyi sakladı ve rengi kendisi değiştirdi"], a: 1,
         e: "Tıklamaya tepki vermek JavaScript'in işi. Kırmızının tonunu CSS belirler, JavaScript \"şimdi kırmızı ol\" der. Veritabanı beğeniyi saklar ama ekrandaki rengi değiştiren o değildir." },
       { q: "Tarayıcı bu HTML'i aldığında ekranda ne görünür?", tag: "Bu kodun çıktısı ne?", code: "<h1>Merhaba</h1>\n<p>Muş'tan selamlar</p>", o: ["Etiketleriyle birlikte kodun kendisi, iki satır halinde", "İki satır da aynı boyda, düz yazıyla: \"Merhaba\" ve \"Muş'tan selamlar\"", "Büyük ve kalın bir başlık olarak \"Merhaba\", altında normal yazıyla \"Muş'tan selamlar\""], a: 2,
         e: "Tarayıcı etiketleri ekranda göstermez, onları talimat olarak okur: h1 başlık, p paragraf. h1 harfleri büyük harfe çevirmez, yazıyı büyük boyutta ve kalın gösterir. Kodun kendisini görmek için DevTools'u açman gerekir." },
       { q: "Derste bir haber sitesinin manşetini DevTools ile değiştirdik ve sayfayı yeniledik. Ne oldu?", o: ["Eski manşet geri geldi, değişiklik yalnız o bilgisayardaydı", "Değişiklik o siteyi açan bütün okurlara görünür", "Değişiklik senin bilgisayarında kalıcı olarak kaydedilir"], a: 0,
         e: "Değiştirdiğin, sunucudan senin tarayıcına gelmiş kopyaydı. Yenileyince tarayıcı dosyaları sunucudan yeniden ister ve asıl hâli gelir. Herkese görünür sanan çok olur, ama sunucudaki dosyaya hiç dokunmadın." },
-      { q: "Günlük dille sunucu nedir?", o: ["İstek geldiğinde cevap veren, sürekli açık bekleyen bir program", "Senin bilgisayarında sayfayı açıp ekrana çizen program", "Kampüsteki Wi-Fi modemi, internete bağlanmanı sağlayan kutu"], a: 0,
-        e: "Sunucu bir programdır, lokantadaki mutfak gibi siparişi bekler ve hazırlar. Sayfayı ekrana çizen program tarayıcıdır, garson. İkisini karıştıran çok olur. Sunucu genelde güçlü bir bilgisayarda çalışır ama modem değildir. Hafta 7'de kendi bilgisayarında bir tane çalıştıracaksın." },
-      { q: "Sabahki ziyaretçi defteri sayfayı yenileyince baştan başlıyor. Gerçek bir sitede yazdığın mesaj yenileyince neden kaybolmaz?", o: ["Gerçek sitede mesaj sunucu üzerinden veritabanına yazılır. Yenileyince tarayıcı listeyi yeniden ister ve kayıtlı satırlar geri gelir", "Gerçek sitede mesaj senin tarayıcında saklanır, tarayıcı onu unutmaz", "Gerçek sitelerde sayfa yenilenmez, o yüzden hiçbir şey kaybolmaz"], a: 0,
-        e: "Kalıcılığı sağlayan veritabanı. Mesaj bir tabloya satır olarak yazılır ve sayfayı kim, ne zaman açarsa açsın sunucu o satırları okuyup gönderir. Mesajın tarayıcıda durduğunu düşünen çok olur. Öyle olsaydı mesajını yalnız sen görürdün, arkadaşın kendi telefonundan açınca göremezdi. DevTools'la değiştirdiğimiz manşetin yenileyince kaybolması da aynı nedenle: tarayıcıdaki kopya kalıcı değil." },
-      { q: "Neredeyse doğru kod neden tamamen yanlış koddan daha tehlikelidir?", o: ["Tarayıcı onu hiç açmaz ve sayfa bembeyaz kalır", "Hata vermeden çalışır, yanlışı ancak ne istendiğini bilen biri fark eder", "Yapay zekâ onu fark edip bir sonraki cevapta kendisi düzeltir"], a: 1,
-        e: "43 TL yazan sepet kodunu hatırla: hiç hata vermedi. Bembeyaz kalan bir sayfa hemen göze batar, o yüzden daha az tehlikelidir. Yapay zekâ senin ne istediğini bilmediği için yanlışı kendisi fark etmez. Stack Overflow 2025 anketinde katılanların %66'sı bu şikâyeti seçti. En sık seçilen şikâyet bu oldu." },
-      { q: "Bu istemi okuyan yapay zekâ neyi hâlâ kendisi tahmin etmek zorunda kalır?", tag: "Bu istemde eksik ne?", code: "Türkçe, tek sayfa bir kantin menüsü yap.\nBaşlık ve ürünler olsun.\nTelefonda da düzgün görünsün.", o: ["Sayfanın dilini", "Telefonda nasıl görüneceğini", "Hiçbir şeyi, istem yeterince açık", "Ürünlerin adlarını ve fiyatlarını"], a: 3,
-        e: "Dil ve telefon istemde yazıyor, ama hangi ürünlerin olduğu ve kaça satıldığı yazmıyor. Yapay zekâ bunları kendisi uydurur ve kontrol etmezsen yanlış fiyat yayına çıkar. \"Hiçbir şeyi\" diyen çok olur, çünkü istem düzgün görünüyor. Açık görünen bir istemde de eksik olabilir. İki istek karşılaştırmasında açık istemin bile açılış saatini uydurduğunu görmüştün." },
+      { q: "Tarayıcı sunucudan bu HTML'i aldı. Sayfayı çizebilmek için sunucuya kaç istek daha gönderir?", tag: "Bu kodun sonucu ne?", code: "<link rel=\"stylesheet\" href=\"stil.css\">\n<h1>Bilgi Kulübü</h1>\n<img src=\"afis.png\" alt=\"Hackathon afişi\">\n<script src=\"kod.js\"><\/script>", o: ["Hiç, çünkü her şey bu HTML'in içinde geldi", "Bir, yalnız görsel ayrı dosya olduğu için", "Üç: stil.css, afis.png ve kod.js için", "Dört, çünkü her satır ayrı bir istektir"], a: 2,
+        e: "HTML'de adı geçen her dosya ayrı bir istekle gelir: stil.css, afis.png ve kod.js. h1 satırı dosya değil, içeriğin kendisi, onun için istek gitmez. \"Hiç\" diyen çok olur, çünkü dosyaların adı HTML'de yazıyor. Oysa HTML yalnız adlarını ve yerlerini söyler, içeriklerini sunucu ayrı yanıtlarla gönderir. DevTools'un Network panelinde bu istekleri ayrı satırlar olarak görürsün." },
+      { q: "Sabahki kayıt formu, sayfayı yenileyince baştan başlıyor. Gerçek bir sitede gönderdiğin kayıt, sayfayı yenileyince neden kaybolmaz?", o: ["Kayıt veritabanına yazılır, liste oradan yeniden gelir", "Kayıt senin tarayıcında saklanır, tarayıcı onu yenilemeden sonra da hatırlar", "Gerçek sitelerde sayfa yenilenmez, o yüzden hiçbir şey kaybolmaz"], a: 0,
+        e: "Kalıcılığı sağlayan veritabanı. Kayıt bir tabloya satır olarak yazılır ve sayfayı kim, ne zaman açarsa açsın sunucu o satırları okuyup gönderir. Kaydın tarayıcıda durduğunu düşünen çok olur. Öyle olsaydı kaydını yalnız sen görürdün, kulüp yöneticisi kendi bilgisayarından listeyi açınca göremezdi. DevTools'la değiştirdiğimiz manşetin yenileyince kaybolması da aynı nedenle: tarayıcıdaki kopya kalıcı değil." },
+      { q: "Neredeyse doğru kod neden tamamen yanlış koddan daha tehlikelidir?", o: ["Tarayıcı onu hiç açmaz, çünkü küçük bir hata bile sayfayı bembeyaz bırakır", "Hata vermeden çalıştığı için yanlış göze batmaz", "Yapay zekâ onu fark edip bir sonraki cevapta kendisi düzeltir"], a: 1,
+        e: "43 dakika yazan süre kodunu hatırla: hiç hata vermedi. Bembeyaz kalan bir sayfa hemen göze batar, o yüzden daha az tehlikelidir. Yapay zekâ senin ne istediğini bilmediği için yanlışı kendisi fark etmez. Stack Overflow 2025 anketinde en sık seçilen şikâyet de buydu, katılanların %66'sı bunu işaretledi." },
+      { q: "Bu istemi okuyan yapay zekâ neyi hâlâ kendisi tahmin etmek zorunda kalır?", tag: "Bu istemde eksik ne?", code: "Türkçe, tek sayfalık bir kulüp etkinlik listesi yap.\nBaşlık ve etkinlikler olsun.\nTelefonda da düzgün görünsün.", o: ["Sayfanın dilini", "Telefonda nasıl görüneceğini", "Hiçbir şeyi, istem yeterince açık", "Etkinliklerin adlarını ve tarihlerini"], a: 3,
+        e: "Dil ve telefon istemde yazıyor, ama hangi etkinliklerin ne zaman yapılacağı yazmıyor. Yapay zekâ bunları kendisi uydurur ve kontrol etmezsen yanlış tarih yayına çıkar. \"Hiçbir şeyi\" diyen çok olur, çünkü istem düzgün görünüyor. Açık görünen bir istemde de eksik olabilir: iki istek karşılaştırmasında açık istemin bile etkinliklerin yerini ve saatini uydurduğunu görmüştün." },
       { q: "Tarayıcı bu satırı aldığında ekranda ne görünür?", tag: "Bu kodun çıktısı ne?", code: "<a href=\"https://www.youtube.com\">YouTube</a>", o: ["Satırın tamamı, etiketleriyle birlikte düz yazı olarak", "Tıklanınca YouTube'u açan \"YouTube\" yazısı", "YouTube'un ana sayfası, bu sayfanın içinde küçük bir pencerede", "Mavi ve altı çizili olarak https://www.youtube.com adresi"], a: 1,
-        e: "a etiketi bağlantı demek. Ekranda yalnız iki etiketin arasındaki yazı görünür, href ise tıklanınca gidilecek adres. Adresin kendisinin görüneceğini düşünen olur, ama href ekranda yazılmaz. Bağlantı yalnız bir kapıdır, YouTube'u sayfanın içine getirmez." },
+        e: "a etiketi bağlantı demek. Ekranda yalnız iki etiketin arasındaki yazı görünür, href ise tıklanınca gidilecek adres. Adresin kendisinin görüneceğini düşünen olur, ama href ekranda yazılmaz. Tıklandığında tarayıcı href'teki adrese yeni bir istek gönderip o sayfayı açar, YouTube'u bu sayfanın içine yerleştirmez." },
       { q: "Bireysel kod savunmasında ne yaparsın?", o: ["Projeni anlatır, bir kodu açıklar, küçük bir değişikliği orada yaparsın", "Yalnız kâğıt üzerinde, yapay zekâ kapalı yazılı bir sınava girersin", "Takımın sunumu bir arkadaşın yapar, sen yalnız soruları dinlersin"], a: 0,
         e: "Savunma 15 dakika ve bireysel: kendi projeni anlatırsın, bir kod parçasını açıklarsın, küçük bir değişikliği orada yaparsın. Yazılı sorular sınavlarda sorulur, savunmada değil. Takımda çalışmış olman kendi payını açıklama sorumluluğunu kaldırmaz." },
-      { q: "Sayfada <h2>Kantin Menüsü</h2> başlığı var. Stil dosyasına aşağıdaki kural eklendi. Ekranda ne değişir?", tag: "Bu kodun çıktısı ne?", code: "h2 { color: teal; }", o: ["Başlığın yazısı \"teal\" olur", "Başlığa tıklanınca rengi değişir", "Sayfadaki bütün yazılar teal renge döner", "Başlığın rengi yeşilimsi maviye (teal) döner, yazısı aynı kalır"], a: 3,
+      { q: "Sayfada <h2>Ekim etkinlikleri</h2> başlığı var. Stil dosyasına aşağıdaki kural eklendi. Ekranda ne değişir?", tag: "Bu kodun çıktısı ne?", code: "h2 { color: teal; }", o: ["Başlığın yazısı \"teal\" olur, çünkü kural başlığa uygulanıyor", "Başlığa tıklanınca rengi değişir, öncesinde aynı kalır", "Sayfadaki bütün yazılar teal renge döner, çünkü kural stil dosyasında", "Başlık yeşilimsi mavi (teal) olur"], a: 3,
         e: "color yazının rengini değiştirir, metnin kendisini değil. Kuralın başındaki h2, kuralın yalnız h2 başlıklarına uygulanacağını söyler, o yüzden öbür yazılar aynı kalır. Tıklamaya tepki vermek ise JavaScript'in işi. Katmanlar simülasyonundaki CSS kodunda da aynı satır vardı." },
       { q: "Adres çubuğuna yazdığında sunucu tarayıcıya ne gönderir?", o: ["Yalnız sayfanın adresini, gerisini tarayıcı kendisi bulur", "Sayfanın ekranda çizilmiş hâlinin hazır bir resmini", "Sayfanın dosyalarını: HTML, CSS, JavaScript, resimler"], a: 2,
-        e: "Sunucu dosyaları gönderir, sayfayı çizen tarayıcıdır. Hazır bir resim gelseydi DevTools'ta manşeti değiştiremezdin, çünkü değiştireceğin bir kod olmazdı." }
+        e: "Sunucu yanıt olarak dosyaları gönderir, sayfayı bu dosyalardan çizen tarayıcıdır. Hazır bir resim gelseydi DevTools'ta manşeti değiştiremezdin, çünkü değiştireceğin bir kod olmazdı." }
     ]}
   };
   const LETTERS = ["A", "B", "C", "D"];
@@ -1344,23 +1343,23 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
 
   /* ---------- fikir kartı ---------- */
   const FK_ORNEK = [
-    ["kampüste kaybolan eşyalar", "eşyasını kaybeden ve bulan öğrenciler", "fotoğraflı bir ilan bırakıp iletişim bilgisi alacak"],
-    ["kantinde günün menüsünü bilmemek", "öğle arasında kantine inecek öğrenciler", "menüyü ve yoğunluğu görüp gitmeye karar verecek"],
-    ["yurtta çamaşırhane sırası", "yurtta kalan öğrenciler", "boş makineyi görüp kendine bir saat ayıracak"],
-    ["kulüp etkinliklerini duymamak", "kulüplere ilgi duyan öğrenciler", "bu haftaki etkinlikleri görüp katılacağım diyecek"],
-    ["ikinci el ders kitabı bulmak", "kitap arayan ve satan öğrenciler", "kitabını ilan verip alıcısıyla anlaşacak"],
-    ["ring saatlerini bilmemek", "kampüsle şehir arasında gidip gelen herkes", "sıradaki ringin saatini ve durağını görecek"]
+    ["kampüste kaybolan eşyalar", "eşyasını kaybeden ve bulan öğrenciler", "fotoğraflı bir ilan bırakır ve iletişim bilgisi alır"],
+    ["kütüphanede boş çalışma odası bulamamak", "sınava grupça hazırlanan öğrenciler", "boş odaları görür ve iki saatlik rezervasyon yapar"],
+    ["yurtta çamaşırhane sırası", "yurtta kalan öğrenciler", "boş makineyi görür ve kendine bir saat ayırır"],
+    ["kulüp etkinliklerini duymamak", "kulüplere ilgi duyan öğrenciler", "bu haftaki etkinlikleri görür ve birine kayıt olur"],
+    ["ikinci el ders kitabı bulmak", "kitap arayan ve satan öğrenciler", "kitabı için ilan verir ve alıcısıyla anlaşır"],
+    ["ring saatlerini bilmemek", "kampüsle şehir arasında gidip gelen herkes", "sıradaki ringin saatini ve durağını görür"]
   ];
   const fkS = $("#fkSorun"), fkK = $("#fkKim"), fkN = $("#fkNe"), fkO = $("#fkOut");
   if (fkS) {
     let fkI = 0;
     const kur = () => {
       const sorun = fkS.value.trim(), kim = fkK.value.trim(), ne = fkN.value.trim();
-      const eksik = [!sorun && "sorunu", !kim && "kimin kullanacağını", !ne && "ne yapıp çıkacağını"].filter(Boolean);
+      const eksik = [!sorun && "sorunu", !kim && "kimin kullanacağını", !ne && "kullanıcının siteyi açıp ne yaptığını"].filter(Boolean);
       fkO.innerHTML = "";
       if (eksik.length) { fkO.append(document.createTextNode("Şunu da yaz: " + eksik.join(", ") + ".")); return; }
       const parca = (t, x) => { const b = el("b", null, x); return [document.createTextNode(t), b]; };
-      fkO.append(...parca("", kim.charAt(0).toUpperCase() + kim.slice(1)), ...parca(" için, ", sorun), ...parca(" sorununu çözen bir site: kullanıcı açar, ", ne), document.createTextNode("."));
+      fkO.append(...parca("", kim.charAt(0).toUpperCase() + kim.slice(1)), ...parca(" için ", sorun), ...parca(" sorununu çözen bir site. Kullanıcı siteyi açıp ", ne), document.createTextNode("."));
     };
     $("#fkKur").addEventListener("click", kur);
     [fkS, fkK, fkN].forEach(i => i.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); kur(); } }));

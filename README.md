@@ -13,7 +13,7 @@ Ders notları bu depoda duruyor ve GitHub Pages ile yayımlanıyor. Her haftanı
 | Giriş sayfası | <https://cagrisahin58.github.io/2026-web/> |
 | Ders planı | <https://cagrisahin58.github.io/2026-web/docs/syllabus.html> |
 | Hafta 0 · Kurulum | <https://cagrisahin58.github.io/2026-web/weeks/hafta-00-kurulum/> |
-| Hafta 1 · Tanışma (24 Eylül) | <https://cagrisahin58.github.io/2026-web/weeks/hafta-01/> |
+| Hafta 1 · Tanışma (1 Ekim) | <https://cagrisahin58.github.io/2026-web/weeks/hafta-01/> |
 
 ## Klasörler
 
