@@ -91,7 +91,7 @@ footer{color:var(--muted);font-size:.86rem;border-top:1px solid var(--line);padd
     <h2>Nasıl çalışır</h2>
     <ol>
       <li>Takımdan bir kişi <b>Yeni takım kaydı</b> düğmesine basar. GitHub'da hazır bir form açılır (GitHub hesabınla giriş yapmış olman gerekir). Takım adını, dört üyenin numarasını ve adını, proje konusunu yazıp <b>Submit new issue</b> dersin.</li>
-      <li>Kayıt bir iki dakika içinde bu listeye düşer. Bir eksik ya da hata varsa kaydın altına ne düzeltileceği yazılır; düzeltince yeniden kontrol edilir.</li>
+      <li>Kayıt birkaç dakika içinde bu listeye düşer. Bir eksik ya da hata varsa kaydın altına ne düzeltileceği yazılır; düzeltince yeniden kontrol edilir.</li>
       <li>Kayıt açıldıktan sonra <span id="kilitGun">7</span> gün boyunca düzenlenebilir: kartın altındaki <b>Kaydı düzenle</b> bağlantısı kaydı açar, sağ üstteki üç noktadan <b>Edit</b> dersin. Sürenin sonunda kayıt kilitlenir; sonrasında değişiklik için hocaya yazarsın.</li>
       <li>Bir öğrenci yalnız bir takımda olabilir. Site adresi ve dosya klasörü sonradan da eklenebilir; taslak çizimlerinizi ve dosyalarınızı kaydın altına sürükleyip bırakabilirsiniz.</li>
     </ol>
@@ -114,6 +114,8 @@ footer{color:var(--muted);font-size:.86rem;border-top:1px solid var(--line);padd
 (function () {
   "use strict";
   // Kayıtlar deponun "veri" dalındaki takimlar.json dosyasından okunur; dosyayı GitHub Actions üretir.
+  // Önce API (anında güncel, saatte sınırlı istek), olmazsa raw adres (birkaç dakika gecikebilir).
+  const API_ADRES = "https://api.github.com/repos/cagrisahin58/2026-web/contents/takimlar.json?ref=veri";
   const VERI_ADRES = "https://raw.githubusercontent.com/cagrisahin58/2026-web/veri/takimlar.json";
   const $ = (s) => document.querySelector(s);
   const esc = (s) => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -132,15 +134,25 @@ footer{color:var(--muted);font-size:.86rem;border-top:1px solid var(--line);padd
     el.style.display = metin ? "" : "none";
   }
 
+  async function veriGetir() {
+    try {
+      const r = await fetch(API_ADRES, { cache: "no-store", headers: { Accept: "application/vnd.github.raw+json" } });
+      if (r.status === 404) return null;
+      if (r.ok) return await r.json();
+    } catch (e) { /* API kapalıysa ya da saatlik sınır dolduysa raw adrese geç */ }
+    const r = await fetch(VERI_ADRES + "?t=" + Date.now(), { cache: "no-store" });
+    if (r.status === 404) return null;
+    if (!r.ok) throw new Error("Liste alınamadı (" + r.status + ").");
+    return await r.json();
+  }
+
   async function yukle() {
     try {
-      const r = await fetch(VERI_ADRES + "?t=" + Date.now(), { cache: "no-store" });
-      if (r.status === 404) { takimlar = []; durum("Henüz kayıt yok. İlk takım kaydını sen aç."); ciz(); return; }
-      if (!r.ok) throw new Error("Liste alınamadı (" + r.status + ").");
-      const v = await r.json();
+      const v = await veriGetir();
+      if (!v) { takimlar = []; durum("Henüz kayıt yok. İlk takım kaydını sen aç."); ciz(); return; }
       takimlar = v.takimlar || [];
       $("#kilitGun").textContent = (v.ayar && v.ayar.kilitGun) || 7;
-      $("#guncelleme").textContent = v.guncelleme ? "Liste en son " + tarih(v.guncelleme) + " güncellendi. Yeni kayıt bir iki dakika içinde görünür; görünmediyse sayfayı yenile." : "";
+      $("#guncelleme").textContent = v.guncelleme ? "Liste en son " + tarih(v.guncelleme) + " güncellendi. Yeni kayıt birkaç dakika içinde görünür; görünmediyse biraz sonra sayfayı yenile." : "";
       durum(takimlar.length ? "" : "Henüz kayıt yok. İlk takım kaydını sen aç.");
       ciz();
     } catch (e) {

@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Takımdan bir kişi doldurur. Yazdıklarınız sınıfa açık görünür; bir iki dakika içinde ders sitesindeki Lab grupları sayfasına düşer.
+        Takımdan bir kişi doldurur. Yazdıklarınız sınıfa açık görünür; birkaç dakika içinde ders sitesindeki Lab grupları sayfasına düşer.
         Kaydı düzenlemek için bu sayfaya dönüp sağ üstteki üç noktadan **Edit** deyin. Dosyalarınızı (taslak çizimi, rapor) bu kaydın altına sürükleyip bırakabilirsiniz.
   - type: input
     id: takim
