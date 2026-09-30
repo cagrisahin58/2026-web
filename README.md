@@ -12,6 +12,7 @@ Ders notları bu depoda duruyor ve GitHub Pages ile yayımlanıyor. Her haftanı
 | --- | --- |
 | Giriş sayfası | <https://cagrisahin58.github.io/2026-web/> |
 | Ders planı | <https://cagrisahin58.github.io/2026-web/docs/syllabus.html> |
+| Lab grupları | <https://cagrisahin58.github.io/2026-web/gruplar/> |
 | Hafta 0 · Kurulum | <https://cagrisahin58.github.io/2026-web/weeks/hafta-00-kurulum/> |
 | Hafta 1 · Tanışma (1 Ekim) | <https://cagrisahin58.github.io/2026-web/weeks/hafta-01/> |
 | Hafta 2 · HTML (8 Ekim) | <https://cagrisahin58.github.io/2026-web/weeks/hafta-02/> |
@@ -23,5 +24,6 @@ Ders notları bu depoda duruyor ve GitHub Pages ile yayımlanıyor. Her haftanı
 | `index.html` | Giriş sayfası |
 | `SYLLABUS.md` | Ders planının metin hâli |
 | `docs/` | Ders planının tarayıcıda açılan hâli (`docs/syllabus.html`) |
+| `gruplar/` | Lab gruplarının kayıt ve liste sayfası |
 | `weeks/` | Haftalık ders notları, her hafta kendi klasöründe (`weeks/hafta-XX/`) |
 | `weeks/hafta-XX/lab/` | O haftanın lab dosyaları, örneğin bozuk site |
