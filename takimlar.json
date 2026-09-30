@@ -1,0 +1,42 @@
+{
+  "guncelleme": "2026-09-30T21:27:07.508Z",
+  "ayar": {
+    "takimBoyu": 4,
+    "kilitGun": 7
+  },
+  "takimlar": [
+    {
+      "id": 1,
+      "takim": "Deneme Takımı",
+      "uyeler": [
+        {
+          "no": "900000001",
+          "ad": "Deneme Bir"
+        },
+        {
+          "no": "900000002",
+          "ad": "Deneme İki"
+        },
+        {
+          "no": "900000003",
+          "ad": "Deneme Üç"
+        },
+        {
+          "no": "900000004",
+          "ad": "Deneme Dört"
+        }
+      ],
+      "konu": "Kayıt sisteminin denemesi; bu kayıt kapatılacak.",
+      "site": "",
+      "klasor": "",
+      "olusturma": "2026-09-30T21:26:58.000Z",
+      "kilit": "2026-10-07T21:26:58.000Z",
+      "kilitli": false,
+      "durum": "gecerli",
+      "hatalar": [],
+      "github": "https://github.com/cagrisahin58/2026-web/issues/1",
+      "yazar": "cagrisahin58",
+      "guncelleme": "2026-09-30T21:26:58Z"
+    }
+  ]
+}
