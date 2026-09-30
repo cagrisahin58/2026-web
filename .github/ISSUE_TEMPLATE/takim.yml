@@ -1,0 +1,50 @@
+name: Takım kaydı
+description: Dönem projesi için dört kişilik takımını kaydet. Kayıt yedi gün düzenlenebilir, sonra kilitlenir.
+title: "Takım: "
+labels: ["takim"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Takımdan bir kişi doldurur. Yazdıklarınız sınıfa açık görünür; bir iki dakika içinde ders sitesindeki Lab grupları sayfasına düşer.
+        Kaydı düzenlemek için bu sayfaya dönüp sağ üstteki üç noktadan **Edit** deyin. Dosyalarınızı (taslak çizimi, rapor) bu kaydın altına sürükleyip bırakabilirsiniz.
+  - type: input
+    id: takim
+    attributes:
+      label: Takım adı
+      placeholder: "Örnek: Kale, Vezir, Kampüs Pusulası"
+    validations:
+      required: true
+  - type: textarea
+    id: uyeler
+    attributes:
+      label: Üyeler
+      description: Her satıra bir üye. Önce öğrenci numarası, bir boşluk, sonra ad soyad. Tam dört satır.
+      placeholder: |
+        230101001 Ece Yılmaz
+        230101002 Mert Kaya
+        230101003 Deniz Aksoy
+        230101004 Ayşe Demir
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: konu
+    attributes:
+      label: Proje konusu
+      description: Kim için, hangi sorunu çözen bir site? Bir iki cümle yeter.
+      placeholder: "Yurtta kalan öğrenciler için çamaşırhane sırasını gösteren ve sıra alınan bir uygulama."
+    validations:
+      required: true
+  - type: input
+    id: site
+    attributes:
+      label: Sitenin adresi
+      description: Varsa. GitHub Pages ya da yayın adresi; Hafta 10'dan itibaren dolu olmalı.
+      placeholder: "https://takimadi.github.io/proje/"
+  - type: input
+    id: klasor
+    attributes:
+      label: Dosya klasörü
+      description: Varsa. Takımın Drive ya da GitHub klasörünün bağlantısı. Dosyaları doğrudan bu kaydın altına da sürükleyebilirsiniz.
+      placeholder: "https://drive.google.com/drive/folders/..."

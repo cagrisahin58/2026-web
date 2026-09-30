@@ -1,0 +1,51 @@
+name: Lab grupları
+
+on:
+  issues:
+    types: [opened, edited, closed, reopened, labeled, unlabeled, deleted]
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: lab-gruplari
+  cancel-in-progress: false
+
+jobs:
+  derle:
+    if: github.repository == 'cagrisahin58/2026-web'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: veri dalını al
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p /tmp/veri && cd /tmp/veri
+          git init -q
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
+          if git fetch -q origin veri; then git checkout -q -b veri FETCH_HEAD; else git checkout -q --orphan veri; fi
+      - name: takımları derle
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          OGRENCI_NUMARALARI: ${{ secrets.OGRENCI_NUMARALARI }}
+          ESKI_JSON: /tmp/veri/takimlar.json
+          YENI_JSON: /tmp/veri/takimlar.json
+        run: node .github/scripts/gruplar.mjs
+      - name: veri dalına yaz
+        run: |
+          cd /tmp/veri
+          git add takimlar.json
+          if git -c user.name=yzm205-bot -c user.email=yzm205-bot@users.noreply.github.com commit -qm "takımlar güncellendi"; then
+            git push -q origin veri
+          else
+            echo "değişiklik yok"
+          fi
