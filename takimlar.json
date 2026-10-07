@@ -1,8 +1,42 @@
 {
-  "guncelleme": "2026-10-07T10:11:20.957Z",
+  "guncelleme": "2026-10-07T16:12:47.203Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
   },
-  "takimlar": []
+  "takimlar": [
+    {
+      "id": 3,
+      "takim": "AI TEAM",
+      "uyeler": [
+        {
+          "no": "250912018",
+          "ad": "Zehra Beyazgül"
+        },
+        {
+          "no": "250912023",
+          "ad": "Miray Beyazgül"
+        },
+        {
+          "no": "250912004",
+          "ad": "İrem Umul"
+        },
+        {
+          "no": "250912007",
+          "ad": "Şerivan Soysal"
+        }
+      ],
+      "konu": "AI VE GERÇEK FOTOĞRAF AYRIMI",
+      "site": "",
+      "klasor": "",
+      "olusturma": "2026-10-07T16:12:34.000Z",
+      "kilit": "2026-10-14T16:12:34.000Z",
+      "kilitli": false,
+      "durum": "gecerli",
+      "hatalar": [],
+      "github": "https://github.com/cagrisahin58/2026-web/issues/3",
+      "yazar": "zehrabeyazgul",
+      "guncelleme": "2026-10-07T16:12:34Z"
+    }
+  ]
 }
