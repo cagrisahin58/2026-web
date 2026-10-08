@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-08T11:05:27.659Z",
+  "guncelleme": "2026-10-08T14:39:52.809Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -37,6 +37,39 @@
       "github": "https://github.com/cagrisahin58/2026-web/issues/3",
       "yazar": "zehrabeyazgul",
       "guncelleme": "2026-10-08T11:05:17Z"
+    },
+    {
+      "id": 4,
+      "takim": "TEKNOTURAN",
+      "uyeler": [
+        {
+          "no": "250912010",
+          "ad": "Fatma Şevval Yıldırım"
+        },
+        {
+          "no": "250912012",
+          "ad": "Sudenur Sezer"
+        },
+        {
+          "no": "250912056",
+          "ad": "Fatma Akan"
+        },
+        {
+          "no": "250912048",
+          "ad": "Gamze Ayyıldız"
+        }
+      ],
+      "konu": "Projenin web tarafı, İHA'yı uzaktan yönetmeni sağlayan bir yer kontrol panelidir. Kullanıcı web üzerindeki haritadan İHA'nın rota koordinatlarını belirler, bu veriler backend aracılığıyla İHA'ya iletilir. Aynı zamanda İHA'dan gelen anlık konum verileri ve canlı kamera yayını web ekranına aktarılarak",
+      "site": "",
+      "klasor": "",
+      "olusturma": "2026-10-08T14:39:38.000Z",
+      "kilit": "2026-10-15T14:39:38.000Z",
+      "kilitli": false,
+      "durum": "gecerli",
+      "hatalar": [],
+      "github": "https://github.com/cagrisahin58/2026-web/issues/4",
+      "yazar": "FatmaSevval",
+      "guncelleme": "2026-10-08T14:39:38Z"
     }
   ]
 }
