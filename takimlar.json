@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-08T14:40:09.806Z",
+  "guncelleme": "2026-10-08T16:32:04.951Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -70,6 +70,39 @@
       "github": "https://github.com/cagrisahin58/2026-web/issues/4",
       "yazar": "FatmaSevval",
       "guncelleme": "2026-10-08T14:39:53Z"
+    },
+    {
+      "id": 5,
+      "takim": "BuildLab",
+      "uyeler": [
+        {
+          "no": "250912011",
+          "ad": "Nurdane Gündoğan"
+        },
+        {
+          "no": "250912025",
+          "ad": "Suna Bingöl"
+        },
+        {
+          "no": "250912034",
+          "ad": "Hatice EROĞLU"
+        },
+        {
+          "no": "250912029",
+          "ad": "Nazlı Yılmaz"
+        }
+      ],
+      "konu": "Mühendislik ve teknoloji topluluğu için bilgi paylaşımı, proje portföyü ve kariyer gelişimini bir araya getiren mobil sosyal ağ platformu.",
+      "site": "https://github.com/nazliylmaz007/BuildLab-Projesi.git",
+      "klasor": "https://drive.google.com/drive/u/0/folders/1Z8Gjgces0Z-6CL8sA9kzI4d6C8muuV3E",
+      "olusturma": "2026-10-08T16:31:51.000Z",
+      "kilit": "2026-10-15T16:31:51.000Z",
+      "kilitli": false,
+      "durum": "gecerli",
+      "hatalar": [],
+      "github": "https://github.com/cagrisahin58/2026-web/issues/5",
+      "yazar": "nazliylmaz007",
+      "guncelleme": "2026-10-08T16:31:51Z"
     }
   ]
 }
