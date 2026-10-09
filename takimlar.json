@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-09T10:28:13.421Z",
+  "guncelleme": "2026-10-09T16:56:28.568Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -59,7 +59,7 @@
           "ad": "Gamze Ayyıldız"
         }
       ],
-      "konu": "Projenin web tarafı, İHA'yı uzaktan yönetmeni sağlayan bir yer kontrol panelidir. Kullanıcı web üzerindeki haritadan İHA'nın rota koordinatlarını belirler, bu veriler backend aracılığıyla İHA'ya iletilir. Aynı zamanda İHA'dan gelen anlık konum verileri ve canlı kamera yayını web ekranına aktarılarak",
+      "konu": "Bu proje, kullanıcıların web tabanlı bir arayüz üzerinden İHA görevlerini yönetebildiği, canlı görüntüleri izleyebildiği ve yapay zekâ tarafından tespit edilen canlılara ait fotoğraf ve videoları arşivleyebildiği bir sistem geliştirmeyi amaçlamaktadır. Kullanıcılar harita üzerinden görev noktaları b",
       "site": "",
       "klasor": "",
       "olusturma": "2026-10-08T14:39:38.000Z",
@@ -69,7 +69,7 @@
       "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/4",
       "yazar": "FatmaSevval",
-      "guncelleme": "2026-10-08T14:39:53Z"
+      "guncelleme": "2026-10-09T16:56:15Z"
     },
     {
       "id": 5,
