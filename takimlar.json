@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-10T08:23:45.939Z",
+  "guncelleme": "2026-10-10T08:26:54.401Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -110,7 +110,19 @@
       "uyeler": [
         {
           "no": "250912051",
-          "ad": "Muhammed Enes YEŞİL 250912027 Mustafa ERİCEK 250912035 Aslan"
+          "ad": "Muhammed Enes YEŞİL"
+        },
+        {
+          "no": "250912027",
+          "ad": "Mustafa ERİCEK"
+        },
+        {
+          "no": "250912035",
+          "ad": "Aslan KARACA"
+        },
+        {
+          "no": "250912031",
+          "ad": "Mehmet Hanifi ÖZBEY"
         }
       ],
       "konu": "Dolandırılan numaraları engellemek, insanları uyarmak için kurulan web site",
@@ -119,13 +131,11 @@
       "olusturma": "2026-10-10T08:23:22.000Z",
       "kilit": "2026-10-17T08:23:22.000Z",
       "kilitli": false,
-      "durum": "hatali",
-      "hatalar": [
-        "Takım tam olarak 4 kişi olmalı (şu an 1 satır var)."
-      ],
+      "durum": "gecerli",
+      "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/6",
       "yazar": "MustafaEricek",
-      "guncelleme": "2026-10-10T08:23:35Z"
+      "guncelleme": "2026-10-10T08:26:42Z"
     }
   ]
 }
