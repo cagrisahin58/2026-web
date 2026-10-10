@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-10T09:45:54.034Z",
+  "guncelleme": "2026-10-10T11:54:46.430Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -136,6 +136,39 @@
       "github": "https://github.com/cagrisahin58/2026-web/issues/6",
       "yazar": "MustafaEricek",
       "guncelleme": "2026-10-10T08:26:57Z"
+    },
+    {
+      "id": 7,
+      "takim": "CodeClean",
+      "uyeler": [
+        {
+          "no": "250912024",
+          "ad": "Dilara Bozkurt"
+        },
+        {
+          "no": "200912033",
+          "ad": "Jan Kelekçier"
+        },
+        {
+          "no": "250912014",
+          "ad": "Rümeysa Firdevs Sarıkaya"
+        },
+        {
+          "no": "250912030",
+          "ad": "Gülnaz Bayar"
+        }
+      ],
+      "konu": "Diş hekimleri ve dis hekimi öğrencileri için, implant çeşitleri ve markaları listeleyen aynı zamanda yapay zeka ile her hasta için en uygun implant tedavisini söyleyecek bir web sitesi.",
+      "site": "",
+      "klasor": "",
+      "olusturma": "2026-10-10T11:54:29.000Z",
+      "kilit": "2026-10-17T11:54:29.000Z",
+      "kilitli": false,
+      "durum": "gecerli",
+      "hatalar": [],
+      "github": "https://github.com/cagrisahin58/2026-web/issues/7",
+      "yazar": "dilaracod",
+      "guncelleme": "2026-10-10T11:54:29Z"
     }
   ]
 }
