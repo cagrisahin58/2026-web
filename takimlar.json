@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-09T16:56:28.568Z",
+  "guncelleme": "2026-10-10T08:23:33.809Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -103,6 +103,29 @@
       "github": "https://github.com/cagrisahin58/2026-web/issues/5",
       "yazar": "nazliylmaz007",
       "guncelleme": "2026-10-08T16:32:05Z"
+    },
+    {
+      "id": 6,
+      "takim": "Kuzey yıldızı",
+      "uyeler": [
+        {
+          "no": "250912051",
+          "ad": "Muhammed Enes YEŞİL 250912027 Mustafa ERİCEK 250912035 Aslan"
+        }
+      ],
+      "konu": "Dolandırılan numaraları engellemek, insanları uyarmak için kurulan web site",
+      "site": "",
+      "klasor": "",
+      "olusturma": "2026-10-10T08:23:22.000Z",
+      "kilit": "2026-10-17T08:23:22.000Z",
+      "kilitli": false,
+      "durum": "hatali",
+      "hatalar": [
+        "Takım tam olarak 4 kişi olmalı (şu an 1 satır var)."
+      ],
+      "github": "https://github.com/cagrisahin58/2026-web/issues/6",
+      "yazar": "MustafaEricek",
+      "guncelleme": "2026-10-10T08:23:22Z"
     }
   ]
 }
