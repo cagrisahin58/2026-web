@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-11T22:31:19.521Z",
+  "guncelleme": "2026-10-11T22:31:31.473Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -169,6 +169,26 @@
       "github": "https://github.com/cagrisahin58/2026-web/issues/7",
       "yazar": "dilaracod",
       "guncelleme": "2026-10-10T11:54:47Z"
+    },
+    {
+      "id": 8,
+      "takim": "",
+      "uyeler": [],
+      "konu": "",
+      "site": "",
+      "klasor": "",
+      "olusturma": "2026-10-11T22:25:15.000Z",
+      "kilit": "2026-10-18T22:25:15.000Z",
+      "kilitli": false,
+      "durum": "hatali",
+      "hatalar": [
+        "Takım adı en az iki karakter olmalı.",
+        "Proje konusu için en az bir cümle yazın.",
+        "Takım tam olarak 4 kişi olmalı (şu an 0 satır var)."
+      ],
+      "github": "https://github.com/cagrisahin58/2026-web/issues/8",
+      "yazar": "lcaraxesl",
+      "guncelleme": "2026-10-11T22:31:14Z"
     }
   ]
 }
