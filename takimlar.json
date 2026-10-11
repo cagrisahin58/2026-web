@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-11T09:56:21.744Z",
+  "guncelleme": "2026-10-11T22:25:24.910Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -169,6 +169,44 @@
       "github": "https://github.com/cagrisahin58/2026-web/issues/7",
       "yazar": "dilaracod",
       "guncelleme": "2026-10-10T11:54:47Z"
+    },
+    {
+      "id": 8,
+      "takim": "TOP4",
+      "uyeler": [
+        {
+          "no": "",
+          "ad": "Arda SÖNER"
+        },
+        {
+          "no": "",
+          "ad": "Muhammed Şutti"
+        },
+        {
+          "no": "",
+          "ad": "Baran Akın Akın"
+        },
+        {
+          "no": "",
+          "ad": "Muhammed Ayhan"
+        }
+      ],
+      "konu": "KampüsCep, Muş Alparslan Üniversitesi öğrencilerinin kampüs yaşamını kolaylaştırmak amacıyla geliştirilmiş modern ve yenilikçi bir öğrenci platformudur. 🚌 Canlı otobüs takibi, 🗺️ interaktif kampüs haritası, 📍 kampüs mekânları, 📚 sınav arşivi, 📊 not hesaplama ve 💬 öğrenci sohbeti gibi birçok öz",
+      "site": "https://puritan-glider-movable.ngrok-free.dev",
+      "klasor": "",
+      "olusturma": "2026-10-11T22:25:15.000Z",
+      "kilit": "2026-10-18T22:25:15.000Z",
+      "kilitli": false,
+      "durum": "hatali",
+      "hatalar": [
+        "Öğrenci numarası rakamlardan oluşmalı ve satır \"numara ad soyad\" biçiminde olmalı: \"Arda SÖNER\".",
+        "Öğrenci numarası rakamlardan oluşmalı ve satır \"numara ad soyad\" biçiminde olmalı: \"Muhammed Şutti\".",
+        "Öğrenci numarası rakamlardan oluşmalı ve satır \"numara ad soyad\" biçiminde olmalı: \"Baran Akın Akın\".",
+        "Öğrenci numarası rakamlardan oluşmalı ve satır \"numara ad soyad\" biçiminde olmalı: \"Muhammed Ayhan\"."
+      ],
+      "github": "https://github.com/cagrisahin58/2026-web/issues/8",
+      "yazar": "lcaraxesl",
+      "guncelleme": "2026-10-11T22:25:15Z"
     }
   ]
 }
