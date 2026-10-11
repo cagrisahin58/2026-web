@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-11T22:27:58.731Z",
+  "guncelleme": "2026-10-11T22:29:11.311Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -172,38 +172,23 @@
     },
     {
       "id": 8,
-      "takim": "TOP4",
-      "uyeler": [
-        {
-          "no": "250912042",
-          "ad": "Arda SÖNER"
-        },
-        {
-          "no": "250912008",
-          "ad": "Muhammed Şutti"
-        },
-        {
-          "no": "250912000",
-          "ad": "Baran Akın Akın"
-        },
-        {
-          "no": "250912000",
-          "ad": "Muhammed Ayhan"
-        }
-      ],
-      "konu": "KampüsCep, Muş Alparslan Üniversitesi öğrencilerinin kampüs yaşamını kolaylaştırmak amacıyla geliştirilmiş modern ve yenilikçi bir öğrenci platformudur. 🚌 Canlı otobüs takibi, 🗺️ interaktif kampüs haritası, 📍 kampüs mekânları, 📚 sınav arşivi, 📊 not hesaplama ve 💬 öğrenci sohbeti gibi birçok öz",
-      "site": "https://puritan-glider-movable.ngrok-free.dev",
+      "takim": "",
+      "uyeler": [],
+      "konu": "",
+      "site": "",
       "klasor": "",
       "olusturma": "2026-10-11T22:25:15.000Z",
       "kilit": "2026-10-18T22:25:15.000Z",
       "kilitli": false,
       "durum": "hatali",
       "hatalar": [
-        "Aynı numara iki kez yazılmış: 250912000."
+        "Takım adı en az iki karakter olmalı.",
+        "Proje konusu için en az bir cümle yazın.",
+        "Takım tam olarak 4 kişi olmalı (şu an 0 satır var)."
       ],
       "github": "https://github.com/cagrisahin58/2026-web/issues/8",
       "yazar": "lcaraxesl",
-      "guncelleme": "2026-10-11T22:27:48Z"
+      "guncelleme": "2026-10-11T22:29:10Z"
     }
   ]
 }
