@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-12T03:00:17.274Z",
+  "guncelleme": "2026-10-12T06:44:01.450Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -221,7 +221,40 @@
       "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/9",
       "yazar": "lcaraxesl",
-      "guncelleme": "2026-10-12T03:00:08Z"
+      "guncelleme": "2026-10-12T03:00:17Z"
+    },
+    {
+      "id": 10,
+      "takim": "Dimensio",
+      "uyeler": [
+        {
+          "no": "250912016",
+          "ad": "Merve Altaş"
+        },
+        {
+          "no": "250912009",
+          "ad": "Bengisu Kayra Orhan"
+        },
+        {
+          "no": "250912039",
+          "ad": "Şevin Polat"
+        },
+        {
+          "no": "250912043",
+          "ad": "Zeynep Yaren Dizlek"
+        }
+      ],
+      "konu": "Projemiz, çevrim içi satış yapan satıcıların ürünlerini daha gerçekçi ve etkileyici bir şekilde tanıtabilmelerini amaçlayan bir 3D görselleştirme ajansıdır. Satıcılar ürünlerinin fotoğraflarını sistemimize yükleyecek, biz de bu görselleri 3D ürün görsellerine dönüştürerek kendilerine ileteceğiz. Sat",
+      "site": "",
+      "klasor": "",
+      "olusturma": "2026-10-12T06:43:48.000Z",
+      "kilit": "2026-10-19T06:43:48.000Z",
+      "kilitli": false,
+      "durum": "gecerli",
+      "hatalar": [],
+      "github": "https://github.com/cagrisahin58/2026-web/issues/10",
+      "yazar": "altasmerve6382-coder",
+      "guncelleme": "2026-10-12T06:43:48Z"
     }
   ]
 }
