@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-12T11:16:51.081Z",
+  "guncelleme": "2026-10-12T13:57:55.326Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -221,7 +221,7 @@
       "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/9",
       "yazar": "lcaraxesl",
-      "guncelleme": "2026-10-12T11:16:40Z"
+      "guncelleme": "2026-10-12T11:16:51Z"
     },
     {
       "id": 10,
@@ -255,6 +255,39 @@
       "github": "https://github.com/cagrisahin58/2026-web/issues/10",
       "yazar": "altasmerve6382-coder",
       "guncelleme": "2026-10-12T06:44:02Z"
+    },
+    {
+      "id": 11,
+      "takim": "Neykos",
+      "uyeler": [
+        {
+          "no": "250912047",
+          "ad": "Özcan Okşak"
+        },
+        {
+          "no": "250912037",
+          "ad": "Muhammed Yusuf Yaman"
+        },
+        {
+          "no": "250912013",
+          "ad": "Abdulkadir Alaaddinbeyoğlu"
+        },
+        {
+          "no": "240912029",
+          "ad": "Muhammed Yusuf Kaygusuz"
+        }
+      ],
+      "konu": "Diyarbakır'da yaşayan ve şehre gelen kişiler için bir şehir rehberi. Dağınık bilgi sorununu çözüyor: otobüs rota rehberi, ai asistanı (Diya AI), nöbetçi eczaneler, yeme içme mekanları, yolun trafik ve radarlar, taksi ücreti hesaplaması, taksi durakları, hava durumu, piyasalar, kültürel mekanlar, şeh",
+      "site": "",
+      "klasor": "https://github.com/ozcanoksak/sehir-rehberi-v2",
+      "olusturma": "2026-10-12T13:57:40.000Z",
+      "kilit": "2026-10-19T13:57:40.000Z",
+      "kilitli": false,
+      "durum": "gecerli",
+      "hatalar": [],
+      "github": "https://github.com/cagrisahin58/2026-web/issues/11",
+      "yazar": "ozcanoksak",
+      "guncelleme": "2026-10-12T13:57:40Z"
     }
   ]
 }
