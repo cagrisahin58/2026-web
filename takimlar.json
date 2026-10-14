@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-14T08:38:21.718Z",
+  "guncelleme": "2026-10-14T12:24:51.789Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -26,7 +26,7 @@
           "ad": "Şerivan Soysal"
         }
       ],
-      "konu": "AI VE GERÇEK FOTOĞRAF/SES AYRIM ORANI BELİRLEME",
+      "konu": "AI TEAM tarafından geliştirilen bu platform, kullanıcıların yüklediği görsel ve ses dosyalarının yapay zekâ (deepfake) ile üretilip üretilmediğini tespit eden modern bir web doğrulama sistemidir. Temel amacımız; körü körüne kesin bir hüküm vermek yerine, görsel üzerindeki anomalileri gösteren bir Is",
       "site": "",
       "klasor": "",
       "olusturma": "2026-10-07T16:12:34.000Z",
@@ -36,7 +36,7 @@
       "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/3",
       "yazar": "zehrabeyazgul",
-      "guncelleme": "2026-10-08T11:05:17Z"
+      "guncelleme": "2026-10-14T12:24:38Z"
     },
     {
       "id": 4,
