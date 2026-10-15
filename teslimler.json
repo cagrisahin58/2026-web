@@ -1,25 +1,4 @@
 {
-  "guncelleme": "2026-10-15T00:51:22.271Z",
-  "teslimler": [
-    {
-      "id": 12,
-      "hafta": 3,
-      "haftaAd": "Hafta 3 · CSS",
-      "numara": "900000001",
-      "ad": "Deneme Öğrenci",
-      "yayin": "https://cagrisahin58.github.io/2026-web/",
-      "depo": "https://github.com/cagrisahin58/2026-web",
-      "bozuk": "",
-      "yzNotu": "Ne sordum: deneme. İşe yaradı mı: evet. Kendi başıma ne öğrendim: teslim sistemi.",
-      "takildigi": "",
-      "birlikte": "",
-      "olusturma": "2026-10-15T00:50:57.000Z",
-      "guncelleme": "2026-10-15T00:51:08Z",
-      "durum": "gecerli",
-      "hatalar": [],
-      "gecerli_son": true,
-      "github": "https://github.com/cagrisahin58/2026-web/issues/12",
-      "yazar": "cagrisahin58"
-    }
-  ]
+  "guncelleme": "2026-10-15T00:52:55.153Z",
+  "teslimler": []
 }
