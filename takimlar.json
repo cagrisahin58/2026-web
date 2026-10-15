@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-15T08:19:30.200Z",
+  "guncelleme": "2026-10-15T18:00:59.357Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -64,7 +64,7 @@
       "klasor": "",
       "olusturma": "2026-10-08T14:39:38.000Z",
       "kilit": "2026-10-15T14:39:38.000Z",
-      "kilitli": false,
+      "kilitli": true,
       "durum": "gecerli",
       "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/4",
@@ -97,7 +97,7 @@
       "klasor": "https://drive.google.com/drive/u/0/folders/1Z8Gjgces0Z-6CL8sA9kzI4d6C8muuV3E",
       "olusturma": "2026-10-08T16:31:51.000Z",
       "kilit": "2026-10-15T16:31:51.000Z",
-      "kilitli": false,
+      "kilitli": true,
       "durum": "gecerli",
       "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/5",
@@ -361,6 +361,41 @@
       "github": "https://github.com/cagrisahin58/2026-web/issues/15",
       "yazar": "muraterbas13",
       "guncelleme": "2026-10-15T08:19:16Z"
+    },
+    {
+      "id": 16,
+      "takim": "TEAM 7",
+      "uyeler": [
+        {
+          "no": "250912559",
+          "ad": "İSMAEL SANOGO"
+        },
+        {
+          "no": "250912041",
+          "ad": "EMİRHAN ÖNER"
+        },
+        {
+          "no": "250912022",
+          "ad": "BİLAL SENDUR"
+        },
+        {
+          "no": "",
+          "ad": "250912*** MEHMET GÖKDENİZ"
+        }
+      ],
+      "konu": "Yeni Nesil Dijital Restoran Yönetim ve Büyüme Platformu",
+      "site": "",
+      "klasor": "",
+      "olusturma": "2026-10-15T18:00:46.000Z",
+      "kilit": "2026-10-22T18:00:46.000Z",
+      "kilitli": false,
+      "durum": "hatali",
+      "hatalar": [
+        "Öğrenci numarası rakamlardan oluşmalı ve satır \"numara ad soyad\" biçiminde olmalı: \"250912*** MEHMET GÖKDENİZ\"."
+      ],
+      "github": "https://github.com/cagrisahin58/2026-web/issues/16",
+      "yazar": "emirhan3619",
+      "guncelleme": "2026-10-15T18:00:46Z"
     }
   ]
 }
