@@ -1,0 +1,1636 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hafta 3 · CSS: sayfaya görünüş vermek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/ders.css">
+<style>
+/* Hafta 3'e özel simülasyon stilleri */
+.hero-demo .frame iframe{height:236px}
+.hero-demo .btnrow{justify-content:space-between}
+.hedef-iki .frame iframe{height:250px}
+.lines+.lines{margin-top:10px}
+.ince{margin-top:14px}
+
+/* 1. kuralın parçaları */
+.anat{background:var(--code-bg);color:var(--code-ink);border-radius:10px;padding:12px 14px;font:1rem/1.5 var(--mono);display:grid;gap:4px;overflow-x:auto}
+.anat-row{display:flex;flex-wrap:wrap;gap:3px;align-items:center}
+.anat-row.ic{padding-left:1.6em}
+.tok{appearance:none;border:1px dashed rgba(255,255,255,.3);background:transparent;color:inherit;font:inherit;padding:2px 7px;border-radius:6px;cursor:pointer;min-width:1.7em}
+.tok:hover{background:rgba(255,255,255,.1)}
+.tok[aria-pressed="true"]{background:#F0A93B;color:#121A2B;border-color:#F0A93B}
+.anat-out{background:var(--surface-2);border-radius:10px;padding:10px 14px;min-height:48px}
+.tok.silik{text-decoration:line-through;opacity:.45}
+.frame .page .anat-on{margin:0;font:700 1.6rem/1.2 "Times New Roman",serif;color:#111;transition:color .3s,font-size .3s}
+
+/* 2. seçici eşleştirme */
+.agac{background:var(--code-bg);color:var(--code-ink);border-radius:10px;padding:10px 0;font:.84rem/1.55 var(--mono);overflow-x:auto}
+.ag-l{padding:2px 14px;white-space:pre;transition:background .25s}
+.ag-l.hit{background:rgba(240,169,59,.3);box-shadow:inset 3px 0 0 #F0A93B}
+.ag-l .tg{color:#FFB3A7}
+.ag-l .at{color:#9FD3FF}
+.sec-out{background:var(--surface-2);border-radius:10px;padding:10px 14px;font-size:.93rem}
+
+/* 3. renk ve yazı */
+.rk-panel{display:grid;gap:10px;align-content:start}
+.rk-on{border:1px solid var(--line);border-radius:10px;padding:14px 16px;min-height:130px;transition:background-color .2s,color .2s}
+.rk-uyari{font-weight:600;font-size:.93rem}
+.rk-uyari.iyi{color:var(--lab)}
+.rk-uyari.kotu{color:var(--err)}
+
+/* 4. kutu modeli */
+.bm-panel{display:grid;gap:10px;align-content:start}
+.bm-diag{font:.74rem/1.2 var(--mono);color:#121A2B}
+.bm-l{position:relative;padding:24px 14px 12px;border-radius:6px;transition:box-shadow .25s,opacity .25s}
+.bm-m{background:#F9CC9D;border:1px dashed #9C6A33}
+.bm-b{background:#FDDD9B;border:1px solid #3A3A3A}
+.bm-p{background:#C3D08B;border:1px dashed #5E6B26}
+.bm-c{background:#8CB6C0;padding:10px;text-align:center;border-radius:4px;font-weight:600}
+.bm-ad{position:absolute;top:6px;left:8px}
+.bm-v{position:absolute;top:6px;right:8px;font-weight:600}
+.bm-l.flash{box-shadow:0 0 0 3px var(--theory)}
+.bm-l.sifir{opacity:.5}
+#simKutu>div{min-width:0}
+.bm-stage{min-width:0;max-width:100%;display:flex;align-items:flex-start;background:var(--surface-2);border-radius:10px;overflow-x:auto;padding:8px 0}
+/* kütüphane bütün öğelere border-box veriyor; simülasyon CSS'in varsayılanını (content-box) göstermeli */
+.bm-kutu{box-sizing:content-box;flex:0 0 auto;width:80px;background:var(--theory-soft);border-style:solid;border-color:var(--theory);color:var(--ink);text-align:center;font:600 .9rem/1.3 var(--mono)}
+.bm-hesap{font-size:.93rem}
+
+/* 5. Flexbox */
+.fx-panel{display:grid;gap:10px;align-content:start}
+.fx-grp{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.fx-grp .lbl{flex-basis:100%;margin:0}
+.fx-grp .btn{font-family:var(--mono);font-size:.8rem;padding:7px 10px}
+.fx-stage{display:flex;height:230px;background:var(--surface-2);border:2px dashed var(--line);border-radius:10px;padding:10px;overflow:hidden}
+.fx-k{background:var(--lab);color:var(--surface);border-radius:8px;padding:10px 14px;font:600 .9rem/1.3 var(--body);min-width:0}
+
+/* 6. medya sorgusu */
+.mq-view{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+.mq-view iframe{border:0;display:block;transform-origin:0 0;height:320px;background:#fff}
+.mq-bilgi{font-family:var(--mono);font-size:.86rem}
+.mq-bilgi b{font-weight:600}
+</style>
+</head>
+<body data-week="3">
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="dot" aria-hidden="true"></span>YZM205 · Hafta 3<span class="long">&nbsp;· CSS</span></div>
+    <nav class="jump" aria-label="Bölümler">
+      <a href="#bugun">Bugün</a><a href="#hedef">Hedef</a><a href="#kural">1 Kural</a><a href="#secici">2 Seçici</a><a href="#renk">3 Renk</a><a href="#kutu">4 Kutu</a><a href="#flex">5 Flex</a><a href="#telefon">6 Telefon</a><a href="#yapay-zeka">Yapay zekâ</a><a href="#lab">Lab</a><a href="#yayin">Yayın</a><a href="#bozuk">Boz</a><a href="#teslim">Teslim</a><a href="#test">Test</a><a href="#kartlar">Kartlar</a>
+    </nav>
+    <button class="themebtn" id="themeBtn" type="button">Koyu tema</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" aria-labelledby="baslik">
+    <div>
+      <div class="eyebrow">YZM205 Web Tasarımı ve Programlama · Hafta 3 · BLD-104</div>
+      <h1 id="baslik">CSS: sayfaya görünüş vermek</h1>
+      <p class="lede">Günün sonunda kişisel sayfan renkli, düzenli ve telefonda da düzgün görünüyor. Geçen hafta sayfanın içeriğini ve yapısını HTML ile kurdun. Bugün görünüşünü ayrı bir stil dosyasında yazacaksın.</p>
+      <div class="meta">
+        <span class="chip theory">Teori 105 dk</span>
+        <span class="chip lab">Lab 105 dk</span>
+        <span class="chip ship">Teslim: labı izleyen Pazar 23:59</span>
+      </div>
+      <div class="meta">
+        <div class="ring" id="ring"><span data-pct>%0</span></div>
+        <span class="badge" id="badge" hidden data-text="Stil dosyası tamam"></span>
+        <span class="small muted">Bu haftanın ilerlemesi: soru grupları ve lab adımları. Tarayıcında saklanır, puan değildir.</span>
+      </div>
+    </div>
+    <div class="hero-demo">
+      <span class="lbl">Canlı gösterim</span>
+      <div class="frame">
+        <div class="bar"><i></i><span>https://kullaniciadi.github.io</span></div>
+        <iframe id="heroFrame" title="Aynı kişisel sayfa, CSS açık ya da kapalı" sandbox="allow-same-origin"></iframe>
+      </div>
+      <div class="btnrow">
+        <button class="btn" type="button" id="heroBtn" aria-pressed="true">CSS: açık</button>
+        <span class="small muted" id="heroDurum" aria-live="polite">Stil dosyası uygulanmış hâli</span>
+      </div>
+      <p class="small muted">HTML hiç değişmiyor, düğme yalnız stil dosyasını devreden çıkarıp geri açıyor.</p>
+    </div>
+  </section>
+
+  <section id="bugun" aria-labelledby="bugun-h">
+    <div class="section-head"><h2 id="bugun-h">Bugün</h2><span class="muted">Dakika dakika akış</span></div>
+    <div class="today">
+      <div class="grid2">
+        <div class="card">
+          <h3>Sabah · konu anlatımı</h3>
+          <div class="tl">
+            <div class="row"><span class="t">0–6 dk</span><div><a href="#hedef">Bugünün hedefi</a><span class="s">Aynı HTML, iki stil dosyası</span></div></div>
+            <div class="row"><span class="t">6–22 dk</span><div><a href="#kural">1. CSS nedir, nasıl bağlanır</a><span class="s">Kuralın parçaları, görevli editör</span></div></div>
+            <div class="row"><span class="t">22–38 dk</span><div><a href="#secici">2. Seçiciler</a><span class="s">Seçici eşleştirme</span></div></div>
+            <div class="row"><span class="t">38–52 dk</span><div><a href="#renk">3. Renk, yazı, boşluk</a><span class="s">Kaydırıcılarla renk ve yazı</span></div></div>
+            <div class="row pause"><span class="t">52–62 dk</span><div>Ara</div></div>
+            <div class="row"><span class="t">62–80 dk</span><div><a href="#kutu">4. Kutu modeli</a><span class="s">Katman katman kutu</span></div></div>
+            <div class="row"><span class="t">80–95 dk</span><div><a href="#flex">5. Flexbox</a><span class="s">Üç kutuyu diz</span></div></div>
+            <div class="row"><span class="t">95–105 dk</span><div><a href="#telefon">6. Telefon için medya sorgusu</a><span class="s">Pencereyi daralt, viewport satırı</span></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Öğleden sonra · lab</h3>
+          <div class="tl">
+            <div class="row"><span class="t">0–5 dk</span><div><a href="#lab">Hazırlık</a><span class="s">Klasör, style.css, link satırı</span></div></div>
+            <div class="row"><span class="t">5–45 dk</span><div><a href="#yap">YAP: kişisel sayfanı biçimlendir</a><span class="s">Yedi adımda renk, boşluk, dizilim</span></div></div>
+            <div class="row pause"><span class="t">45–50 dk</span><div>Ara</div></div>
+            <div class="row"><span class="t">50–65 dk</span><div><a href="#yayin">Yayın</a><span class="s">GitHub'a yükle, telefonda aç</span></div></div>
+            <div class="row"><span class="t">65–90 dk</span><div><a href="#bozuk">BOZ: bozuk stil</a><span class="s">Üç hatayı bul. 13. adım yetişmezse labı izleyen Pazar'a kadar evde.</span></div></div>
+            <div class="row"><span class="t">90–100 dk</span><div><a href="#anlat">ANLAT</a><span class="s">"Kutu modeli nedir?" 60 saniye</span></div></div>
+            <div class="row"><span class="t">100–105 dk</span><div><a href="#teslim">Teslim</a><span class="s">Lab sonu teslimi</span></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="muted" style="max-width:80ch">Her bölümün sonunda sorular var. "Derste" işaretli olanı o bölümün sonunda birlikte çözeceğiz. Kalan sorular, hafta testi ve kavram kartları evde senin. Sayfada "evde" diye işaretlenmiş birkaç deneme daha var, onları da akşam kendin yaparsın. Her soruda cevabı seçince açıklaması açılır.</p>
+      <div class="grid2">
+        <div class="card">
+          <span class="lbl">Önceki hafta</span>
+          <p>Hafta 2'de sayfanın yapısını HTML ile kurup GitHub Pages ile yayına aldın. Sayfan şu an tarayıcının varsayılan stiliyle görünüyor: beyaz zemin, siyah yazı, mavi bağlantılar. Hatırlamak istersen <a href="../hafta-02/">Hafta 2 ders notu</a>.</p>
+        </div>
+        <div class="card">
+          <span class="lbl">Bugün yanında olsun</span>
+          <p>Dizüstün ve şarj aleti, Hafta 2'de yazdığın <code>kisisel-sayfa</code> klasörü, GitHub şifren ve telefonun. Labda sayfanı telefondan da açıp bakacaksın.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hedef" aria-labelledby="hedef-h">
+    <div class="section-head"><h2 id="hedef-h">Aynı HTML, iki stil dosyası</h2><span class="chip theory">6 dk</span></div>
+    <div class="prose">
+      <p>Aşağıdaki iki pencerede harfi harfine aynı HTML dosyası açık, yalnız her birine başka bir stil dosyası bağlanmış. Soldaki sıcak renkli ve ferah, sağdaki koyu zeminli ve sıkı. Başlık, menü, kartlar ve alt kısım iki pencerede de aynı sırayla duruyor, çünkü içeriği ve sırayı HTML belirliyor, görünüşü ise stil dosyası.</p>
+    </div>
+    <div class="grid2 hedef-iki ince">
+      <div>
+        <span class="lbl">Stil 1: sıcak</span>
+        <div class="frame"><div class="bar"><i></i><span>index.html + sicak.css</span></div><iframe id="hedefSicak" title="Kişisel sayfa, sıcak renkli stil" sandbox=""></iframe></div>
+      </div>
+      <div>
+        <span class="lbl">Stil 2: gece</span>
+        <div class="frame"><div class="bar"><i></i><span>index.html + gece.css</span></div><iframe id="hedefGece" title="Kişisel sayfa, koyu zeminli stil" sandbox=""></iframe></div>
+      </div>
+    </div>
+    <div class="prose ince">
+      <p>Görünüşü değiştiren dilin adı CSS. Bugün sabah bir CSS dosyasının nasıl yazıldığını ve sayfaya nasıl bağlandığını, kuralın kime uygulanacağını, renk ve yazıyı, kutuların içindeki ve arasındaki boşluğu, kutuları yan yana dizmeyi ve telefonda düzeni değiştirmeyi göreceğiz. Öğleden sonra aynı şeyleri kendi kişisel sayfanda yapacaksın.</p>
+    </div>
+  </section>
+
+  <!-- 1 -->
+  <section id="kural" aria-labelledby="kural-h">
+    <div class="section-head"><span class="num">1</span><h2 id="kural-h">CSS nedir, sayfaya nasıl bağlanır</h2><span class="chip theory">16 dk</span></div>
+    <div class="prose">
+      <p>CSS'in açılımı <i>Cascading Style Sheets</i>, kısaca "stil sayfaları". HTML gibi o da düz bir metin dosyası. Adı çoğu zaman <code>style.css</code> olur ve içinde yalnız görünüşle ilgili kurallar durur. HTML neyin başlık, neyin liste olduğunu söyler, CSS ise o başlığın hangi renkte ve hangi büyüklükte çizileceğini. İş bu şekilde bölündüğü için HTML'e dokunmadan renkleri, yazıları, boşlukları ve dizilişi baştan değiştirebilirsin.</p>
+      <h3>Stil dosyasını sayfaya bağlamak</h3>
+      <p>Tarayıcı <code>style.css</code>'i kendiliğinden bulmaz. HTML'in <code>head</code> bölümüne tek bir satır yazarak dosyanın yerini ona söylersin:</p>
+    </div>
+    <div class="lines ince">
+      <div class="ln"><span class="n">1</span><code>&lt;link rel="stylesheet" href="style.css"></code><p><code>link</code> etiketi başka bir dosyayı sayfaya bağlar. <code>rel="stylesheet"</code> "bağladığım dosya bir stil sayfası" der. <code>href</code> dosyanın yolu. Hafta 2'deki göreli yol kuralları aynen geçerli: aynı klasördeyse yalnız adı yazarsın. <code>img</code> gibi <code>link</code>'in de kapanış etiketi yoktur.</p></div>
+    </div>
+    <div class="prose ince">
+      <h3>Bir kuralın parçaları</h3>
+      <p>CSS dosyası kurallardan oluşur. Her kural iki soruya cevap verir: kime ve ne?</p>
+    </div>
+    <div class="lines ince">
+      <div class="ln"><span class="n">1</span><code>h1 {</code><p>Seçici: kural kime uygulanacak. Burada sayfadaki bütün <code>h1</code> başlıkları. Seçiciden sonra süslü parantez açılır.</p></div>
+      <div class="ln"><span class="n">2</span><code>  color: crimson;</code><p>Solda özellik, yani neyi değiştireceğiz: yazının rengini. İki noktadan sonra değer, yani ne olacak: <code>crimson</code>, koyu bir kırmızı. Satır noktalı virgülle biter.</p></div>
+      <div class="ln"><span class="n">3</span><code>  text-align: center;</code><p>İkinci bir özellik ve değeri: yazıyı ortala. Bir kuralın içine istediğin kadar satır yazabilirsin.</p></div>
+      <div class="ln"><span class="n">4</span><code>}</code><p>Kural burada biter. Kapanan süslü parantezi unutursan tarayıcı sonraki kuralları da bu kuralın parçası sanar.</p></div>
+    </div>
+
+    <div class="sim ince" id="sim-anat">
+      <div class="sim-head"><h3>Kuralın parçaları</h3><span class="chip lab">Tıkla</span></div>
+      <div class="sim-body" id="simAnat">
+        <div class="anat" role="group" aria-label="Bir CSS kuralının parçaları"></div>
+        <div class="anat-out" id="anatOut" aria-live="polite">Kuralın bir parçasına tıkla, adı ve görevi burada yazsın.</div>
+        <div><span class="lbl">Bu kuralın uygulandığı başlık</span><div class="frame"><div class="page"><p class="anat-on" id="anatOn">Satranç Kulübü</p></div></div></div>
+      </div>
+    </div>
+
+    <div class="sim ince" id="sim-editor">
+      <div class="sim-head"><h3>Görevli CSS editörü</h3><span class="chip lab">Dene</span></div>
+      <div class="sim-body" id="edKural"></div>
+    </div>
+
+    <div class="prose ince">
+      <h3>Tarayıcı CSS'i nasıl uygular?</h3>
+      <p>Tarayıcı HTML'i okurken <code>link</code> satırına gelince sunucuya ikinci bir istek gönderip <code>style.css</code>'i ister. DevTools'un Network panelini açıp sayfayı yenilersen listede HTML dosyasının hemen ardından stil dosyasının da geldiğini görürsün. Dosya gelince tarayıcı sayfadaki her öğe için tek tek şunu sorar: hangi kuralların seçicisi bu öğeyi tutuyor? Tutan kuralların satırlarını toplayıp öğeyi öyle çizer.</p>
+      <p>Bazen iki kural aynı öğeye aynı özelliği farklı değerle verir. Seçicileri aynıysa, örneğin ikisi de <code>h1</code> ise, sonra yazılan kazanır. Önceki silinmez, ezilir, yani aşağıdaki kodda başlık koyu kırmızı çıkar. Bu kural yalnız seçicileri aynı olan kurallar için geçerli. Farklı seçiciler çakışınca tarayıcının başka bir hesabı var, onu bu derste görmeyeceğiz.</p>
+    </div>
+    <pre class="code ince">h1 {
+  color: navy;
+}
+h1 {
+  color: crimson;
+}</pre>
+    <div class="prose ince">
+      <p>Kural bozuksa tarayıcı hata mesajı göstermez, anlamadığı satırı sessizce atlayıp sonrakine geçer. Tek bir yazım hatası bütün sayfayı çizilmez hâle getirmesin diye CSS böyle tasarlanmış. Sayfa her zaman açılır, ama hatanı bir mesajdan öğrenemez, "bu neden olmadı?" diye bakarken fark edersin.</p>
+      <h3>Neden ayrı bir dosya?</h3>
+      <p>Kişisel sayfanda iki HTML dosyası var: <code>index.html</code> ve <code>projeler.html</code>. İkisi de aynı <code>style.css</code>'i bağlarsa başlığın rengini tek yerde değiştirirsin, iki sayfa birden değişir. Yüzlerce sayfası olan bir sitede aynı düzen olmadan her renk değişikliği yüzlerce dosyada tek tek yapılırdı.</p>
+      <div class="analogy"><b>Gerçek sistemde</b><p>e-Devlet'in ana sayfasını aç, boş bir yere sağ tıklayıp Sayfa kaynağını görüntüle'yi seç (kısayolu <kbd>Ctrl</kbd>+<kbd>U</kbd>). Açılan sekmede <kbd>Ctrl</kbd>+<kbd>F</kbd> ile <code>stylesheet</code> ara. <code>head</code> bölümünde birkaç <code>link</code> satırı bulursun, her birinin <code>href</code>'i <code>.css</code> ile biten bir dosyayı gösterir. Aynı aramayı Hizmetler sayfasının kaynağında da yaparsan adı <code>base</code> ile başlayan stil dosyasının orada da bağlı olduğunu görürsün: iki sayfa aynı dosyayı paylaşıyor.</p></div>
+    </div>
+
+    <div class="callout info ince"><span class="chip ship">Derste projeksiyonda, evde sen tekrarla</span> Bunu derste projeksiyonda, labda düzelteceğin <a href="https://cagrisahin58.github.io/2026-web/weeks/hafta-03/lab/bozuk-stil/" target="_blank" rel="noopener">Ece'nin sayfasında</a> birlikte göreceğiz. Akşam aynı sayfada kendin dene. Başlığın üstüne sağ tıkla, İncele'yi seç. Açılan panelde başlığın kodunun yanında ya da altında Styles adlı bir bölüm görürsün (Türkçe arayüzde adı farklı olabilir). Başlığa uygulanan kurallar orada alt alta durur. <code>color</code> değerinin üstüne çift tıkla, başka bir renk yaz, Enter'a bas: başlığın rengi değişti. Üstü çizili bir satır görürsen o satır uygulanmıyor demektir, ya başka bir kural onu ezmiş ya da tarayıcı onu anlamamış. Sonra koddaki <code>head</code> bölümünü aç, <code>link</code> satırını seç ve <kbd>Delete</kbd> tuşuna bas. Sayfanın tek stil dosyası gidince geriye tarayıcının varsayılan görünüşü kalır: beyaz zemin, siyah yazı, mavi bağlantılar, alt alta dizilmiş her şey. <kbd>F5</kbd> ile yenileyince hepsi geri gelir, çünkü değiştirdiğin şey tarayıcındaki kopyaydı.</div>
+
+    <div class="callout warn ince">"Kaydettim ama sayfada hiçbir şey değişmedi" diyorsan sırayla bak. Önce kaydettin mi? VS Code'da sekme adının yanındaki nokta kaydedilmemiş değişiklik demek. Sonra <code>link</code> satırındaki ada bak: <code>href="stlye.css"</code> gibi tek harflik bir yanlış tarayıcıya olmayan bir dosyayı arattırır. En son dosyanın yerine bak: <code>style.css</code>, <code>index.html</code> ile aynı klasörde durmalı. Yalnız bir satır çalışmıyorsa onun bir üstündeki satırın sonunda noktalı virgül var mı, ona bak.</div>
+
+    <div class="quiz" data-quiz="kural"></div>
+  </section>
+
+  <!-- 2 -->
+  <section id="secici" aria-labelledby="secici-h">
+    <div class="section-head"><span class="num">2</span><h2 id="secici-h">Seçiciler: kural hangi öğelere uygulanır?</h2><span class="chip theory">16 dk</span></div>
+    <div class="prose">
+      <p>Kuralın gövdesi neyin değişeceğini söyler, seçici de bu değişikliğin hangi öğelere uygulanacağını. <code>p</code> yazarsan kural sayfadaki bütün paragraflara uygulanır, <code>.duyuru</code> yazarsan yalnız <code>class</code> niteliğinde <code>duyuru</code> adını taşıyan öğelere.</p>
+      <p>Bu hafta iki seçici türü göreceğiz. Etiket seçicisi etiketin kendi adıdır: <code>h1</code>, <code>p</code>, <code>li</code>, <code>footer</code>. O etiketin sayfadaki her örneğini seçer.</p>
+      <p>Yalnız bazı paragrafları boyamak istediğinde HTML'de o öğelere <code>class</code> niteliğiyle bir ad verir, CSS'te de adın başına nokta koyarak o öğeleri seçersin.</p>
+    </div>
+    <div class="grid2 ince">
+      <div>
+        <span class="lbl">HTML</span>
+        <div class="lines">
+          <div class="ln"><span class="n">1</span><code>&lt;p class="duyuru">Turnuva Cuma 15:00'te.&lt;/p></code><p><code>class</code> niteliği bu paragrafa <code>duyuru</code> adını veriyor. HTML'de nokta yok, yalnız ad var.</p></div>
+          <div class="ln"><span class="n">2</span><code>&lt;p>Yer: kütüphane, 2. kat.&lt;/p></code><p>Sınıfı olmayan sıradan bir paragraf.</p></div>
+        </div>
+      </div>
+      <div>
+        <span class="lbl">CSS</span>
+        <div class="lines">
+          <div class="ln"><span class="n">1</span><code>.duyuru {</code><p>Noktayla başlayan seçici sınıf seçicisidir: "<code>class</code> niteliğinde <code>duyuru</code> yazan her öğe".</p></div>
+          <div class="ln"><span class="n">2</span><code>  color: crimson;</code><p>Yalnız HTML'deki 1. satır koyu kırmızı olur.</p></div>
+          <div class="ln"><span class="n">3</span><code>}</code><p>Kural biter.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="prose ince">
+      <h3>Bir öğe, birden çok sınıf</h3>
+      <p>Bir öğe birden çok sınıf taşıyabilir. Adları <code>class</code> niteliğinin içine boşlukla ayırarak yazarsın: <code>&lt;li class="kart onemli"></code>. Bu maddeye hem <code>.kart</code> kuralı hem <code>.onemli</code> kuralı uygulanır. Virgül koymak sık yapılan bir hata: <code>class="kart,onemli"</code> yazarsan tek ve tuhaf bir ad olur, iki seçici de onu tutmaz.</p>
+    </div>
+
+    <div class="sim ince" id="sim-secici">
+      <div class="sim-head"><h3>Seçici eşleştirme</h3><span class="chip lab">Dene</span></div>
+      <div class="sim-body" id="simSecici">
+        <div class="sim-cols">
+          <div><span class="lbl">Sayfanın HTML'i (tutan satırlar yanar)</span><div class="agac" id="agac"></div></div>
+          <div style="display:grid;gap:10px;align-content:start">
+            <label class="f"><span>Seçici yaz</span><input type="text" id="secIn" value="p" spellcheck="false" autocomplete="off" autocapitalize="off"></label>
+            <div class="btnrow" role="group" aria-label="Hazır seçiciler">
+              <button class="btn" type="button" data-sec="h1">h1</button>
+              <button class="btn" type="button" data-sec="li">li</button>
+              <button class="btn" type="button" data-sec=".kart">.kart</button>
+              <button class="btn" type="button" data-sec=".onemli">.onemli</button>
+              <button class="btn" type="button" data-sec="onemli">onemli</button>
+            </div>
+            <div class="sec-out" id="secOut" aria-live="polite"></div>
+            <button class="btn" type="button" id="secSinif" aria-pressed="false">3. satırdaki paragrafa <code>onemli</code> sınıfını ekle</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prose ince">
+      <h3>Tarayıcı seçiciyi nasıl eşleştirir?</h3>
+      <p>Tarayıcı sayfadaki her öğeye sırayla bakar ve her kural için sorar: "Bu seçici bu öğeyi tutuyor mu?" Etiket seçicisinde etiketin adına, sınıf seçicisinde <code>class</code> niteliğinin içindeki adlara bakar. Adlar harfi harfine karşılaştırılır. <code>Duyuru</code> ile <code>duyuru</code> farklıdır, <code>menü</code> ile <code>menu</code> da. Tarayıcı "herhalde bunu demek istedi" demez. Tutmayan kuralı atlar ve hiçbir uyarı göstermez. Sınıf adlarını bu yüzden küçük harfle ve Türkçe karakter kullanmadan ver.</p>
+      <p>Sınıf olmasaydı iki paragraftan yalnız birini boyamanın yolu kalmazdı, çünkü etiket seçicisi ya hepsini tutar ya hiçbirini.</p>
+      <div class="analogy"><b>Gerçek sistemde</b><p>YouTube'da bir videonun başlığına sağ tıklayıp İncele'yi seç. Elements panelinde başlığın satırı seçili gelir, sağdaki Styles listesinde de o öğeye uygulanan kurallar alt alta durur. Her kuralın en üstünde seçicisi yazar. İçlerinde etiket adlarını ve noktayla başlayan sınıf adlarını tanırsın, bazıları da birkaç parçadan kurulmuş ve bu hafta görmeyeceğimiz türden seçiciler. Seçili satırdaki <code>class="…"</code> niteliğini oku: büyük siteler bir öğeye çoğu zaman birkaç sınıf birden verir ve Styles'taki sınıf seçicilerini bu adlarda bulursun.</p></div>
+    </div>
+
+    <div class="callout warn ince">Nokta yalnız CSS'te yazılır. HTML'de <code>class=".kart"</code> yazarsan öğenin sınıfının adı ".kart" olur ve <code>.kart</code> seçicisi onu tutmaz. Tersi de olur: CSS'te noktayı unutup <code>kart { … }</code> yazarsan tarayıcı sayfada <code>&lt;kart></code> diye bir etiket arar. Belirti ikisinde de aynı: kural sessizce hiçbir şeye uygulanmaz.</div>
+
+    <div class="quiz" data-quiz="secici"></div>
+  </section>
+
+  <!-- 3 -->
+  <section id="renk" aria-labelledby="renk-h">
+    <div class="section-head"><span class="num">3</span><h2 id="renk-h">Renk, yazı ve boşluk</h2><span class="chip theory">14 dk</span></div>
+    <div class="prose">
+      <p>Bir paragrafın ekranda nasıl okunacağını çoğunlukla aşağıdaki altı özellik belirliyor. Yazının rengiyle zeminin rengi ayrı özellikler, yazı tipiyle yazı boyu da öyle, bu yüzden her birini ötekilere dokunmadan değiştirebilirsin.</p>
+    </div>
+    <div class="tablewrap ince">
+      <table>
+        <thead><tr><th>Özellik</th><th>Ne yapar</th><th>Örnek</th></tr></thead>
+        <tbody>
+          <tr><td><code>color</code></td><td>Yazının rengi.</td><td><code>color: navy;</code></td></tr>
+          <tr><td><code>background-color</code></td><td>Öğenin zemin rengi.</td><td><code>background-color: #fdf3e7;</code></td></tr>
+          <tr><td><code>font-family</code></td><td>Yazı tipi. Virgülle yedekler yazılır.</td><td><code>font-family: Georgia, serif;</code></td></tr>
+          <tr><td><code>font-size</code></td><td>Yazının büyüklüğü.</td><td><code>font-size: 18px;</code></td></tr>
+          <tr><td><code>text-align</code></td><td>Yazının satırdaki yeri: <code>left</code>, <code>center</code>, <code>right</code>.</td><td><code>text-align: center;</code></td></tr>
+          <tr><td><code>line-height</code></td><td>Satırların arasındaki mesafe.</td><td><code>line-height: 150%;</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose ince">
+      <h3>Renk nasıl yazılır?</h3>
+      <p>İngilizce renk adıyla yazabilirsin: <code>navy</code> lacivert, <code>crimson</code> koyu kırmızı, <code>gold</code> altın sarısı. Ya da diyez işaretiyle başlayan altı haneli bir kodla: <code>#b5452b</code>. Koddaki ilk iki hane kırmızının, sonraki ikisi yeşilin, son ikisi mavinin miktarını söyler. <code>#000000</code> siyah, <code>#ffffff</code> beyaz. Kodları ezberlemezsin, bir renk seçiciden kopyalarsın.</p>
+      <h3>Birim: piksel ve yüzde</h3>
+      <p><code>font-size</code>, <code>padding</code>, <code>margin</code>, <code>width</code> gibi uzunluk alan değerlerin bir birimi olur. Bu hafta iki birim kullanıyoruz. <code>px</code> (piksel) CSS'in sabit uzunluk ölçüsü: <code>font-size: 18px</code>. Neredeyse bütün sayfalar bununla ölçülür. Telefonların çoğu kendini sayfaya 360 ile 430 piksel arası bir genişlikle tanıtır. <code>%</code> (yüzde) bir şeye göre oran: <code>line-height: 150%</code> "yazı boyunun bir buçuk katı" demek. 18 piksellik yazıda satırların arası 27 piksel olur.</p>
+      <p>Birim sayıya bitişik yazılır: <code>18px</code>, <code>18 px</code> değil. Birimi unutursan (<code>font-size: 18</code>) tarayıcı değeri anlamaz ve satırı atlar. Tek istisna sıfır. Sıfır piksel de sıfır yüzde de aynı şey, <code>0</code> yazman yeter.</p>
+      <h3>Yazı tipinin yedekleri</h3>
+      <p><code>font-family: Georgia, serif;</code> şunu der: "Georgia kullan, bilgisayarda yoksa herhangi bir tırnaklı yazı tipi kullan." Tırnaklı (<code>serif</code>) yazı tiplerinde harflerin uçlarında küçük çıkıntılar olur, kitaplardaki gibi. <code>sans-serif</code> tırnaksız demek, ekranlarda en çok kullanılan tür. Listenin sonuna her zaman böyle genel bir ad yaz ki tarayıcının eli boş kalmasın.</p>
+      <p><code>body</code>'ye verdiğin yazı rengi, yazı tipi ve yazı boyu içindeki bütün öğelere geçer. Her paragrafa ayrı ayrı yazmana gerek yok. Bir öğeye doğrudan yazdığın kural ise <code>body</code>'den gelenin önüne her zaman geçer: <code>footer { font-size: 14px; }</code> yazarsan alt kısım 14 piksel olur, <code>body</code>'de ne yazarsa yazsın. Bağlantılar rengi almaz: tarayıcı onlara kendi mavisini verir, rengini ayrı bir <code>a</code> kuralıyla değiştirirsin.</p>
+    </div>
+
+    <div class="sim ince" id="sim-renk">
+      <div class="sim-head"><h3>Renk ve yazı</h3><span class="chip lab">Dene</span></div>
+      <div class="sim-body" id="simRenk">
+        <div class="sim-cols">
+          <div class="rk-panel">
+            <label class="f"><span><code>color</code> (yazı rengi)</span><select id="rkC">
+              <option value="#2b2b2b">#2b2b2b (koyu gri)</option>
+              <option value="navy">navy (lacivert)</option>
+              <option value="crimson">crimson (koyu kırmızı)</option>
+              <option value="white">white (beyaz)</option>
+              <option value="gold">gold (altın sarısı)</option>
+            </select></label>
+            <label class="f"><span><code>background-color</code> (zemin)</span><select id="rkBg">
+              <option value="#fdf3e7">#fdf3e7 (krem)</option>
+              <option value="white">white (beyaz)</option>
+              <option value="yellow">yellow (sarı)</option>
+              <option value="navy">navy (lacivert)</option>
+              <option value="black">black (siyah)</option>
+            </select></label>
+            <label class="f"><span><code>font-family</code></span><select id="rkF">
+              <option value="Arial, sans-serif">Arial, sans-serif</option>
+              <option value="Georgia, serif">Georgia, serif</option>
+              <option value="'Courier New', monospace">'Courier New', monospace</option>
+            </select></label>
+            <label class="f"><span><code>font-size</code>: <b id="rkSv">18</b>px</span><input type="range" id="rkS" min="12" max="36" step="1" value="18"></label>
+            <label class="f"><span><code>line-height</code>: <b id="rkLv">150</b>%</span><input type="range" id="rkL" min="100" max="220" step="10" value="150"></label>
+            <label class="f"><span><code>text-align</code></span><select id="rkA">
+              <option value="left">left (sola)</option>
+              <option value="center">center (ortaya)</option>
+              <option value="right">right (sağa)</option>
+            </select></label>
+          </div>
+          <div style="display:grid;gap:10px;align-content:start">
+            <div class="rk-on" id="rkOn"><p>Satranç kulübü bu Cuma 15:00'te kütüphanenin 2. katında toplanıyor. Yeni gelenlere tahta ve saat bizden.</p></div>
+            <p class="rk-uyari" id="rkU" aria-live="polite"></p>
+            <div><span class="lbl">Yazdığın CSS</span><pre class="code" id="rkKod"></pre></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prose ince">
+      <h3>Tarayıcı okunaklılığa karışmaz</h3>
+      <p>Sarı zemine beyaz yazı yazarsan tarayıcı olduğu gibi çizer. Okunup okunmadığını kontrol etmek senin işin. Güneşin altında telefonuna bakan birini ya da gözleri zayıf birini düşün: yazı ile zemin arasındaki fark (kontrast) ne kadar büyükse o kadar rahat okunur. Koyu zemine açık yazı ya da açık zemine koyu yazı, ikisi de iyi. Açık üstüne açık ya da koyu üstüne koyu ise okunmaz.</p>
+      <div class="analogy"><b>Gerçek sistemde</b><p>e-Devlet'te bir paragrafa sağ tıklayıp İncele'yi seç. Styles listesinde <code>font-family</code> satırını ara, paragrafın kendi kuralında yoksa aşağı kaydırıp <code>body</code>'den gelen kurallara bak. Satırda virgülle ayrılmış birkaç yazı tipi adı, çoğu zaman en sonda da genel bir ad görürsün. Renk değerlerinin yanında küçük bir renk karesi durur. Kareye tıklayınca açılan seçiciden başka bir renk seçersen yazının rengi sayfada hemen değişir, sayfayı yenileyince de eski hâline döner.</p></div>
+    </div>
+
+    <div class="callout warn ince">Bir satır hiçbir şeyi değiştirmiyorsa önce harflerine bak. Çoğu zaman ya birim unutulmuş (<code>font-size: 20</code>) ya da özelliğin adı yanlış yazılmış olur (<code>colour</code>, <code>font-color</code>, <code>text-color</code>). İkisinde de tarayıcı satırı atlar ve başka hiçbir şey olmaz.</div>
+
+    <div class="quiz" data-quiz="renk"></div>
+  </section>
+
+  <div class="brk">10 dk · Ara</div>
+
+  <!-- 4 -->
+  <section id="kutu" aria-labelledby="kutu-h" style="margin-top:40px">
+    <div class="section-head"><span class="num">4</span><h2 id="kutu-h">Kutu modeli: her öğe bir kutudur</h2><span class="chip theory">18 dk</span></div>
+    <div class="prose">
+      <p>Tarayıcı sayfadaki her öğeyi, başlığı da paragrafı da görseli de dikdörtgen kutu olarak çizer ve bu kutuyu iç içe dört katmandan kurar. En içte içerik (yazı ya da görsel) durur, genişliğini <code>width</code> söyler. İçeriği saran katman iç boşluk, yani <code>padding</code>. Onun çevresinde kenarlık (<code>border</code>) çizilir. En dıştaki dış boşluk (<code>margin</code>) ise kutuyla komşu kutular arasındaki mesafe.</p>
+    </div>
+    <div class="lines ince">
+      <div class="ln"><span class="n">1</span><code>.kart {</code><p>Sınıfı <code>kart</code> olan öğeler.</p></div>
+      <div class="ln"><span class="n">2</span><code>  width: 200px;</code><p>İçeriğin genişliği. Dikkat: kutunun tamamının değil, yalnız en içteki kısmın genişliği.</p></div>
+      <div class="ln"><span class="n">3</span><code>  padding: 20px;</code><p>İç boşluk. İçerik ile kenarlık arasına dört yandan 20 piksel. Kutunun zemin rengi bu boşluğa da yayılır.</p></div>
+      <div class="ln"><span class="n">4</span><code>  border: 5px solid gray;</code><p>Kenarlık üç parçadan oluşur: kalınlık (<code>5px</code>), çizgi türü (<code>solid</code> düz çizgi demek), renk. Türü yazmazsan kenarlık hiç çizilmez.</p></div>
+      <div class="ln"><span class="n">5</span><code>  margin: 10px;</code><p>Dış boşluk. Kutuyu komşularından 10 piksel uzak tutar. Saydamdır, arkasındaki zemin görünür.</p></div>
+      <div class="ln"><span class="n">6</span><code>  border-radius: 12px;</code><p>Köşeleri 12 piksel yuvarlar. <code>50%</code> yazarsan kare bir kutu daireye döner.</p></div>
+      <div class="ln"><span class="n">7</span><code>}</code><p>Kural biter.</p></div>
+    </div>
+    <div class="prose ince">
+      <p>Tek değer dört yana birden uygulanır. İki değer yazarsan, örneğin <code>margin: 24px 0</code>, ilki üst ve alt, ikincisi sağ ve sol içindir. Dört değer saat yönünde okunur: üst, sağ, alt, sol. <code>margin: 24px 0 8px 0</code> üstte 24, altta 8 piksel demek.</p>
+      <h3>Kutunun toplam genişliği</h3>
+      <p>Yukarıdaki kart ekranda kaç piksel yer kaplar? 200 değil. Tarayıcı <code>width</code>'i içeriğe verir, padding ile border'ı onun iki yanına ekler: 5 + 20 + 200 + 20 + 5 = 250 piksel. Margin bu 250'nin içinde değil, ama kutunun dışında 10 piksel daha yer tutar. Labda Ece'nin sayfasındaki kartlar da bu yüzden <code>width</code>'te yazan 260 pikselden geniş görünecek.</p>
+    </div>
+
+    <div class="sim ince" id="sim-kutu">
+      <div class="sim-head"><h3>Katman katman kutu</h3><span class="chip lab">Dene</span></div>
+      <div class="sim-body" id="simKutu">
+        <div class="sim-cols">
+          <div class="bm-panel">
+            <label class="f"><span><code>padding</code>: <b id="vP">10</b>px</span><input type="range" id="rP" min="0" max="30" step="2" value="10"></label>
+            <label class="f"><span><code>border</code>: <b id="vB">4</b>px solid</span><input type="range" id="rB" min="0" max="12" step="1" value="4"></label>
+            <label class="f"><span><code>margin</code>: <b id="vM">10</b>px</span><input type="range" id="rM" min="0" max="30" step="2" value="10"></label>
+            <p class="small muted"><code>width: 80px</code> sabit. Kaydırıcıları klavyede ok tuşlarıyla da oynatabilirsin.</p>
+          </div>
+          <div>
+            <span class="lbl">DevTools'taki gibi kutu çizimi</span>
+            <div class="bm-diag" aria-hidden="true">
+              <div class="bm-l bm-m" id="dMk"><span class="bm-ad">margin</span><span class="bm-v" id="dM">10</span>
+                <div class="bm-l bm-b" id="dBk"><span class="bm-ad">border</span><span class="bm-v" id="dB">4</span>
+                  <div class="bm-l bm-p" id="dPk"><span class="bm-ad">padding</span><span class="bm-v" id="dP">10</span>
+                    <div class="bm-c">80 genişlik</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="lbl">Ekranda: aynı kuralın uygulandığı iki kutu yan yana</span>
+          <div class="bm-stage" id="bmStage"><div class="bm-kutu">1</div><div class="bm-kutu">2</div></div>
+        </div>
+        <p class="bm-hesap" id="bmHesap" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <div class="prose ince">
+      <h3>Kutular olmasaydı</h3>
+      <p>Kutu modeli olmasaydı sayfada boşluk vermenin yolu olmazdı. Her yazı kutusunun kenarına, her kart yanındakine yapışırdı. Padding bir kartın içini ferahlatır, margin iki kartın arasını açar. Bir sayfayı düzenli gösteren şey çoğu zaman renklerden çok bu boşluklardır.</p>
+      <div class="analogy"><b>Gerçek sistemde</b><p>OBS'nin giriş sayfasını aç ve Giriş düğmesine sağ tıklayıp İncele'yi seç. Styles bölümünün yanındaki Computed sekmesinde ya da Styles'ın en altında iç içe renkli dikdörtgenlerden oluşan bir çizim görürsün (yeri ve adı ekranında farklı olabilir). Dışta margin, sonra border, sonra padding, ortada içeriğin genişliği ve yüksekliği yazar. Simülasyondaki çizimin aynısı. Elements panelinde seçili satırın üstüne fareyle gelince sayfada da aynı katmanlar renkli görünür, padding ile margin'in nerede başlayıp bittiğini oradan okursun.</p></div>
+    </div>
+
+    <div class="callout warn ince">Kartın kenarlığı yazıya yapışıksa padding eksik, kartlar birbirine yapışıksa margin eksik (ya da biraz sonra göreceğin <code>gap</code>). Bu ikisi çok karışır. Emin olamazsan zemin rengine bak: renk o boşluğa yayılıyorsa o boşluk padding'dir, yayılmıyorsa margin.</div>
+
+    <div class="quiz" data-quiz="kutu"></div>
+  </section>
+
+  <!-- 5 -->
+  <section id="flex" aria-labelledby="flex-h">
+    <div class="section-head"><span class="num">5</span><h2 id="flex-h">Flexbox: kutuları yan yana dizmek</h2><span class="chip theory">15 dk</span></div>
+    <div class="prose">
+      <p>Tarayıcı kutuları kendiliğinden alt alta dizer. Başlık, paragraf, liste maddesi, her biri kendi satırını baştan sona kaplar. Bağlantılar bunun istisnası: yazının içinde aktıkları için zaten yan yana dururlar, ama aralarında yalnız bir boşluk karakteri olur ve hizaları sana kalmaz. Kartları yan yana dizmek ya da menüdeki bağlantıların arasını düzenli açmak istediğinde Flexbox'ı kullanırsın. Kuralı dizilecek kutuları içine alan kapsayıcıya yazarsın: kutuların hangi yönde dizileceğine ve aralarında ne kadar boşluk kalacağına kapsayıcı karar verir, içindeki kutular da bu karara göre sıraya girer.</p>
+    </div>
+    <div class="lines ince">
+      <div class="ln"><span class="n">1</span><code>.menu {</code><p>Bağlantıları saran <code>nav</code>'ın sınıfı. Kapsayıcı bu.</p></div>
+      <div class="ln"><span class="n">2</span><code>  display: flex;</code><p>Kapsayıcıyı esnek kutuya çevirir. İçindeki kutular bir sıraya girer, normalde alt alta duranlar bile yan yana gelir.</p></div>
+      <div class="ln"><span class="n">3</span><code>  gap: 16px;</code><p>Kutuların arasına 16 piksel boşluk. Yalnız aralara koyar, dış kenarlara değil.</p></div>
+      <div class="ln"><span class="n">4</span><code>  justify-content: center;</code><p>Sıra boyunca hizalama. <code>flex-start</code> başa toplar, <code>center</code> ortaya, <code>space-between</code> ilkini başa, sonuncusunu sona yaslar ve boşluğu aralara dağıtır.</p></div>
+      <div class="ln"><span class="n">5</span><code>  align-items: center;</code><p>Sıraya dik hizalama. Yan yana dizilmiş kutuları dikeyde ortalar. Varsayılanı <code>stretch</code>: kutular en uzununun boyuna kadar uzar.</p></div>
+      <div class="ln"><span class="n">6</span><code>  flex-wrap: wrap;</code><p>Sığmayan kutu alt satıra geçer. Yazmazsan kutular tek sırada sıkışır.</p></div>
+      <div class="ln"><span class="n">7</span><code>}</code><p>Kural biter.</p></div>
+    </div>
+    <div class="prose ince">
+      <p>Sıranın yönünü <code>flex-direction</code> seçer: <code>row</code> yan yana (yazmazsan bu), <code>column</code> alt alta.</p>
+    </div>
+
+    <div class="sim ince" id="sim-flex">
+      <div class="sim-head"><h3>Üç kutuyu diz</h3><span class="chip lab">Dene</span></div>
+      <div class="sim-body" id="simFlex">
+        <div class="sim-cols">
+          <div class="fx-panel" id="fxPanel"></div>
+          <div style="display:grid;gap:10px;align-content:start">
+            <div class="fx-stage" id="fxStage" aria-label="Flex kapsayıcı ve üç kutu">
+              <div class="fx-k">Turnuva</div>
+              <div class="fx-k">Açılış<br>çalışması</div>
+              <div class="fx-k">Analiz</div>
+            </div>
+            <div><span class="lbl">Yazdığın CSS</span><pre class="code" id="fxKod"></pre></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prose ince">
+      <h3>Kutular satıra nasıl dizilir?</h3>
+      <p>Yön <code>column</code> olunca <code>justify-content</code> dikeyde, <code>align-items</code> yatayda çalışır. İkisi de yöne göre konuşur: biri sıranın boyunca, öteki ona dik.</p>
+      <p>Flexbox'tan önce kutuları yan yana dizmek, aslında bu iş için yapılmamış yollarla uğraşmak demekti ve küçük bir değişiklik bütün düzeni bozabiliyordu. Flexbox bu işi tek bir kurala indirdi. Tarayıcı <code>display: flex</code> görünce kapsayıcının içindeki kutuları bir sıraya koyar, sıranın ne kadar yer kapladığını ölçer ve kalan boşluğu <code>justify-content</code>'in dediği gibi dağıtır. Menüye yeni bir bağlantı eklediğinde hesabı baştan yapar. Senin bir şey değiştirmen gerekmez.</p>
+      <div class="analogy"><b>Gerçek sistemde</b><p>Trendyol'un ana sayfasında üstteki kategori menüsüne sağ tıklayıp İncele'yi seç. Chrome'un Elements panelinde bazı satırların yanında küçük bir <code>flex</code> etiketi durur. Etiketi taşıyan satır bir flex kapsayıcısı, Styles'ta da kuralında <code>display: flex</code> yazar. Etikete tıklarsan sayfada kapsayıcının içindeki kutuların sınırları ve aralarındaki boşluklar çizgilerle görünür. Seçili satırdan birkaç üst satıra çıkarak menüyü dizen kapsayıcıyı bulmaya çalış.</p></div>
+    </div>
+
+    <div class="callout warn ince">Bağlantılar birden alt alta dizildiyse <code>display: flex</code>'i yanlış kutuya yazmışsındır. Bağlantıların kendisine yazınca (<code>a { display: flex; }</code>) her bağlantı kendi başına bir kapsayıcı olur ve kendi satırını kaplar. Kural her zaman dizilecek kutuları içine alan kapsayıcıya yazılır: menüde <code>nav</code>'a, kartlarda <code>ul</code>'ye.</div>
+
+    <div class="quiz" data-quiz="flex"></div>
+  </section>
+
+  <!-- 6 -->
+  <section id="telefon" aria-labelledby="telefon-h">
+    <div class="section-head"><span class="num">6</span><h2 id="telefon-h">Telefon için tek bir medya sorgusu</h2><span class="chip theory">10 dk</span></div>
+    <div class="prose">
+      <p>Masaüstünde yan yana güzel duran üç kart telefonda sıkışır. Telefonların çoğu kendini sayfaya 360 ile 430 piksel arası bir genişlikle tanıtır, üç kartlık bir sıra oraya sığmaz. Medya sorgusu, stil dosyasının bir bölümünü ekranın özelliğine, bu derste pencerenin genişliğine bağlar. Bir koşuldan ve içindeki kurallardan oluşur: koşul tutarsa içindeki kurallar uygulanır, tutmazsa yok sayılır.</p>
+    </div>
+    <div class="lines ince">
+      <div class="ln"><span class="n">1</span><code>@media (max-width: 600px) {</code><p>Koşul: pencerenin genişliği en fazla 600 piksel ise. Yani 600 ve daha dar ekranlarda.</p></div>
+      <div class="ln"><span class="n">2</span><code>  .kartlar {</code><p>Koşulun içinde sıradan bir kural.</p></div>
+      <div class="ln"><span class="n">3</span><code>    flex-direction: column;</code><p>Kartlar alt alta dizilsin.</p></div>
+      <div class="ln"><span class="n">4</span><code>  }</code><p>Kural bitti.</p></div>
+      <div class="ln"><span class="n">5</span><code>}</code><p>Medya sorgusu bitti. İki kapanış parantezi var: biri kuralın, biri sorgunun.</p></div>
+    </div>
+    <div class="prose ince">
+      <p>Medya sorgusunu dosyanın en sonuna yaz. İçindeki <code>.kartlar</code> kuralı, yukarıdaki aynı seçicili <code>.kartlar</code> kuralını ancak ondan sonra gelirse ezebilir, çünkü aynı seçicide sonra yazılan kazanır.</p>
+    </div>
+
+    <div class="sim ince" id="sim-medya">
+      <div class="sim-head"><h3>Pencereyi daralt</h3><span class="chip lab">Dene</span></div>
+      <div class="sim-body" id="simMedya">
+        <label class="f"><span>Pencere genişliği: <b id="mqV">800</b> piksel</span><input type="range" id="mqR" min="320" max="1000" step="10" value="800"></label>
+        <p class="mq-bilgi" id="mqBilgi" aria-live="polite"></p>
+        <div class="mq-view" id="mqView"><iframe id="mqFrame" title="Genişliği değişen örnek sayfa" sandbox="allow-same-origin"></iframe></div>
+        <div><span class="lbl">Sayfadaki medya sorgusu</span><pre class="code" id="mqKod"></pre></div>
+      </div>
+    </div>
+
+    <div class="prose ince">
+      <h3>Bir satır daha: viewport</h3>
+      <p>Telefon tarayıcısı, <code>head</code>'inde aşağıdaki satırı görmediği sayfayı geniş bir masaüstü ekranı varmış gibi çizer, sonra küçültüp ekrana sığdırır. Yazılar karınca gibi kalır. Kullanıcı iki parmağıyla yakınlaştırıp sağa sola kaydırarak okur. Medya sorgusu da hiç çalışmaz, çünkü tarayıcıya göre pencere dar değildir. <i>Viewport</i> "görüş alanı" demek, yani ekranda sayfaya ayrılan pencere. Bu satır telefona "görüş alanını kendi ekran genişliğin kadar al, sayfayı büyütüp küçültmeden çiz" der:</p>
+    </div>
+    <pre class="code hascopy ince">&lt;meta name="viewport" content="width=device-width, initial-scale=1"></pre>
+    <div class="prose ince">
+      <p>Hafta 2'de ders notunun kaynağında gördüğün bu satır için "CSS haftasında ekleyeceğiz" demiştik, labda iki HTML dosyana da ekleyeceksin.</p>
+      <div class="analogy"><b>Gerçek sistemde</b><p>YouTube'u bilgisayarında aç ve tarayıcı penceresini yavaş yavaş daralt. Belli genişliklerde düzen birden değişir: yan yana duran video sütunlarının sayısı azalır, soldaki menü daralıp simgelere iner. Aynı sayfayı telefonunda açınca gördüğün düzen, dar penceredekine benzer. Çoğu sitede bu değişimleri medya sorguları yapar: pencere bir koşuldaki genişliği geçtiği anda başka kurallar devreye girer.</p></div>
+    </div>
+
+    <div class="callout warn ince">Pencereyi daraltınca çalışan sorgu telefonda çalışmıyorsa <code>viewport</code> satırı eksiktir. Sorgunun yalnız bazı satırları çalışıyorsa onu dosyanın başına yazmış olabilirsin: altta aynı seçiciyle aynı özelliği veren kurallar o satırları eziyor, altta karşılığı olmayan satırlar ise çalışıyor. Bir de parantezleri say. <code>@media</code>'nın kendi süslü parantezi kapanmazsa altındaki her kural koşulun içinde kalır ve yalnız dar ekranda çalışır.</div>
+
+    <div class="quiz" data-quiz="medya"></div>
+  </section>
+
+  <!-- Yapay zekâ -->
+  <section id="yapay-zeka" aria-labelledby="yz-h">
+    <div class="callout ai">
+      <h2 id="yz-h">Yapay zekâyla çalış</h2>
+      <p>Bu hafta da kodu sen yazıyorsun. Copilot Chat bir kuralın neden çalışmadığını bulmana yardım edebilir. En iyi sonucu, CSS kuralını ve HTML'in ilgili satırını birlikte yapıştırıp "bu kural neden çalışmıyor?" diye sorunca alırsın. Tek başına CSS'e bakarak seçicinin HTML'de neyi tuttuğunu bilemez. "Sayfamı biçimlendir" deme. Sana yirmi satırlık bir dosya yazar, sen hangi satırın ne yaptığını bilemezsin ve bu hafta öğrenmen gereken şey tam olarak o satırlar. Üç örnek istem, kopyalayıp kendi koduna göre değiştir:</p>
+      <pre class="code hascopy">Bu CSS kuralı neden çalışmıyor? Kodu düzeltme, hangi satıra bakmam gerektiğini söyle.
+
+CSS:
+h2 {
+  colour: navy;
+}
+
+HTML:
+&lt;h2>İlgi alanlarım&lt;/h2></pre>
+      <pre class="code hascopy">Şu kural ekranda nasıl bir kutu çizer, adım adım anlat. Toplam genişliği hesaplamayı bana bırak, sonra benim cevabımı kontrol et:
+.kart {
+  width: 200px;
+  padding: 16px;
+  border: 2px solid gray;
+}</pre>
+      <pre class="code hascopy">Flexbox hakkında bana 3 soruluk bir mini test hazırla. Soruları tek tek sor, cevabımı bekle, sonra neden doğru ya da yanlış olduğunu açıkla.</pre>
+      <p>Haftalık yapay zekâ notun üç satır: ne sordun, işe yaradı mı ve neyi değiştirdin, kendi başına ne öğrendin. Bu notu teslim formuna yazacaksın.</p>
+    </div>
+  </section>
+
+  <!-- LAB -->
+  <section id="lab" aria-labelledby="lab-h">
+    <div class="section-head"><h2 id="lab-h">Lab: kişisel sayfanı biçimlendir</h2><span class="chip lab">105 dk</span><span class="progress-pill" id="labProg" aria-live="polite">0 / 16 adım</span></div>
+    <p class="lede">Hafta 2'de yazdığın kişisel sayfadan devam ediyorsun. Önce ona bir stil dosyası bağlayacaksın, sonra yedi adımda renk, boşluk ve dizilim vereceksin. Ardından yayına koyup telefonda bakacak, en son Ece'nin bozuk stil dosyasını düzelteceksin. Her adımın altındaki kutuyu işaretledikçe nerede kaldığın bu tarayıcıda saklanır.</p>
+
+    <div class="subhead"><h3>Hazırlık</h3><span class="chip lab">5 dk</span></div>
+    <div class="steps">
+      <article class="step">
+        <div class="sn">0</div>
+        <div class="sb">
+          <h3>Stil dosyasını aç ve bağla</h3>
+          <pre class="code hascopy">&lt;link rel="stylesheet" href="style.css"></pre>
+          <pre class="code hascopy">/* Deneme: bağlantı çalışıyor mu? */
+body {
+  background-color: lightyellow;
+}</pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>VS Code'da File menüsünden Open Folder ile <code>kisisel-sayfa</code> klasörünü aç. Soldaki listede yeni dosya simgesine tıkla ve adını <code>style.css</code> yaz. İlk satırı <code>index.html</code>'in <code>head</code> bölümüne, <code>title</code>'ın altına yapıştır. Aynı satırı <code>projeler.html</code>'e de ekle. İkinci kodu <code>style.css</code>'e yapıştır. Üç dosyayı da kaydet ve <code>index.html</code>'i <code>Open with Live Server</code> ile aç.</span></div>
+            <div><b>Neden</b><span>İki sayfa da aynı stil dosyasını kullanacak. Deneme kuralı bağlantının çalışıp çalışmadığını hemen gösterir. Bir sonraki adımda onu silip gerçek paletini yazacaksın. İlk satırdaki <code>/* … */</code> bir yorum: arasına yazdığını tarayıcı okumaz, kendine not düşmek için kullanırsın.</span></div>
+            <div><b>Ekranda</b><span>Sayfanın zemini açık sarı. Menüden projeler sayfasına geçince o da açık sarı.</span></div>
+            <div><b>Olmadıysa</b><span>Zemin beyazsa <code>href</code>'teki adı soldaki dosya listesindeki adla harf harf karşılaştır. <code>style.css</code> bir alt klasöre düştüyse <code>index.html</code>'in yanına taşı. Hafta 2'deki klasörün yanında değilse aşağıdaki ipucunu aç.</span></div>
+          </div>
+          <details class="hint"><summary>Klasörüm yanımda değil</summary><div>
+            <p>Sayfan GitHub'da duruyor, oradan geri alırsın. github.com'da <code>kullaniciadi.github.io</code> deponu aç. Dosya listesinin üstündeki yeşil <code>Code</code> düğmesine bas ve <code>Download ZIP</code> seç (ekranda göreceğin ad değişmiş olabilir). İnen zip'i Tümünü ayıkla ile masaüstüne çıkar, çıkan klasörün adını <code>kisisel-sayfa</code> yap ve 0. adımdan devam et.</p>
+            <p>Deponda henüz sayfa yoksa (Hafta 2 labını yapamadıysan) masaüstünde yeni bir <code>kisisel-sayfa</code> klasörü aç, içine <code>index.html</code> adlı bir dosya koy ve aşağıdaki kodu yapıştır. Bu yedek dosyayla çalıştıysan ve deponda senin asıl sayfan varsa 8. adımda yükleme yapma, yoksa asıl sayfanın yerine bu yedek geçer. Adımları akşam asıl dosyalarında tekrarlayıp Pazar'a kadar yüklersin.</p>
+            <pre class="code hascopy">&lt;!doctype html>
+&lt;html lang="tr">
+&lt;head>
+  &lt;meta charset="utf-8">
+  &lt;title>Adın Soyadın&lt;/title>
+&lt;/head>
+&lt;body>
+  &lt;header>
+    &lt;h1>Merhaba, ben Adın&lt;/h1>
+    &lt;nav>
+      &lt;a href="index.html">Ana sayfa&lt;/a>
+      &lt;a href="projeler.html">Projelerim&lt;/a>
+    &lt;/nav>
+  &lt;/header>
+  &lt;main>
+    &lt;p>Muş Alparslan Üniversitesi Yazılım Mühendisliği 2. sınıftayım.&lt;/p>
+    &lt;h2>İlgi alanlarım&lt;/h2>
+    &lt;ul>
+      &lt;li>Satranç&lt;/li>
+      &lt;li>Fotoğrafçılık&lt;/li>
+      &lt;li>Futbol&lt;/li>
+    &lt;/ul>
+    &lt;img src="img/avatar.svg" alt="Profil resmi yerine konmuş basit bir insan çizimi" width="160">
+    &lt;p>Sık girdiğim bir site: &lt;a href="https://tr.wikipedia.org">Vikipedi&lt;/a>&lt;/p>
+  &lt;/main>
+  &lt;footer>
+    &lt;p>Adın Soyadın · 2026&lt;/p>
+  &lt;/footer>
+&lt;/body>
+&lt;/html></pre>
+          </div></details>
+          <label class="check"><input type="checkbox" data-done="h0"> Stil dosyam bağlı, zemin açık sarı.</label>
+        </div>
+      </article>
+    </div>
+
+    <div class="subhead" id="yap"><h3>YAP: kişisel sayfanı biçimlendir</h3><span class="chip lab">40 dk</span></div>
+    <div class="steps">
+      <article class="step">
+        <div class="sn">1</div>
+        <div class="sb">
+          <h3>Renk paleti ve yazı tipi</h3>
+          <pre class="code hascopy">/* Palet: zemin #fdf3e7, metin #2b2b2b, vurgu #b5452b */
+body {
+  background-color: #fdf3e7;
+  color: #2b2b2b;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  padding: 16px;
+}</pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span><code>style.css</code>'teki deneme kuralını sil, yerine bu kodu yapıştır. Üç rengi istersen kendi seçtiklerinle değiştir: açık bir zemin, koyu bir metin rengi ve dikkat çeken bir vurgu rengi.</span></div>
+            <div><b>Neden</b><span>Paleti <code>body</code>'ye yazıyorsun, çünkü yazı rengi, yazı tipi ve yazı boyu içindeki bütün öğelere geçer. Vurgu rengini şimdilik yorum satırında tutuyoruz, başlıklarda ve bağlantılarda kullanacaksın.</span></div>
+            <div><b>Ekranda</b><span>Krem bir zemin, koyu gri, biraz büyümüş ve tırnaksız bir yazı. Sayfa kenarlardan uzaklaştı.</span></div>
+            <div><b>Olmadıysa</b><span>Renk değişmediyse kodu seçip sayıları kontrol et: diyez işareti ve altı hane. Yalnız yazı tipi değişmediyse virgülü ve noktalı virgülü kontrol et. Zemin rengin çok koyuysa metin rengini açık seç, yoksa okunmaz.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="y1"> Paletim ve yazı tipim sayfada.</label>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="sn">2</div>
+        <div class="sb">
+          <h3>Başlık ve paragraf boşlukları</h3>
+          <pre class="code hascopy">h1 {
+  color: #b5452b;
+  font-size: 36px;
+  margin: 0;
+}
+h2 {
+  color: #b5452b;
+  font-size: 24px;
+  margin: 24px 0 8px 0;
+}
+p {
+  line-height: 150%;
+}</pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Bu üç kuralı <code>body</code> kuralının altına yapıştır ve kaydet.</span></div>
+            <div><b>Neden</b><span>Başlıklar vurgu rengini alıyor. <code>h1</code>'in dış boşluğunu sıfırlıyoruz, bir sonraki adımda menüyle aynı hizaya gelecek. <code>h2</code>'deki dört değer saat yönünde okunur: üst 24, sağ 0, alt 8, sol 0. Başlık bu sayede kendinden önceki bölümden uzak, altındaki içeriğe yakın durur. Satır aralığını yalnız paragraflara veriyoruz: uzun metin rahat okunsun, başlıklar ise sıkı dursun.</span></div>
+            <div><b>Ekranda</b><span>Başlıklar vurgu renginde. "İlgi alanlarım" başlığının üstünde geniş, altında dar bir boşluk.</span></div>
+            <div><b>Olmadıysa</b><span>Başlık büyümediyse <code>36px</code>'in birimini ve sayıyla bitişik yazıldığını kontrol et. Bir kural çalışıyor da sonraki çalışmıyorsa aradaki kapanış parantezi <code>}</code> eksiktir.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="y2"> Başlıklarım renkli, boşluklar yerinde.</label>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="sn">3</div>
+        <div class="sb">
+          <h3>Başlık ve menü yan yana</h3>
+          <pre class="code hascopy">&lt;nav class="menu"></pre>
+          <pre class="code hascopy">header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  background-color: white;
+  padding: 16px;
+  border-radius: 12px;
+}
+.menu {
+  display: flex;
+  gap: 16px;
+}
+a {
+  color: #b5452b;
+}</pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>İki HTML dosyasında da <code>&lt;nav></code> satırını ilk koddaki gibi değiştir: <code>class="menu"</code> ekle. CSS'i <code>style.css</code>'e yapıştır.</span></div>
+            <div><b>Neden</b><span><code>header</code> kapsayıcı, <code>h1</code> ile <code>nav</code> içindeki kutular: <code>space-between</code> başlığı sola, menüyü sağa yaslar. <code>.menu</code> ise bağlantıların kapsayıcısı, onları aralarında 16 piksel boşlukla dizer. <code>flex-wrap</code> sayesinde dar ekranda menü başlığın altına geçer.</span></div>
+            <div><b>Ekranda</b><span>Beyaz, köşeleri yuvarlak bir şerit. Solda adın, sağda iki bağlantı yan yana. Bağlantılar vurgu renginde.</span></div>
+            <div><b>Olmadıysa</b><span>Bağlantılar birbirine yapışık, aralarında yalnız bir boşluk karakteri varsa <code>.menu</code> kuralı tutmuyor. Önce <code>class="menu"</code>'yü kaydettin mi, bak. Sonra seçiciye bak: başındaki noktayı unuttuysan (<code>menu {</code>) tarayıcı sayfada <code>&lt;menu></code> diye bir etiket arar ve kural hiçbir şeye uygulanmaz. Menü projeler sayfasında düzgün, ana sayfada bozuksa sınıfı yalnız bir dosyaya eklemişsin.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="y3"> Başlığım solda, menüm sağda.</label>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="sn">4</div>
+        <div class="sb">
+          <h3>İlgi alanları kart gibi görünsün</h3>
+          <p>Labın 30. dakikasına geldiysen ve bu adım bitmediyse onu bitir, sonra 5. ve 6. adımı atlayıp 7. adıma geç. Görseli ve alt kısmı labı izleyen Pazar'a kadar evde eklersin. Telefonda tek sütun daha önemli.</p>
+          <pre class="code hascopy">&lt;ul class="kartlar">
+  &lt;li class="kart">Satranç&lt;/li>
+  &lt;li class="kart">Fotoğrafçılık&lt;/li>
+  &lt;li class="kart">Futbol&lt;/li>
+&lt;/ul></pre>
+          <pre class="code hascopy">.kartlar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+}
+.kart {
+  background-color: white;
+  padding: 16px;
+  border: 2px solid #f0c9b8;
+  border-radius: 12px;
+}</pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span><code>index.html</code>'deki listeye ilk koddaki gibi sınıfları ekle, maddeler senin ilgi alanların kalsın. CSS'i <code>style.css</code>'e yapıştır.</span></div>
+            <div><b>Neden</b><span><code>ul</code> kartların kapsayıcısı, her <code>li</code> bir kart. <code>padding: 0</code> listenin soldaki hazır iç boşluğunu kaldırır. <code>list-style: none</code> maddelerin önündeki noktayı kaldırır, bu satır yalnız listeler içindir. Kartın içindeki ferahlığı <code>padding</code>, çizgiyi <code>border</code>, yuvarlak köşeyi <code>border-radius</code> veriyor.</span></div>
+            <div><b>Ekranda</b><span>İlgi alanların, aralarında 12 piksel boşluk olan beyaz ve yuvarlak köşeli kutucuklar. Pencereyi daraltınca sığmayan kart alt satıra geçer.</span></div>
+            <div><b>Olmadıysa</b><span>Kartlar alt alta duruyorsa <code>display: flex</code>'i <code>.kart</code>'a yazmışsındır, <code>.kartlar</code>'a taşı. Yazı kartın kenarına yapışıksa padding satırını ve <code>px</code> birimini kontrol et.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="y4"> İlgi alanlarım kart gibi yan yana.</label>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="sn">5</div>
+        <div class="sb">
+          <h3>Görsel: taşmasın, köşesi yuvarlak olsun <span class="chip ship">yetişmezse evde</span></h3>
+          <pre class="code hascopy">&lt;img class="profil" src="img/avatar.svg" alt="Profil resmi yerine konmuş basit bir insan çizimi" width="160"></pre>
+          <pre class="code hascopy">.profil {
+  max-width: 100%;
+  border-radius: 50%;
+  border: 4px solid white;
+}</pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Görselinin <code>img</code> etiketine <code>class="profil"</code> ekle. <code>src</code> ve <code>alt</code> seninki kalsın. CSS'i yapıştır.</span></div>
+            <div><b>Neden</b><span><code>max-width: 100%</code> "görselin genişliği hiçbir zaman içinde durduğu kutudan büyük olmasın" der. Telefonla çekilmiş büyük bir fotoğraf dar ekranda sayfayı yana taşırmaz. <code>border-radius: 50%</code> kare bir görseli daireye çevirir.</span></div>
+            <div><b>Ekranda</b><span>Görselin yuvarlak, çevresinde ince beyaz bir çerçeve.</span></div>
+            <div><b>Olmadıysa</b><span>Görsel daire değil de oval olduysa fotoğrafın kendisi kare değil. Olduğu gibi bırakabilir ya da <code>50%</code> yerine <code>16px</code> yazıp yalnız köşeleri yuvarlatabilirsin.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="y5"> Görselim yuvarlak ve taşmıyor.</label>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="sn">6</div>
+        <div class="sb">
+          <h3>Alt kısım <span class="chip ship">yetişmezse evde</span></h3>
+          <pre class="code hascopy">footer {
+  margin: 32px 0 0 0;
+  padding: 12px;
+  text-align: center;
+  font-size: 14px;
+  color: #6b6b6b;
+}</pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Kodu yapıştır ve kaydet.</span></div>
+            <div><b>Neden</b><span>Künye sayfanın asıl içeriğinden ayrı dursun: üstünde 32 piksel dış boşluk, küçük ve soluk bir yazı, ortada.</span></div>
+            <div><b>Ekranda</b><span>En altta, ortalanmış, küçük gri bir "Adın Soyadın · 2026".</span></div>
+            <div><b>Olmadıysa</b><span>Yazı ortalanmadıysa <code>text-align</code> değerini kontrol et: <code>center</code>, <code>centre</code> değil.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="y6"> Alt kısmım ortada ve soluk.</label>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="sn">7</div>
+        <div class="sb">
+          <h3>Telefonda tek sütun</h3>
+          <p>Labın 45. dakikasına geldiysen ve bu adım bitmediyse yarıda bırak, önce yayına koy. Bu adımı yayından sonra ekleyip dosyaları yeniden yüklersin.</p>
+          <pre class="code hascopy">&lt;meta name="viewport" content="width=device-width, initial-scale=1"></pre>
+          <pre class="code hascopy">@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .kartlar {
+    flex-direction: column;
+  }
+  h1 {
+    font-size: 28px;
+  }
+}</pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span><code>viewport</code> satırını iki HTML dosyasının da <code>head</code>'ine, <code>meta charset</code>'in altına ekle. Medya sorgusunu <code>style.css</code>'in en sonuna yapıştır. Kaydet ve tarayıcı penceresini yavaş yavaş daralt.</span></div>
+            <div><b>Neden</b><span>600 pikselden dar ekranda başlık ile menü alt alta, kartlar tek sütun olur, başlık biraz küçülür. Sorgu dosyanın sonunda, çünkü içindeki <code>header</code> ve <code>.kartlar</code> kuralları yukarıdaki aynı seçicili kuralları ancak onlardan sonra gelirse ezebilir. <code>viewport</code> satırı olmadan telefon sorguyu hiç çalıştırmaz.</span></div>
+            <div><b>Ekranda</b><span>Pencere daraldıkça bir noktada menü başlığın altına iner, kartlar alt alta dizilir.</span></div>
+            <div><b>Olmadıysa</b><span>Başlık küçülüyor ama kartlar yan yana kalıyorsa sorguyu dosyanın sonuna değil ortasına koymuşsun: altındaki <code>.kartlar</code> kuralı onu eziyor. Hiçbir şey değişmiyorsa <code>@media</code> satırını harf harf ve iki kapanış parantezini kontrol et. Pencere yeterince daralmıyorsa sabahki "Pencereyi daralt" simülasyonuyla kıyasla, yayından sonra telefonunda da deneyeceksin.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="y7"> Dar pencerede sayfam tek sütun.</label>
+        </div>
+      </article>
+    </div>
+
+    <div class="brk">5 dk · Ara</div>
+  </section>
+
+  <section id="yayin" aria-labelledby="yayin-h" style="margin-top:40px">
+    <div class="section-head"><h2 id="yayin-h">Yayın: yükle ve telefonda bak</h2><span class="chip lab">15 dk</span></div>
+    <p class="prose">Hafta 2'deki yolun aynısı: dosyaları GitHub'ın web sitesinden yükleyeceksin. Aynı adla yüklediğin dosya depodaki eskisinin yerine geçer.</p>
+    <div class="steps ince">
+      <article class="step">
+        <div class="sn">8</div>
+        <div class="sb">
+          <h3>Dosyaları yükle</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>github.com'da <code>kullaniciadi.github.io</code> deponu aç. <code>Add file</code> menüsünden <code>Upload files</code> seç. Bilgisayarındaki <code>kisisel-sayfa</code> klasörünün içinden <code>style.css</code>, <code>index.html</code> ve <code>projeler.html</code>'i seçip yükleme alanına sürükle. Commit mesajına "CSS eklendi" yaz ve alttaki onay düğmesine bas. Düğmede <code>Commit changes</code> ya da <code>Propose changes</code> yazabilir.</span></div>
+            <div><b>Neden</b><span>HTML dosyalarını da yeniden yüklüyorsun, çünkü onlara <code>link</code> ve <code>viewport</code> satırlarını ve sınıfları ekledin. Yalnız <code>style.css</code>'i yüklersen yayındaki eski HTML onu hiç istemez.</span></div>
+            <div><b>Ekranda</b><span>Depodaki dosya listesinde <code>style.css</code>, yanında da "CSS eklendi" mesajı.</span></div>
+            <div><b>Olmadıysa</b><span><code>style.css</code> listede yoksa sürüklediğin yeri kontrol et: dosyalar deponun en üst düzeyinde olmalı, bir klasörün içinde değil. Hazırlıkta yedek <code>index.html</code> ile çalıştıysan ve deponda asıl sayfan varsa bu adımı bugün atla, asıl sayfanın yerine yedek geçmesin.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="p1"> <code>style.css</code> ve iki HTML dosyası depomda.</label>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="sn">9</div>
+        <div class="sb">
+          <h3>Telefonunda aç ve kontrol et</h3>
+          <pre class="code hascopy">https://kullaniciadi.github.io</pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Birkaç dakika bekle, sonra adresi kendi kullanıcı adınla önce bilgisayarında, sonra telefonunda aç. Telefonda şunlara bak: yazılar yakınlaştırmadan okunuyor mu, menü başlığın altında mı, kartlar alt alta mı, görsel ekrandan taşmıyor mu.</span></div>
+            <div><b>Neden</b><span>Medya sorgusunun ve <code>viewport</code> satırının asıl sınavı gerçek bir telefon ekranı.</span></div>
+            <div><b>Ekranda</b><span>Bilgisayarda yan yana, telefonda alt alta dizilmiş, renkli bir kişisel sayfa.</span></div>
+            <div><b>Olmadıysa</b><span>Eski, stilsiz sayfa görünüyorsa yayının gelmesini birkaç dakika daha bekle. Bilgisayarda <kbd>Ctrl</kbd>+<kbd>F5</kbd> ile yenile, telefonda sekmeyi kapatıp adresi yeniden aç. Bu arada BOZ kısmına geçebilirsin. Bilgisayarda renkli ama telefonda yazılar minicikse yayındaki <code>index.html</code>'de <code>viewport</code> satırı yok, dosyayı yeniden yükle.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="p2"> Sayfam telefonda düzgün görünüyor.</label>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="bozuk" aria-labelledby="bozuk-h">
+    <div class="section-head"><h2 id="bozuk-h">BOZ: bozuk stil</h2><span class="chip lab">25 dk</span></div>
+    <p class="prose">Ece geçen hafta düzelttiğin sitesine kulübün tanıtım kartını ekleyip bir stil dosyası yazmış, ama üç yerde hata yapmış. Her belirtinin arkasında tek bir hata var. Bu kez üçü de kendi bilgisayarında görünür, yayını beklemen gerekmiyor. Hataları bul, düzelt ve düzelttiğin siteyi kendi deponda yayınla. Son adım (13) labda yetişmezse onu labı izleyen Pazar'a kadar evde yaparsın.</p>
+    <div class="steps ince">
+      <article class="step">
+        <div class="sn">10</div>
+        <div class="sb">
+          <h3>İndir ve aç</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span><a href="lab/bozuk-stil.zip" download>bozuk-stil.zip</a> dosyasını indir. İndirilenler klasöründe zip'e sağ tıkla, Tümünü ayıkla ile masaüstüne çıkar. Açtığın klasörün içinde doğrudan <code>index.html</code>, <code>style.css</code> ve <code>img</code> görmelisin. İçinde bir <code>bozuk-stil</code> klasörü daha varsa içtekini kullan. VS Code'da Open Folder ile klasörü aç, <code>index.html</code>'e sağ tıklayıp <code>Open with Live Server</code> seç. Aynı siteyi yayında da görebilirsin: <a href="https://cagrisahin58.github.io/2026-web/weeks/hafta-03/lab/bozuk-stil/" target="_blank" rel="noopener">yayındaki bozuk stil</a>.</span></div>
+            <div><b>Neden</b><span>Hataları VS Code'da düzeltip Live Server'da hemen göreceksin.</span></div>
+            <div><b>Ekranda</b><span>"Ece'nin sayfası": krem zemin, iki kart ve birinde yuvarlak bir kulüp logosu. Birkaç yer biçimsiz.</span></div>
+            <div><b>Olmadıysa</b><span>Zip'in içindeki dosyalara doğrudan çift tıkladıysan önce zip'i dışarı çıkar. Zip'in içinden açılan dosya stil dosyasını bulamayabilir.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="b1"> Ece'nin sitesi Live Server'da açık.</label>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="sn">11</div>
+        <div class="sb">
+          <h3>Üç belirti, üç hata</h3>
+          <p>Önce kendin ara. Takılırsan ipuçlarını sırayla aç. İlk ipucu nereye bakacağını, ikincisi neden bozulduğunu söyler.</p>
+          <div class="card">
+            <h4>Belirti 1: Menü biçimsiz</h4>
+            <p class="small muted" style="margin:4px 0 8px">Bağlantıların arkasında renkli bir şerit olmalıydı, yok. Bağlantılar da birbirine yapışık, aralarında yalnız bir boşluk karakteri var.</p>
+            <details class="hint"><summary>İpucu 1: Nereye bakmalı?</summary><div>CSS'te menüyü biçimlendiren kuralı bul ve seçicisini oku. Sonra HTML'de <code>nav</code> satırındaki <code>class</code> niteliğini oku. İki adı harf harf karşılaştır.</div></details>
+            <details class="hint"><summary>İpucu 2: Neden?</summary><div>Tarayıcı sınıf adlarını harfi harfine karşılaştırır. Tek bir harf farklıysa, Türkçe bir harf bile olsa, seçici öğeyi tutmaz ve kural sessizce atlanır. Sınıf adlarında Türkçe karakter kullanmamak bu yüzden iyi bir alışkanlık.</div></details>
+          </div>
+          <div class="card" style="margin-top:10px">
+            <h4>Belirti 2: Kart başlıkları siyah, alt kısım biçimsiz</h4>
+            <p class="small muted" style="margin:4px 0 8px">Başlıklar vurgu renginde olmalıydı. En alttaki "Ece · 2026" satırının da renkli bir zemini olmalıydı.</p>
+            <details class="hint"><summary>İpucu 1: Nereye bakmalı?</summary><div>Kulüp logosu yuvarlak, yani onun kuralı çalışıyor. Hemen altındaki iki kural çalışmıyor. Çalışan son kural ile çalışmayan ilk kuralın arasındaki satırlara bak, parantezleri say.</div></details>
+            <details class="hint"><summary>İpucu 2: Neden?</summary><div>Bir kuralın kapanış parantezi <code>}</code> eksikse tarayıcı o kuralın bittiğini anlamaz. Altındaki kuralları da onun içinde sanır ve hiçbirini sayfadaki öğelere uygulamaz. Hata mesajı çıkmaz. Belirti, hatanın altındaki her şeyin birden çalışmaması.</div></details>
+          </div>
+          <div class="card" style="margin-top:10px">
+            <h4>Belirti 3: Kartların içi sıkışık</h4>
+            <p class="small muted" style="margin:4px 0 8px">Yazılar kartın sol kenarlığına yapışık duruyor.</p>
+            <details class="hint"><summary>İpucu 1: Nereye bakmalı?</summary><div>Kartın içindeki boşluğu hangi özellik veriyordu? <code>.kart</code> kuralında o satırı bul ve değerini dikkatle oku.</div></details>
+            <details class="hint"><summary>İpucu 2: Neden?</summary><div>Sayı alan bir değerin birimi olmalı. Birim yoksa tarayıcı değeri anlamaz ve satırın tamamını yok sayar. Kural çalışıyor gibi görünür ama o satır hiç yokmuş gibi davranır. DevTools'ta Styles bölümünde o satırı üstü çizili görürsün.</div></details>
+          </div>
+          <label class="check" style="margin-top:10px"><input type="checkbox" data-done="b2"> Üç hatayı da buldum.</label>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="sn">12</div>
+        <div class="sb">
+          <h3>Düzelt ve kendi bilgisayarında dene</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Üç hatayı VS Code'da düzelt ve iki dosyayı da kaydet. Live Server'daki sayfaya bak.</span></div>
+            <div><b>Neden</b><span>Yüklemeden önce kendi bilgisayarında görmek, GitHub'ı beklemekten hızlıdır.</span></div>
+            <div><b>Ekranda</b><span>Menü renkli bir şeridin içinde, kart başlıkları vurgu renginde, kartların içi ferah, en altta renkli ve ortalanmış bir "Ece · 2026".</span></div>
+            <div><b>Olmadıysa</b><span>Bir belirti düzelmediyse o dosyayı kaydettin mi, bak. Başlıklar düzeldi ama alt kısım düzelmediyse parantezi yanlış yere koymuş olabilirsin: eksik <code>}</code> logonun kuralını (<code>.logo</code>) kapatmalı.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="b3"> Düzeltilmiş site kendi bilgisayarımda doğru görünüyor.</label>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="sn">13</div>
+        <div class="sb">
+          <h3>Kendi deponda yayınla</h3>
+          <pre class="code hascopy">https://kullaniciadi.github.io/bozuk-stil/</pre>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span><code>kullaniciadi.github.io</code> depona dön, <code>Add file</code>, sonra <code>Upload files</code>. Bu kez <code>bozuk-stil</code> klasörünün kendisini sürükle. Commit mesajına "Bozuk stil düzeltildi" yaz ve onayla. Birkaç dakika sonra yukarıdaki adresi kendi kullanıcı adınla aç.</span></div>
+            <div><b>Neden</b><span>Kişisel sayfanın dosyaları en üstte duruyor. Ece'nin sitesi <code>bozuk-stil</code> adında ayrı bir klasörde dursun ki kendi <code>index.html</code>'inin yerine geçmesin.</span></div>
+            <div><b>Ekranda</b><span>Kendi adresinde Ece'nin düzelmiş sitesi.</span></div>
+            <div><b>Olmadıysa</b><span>404 görüyorsan depoda <code>bozuk-stil</code> klasörünün içinde doğrudan <code>index.html</code> var mı, bak. İçinde bir <code>bozuk-stil</code> klasörü daha görüyorsan iç içe iki klasörün dıştakini yüklemişsin, içtekini yeniden yükle. Kişisel sayfan Ece'ninkiyle değiştiyse klasörü değil içindekileri yüklemişsin: kendi <code>index.html</code>'ini yeniden yükle, <code>bozuk-stil</code>'i klasör olarak ayrıca yükle.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="b4"> Düzeltilmiş bozuk stil kendi adresimde açılıyor.</label>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="anlat" aria-labelledby="anlat-h">
+    <div class="section-head"><h2 id="anlat-h">ANLAT</h2><span class="chip lab">10 dk</span></div>
+    <div class="steps">
+      <article class="step">
+        <div class="sn">14</div>
+        <div class="sb">
+          <h3>60 saniye: "Kutu modeli nedir?"</h3>
+          <p>Yan masadaki arkadaşına bir dakikada anlat, sonra o sana anlatsın. Kendi sayfandaki bir karttan başla ve DevTools'ta o kartın kutu çizimini göstererek anlat. Anlatırken katmanların sırasına ve adlarına, kartının ekranda kapladığı genişliğin nasıl hesaplandığına, kartın içi sıkışıksa hangi özelliği, kartlar yapışıksa hangisini değiştireceğine değin.</p>
+          <label class="check"><input type="checkbox" data-done="a1"> Anlattım ve dinledim.</label>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="teslim" aria-labelledby="teslim-h">
+    <div class="section-head"><h2 id="teslim-h">Teslim</h2><span class="chip lab">5 dk</span></div>
+    <div class="grid2">
+      <div class="card">
+        <span class="chip ship">Lab sonu</span>
+        <h3 style="margin-top:10px">Lab sonu teslimi</h3>
+        <p>Labın bitiminde o ana kadar yaptığını Lab teslimleri sayfasındaki formla gönder. Sayfan yayındaysa adresini, değilse deponun adresini yaz. Bu teslim uygulama yoklaması yerine geçer.</p>
+      </div>
+      <div class="card">
+        <span class="chip ship">Labı izleyen Pazar · 23:59</span>
+        <h3 style="margin-top:10px">Tam teslim</h3>
+        <p>Aynı formu bu kez tam hâliyle gönder: kişisel sayfan stil dosyasıyla yayında ve telefonda tek sütun, düzeltilmiş bozuk stil <code>kullaniciadi.github.io/bozuk-stil/</code> adresinde, yapay zekâ notun yazılı.</p>
+      </div>
+    </div>
+    <div class="card ince">
+      <h3>Form</h3>
+      <p>İki teslim de sitedeki <a href="../../teslimler/">Lab teslimleri</a> sayfasından GitHub formuyla yapılır. Formda şunları dolduracaksın:</p>
+      <ul style="margin-top:8px">
+        <li>Ad soyad ve öğrenci numarası</li>
+        <li>GitHub kullanıcı adı</li>
+        <li>Teslim türü (lab sonu ya da tam teslim)</li>
+        <li>Yayındaki sayfanın adresi: <code>https://kullaniciadi.github.io</code></li>
+        <li>Deponun adresi: <code>https://github.com/kullaniciadi/kullaniciadi.github.io</code></li>
+        <li>Düzeltilmiş bozuk stilin adresi: <code>https://kullaniciadi.github.io/bozuk-stil/</code> (lab sonunda yetişmediyse tam teslime bırak)</li>
+        <li>Üç satırlık yapay zekâ notu</li>
+      </ul>
+    </div>
+    <div class="card ince">
+      <h3>Göndermeden önce kontrol listesi</h3>
+      <ul>
+        <li>İki sayfam da aynı <code>style.css</code>'i bağlıyor ve ikisinde de aynı renkler var.</li>
+        <li>Başlık ve menü yan yana, ilgi alanlarım kart gibi.</li>
+        <li>Telefonda yazılar yakınlaştırmadan okunuyor, kartlar alt alta.</li>
+        <li>Görselim ekrandan taşmıyor.</li>
+        <li>Ece'nin sitesinin üç hatası kendi adresimde düzelmiş görünüyor.</li>
+      </ul>
+      <label class="check" style="margin-top:12px"><input type="checkbox" data-done="t1"> Lab sonu teslimini gönderdim.</label>
+    </div>
+  </section>
+
+  <section id="test" aria-labelledby="test-h">
+    <div class="section-head"><h2 id="test-h">Hafta testi</h2><span class="time">evde · yaklaşık 20 dk</span></div>
+    <p class="prose">Labdan sonra, evde çöz. Soruların çoğu bir kuralın ekranda neyi değiştireceğini ya da hangi satır yüzünden çalışmadığını soruyor.</p>
+    <div class="quiz" data-quiz="test"></div>
+  </section>
+
+  <section id="kartlar" aria-labelledby="kartlar-h">
+    <div class="section-head"><h2 id="kartlar-h">Kavram kartları</h2><span class="time">evde · tekrar için</span></div>
+    <p class="prose">Kartın ön yüzünde terim var. Önce kendi cümlenle açıklamayı dene, sonra kartı çevirip karşılaştır.</p>
+    <div class="kartlar ince">
+      <button class="kart" type="button"><span class="kart-on">Seçici</span><span class="kart-arka">Kuralın kime uygulanacağını söyleyen kısım: <code>h1</code>, <code>p</code>, <code>.kart</code>.</span></button>
+      <button class="kart" type="button"><span class="kart-on">Özellik</span><span class="kart-arka">Neyin değişeceği: <code>color</code>, <code>font-size</code>, <code>padding</code>. İki noktadan önce yazılır.</span></button>
+      <button class="kart" type="button"><span class="kart-on">Değer</span><span class="kart-arka">Özelliğin ne olacağı: <code>crimson</code>, <code>18px</code>. İki noktadan sonra gelir, noktalı virgülle biter.</span></button>
+      <button class="kart" type="button"><span class="kart-on">Sınıf</span><span class="kart-arka">HTML'de <code>class="kart"</code> ile verilen ad. CSS'te başına nokta konarak seçilir: <code>.kart</code>.</span></button>
+      <button class="kart" type="button"><span class="kart-on">padding</span><span class="kart-arka">İç boşluk: içerik ile kenarlık arası. Kutunun zemin rengini alır.</span></button>
+      <button class="kart" type="button"><span class="kart-on">margin</span><span class="kart-arka">Dış boşluk: kenarlık ile komşu kutular arası. Saydamdır.</span></button>
+      <button class="kart" type="button"><span class="kart-on">border</span><span class="kart-arka">Kenarlık. Kalınlık, çizgi türü ve renkle yazılır: <code>2px solid gray</code>.</span></button>
+      <button class="kart" type="button"><span class="kart-on">flex</span><span class="kart-arka"><code>display: flex</code> kapsayıcıya yazılır ve içindeki kutuları bir sıraya dizer.</span></button>
+      <button class="kart" type="button"><span class="kart-on">gap</span><span class="kart-arka">Flex kutularının yalnız arasına boşluk koyar, dış kenarlara değil.</span></button>
+      <button class="kart" type="button"><span class="kart-on">Medya sorgusu</span><span class="kart-arka">Koşul tutarsa içindeki kurallar çalışır: <code>@media (max-width: 600px) { … }</code>.</span></button>
+    </div>
+  </section>
+
+  <section id="gelecek" aria-labelledby="gelecek-h">
+    <div class="next">
+      <span class="lbl">Sonraki hafta</span>
+      <h2 id="gelecek-h">Hafta 4 · JavaScript ve DOM</h2>
+      <p>Sayfanın yapısını HTML'le, görünüşünü CSS'le kurdun, sonraki derste sayfaya davranış ekleyen dile, JavaScript'e geçiyoruz. Değişken, koşul ve döngüyü hızlıca hatırlayıp sayfadaki öğeleri seçmeyi, düğmeye basınca tepki veren bir sayfa yapmayı öğreneceksin. Gelmeden önce bu haftanın sayfasının telefonunda düzgün açıldığından emin ol.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><a href="../hafta-02/">Önceki hafta: Hafta 2</a> · <a href="../../">Ders ana sayfası</a></div>
+    <div>YZM205 Web Tasarımı ve Programlama · Muş Alparslan Üniversitesi · Arş. Gör. Çağrı ŞAHİN</div>
+  </div>
+</footer>
+
+<script src="../../assets/ders.js"></script>
+<script>
+/* ---------- sorular ---------- */
+window.QUIZ = {
+  kural: {
+    title: "Kendini sına: CSS nedir, nasıl bağlanır",
+    start: 1,
+    qs: [
+      { d: 1, tag: "hatırlama", q: "Stil dosyasını sayfaya bağlayan satır hangisi, nereye yazılır?",
+        o: ["`<link rel=\"stylesheet\" href=\"style.css\">`, `head` bölümüne", "`<style.css>`, `body`'nin en başına", "`<a href=\"style.css\">`, `head` bölümüne"], a: 0,
+        e: "Tarayıcı `link` satırını görünce `href`'teki dosyayı ister ve sayfaya uygular. `a` ile yazılan satır tuzak: o da bir `href` taşıyor, yalnız `a` tıklanınca gidilecek bir bağlantı olduğu için tarayıcı onu görünce stil dosyasını istemez." },
+      { tag: "hata bulma", q: "Paragraf ne gri oldu ne ortalandı. Neden?", code: "p {\n  color: gray\n  text-align: center;\n}",
+        o: ["`gray`'den sonra noktalı virgül yok, tarayıcı iki satırı tek bir bozuk satır sanıp ikisini de atlıyor", "`p` seçicisi yanlış yazılmış, `.p` olmalı", "`color` ile `text-align` aynı kuralda kullanılamaz"], a: 0,
+        e: "Noktalı virgül bir satırın bittiğini söyler. Eksik olunca tarayıcı `gray text-align: center` diye tek bir değer okur, anlamaz ve ikisini birden atlar. `.p` yanlış, noktalı seçici `class=\"p\"` taşıyan öğeleri arar. Paragrafların hepsini seçmek için `p` doğru." },
+      { tag: "neden", q: "`index.html` ve `projeler.html` aynı `style.css`'i bağlıyor. İki sayfadaki `h1`'in rengini değiştirmek için kaç dosyayı düzenlersin?",
+        o: ["Yalnız `style.css`'i", "İki HTML dosyasını da, çünkü başlıklar orada yazıyor", "`style.css`'i ve onu ilk bağlayan `index.html`'i"], a: 0,
+        e: "Renk bilgisi yalnız `style.css`'te duruyor ve iki sayfa da o dosyayı bağlıyor. Tek yerde değiştirirsin, iki sayfa birden değişir. Başlıkların metni HTML'de yazıyor ama renkleri orada değil, bu yüzden HTML dosyalarına dokunmak gerekmez." },
+      { tag: "uygulama", q: "Başlık hangi renkte görünür?", code: "h1 {\n  color: navy;\n}\nh1 {\n  color: crimson;\n}",
+        o: ["Koyu kırmızı (`crimson`)", "Lacivert (`navy`)", "İki renk karışır, mor olur"], a: 0,
+        e: "İki kuralın seçicisi aynı ve ikisi de aynı özelliği verdiği için sonra yazılan kazanır. Lacivert diyenler dosyada önce geleni seçmiş. İlk kural silinmez, ezilir ve DevTools'ta onu üstü çizili görürsün. Renkler karışmaz." },
+      { tag: "hata bulma", q: "Klasörde `index.html` ile `style.css` yan yana duruyor. `head`'de bu satır var ama sayfada hiçbir stil çalışmıyor. Neden?", code: "<link rel=\"stylesheet\" href=\"stil.css\">",
+        o: ["`href`'teki ad dosyanın adıyla aynı değil, tarayıcı olmayan `stil.css`'i istiyor", "`rel` niteliği gereksiz, silinmeli", "Stil dosyası `body`'ye bağlanmalı"], a: 0,
+        e: "Dosyanın adı `style.css`, satırda `stil.css` yazıyor. Tarayıcı yazılanı harfi harfine ister, bulamayınca da hiçbir stil uygulamaz ve uyarı göstermez. `rel` gereksiz değil: tarayıcıya bağlanan dosyanın bir stil sayfası olduğunu o söyler." }
+    ]
+  },
+  secici: {
+    title: "Kendini sına: seçiciler",
+    start: 6,
+    qs: [
+      { d: 1, tag: "hatırlama", q: "HTML'de `<p class=\"duyuru\">` yazan paragrafı seçen seçici hangisi?",
+        o: ["`.duyuru`", "`duyuru`", "`class.duyuru`"], a: 0,
+        e: "Başındaki nokta \"sınıf\" demek. Noktasız `duyuru` akla ilk gelen ama yanlış olan: tarayıcı onu bir etiket adı sanır ve sayfada `<duyuru>` etiketi arar. Böyle bir etiket olmadığı için kural hiçbir şeye uygulanmaz." },
+      { tag: "uygulama", q: "Bu kuralla kaç paragraf koyu kırmızı olur?", code: "<p class=\"onemli\">Sınav Pazartesi.</p>\n<p>Yer: BLD-104.</p>\n<p class=\"onemli kalin\">Hesap makinesi getir.</p>\n\n.onemli {\n  color: crimson;\n}",
+        o: ["2", "1", "3"], a: 0,
+        e: "Üçüncü paragrafın iki sınıfı var: `onemli` ve `kalin`. Adlar boşlukla ayrılır ve her biri ayrı sayılır, yani `.onemli` onu da tutar. 1 diyen, sınıfın tam olarak \"onemli\" yazması gerektiğini sanmış. Ortadaki paragrafın sınıfı yok, o boyanmaz." },
+      { tag: "hata bulma", q: "Kutunun içine boşluk gelmedi. Hata nerede?", code: "<div class=\".kart\">Turnuva</div>\n\n.kart {\n  padding: 16px;\n}",
+        o: ["HTML'de sınıf adının başına nokta konmuş, `class=\"kart\"` olmalı", "CSS'teki nokta fazla, `kart { … }` olmalı", "`padding` bir `div`'e verilemez"], a: 0,
+        e: "Nokta yalnız CSS'te yazılır ve \"sınıf\" demektir. HTML'de `class=\".kart\"` yazınca sınıfın adı \".kart\" olur, `.kart` seçicisi de \"kart\" adını aradığı için tutmaz. CSS'teki noktayı silmek de işe yaramaz: o zaman tarayıcı `<kart>` etiketi arar." },
+      { tag: "karşılaştırma", q: "`p { color: gray; }` ile `.not { color: gray; }` arasındaki fark ne?",
+        o: ["İlki sayfadaki bütün paragrafları, ikincisi yalnız `class=\"not\"` taşıyan öğeleri boyar", "İkincisi sayfadaki `<not>` etiketlerini boyar", "İlki yalnız sınıfı olmayan paragrafları boyar"], a: 0,
+        e: "Etiket seçicisi o etiketin her örneğini seçer. Sınıf seçicisi ise yalnız o adı taşıyanları, etiketi ne olursa olsun: bir `li` de olabilir, bir `div` de. `<not>` etiketi arayan, noktasız `not` seçicisi olurdu. `p` kuralı sınıfı olan paragraflara da uygulanır, çünkü etiket seçicisi sınıfa bakmaz." },
+      { tag: "hata bulma", q: "Paragraf mavi olmadı. Neden?", code: "<p class=\"Duyuru\">Kulüp toplantısı ertelendi.</p>\n\n.duyuru {\n  color: blue;\n}",
+        o: ["Sınıf adlarında büyük ve küçük harf farklıdır, `Duyuru` ile `duyuru` iki ayrı ad", "Sınıf adı büyük harfle başlayamaz", "Seçicinin başındaki nokta gereksiz"], a: 0,
+        e: "Tarayıcı sınıf adlarını harfi harfine karşılaştırır ve büyük harfi küçükten ayırır. \"Büyük harfle başlayamaz\" yanlış, başlayabilir. Yeter ki HTML'de ve CSS'te aynı yazılsın. Karışmasın diye sınıf adlarını hep küçük harfle ver." }
+    ]
+  },
+  renk: {
+    title: "Kendini sına: renk, yazı, boşluk",
+    start: 11,
+    qs: [
+      { d: 1, tag: "hatırlama", q: "Yazının rengini değiştiren özellik hangisi?",
+        o: ["`color`", "`background-color`", "`font-color`"], a: 0,
+        e: "`color` yazının rengidir. `background-color` öğenin zeminini boyar. `font-color` kulağa doğru geliyor, çoğu kişi onu işaretler, ama CSS'te böyle bir özellik yok. Tarayıcı o satırı anlamaz ve atlar." },
+      { tag: "hata bulma", q: "Başlığın boyutu değişmedi. Neden?", code: "h1 {\n  font-size: 32;\n}",
+        o: ["Değerde birim yok, `32px` yazılmalı", "`font-size` başlıklara verilemez", "32 bir başlık için fazla büyük"], a: 0,
+        e: "Sayı alan değerin birimi olmalı. Birim olmayınca tarayıcı 32'nin piksel mi yüzde mi olduğunu bilemez ve satırı atlar. `font-size` her yazıya verilebilir. Birim yalnız sıfırda gerekmez." },
+      { tag: "uygulama", q: "Sayfayı Georgia yazı tipi yüklü olmayan bir telefonda açıyorsun. Bu kuralla yazılar hangi yazı tipiyle çıkar?", code: "body {\n  font-family: Georgia;\n}",
+        o: ["Tarayıcının kendi varsayılan yazı tipiyle", "Georgia'ya en çok benzeyen tırnaklı bir yazı tipiyle", "Hiçbiriyle, yazılar görünmez"], a: 0,
+        e: "Listede yedek yok. Georgia bulunamayınca tarayıcı kuralı yokmuş gibi sayar ve kendi varsayılanını kullanır. Tarayıcı \"benzerini\" kendisi aramaz, o işi listenin sonundaki genel ad görür: `font-family: Georgia, serif;` yazsaydın tırnaklı bir yazı tipi gelirdi. Yazılar ise hiçbir durumda kaybolmaz." },
+      { tag: "neden", q: "Açık gri zemine (`#eeeeee`) açık sarı yazı (`#ffee88`) yazdın. Tarayıcı ne yapar?",
+        o: ["Olduğu gibi çizer. Yazı zor okunur ama hata da çıkmaz", "Yazıyı kendiliğinden koyulaştırır", "Kuralı geçersiz sayıp atlar"], a: 0,
+        e: "Tarayıcı renk seçimine karışmaz. İki değer de geçerli bir renk, bu yüzden kural çalışır ve yazı açık zeminde kaybolur. \"Koyulaştırır\" diye bir yardım yok. Kontrastı kontrol etmek senin işin." },
+      { tag: "uygulama", q: "Satırların arası (bir satırın tabanından bir sonrakinin tabanına) kaç piksel olur?", code: "p {\n  font-size: 20px;\n  line-height: 150%;\n}",
+        o: ["30 piksel", "150 piksel", "20 piksel"], a: 0,
+        e: "Yüzde, yazının boyuna göre hesaplanır: 20 pikselin yüzde 150'si 30 piksel. 150 piksel diyen yüzdeyi piksel sanmış. 20 piksel ise `line-height` hiç yazılmamış gibi düşünmek olur." }
+    ]
+  },
+  kutu: {
+    title: "Kendini sına: kutu modeli",
+    start: 16,
+    qs: [
+      { d: 1, tag: "hatırlama", q: "Kutunun kenarlığı ile içindeki yazı arasındaki boşluğa ne denir?",
+        o: ["`padding` (iç boşluk)", "`margin` (dış boşluk)", "`border` (kenarlık)"], a: 0,
+        e: "İçerik ile kenarlık arası `padding`'dir ve kutunun zemin rengini alır. `margin` kenarlığın dışında kalır, kutuyu komşularından uzaklaştırır. Bu ikisi labda da çok karışacak." },
+      { tag: "uygulama", q: "Bu kart ekranda toplam kaç piksel genişlikte görünür (margin hariç)?", code: ".kart {\n  width: 150px;\n  padding: 12px;\n  border: 3px solid gray;\n}",
+        o: ["180 piksel", "150 piksel", "165 piksel"], a: 0,
+        e: "`width` yalnız içeriğin genişliği. Padding ve border iki yana birden eklenir: 3 + 12 + 150 + 12 + 3 = 180. 165 diyen padding ile border'ı tek yana eklemiş. 150 diyen `width`'i kutunun tamamı sanmış." },
+      { tag: "karşılaştırma", q: "İki kart yan yana ve birbirine yapışık. Aralarını açmak için hangisini büyütürsün?",
+        o: ["`margin`", "`padding`", "`border-radius`"], a: 0,
+        e: "Kutular arasındaki mesafe dış boşluk, yani `margin`. `padding` işe yaramaz: kartların içini ferahlatır, kartlar büyür ama birbirine yine yapışık kalır. Flexbox'ta aynı işi kapsayıcıya yazılan `gap` da görür." },
+      { tag: "hata bulma", q: "Kenarlık hiç görünmüyor. Neden?", code: ".kart {\n  border: 3px crimson;\n}",
+        o: ["Çizgi türü eksik, `solid` gibi bir tür yazılmazsa kenarlık çizilmez", "3 piksel görünmeyecek kadar ince", "`crimson` kenarlıkta kullanılamaz"], a: 0,
+        e: "`border` üç parçadan oluşur: kalınlık, çizgi türü, renk. Tür yazılmayınca tarayıcı türü \"yok\" sayar ve kalınlık ile renk boşa gider. `border: 3px solid crimson;` olmalı. 3 piksel gayet görünür bir kalınlık." },
+      { tag: "neden", q: "Kartına `border-radius: 12px;` yazdın. Kartın kenarlığı yok, zemini de sayfanın zeminiyle aynı renk. Köşeler neden yuvarlak görünmüyor?",
+        o: ["Köşeler yuvarlandı ama kenarlık ve farklı bir zemin olmadığı için göremiyorsun", "`border-radius` yalnız görsellerde çalışır", "12 piksel yetmez, en az 50 piksel olmalı"], a: 0,
+        e: "Kutunun köşesi gerçekten yuvarlandı, yalnız kutunun sınırı ancak bir kenarlık ya da zeminden farklı bir renkle görünür. `background-color: white;` ekleyince yuvarlak köşeler ortaya çıkar. `border-radius` her kutuda çalışır, yalnız görsellerde değil." }
+    ]
+  },
+  flex: {
+    title: "Kendini sına: Flexbox",
+    start: 21,
+    qs: [
+      { d: 1, tag: "hatırlama", q: "Kutuları yan yana dizmek için `display: flex` nereye yazılır?",
+        o: ["Kutuları içine alan kapsayıcıya", "Yan yana gelecek her kutuya tek tek", "Yalnız `body`'ye"], a: 0,
+        e: "Flexbox kapsayıcının içindeki kutuları dizer, bu yüzden kural kapsayıcıya yazılır. Her kutuya yazmak sık görülen bir yanlış: o zaman her kutu kendi içindekileri dizmeye çalışır ve kutular yan yana gelmez." },
+      { tag: "uygulama", q: "Menüde üç bağlantı var. Ekranda nasıl dizilirler?", code: ".menu {\n  display: flex;\n  justify-content: space-between;\n}",
+        o: ["İlki sola, sonuncusu sağa yaslanır, ortadaki arada kalır", "Üçü ortada toplanır", "Üçü alt alta dizilir"], a: 0,
+        e: "`space-between` ilk kutuyu başa, son kutuyu sona yaslar, kalan boşluğu aralara eşit dağıtır. Ortada toplamak `center`'ın işi. Alt alta dizilmeleri için `flex-direction: column` gerekirdi." },
+      { tag: "uygulama", q: "Üç kartın yazıları farklı uzunlukta: birinde bir satır, birinde üç satır yazı var. `align-items` yazılmadı. Kartların boyu ne olur?", code: ".kartlar {\n  display: flex;\n  gap: 12px;\n}",
+        o: ["Üçü de en uzun kartın boyuna uzar", "Her kart kendi yazısı kadar uzun olur", "Üçü de en kısa kartın boyunda kalır, fazla yazı taşar"], a: 0,
+        e: "`align-items` yazılmazsa varsayılanı `stretch` olur: yan yana dizilen kutular sıranın en uzun kutusunun boyuna uzar. Kartların alt kenarlarının hizalı durması bundan. Her kartın kendi yazısı kadar kalması için `align-items: flex-start` yazman gerekirdi. Tarayıcı yazıyı kesip taşırmaz." },
+      { tag: "hata bulma", q: "Bağlantılar yan yana dizilmek yerine alt alta geldi. Neden?", code: "<nav class=\"menu\">\n  <a href=\"index.html\">Ana sayfa</a>\n  <a href=\"projeler.html\">Projelerim</a>\n</nav>\n\na {\n  display: flex;\n  gap: 20px;\n}",
+        o: ["`display: flex` bağlantıların kendisine yazılmış, kapsayıcıya (`.menu`) yazılmalıydı", "`gap` piksel almaz", "Bağlantılar Flexbox ile dizilemez"], a: 0,
+        e: "Her bağlantı kendi başına bir flex kapsayıcısı oldu ve kendi satırını kaplayan bir kutuya dönüştü. Kural `.menu`'ye taşınınca bağlantılar yan yana gelir, `gap` da aralarına boşluk koyar. `gap` pikselle yazılır, sorun onda değil." },
+      { tag: "uygulama", q: "Dar ekranda kartlar tek sıraya sıkışıp daralıyor. Sığmayanın alt satıra geçmesi için hangi satırı eklersin?", code: ".kartlar {\n  display: flex;\n  gap: 12px;\n}",
+        o: ["`flex-wrap: wrap;`", "`justify-content: center;`", "`align-items: center;`"], a: 0,
+        e: "Flexbox kutuları varsayılan olarak tek sırada tutar ve sığmazlarsa sıkıştırır. `flex-wrap: wrap` sığmayanı alt satıra geçirir. `justify-content: center` kutuları ortalar ama sıkışmayı çözmez." },
+      { tag: "karşılaştırma", q: "`flex-direction: row` iken `justify-content` ile `align-items` arasındaki fark ne?",
+        o: ["`justify-content` kutuları yatayda, `align-items` dikeyde hizalar", "İkisi aynı işi yapar", "`justify-content` yazıyı, `align-items` kutuları hizalar"], a: 0,
+        e: "`justify-content` sıranın boyunca, `align-items` sıraya dik hizalar. Sıra yan yana (`row`) iken biri yatay, öteki dikey olur. `justify-content`'in yazıyı hizaladığını sanmak yaygın, yazıyı hizalayan `text-align`." }
+    ]
+  },
+  medya: {
+    title: "Kendini sına: medya sorgusu",
+    start: 27,
+    qs: [
+      { d: 1, tag: "uygulama", q: "İçerideki kural ne zaman çalışır?", code: "@media (max-width: 600px) {\n  .menu {\n    flex-direction: column;\n  }\n}",
+        o: ["Pencere 600 piksel ya da daha darken", "Pencere 600 pikselden genişken", "Yalnız telefonlarda, pencere genişliği ne olursa olsun"], a: 0,
+        e: "`max-width: 600px` \"genişlik en fazla 600 piksel\" demek. Pencere 600 ya da daha darsa koşul tutar. \"Yalnız telefonlarda\" yanlış: tarayıcı cihaza değil genişliğe bakar. Bilgisayarında pencereyi daraltınca da çalışır." },
+      { tag: "hata bulma", q: "Medya sorgun bilgisayarda pencereyi daraltınca çalışıyor. Telefonunda çalışmıyor, sayfa minicik görünüyor. `head`'de eksik olan satır hangisi?",
+        o: ["`<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">`", "`<meta charset=\"utf-8\">`", "`<link rel=\"stylesheet\" href=\"style.css\">`"], a: 0,
+        e: "`viewport` satırı olmayınca telefon sayfayı geniş bir masaüstü ekranı gibi çizip küçültür. Tarayıcıya göre pencere dar olmadığı için sorgu çalışmaz. `link` satırı eksik olsaydı bilgisayarda da hiçbir stil görünmezdi. `charset` ise harflerle ilgili." },
+      { tag: "hata bulma", q: "Telefonda menü yine yan yana. Neden?", code: "@media (max-width: 600px) {\n  .menu {\n    flex-direction: column;\n  }\n}\n.menu {\n  display: flex;\n  flex-direction: row;\n}",
+        o: ["Medya sorgusu dosyanın başında. Alttaki `.menu` kuralı sonra yazıldığı için onu eziyor", "`@media` içinde sınıf seçicisi kullanılamaz", "600 piksel telefonlar için çok küçük bir sayı"], a: 0,
+        e: "Koşul tutuyor ve içerideki kural uygulanıyor, ne var ki aynı seçiciyle yazılmış sonraki kural `flex-direction: row` diyor ve sonra yazılan kazanıyor. Sorgu dosyanın sonuna taşınınca menü alt alta iner. Sorgunun içinde her seçici kullanılabilir." },
+      { tag: "neden", q: "Pencereyi 900 pikselden 400 piksele yavaşça daraltıyorsun. Menü tam olarak ne zaman alt alta iner?", code: "@media (max-width: 600px) {\n  .menu {\n    flex-direction: column;\n  }\n}",
+        o: ["Genişlik 600 piksele indiği anda, sayfayı yenilemeden", "400 piksele geldiğinde", "Pencereyi bırakıp sayfayı yenilediğinde"], a: 0,
+        e: "Tarayıcı pencerenin genişliği her değiştiğinde koşulu yeniden kontrol eder. 600'e inildiği anda koşul tutar ve kural uygulanır, yenilemeye gerek yok. Sabahki \"Pencereyi daralt\" simülasyonunda bunu gördün." }
+    ]
+  },
+  test: {
+    title: "Hafta testi",
+    prefix: "T",
+    qs: [
+      { tag: "uygulama", q: "Hangi satır yeşil görünür?", code: "<li class=\"yeni\">Hızlı turnuva</li>\n<li>Açılış dersi</li>\n\n.yeni {\n  color: green;\n}",
+        o: ["Yalnız \"Hızlı turnuva\"", "İkisi de", "Hiçbiri, `li`'ye sınıf verilemez"], a: 0,
+        e: "`.yeni` yalnız `class=\"yeni\"` taşıyan öğeyi seçer. \"Açılış dersi\" satırının sınıfı yok. \"İkisi de\" diyen `li` etiket seçicisiyle karıştırmış. Sınıf her öğeye verilebilir." },
+      { tag: "hata bulma", q: "Başlık lacivert oldu ama paragrafın boyutu değişmedi. Hata hangi satırda?", c: ["h1 {", "  color: navy;", "", "p {", "  font-size: 18px;", "}"],
+        o: ["2. satır", "3. satır", "5. satır", "6. satır"], a: 1,
+        e: "3. satırda `h1` kuralını kapatan `}` olmalıydı, satır boş kalmış. Tarayıcı `p` kuralını `h1`'in içinde sanıyor ve sayfadaki paragraflara uygulamıyor. 6. satırı seçen olur, ama oradaki `}` `p` kuralını kapatıyor ve yerinde." },
+      { tag: "uygulama", q: "Kutunun kenarlığı dahil ekranda kapladığı genişlik kaç piksel (margin hariç)?", code: ".kutu {\n  width: 100px;\n  padding: 10px;\n  border: 2px solid black;\n  margin: 20px;\n}",
+        o: ["124 piksel", "100 piksel", "164 piksel"], a: 0,
+        e: "100 + 2 × 10 + 2 × 2 = 124. 164 diyen margin'i de eklemiş, ama soru margin'i dışarıda bırakıyor. Margin kutunun dışında kalan mesafedir. 100 diyen `width`'i kutunun tamamı sanmış." },
+      { tag: "hatırlama", q: "`color: crimson;` satırında `color` kuralın hangi parçası?",
+        o: ["Özellik", "Değer", "Seçici"], a: 0,
+        e: "İki noktadan önceki kısım özelliktir, neyin değişeceğini söyler. İki noktadan sonraki `crimson` değerdir. Seçici kuralın en başında, süslü parantezden önce durur." },
+      { tag: "uygulama", q: "Kartlar nasıl dizilir?", code: ".kartlar {\n  display: flex;\n  flex-direction: column;\n  gap: 12px;\n}",
+        o: ["Alt alta, aralarında 12 piksel boşlukla", "Yan yana, aralarında 12 piksel boşlukla", "Alt alta, birbirine yapışık"], a: 0,
+        e: "`flex-direction: column` sırayı dikey yapar. `gap` yön ne olursa olsun kutuların arasına boşluk koyar. \"Yan yana\" diyen `display: flex`'i gördü ama yönü gözden kaçırdı." },
+      { tag: "neden", q: "CSS'te bir satırı yanlış yazdığında tarayıcı neden hata mesajı göstermez?",
+        o: ["Anlamadığı satırı atlayıp sayfayı çizmeye devam eder, tek bir hata yüzünden sayfa açılmaz olmasın diye", "CSS hatalarını yalnız VS Code bulur, tarayıcı CSS'i denetlemez", "Tarayıcı yanlış satırı kendi bildiği gibi düzeltir"], a: 0,
+        e: "Tarayıcı her satırı okur ve anlamadığını sessizce atlar. Kalan kurallar çalışır, sayfa açılır. \"Kendi bildiği gibi düzeltir\" doğru değil: tarayıcı tahmin yürütmez, satır hiç yazılmamış gibi davranır. Hatayı DevTools'ta üstü çizili satır olarak görürsün." },
+      { tag: "uygulama", q: "400 piksel genişliğindeki bir telefonda kartın genişliği ne olur?", code: ".kart {\n  width: 300px;\n}\n@media (max-width: 600px) {\n  .kart {\n    width: 100%;\n  }\n}",
+        o: ["İçinde durduğu kutunun tamamı (yüzde 100)", "300 piksel", "600 piksel"], a: 0,
+        e: "400 piksel 600'den dar, koşul tutar. Sorgu dosyada sonra geldiği için `width: 100%` kazanır ve kart kapsayıcısının tamamını kaplar. 300 piksel, koşulun tuttuğunu gözden kaçırmak. 600 koşuldaki sayı, bir genişlik değil." },
+      { tag: "karşılaştırma", q: "`margin` ile `padding` arasındaki farkı en doğru anlatan cümle hangisi?",
+        o: ["Padding kenarlığın içinde kalır ve kutunun zemin rengini alır. Margin kenarlığın dışında kalır ve saydamdır", "İkisi aynı boşluk, yalnız adları farklı", "Margin kenarlığın içinde, padding dışında kalır"], a: 0,
+        e: "Kutu modelinde sıra içten dışa: içerik, padding, border, margin. Padding kutunun parçasıdır, zeminini taşır. Margin kutuyu komşularından ayıran saydam mesafe. Üçüncü seçenek sırayı ters çevirmiş." },
+      { tag: "uygulama", q: "Bu kural neyi ortalar?", code: "h1 {\n  text-align: center;\n}",
+        o: ["Başlığın yazısını, kendi satırının ortasına", "Başlığı sayfanın dikey ortasına", "Sayfadaki bütün yazıları"], a: 0,
+        e: "`text-align` yazının satır içindeki yerini seçer ve yalnız seçilen öğelere uygulanır, burada `h1`'lere. Dikey ortalama `text-align`'ın işi değil. Bütün yazılar için kuralı `body`'ye yazman gerekirdi." },
+      { tag: "hata bulma", q: "Kırmızı kenarlık gelmedi. Neden?", code: "<div class=\"kart,onemli\">Duyuru</div>\n\n.onemli {\n  border: 2px solid crimson;\n}",
+        o: ["Birden çok sınıf virgülle değil boşlukla ayrılır: `class=\"kart onemli\"`", "Bir öğeye iki sınıf verilemez", "`border`'a renk yazılamaz"], a: 0,
+        e: "Virgülle yazınca \"kart,onemli\" tek ve tuhaf bir sınıf adı olur. Ne `.kart` ne `.onemli` onu tutar. Bir öğe istediği kadar sınıf taşıyabilir, adlar arasına yalnız boşluk konur." },
+      { tag: "uygulama", q: "Paragraf nasıl görünür?", code: "p {\n  color: navy;\n  font-size: 16px;\n}\np {\n  color: gray;\n}",
+        o: ["Gri ve 16 piksel", "Lacivert ve 16 piksel", "Gri ve tarayıcının varsayılan boyutunda"], a: 0,
+        e: "Yalnız çakışan özellik ezilir. İki kural da `color` veriyor, sonra yazılan `gray` kazanır. `font-size`'ı ise yalnız ilk kural veriyor, o olduğu gibi kalır. Üçüncü seçenek bütün ilk kuralın silindiğini sanmış." },
+      { tag: "neden", q: "Menün `display: flex` ile dizili. Menüye dördüncü bir bağlantı eklersen ne yapman gerekir?",
+        o: ["Hiçbir şey. Yeni bağlantı da sıraya kendiliğinden girer", "Yeni bağlantıya ayrıca `display: flex` yazmak", "Bütün bağlantıların genişliğini yeniden hesaplamak"], a: 0,
+        e: "Kural kapsayıcıya yazılı. Tarayıcı kapsayıcının içindeki bütün kutuları, sonradan eklenenler dahil, her çizimde yeniden dizer. Bağlantıya `display: flex` yazmak onu kapsayıcıya çevirir, işe yaramaz." },
+      { tag: "uygulama", q: "Sayfadaki `h1` ve `p`'ye ayrı bir kural yazmadın. Onların yazı tipi ne olur?", code: "body {\n  color: #333333;\n  font-family: Arial, sans-serif;\n}",
+        o: ["Arial olur, `body`'ye verilen yazı tipi içindeki öğelere geçer", "Tarayıcının varsayılan yazı tipinde kalır", "Yalnız `body`'nin kendi yazısı Arial olur"], a: 0,
+        e: "Yazı tipi ve yazı rengi `body`'den içindeki öğelere geçer. Labda paleti bu yüzden `body`'ye yazdın. Bu geçişin bilinen istisnası bağlantılar: tarayıcı onlara kendi rengini verir." }
+    ]
+  }
+};
+
+(function () {
+  'use strict';
+  var fmt = Ders.fmt;
+  function byId(id) { return document.getElementById(id); }
+
+  /* ---------- ortak mini sayfa: hero ve hedef ---------- */
+  var DENIZ = '<header><h1>Merhaba, ben Deniz</h1><nav class="menu"><a href="#">Ana sayfa</a><a href="#">Projelerim</a></nav></header>' +
+    '<main><p>Yazılım Mühendisliği 2. sınıftayım. Web sayfası yapmayı öğreniyorum.</p><h2>İlgi alanlarım</h2>' +
+    '<ul class="kartlar"><li class="kart">Satranç</li><li class="kart">Fotoğraf</li><li class="kart">Futbol</li></ul></main>' +
+    '<footer><p>Deniz · 2026</p></footer>';
+  var CSS_SICAK = 'body{margin:0;padding:12px;background-color:#fdf3e7;color:#2b2b2b;font-family:Arial,sans-serif;line-height:140%;font-size:14px}' +
+    'header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;background-color:white;padding:10px 12px;border-radius:10px}' +
+    'h1{margin:0;font-size:17px;color:#b5452b}.menu{display:flex;gap:10px}a{color:#b5452b}' +
+    'h2{font-size:15px;color:#b5452b;margin:14px 0 6px}p{margin:10px 0}' +
+    '.kartlar{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0;list-style:none}' +
+    '.kart{background-color:white;padding:8px 12px;border:2px solid #f0c9b8;border-radius:10px}' +
+    'footer{text-align:center;font-size:12px;color:#6b6b6b}';
+  var CSS_GECE = 'body{margin:0;padding:12px;background-color:#14213d;color:#e5e5e5;font-family:Georgia,serif;line-height:130%;font-size:14px}' +
+    'header{display:flex;flex-direction:column;align-items:center;gap:6px;border:1px solid #fca311;padding:8px;border-radius:0}' +
+    'h1{margin:0;font-size:18px;color:#fca311}.menu{display:flex;gap:16px}a{color:#fca311}' +
+    'main{text-align:center}h2{font-size:15px;color:#fca311;margin:12px 0 6px}p{margin:10px 0}' +
+    '.kartlar{display:flex;justify-content:center;gap:6px;padding:0;margin:0;list-style:none}' +
+    '.kart{background-color:#fca311;color:#14213d;padding:6px 10px;border-radius:0}' +
+    'footer{text-align:center;font-size:12px;color:#9a9a9a}';
+  function sayfa(css, html) {
+    return '<!doctype html><html lang="tr"><head><meta charset="utf-8">' + (css ? '<style id="stil">' + css + '</style>' : '') + '</head><body>' + html + '</body></html>';
+  }
+
+  /* hero: CSS açık / kapalı */
+  (function () {
+    var fr = byId('heroFrame'), btn = byId('heroBtn'), durum = byId('heroDurum');
+    var acik = true, timer = null;
+    fr.srcdoc = sayfa(CSS_SICAK, DENIZ);
+    function uygula(v) {
+      acik = v;
+      try {
+        var s = fr.contentDocument && fr.contentDocument.getElementById('stil');
+        if (s && s.sheet) s.sheet.disabled = !v;
+      } catch (e) { /* çerçeve henüz hazır değil */ }
+      btn.setAttribute('aria-pressed', v ? 'true' : 'false');
+      btn.textContent = v ? 'CSS: açık' : 'CSS: kapalı';
+      durum.textContent = v ? 'Stil dosyası uygulanmış hâli' : 'Stil dosyası yok: tarayıcının varsayılanı';
+    }
+    fr.addEventListener('load', function () { uygula(acik); });
+    btn.addEventListener('click', function () {
+      if (timer) { clearInterval(timer); timer = null; }
+      uygula(!acik);
+    });
+    if (!Ders.reduced()) timer = setInterval(function () { uygula(!acik); }, 2800);
+  })();
+
+  /* hedef: iki stil dosyası */
+  byId('hedefSicak').srcdoc = sayfa(CSS_SICAK, DENIZ);
+  byId('hedefGece').srcdoc = sayfa(CSS_GECE, DENIZ);
+
+  /* ---------- 1. kuralın parçaları ---------- */
+  (function () {
+    var ROWS = [
+      { ic: false, t: [['h1', 'sec'], ['{', 'ac']] },
+      { ic: true, t: [['color', 'oz'], [':', 'ik'], ['crimson', 'deg'], [';', 'nv']] },
+      { ic: true, t: [['font-size', 'oz2'], [':', 'ik'], ['32px', 'deg2'], [';', 'nv']] },
+      { ic: false, t: [['}', 'kap']] }
+    ];
+    var ACIK = {
+      sec: '`h1` bir seçici. "Kural kime uygulanacak?" sorusunu cevaplar: sayfadaki bütün `h1` başlıklarına.',
+      ac: 'Açılan süslü parantez. Kuralın gövdesi burada başlar.',
+      oz: '`color` bir özellik. "Neyi değiştireceğiz?" sorusunu cevaplar: yazının rengini.',
+      ik: 'İki nokta. Özelliği değerinden ayırır.',
+      deg: '`crimson` bir değer. "Ne olacak?" sorusunu cevaplar: koyu bir kırmızı. Renk adı ya da `#b5452b` gibi bir kod yazılır.',
+      nv: 'Noktalı virgül. Satırın bittiğini söyler. Unutursan tarayıcı bu satırla sonrakini tek bir bozuk satır sanır ve ikisini de atlar.',
+      oz2: '`font-size` de bir özellik: yazının büyüklüğü. Bir kuralın içinde istediğin kadar özellik olabilir.',
+      deg2: '`32px` bir değer: 32 piksel. Birim sayıya bitişik yazılır.',
+      kap: 'Kapanan süslü parantez. Kural burada biter. Unutursan altındaki kurallar bu kuralın içinde kalır ve çalışmaz.'
+    };
+    var host = byId('simAnat'), box = host.querySelector('.anat'), out = byId('anatOut');
+    ROWS.forEach(function (r) {
+      var row = Ders.el('div', 'anat-row' + (r.ic ? ' ic' : ''));
+      r.t.forEach(function (t) {
+        var b = Ders.el('button', 'tok', t[0]); b.type = 'button';
+        b.setAttribute('data-k', t[1]); b.setAttribute('aria-pressed', 'false');
+        b.addEventListener('click', function () { sec(b); });
+        row.appendChild(b);
+      });
+      box.appendChild(row);
+    });
+    function sec(b) {
+      Ders.$$('.tok', box).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      out.innerHTML = b ? fmt(ACIK[b.getAttribute('data-k')]) : 'Kuralın bir parçasına tıkla, adı ve görevi burada yazsın.';
+    }
+    var on = byId('anatOn'), nv2 = box.children[1].querySelector('[data-k="nv"]');
+    function onizle(bozuk) {
+      on.style.color = bozuk ? '' : 'crimson';
+      on.style.fontSize = bozuk ? '' : '32px';
+      nv2.classList.toggle('silik', bozuk);
+    }
+    onizle(false);
+    Ders.predict(host, {
+      q: '2. satırın sonundaki noktalı virgül silinirse aşağıdaki başlık ne olur?',
+      options: ['Yalnız rengi gider, büyüklüğü kalır', 'Hiçbir şey değişmez, tarayıcı eksiği tamamlar', 'Ne rengi ne büyüklüğü kalır'],
+      correct: 2,
+      run: function () { onizle(true); sec(nv2); },
+      reset: function () { onizle(false); sec(null); },
+      seen: 'Noktalı virgül olmayınca tarayıcı `crimson font-size: 32px` diye tek bir değer okudu, anlamadı ve iki satırı birden atladı. Hata mesajı çıkmadı. Kuralın öteki parçalarına da tıkla: seçici kime, özellik neyi, değer ne olacağını söylüyor.'
+    });
+  })();
+
+  /* ---------- 1. görevli CSS editörü ---------- */
+  (function () {
+    var BAS = 'h1 {\n  color: navy;\n}\n';
+    var ed = Ders.editor('edKural', {
+      mode: 'css',
+      height: 220,
+      title: 'kulup.html',
+      html: '<h1>Satranç Kulübü</h1>\n<p>Bu hafta Cuma 15:00\'te kütüphanenin 2. katında toplanıyoruz.</p>\n<ul>\n  <li>Açılış çalışması</li>\n  <li>Kısa turnuva</li>\n  <li>Parti analizi</li>\n</ul>',
+      css: BAS,
+      tasks: [
+        {
+          text: 'Başlığı kırmızı yap.',
+          check: function (doc, win) {
+            var c = Ders.rgb(win.getComputedStyle(doc.querySelector('h1')).color);
+            return !!c && c[0] > 150 && c[1] < 90 && c[2] < 90;
+          },
+          hint: '`h1` kuralındaki `color` değerini `red` ya da `crimson` yap.'
+        },
+        {
+          text: 'Evde: paragrafı ortala.',
+          check: function (doc, win) { return win.getComputedStyle(doc.querySelector('p')).textAlign === 'center'; },
+          hint: 'Yeni bir `p { … }` kuralı yaz, içine `text-align: center;` koy. Süslü parantezi kapatmayı unutma.'
+        }
+      ]
+    });
+    Ders.predict('edKural', {
+      q: 'Editördeki `navy` yerine `seagreen` (deniz yeşili) yazılırsa soldaki HTML ne olur?',
+      options: ['HTML\'deki `h1` satırı da değişir', 'HTML aynı kalır, yalnız başlığın rengi değişir', 'Sayfa baştan yüklenir, liste kaybolur'],
+      correct: 1,
+      run: function () { ed.set('h1 {\n  color: seagreen;\n}\n'); },
+      reset: function () { ed.set(BAS); },
+      seen: 'Soldaki HTML\'e hiç dokunulmadı. Tarayıcı aynı HTML\'i yeni kuralla yeniden çizdi. Şimdi aşağıdaki 1. görevi derste yap ve "Kontrol et"e bas. 2. görev akşam evde.'
+    });
+  })();
+
+  /* ---------- 2. seçici eşleştirme ---------- */
+  (function () {
+    var NODES = [
+      { tag: 'h1', cls: '', text: 'Satranç Kulübü' },
+      { tag: 'p', cls: 'onemli', text: 'Turnuva Cuma 15:00\'te.' },
+      { tag: 'p', cls: '', text: 'Yer: kütüphane, 2. kat.', degis: true },
+      { tag: 'ul', cls: '', kids: [
+        { tag: 'li', cls: 'kart', text: 'Açılışlar' },
+        { tag: 'li', cls: 'kart onemli', text: 'Kısa turnuva' },
+        { tag: 'li', cls: 'kart', text: 'Parti analizi' }
+      ] }
+    ];
+    var agac = byId('agac'), inp = byId('secIn'), out = byId('secOut'), tgl = byId('secSinif');
+    var kok = document.createElement('div'), satirlar = [], degisen = null;
+    function acilis(n) {
+      var c = n.el.getAttribute('class');
+      return '<span class="tg">&lt;' + n.tag + '</span>' + (c ? ' <span class="at">class="' + Ders.esc(c) + '"</span>' : '') + '<span class="tg">&gt;</span>';
+    }
+    function kur(list, parent, girinti) {
+      list.forEach(function (n) {
+        n.el = document.createElement(n.tag);
+        if (n.cls) n.el.className = n.cls;
+        parent.appendChild(n.el);
+        if (n.degis) degisen = n;
+        if (n.kids) {
+          satirlar.push({ n: n, tip: 'ac', g: girinti });
+          kur(n.kids, n.el, girinti + '  ');
+          satirlar.push({ n: n, tip: 'kap', g: girinti });
+        } else {
+          n.el.textContent = n.text;
+          satirlar.push({ n: n, tip: 'tek', g: girinti });
+        }
+      });
+    }
+    kur(NODES, kok, '');
+    function ciz(eslesen) {
+      agac.innerHTML = '';
+      satirlar.forEach(function (s) {
+        var d = Ders.el('div', 'ag-l');
+        var kap = '<span class="tg">&lt;/' + s.n.tag + '&gt;</span>';
+        d.innerHTML = Ders.esc(s.g) + (s.tip === 'kap' ? kap : acilis(s.n) + (s.tip === 'tek' ? Ders.esc(s.n.text) + kap : ''));
+        if (eslesen.indexOf(s.n.el) > -1) d.classList.add('hit');
+        agac.appendChild(d);
+      });
+    }
+    var ADI = /^[A-Za-z_À-ɏ][\wÀ-ɏ-]*$/;
+    function guncelle() {
+      var v = inp.value.trim(), eslesen = [], msg;
+      if (!v) {
+        msg = 'Bir seçici yaz ya da hazır düğmelerden birine bas.';
+      } else {
+        var sinif = v.charAt(0) === '.', ad = sinif ? v.slice(1) : v;
+        var gecerli = sinif ? ADI.test(ad) : /^[A-Za-z][A-Za-z0-9]*$/.test(ad);
+        if (!gecerli) {
+          msg = 'Bu hafta yalnız etiket seçicisi (`p`, `li`) ve sınıf seçicisi (`.onemli`) kullanıyoruz. Seçiciyi boşluksuz, tek bir ad olarak yaz.';
+        } else {
+          Ders.$$('*', kok).forEach(function (el) {
+            try { if (el.matches(v)) eslesen.push(el); } catch (e) { /* geçersiz seçici */ }
+          });
+          if (eslesen.length) {
+            msg = eslesen.length + ' öğe tuttu.' + (sinif ? ' Etiketleri farklı olabilir, hepsinin `class` niteliğinde `' + ad + '` adı var.' : ' Sayfadaki bütün `' + ad + '` öğeleri.');
+          } else if (sinif) {
+            msg = 'Hiçbir öğe tutmadı. `class` niteliğinde `' + ad + '` adını taşıyan öğe yok. Harfleri karşılaştır.';
+          } else {
+            msg = 'Hiçbir öğe tutmadı. Sayfada `<' + ad + '>` diye bir etiket yok. Sınıf arıyorsan başına nokta koy: `.' + ad + '`.';
+          }
+        }
+      }
+      out.innerHTML = fmt(msg);
+      ciz(eslesen);
+    }
+    function sinifAyarla(on) {
+      degisen.el.className = on ? 'onemli' : '';
+      tgl.setAttribute('aria-pressed', on ? 'true' : 'false');
+      tgl.innerHTML = on ? '3. satırdaki paragraftan <code>onemli</code> sınıfını çıkar' : '3. satırdaki paragrafa <code>onemli</code> sınıfını ekle';
+      guncelle();
+    }
+    inp.addEventListener('input', guncelle);
+    inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); guncelle(); } });
+    Ders.$$('[data-sec]').forEach(function (b) {
+      b.addEventListener('click', function () { inp.value = b.getAttribute('data-sec'); guncelle(); });
+    });
+    tgl.addEventListener('click', function () { sinifAyarla(tgl.getAttribute('aria-pressed') !== 'true'); });
+    guncelle();
+    Ders.predict('simSecici', {
+      q: 'Kutuya `.onemli` yazılınca soldaki kodda kaç satır yanar?',
+      options: ['1', '2', '3'],
+      correct: 1,
+      run: function () { inp.value = '.onemli'; guncelle(); },
+      reset: function () { inp.value = 'p'; sinifAyarla(false); },
+      seen: 'Sınıf seçicisi `class` niteliğinde o adı taşıyan her öğeyi bulur, etiketi ne olursa olsun: bir paragraf da yandı, bir madde de. `class="kart onemli"` yazan madde iki sınıf birden taşıyor, iki seçiciye de yakalanıyor. Şimdi alttaki düğmeyle 3. satıra sınıf ekle ve ne değiştiğine bak.'
+    });
+  })();
+
+  /* ---------- 3. renk ve yazı ---------- */
+  (function () {
+    var c = byId('rkC'), bg = byId('rkBg'), f = byId('rkF'), s = byId('rkS'), l = byId('rkL'), a = byId('rkA');
+    var on = byId('rkOn'), uyari = byId('rkU'), kod = byId('rkKod');
+    function lum(rgb) {
+      var v = rgb.map(function (x) { x = x / 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); });
+      return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2];
+    }
+    function oran(c1, c2) {
+      var a1 = lum(c1), a2 = lum(c2);
+      return (Math.max(a1, a2) + 0.05) / (Math.min(a1, a2) + 0.05);
+    }
+    function guncelle() {
+      byId('rkSv').textContent = s.value;
+      byId('rkLv').textContent = l.value;
+      on.style.color = c.value;
+      on.style.backgroundColor = bg.value;
+      on.style.fontFamily = f.value;
+      on.style.fontSize = s.value + 'px';
+      on.style.lineHeight = l.value + '%';
+      on.style.textAlign = a.value;
+      kod.textContent = '.duyuru {\n  color: ' + c.value + ';\n  background-color: ' + bg.value + ';\n  font-family: ' + f.value + ';\n  font-size: ' + s.value + 'px;\n  line-height: ' + l.value + '%;\n  text-align: ' + a.value + ';\n}';
+      var r1 = Ders.rgb(c.value), r2 = Ders.rgb(bg.value);
+      var k = r1 && r2 ? oran(r1, r2) : 21;
+      if (k < 4.5) {
+        uyari.className = 'rk-uyari kotu';
+        uyari.textContent = 'Dikkat: yazı ile zemin birbirine çok yakın, zor okunur. Tarayıcı yine de çizer.';
+      } else {
+        uyari.className = 'rk-uyari iyi';
+        uyari.textContent = 'Yazı ile zemin arasındaki fark yeterli, rahat okunur.';
+      }
+    }
+    [c, bg, f, a].forEach(function (x) { x.addEventListener('change', guncelle); });
+    [s, l].forEach(function (x) { x.addEventListener('input', guncelle); });
+    guncelle();
+    Ders.predict('simRenk', {
+      q: 'Zemin `yellow`, yazı `white` yapılırsa ne olur?',
+      options: ['Tarayıcı yazıyı kendiliğinden koyulaştırır', 'Tarayıcı bu kuralı atlar', 'Yazı zor okunur, tarayıcı yine de olduğu gibi çizer'],
+      correct: 2,
+      run: function () { c.value = 'white'; bg.value = 'yellow'; guncelle(); },
+      reset: function () { c.value = '#2b2b2b'; bg.value = '#fdf3e7'; f.value = 'Arial, sans-serif'; s.value = 18; l.value = 150; a.value = 'left'; guncelle(); },
+      seen: 'İki değer de geçerli bir renk, bu yüzden tarayıcı kuralı uyguladı ve yazı zeminde kayboldu. Okunaklılığı kontrol etmek sana kalıyor. Şimdi kaydırıcılarla yazı boyunu ve satır aralığını değiştir: yüzde, yazının boyuna göre hesaplanıyor.'
+    });
+  })();
+
+  /* ---------- 4. kutu modeli ---------- */
+  (function () {
+    var rP = byId('rP'), rB = byId('rB'), rM = byId('rM'), stage = byId('bmStage'), hesap = byId('bmHesap');
+    var W = 80, flashT = null;
+    function guncelle(katman) {
+      var p = +rP.value, b = +rB.value, m = +rM.value;
+      byId('vP').textContent = p; byId('vB').textContent = b; byId('vM').textContent = m;
+      byId('dP').textContent = p; byId('dB').textContent = b; byId('dM').textContent = m;
+      byId('dPk').classList.toggle('sifir', p === 0);
+      byId('dBk').classList.toggle('sifir', b === 0);
+      byId('dMk').classList.toggle('sifir', m === 0);
+      Ders.$$('.bm-kutu', stage).forEach(function (k) {
+        k.style.padding = p + 'px';
+        k.style.borderWidth = b + 'px';
+        k.style.margin = m + 'px';
+      });
+      var top = W + 2 * p + 2 * b;
+      hesap.innerHTML = fmt('Bir kutunun ekranda kapladığı genişlik: ' + W + ' + 2 × ' + p + ' + 2 × ' + b + ' = ' + top + ' piksel. İki kutunun arası: ' + m + ' + ' + m + ' = ' + (2 * m) + ' piksel, çünkü iki kutunun da margin\'i var.');
+      Ders.$$('.bm-l').forEach(function (x) { x.classList.remove('flash'); });
+      if (katman) {
+        byId(katman).classList.add('flash');
+        clearTimeout(flashT);
+        flashT = setTimeout(function () { byId(katman).classList.remove('flash'); }, 900);
+      }
+    }
+    rP.addEventListener('input', function () { guncelle('dPk'); });
+    rB.addEventListener('input', function () { guncelle('dBk'); });
+    rM.addEventListener('input', function () { guncelle('dMk'); });
+    guncelle();
+    Ders.predict('simKutu', {
+      q: 'Padding 10\'dan 30 piksele çıkarılırsa kutunun ekranda kapladığı genişlik ne kadar değişir?',
+      options: ['20 piksel büyür', '40 piksel büyür', 'Değişmez, içerik daralır'],
+      correct: 1,
+      run: function () { rP.value = 30; guncelle('dPk'); },
+      reset: function () { rP.value = 10; rB.value = 4; rM.value = 10; guncelle(); },
+      seen: 'Padding kutunun iki yanına birden eklenir: 20 piksel solda, 20 piksel sağda. `width` yalnız içeriğin genişliği, kutunun kapladığı yer width + iki yandaki padding + iki yandaki border. Şimdi margin\'i oynat: kutu büyümüyor, yalnız komşusundan uzaklaşıyor.'
+    });
+  })();
+
+  /* ---------- 5. Flexbox ---------- */
+  (function () {
+    var GRUP = [
+      { k: 'flexDirection', css: 'flex-direction', v: ['row', 'column'] },
+      { k: 'justifyContent', css: 'justify-content', v: ['flex-start', 'center', 'space-between'] },
+      { k: 'alignItems', css: 'align-items', v: ['stretch', 'flex-start', 'center'] },
+      { k: 'gap', css: 'gap', v: ['0', '10px', '24px'] },
+      { k: 'flexWrap', css: 'flex-wrap', v: ['nowrap', 'wrap'], ek: ' (evde dene)' }
+    ];
+    var BAS = { flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'stretch', gap: '10px', flexWrap: 'nowrap', genis: false };
+    var st = {}, son = null;
+    var panel = byId('fxPanel'), stage = byId('fxStage'), kod = byId('fxKod');
+    function kopya() { for (var k in BAS) st[k] = BAS[k]; }
+    kopya();
+    GRUP.forEach(function (g) {
+      var d = Ders.el('div', 'fx-grp');
+      d.setAttribute('role', 'group'); d.setAttribute('aria-label', g.css);
+      var ad = Ders.el('span', 'lbl', g.css + (g.ek || ''));
+      ad.setAttribute('lang', 'en'); /* büyük harfe çevrilirken i harfi İ olmasın */
+      d.appendChild(ad);
+      g.v.forEach(function (v) {
+        var b = Ders.el('button', 'btn', v); b.type = 'button';
+        b.setAttribute('data-k', g.k); b.setAttribute('data-v', v);
+        b.addEventListener('click', function () { st[g.k] = v; son = g.css; ciz(); });
+        d.appendChild(b);
+      });
+      panel.appendChild(d);
+    });
+    var gd = Ders.el('div', 'fx-grp');
+    gd.appendChild(Ders.el('span', 'lbl', 'kutuların genişliği (evde dene)'));
+    var gb = Ders.el('button', 'btn', 'Geniş kutular (width: 45%)'); gb.type = 'button';
+    gb.setAttribute('aria-pressed', 'false');
+    gb.addEventListener('click', function () { st.genis = !st.genis; son = 'width'; ciz(); });
+    gd.appendChild(gb);
+    panel.appendChild(gd);
+    var evde = Ders.el('p', 'small muted');
+    evde.innerHTML = Ders.fmt('Evde: önce "Geniş kutular"a bas, kutular tek sırada sıkışsın. Sonra `flex-wrap: wrap` seç ve sığmayan kutunun alt satıra geçtiğini gör.');
+    panel.appendChild(evde);
+    function ciz() {
+      GRUP.forEach(function (g) { stage.style[g.k] = st[g.k]; });
+      Ders.$$('.fx-k', stage).forEach(function (k) { k.style.width = st.genis ? '45%' : ''; });
+      Ders.$$('[data-k]', panel).forEach(function (b) {
+        b.setAttribute('aria-pressed', st[b.getAttribute('data-k')] === b.getAttribute('data-v') ? 'true' : 'false');
+      });
+      gb.setAttribute('aria-pressed', st.genis ? 'true' : 'false');
+      var satir = ['.kutular {', '  display: flex;'];
+      GRUP.forEach(function (g) { satir.push('  ' + g.css + ': ' + st[g.k] + ';'); });
+      satir.push('}');
+      if (st.genis) { satir.push('.kutu {'); satir.push('  width: 45%;'); satir.push('}'); }
+      kod.innerHTML = satir.map(function (x) {
+        var e = Ders.esc(x);
+        return son && x.indexOf('  ' + son + ':') === 0 ? '<mark class="ln-hot">' + e + '</mark>' : e;
+      }).join('\n');
+    }
+    ciz();
+    Ders.predict('simFlex', {
+      q: 'Önce `flex-direction: column`, sonra `justify-content: center` seçilirse kutular nereye gider?',
+      options: ['Yatayda ortaya toplanırlar', 'Hiçbir şey değişmez', 'Dikeyde ortaya toplanırlar'],
+      correct: 2,
+      run: function () { st.flexDirection = 'column'; st.justifyContent = 'center'; son = 'justify-content'; ciz(); },
+      reset: function () { kopya(); son = null; ciz(); },
+      seen: 'Yön `column` olunca sıra yukarıdan aşağıya akar ve `justify-content` sıranın boyunca, yani dikeyde çalışır: kutular yüksekliğin ortasına toplandı. Kutulara hiç dokunmadık, bütün kurallar kapsayıcıya yazıldı. Şimdi `align-items: center`\'a bas: bu kez yatayda ortalanıyorlar. Sonra `row`\'a dönüp `space-between`\'i dene.'
+    });
+  })();
+
+  /* ---------- 6. medya sorgusu ---------- */
+  (function () {
+    var HTML = '<header><b>Satranç Kulübü</b><nav class="menu"><a href="#">Ana sayfa</a><a href="#">Etkinlikler</a><a href="#">Üyelik</a></nav></header>' +
+      '<div class="kartlar"><div class="kart">Turnuva</div><div class="kart">Açılış dersi</div><div class="kart">Parti analizi</div></div>';
+    var CSS = 'body{margin:0;padding:14px;background:#fdf3e7;color:#2b2b2b;font:15px/1.4 Arial,sans-serif}' +
+      'header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;background:#fff;padding:10px 14px;border-radius:10px}' +
+      '.menu{display:flex;gap:14px}a{color:#b5452b}' +
+      '.kartlar{display:flex;gap:10px;margin-top:12px}' +
+      '.kart{flex:1;background:#fff;border:2px solid #f0c9b8;border-radius:10px;padding:18px 12px;text-align:center}' +
+      '@media (max-width: 600px){.menu{flex-direction:column;gap:4px}.kartlar{flex-direction:column}}';
+    var KOD = ['@media (max-width: 600px) {', '  .menu {', '    flex-direction: column;', '  }', '  .kartlar {', '    flex-direction: column;', '  }', '}'];
+    var r = byId('mqR'), v = byId('mqV'), bilgi = byId('mqBilgi'), view = byId('mqView'), fr = byId('mqFrame'), kod = byId('mqKod');
+    var H = 320;
+    fr.srcdoc = sayfa(CSS, HTML);
+    fr.addEventListener('load', guncelle);
+    function guncelle() {
+      var w = +r.value, alan = view.clientWidth || 300;
+      var k = Math.min(1, alan / w);
+      v.textContent = w;
+      fr.style.width = w + 'px';
+      try {
+        /* önizlemenin yüksekliği içeriğe göre: dar ekranda sayfa uzar */
+        var d = fr.contentDocument;
+        if (d && d.body) { fr.style.height = '200px'; H = Math.max(200, d.documentElement.scrollHeight); }
+      } catch (e) { /* çerçeve henüz hazır değil */ }
+      fr.style.height = H + 'px';
+      fr.style.transform = 'scale(' + k + ')';
+      view.style.height = Math.round(H * k) + 'px';
+      var tut = w <= 600;
+      bilgi.innerHTML = fmt('Koşul `max-width: 600px`: ' + (tut ? 'tutuyor, içerideki kurallar uygulanıyor.' : 'tutmuyor, içerideki kurallar yok sayılıyor.')) +
+        (k < 1 ? ' <span class="muted">(Önizleme ekrana sığsın diye küçültüldü.)</span>' : '');
+      kod.innerHTML = KOD.map(function (x) { var e = Ders.esc(x); return tut ? '<mark class="ln-hot">' + e + '</mark>' : e; }).join('\n');
+    }
+    r.addEventListener('input', guncelle);
+    window.addEventListener('resize', guncelle);
+    guncelle();
+    Ders.predict('simMedya', {
+      q: 'Genişlik 800\'den 500 piksele indirilirse menü ne olur?',
+      options: ['Aynı kalır, yalnız küçülür', 'Bağlantılar alt alta iner', 'Menü kaybolur'],
+      correct: 1,
+      run: function () { r.value = 500; guncelle(); },
+      reset: function () { r.value = 800; guncelle(); },
+      seen: '500 piksel 600\'den dar, koşul tuttu ve içerideki iki kural uygulandı: menü de kartlar da alt alta indi. Kaydırıcıyı 600 ile 610 arasında gidip getir, değişimin tam sınırda olduğunu gör. Tarayıcı koşulu her genişlik değişiminde yeniden kontrol eder.'
+    });
+  })();
+})();
+</script>
+</body>
+</html>

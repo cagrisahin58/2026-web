@@ -44,6 +44,8 @@ Bir web sayfasının aslında bir metin dosyası olduğunu görürsün. Etiket, 
 
 CSS'in ne olduğunu ve HTML'e nasıl bağlandığını öğrenirsin. Seçicilerle hangi öğeyi biçimlendireceğini söylersin. Renk, yazı tipi ve boşluk verirsin. Her öğenin bir kutu olduğunu görürsün: içerik, padding, border, margin. Flexbox ile öğeleri yan yana dizersin. Tek bir media sorgusuyla sayfanı telefonda da düzgün gösterirsin. Kişisel sayfanı biçimlendirir, projenin ilk ekranına görünüş verirsin.
 
+[Hafta 3 ders notu](https://cagrisahin58.github.io/2026-web/weeks/hafta-03/)
+
 ### Hafta 4 · JavaScript ve DOM: sayfayı canlandırmak
 
 YZM103'ten tanıdığın değişken, koşul, döngü, fonksiyon ve diziyi JavaScript'te hızlıca yazarsın. Sonra DOM'u öğrenirsin: tarayıcının sayfayı bellekte tuttuğu ağaç. Bir öğeyi seçer, metnini ve sınıfını değiştirir, tıklama ve yazma olaylarını dinler, formdan değer okur, listeye öğe eklersin. `fetch` ile sunucuya nasıl soru sorulduğunu görürsün. Projenin bir ekranını canlandırırsın.

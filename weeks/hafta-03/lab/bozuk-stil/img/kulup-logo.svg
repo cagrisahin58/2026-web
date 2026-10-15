@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <title>Satranç Kulübü logosu</title>
+  <rect width="200" height="200" fill="#1F3A5F"/>
+  <circle cx="100" cy="100" r="84" fill="none" stroke="#F6D5C4" stroke-width="4"/>
+  <circle cx="100" cy="100" r="74" fill="none" stroke="#F6D5C4" stroke-width="1.5" stroke-dasharray="4 5"/>
+  <path d="M72 146 H128 V136 H121 C119 118 126 106 130 94 C135 79 129 61 113 54 L108 41 L101 53 C86 55 74 66 69 80 L62 93 C59 100 66 105 72 101 L84 94 C89 98 89 104 84 110 C77 119 80 129 81 136 H72 Z" fill="#F6D5C4"/>
+  <circle cx="98" cy="70" r="4" fill="#1F3A5F"/>
+  <rect x="66" y="148" width="68" height="10" rx="3" fill="#F6D5C4"/>
+</svg>

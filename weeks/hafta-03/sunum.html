@@ -1,0 +1,1340 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hafta 3 sunum · CSS: sayfaya görünüş vermek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/sunum.css">
+<style>
+/* Hafta 3 sunumuna özel düzen ve şemalar */
+@property --w{syntax:'<integer>';inherits:true;initial-value:900}
+
+.s > header h2{min-width:0}
+.govde.tek{align-content:center}
+.metin{display:grid;gap:1.8vh;align-content:center}
+.metin code,.kutu code{white-space:nowrap}
+.metin p{margin:0}
+.kodlu{font-family:var(--mono)}
+.kodlu .e{color:var(--theory);font-weight:600}
+.kodlu .n{color:var(--ship)}
+.kodlu .d{color:var(--lab)}
+.kodlu .y{color:var(--muted)}
+.s pre.kod.kod-orta{font-size:clamp(.85rem,1.6vw,1.2rem)}
+.cizik{text-decoration:line-through;text-decoration-thickness:2px;opacity:.6}
+.ornek{display:inline-block;width:1em;height:1em;border-radius:.25em;background:var(--r);vertical-align:-.15em;margin-right:.35em;border:1px solid var(--line)}
+.kutu h3{margin-bottom:.6em}
+.kutu p{margin:.8em 0 0}
+.kutu pre.kod{margin-top:.2em}
+
+/* kapak */
+.yol{display:flex;flex-wrap:wrap;gap:1vw;margin:0;padding:0;list-style:none}
+.s .yol li{margin:0;display:flex;align-items:center;gap:.5em;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.3em .9em .3em .3em;font-size:var(--b2)}
+.yol .no{display:grid;place-items:center;width:1.7em;height:1.7em;border-radius:50%;background:var(--lab);color:#fff;font:600 .85em var(--mono)}
+
+/* sınıfça */
+.s.sinifca .govde{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:start}
+.s.sinifca pre.kod{font-size:clamp(.85rem,1.6vw,1.2rem)}
+.s.sinifca .secenek{padding:1.1vh 1.3vw;font-size:clamp(1rem,1.9vw,1.4rem)}
+.s.sinifca .cevap{font-size:var(--b2);margin-top:1.8vh;line-height:1.4}
+.s.sinifca .cevap p{margin:0}
+.s.sinifca .soru-not{margin-top:1.4vh}
+
+/* şimdi sen */
+.s.sen .gorev{grid-template-columns:minmax(0,1fr) minmax(0,24%);gap:2.4vw;min-height:0}
+.s.sen .sayac{font-size:clamp(1.8rem,4.4vw,3.4rem);min-width:0;width:100%;padding:1.2vh .8vw}
+.s.sen pre.kod{font-size:clamp(.8rem,1.45vw,1.12rem);padding:1.1vh .8vw;line-height:1.45;margin-top:.7vh}
+.yan{display:grid;gap:1.8vh;align-content:start}
+.yan p{margin:0;font-size:var(--b2);line-height:1.4}
+.ne{display:block;font:600 clamp(.68rem,1.05vw,.85rem)/1.5 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--lab)}
+.ne.dikkat{color:var(--ship)}
+.adimlar{margin:0;padding-left:1.4em;display:grid;gap:1.6vh;font-size:var(--b2);line-height:1.4;align-content:start}
+.s .adimlar li{margin:0;padding-left:.2em}
+.adimlar li::marker{font-weight:700;color:var(--lab)}
+.adimlar.iki-sutun{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);column-gap:2.4vw;align-items:start}
+.s.sen .ek{display:block;margin:1.4vh 0 0;font-size:var(--b2);color:var(--muted)}
+
+/* kontrol tablosu ve özet */
+.tablo{width:100%;border-collapse:collapse;font-size:var(--b2)}
+.tablo th{text-align:left;font:600 clamp(.68rem,1.05vw,.85rem) var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--ink);padding:.4em .6em}
+.tablo td{border-bottom:1px solid var(--line);padding:.3em .6em;vertical-align:top;line-height:1.35}
+.tablo td:first-child{width:38%;font-weight:600}
+.karolar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.4vh 1.4vw;align-self:center}
+.karo{background:var(--surface);border:1px solid var(--line);border-radius:1vw;padding:1.4vh 1.2vw;display:grid;gap:.5vh;align-content:start}
+.karo h3{font-size:var(--b2)}
+.teslim{--c:var(--ai);align-self:center}
+.teslim p:first-of-type{margin-top:0}
+.karo .no{font:600 clamp(.7rem,1.1vw,.9rem) var(--mono);color:var(--ai)}
+.karo h3{margin:0}
+.karo code{justify-self:start;font-size:.82em}
+.s .alt-not{margin:2.6vh 0 0;font-size:var(--b2);max-width:none}
+
+/* ortak şema parçaları */
+.sahne{font-size:var(--b2)}
+.sahne .yeniden{z-index:4}
+@keyframes cik{from{opacity:0;transform:translateY(.6em)}to{opacity:1;transform:none}}
+@keyframes belir{from{opacity:0}to{opacity:1}}
+@keyframes ciz{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.tar{height:100%;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:.8vw;overflow:hidden;background:#fff}
+.tar-bar{display:flex;align-items:center;gap:.8em;padding:.6vh 1vw;background:var(--surface-2);border-bottom:1px solid var(--line);font:clamp(.65rem,1.05vw,.85rem)/1.4 var(--mono);color:var(--muted);white-space:nowrap}
+.tar-bar i{display:block;flex:none;width:.65em;height:.65em;border-radius:50%;background:#e0645a;box-shadow:1em 0 0 #e8b33f,2em 0 0 #5bb974;margin-right:2em}
+
+/* A. aynı HTML, bir satır fark */
+.sahne.ah{height:54vh;padding:1.6vh 1.4vw}
+.ah-s{flex:1;min-height:0;background:#fff;color:#000;font:clamp(.8rem,1.45vw,1.1rem)/1.35 "Times New Roman",Times,serif;padding:1.4vh 1.2vw;display:flex;flex-direction:column;gap:.9vh}
+.ah-header{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:.25em;padding:0;border-radius:0;background:rgba(255,255,255,0)}
+.ah-h1{font-weight:700;font-size:1.55em;line-height:1.1;color:#000}
+.ah-nav{display:flex;gap:.3em}
+.ah-a{color:#0000ee;text-decoration:underline}
+.ah-h2{font-weight:700;font-size:1.2em;color:#000}
+.s .ah-ul{display:flex;flex-direction:column;margin:0;padding:0 0 0 1.3em;gap:0}
+.s .ah-ul li{list-style-type:disc;margin:0;padding:0;border:2px solid rgba(240,201,184,0);border-radius:0;background:rgba(255,255,255,0)}
+.ah-link{position:absolute;right:2.4vw;bottom:2.6vh;z-index:3;background:var(--ship-soft);color:var(--ink);border:2px solid var(--ship);border-radius:.5em;padding:.3em .6em;font-size:clamp(.7rem,1.2vw,.95rem)}
+.sahne.oynuyor .ah-link{animation:cik .5s ease-out .6s both}
+.sahne.oynuyor .ah-s{animation:ah-s .8s ease 1.6s both}
+.sahne.oynuyor .ah-header{animation:ah-header .8s ease 1.6s both}
+.sahne.oynuyor .ah-h1,.sahne.oynuyor .ah-h2,.sahne.oynuyor .ah-a{animation:ah-vurgu .8s ease 1.6s both}
+.sahne.oynuyor .ah-nav{animation:ah-nav .8s ease 1.6s both}
+.sahne.oynuyor .ah-ul{animation:ah-ul .8s ease 1.6s both}
+.sahne.oynuyor .ah-ul li{animation:ah-li .8s ease 1.6s both}
+@keyframes ah-s{to{background:#fdf3e7;color:#2b2b2b;font-family:Arial,Helvetica,sans-serif}}
+@keyframes ah-header{to{flex-direction:row;align-items:center;justify-content:space-between;background:#fff;padding:.6em .9em;border-radius:.7em}}
+@keyframes ah-vurgu{to{color:#b5452b}}
+@keyframes ah-nav{to{gap:1.1em}}
+@keyframes ah-ul{to{flex-direction:row;padding-left:0;gap:.6em}}
+@keyframes ah-li{to{list-style-type:none;background:#fff;border-color:#f0c9b8;padding:.35em .8em;border-radius:.6em}}
+
+/* B. iki sayfa, bir stil dosyası */
+.sahne.cd{height:46vh;display:grid;place-items:center}
+.cd-svg{width:100%;height:100%}
+.cd-kart{fill:var(--surface-2);stroke:var(--line);stroke-width:2}
+.cd-kart-css{fill:var(--ship-soft);stroke:var(--ship)}
+.cd-ad{font:600 20px var(--mono);fill:var(--ink)}
+.cd-kod{font:15px var(--mono);fill:var(--muted)}
+.cd-mini{fill:#fff;stroke:var(--line)}
+.cd-bas{fill:#111}
+.cd-sat{fill:#9aa3b2}
+.cd-l{fill:none;stroke:var(--theory);stroke-width:3;stroke-dasharray:1;stroke-dashoffset:1}
+.sahne.oynuyor .cd-css{animation:belir .5s ease-out .3s both}
+.sahne.oynuyor .cd-l1{animation:ciz .6s ease-out 1s both}
+.sahne.oynuyor .cd-l2{animation:ciz .6s ease-out 1.5s both}
+.sahne.oynuyor .cd-mini{animation:cd-zemin .6s ease 2.3s both}
+.sahne.oynuyor .cd-bas{animation:cd-bas .6s ease 2.3s both}
+@keyframes cd-zemin{to{fill:#fdf3e7}}
+@keyframes cd-bas{to{fill:#b5452b}}
+
+/* C. iki istek */
+.sahne.is{height:50vh;display:grid;place-items:center}
+.is-svg{width:100%;height:100%}
+.is-bas{font:600 19px var(--body);fill:var(--muted)}
+.is-pano{fill:var(--surface-2);stroke:var(--line);stroke-width:2}
+.is-sayfa{opacity:0}
+.is-zemin{fill:#fff;stroke:var(--line)}
+.is-ust{fill:rgba(255,255,255,0)}
+.is-h1{fill:#111}
+.is-sat{fill:#8a93a3}
+.is-kart{fill:rgba(255,255,255,0);stroke:rgba(240,201,184,0);stroke-width:2}
+.is-link{opacity:0}
+.is-link rect{fill:var(--ship-soft);stroke:var(--ship);stroke-width:2}
+.is-link text{font:600 15px var(--mono);fill:var(--ink)}
+.is-dosya{fill:var(--surface);stroke:var(--line);stroke-width:2}
+.is-css{stroke:var(--ship)}
+.is-ad{font:600 17px var(--mono);fill:var(--ink)}
+.is-o{opacity:0}
+.is-o path{fill:none;stroke-width:3;stroke-dasharray:1;stroke-dashoffset:1}
+.is-o text{font:17px var(--body);fill:var(--ink);text-anchor:middle}
+.is-git path{stroke:var(--theory)}
+.is-git polygon{fill:var(--theory)}
+.is-gel path{stroke:var(--lab)}
+.is-gel polygon{fill:var(--lab)}
+.sahne.oynuyor .is-o1{animation:belir .3s ease .3s both}
+.sahne.oynuyor .is-o1 path{animation:ciz .6s ease .3s both}
+.sahne.oynuyor .is-o2{animation:belir .3s ease 1.1s both}
+.sahne.oynuyor .is-o2 path{animation:ciz .6s ease 1.1s both}
+.sahne.oynuyor .is-sayfa{animation:belir .4s ease 1.7s both}
+.sahne.oynuyor .is-link{animation:belir .4s ease 2.1s both}
+.sahne.oynuyor .is-o3{animation:belir .3s ease 2.6s both}
+.sahne.oynuyor .is-o3 path{animation:ciz .6s ease 2.6s both}
+.sahne.oynuyor .is-o4{animation:belir .3s ease 3.4s both}
+.sahne.oynuyor .is-o4 path{animation:ciz .6s ease 3.4s both}
+.sahne.oynuyor .is-zemin{animation:is-zemin .6s ease 4.1s both}
+.sahne.oynuyor .is-ust{animation:is-ust .6s ease 4.1s both}
+.sahne.oynuyor .is-h1{animation:is-h1 .6s ease 4.1s both}
+.sahne.oynuyor .is-kart{animation:is-kart .6s ease 4.1s both}
+@keyframes is-zemin{to{fill:#fdf3e7}}
+@keyframes is-ust{to{fill:#fff}}
+@keyframes is-h1{to{fill:#b5452b}}
+@keyframes is-kart{to{fill:#fff;stroke:#f0c9b8}}
+
+/* D. kuralın parçaları */
+.sahne.kr{height:40vh;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:2vw;align-items:center}
+.kr-kod{font-size:clamp(1rem,2vw,1.5rem);display:grid;gap:.35em}
+.kr-s{display:flex;align-items:center;gap:1em}
+.s .kr-s code{background:none;padding:.1em .3em;border-radius:.3em;white-space:pre;font-size:1em}
+.kr-et{font-family:var(--body);font-size:.7em;color:var(--ship);border-left:3px solid var(--ship);padding-left:.5em}
+.kr-on{border:1px solid var(--line);border-radius:.8vw;background:#fff;padding:3vh 1.4vw;text-align:left}
+.kr-baslik{display:block;font:700 clamp(1.3rem,2.6vw,2rem)/1.2 "Times New Roman",Times,serif;color:#111}
+.sahne.oynuyor .kr-1 code{animation:kr-yak 1s ease .3s both}
+.sahne.oynuyor .kr-1 .kr-et{animation:cik .4s ease .4s both}
+.sahne.oynuyor .kr-2 code{animation:kr-yak 1s ease 1.2s both}
+.sahne.oynuyor .kr-2 .kr-et{animation:cik .4s ease 1.3s both}
+.sahne.oynuyor .kr-3 code{animation:kr-yak 1s ease 2.4s both}
+.sahne.oynuyor .kr-3 .kr-et{animation:cik .4s ease 2.5s both}
+.sahne.oynuyor .kr-4 code{animation:kr-yak 1s ease 3.4s both}
+.sahne.oynuyor .kr-4 .kr-et{animation:cik .4s ease 3.5s both}
+.sahne.oynuyor .kr-baslik{animation:kr-renk .5s ease 1.7s both}
+.sahne.oynuyor .kr-on{animation:kr-orta .1s linear 2.9s both}
+@keyframes kr-yak{0%{background:transparent}30%,70%{background:var(--ship-soft)}100%{background:transparent}}
+@keyframes kr-renk{to{color:crimson}}
+@keyframes kr-orta{to{text-align:center}}
+
+/* E. seçici eşleştirme */
+.sahne.sc{height:52vh;display:grid;grid-template-rows:auto 1fr;gap:1.4vh;padding-top:2.2vh}
+.sc-secici{position:relative;height:2.1em;font-size:clamp(1rem,1.9vw,1.4rem)}
+.s .sc-secici code{position:absolute;left:0;top:0;opacity:0;background:var(--ship-soft);color:var(--ink);border:2px solid var(--ship);padding:.12em .6em;border-radius:.4em;font-size:1em;white-space:nowrap}
+.sc-secici small{font-family:var(--body);color:var(--muted);margin-left:.6em;font-size:.75em}
+.sc-kod{font-size:clamp(.8rem,1.45vw,1.1rem);line-height:1.75;background:var(--surface-2);border-radius:.6vw;padding:1vh 0;overflow:hidden}
+.sc-l{padding:0 1vw;white-space:pre;border-left:4px solid transparent}
+.sahne.oynuyor .sc-a{animation:sc-gec 2s ease .3s both}
+.sahne.oynuyor .sc-b{animation:sc-gec 2s ease 2.5s both}
+.sahne.oynuyor .sc-c{animation:cik .4s ease 4.7s both}
+.sahne.oynuyor .la{animation:sc-yan 2s ease .5s both}
+.sahne.oynuyor .lb{animation:sc-yan 2s ease 2.7s both}
+.sahne.oynuyor .lb.ikinci{animation-delay:2.9s}
+.sahne.oynuyor .lc{animation:sc-kal .4s ease 4.9s both}
+.sahne.oynuyor .lc.ikinci{animation-delay:5.1s}
+@keyframes sc-gec{0%{opacity:0}12%,85%{opacity:1}100%{opacity:0}}
+@keyframes sc-yan{0%{background:transparent;border-left-color:transparent}12%,85%{background:rgba(240,169,59,.32);border-left-color:#F0A93B}100%{background:transparent;border-left-color:transparent}}
+@keyframes sc-kal{to{background:rgba(240,169,59,.32);border-left-color:#F0A93B}}
+
+/* F. altı özellik */
+.sahne.rk{height:44vh;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:2.5vw;align-items:center}
+.rk-kod{font-size:clamp(.85rem,1.6vw,1.2rem);line-height:1.6;white-space:pre}
+.rk-on{background:#fff;border:1px solid var(--line);border-radius:.8vw;padding:2vh 1.4vw;min-height:26vh;display:flex;align-items:center}
+.s .rk-on p{margin:0;max-width:none;width:100%;font-family:"Times New Roman",Times,serif;font-size:clamp(.9rem,1.6vw,1.2rem);line-height:1.15;color:#000;text-align:left}
+.sahne.oynuyor .r1{animation:cik .4s ease .4s both}
+.sahne.oynuyor .r2{animation:cik .4s ease 1.15s both}
+.sahne.oynuyor .r3{animation:cik .4s ease 1.9s both}
+.sahne.oynuyor .r4{animation:cik .4s ease 2.65s both}
+.sahne.oynuyor .r5{animation:cik .4s ease 3.4s both}
+.sahne.oynuyor .r6{animation:cik .4s ease 4.15s both}
+.sahne.oynuyor .rk-on{animation:rk-bg .5s ease 1.25s both}
+.sahne.oynuyor .rk-on p{animation:rk-c .5s ease .5s both,rk-f .1s linear 2s both,rk-s .5s ease 2.75s both,rk-a .1s linear 3.5s both,rk-lh .5s ease 4.25s both}
+@keyframes rk-c{to{color:navy}}
+@keyframes rk-bg{to{background:#fdf3e7}}
+@keyframes rk-f{to{font-family:Arial,Helvetica,sans-serif}}
+@keyframes rk-s{to{font-size:clamp(1.05rem,1.95vw,1.45rem)}}
+@keyframes rk-a{to{text-align:center}}
+@keyframes rk-lh{to{line-height:1.5}}
+
+/* G. body'den içeri geçenler */
+.sahne.bd{height:52vh;display:grid;grid-template-rows:auto 1fr;gap:1.6vh;padding-top:7vh}
+.bd-kod{display:grid;gap:.6vh;font-size:clamp(.75rem,1.3vw,1rem)}
+.s .bd-kod code{background:var(--surface-2);padding:.3em .6em;border-radius:.4em;justify-self:start;font-size:1em}
+.bd-body{position:relative;background:#fff;border:2px dashed var(--line);border-radius:.8vw;padding:3.4vh 1.4vw 1.4vh;display:grid;gap:.9vh;align-content:start;font:clamp(.85rem,1.5vw,1.15rem)/1.35 "Times New Roman",Times,serif;color:#000}
+.bd-ad{position:absolute;top:.5vh;left:.8vw;font:clamp(.65rem,1vw,.8rem) var(--mono);color:var(--muted)}
+.bd-h1{font-weight:700;font-size:1.4em}
+.bd-a{color:#0000ee;text-decoration:underline}
+.bd-not{font:clamp(.65rem,1vw,.8rem) var(--body);background:var(--ship-soft);color:var(--ship);border-radius:.3em;padding:.1em .4em;margin-left:.5em;opacity:0}
+.sahne.oynuyor .bd-k1{animation:cik .4s ease .3s both}
+.sahne.oynuyor .bd-1{animation:bd-in .5s ease .9s both}
+.sahne.oynuyor .bd-2{animation:bd-in .5s ease 1.15s both}
+.sahne.oynuyor .bd-3{animation:bd-in .5s ease 1.4s both}
+.sahne.oynuyor .bd-4{animation:bd-in .5s ease 1.65s both}
+.sahne.oynuyor .bd-not{animation:bd-not 1.8s ease 2.1s both}
+.sahne.oynuyor .bd-k2{animation:cik .4s ease 3.1s both}
+.sahne.oynuyor .bd-a{animation:bd-a .5s ease 3.5s both}
+@keyframes bd-in{to{color:navy;font-family:Arial,Helvetica,sans-serif}}
+@keyframes bd-not{0%{opacity:0}15%,75%{opacity:1}100%{opacity:0}}
+@keyframes bd-a{to{color:#b5452b}}
+
+/* H. kutunun katmanları */
+.sahne.km{height:46vh;display:grid;align-content:center;padding-top:6vh}
+.km-m{font:clamp(.75rem,1.3vw,1rem)/1.2 var(--mono);color:#121A2B}
+.km-m,.km-b,.km-p{position:relative;padding:3.8vh 2.2vw 1.8vh;border-radius:.4vw}
+.km-m{background:#F9CC9D;border:2px dashed #9C6A33}
+.km-b{background:#FDDD9B;border:2px solid #3A3A3A}
+.km-p{background:#C3D08B;border:2px dashed #5E6B26}
+.km-c{background:#8CB6C0;padding:2.4vh 1vw;text-align:center;font-weight:600;border-radius:.3vw}
+.km-ad{position:absolute;top:.8vh;left:.8vw}
+.km-v{position:absolute;top:.8vh;right:.8vw;font-weight:600}
+.sahne.oynuyor .km-m{animation:km .5s ease .3s both}
+.sahne.oynuyor .km-b{animation:km .5s ease 1.1s both}
+.sahne.oynuyor .km-p{animation:km .5s ease 1.9s both}
+.sahne.oynuyor .km-c{animation:km .5s ease 2.7s both}
+@keyframes km{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+
+/* I. toplam genişlik */
+.sahne.tp{height:38vh;display:grid;align-content:center}
+.tp-izgara{display:grid;grid-template-columns:7fr 3.5fr 9fr 61fr 9fr 3.5fr 7fr;row-gap:1vh;font:clamp(.75rem,1.35vw,1.05rem)/1.2 var(--mono)}
+.tp-et{text-align:center;align-self:end;white-space:nowrap}
+.tp-s{display:block;height:7vh}
+.tp-s.tp-m{background:#F9CC9D;border:1px dashed #9C6A33}
+.tp-s.tp-b{background:#3A3A3A}
+.tp-s.tp-p{background:#C3D08B}
+.tp-s.tp-c{background:#8CB6C0}
+.tp-et.tp-m{color:var(--muted)}
+.tp-ayrac{grid-column:2 / 7;border:2px solid var(--ink);border-top:0;height:1.6vh;position:relative;margin-bottom:4.6vh}
+.tp-ayrac span{position:absolute;left:50%;top:2.2vh;transform:translateX(-50%);white-space:nowrap;font-weight:600;font-size:1.1em}
+.tp-dis{grid-column:1 / 8;text-align:center;color:var(--muted);font-family:var(--body)}
+.sahne.oynuyor .tp-c{animation:cik .4s ease .3s both}
+.sahne.oynuyor .tp-p{animation:cik .4s ease 1s both}
+.sahne.oynuyor .tp-b{animation:cik .4s ease 1.7s both}
+.sahne.oynuyor .tp-ayrac{animation:cik .4s ease 2.4s both}
+.sahne.oynuyor .tp-m,.sahne.oynuyor .tp-dis{animation:cik .4s ease 3.2s both}
+
+/* J. padding ve margin */
+.sahne.bs{height:44vh;display:grid;grid-template-rows:1fr auto auto;gap:1vh;padding-bottom:2.4vh}
+.bs-sira{display:flex;justify-content:center;align-items:center;background:repeating-linear-gradient(45deg,var(--surface-2) 0 10px,transparent 10px 20px);border-radius:.6vw}
+.bs-k{background:#fff;border:2px solid #f0c9b8;border-radius:.6em;padding:.2em .3em;margin:0;font:600 clamp(.9rem,1.6vw,1.2rem) Arial,Helvetica,sans-serif;color:#2b2b2b}
+.s .bs-et{margin:0;opacity:0}
+.sahne.oynuyor .bs-k{animation:bs-p 1s ease .6s both,bs-m 1s ease 2.5s both}
+.sahne.oynuyor .bs-e1{animation:cik .4s ease .6s both}
+.sahne.oynuyor .bs-e2{animation:cik .4s ease 2.5s both}
+@keyframes bs-p{to{padding:1.3em 1.6em}}
+@keyframes bs-m{to{margin:0 1.4em}}
+
+/* K. display: flex */
+.sahne.fx{height:42vh;padding-top:6vh}
+.fx-kap{position:relative;height:25.5vh;border:2px dashed var(--theory);border-radius:.6vw;background:var(--theory-soft)}
+.fx-ad{position:absolute;top:-1.6em;left:0;font:clamp(.7rem,1.1vw,.9rem) var(--mono);color:var(--theory)}
+.fx-cip{position:absolute;top:-1.75em;font:600 clamp(.7rem,1.1vw,.9rem) var(--mono);background:var(--ship-soft);color:var(--ship);border:1px solid var(--ship);border-radius:.3em;padding:.05em .4em;opacity:0;white-space:nowrap}
+.fx-c1{left:8.5em}
+.fx-c2{left:18em}
+.fx-k{position:absolute;height:6.5vh;display:flex;align-items:center;padding:0 1vw;background:var(--lab);color:#fff;border-radius:.5vw;font:600 clamp(.85rem,1.5vw,1.15rem) var(--body);white-space:nowrap;overflow:hidden}
+.fx-1{top:1.5vh;left:2%;width:96%}
+.fx-2{top:9.5vh;left:2%;width:96%}
+.fx-3{top:17.5vh;left:2%;width:96%}
+.sahne.oynuyor .fx-kap{animation:fx-kap 3.4s ease .4s both}
+.sahne.oynuyor .fx-1{animation:fx-1 3.4s ease .4s both}
+.sahne.oynuyor .fx-2{animation:fx-2 3.4s ease .4s both}
+.sahne.oynuyor .fx-3{animation:fx-3 3.4s ease .4s both}
+.sahne.oynuyor .fx-c1{animation:cik .4s ease .9s both}
+.sahne.oynuyor .fx-c2{animation:cik .4s ease 2.6s both}
+@keyframes fx-kap{0%,15%{height:25.5vh}50%,100%{height:9.5vh}}
+@keyframes fx-1{0%,15%{top:1.5vh;left:2%;width:96%}50%,100%{top:1.5vh;left:2%;width:20%}}
+@keyframes fx-2{0%,15%{top:9.5vh;left:2%;width:96%}50%,65%{top:1.5vh;left:22%;width:28%}85%,100%{top:1.5vh;left:24%;width:28%}}
+@keyframes fx-3{0%,15%{top:17.5vh;left:2%;width:96%}50%,65%{top:1.5vh;left:50%;width:17%}85%,100%{top:1.5vh;left:54%;width:17%}}
+
+/* L. justify-content */
+.sahne.js{height:32vh;display:grid;grid-template-rows:auto 1fr;gap:1.4vh;padding-top:2.4vh}
+.js-deger{position:relative;height:2.1em;font-size:clamp(.85rem,1.5vw,1.15rem)}
+.s .js-deger code{position:absolute;left:0;top:0;opacity:0;background:var(--ship-soft);border:2px solid var(--ship);color:var(--ink);font-size:1em;padding:.15em .6em;border-radius:.4em;white-space:nowrap}
+.s .js-deger .js-1{opacity:1}
+.js-kap{position:relative;border:2px dashed var(--theory);border-radius:.6vw;background:var(--theory-soft);min-height:11vh}
+.js-k{position:absolute;top:50%;transform:translateY(-50%);height:6.5vh;display:flex;align-items:center;justify-content:center;background:var(--lab);color:#fff;border-radius:.5vw;font:600 clamp(.8rem,1.4vw,1.1rem) var(--body);white-space:nowrap;overflow:hidden}
+.js-k1{left:2%;width:18%}
+.js-k2{left:22%;width:26%}
+.js-k3{left:50%;width:16%}
+.sahne.oynuyor .js-k1{animation:js-k1 6s ease .3s both}
+.sahne.oynuyor .js-k2{animation:js-k2 6s ease .3s both}
+.sahne.oynuyor .js-k3{animation:js-k3 6s ease .3s both}
+.sahne.oynuyor .js-1{animation:js-1 6s linear .3s both}
+.sahne.oynuyor .js-2{animation:js-2 6s linear .3s both}
+.sahne.oynuyor .js-3{animation:js-3 6s linear .3s both}
+@keyframes js-k1{0%,28%{left:2%}33%,62%{left:18%}67%,100%{left:2%}}
+@keyframes js-k2{0%,28%{left:22%}33%,100%{left:38%}}
+@keyframes js-k3{0%,28%{left:50%}33%,62%{left:66%}67%,100%{left:82%}}
+@keyframes js-1{0%,28%{opacity:1}31%,100%{opacity:0}}
+@keyframes js-2{0%,29%{opacity:0}33%,62%{opacity:1}65%,100%{opacity:0}}
+@keyframes js-3{0%,63%{opacity:0}67%,100%{opacity:1}}
+
+/* M. iki kapsayıcı */
+.sahne.hf{height:48vh;display:grid;align-content:center;gap:1.4vh;padding-top:4.4vh}
+.hf-header{position:relative;height:19vh;border:2px dashed var(--line);border-radius:.6vw;background:#fff;font:clamp(.85rem,1.5vw,1.15rem)/1.2 Arial,Helvetica,sans-serif;color:#2b2b2b;margin-bottom:.8vh}
+.hf-ad{position:absolute;top:-1.5em;left:0;font:clamp(.65rem,1vw,.85rem) var(--mono);color:var(--theory)}
+.hf-h1{position:absolute;left:3%;top:4vh;font-weight:700;font-size:1.45em;color:#b5452b;white-space:nowrap}
+.hf-nav{position:absolute;left:3%;top:11vh;width:36%;padding:.35em .5em;border:2px dashed transparent;border-radius:.4vw;white-space:nowrap}
+.hf-ad2{position:absolute;top:-1.45em;left:0;font:clamp(.6rem,.95vw,.8rem) var(--mono);color:var(--lab);opacity:0}
+.hf-a{color:#b5452b;text-decoration:underline}
+.hf-a2{margin-left:.3em}
+.s .hf-cip{justify-self:start;font-size:clamp(.7rem,1.2vw,.95rem);background:var(--surface-2);padding:.3em .6em}
+.sahne.oynuyor .hf-header{animation:hf-kap .8s ease .9s both}
+.sahne.oynuyor .hf-h1{animation:hf-h1 .8s ease .9s both}
+.sahne.oynuyor .hf-nav{animation:hf-nav .8s ease .9s both,hf-nav2 .4s ease 2.5s both}
+.sahne.oynuyor .hf-ad2{animation:cik .4s ease 2.5s both}
+.sahne.oynuyor .hf-a2{animation:hf-gap .6s ease 2.7s both}
+.sahne.oynuyor .hf-c1{animation:cik .4s ease .7s both}
+.sahne.oynuyor .hf-c2{animation:cik .4s ease 2.5s both}
+@keyframes hf-kap{to{border-color:var(--theory);height:10vh}}
+@keyframes hf-h1{to{top:2.9vh}}
+@keyframes hf-nav{to{left:61%;top:2.2vh}}
+@keyframes hf-nav2{to{border-color:var(--lab)}}
+@keyframes hf-gap{to{margin-left:1em}}
+
+/* N. medya sorgusu */
+.sahne.md{height:54vh;display:grid;grid-template-rows:1fr auto;gap:1.4vh;padding-top:3.6vh}
+.md-alan{position:relative;min-height:0}
+.md-tar{position:relative;z-index:1;width:100%;height:100%;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:.6vw;overflow:hidden;background:#fff}
+.md-esik{position:absolute;top:-2.4vh;bottom:-.6vh;left:66.4%;border-left:2px dashed var(--ship);z-index:2}
+.md-esik span{position:absolute;top:-.2vh;left:.4em;font:600 clamp(.65rem,1vw,.85rem) var(--mono);color:var(--ship);white-space:nowrap}
+.md-sayi::after{counter-reset:w var(--w);content:counter(w) " piksel"}
+.md-sayfa{flex:1;min-height:0;background:#fdf3e7;padding:1.2vh 1vw;font:clamp(.7rem,1.2vw,.95rem)/1.3 Arial,Helvetica,sans-serif;color:#2b2b2b;display:grid;gap:1vh;align-content:start;overflow:hidden}
+.md-h{font-weight:700;color:#b5452b;font-size:1.3em;white-space:nowrap}
+.md-kartlar{display:flex;flex-direction:row;gap:.6em}
+.md-kartlar span{flex:1;min-width:0;background:#fff;border:2px solid #f0c9b8;border-radius:.5em;padding:.6em .7em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s .md-durum{margin:0;display:grid;max-width:none}
+.md-durum span{grid-area:1 / 1}
+.md-d2{opacity:0;color:var(--lab);font-weight:600}
+.sahne.oynuyor .md-tar{animation:md-dar 3.6s linear .4s both}
+.sahne.oynuyor .md-sayi{animation:md-w 3.6s linear .4s both}
+.sahne.oynuyor .md-kartlar{animation:md-sutun 3.6s linear .4s both}
+.sahne.oynuyor .md-d1{animation:md-d1 3.6s linear .4s both}
+.sahne.oynuyor .md-d2{animation:md-d2 3.6s linear .4s both}
+@keyframes md-dar{to{width:44%}}
+@keyframes md-w{from{--w:900}to{--w:400}}
+@keyframes md-sutun{0%,59.9%{flex-direction:row}60%,100%{flex-direction:column}}
+@keyframes md-d1{0%,59.9%{opacity:1}60%,100%{opacity:0}}
+@keyframes md-d2{0%,59.9%{opacity:0}60%,100%{opacity:1}}
+
+/* O. viewport */
+.sahne.vp{height:54vh;display:flex;justify-content:center;align-items:center;gap:2.5vw;padding-top:3vh}
+.vp-tel{margin:0;display:grid;gap:1vh;justify-items:center}
+.vp-ekran{width:20vh;height:38vh;border:.9vh solid #1d2535;border-radius:2.4vh;overflow:hidden;background:#fdf3e7;position:relative}
+.vp-tel figcaption{font:clamp(.7rem,1.15vw,.9rem) var(--mono);color:var(--muted);white-space:nowrap}
+.vp-masa{position:absolute;left:0;top:0;width:300%;padding:1.4vh;transform-origin:0 0;font:clamp(.75rem,1.3vw,1rem)/1.3 Arial,Helvetica,sans-serif;color:#2b2b2b;display:grid;gap:1vh}
+.vp-ust{display:flex;justify-content:space-between;background:#fff;border-radius:.6em;padding:.5em .8em}
+.vp-ust span:first-child,.vp-mobil .vp-ad{font-weight:700;color:#b5452b}
+.vp-sira{display:flex;gap:.6em}
+.vp-sira span,.vp-mobil .vp-k{flex:1;background:#fff;border:2px solid #f0c9b8;border-radius:.5em;padding:.5em}
+.s .vp-masa p{margin:0;max-width:none}
+.vp-mobil{padding:1.4vh;display:grid;gap:.8vh;font:clamp(.75rem,1.3vw,1rem)/1.3 Arial,Helvetica,sans-serif;color:#2b2b2b}
+.sahne.oynuyor .vp-masa{animation:vp-kucul 1s ease .6s both}
+.sahne.oynuyor .vp-mobil > span{animation:cik .4s ease 1.8s both}
+.sahne.oynuyor .vp-mobil > span:nth-child(2){animation-delay:1.95s}
+.sahne.oynuyor .vp-mobil > span:nth-child(3){animation-delay:2.1s}
+.sahne.oynuyor .vp-mobil > span:nth-child(4){animation-delay:2.25s}
+.sahne.oynuyor .vp-mobil > span:nth-child(5){animation-delay:2.4s}
+@keyframes vp-kucul{to{transform:scale(.3334)}}
+
+/* P. yayın */
+.sahne.yy{height:46vh;display:grid;grid-template-columns:minmax(0,1fr) 3vw minmax(0,1.15fr) 3vw auto;align-items:center;gap:.8vw}
+.yy-kol{display:grid;gap:1vh;background:var(--surface-2);border-radius:.6vw;padding:1.6vh 1vw;font-size:clamp(.7rem,1.15vw,.95rem)}
+.yy-bas{font:600 clamp(.68rem,1.1vw,.9rem)/1.3 var(--mono);color:var(--muted);margin-bottom:.4vh}
+.s .yy-kol code{background:var(--surface);border:1px solid var(--line);padding:.35em .6em;font-size:1em}
+.yy-msj{font-size:.95em;color:var(--lab);font-weight:600}
+.yy-ok{display:block;height:3px;background:var(--theory);transform-origin:left center;position:relative}
+.yy-ok::after{content:"";position:absolute;right:-2px;top:-5px;border:6.5px solid transparent;border-left:9px solid var(--theory);border-right:0}
+.yy-tel{width:15vh;height:28vh;border:.8vh solid #1d2535;border-radius:2vh;overflow:hidden}
+.yy-ekran{height:100%;background:#fff;padding:1.2vh;display:grid;gap:.9vh;align-content:start}
+.yy-h{display:block;height:1.4vh;width:70%;border-radius:.3vh;background:#222}
+.yy-c{display:block;height:3.6vh;border-radius:.6vh;background:rgba(255,255,255,0);border:2px solid #c9ced8}
+.sahne.oynuyor .yy-ok1{animation:yy-ok .5s ease .2s both}
+.sahne.oynuyor .yy-r1{animation:cik .4s ease .6s both}
+.sahne.oynuyor .yy-r2{animation:cik .4s ease .9s both}
+.sahne.oynuyor .yy-r3{animation:cik .4s ease 1.2s both}
+.sahne.oynuyor .yy-msj{animation:cik .4s ease 1.7s both}
+.sahne.oynuyor .yy-ok2{animation:yy-ok .5s ease 2.2s both}
+.sahne.oynuyor .yy-ekran{animation:yy-zemin .6s ease 2.8s both}
+.sahne.oynuyor .yy-h{animation:yy-h .6s ease 2.8s both}
+.sahne.oynuyor .yy-c{animation:yy-c .6s ease 2.8s both}
+@keyframes yy-ok{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes yy-zemin{to{background:#fdf3e7}}
+@keyframes yy-h{to{background:#b5452b}}
+@keyframes yy-c{to{background:#fff;border-color:#f0c9b8}}
+
+@media (prefers-reduced-motion:reduce){
+  .sahne.oynuyor,.sahne.oynuyor *{animation-duration:1ms!important;animation-delay:0s!important}
+}
+</style>
+</head>
+<body>
+<div class="deste">
+
+<!-- Başlarken -->
+<section class="s kapak" id="kapak">
+  <div class="baslik">
+    <span class="etiket">YZM205 Web Tasarımı ve Programlama · Hafta 3</span>
+    <h1>CSS: sayfaya görünüş vermek</h1>
+    <p class="buyuk">Hafta 2'de kurduğun kişisel sayfaya bugün bir stil dosyası bağlıyorsun. Ders bittiğinde sayfan telefonda da düzgün görünecek.</p>
+    <p class="kucuk">Önce birlikte bakıyoruz, sonra sen kendi dosyana yazıyorsun. <code>kisisel-sayfa</code> klasörünü şimdiden VS Code'da aç.</p>
+  </div>
+  <ol class="yol" aria-label="Bugünün adımları">
+    <li><span class="no">1</span>Bağla</li>
+    <li><span class="no">2</span>Seç</li>
+    <li><span class="no">3</span>Renk ve yazı</li>
+    <li><span class="no">4</span>Kutu</li>
+    <li><span class="no">5</span>Yan yana</li>
+    <li><span class="no">6</span>Telefon</li>
+    <li><span class="no">7</span>Yayın</li>
+  </ol>
+</section>
+
+<section class="s" id="ayni-html">
+  <header><h2>Aynı HTML, bir satır fark</h2><span class="etiket">Başlarken</span></header>
+  <div class="govde iki sag-genis">
+    <div class="metin">
+      <p>Sağdaki sayfanın HTML'ine dokunulmadı. Değişen tek şey <code>head</code>'e eklenen bir satır ve o satırın gösterdiği <code>style.css</code>.</p>
+      <p class="kucuk">İçeriği ve sırayı HTML belirler, görünüşü stil dosyası. Senin sayfan da bugün bu yolu izleyecek.</p>
+    </div>
+    <div class="sahne ah">
+      <div class="tar">
+        <div class="tar-bar"><i></i><span>kullaniciadi.github.io</span></div>
+        <div class="ah-s">
+          <div class="ah-header">
+            <div class="ah-h1">Merhaba, ben Elif</div>
+            <div class="ah-nav"><span class="ah-a">Ana sayfa</span><span class="ah-a">Projelerim</span></div>
+          </div>
+          <div class="ah-p">Yazılım Mühendisliği 2. sınıftayım.</div>
+          <div class="ah-h2">İlgi alanlarım</div>
+          <ul class="ah-ul"><li>Satranç</li><li>Fotoğrafçılık</li><li>Futbol</li></ul>
+        </div>
+      </div>
+      <code class="ah-link">&lt;link rel="stylesheet" href="style.css"&gt;</code>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+    </div>
+  </div>
+</section>
+
+<!-- 1. CSS ve bağlama -->
+<section class="s" id="css-dosya">
+  <header><h2>CSS ayrı bir dosyada durur</h2><span class="etiket">1 · Bağlama</span></header>
+  <div class="govde iki sag-genis">
+    <div class="metin">
+      <p>CSS de HTML gibi düz bir metin dosyası, adı çoğu zaman <code>style.css</code>. İçinde yalnız görünüşle ilgili kurallar durur.</p>
+      <p class="kucuk">İki sayfan aynı dosyayı bağlarsa bir rengi tek yerde değiştirirsin ve iki sayfa birden değişir.</p>
+    </div>
+    <div class="sahne cd">
+      <svg class="cd-svg" viewBox="0 0 640 300" role="img" aria-label="index.html ve projeler.html aynı style.css dosyasını bağlıyor">
+        <rect class="cd-kart" x="10" y="20" width="240" height="116" rx="12"/>
+        <text class="cd-ad" x="30" y="52">index.html</text>
+        <rect class="cd-mini" x="30" y="66" width="200" height="54" rx="6"/>
+        <rect class="cd-bas" x="40" y="76" width="90" height="10" rx="3"/>
+        <rect class="cd-sat" x="40" y="94" width="160" height="6" rx="3"/>
+        <rect class="cd-sat" x="40" y="106" width="120" height="6" rx="3"/>
+        <rect class="cd-kart" x="10" y="164" width="240" height="116" rx="12"/>
+        <text class="cd-ad" x="30" y="196">projeler.html</text>
+        <rect class="cd-mini" x="30" y="210" width="200" height="54" rx="6"/>
+        <rect class="cd-bas" x="40" y="220" width="90" height="10" rx="3"/>
+        <rect class="cd-sat" x="40" y="238" width="160" height="6" rx="3"/>
+        <rect class="cd-sat" x="40" y="250" width="120" height="6" rx="3"/>
+        <path class="cd-l cd-l1" d="M250 78 C 320 78 320 150 388 150" pathLength="1"/>
+        <path class="cd-l cd-l2" d="M250 222 C 320 222 320 150 388 150" pathLength="1"/>
+        <g class="cd-css">
+          <rect class="cd-kart cd-kart-css" x="390" y="92" width="240" height="116" rx="12"/>
+          <text class="cd-ad" x="410" y="124">style.css</text>
+          <text class="cd-kod" x="410" y="156">body { … }</text>
+          <text class="cd-kod" x="410" y="182">h1 { color: #b5452b; }</text>
+        </g>
+      </svg>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="istek">
+  <header><h2>Tarayıcı style.css'i nasıl bulur?</h2><span class="etiket">1 · Bağlama</span></header>
+  <div class="govde iki sag-genis">
+    <div class="metin">
+      <pre class="kod kod-orta"><span class="e">&lt;link</span> <span class="n">rel</span>=<span class="d">"stylesheet"</span>
+      <span class="n">href</span>=<span class="d">"style.css"</span><span class="e">&gt;</span></pre>
+      <p class="kucuk">Bu satır <code>head</code>'e, <code>title</code>'ın altına yazılır. HTML'i okuyan tarayıcı satıra gelince ikinci bir istek gönderir ve <code>href</code>'teki dosyayı ister.</p>
+      <p class="kucuk">DevTools'un Network panelinde bu iki istek alt alta görünür.</p>
+    </div>
+    <div class="sahne is">
+      <svg class="is-svg" viewBox="0 0 700 300" role="img" aria-label="Tarayıcı önce HTML dosyasını, link satırını görünce style.css dosyasını ister">
+        <text class="is-bas" x="20" y="22">Tarayıcı</text>
+        <rect class="is-pano" x="20" y="32" width="250" height="256" rx="12"/>
+        <g class="is-sayfa">
+          <rect class="is-zemin" x="34" y="46" width="222" height="228" rx="6"/>
+          <rect class="is-ust" x="44" y="56" width="202" height="38" rx="6"/>
+          <rect class="is-h1" x="52" y="68" width="104" height="14" rx="3"/>
+          <rect class="is-sat" x="52" y="106" width="176" height="8" rx="3"/>
+          <rect class="is-sat" x="52" y="122" width="140" height="8" rx="3"/>
+          <rect class="is-kart" x="52" y="144" width="54" height="34" rx="6"/>
+          <rect class="is-kart" x="114" y="144" width="54" height="34" rx="6"/>
+          <rect class="is-kart" x="176" y="144" width="54" height="34" rx="6"/>
+          <rect class="is-sat" x="60" y="158" width="36" height="6" rx="3"/>
+          <rect class="is-sat" x="122" y="158" width="36" height="6" rx="3"/>
+          <rect class="is-sat" x="184" y="158" width="36" height="6" rx="3"/>
+          <g class="is-link"><rect x="44" y="226" width="202" height="36" rx="6"/><text x="56" y="249">link: style.css</text></g>
+        </g>
+        <text class="is-bas" x="480" y="22">Sunucu</text>
+        <rect class="is-pano" x="480" y="32" width="200" height="256" rx="12"/>
+        <rect class="is-dosya" x="500" y="62" width="160" height="50" rx="8"/>
+        <text class="is-ad" x="516" y="93">index.html</text>
+        <rect class="is-dosya is-css" x="500" y="168" width="160" height="50" rx="8"/>
+        <text class="is-ad" x="516" y="199">style.css</text>
+        <g class="is-o is-o1 is-git"><path d="M284 86 H462" pathLength="1"/><polygon points="462,79 476,86 462,93"/><text x="378" y="72">index.html ister</text></g>
+        <g class="is-o is-o2 is-gel"><path d="M476 118 H298" pathLength="1"/><polygon points="298,111 284,118 298,125"/><text x="378" y="143">HTML geldi</text></g>
+        <g class="is-o is-o3 is-git"><path d="M284 190 H462" pathLength="1"/><polygon points="462,183 476,190 462,197"/><text x="378" y="176">style.css ister</text></g>
+        <g class="is-o is-o4 is-gel"><path d="M476 222 H298" pathLength="1"/><polygon points="298,215 284,222 298,229"/><text x="378" y="247">CSS geldi</text></g>
+      </svg>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="kural">
+  <header><h2>Kuralın parçaları: kime ve ne?</h2><span class="etiket">1 · Bağlama</span></header>
+  <div class="govde tek">
+    <div class="sahne kr">
+      <div class="kr-kod kodlu">
+        <div class="kr-s kr-1"><code><span class="e">h1</span> {</code><span class="kr-et">seçici: kural kime uygulanacak</span></div>
+        <div class="kr-s kr-2"><code>  <span class="n">color</span>: <span class="d">crimson</span>;</code><span class="kr-et">özellik: değer;</span></div>
+        <div class="kr-s kr-3"><code>  <span class="n">text-align</span>: <span class="d">center</span>;</code><span class="kr-et">ikinci satır</span></div>
+        <div class="kr-s kr-4"><code>}</code><span class="kr-et">kural biter</span></div>
+      </div>
+      <div class="kr-on"><span class="kr-baslik">Satranç Kulübü</span></div>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+    </div>
+    <p>Seçiciden sonra süslü parantez açılır. İçindeki her satır <code>özellik: değer;</code> biçiminde yazılır ve noktalı virgülle biter.</p>
+  </div>
+</section>
+
+<section class="s sinifca" id="sinifca-noktali">
+  <header><h2>Bu paragraf nasıl görünür?</h2><span class="etiket">Sınıfça tahmin</span></header>
+  <div class="govde">
+    <div>
+      <pre class="kod"><span class="e">p</span> {
+  <span class="n">color</span>: <span class="d">gray</span>
+  <span class="n">text-align</span>: <span class="d">center</span>;
+}</pre>
+    </div>
+    <div>
+      <div class="secenekler">
+        <button class="secenek" type="button">Gri ve ortalı</button>
+        <button class="secenek" type="button">Gri, ama sola yaslı</button>
+        <button class="secenek" type="button">Ortalı, ama rengi değişmez</button>
+        <button class="secenek" data-dogru type="button">Ne gri olur ne ortalanır</button>
+      </div>
+      <div class="cevap"><p>Noktalı virgül olmayınca tarayıcı iki satırı tek bir değer sanar: <code>gray text-align: center</code>. Böyle bir renk yok, satırın tamamını atlar ve hata mesajı göstermez.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="sessiz">
+  <header><h2>Tarayıcı hata mesajı göstermez</h2><span class="etiket">1 · Bağlama</span></header>
+  <div class="govde iki">
+    <div class="kutu">
+      <h3>Aynı seçici iki kez</h3>
+      <pre class="kod kod-orta"><span class="e">h1</span> { <span class="n">color</span>: <span class="d">navy</span>; }
+<span class="e">h1</span> { <span class="n">color</span>: <span class="d">crimson</span>; }</pre>
+      <p class="kucuk" data-adim="1">Sonra yazılan kazanır, başlık <span class="ornek" style="--r:crimson"></span>crimson olur. Önceki kural silinmez, ezilir.</p>
+    </div>
+    <div class="kutu">
+      <h3>Yanlış yazılmış özellik</h3>
+      <pre class="kod kod-orta"><span class="e">h1</span> { <span class="cizik"><span class="n">colour</span>: <span class="d">navy</span>;</span> }</pre>
+      <p class="kucuk" data-adim="2">Tarayıcı anlamadığı satırı atlar ve sonrakine geçer. Sayfa yine açılır, hatayı sana söylemez. DevTools'ta bu satır üstü çizili görünür.</p>
+    </div>
+  </div>
+</section>
+
+<section class="s sen" id="sen-baglan">
+  <header><h2>Stil dosyanı aç ve bağla</h2><span class="etiket">Şimdi sen · 1</span></header>
+  <div class="govde">
+    <div class="gorev">
+      <div>
+        <ol class="adimlar">
+          <li>VS Code'da <code>kisisel-sayfa</code> klasöründe yeni bir dosya aç, adı <code>style.css</code> olsun.</li>
+          <li><code>index.html</code> ve <code>projeler.html</code>'de <code>title</code> satırının altına yaz:
+<pre class="kod"><span class="e">&lt;link</span> <span class="n">rel</span>=<span class="d">"stylesheet"</span> <span class="n">href</span>=<span class="d">"style.css"</span><span class="e">&gt;</span></pre></li>
+          <li><code>style.css</code>'e yaz, üç dosyayı da kaydet:
+<pre class="kod"><span class="e">body</span> {
+  <span class="n">background-color</span>: <span class="d">lightyellow</span>;
+}</pre></li>
+        </ol>
+      </div>
+      <div class="yan">
+        <div class="sayac" data-sure="180"></div>
+        <p><span class="ne">Ekranda</span><code>index.html</code>'i Live Server ile aç. Zemin açık sarı, Projelerim'e geçince de.</p>
+        <p><span class="ne dikkat">Olmadıysa</span><code>href</code>'teki adı soldaki dosya listesindeki adla harf harf karşılaştır.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Seçiciler -->
+<section class="s" id="secici">
+  <header><h2>Seçici: kural kime uygulanır?</h2><span class="etiket">2 · Seçici</span></header>
+  <div class="govde iki sag-genis">
+    <div class="metin">
+      <p>Tarayıcı sayfadaki her öğeye bakar ve her kural için sorar: bu seçici bu öğeyi tutuyor mu?</p>
+      <p class="kucuk">Etiket seçicisi (<code>h1</code>, <code>p</code>) o etiketin her örneğini tutar. Noktayla başlayan sınıf seçicisi (<code>.kart</code>) yalnız o sınıfı taşıyanları.</p>
+    </div>
+    <div class="sahne sc">
+      <div class="sc-secici">
+        <code class="sc-a">h1 { … }<small>1 öğe tuttu</small></code>
+        <code class="sc-b">p { … }<small>2 öğe tuttu</small></code>
+        <code class="sc-c">.kart { … }<small>2 öğe tuttu</small></code>
+      </div>
+      <div class="sc-kod kodlu">
+        <div class="sc-l la"><span class="e">&lt;h1&gt;</span>Satranç Kulübü<span class="e">&lt;/h1&gt;</span></div>
+        <div class="sc-l lb"><span class="e">&lt;p&gt;</span>Turnuva kaydı açıldı.<span class="e">&lt;/p&gt;</span></div>
+        <div class="sc-l"><span class="e">&lt;ul</span> <span class="n">class</span>=<span class="d">"kartlar"</span><span class="e">&gt;</span></div>
+        <div class="sc-l lc">  <span class="e">&lt;li</span> <span class="n">class</span>=<span class="d">"kart"</span><span class="e">&gt;</span>Açılışlar<span class="e">&lt;/li&gt;</span></div>
+        <div class="sc-l lc ikinci">  <span class="e">&lt;li</span> <span class="n">class</span>=<span class="d">"kart onemli"</span><span class="e">&gt;</span>Kısa turnuva<span class="e">&lt;/li&gt;</span></div>
+        <div class="sc-l">  <span class="e">&lt;li&gt;</span>Parti analizi<span class="e">&lt;/li&gt;</span></div>
+        <div class="sc-l"><span class="e">&lt;/ul&gt;</span></div>
+        <div class="sc-l lb ikinci"><span class="e">&lt;p&gt;</span>Yer: kütüphane, 2. kat.<span class="e">&lt;/p&gt;</span></div>
+      </div>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="sinif">
+  <header><h2>Sınıf: HTML'de ad, CSS'te nokta</h2><span class="etiket">2 · Seçici</span></header>
+  <div class="govde iki">
+    <div class="kutu">
+      <h3>HTML</h3>
+      <pre class="kod kod-orta"><span class="e">&lt;li</span> <span class="n">class</span>=<span class="d">"<span class="vurgu">kart</span>"</span><span class="e">&gt;</span>Satranç<span class="e">&lt;/li&gt;</span>
+<span class="e">&lt;li</span> <span class="n">class</span>=<span class="d">"kart onemli"</span><span class="e">&gt;</span>Futbol<span class="e">&lt;/li&gt;</span></pre>
+      <p class="kucuk" data-adim="1">Bir öğeye birden çok sınıf verebilirsin. Adları boşlukla ayırırsın, virgül koymazsın.</p>
+    </div>
+    <div class="kutu">
+      <h3>CSS</h3>
+      <pre class="kod kod-orta"><span class="e"><span class="vurgu">.</span>kart</span> {
+  <span class="n">background-color</span>: <span class="d">white</span>;
+}</pre>
+      <p class="kucuk" data-adim="2">Nokta yalnız CSS'te yazılır. Noktayı unutursan (<code>kart {</code>) tarayıcı sayfada <code>&lt;kart&gt;</code> diye bir etiket arar ve kural hiçbir şeye uygulanmaz.</p>
+    </div>
+  </div>
+</section>
+
+<section class="s sinifca" id="sinifca-secici">
+  <header><h2>Kaç paragraf koyu kırmızı olur?</h2><span class="etiket">Sınıfça tahmin</span></header>
+  <div class="govde">
+    <div>
+      <pre class="kod"><span class="e">&lt;p</span> <span class="n">class</span>=<span class="d">"duyuru"</span><span class="e">&gt;</span>Kayıt açıldı.<span class="e">&lt;/p&gt;</span>
+<span class="e">&lt;p</span> <span class="n">class</span>=<span class="d">"Duyuru"</span><span class="e">&gt;</span>Yer: kütüphane.<span class="e">&lt;/p&gt;</span>
+<span class="e">&lt;p</span> <span class="n">class</span>=<span class="d">".duyuru"</span><span class="e">&gt;</span>Tahtanı getir.<span class="e">&lt;/p&gt;</span>
+<span class="e">&lt;p</span> <span class="n">class</span>=<span class="d">"kalin duyuru"</span><span class="e">&gt;</span>Tahta bizden.<span class="e">&lt;/p&gt;</span>
+
+<span class="e">.duyuru</span> {
+  <span class="n">color</span>: <span class="d">crimson</span>;
+}</pre>
+    </div>
+    <div>
+      <div class="secenekler">
+        <button class="secenek" type="button">Bir paragraf</button>
+        <button class="secenek" data-dogru type="button">İki paragraf</button>
+        <button class="secenek" type="button">Üç paragraf</button>
+        <button class="secenek" type="button">Dördü de</button>
+      </div>
+      <div class="cevap"><p>1. ve 4. paragraf. Adlar harfi harfine karşılaştırılır: <code>Duyuru</code> başka bir ad, HTML'e yazılan nokta da adın parçası olur. Sınıf adlarını küçük harfle ve Türkçe karakter kullanmadan ver.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s sen" id="sen-secici">
+  <header><h2>Listene sınıf ver, iki seçici yaz</h2><span class="etiket">Şimdi sen · 2</span></header>
+  <div class="govde">
+    <div class="gorev">
+      <div>
+        <ol class="adimlar iki-sutun">
+          <li><code>index.html</code>'deki ilgi alanları listene sınıfları ekle, maddeler seninki kalsın:
+<pre class="kod"><span class="e">&lt;ul</span> <span class="n">class</span>=<span class="d">"kartlar"</span><span class="e">&gt;</span>
+  <span class="e">&lt;li</span> <span class="n">class</span>=<span class="d">"kart"</span><span class="e">&gt;</span>Satranç<span class="e">&lt;/li&gt;</span>
+  <span class="e">&lt;li</span> <span class="n">class</span>=<span class="d">"kart"</span><span class="e">&gt;</span>Fotoğrafçılık<span class="e">&lt;/li&gt;</span>
+  <span class="e">&lt;li</span> <span class="n">class</span>=<span class="d">"kart"</span><span class="e">&gt;</span>Futbol<span class="e">&lt;/li&gt;</span>
+<span class="e">&lt;/ul&gt;</span></pre></li>
+          <li><code>style.css</code>'te <code>body</code> kuralının altına:
+<pre class="kod"><span class="e">h2</span> {
+  <span class="n">color</span>: <span class="d">#b5452b</span>;
+}
+<span class="e">.kart</span> {
+  <span class="n">background-color</span>: <span class="d">white</span>;
+}</pre></li>
+        </ol>
+      </div>
+      <div class="yan">
+        <div class="sayac" data-sure="180"></div>
+        <p><span class="ne">Ekranda</span>"İlgi alanlarım" başlığı kiremit rengi, üç madde açık sarı zeminde beyaz birer şerit.</p>
+        <p><span class="ne dikkat">Olmadıysa</span>HTML'deki <code>class="kart"</code>'a ve CSS'teki noktaya bak.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Renk ve yazı -->
+<section class="s" id="renk">
+  <header><h2>Altı özellik, tek paragraf</h2><span class="etiket">3 · Renk ve yazı</span></header>
+  <div class="govde tek">
+    <div class="sahne rk">
+      <div class="rk-kod kodlu"><div><span class="e">p</span> {</div><div class="r1">  <span class="n">color</span>: <span class="d">navy</span>;</div><div class="r2">  <span class="n">background-color</span>: <span class="d">#fdf3e7</span>;</div><div class="r3">  <span class="n">font-family</span>: <span class="d">Arial, sans-serif</span>;</div><div class="r4">  <span class="n">font-size</span>: <span class="d">18px</span>;</div><div class="r5">  <span class="n">text-align</span>: <span class="d">center</span>;</div><div class="r6">  <span class="n">line-height</span>: <span class="d">150%</span>;</div><div>}</div></div>
+      <div class="rk-on"><p>Satranç kulübü her hafta kütüphanenin 2. katında toplanıyor. Yeni gelenlere tahta bizden.</p></div>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+    </div>
+    <p>Her özellik tek bir şeyi değiştirir, ötekilere dokunmaz. Yazının rengi ile zeminin rengi bu yüzden ayrı özellikler.</p>
+  </div>
+</section>
+
+<section class="s sinifca" id="sinifca-birim">
+  <header><h2>Başlığa ne olur?</h2><span class="etiket">Sınıfça tahmin</span></header>
+  <div class="govde">
+    <div>
+      <pre class="kod"><span class="e">h1</span> {
+  <span class="n">font-size</span>: <span class="d">32</span>;
+}</pre>
+    </div>
+    <div>
+      <div class="secenekler">
+        <button class="secenek" type="button">32 piksel olur</button>
+        <button class="secenek" data-dogru type="button">Hiç değişmez</button>
+        <button class="secenek" type="button">Sayfada hata mesajı çıkar</button>
+        <button class="secenek" type="button">Ekranı kaplayacak kadar büyür</button>
+      </div>
+      <div class="cevap"><p>Birimsiz sayıyı tarayıcı anlamaz ve satırı atlar. Başlık eski büyüklüğünde kalır, hata mesajı da çıkmaz. Doğrusu <code>32px</code>, sayıya bitişik.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="deger">
+  <header><h2>Değerler nasıl yazılır?</h2><span class="etiket">3 · Renk ve yazı</span></header>
+  <div class="govde uc">
+    <div class="kutu">
+      <h3>Renk</h3>
+      <p class="kucuk">İngilizce adıyla ya da diyezle başlayan altı haneli kodla.</p>
+      <p><span class="ornek" style="--r:navy"></span><code>navy</code> <span class="ornek" style="--r:crimson"></span><code>crimson</code></p>
+      <p><span class="ornek" style="--r:#b5452b"></span><code>#b5452b</code></p>
+      <p class="kucuk" data-adim="1">İlk iki hane kırmızının, sonraki iki yeşilin, son iki mavinin miktarı. Kodu ezberlemezsin, renk seçiciden kopyalarsın.</p>
+    </div>
+    <div class="kutu">
+      <h3>Uzunluk</h3>
+      <p><code>18px</code> <span class="kucuk">sabit ölçü</span></p>
+      <p><code>150%</code> <span class="kucuk">bir şeye göre oran</span></p>
+      <p class="kucuk"><code>line-height: 150%</code> yazı büyüklüğünün bir buçuk katı demek: 18 piksellik yazıda 27 piksel.</p>
+      <p class="kucuk" data-adim="2">Birim sayıya bitişik yazılır. Yalnız sıfırda gerekmez.</p>
+    </div>
+    <div class="kutu">
+      <h3>Yazı tipi</h3>
+      <p><code>Arial, sans-serif</code></p>
+      <p class="kucuk">"Arial kullan, yoksa herhangi bir tırnaksız yazı tipi kullan."</p>
+      <p class="kucuk" data-adim="3">Listenin sonuna her zaman <code>serif</code> ya da <code>sans-serif</code> gibi genel bir ad yaz ki tarayıcının eli boş kalmasın.</p>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="body-gecer">
+  <header><h2>body'ye yazdığın içeri geçer</h2><span class="etiket">3 · Renk ve yazı</span></header>
+  <div class="govde iki sag-genis">
+    <div class="metin">
+      <p>Yazı rengi, yazı tipi ve yazı boyu <code>body</code>'den içindeki bütün öğelere geçer. Her paragrafa ayrı ayrı yazmazsın.</p>
+      <p class="kucuk">Bağlantılar rengi almaz, tarayıcı onlara kendi mavisini verir. Rengini ayrı bir <code>a</code> kuralıyla değiştirirsin.</p>
+    </div>
+    <div class="sahne bd">
+      <div class="bd-kod kodlu">
+        <code class="bd-k1"><span class="e">body</span> { <span class="n">color</span>: <span class="d">navy</span>; <span class="n">font-family</span>: <span class="d">Arial, sans-serif</span>; }</code>
+        <code class="bd-k2"><span class="e">a</span> { <span class="n">color</span>: <span class="d">#b5452b</span>; }</code>
+      </div>
+      <div class="bd-body">
+        <span class="bd-ad">body</span>
+        <div class="bd-1 bd-h1">Merhaba, ben Elif</div>
+        <div class="bd-2">Yazılım Mühendisliği 2. sınıftayım.</div>
+        <div class="bd-3">• Satranç</div>
+        <div class="bd-4">Sık girdiğim site: <span class="bd-a">Vikipedi</span><span class="bd-not">kendi mavisi</span></div>
+      </div>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+    </div>
+  </div>
+</section>
+
+<section class="s sen" id="sen-renk">
+  <header><h2>Paletini ve yazı tipini yaz</h2><span class="etiket">Şimdi sen · 3</span></header>
+  <div class="govde">
+    <div class="gorev">
+      <div>
+        <ol class="adimlar iki-sutun">
+          <li><code>style.css</code>'teki <code>lightyellow</code>'lu <code>body</code> kuralını sil, yerine:
+<pre class="kod"><span class="e">body</span> {
+  <span class="n">background-color</span>: <span class="d">#fdf3e7</span>;
+  <span class="n">color</span>: <span class="d">#2b2b2b</span>;
+  <span class="n">font-family</span>: <span class="d">Arial, sans-serif</span>;
+  <span class="n">font-size</span>: <span class="d">18px</span>;
+}</pre></li>
+          <li>Dosyanın en altına:
+<pre class="kod"><span class="e">h1</span> {
+  <span class="n">color</span>: <span class="d">#b5452b</span>;
+  <span class="n">font-size</span>: <span class="d">36px</span>;
+}
+<span class="e">a</span> {
+  <span class="n">color</span>: <span class="d">#b5452b</span>;
+}</pre></li>
+        </ol>
+      </div>
+      <div class="yan">
+        <div class="sayac" data-sure="240"></div>
+        <p><span class="ne">Ekranda</span>Krem zemin, koyu gri ve tırnaksız yazı. Büyük başlık ve bağlantılar kiremit rengi.</p>
+        <p><span class="ne dikkat">Olmadıysa</span>Tek satır çalışmıyorsa bir üstündeki noktalı virgüle ve <code>px</code> birimine bak.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Kutu modeli -->
+<section class="s" id="kutu">
+  <header><h2>Her öğe dört katmanlı bir kutu</h2><span class="etiket">4 · Kutu modeli</span></header>
+  <div class="govde iki sag-genis">
+    <div class="metin">
+      <pre class="kod kod-orta"><span class="e">.kart</span> {
+  <span class="n">width</span>: <span class="d">200px</span>;
+  <span class="n">padding</span>: <span class="d">20px</span>;
+  <span class="n">border</span>: <span class="d">5px solid gray</span>;
+  <span class="n">margin</span>: <span class="d">10px</span>;
+}</pre>
+      <p class="kucuk">Ortada içerik durur. Onu iç boşluk sarar, iç boşluğu kenarlık çevreler, dış boşluk da kutuyu komşularından uzak tutar.</p>
+    </div>
+    <div class="sahne km">
+      <div class="km-m"><span class="km-ad">margin</span><span class="km-v">10</span>
+        <div class="km-b"><span class="km-ad">border</span><span class="km-v">5</span>
+          <div class="km-p"><span class="km-ad">padding</span><span class="km-v">20</span>
+            <div class="km-c">içerik · width 200</div>
+          </div>
+        </div>
+      </div>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+    </div>
+  </div>
+</section>
+
+<section class="s sinifca" id="sinifca-kutu">
+  <header><h2>Kart ekranda kaç piksel genişlikte?</h2><span class="etiket">Sınıfça tahmin</span></header>
+  <div class="govde">
+    <div>
+      <pre class="kod"><span class="e">.kart</span> {
+  <span class="n">width</span>: <span class="d">200px</span>;
+  <span class="n">padding</span>: <span class="d">20px</span>;
+  <span class="n">border</span>: <span class="d">5px solid gray</span>;
+  <span class="n">margin</span>: <span class="d">10px</span>;
+}</pre>
+      <p class="kucuk soru-not">Kenarlık dahil, margin hariç.</p>
+    </div>
+    <div>
+      <div class="secenekler">
+        <button class="secenek" type="button">200 piksel</button>
+        <button class="secenek" type="button">225 piksel</button>
+        <button class="secenek" data-dogru type="button">250 piksel</button>
+        <button class="secenek" type="button">270 piksel</button>
+      </div>
+      <div class="cevap"><p><code>width</code> yalnız içeriğin genişliği. Padding ve border iki yana da eklenir: 5 + 20 + 200 + 20 + 5 = 250. Margin bunun dışında kalır.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="toplam">
+  <header><h2>width yalnız içeriği ölçer</h2><span class="etiket">4 · Kutu modeli</span></header>
+  <div class="govde tek">
+    <div class="sahne tp">
+      <div class="tp-izgara">
+        <span class="tp-et tp-m">10</span><span class="tp-et tp-b">5</span><span class="tp-et tp-p">20</span><span class="tp-et tp-c">width: 200</span><span class="tp-et tp-p">20</span><span class="tp-et tp-b">5</span><span class="tp-et tp-m">10</span>
+        <i class="tp-s tp-m"></i><i class="tp-s tp-b"></i><i class="tp-s tp-p"></i><i class="tp-s tp-c"></i><i class="tp-s tp-p"></i><i class="tp-s tp-b"></i><i class="tp-s tp-m"></i>
+        <div class="tp-ayrac"><span>5 + 20 + 200 + 20 + 5 = 250 piksel</span></div>
+        <div class="tp-dis">margin dışarıda kalır: iki yanda 10'ar piksel daha yer tutar</div>
+      </div>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+    </div>
+    <p>Ders notundaki <a href="index.html#kutu">kutu simülasyonunda</a> kaydırıcılarla dene: padding büyüdükçe kutunun ekrandaki genişliği de büyür.</p>
+  </div>
+</section>
+
+<section class="s" id="bosluk">
+  <header><h2>Padding mi, margin mi?</h2><span class="etiket">4 · Kutu modeli</span></header>
+  <div class="govde iki sag-genis">
+    <div class="metin">
+      <p>Zemin rengi o boşluğa yayılıyorsa padding, yayılmıyorsa margin.</p>
+      <p class="kucuk" data-adim="1">Yazı kenarlığa yapışıksa padding eksik, kartlar birbirine yapışıksa margin.</p>
+      <p class="kucuk" data-adim="2"><code>margin: 24px 0</code> yazarsan ilk değer üst ve alt, ikincisi sağ ve sol içindir. Dört değer saat yönünde okunur: üst, sağ, alt, sol.</p>
+    </div>
+    <div class="sahne bs">
+      <div class="bs-sira"><div class="bs-k">Satranç</div><div class="bs-k">Futbol</div></div>
+      <p class="bs-et bs-e1"><code>padding</code> büyüyor: beyaz zemin yazının çevresine yayılıyor.</p>
+      <p class="bs-et bs-e2"><code>margin</code> büyüyor: kartlar uzaklaşıyor, aradaki boşluk saydam.</p>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+    </div>
+  </div>
+</section>
+
+<section class="s sen" id="sen-kutu">
+  <header><h2>İlgi alanlarını karta çevir</h2><span class="etiket">Şimdi sen · 4</span></header>
+  <div class="govde">
+    <div class="gorev">
+      <div>
+        <ol class="adimlar iki-sutun">
+          <li><code>.kart</code> kuralını şöyle genişlet:
+<pre class="kod"><span class="e">.kart</span> {
+  <span class="n">background-color</span>: <span class="d">white</span>;
+  <span class="n">padding</span>: <span class="d">16px</span>;
+  <span class="n">border</span>: <span class="d">2px solid #f0c9b8</span>;
+  <span class="n">border-radius</span>: <span class="d">12px</span>;
+}</pre></li>
+          <li>Altına, listenin kendisi için:
+<pre class="kod"><span class="e">.kartlar</span> {
+  <span class="n">padding</span>: <span class="d">0</span>;
+  <span class="n">list-style</span>: <span class="d">none</span>;
+}</pre>
+<span class="ek"><code>list-style: none</code> maddelerin önündeki noktayı kaldırır. <code>border-radius</code> köşeleri yuvarlar.</span></li>
+        </ol>
+      </div>
+      <div class="yan">
+        <div class="sayac" data-sure="240"></div>
+        <p><span class="ne">Ekranda</span>Üç madde içi ferah, ince kenarlıklı, köşeleri yuvarlak kart. Noktalar gitti, kartlar şimdilik alt alta.</p>
+        <p><span class="ne dikkat">Olmadıysa</span>Yazı kenarlığa yapışıksa <code>padding</code> satırındaki <code>px</code>'e bak.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Flexbox -->
+<section class="s" id="flex">
+  <header><h2>display: flex kapsayıcıya yazılır</h2><span class="etiket">5 · Flexbox</span></header>
+  <div class="govde iki sag-genis">
+    <div class="metin">
+      <pre class="kod kod-orta"><span class="e">.kartlar</span> {
+  <span class="n">display</span>: <span class="d">flex</span>;
+  <span class="n">gap</span>: <span class="d">12px</span>;
+}</pre>
+      <p class="kucuk">Tarayıcı kutuları kendiliğinden alt alta dizer. Kuralı kutuları içine alan kapsayıcıya yazınca içindekiler bir sıraya girer, <code>gap</code> de aralarına boşluk koyar.</p>
+    </div>
+    <div class="sahne fx">
+      <div class="fx-kap">
+        <span class="fx-ad">ul.kartlar</span>
+        <span class="fx-cip fx-c1">display: flex</span>
+        <span class="fx-cip fx-c2">gap: 12px</span>
+        <div class="fx-k fx-1">Satranç</div>
+        <div class="fx-k fx-2">Fotoğrafçılık</div>
+        <div class="fx-k fx-3">Futbol</div>
+      </div>
+      <div class="not">Kutular içeriklerinin genişliği kadar yer tutar ve başa toplanır.</div>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="justify">
+  <header><h2>justify-content boşluğu dağıtır</h2><span class="etiket">5 · Flexbox</span></header>
+  <div class="govde iki sag-genis">
+    <div class="metin">
+      <p class="kucuk">Sıranın yönünde hizalar. <code>flex-start</code> başa toplar, <code>center</code> ortaya alır, <code>space-between</code> ilk kutuyu başa, sonuncuyu sona yaslar.</p>
+      <p class="kucuk" data-adim="1"><code>align-items: center</code> kutuları sıraya dik yönde ortalar. <code>flex-direction: column</code> sırayı alt alta çevirir, <code>flex-wrap: wrap</code> sığmayan kutuyu alt satıra geçirir.</p>
+    </div>
+    <div class="sahne js">
+      <div class="js-deger">
+        <code class="js-1">justify-content: flex-start</code>
+        <code class="js-2">justify-content: center</code>
+        <code class="js-3">justify-content: space-between</code>
+      </div>
+      <div class="js-kap">
+        <div class="js-k js-k1">Satranç</div>
+        <div class="js-k js-k2">Fotoğrafçılık</div>
+        <div class="js-k js-k3">Futbol</div>
+      </div>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+    </div>
+  </div>
+</section>
+
+<section class="s sinifca" id="sinifca-flex">
+  <header><h2>Bağlantılar nasıl dizilir?</h2><span class="etiket">Sınıfça tahmin</span></header>
+  <div class="govde">
+    <div>
+      <pre class="kod"><span class="e">&lt;nav</span> <span class="n">class</span>=<span class="d">"menu"</span><span class="e">&gt;</span>
+  <span class="e">&lt;a</span> <span class="n">href</span>=<span class="d">"index.html"</span><span class="e">&gt;</span>Ana sayfa<span class="e">&lt;/a&gt;</span>
+  <span class="e">&lt;a</span> <span class="n">href</span>=<span class="d">"projeler.html"</span><span class="e">&gt;</span>Projelerim<span class="e">&lt;/a&gt;</span>
+<span class="e">&lt;/nav&gt;</span>
+
+<span class="e">a</span> {
+  <span class="n">display</span>: <span class="d">flex</span>;
+  <span class="n">gap</span>: <span class="d">20px</span>;
+}</pre>
+    </div>
+    <div>
+      <div class="secenekler">
+        <button class="secenek" type="button">Yan yana, 20 piksel arayla</button>
+        <button class="secenek" data-dogru type="button">Alt alta, her biri ayrı satırda</button>
+        <button class="secenek" type="button">Hiçbir şey değişmez</button>
+        <button class="secenek" type="button">Üst üste biner</button>
+      </div>
+      <div class="cevap"><p>Kural bağlantıların kendisine yazıldı. Her bağlantı ayrı bir kapsayıcı oldu ve kendi satırını kapladı. Dizilecek kutuları içine alan <code>nav</code>'a yazmak gerekirdi: <code>.menu { display: flex; }</code></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="header-flex">
+  <header><h2>Senin sayfanda iki kapsayıcı var</h2><span class="etiket">5 · Flexbox</span></header>
+  <div class="govde iki sag-genis">
+    <div class="metin">
+      <p><code>header</code>'ın içinde <code>h1</code> ile <code>nav</code> var, <code>nav</code>'ın içinde de bağlantılar. Her kapsayıcı yalnız kendi içindekileri dizer.</p>
+      <p class="kucuk"><code>space-between</code> başlığı sola, menüyü sağa yaslar. Menüdeki boşluğu <code>.menu</code>'nün <code>gap</code>'i verir.</p>
+    </div>
+    <div class="sahne hf">
+      <div class="hf-header"><span class="hf-ad">header</span>
+        <div class="hf-h1">Merhaba, ben Elif</div>
+        <div class="hf-nav"><span class="hf-ad2">nav.menu</span><span class="hf-a">Ana sayfa</span><span class="hf-a hf-a2">Projelerim</span></div>
+      </div>
+      <code class="hf-cip hf-c1 kodlu"><span class="e">header</span> { <span class="n">display</span>: <span class="d">flex</span>; <span class="n">justify-content</span>: <span class="d">space-between</span>; }</code>
+      <code class="hf-cip hf-c2 kodlu"><span class="e">.menu</span> { <span class="n">display</span>: <span class="d">flex</span>; <span class="n">gap</span>: <span class="d">16px</span>; }</code>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+    </div>
+  </div>
+</section>
+
+<section class="s sen" id="sen-flex">
+  <header><h2>Başlığı, menüyü ve kartları diz</h2><span class="etiket">Şimdi sen · 5</span></header>
+  <div class="govde">
+    <div class="gorev">
+      <div>
+        <ol class="adimlar iki-sutun">
+          <li>İki HTML dosyasında da <code>nav</code> satırına sınıf ekle:
+<pre class="kod"><span class="e">&lt;nav</span> <span class="n">class</span>=<span class="d">"menu"</span><span class="e">&gt;</span></pre>
+            <span class="ek">Sonra <code>style.css</code>'e:</span>
+<pre class="kod"><span class="e">header</span> {
+  <span class="n">display</span>: <span class="d">flex</span>;
+  <span class="n">justify-content</span>: <span class="d">space-between</span>;
+  <span class="n">align-items</span>: <span class="d">center</span>;
+}
+<span class="e">.menu</span> {
+  <span class="n">display</span>: <span class="d">flex</span>;
+  <span class="n">gap</span>: <span class="d">16px</span>;
+}</pre></li>
+          <li><code>.kartlar</code> kuralına üç satır ekle:
+<pre class="kod">  <span class="n">display</span>: <span class="d">flex</span>;
+  <span class="n">flex-wrap</span>: <span class="d">wrap</span>;
+  <span class="n">gap</span>: <span class="d">12px</span>;</pre></li>
+        </ol>
+      </div>
+      <div class="yan">
+        <div class="sayac" data-sure="300"></div>
+        <p><span class="ne">Ekranda</span>Solda adın, sağda menü, bağlantıların arası açık. Kartlar yan yana.</p>
+        <p><span class="ne dikkat">Olmadıysa</span>Menü sıkışıksa <code>class="menu"</code> iki dosyada da var mı, bak. Kartlar alt alta kaldıysa <code>display: flex</code> <code>.kartlar</code>'da mı?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Telefon -->
+<section class="s" id="medya">
+  <header><h2>Medya sorgusu: koşul tutarsa çalışır</h2><span class="etiket">6 · Telefon</span></header>
+  <div class="govde iki sag-genis">
+    <div class="metin">
+      <pre class="kod kod-orta"><span class="e">@media</span> (<span class="n">max-width</span>: <span class="d">600px</span>) {
+  <span class="e">.kartlar</span> {
+    <span class="n">flex-direction</span>: <span class="d">column</span>;
+  }
+}</pre>
+      <p class="kucuk">Pencere 600 piksel ya da daha darsa içindeki kurallar uygulanır, genişse yok sayılır. İki kapanış parantezi var: biri kuralın, biri sorgunun.</p>
+    </div>
+    <div class="sahne md">
+      <div class="md-alan">
+        <div class="md-esik"><span>600</span></div>
+        <div class="md-tar">
+          <div class="tar-bar"><i></i><span class="md-sayi">pencere: </span></div>
+          <div class="md-sayfa">
+            <div class="md-h">Merhaba, ben Elif</div>
+            <div class="md-kartlar"><span>Satranç</span><span>Fotoğrafçılık</span><span>Futbol</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="md-durum kucuk"><span class="md-d1">600'den geniş: sorgunun içindeki kural uygulanmıyor</span><span class="md-d2">600 ya da daha dar: kartlar alt alta</span></p>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="viewport">
+  <header><h2>Telefon için bir satır daha</h2><span class="etiket">6 · Telefon</span></header>
+  <div class="govde iki sol-genis">
+    <div class="metin">
+      <pre class="kod kod-orta"><span class="e">&lt;meta</span> <span class="n">name</span>=<span class="d">"viewport"</span>
+  <span class="n">content</span>=<span class="d">"width=device-width, initial-scale=1"</span><span class="e">&gt;</span></pre>
+      <p class="kucuk">Bu satır yoksa telefon sayfayı geniş bir masaüstü ekranı varmış gibi çizer, sonra küçültüp ekrana sığdırır. Yazılar minicik kalır, medya sorgusu da hiç çalışmaz.</p>
+      <p class="kucuk">Satır <code>head</code>'e, <code>meta charset</code>'in altına yazılır.</p>
+    </div>
+    <div class="sahne vp">
+      <figure class="vp-tel">
+        <div class="vp-ekran"><div class="vp-masa">
+          <div class="vp-ust"><span>Merhaba, ben Elif</span><span>Ana sayfa · Projelerim</span></div>
+          <div class="vp-sira"><span>Satranç</span><span>Fotoğrafçılık</span><span>Futbol</span></div>
+          <p>Yazılım Mühendisliği 2. sınıftayım. Web sayfası yapmayı öğreniyorum.</p>
+        </div></div>
+        <figcaption>viewport yok</figcaption>
+      </figure>
+      <figure class="vp-tel">
+        <div class="vp-ekran"><div class="vp-mobil">
+          <span class="vp-ad">Merhaba, ben Elif</span>
+          <span>Ana sayfa · Projelerim</span>
+          <span class="vp-k">Satranç</span>
+          <span class="vp-k">Fotoğrafçılık</span>
+          <span class="vp-k">Futbol</span>
+        </div></div>
+        <figcaption>viewport var</figcaption>
+      </figure>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+    </div>
+  </div>
+</section>
+
+<section class="s sinifca" id="sinifca-medya">
+  <header><h2>Telefonda kartlar nasıl dizilir?</h2><span class="etiket">Sınıfça tahmin</span></header>
+  <div class="govde">
+    <div>
+      <pre class="kod"><span class="e">@media</span> (<span class="n">max-width</span>: <span class="d">600px</span>) {
+  <span class="e">.kartlar</span> {
+    <span class="n">flex-direction</span>: <span class="d">column</span>;
+  }
+}
+<span class="e">.kartlar</span> {
+  <span class="n">display</span>: <span class="d">flex</span>;
+  <span class="n">flex-direction</span>: <span class="d">row</span>;
+}</pre>
+      <p class="kucuk soru-not"><code>viewport</code> satırı yerinde, telefon 400 piksel genişlikte.</p>
+    </div>
+    <div>
+      <div class="secenekler">
+        <button class="secenek" type="button">Alt alta</button>
+        <button class="secenek" data-dogru type="button">Yan yana</button>
+        <button class="secenek" type="button">Kartlar üst üste biner</button>
+      </div>
+      <div class="cevap"><p>Aynı seçicide sonra yazılan kazanır. Sorgu dosyanın başında kaldığı için alttaki <code>.kartlar</code> kuralı onun satırını ezer. Medya sorgusunu dosyanın en sonuna yaz.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s sen" id="sen-medya">
+  <header><h2>Telefonda tek sütun</h2><span class="etiket">Şimdi sen · 6</span></header>
+  <div class="govde">
+    <div class="gorev">
+      <div>
+        <ol class="adimlar">
+          <li>İki HTML dosyasında da <code>meta charset</code> satırının altına:
+<pre class="kod"><span class="e">&lt;meta</span> <span class="n">name</span>=<span class="d">"viewport"</span>
+      <span class="n">content</span>=<span class="d">"width=device-width, initial-scale=1"</span><span class="e">&gt;</span></pre></li>
+          <li><code>style.css</code>'in en sonuna:
+<pre class="kod"><span class="e">@media</span> (<span class="n">max-width</span>: <span class="d">600px</span>) {
+  <span class="e">header</span> {
+    <span class="n">flex-direction</span>: <span class="d">column</span>;
+    <span class="n">align-items</span>: <span class="d">flex-start</span>;
+  }
+  <span class="e">.kartlar</span> {
+    <span class="n">flex-direction</span>: <span class="d">column</span>;
+  }
+}</pre></li>
+        </ol>
+      </div>
+      <div class="yan">
+        <div class="sayac" data-sure="240"></div>
+        <p><span class="ne">Ekranda</span>Pencereyi yavaş yavaş daralt. Bir noktada menü başlığın altına iner, kartlar alt alta dizilir.</p>
+        <p><span class="ne dikkat">Olmadıysa</span>Sorgu dosyanın en sonunda mı, iki kapanış parantezi yerinde mi? Pencere yeterince daralmıyorsa DevTools'u sağda aç.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Yayın ve özet -->
+<section class="s" id="yayin">
+  <header><h2>Yayındaki sayfa, dosyalarının kopyası</h2><span class="etiket">7 · Yayın</span></header>
+  <div class="govde iki sag-genis">
+    <div class="metin">
+      <p>GitHub'daki depon bilgisayarındaki klasörü kendiliğinden izlemez. Değiştirdiğin her dosyayı yeniden yüklersin.</p>
+      <p class="kucuk">Aynı adla yüklenen dosya depodakinin yerine geçer. Telefonun sayfayı oradan alır.</p>
+    </div>
+    <div class="sahne yy">
+      <div class="yy-kol"><span class="yy-bas">kisisel-sayfa</span><code>index.html</code><code>projeler.html</code><code>style.css</code></div>
+      <i class="yy-ok yy-ok1"></i>
+      <div class="yy-kol"><span class="yy-bas">kullaniciadi.<wbr>github.io</span><code class="yy-r1">index.html</code><code class="yy-r2">projeler.html</code><code class="yy-r3">style.css</code><span class="yy-msj">CSS eklendi</span></div>
+      <i class="yy-ok yy-ok2"></i>
+      <div class="yy-tel"><div class="yy-ekran"><span class="yy-h"></span><span class="yy-c"></span><span class="yy-c"></span><span class="yy-c"></span></div></div>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+    </div>
+  </div>
+</section>
+
+<section class="s sinifca" id="sinifca-yayin">
+  <header><h2>Yalnız style.css'i yükledin. Sonra?</h2><span class="etiket">Sınıfça tahmin</span></header>
+  <div class="govde">
+    <div>
+      <p>Bilgisayarında <code>index.html</code>'e <code>link</code> ve <code>viewport</code> satırlarını, listeye de sınıfları ekledin. GitHub'a yalnız <code>style.css</code>'i yükledin.</p>
+      <p class="kucuk">Telefonundan yayındaki sayfayı açıyorsun. Ne görürsün?</p>
+    </div>
+    <div>
+      <div class="secenekler">
+        <button class="secenek" type="button">Renkli ve düzenli sayfa</button>
+        <button class="secenek" data-dogru type="button">Eski, stilsiz sayfa</button>
+        <button class="secenek" type="button">GitHub dosyayı kabul etmez</button>
+        <button class="secenek" type="button">Renkler gelir, kartlar gelmez</button>
+      </div>
+      <div class="cevap"><p>Yayındaki <code>index.html</code> eski hâlinde, içinde <code>link</code> satırı yok. Tarayıcı <code>style.css</code>'i hiç istemez. HTML dosyalarını da yeniden yükle.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s sen" id="sen-yayin">
+  <header><h2>Sayfanı yayına al</h2><span class="etiket">Şimdi sen · 7</span></header>
+  <div class="govde">
+    <div class="gorev">
+      <div>
+        <ol class="adimlar">
+          <li>github.com'da <code>kullaniciadi.github.io</code> deponu aç, <code>Add file</code> menüsünden <code>Upload files</code>'ı seç.</li>
+          <li><code>style.css</code>, <code>index.html</code> ve <code>projeler.html</code>'i yükleme alanına sürükle.</li>
+          <li>Mesaj kutusuna <code>CSS eklendi</code> yaz, alttaki <code>Commit changes</code> düğmesine bas.</li>
+          <li>Birkaç dakika sonra sayfanı telefonundan aç.</li>
+        </ol>
+        <p class="ek">Süre yetmezse aynı adımları evde yaparsın.</p>
+      </div>
+      <div class="yan">
+        <div class="sayac" data-sure="180"></div>
+        <p><span class="ne">Ekranda</span>Depoda <code>style.css</code> var, telefonda kartlar alt alta.</p>
+        <p><span class="ne dikkat">Olmadıysa</span>Eski görünüm geliyorsa birkaç dakika bekle, <kbd>Ctrl</kbd>+<kbd>F5</kbd> ile yenile. Dosyalar deponun en üst düzeyinde olmalı.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="kontrol">
+  <header><h2>Çalışmıyorsa ilk nereye bakarsın?</h2><span class="etiket">7 · Yayın</span></header>
+  <div class="govde">
+    <table class="tablo">
+      <thead><tr><th>Ekranda gördüğün</th><th>İlk bakacağın yer</th></tr></thead>
+      <tbody>
+        <tr><td>Hiçbir stil yok</td><td>Kaydettin mi, <code>href</code>'teki ad doğru mu, <code>style.css</code> <code>index.html</code>'in yanında mı</td></tr>
+        <tr><td>Tek bir satır çalışmıyor</td><td>Bir üst satırın noktalı virgülü, <code>px</code> birimi, özelliğin adı (<code>colour</code> değil <code>color</code>)</td></tr>
+        <tr><td>Bir kural çalışıyor, altındakiler çalışmıyor</td><td>Aradaki kapanış parantezi <code>}</code> eksik</td></tr>
+        <tr><td>Sınıf kuralı hiçbir şeyi tutmuyor</td><td>HTML'deki adla CSS'teki ad harfi harfine aynı mı, nokta yalnız CSS'te mi</td></tr>
+        <tr><td>Kartlar alt alta kaldı</td><td><code>display: flex</code> <code>.kartlar</code>'a mı yazılmış, <code>.kart</code>'a mı</td></tr>
+        <tr><td>Telefonda sorgu çalışmıyor</td><td><code>viewport</code> satırı, sorgunun dosyanın en sonunda olması</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="s ozet" id="ozet">
+  <header><h2>Bugün sayfana yazdıkların</h2><span class="etiket">Özet</span></header>
+  <div class="govde iki sol-genis">
+    <div class="karolar">
+      <div class="karo"><span class="no">1 · Bağla</span><h3>Stil dosyası</h3><code>&lt;link rel="stylesheet"&gt;</code></div>
+      <div class="karo"><span class="no">2 · Seç</span><h3>Etiket ve sınıf</h3><code>h2 { }  .kart { }</code></div>
+      <div class="karo"><span class="no">3 · Renk ve yazı</span><h3>Palet</h3><code>color  font-family</code></div>
+      <div class="karo"><span class="no">4 · Kutu</span><h3>Dört katman</h3><code>padding  border  margin</code></div>
+      <div class="karo"><span class="no">5 · Yan yana</span><h3>Kapsayıcıya flex</h3><code>display: flex</code></div>
+      <div class="karo"><span class="no">6 · Telefon</span><h3>Tek sorgu</h3><code>@media (max-width: 600px)</code></div>
+    </div>
+    <div class="kutu vurgu teslim">
+      <h3>Teslim</h3>
+      <p>Hafta 2 ve 3 için tek teslim var: stil uygulanmış kişisel sayfanın yayındaki adresi ve deposu.</p>
+      <p class="kucuk"><a href="../../teslimler/">Lab teslimleri</a> sayfasındaki formda "Hafta 3 · CSS"yi seç. Son gün bu dersten sonraki Pazar, gün bitmeden.</p>
+      <p class="kucuk">Yetişmeyen "Şimdi sen" adımlarını ve <a href="index.html#lab">ders notunun Lab bölümündeki</a> kalanları evde tamamla. <a href="lab/bozuk-stil/">Bozuk stil sayfası</a> isteğe bağlı bir alıştırma.</p>
+    </div>
+  </div>
+</section>
+
+</div>
+<script>
+window.SUNUM = {
+  baslik: "YZM205 Hafta 3",
+  bolumler: [
+    { ad: "Başlarken", ilk: "kapak" },
+    { ad: "CSS ve bağlama", ilk: "css-dosya" },
+    { ad: "Seçiciler", ilk: "secici" },
+    { ad: "Renk ve yazı", ilk: "renk" },
+    { ad: "Kutu modeli", ilk: "kutu" },
+    { ad: "Flexbox", ilk: "flex" },
+    { ad: "Telefon", ilk: "medya" },
+    { ad: "Yayın ve özet", ilk: "yayin" }
+  ]
+};
+</script>
+<script src="../../assets/sunum.js"></script>
+</body>
+</html>

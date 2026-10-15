@@ -1,0 +1,72 @@
+/* Ece'nin stil dosyası */
+
+/* Bütün sayfa: zemin, yazı rengi, yazı tipi */
+body {
+  background-color: #fdf3e7;
+  color: #2b2b2b;
+  font-family: Arial, sans-serif;
+  padding: 16px;
+}
+
+/* Üst kısım: başlık solda, menü sağda */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+h1 {
+  color: #b5452b;
+  font-size: 32px;
+}
+
+/* Menü: bağlantılar yan yana, renkli bir şeridin içinde */
+.menu {
+  display: flex;
+  gap: 16px;
+  background-color: #f6d5c4;
+  padding: 10px 16px;
+  border-radius: 10px;
+}
+
+a {
+  color: #8a2f14;
+}
+
+/* Kartlar yan yana, sığmayan alt satıra */
+.kartlar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Tek bir kart */
+.kart {
+  width: 260px;
+  background-color: white;
+  padding: 20;
+  border: 2px solid #f0c9b8;
+  border-radius: 12px;
+}
+
+/* Kulüp logosu: yuvarlak */
+.logo {
+  max-width: 100%;
+  border-radius: 50%;
+
+/* Kart başlıkları */
+h2 {
+  color: #b5452b;
+  font-size: 22px;
+}
+
+/* Alt kısım */
+footer {
+  margin: 24px 0 0 0;
+  background-color: #f6d5c4;
+  text-align: center;
+  padding: 8px;
+  border-radius: 10px;
+}
