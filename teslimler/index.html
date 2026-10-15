@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab teslimleri · YZM205</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ink:#121A2B; --ground:#F5F7FB; --surface:#FFFFFF; --surface-2:#EEF2F8; --line:#D9DEE8; --muted:#5B6577;
+  --theory:#2352D9; --theory-soft:#E4EAFB; --lab:#0A6F62; --lab-soft:#DDF3EF; --ship:#8F5600; --ship-soft:#FBEBD2; --ai:#7A3DD6; --ai-soft:#EEE6FB;
+  --err:#B42318; --err-soft:#FBE9E7; --focus:#2352D9;
+  --display:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif; --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#E7ECF5; --ground:#0E131D; --surface:#161C29; --surface-2:#1D2535; --line:#2A3345; --muted:#9AA5B8;
+    --theory:#7B97FF; --theory-soft:#1B2545; --lab:#3FC4B0; --lab-soft:#123430; --ship:#F0A93B; --ship-soft:#3A2A10; --ai:#B48CFF; --ai-soft:#2C1F4A;
+    --err:#FF8A80; --err-soft:#3A1A17; --focus:#7B97FF; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E7ECF5; --ground:#0E131D; --surface:#161C29; --surface-2:#1D2535; --line:#2A3345; --muted:#9AA5B8;
+  --theory:#7B97FF; --theory-soft:#1B2545; --lab:#3FC4B0; --lab-soft:#123430; --ship:#F0A93B; --ship-soft:#3A2A10; --ai:#B48CFF; --ai-soft:#2C1F4A;
+  --err:#FF8A80; --err-soft:#3A1A17; --focus:#7B97FF; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:16px/1.55 var(--body)}
+main{max-width:1040px;margin:0 auto;padding:32px 16px 64px}
+a{color:var(--theory)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,4.5vw,2.4rem);line-height:1.15;margin:8px 0 10px;letter-spacing:-.01em}
+h2{font-family:var(--display);font-size:1.25rem;margin:0}
+p{margin:0 0 12px;max-width:72ch}
+.ust{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin-bottom:6px}
+.ust nav{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;font:inherit;font-size:.92rem;font-weight:500;cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--theory)}
+.btn.primary{background:var(--theory);border-color:var(--theory);color:#fff}
+.arac{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 12px}
+.arac input{flex:1 1 220px;min-width:0;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font:inherit;background:var(--surface);color:var(--ink)}
+.haftalar{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.haftalar button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 13px;font:inherit;font-size:.9rem;cursor:pointer;min-width:44px}
+.haftalar button:hover{border-color:var(--lab)}
+.haftalar button[aria-pressed="true"]{background:var(--lab);border-color:var(--lab);color:#fff}
+.ozet{color:var(--muted);font-size:.92rem}
+.sayilar{display:flex;flex-wrap:wrap;gap:6px 8px;margin:0 0 6px;padding:0;list-style:none}
+.sayilar li{font-size:.88rem;background:var(--surface-2);border-radius:999px;padding:3px 11px;color:var(--ink)}
+.sayilar b{font-weight:600}
+.durum{padding:12px 14px;border-radius:12px;background:var(--surface-2);color:var(--muted);margin:10px 0}
+.durum.hata{background:var(--err-soft);color:var(--err)}
+.hafta{margin-top:26px}
+.hafta-bas{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;border-bottom:2px solid var(--lab);padding-bottom:6px;margin-bottom:10px}
+.hafta-bas h2{color:var(--ink)}
+.hafta-bas .ozet{font-size:.88rem}
+.satir{display:grid;grid-template-columns:minmax(0,1fr);gap:8px 18px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--lab);border-radius:12px;padding:12px 14px;margin:0 0 8px}
+.satir > *{min-width:0}
+.satir.eski{opacity:.6;border-left-color:var(--line)}
+.satir.hatali{border-left-color:var(--err)}
+.kim{display:flex;flex-direction:column;gap:2px}
+.kim .no{font-family:var(--mono);font-size:.84rem;color:var(--lab)}
+.kim strong{font-weight:600;overflow-wrap:anywhere}
+.rozetler{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.rozet{display:inline-block;font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;padding:3px 8px;border-radius:999px;background:var(--surface-2);color:var(--muted);white-space:nowrap}
+.rozet.hata{background:var(--err-soft);color:var(--err)}
+.baglar{display:flex;flex-direction:column;gap:2px;font-size:.92rem}
+.baglar .yok{color:var(--muted)}
+.baglar a{overflow-wrap:anywhere}
+.yz{font-size:.92rem;overflow-wrap:anywhere}
+.yz summary{cursor:pointer;color:var(--ink)}
+.yz summary:hover{color:var(--theory)}
+.yz .tam{white-space:pre-wrap;margin:6px 0 0;padding:8px 10px;background:var(--surface-2);border-radius:8px}
+.yz .yok{color:var(--muted)}
+.zaman{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px 12px;align-items:center;justify-content:space-between;font-size:.82rem;color:var(--muted)}
+.zaman a{padding:5px 11px;font-size:.84rem;white-space:nowrap}
+.hatalar{grid-column:1/-1;font-size:.9rem;color:var(--err);background:var(--err-soft);border-radius:10px;padding:8px 10px}
+.hatalar b{font-weight:600;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;display:block;margin-bottom:2px}
+.hatalar ul{margin:0;padding-left:18px}
+footer{color:var(--muted);font-size:.86rem;border-top:1px solid var(--line);padding-top:16px;margin-top:40px}
+@media (min-width:860px){
+  .satir{grid-template-columns:minmax(0,1.1fr) minmax(0,1.2fr) minmax(0,1.5fr) 150px;align-items:start}
+  .zaman{flex-direction:column;align-items:flex-end;justify-content:flex-start;text-align:right}
+}
+</style>
+</head>
+<body>
+<main>
+  <div class="ust">
+    <div>
+      <div class="eyebrow">YZM205 · Haftalık lablar</div>
+      <h1>Lab teslimleri</h1>
+    </div>
+    <nav><a class="btn" href="../">Ders ana sayfası</a><button class="btn" type="button" id="tema">Tema</button></nav>
+  </div>
+  <p>Her labın sonunda yaptığın sayfayı ve kodunu bir formla teslim edersin. Her lab için ayrı teslim gönderirsin; aynı haftaya ikinci kez gönderirsen yenisi geçerli sayılır, eskisi listede soluk görünür. Teslimler sınıfa açık görünür.</p>
+
+  <div class="arac">
+    <a class="btn primary" href="https://github.com/cagrisahin58/2026-web/issues/new?template=lab-teslim.yml" target="_blank" rel="noopener">Teslim gönder</a>
+    <input type="search" id="ara" placeholder="Öğrenci numaranı ya da adını yaz" aria-label="Teslim ara" autocomplete="off">
+  </div>
+  <div class="haftalar" id="haftalar" role="group" aria-label="Hafta seç"></div>
+  <ul class="sayilar" id="sayilar" aria-label="Haftalara göre teslim sayıları"></ul>
+  <p class="ozet" id="ozet"></p>
+
+  <div id="durum" class="durum" aria-live="polite">Teslimler yükleniyor…</div>
+  <div id="liste"></div>
+  <p class="ozet" id="guncelleme" style="margin-top:14px"></p>
+
+  <footer>YZM205 Web Tasarımı ve Programlama · Muş Alparslan Üniversitesi · Arş. Gör. Çağrı ŞAHİN</footer>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  // Teslimler deponun "veri" dalındaki teslimler.json dosyasından okunur; dosyayı GitHub Actions üretir.
+  // Önce API (anında güncel, saatte sınırlı istek), olmazsa raw adres (birkaç dakika gecikebilir).
+  const API_ADRES = "https://api.github.com/repos/cagrisahin58/2026-web/contents/teslimler.json?ref=veri";
+  const VERI_ADRES = "https://raw.githubusercontent.com/cagrisahin58/2026-web/veri/teslimler.json";
+  const $ = (s) => document.querySelector(s);
+  const esc = (s) => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  const HAFTALAR = [2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13];
+  const NOT_UZUNLUK = 80;
+  let teslimler = [];
+  let secili = 0;   // 0 = hepsi
+
+  function tarih(iso) {
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return "";
+    return d.toLocaleDateString("tr-TR", { day: "numeric", month: "long" }) + " " + d.toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" });
+  }
+  function durum(metin, tur) {
+    const el = $("#durum");
+    el.className = "durum" + (tur ? " " + tur : "");
+    el.textContent = metin;
+    el.style.display = metin ? "" : "none";
+  }
+  function baglanti(adres, ad) {
+    return /^https:\/\/\S+$/.test(adres || "") ? '<a href="' + esc(adres) + '" target="_blank" rel="noopener">' + esc(ad) + '</a>' : "";
+  }
+
+  async function veriGetir() {
+    try {
+      const r = await fetch(API_ADRES, { cache: "no-store", headers: { Accept: "application/vnd.github.raw+json" } });
+      if (r.status === 404) return null;
+      if (r.ok) return await r.json();
+    } catch (e) { /* API kapalıysa ya da saatlik sınır dolduysa raw adrese geç */ }
+    const r = await fetch(VERI_ADRES + "?t=" + Date.now(), { cache: "no-store" });
+    if (r.status === 404) return null;
+    if (!r.ok) throw new Error("Liste alınamadı (" + r.status + ").");
+    return await r.json();
+  }
+
+  async function yukle() {
+    try {
+      const v = await veriGetir();
+      if (!v) { teslimler = []; durum("Henüz teslim yok. İlk teslimi sen gönder."); ciz(); return; }
+      teslimler = Array.isArray(v.teslimler) ? v.teslimler : [];
+      $("#guncelleme").textContent = v.guncelleme ? "Liste en son " + tarih(v.guncelleme) + " güncellendi. Yeni teslim birkaç dakika içinde görünür; görünmediyse biraz sonra sayfayı yenile." : "";
+      durum(teslimler.length ? "" : "Henüz teslim yok. İlk teslimi sen gönder.");
+      ciz();
+    } catch (e) {
+      durum("Liste şu an alınamadı: " + e.message + " Biraz sonra yeniden dene.", "hata");
+    }
+  }
+
+  function haftaDugmeleri() {
+    const kutu = $("#haftalar");
+    kutu.innerHTML = '<button type="button" data-h="0">Hepsi</button>' + HAFTALAR.map((h) => '<button type="button" data-h="' + h + '" title="Hafta ' + h + '">' + h + '</button>').join("");
+    kutu.addEventListener("click", (e) => {
+      const b = e.target.closest("button[data-h]");
+      if (!b) return;
+      secili = Number(b.dataset.h);
+      ciz();
+    });
+  }
+
+  function notHtml(t) {
+    const n = String(t.yzNotu || "").trim();
+    if (!n) return '<span class="yok">Yapay zekâ notu yok</span>';
+    if (n.length <= NOT_UZUNLUK && n.indexOf("\n") < 0) return esc(n);
+    const kisa = n.replace(/\s+/g, " ").slice(0, NOT_UZUNLUK).trim().replace(/[.,;:!?\s]+$/, "") + "…";
+    return '<details><summary>' + esc(kisa) + '</summary><div class="tam">' + esc(n) + '</div></details>';
+  }
+
+  function satir(t) {
+    const hatali = t.durum !== "gecerli";
+    const eski = !hatali && t.gecerli_son === false;
+    const rozet = hatali ? '<span class="rozet hata">Hatalı teslim</span>' : eski ? '<span class="rozet">eski teslim</span>' : "";
+    const bozuk = baglanti(t.bozuk, "Düzeltilmiş paket");
+    const yayin = baglanti(t.yayin, "Yayındaki sayfa") || '<span class="yok">Sayfa adresi yok</span>';
+    const depo = baglanti(t.depo, "Depo") || '<span class="yok">Depo adresi yok</span>';
+    const hatalar = hatali ? '<div class="hatalar"><b>Listeye girmesi için</b><ul>' + (t.hatalar || []).map((h) => "<li>" + esc(h) + "</li>").join("") + "</ul></div>" : "";
+    const kayit = /^https:\/\/\S+$/.test(t.github || "") ? '<a class="btn" href="' + esc(t.github) + '" target="_blank" rel="noopener">Kaydı aç</a>' : "";
+    return '<article class="satir' + (hatali ? " hatali" : "") + (eski ? " eski" : "") + '">'
+      + '<div class="kim"><span class="no">' + esc(t.numara || "?") + '</span><strong>' + esc(t.ad || "(adsız)") + '</strong>'
+      + (rozet ? '<div class="rozetler">' + rozet + '</div>' : "") + '</div>'
+      + '<div class="baglar">' + yayin + depo + (bozuk || "") + '</div>'
+      + '<div class="yz">' + notHtml(t) + '</div>'
+      + '<div class="zaman"><span>' + esc(tarih(t.olusturma)) + '</span>' + kayit + '</div>'
+      + hatalar
+      + '</article>';
+  }
+
+  function ciz() {
+    const q = ($("#ara").value || "").trim().toLocaleLowerCase("tr");
+    document.querySelectorAll("#haftalar button").forEach((b) => b.setAttribute("aria-pressed", String(Number(b.dataset.h) === secili)));
+
+    // Haftaya göre güncel teslim sayıları (yalnız geçerli ve en son olanlar)
+    const sayim = new Map();
+    for (const t of teslimler) if (t.durum === "gecerli" && t.gecerli_son !== false && t.hafta != null) sayim.set(t.hafta, (sayim.get(t.hafta) || 0) + 1);
+    $("#sayilar").innerHTML = [...sayim.keys()].sort((a, b) => a - b).map((h) => "<li><b>Hafta " + h + ":</b> " + sayim.get(h) + " teslim</li>").join("");
+    const bekleyen = teslimler.filter((t) => t.durum !== "gecerli").length;
+    $("#ozet").textContent = bekleyen ? bekleyen + " teslim düzeltme bekliyor, aşağıda kırmızı rozetle görünüyor." : "";
+
+    const suz = teslimler.filter((t) => {
+      if (secili && t.hafta !== secili) return false;
+      if (!q) return true;
+      return String(t.numara || "").includes(q) || String(t.ad || "").toLocaleLowerCase("tr").includes(q);
+    });
+
+    const gruplar = new Map();
+    for (const t of suz) {
+      const k = t.hafta == null ? 0 : t.hafta;
+      if (!gruplar.has(k)) gruplar.set(k, []);
+      gruplar.get(k).push(t);
+    }
+    const anahtarlar = [...gruplar.keys()].sort((a, b) => (a === 0) - (b === 0) || a - b);
+    $("#liste").innerHTML = anahtarlar.map((k) => {
+      const l = gruplar.get(k);
+      const ad = k === 0 ? "Haftası seçilmemiş teslimler" : ((l.find((t) => t.haftaAd) || {}).haftaAd || "Hafta " + k);
+      const guncel = l.filter((t) => t.durum === "gecerli" && t.gecerli_son !== false).length;
+      return '<section class="hafta"><div class="hafta-bas"><h2>' + esc(ad) + '</h2><span class="ozet">' + guncel + " teslim" + (l.length > guncel ? ", " + (l.length - guncel) + " eski ya da hatalı kayıt" : "") + "</span></div>"
+        + l.map(satir).join("") + "</section>";
+    }).join("");
+    if (teslimler.length && !suz.length) durum(q || secili ? "Bu süzgeçle eşleşen teslim yok." : "");
+    else if (teslimler.length) durum("");
+  }
+
+  $("#ara").addEventListener("input", ciz);
+  $("#tema").addEventListener("click", () => {
+    const kok = document.documentElement;
+    const koyu = kok.dataset.theme ? kok.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    kok.dataset.theme = koyu ? "light" : "dark";
+    try { localStorage.setItem("yzm205.tema", kok.dataset.theme); } catch (e) {}
+  });
+  try { const t = localStorage.getItem("yzm205.tema"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  haftaDugmeleri();
+  ciz();
+  yukle();
+})();
+</script>
+</body>
+</html>

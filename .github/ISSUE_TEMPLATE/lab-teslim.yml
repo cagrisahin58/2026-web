@@ -1,0 +1,84 @@
+name: Lab teslimi
+description: Haftalık labda yaptığın sayfayı, kodunu ve yapay zekâ notunu teslim et.
+title: "Teslim: "
+labels: ["teslim"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Her lab için ayrı bir teslim gönderirsin. Aynı haftaya ikinci kez gönderirsen yenisi geçerli sayılır. Gönderdikten sonra düzeltmek için sağ üstteki üç noktadan **Edit** de.
+  - type: dropdown
+    id: hafta
+    attributes:
+      label: Hafta
+      description: Hangi labı teslim ediyorsun?
+      options:
+        - "Hafta 2 · HTML"
+        - "Hafta 3 · CSS"
+        - "Hafta 4 · JavaScript 1"
+        - "Hafta 5 · JavaScript 2"
+        - "Hafta 7 · Sunucu"
+        - "Hafta 8 · Veritabanı"
+        - "Hafta 9 · Git"
+        - "Hafta 10 · Yapay zekâ ile geliştirme"
+        - "Hafta 11 · Güvenlik"
+        - "Hafta 12 · Yapay zekâ API"
+        - "Hafta 13 · Yayına alma"
+    validations:
+      required: true
+  - type: input
+    id: numara
+    attributes:
+      label: Öğrenci numarası
+      placeholder: "230101001"
+    validations:
+      required: true
+  - type: input
+    id: ad
+    attributes:
+      label: Ad soyad
+      placeholder: "Ece Yılmaz"
+    validations:
+      required: true
+  - type: input
+    id: yayin
+    attributes:
+      label: Yayındaki sayfanın adresi
+      description: GitHub Pages adresin. Sunucu haftalarında çalışan ekranın görüntüsünü depona koy, onun adresini yaz.
+      placeholder: "https://kullaniciadin.github.io/depo-adi/"
+    validations:
+      required: true
+  - type: input
+    id: depo
+    attributes:
+      label: Deponun adresi
+      placeholder: "https://github.com/kullaniciadin/depo-adi"
+    validations:
+      required: true
+  - type: input
+    id: bozuk
+    attributes:
+      label: Düzeltilmiş bozuk paketin adresi
+      description: Labda bozuk bir paket verildiyse düzelttiğin sürümün adresi. Yoksa boş bırak.
+      placeholder: "https://github.com/kullaniciadin/bozuk-paket"
+  - type: textarea
+    id: yz
+    attributes:
+      label: Yapay zekâ notu
+      description: Yapay zekâyı nerede, ne için kullandın, neyi kendin yazdın? Üç satır yeter.
+      placeholder: |
+        Menü düzenini yapay zekâya sordum, çıkan kodu sadeleştirdim.
+        Renkleri ve metinleri kendim yazdım.
+        Kullanmadığım yerde bunu da yaz.
+    validations:
+      required: true
+  - type: textarea
+    id: takildigi
+    attributes:
+      label: Takıldığın yer
+      description: Zorlandığın ya da çözemediğin bir şey varsa yaz. Yoksa boş bırak.
+  - type: input
+    id: birlikte
+    attributes:
+      label: Birlikte çalıştığın kişi
+      description: Biriyle birlikte çalıştıysan adını yaz. Yoksa boş bırak.

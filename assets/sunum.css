@@ -1,0 +1,111 @@
+/* YZM205 sunum kipi: projeksiyon için tek fikirlik ekranlar. Her hafta weeks/hafta-XX/sunum.html bu dosyayı kullanır.
+   Tuşlar: → ← (ekran), Boşluk (sıradaki adım), F (tam ekran), T (sayaç), R (animasyonu yeniden oynat), D (koyu/açık), ? (yardım) */
+:root{
+  --ink:#121A2B; --ground:#F5F7FB; --surface:#FFFFFF; --surface-2:#EEF2F8; --line:#D9DEE8; --muted:#5B6577;
+  --theory:#2352D9; --theory-soft:#E4EAFB; --lab:#0A6F62; --lab-soft:#DDF3EF; --ship:#8F5600; --ship-soft:#FBEBD2; --ai:#7A3DD6; --ai-soft:#EEE6FB;
+  --srv:#B3261E; --srv-soft:#FBE6E4; --db:#0B6E99; --db-soft:#DDF0FA; --err:#B42318; --err-soft:#FBE9E7; --focus:#2352D9;
+  --display:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif; --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --b1:clamp(1.05rem,2.1vw,1.65rem); --b2:clamp(.95rem,1.8vw,1.35rem); --h1:clamp(2rem,5.2vw,4rem); --h2:clamp(1.5rem,3.6vw,2.7rem); --kod:clamp(.95rem,1.9vw,1.45rem);
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --ink:#E7ECF5; --ground:#0E131D; --surface:#161C29; --surface-2:#1D2535; --line:#2A3345; --muted:#9AA5B8;
+  --theory:#7B97FF; --theory-soft:#1B2545; --lab:#3FC4B0; --lab-soft:#123430; --ship:#F0A93B; --ship-soft:#3A2A10; --ai:#B48CFF; --ai-soft:#2C1F4A;
+  --srv:#FF8A80; --srv-soft:#3A1A17; --db:#5CC3F0; --db-soft:#0F2E3D; --err:#FF8A80; --err-soft:#3A1A17; --focus:#7B97FF; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--ground);color:var(--ink);font:var(--b1)/1.45 var(--body);overflow:hidden}
+a{color:var(--theory)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+code,pre,kbd{font-family:var(--mono)}
+code{background:var(--surface-2);padding:.05em .35em;border-radius:.3em;font-size:.92em}
+kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:.3em;padding:.05em .4em;font-size:.85em;background:var(--surface)}
+
+/* deste ve ekran */
+.deste{position:fixed;inset:0}
+.s{position:absolute;inset:0;display:none;padding:6vh 7vw 9vh;grid-template-rows:auto 1fr;gap:2.5vh;overflow:hidden}
+.s.aktif{display:grid;animation:gir .25s ease-out}
+@keyframes gir{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.s > header{display:flex;align-items:baseline;justify-content:space-between;gap:2vw;flex-wrap:wrap}
+.s h1{font-family:var(--display);font-weight:800;font-size:var(--h1);line-height:1.1;margin:0;letter-spacing:-.01em}
+.s h2{font-family:var(--display);font-weight:800;font-size:var(--h2);line-height:1.15;margin:0;letter-spacing:-.01em}
+.s h3{font-family:var(--display);font-size:calc(var(--b1)*1.15);margin:0 0 .4em}
+.s p{margin:0 0 .6em;max-width:60ch}
+.s ul,.s ol{margin:0 0 .6em;padding-left:1.2em}
+.s li{margin:.25em 0}
+.etiket{font-family:var(--mono);font-size:clamp(.72rem,1.3vw,1rem);letter-spacing:.1em;text-transform:uppercase;color:var(--c,var(--theory));white-space:nowrap}
+.govde{display:grid;gap:2.5vw;min-height:0}
+.govde.iki{grid-template-columns:1fr 1fr;align-items:center}
+.govde.iki.sol-genis{grid-template-columns:3fr 2fr}
+.govde.iki.sag-genis{grid-template-columns:2fr 3fr}
+.govde.uc{grid-template-columns:1fr 1fr 1fr;align-items:start}
+.kutu{background:var(--surface);border:1px solid var(--line);border-radius:1.2vw;padding:2.2vh 2vw;min-width:0}
+.kutu.soft{background:var(--surface-2);border-color:transparent}
+.kutu.vurgu{border-color:var(--c,var(--theory));box-shadow:0 0 0 3px color-mix(in srgb,var(--c,var(--theory)) 18%,transparent)}
+.buyuk{font-size:calc(var(--b1)*1.25)}
+.kucuk{font-size:var(--b2);color:var(--muted)}
+.orta{text-align:center;align-self:center;justify-self:center}
+
+/* ekran türleri */
+.s.kapak{grid-template-rows:1fr auto;background:linear-gradient(135deg,var(--theory-soft),var(--ground) 60%)}
+.s.kapak .baslik{align-self:center}
+.s.kapak h1{font-size:clamp(2.4rem,7vw,5.5rem)}
+.s.sen{background:linear-gradient(180deg,var(--lab-soft),var(--ground) 40%)}
+.s.sen .etiket{--c:var(--lab)}
+.s.sinifca{background:linear-gradient(180deg,var(--ship-soft),var(--ground) 40%)}
+.s.sinifca .etiket{--c:var(--ship)}
+.s.ozet{background:linear-gradient(180deg,var(--ai-soft),var(--ground) 40%)}
+.s.ozet .etiket{--c:var(--ai)}
+
+/* kod */
+pre.kod{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:1vw;padding:2vh 2vw;font-size:var(--kod);line-height:1.5;overflow:auto;max-height:100%;tab-size:2}
+pre.kod .y{color:var(--muted)}                 /* yorum */
+pre.kod .e{color:var(--theory);font-weight:600} /* etiket, seçici */
+pre.kod .n{color:var(--ship)}                  /* nitelik, özellik */
+pre.kod .d{color:var(--lab)}                   /* değer */
+pre.kod .vurgu{background:var(--ship-soft);border-radius:.3em;outline:2px solid var(--ship)}
+pre.kod .satir{display:block}
+
+/* adım adım beliren parçalar: data-adim="1", "2"… Boşluk ile sırayla görünür */
+[data-adim]{opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s}
+[data-adim].goster{opacity:1;transform:none}
+
+/* sınıfça tahmin */
+.secenekler{display:grid;gap:1.2vh}
+.secenek{text-align:left;font:inherit;font-size:var(--b1);background:var(--surface);border:2px solid var(--line);border-radius:1vw;padding:1.6vh 2vw;cursor:pointer;color:var(--ink)}
+.secenek:hover{border-color:var(--theory)}
+.secenekler.acildi .secenek[data-dogru]{border-color:var(--lab);background:var(--lab-soft)}
+.secenekler.acildi .secenek:not([data-dogru]){opacity:.55}
+.cevap{opacity:0;transition:opacity .3s}
+.secenekler.acildi + .cevap, .cevap.goster{opacity:1}
+
+/* şimdi sen: görev ve sayaç */
+.gorev{display:grid;grid-template-columns:1fr auto;gap:2vw;align-items:start}
+.sayac{font-family:var(--mono);font-size:clamp(2rem,6vw,4.5rem);font-weight:600;line-height:1;color:var(--lab);background:var(--surface);border:2px solid var(--line);border-radius:1.2vw;padding:1.5vh 1.5vw;min-width:5.2ch;text-align:center;cursor:pointer;user-select:none}
+.sayac.bitti{color:var(--err);border-color:var(--err);animation:yanip 1s steps(2,start) 6}
+.sayac small{display:block;font:var(--b2) var(--body);color:var(--muted);margin-top:.4em}
+@keyframes yanip{50%{opacity:.3}}
+
+/* canlı şema alanı: her sunum kendi animasyonunu .sahne içine kurar; R tuşu .oynuyor sınıfını baştan verir */
+.sahne{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:1.2vw;padding:2vh 2vw;min-height:30vh;overflow:hidden}
+.sahne .not{position:absolute;left:1.5vw;bottom:1.2vh;font-size:var(--b2);color:var(--muted)}
+.sahne .yeniden{position:absolute;right:1vw;top:1vh;font:inherit;font-size:var(--b2);border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:.3em .8em;cursor:pointer}
+
+/* çerçeve: ilerleme, sayaç, yardım */
+.ilerleme{position:fixed;left:0;bottom:0;height:.6vh;background:var(--theory);width:0;transition:width .25s;z-index:5}
+.sayfa-no{position:fixed;right:1.2vw;bottom:1.2vh;font-family:var(--mono);font-size:clamp(.75rem,1.3vw,1rem);color:var(--muted);z-index:5}
+.cerceve-sol{position:fixed;left:1.2vw;bottom:1.2vh;display:flex;gap:1vw;font-size:clamp(.75rem,1.3vw,1rem);color:var(--muted);z-index:5}
+.cerceve-sol a{color:var(--muted);text-decoration:none}
+.cerceve-sol a:hover{color:var(--theory)}
+.yardim{position:fixed;inset:0;background:rgba(10,14,24,.78);color:#fff;display:none;place-items:center;z-index:9;font-size:var(--b1)}
+.yardim.acik{display:grid}
+.yardim div{background:#161C29;border-radius:1.2vw;padding:3vh 3vw;max-width:60ch}
+.yardim kbd{background:#1D2535;border-color:#2A3345;color:#fff}
+.bolum-cizgi{position:fixed;left:0;top:0;height:.5vh;display:flex;width:100%;z-index:5}
+.bolum-cizgi i{flex:1;background:var(--line);margin-right:2px}
+.bolum-cizgi i.bitti{background:var(--theory)}
+.bolum-cizgi i.aktif{background:var(--ship)}
+
+@media (prefers-reduced-motion:reduce){ .s.aktif{animation:none} [data-adim]{transition:none} .sayac.bitti{animation:none} }
+@media print{ body{overflow:visible} .deste{position:static} .s{position:static;display:grid;height:100vh;page-break-after:always} .ilerleme,.sayfa-no,.cerceve-sol,.bolum-cizgi,.yardim{display:none} [data-adim]{opacity:1;transform:none} }

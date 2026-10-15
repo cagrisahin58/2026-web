@@ -4,162 +4,124 @@ Muş Alparslan Üniversitesi · Mühendislik-Mimarlık Fakültesi · Yazılım M
 
 Yürütücü: Arş. Gör. Çağrı ŞAHİN
 
-Perşembe · teori 10:00–11:45 · uygulama (lab) 15:00–16:45 · derslik BLD-104
+Haftada iki blok: sabah konu anlatımı ve birlikte kodlama, öğleden sonra proje atölyesi. Derslik BLD-104.
 
 Etkileşimli sürüm: [cagrisahin58.github.io/2026-web/docs/syllabus.html](https://cagrisahin58.github.io/2026-web/docs/syllabus.html)
-
-Güncelleme: 23 Eylül 2026
 
 ## Dersin amacı
 
 WhatsApp Web, YouTube, e-Devlet: her gün açtığın bu sitelerin hepsi birer web uygulaması. Dönemin sonunda sen de takımınla birlikte küçük ama gerçek bir web uygulaması yapıp internete koymuş olacaksın. Sayfaları tarayıcıda açılan, arkasında bir sunucu ve bir veritabanı çalışan bir uygulama. Bugün kodun bir kısmını yapay zekâ yazabiliyor. Neyin yapılacağına karar vermek, çıkan kodu anlamak ve doğru çalışıp çalışmadığını kontrol etmek yine insanın işi. Bu derste o insan olmayı öğreneceksin.
 
-Peki yapay zekâ bir sayfayı saniyeler içinde yazabiliyorsa HTML'i, CSS'i, JavaScript'i neden tek tek öğreniyoruz? Çünkü yapay zekâ çoğu zaman neredeyse doğru kod verir ve aradaki küçük hatayı ancak kodu okuyabilen biri fark eder. O yüzden Hafta 2 ile Hafta 9 arasında kodu önce sen yazarsın. Temeller oturunca, Hafta 10'dan itibaren kodlama ajanıyla daha hızlı çalışırsın. Kuralların ayrıntısı aşağıda, "Yapay zekâ kuralları" başlığında.
+Peki yapay zekâ bir sayfayı saniyeler içinde yazabiliyorsa HTML'i, CSS'i, JavaScript'i neden tek tek öğreniyoruz? Çünkü yapay zekâ çoğu zaman neredeyse doğru kod verir ve aradaki küçük hatayı ancak kodu okuyabilen biri fark eder. Bu yüzden ilk sekiz haftada temeli birlikte kurarız: her kavramı önce sen yazarsın. Temel oturunca dokuzuncu haftadan itibaren bugünün web dünyasına bakarız: modern mimariler, çerçeveler, kodlama ajanları, uygulamaya yapay zekâ eklemek, GitHub'ın otomasyon araçları.
 
 ## Haftalık ritim
 
-Her Perşembe iki blok var. Sabah 10:00–11:45 arası konu anlatılır. Hoca yeni kavramları o haftanın ders notundan anlatır ve canlı örnekle gösterir. 105 dakikanın ortasında 10 dakika ara verilir.
+Her ders günü iki blok var. Sabah bloğunda hoca konuyu projeksiyondaki sunumdan anlatır: her ekranda tek bir fikir, hareketli bir şema, sınıfça bir tahmin ve birkaç dakikada bir "şimdi sen" adımı. Sen de kendi bilgisayarında aynı kodu yazarsın. 105 dakikanın ortasında 10 dakika ara verilir.
 
-Ders notu slayt değil, tarayıcıda açılan bir sayfa. İçinde küçük denemeler (simülasyonlar) ve cevabı açıklanan sorular var. Soruların bir kısmını derste birlikte çözeriz, kalanını evde sen çözersin.
+Her haftanın bir de uzun ders notu var: tarayıcıda açılan, içinde küçük denemeler (simülasyonlar) ve cevabı açıklanan sorular olan bir sayfa. O sayfa evde tekrar içindir; derste sunumu izlersin, evde notu okursun.
 
-Öğleden sonra 15:00–16:45 arası lab var. Kendi dizüstünle gelirsin, kampüs Wi-Fi'ına bağlanırsın. Lab da 105 dakika sürer, arada 5 dakika ara verilir. Her lab üç adımdan oluşur:
+Öğleden sonra bloğu proje atölyesidir. Takımınla oturursun, o haftanın konusunu kendi projenize uygularsınız, hoca masaları gezer. Blok bitmeden o haftanın teslimini gönderirsin (aşağıda "Haftalık teslim"). Her haftanın ders notundaki lab paketleri (Yap, Boz, Anlat) evde çalışmak isteyen için duruyor; zorunlu değil.
 
-1. Yap: Haftanın konusunu adım adım uygulayıp kendi çalışan sayfanı ya da kodunu ortaya çıkarırsın.
-2. Boz: İçine bilerek üç hata konmuş bir kodu alır, hataları bulup düzeltirsin.
-3. Anlat: Haftanın bir sorusunu yanındaki arkadaşına 60 saniyede kendi cümlelerinle anlatırsın.
-
-Lab bitmeden teslim formunu doldurursun. Ayrıntısı aşağıda, "Lab teslimi" başlığında.
+Takvimi haftalarla sayarız, günle değil. Bir hafta iki derse yayılabilir ya da iki hafta tek derste işlenebilir; hangi haftada olduğumuz derste ve sınıf kanalında söylenir.
 
 ## 14 haftalık plan
 
-Tarihler Perşembe günleridir. 29 Ekim Cumhuriyet Bayramı'dır, o hafta ders yok. Hafta 6 (9–13 Kasım) ara sınav haftasıdır, o hafta da ders yapılmaz. Demo Günü final haftasının ilk Perşembesine, 7 Ocak'a denk gelir. Puanlanan 11 lab var: Hafta 2, 3, 4, 5, 7, 8, 9, 10, 11, 12 ve 13.
+İlk sekiz hafta temel: sayfa, görünüş, davranış, takım çalışması, sunucu, veritabanı, yayın. Sonraki haftalar bugünün web'i. Ara sınav haftası ders yok; sınav o güne kadar işlediğimiz konuları kapsar.
 
-### Hafta 1 · 1 Ekim · Tanışma: yapay zekâ çağında web yazılımcısı olmak
+### Hafta 1 · Tanışma: yapay zekâ çağında web yazılımcısı olmak
 
-Sabah konu anlatımı yok. Dersi, dönemin haritasını ve takım projesini tanırsın. HTML, CSS, JavaScript, sunucu, veritabanı ve yapay zekâya birer küçük tadımlık bakarız.
+Konu anlatımı yok. Dersi, dönemin haritasını ve takım projesini tanırsın. HTML, CSS, JavaScript, sunucu, veritabanı ve yapay zekâya birer küçük bakış. Öğleden sonra bilgisayar yok: dörtlü masalarda tanışırız, kampüs hayatından site fikirleri çıkarırız. Takımını Lab grupları sayfasından kaydedersin.
 
-Öğleden sonra bilgisayar yok: dörtlü masalarda tanışırız, kampüs hayatından site fikirleri çıkarırız ve yapay zekâ çağında bu işi neden öğrendiğimizi konuşuruz. Puan yok, teslim yok. Bilgisayarlı ilk ders 8 Ekim. O güne kadar Hafta 0 kurulum sayfasındaki beş adımı evde yaparsın.
+[Hafta 1 ders notu](https://cagrisahin58.github.io/2026-web/weeks/hafta-01/) · [Kurulum sayfası](https://cagrisahin58.github.io/2026-web/weeks/hafta-00-kurulum/)
 
-[Hafta 1 ders notu](https://cagrisahin58.github.io/2026-web/weeks/hafta-01/) · [Hafta 0 kurulum sayfası](https://cagrisahin58.github.io/2026-web/weeks/hafta-00-kurulum/)
+### Hafta 2 · HTML: sayfanın iskeleti
 
-### Hafta 2 · 8 Ekim · HTML: sayfanın iskeleti
-
-Bir web sayfasının aslında bir metin dosyası olduğunu görürsün. Tarayıcının bu dosyayı sunucudan nasıl alıp ekrana çizdiğini anlarsın. Etiket, öğe ve niteliğin ne olduğunu ve etiketlerin iç içe nasıl geçtiğini öğrenirsin. Bir HTML belgesinin iskeletini satır satır yazarsın. Başlık, paragraf ve liste kullanırsın. Bağlantı ve görsel eklerken dosya yolunun mantığını çözersin. Sayfanı header (üst kısım), nav (menü), main (ana içerik) ve footer (alt kısım) bölümlerine ayırırsın.
-
-Labda kişisel sayfanı adım adım yaparsın, GitHub'a web arayüzünden yükleyip GitHub Pages ile yayınlarsın. Boz adımında bozuk bir sitede üç hata ararsın.
+Bir web sayfasının aslında bir metin dosyası olduğunu görürsün. Etiket, öğe ve niteliğin ne olduğunu, etiketlerin iç içe nasıl geçtiğini öğrenirsin. Bir HTML belgesinin iskeletini satır satır yazarsın. Başlık, paragraf ve liste kullanırsın. Bağlantı ve görsel eklerken dosya yolunun mantığını çözersin. Sayfanı header, nav, main ve footer bölümlerine ayırırsın. Kişisel sayfanı yapıp GitHub Pages ile yayınlarsın.
 
 [Hafta 2 ders notu](https://cagrisahin58.github.io/2026-web/weeks/hafta-02/)
 
-### Hafta 3 · 15 Ekim · CSS: sayfaya görünüş vermek
+### Hafta 3 · CSS: sayfaya görünüş vermek
 
-CSS'in ne olduğunu ve HTML'e nasıl bağlandığını öğrenirsin. Seçicilerle (etiket ve sınıf) hangi öğeyi biçimlendireceğini söylersin. Renk, yazı tipi ve boşluk verirsin. Her öğenin bir kutu olduğunu görürsün. Bu kutunun dış boşluğu margin, çerçevesi border, iç boşluğu padding adını taşır. Flexbox adlı CSS yöntemiyle öğeleri yan yana dizersin. Ekran genişliğine göre devreye giren tek bir kuralla, yani bir media query ile sayfanı telefonda da düzgün gösterirsin.
+CSS'in ne olduğunu ve HTML'e nasıl bağlandığını öğrenirsin. Seçicilerle hangi öğeyi biçimlendireceğini söylersin. Renk, yazı tipi ve boşluk verirsin. Her öğenin bir kutu olduğunu görürsün: içerik, padding, border, margin. Flexbox ile öğeleri yan yana dizersin. Tek bir media sorgusuyla sayfanı telefonda da düzgün gösterirsin. Kişisel sayfanı biçimlendirir, projenin ilk ekranına görünüş verirsin.
 
-Labda kişisel sayfanı biçimlendirirsin. Boz adımında bozuk bir stil dosyasında üç hata bulursun.
+### Hafta 4 · JavaScript ve DOM: sayfayı canlandırmak
 
-### Hafta 4 · 22 Ekim · JavaScript 1: dilin temelleri
+YZM103'ten tanıdığın değişken, koşul, döngü, fonksiyon ve diziyi JavaScript'te hızlıca yazarsın. Sonra DOM'u öğrenirsin: tarayıcının sayfayı bellekte tuttuğu ağaç. Bir öğeyi seçer, metnini ve sınıfını değiştirir, tıklama ve yazma olaylarını dinler, formdan değer okur, listeye öğe eklersin. `fetch` ile sunucuya nasıl soru sorulduğunu görürsün. Projenin bir ekranını canlandırırsın.
 
-İlk JavaScript kodunu tarayıcı konsolunda çalıştırırsın. Değişken (let, const) ve veri türlerini, koşulu (if), döngüyü (for), fonksiyonu ve diziyi JavaScript'te yazarsın. Bu fikirlerin çoğunu YZM103'ten tanıyorsun. Burada aynı fikirlerin JavaScript'te nasıl yazıldığını görürsün.
+### Hafta 5 · Git ve GitHub ile takım çalışması
 
-Labda küçük hesaplayıcılar yaparsın: not ortalaması, KDV, çarpım tablosu. Boz adımında bozuk bir kodda üç hata bulursun.
+Git, dosyalarında yaptığın her değişikliğin geçmişini tutan programdır. Değişikliği commit ile kaydeder, push ile GitHub'a gönderir, pull ile arkadaşının değişikliğini alırsın. Ana kodu bozmadan çalışmak için kendi dalını açar, işin bitince pull request ile takıma sunarsın. İki kişinin aynı satırı değiştirmesinden doğan çakışmayı çözersin. Takım deposu kurulur ve proje oradan yayınlanır.
 
-Proje: M0. Dört kişilik takımlar dersin öğle arasında kurulur, labın sonunda takım adı ve fikir netleşir. Her takım proje fikrini, uygulamanın kimin için olduğunu ve üç ekranın kâğıt üzerindeki taslağını Pazar 1 Kasım 23:59'a kadar ayrı bir M0 formuyla teslim eder.
+Proje: M1. Takımın statik sayfalardan ve JavaScript'ten oluşan ilk sürümü takım deposundan yayında.
 
-### 29 Ekim · Ders yok (Cumhuriyet Bayramı)
+### Hafta 6 · Sunucu: HTTP, Node.js ve Express
 
-Ders ve lab yok. Takımın ilk buluşmasını bu hafta kendi aranızda yaparsınız.
+HTTP, tarayıcı ile sunucunun konuşma kuralıdır: istek gider, yanıt gelir. GET ile POST'un, 200 ile 404'ün farkını görürsün. Verinin JSON biçiminde taşındığını öğrenirsin. Node.js ile JavaScript'i tarayıcının dışında çalıştırır, Express ile ilk sunucunu yazar, bir rota açıp JSON döndürürsün. Sayfandan `fetch` ile kendi sunucuna istek atarsın. Projene ilk API'ni eklersin.
 
-### Hafta 5 · 5 Kasım · JavaScript 2: sayfayı canlandırmak
+### Hafta 7 · Veritabanı: SQL, SQLite ve bulutta veritabanı
 
-DOM'un ne olduğunu öğrenirsin. DOM, tarayıcının sayfadaki öğeleri JavaScript'in erişebileceği biçimde tuttuğu yapıdır. querySelector ile bir öğe seçer, metnini ve sınıfını değiştirirsin. click ve input olaylarını dinlersin. Formdan değer okur, listeye yeni öğe eklersin.
+Tablo, satır, sütun ve birincil anahtarı öğrenirsin. SQL ile veri okur (SELECT), ekler (INSERT), süzer (WHERE), sıralar (ORDER BY), günceller ve silersin. Tek dosyada duran SQLite ile çalışırsın. Aynı fikrin buluttaki servislerine (Supabase, Turso, Firebase gibi) bakarsın: ne değişir, ne aynı kalır. Projenin verisi veritabanına taşınır.
 
-Labda bir yapılacaklar listesi uygulaması yaparsın. Boz adımında bozuk bir kodda üç hata bulursun.
+### Hafta 8 · Yayına alma ve güvenlik temelleri
 
-### Hafta 6 · 9–13 Kasım · Ara sınav haftası, ders yok
+Sunucunu ve veritabanını internete koymayı öğrenirsin: barındırma servisi, ortam değişkeni, gizli anahtarın neden koda yazılmadığı, geçici disk. Parolanın neden düz saklanmadığını (hash), oturumun nasıl hatırlandığını (çerez) ve en bilinen iki açığı (XSS, SQL enjeksiyonu) tanırsın. Proje yayına alınır.
 
-Ara sınav bu haftadır ve Hafta 2–5 konularını kapsar. Sınavın biçimi "Değerlendirme" başlığında.
+Proje: M2. Sunucusu ve veritabanı bağlı sürüm yayında.
 
-### Hafta 7 · 19 Kasım · Sunucu: tarayıcının konuştuğu program
+### Ara sınav haftası · ders yok
 
-HTTP, tarayıcı ile sunucunun konuşurken uyduğu kurallardır. Tarayıcı bir istek gönderir, sunucu bir yanıt döner. Veri isteyen GET ile veri gönderen POST'un farkını görürsün. "Tamam" anlamına gelen 200 ile "bulunamadı" anlamına gelen 404'ü tanırsın. Verinin JSON biçiminde, yani programların kolayca okuduğu düz bir metin olarak nasıl taşındığını öğrenirsin. Bilgisayarına Node.js kurarsın. Node.js, JavaScript'i tarayıcının dışında çalıştıran programdır. Express kütüphanesiyle ilk sunucunu yazarsın. Sunucunda bir rota, yani `/soz` gibi bir adres tanımlayıp oradan JSON döndürürsün. Sonra sayfandaki JavaScript'ten fetch komutuyla kendi sunucuna istek gönderirsin.
+Ara sınav o güne kadar işlediğimiz konuları kapsar. Biçimi "Değerlendirme" başlığında.
 
-Labda kendi küçük API'ni yaparsın. API, başka bir programın senin sunucuna soru sorup cevap aldığı kapıdır. Seninki örneğin günün sözünü verebilir. Boz adımında bozuk bir sunucuda üç hata bulursun.
+### Hafta 9 · Modern web mimarileri
 
-### Hafta 8 · 26 Kasım · Veritabanı: veriyi saklamak
+Sayfa tarayıcıda mı, sunucuda mı üretilir? SPA, SSR ve SSG'nin ne olduğunu, API-first yaklaşımı, bileşen tabanlı çerçeveleri (React, Next.js) ve TypeScript'in neden var olduğunu görürsün. Hangi projenin neyi seçtiğini konuşuruz. Kendi projenin mimarisini çizersin, küçük bir bileşen denersin.
 
-Tablo, satır ve sütunun ne olduğunu öğrenirsin. Birincil anahtar, her satırı ötekilerden ayıran değerdir, çoğu zaman bir numara. Veritabanıyla SQL dilinde konuşursun. SQL ile veri okursun (SELECT), eklersin (INSERT), süzersin (WHERE), sıralarsın (ORDER BY), güncellersin (UPDATE) ve silersin (DELETE). Veritabanı olarak tek bir dosyada duran SQLite'ı kullanırsın. Sunucundan veritabanına yazıp okursun.
+### Hafta 10 · Yapay zekâ ile geliştirme
 
-Labda bir ziyaretçi defteri yaparsın: form, sunucu, veritabanı ve liste birbirine bağlanır. Boz adımında bozuk bir sorguda üç hata bulursun.
+Kodlama ajanları (GitHub Copilot, Claude Code, Cursor) nasıl çalışır, nerede yanılır? İyi istem yazmayı, üretilen kodu okumayı ve test etmeyi öğrenirsin. Ajanın araç kullanımına (MCP) bakarsın. Kural: açıklayamadığın kod senin değil. Projene ajanla bir özellik ekler, her satırını açıklarsın.
 
-### Hafta 9 · 3 Aralık · Git ve GitHub ile takım çalışması
+### Hafta 11 · Uygulamaya yapay zekâ eklemek
 
-Bilgisayarına Git kurarsın. Git, dosyalarında yaptığın her değişikliğin geçmişini tutan programdır. Yaptığın değişikliği commit ile kaydeder, push ile GitHub'a gönderir, pull ile takım arkadaşının değişikliğini alırsın. Ana kodu bozmadan çalışmak için kendi dalını (branch) açarsın. İşin bitince pull request ile değişikliğini takıma "bakın, uygunsa ekleyelim" diye sunarsın. İki kişi aynı satırı değiştirdiğinde çıkan çakışmayı (conflict) çözersin.
+Dil modeli API'sine sunucundan istek atarsın; anahtar sunucuda kalır. Sistem mesajı, hata ve zaman aşımı, çıktının doğrulanması. Modelin kendi belgelerinden cevap üretmesine (RAG) kısa bir bakış. Projene bir yapay zekâ özelliği eklersin.
 
-Labda takım deposu kurulur, herkes bir dal açıp pull request gönderir. Bilerek çıkarılmış bir çakışmayı çözersin.
+### Hafta 12 · GitHub ekosistemi ve otomasyon
 
-Proje: takım deposu açılır.
+GitHub Actions ile test ve yayın otomasyonu, Issues ve Projects ile iş takibi, iyi bir README ve lisans, açık kaynak projeye katkı. Depon senin CV'ndir. Projene bir otomasyon eklersin.
 
-### Hafta 10 · 10 Aralık · Yapay zekâ ile geliştirme
+### Hafta 13 · Kalite ve son hazırlık
 
-Yapay zekânın nasıl kod yazdığını ve nerede yanıldığını görürsün. İstem, yapay zekâya yazdığın istektir. İyi istem yazmayı öğrenirsin: bağlam verirsin, tek bir görev istersin, açıklama istersin. Kodlama ajanı, verdiğin göreve göre dosyalarını kendisi değiştiren yapay zekâdır. Onunla (Copilot ajan modu) çalışırsın. Üretilen kodu okur ve test edersin.
+Erişilebilirlik, performans (Lighthouse), telefon ve masaüstü kontrolü, güvenlik kontrol listesi. Demo Günü provası.
 
-Labda ajanla projene bir özellik eklersin ve her satırını açıklarsın. Ajanın bıraktığı üç hatayı bulursun.
+Proje: kod dondurma, Demo Günü'nden önceki gün 23:59. Bu saatten sonra takım deposuna yapılan değişiklik değerlendirilmez.
 
-Proje: M1. HTML, CSS ve JavaScript ile yapılmış prototip (uygulamanın ilk deneme sürümü), takım deposundan yayında.
+### Hafta 14 · Demo Günü
 
-### Hafta 11 · 17 Aralık · Güvenlik ve kullanıcı girişi
-
-Parolanın neden düz metin olarak saklanmadığını öğrenirsin. Hash, parolayı geri çözülemeyen bir karakter dizisine çevirir. Çerez, tarayıcının bir site için sakladığı küçük nottur. Oturum da sitenin, giriş yaptığını bu not sayesinde hatırlamasıdır. İki açığı tanırsın. XSS'te saldırgan sayfaya kendi JavaScript kodunu sokar. SQL enjeksiyonunda form kutusuna yazdığı metinle veritabanı sorgusunu değiştirir. Gizli anahtarlar, bir servise bağlanmak için kullanılan şifre gibi metinlerdir. Bunların neden koda ve depoya yazılmadığını öğrenirsin.
-
-Labda ziyaretçi defterine kullanıcı girişi eklersin. İçindeki açıkları bulup kapatırsın.
-
-### Hafta 12 · 24 Aralık · Web uygulamasına yapay zekâ eklemek
-
-Dil modeli, sohbet eden yapay zekâ programlarının arkasındaki modeldir. Bir dil modeli API'sinin, yani programının modele soru sorduğu kapının ne olduğunu öğrenirsin. API anahtarının neden sunucuda kalması gerektiğini görürsün. Sunucundan modele istek atarsın. Modelin cevabına körü körüne güvenmez, kullanmadan önce doğrularsın.
-
-Labda projene küçük bir yapay zekâ özelliği eklersin.
-
-Proje: M2. Sunucusu ve veritabanı bağlı, çalışan sürüm.
-
-### Hafta 13 · 31 Aralık · Yayına alma ve modern araçlara bakış
-
-Sunucunu ve veritabanını internete koymayı öğrenirsin. Ortam değişkeni, kodun içine değil sunucunun ayarlarına yazılan bir değerdir. Gizli bilgileri ve ayarları bununla kodun dışında tutarsın. Çerçeve, büyük bir uygulamayı düzenli yazmak için hazır bir yapıdır. React gibi çerçevelerin hangi sorunu çözdüğüne kısa bir tanıtımla bakarsın.
-
-Labda yayın yolunu birlikte kurarız. Projeni yayına alır, son hazırlığı yaparsın.
-
-Proje: final kodu 6 Ocak 23:59'da dondurulur. Bu saatten sonra takım deposuna yapılan değişiklik değerlendirilmez.
-
-### Hafta 14 · 7 Ocak · Demo Günü
-
-Final haftasının ilk Perşembesi, ders saatlerinde. Sabah ve öğleden sonra blokları Demo Günü'ne ayrılır. 14 takımın her biri 7 dakika demo yapar, ardından 3 dakika soru gelir. Toplam 140 dakika.
+Sabah ve öğleden sonra blokları Demo Günü'ne ayrılır. Her takım 7 dakika demo yapar, 3 dakika soru alır.
 
 Proje: M3, final teslimi.
 
-### Final haftası · 4–15 Ocak 2027
+### Final haftası
 
-Final sınavı ve bireysel kod savunmaları bu iki haftada yapılır, Demo Günü'nden sonra. Savunma öğrenci başına 15 dakikadır.
-
-### Bütünleme · 18–22 Ocak 2027
-
-Bütünleme sınavı final sınavının yerine geçer ve onunla aynı biçimdedir. Proje ve savunma notların korunur.
+Final sınavı ve bireysel kod savunmaları final haftasında yapılır. Savunma öğrenci başına 15 dakikadır. Bütünleme sınavı final sınavının yerine geçer ve onunla aynı biçimdedir; proje ve savunma notların korunur.
 
 ## Dönem projesi
 
-56 kişiyiz. Dört kişilik 14 takım kuracağız. Takımlar Hafta 4'te kurulur.
+Dört kişilik takımlar. Takımını [Lab grupları](https://cagrisahin58.github.io/2026-web/gruplar/) sayfasından kaydedersin; kayıt yedi gün düzenlenebilir, sonra kilitlenir.
 
-Her takım gerçek bir kullanıcı için birkaç sayfalık bir web uygulaması yapar. Ön yüz HTML, CSS ve JavaScript ile yazılır. Arkada bir Express sunucusu ve bir SQLite veritabanı çalışır. Uygulamada küçük bir yapay zekâ özelliği bulunur. Dönem sonunda uygulama yayındadır, yani herkes adresinden açabilir. Fikir örnekleri: kulüp etkinliklerine kayıt, kantin siparişi, ders notu paylaşımı, laboratuvar cihazı rezervasyonu.
+Her takım gerçek bir kullanıcı için birkaç sayfalık bir web uygulaması yapar. Ön yüz HTML, CSS ve JavaScript ile yazılır. Arkada bir sunucu ve bir veritabanı çalışır. Uygulamada küçük bir yapay zekâ özelliği bulunur. Dönem sonunda uygulama yayındadır, yani herkes adresinden açabilir. Fikir örnekleri: kulüp etkinliklerine kayıt, kayıp eşya panosu, ders notu paylaşımı, laboratuvar cihazı rezervasyonu.
 
 Kilometre taşları:
 
-| Taş | Tarih | Ne teslim edilir? |
+| Taş | Ne zaman | Ne teslim edilir? |
 | --- | --- | --- |
-| M0 | 22 Ekim (Hafta 4), teslim Pazar 1 Kasım 23:59 | Takım, proje fikri, kullanıcı ve üç ekranın kâğıt taslağı |
-| M1 | 10 Aralık (Hafta 10), teslim Pazar 13 Aralık 23:59 | HTML, CSS ve JavaScript prototip, takım deposundan yayında |
-| M2 | 24 Aralık (Hafta 12), teslim Pazar 27 Aralık 23:59 | Sunucusu ve veritabanı bağlı, çalışan sürüm |
-| M3 | 7 Ocak (Hafta 14) | Demo Günü ve final teslimi: yayındaki uygulama, README (projeyi tanıtan metin dosyası), kısa rapor |
+| M0 | Hafta 1 | Takım, proje fikri ve kullanıcı (Lab grupları sayfasında) |
+| M1 | Hafta 5 | Statik sayfalar ve JavaScript ile ilk sürüm, takım deposundan yayında |
+| M2 | Hafta 8 | Sunucusu ve veritabanı bağlı sürüm yayında |
+| M3 | Hafta 14 | Demo Günü ve final teslimi: yayındaki uygulama, README (projeyi tanıtan metin dosyası), kısa rapor |
 
-Final kodu 6 Ocak 23:59'da dondurulur. Final raporunda yapay zekâ kullanımını anlatan bir bölüm zorunludur.
+Final kodu Demo Günü'nden önceki gün 23:59'da dondurulur. Final raporunda yapay zekâ kullanımını anlatan bir bölüm zorunludur.
 
-Ara teslimlerde (M0, M1, M2) takım notu, senin bireysel katkınla çarpılır. Takımda iş yapmayan, takımın aldığı notu olduğu gibi almaz.
+Ara teslimlerde (M1, M2) takım notu, senin bireysel katkınla çarpılır. Takımda iş yapmayan, takımın aldığı notu olduğu gibi almaz.
 
 Final teslimi şu başlıklarla değerlendirilir:
 
@@ -171,47 +133,39 @@ Final teslimi şu başlıklarla değerlendirilir:
 | Kullanıcı deneyimi | Kullanıcı uygulamayı zorlanmadan kullanabiliyor mu? |
 | Yapay zekâ kullanımının dürüst kaydı | Raporda yapay zekânın nerede ve nasıl kullanıldığı açıkça yazılmış mı? |
 
+Yıl sonunda projeler bütün üniversitenin gezdiği bir proje sergisinde sergilenebilir. Ders kapsamında en iyi üç proje ödüllendirilir; ödüller Lab grupları sayfasında yazıyor.
+
 ## Değerlendirme
 
 | Bileşen | Puan | Açıklama |
 | --- | --- | --- |
-| Ara sınav (9–13 Kasım) | 15 | 60 dakika bilgisayarda uygulamalı (yapay zekâ kapalı, ders notları açık) ve 30 dakika kâğıt üzerinde kavram soruları. Kapsam Hafta 2–5. |
-| Haftalık lab | 12 | 11 lab (Hafta 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13). En düşük 2 lab notun silinir. Her labda çalışan sayfa ya da kod, bozuk kodun düzeltmesi ve kısa yapay zekâ notu teslim edilir. |
-| Proje ara teslimleri (M0, M1, M2) | 13 | Takım notu, bireysel katkınla çarpılır. |
+| Ara sınav | 15 | 60 dakika bilgisayarda uygulamalı (yapay zekâ kapalı, ders notları açık) ve 30 dakika kâğıt üzerinde kavram soruları. Kapsam: sınava kadar işlenen konular. |
+| Haftalık teslim | 12 | Hafta 2'den 13'e kadar her hafta bir teslim; en düşük iki notun silinir. Teslim, o haftanın konusunun kendi sayfanda ya da projende uygulanmış hâlidir; kısa bir yapay zekâ notu eklenir. |
+| Proje ara teslimleri (M1, M2) | 13 | Takım notu, bireysel katkınla çarpılır. |
 | Final sınavı | 25 | 80 dakika uygulamalı (yapay zekâ serbest) ve 40 dakika yazılı (yapay zekâ kapalı). |
 | Proje final teslimi (M3) | 20 | Demo Günü, yayındaki uygulama, README ve kısa rapor (yapay zekâ kullanımı bölümü zorunlu). |
 | Bireysel kod savunması | 15 | 15 dakika: projeni anlatırsın, bir kodu açıklarsın, küçük bir değişiklik yaparsın. 0–4 ölçeğiyle puanlanır. |
 
 Yıl içi notun 40 puandır (15 + 12 + 13). Yarıyıl sonu notun 60 puandır (25 + 20 + 15). Yarıyıl sonu notu 50'nin altında kalan öğrenci dersten kalır.
 
-Devam şartı teoride en az %70, uygulamada en az %80. Lab teslimin uygulama yoklaması sayılır. En düşük iki lab notunun silinmesi devam şartını değiştirmez.
+Devam şartı teoride en az %70, uygulamada en az %80. Haftalık teslimin uygulama yoklaması sayılır.
 
-## Lab teslimi
+## Haftalık teslim
 
-Her lab haftasında iki teslim var ve ikisi de aynı Google Form ile yapılır. Formun bağlantısı derste ve sınıf kanalında paylaşılır.
+Her hafta iki teslim var ve ikisi de [Lab teslimleri](https://cagrisahin58.github.io/2026-web/teslimler/) sayfasındaki formla yapılır (GitHub hesabınla).
 
-1. Lab sonu teslimi: Perşembe 16:45'e kadar. Labda o ana kadar yaptığını gönderirsin. Bu teslim uygulama yoklaması sayılır.
-2. Tam teslim: Pazar 23:59'a kadar. Labın bitmiş hâlini gönderirsin.
+1. Lab sonu teslimi: öğleden sonra bloğu bitmeden. O ana kadar yaptığını gönderirsin. Bu teslim uygulama yoklaması sayılır.
+2. Tam teslim: labı izleyen Pazar 23:59'a kadar. Bitmiş hâlini gönderirsin. Aynı haftaya ikinci kez gönderdiğinde yenisi geçerli sayılır.
 
-Örnek olarak Hafta 2'de lab sonu teslimi 8 Ekim Perşembe 16:45'e, tam teslim 11 Ekim Pazar 23:59'a kadardır.
-
-Formda şunları dolduracaksın:
-
-- Ad soyad
-- Öğrenci numarası
-- GitHub kullanıcı adı
-- Teslim türü (lab sonu ya da tam teslim)
-- Yayındaki sayfanın adresi (o hafta yayın varsa)
-- Deponun adresi (Hafta 2'de açtığın kullaniciadi.github.io deposu ya da labda söylenen depo)
-- Yapay zekâ notu
+Formda şunları yazarsın: hafta, öğrenci numarası, ad soyad, yayındaki sayfanın adresi, deponun adresi, varsa düzelttiğin bozuk paketin adresi, yapay zekâ notu.
 
 ## Yapay zekâ kuralları
 
 Bu derste yapay zekâ yardımcındır. Her haftanın ders notunda "Yapay zekâyla çalış" kutusu var. O kutu, o hafta yapay zekâya ne sorabileceğini örnek istemlerle gösterir.
 
-Hafta 2 ile Hafta 9 arasında kodu önce sen yazarsın. Yapay zekâya bir satırın ne işe yaradığını sorabilirsin. Aldığın hata mesajını açıklatabilir, konuyu anlayıp anlamadığını görmek için seni sınamasını isteyebilirsin. Bütün sayfayı ya da bütün kodu ona yazdırmazsın.
+İlk sekiz haftada kodu önce sen yazarsın. Yapay zekâya bir satırın ne işe yaradığını sorabilirsin. Aldığın hata mesajını açıklatabilir, konuyu anlayıp anlamadığını görmek için seni sınamasını isteyebilirsin. Bütün sayfayı ya da bütün kodu ona yazdırmazsın.
 
-Hafta 10'dan itibaren kodlama ajanıyla kod ürettirmek serbesttir. Tek şart, üretilen kodun her satırını açıklayabilmendir. Açıklayamadığın kod senin kodun değildir. Kod savunmasında da bu yüzden kendi projenden bir kodu açıklamanı ve üzerinde küçük bir değişiklik yapmanı isteriz.
+Hafta 9'dan itibaren kodlama ajanıyla kod ürettirmek serbesttir. Tek şart, üretilen kodun her satırını açıklayabilmendir. Açıklayamadığın kod senin kodun değildir. Kod savunmasında da bu yüzden kendi projenden bir kodu açıklamanı ve üzerinde küçük bir değişiklik yapmanı isteriz.
 
 Sınavlarda yapay zekâ şöyle:
 
@@ -222,7 +176,7 @@ Sınavlarda yapay zekâ şöyle:
 | Final sınavı | 80 dakika uygulamalı | Serbest |
 | Final sınavı | 40 dakika yazılı | Kapalı |
 
-Her lab teslimine üç satırlık bir yapay zekâ notu eklersin:
+Her haftalık teslime üç satırlık bir yapay zekâ notu eklersin:
 
 ```text
 Ne sordum:
@@ -232,15 +186,17 @@ Kendi başıma ne öğrendim:
 
 ## Araçlar
 
-Dönem boyunca kullanacağımız araçlar aşağıda. VS Code'u, Live Server ve GitHub Copilot Chat eklentilerini kurup GitHub hesabını açmayı 8 Ekim'den önce evde yaparsın. Adım adım anlatım [kurulum sayfasında](https://cagrisahin58.github.io/2026-web/weeks/hafta-00-kurulum/). Eksik kalanı Hafta 2 labının başında birlikte bitiririz. Hafta 12'de kullanacağımız dil modeli servisini ve Hafta 13'teki yayın yolunu o haftanın dersinde birlikte kuracağız.
+VS Code'u, Live Server ve GitHub Copilot Chat eklentilerini kurup GitHub hesabını açmayı ilk bilgisayarlı dersten önce evde yaparsın. Adım adım anlatım [kurulum sayfasında](https://cagrisahin58.github.io/2026-web/weeks/hafta-00-kurulum/). Sonraki haftalarda gelen araçları o haftanın dersinde birlikte kurarız.
 
 | Araç | Ne işe yarar? | İlk kullandığımız hafta |
 | --- | --- | --- |
 | VS Code | Kodunu yazdığın editör | Hafta 0 (evde) |
 | Live Server | VS Code eklentisi. Sayfanı tarayıcıda açar, dosyayı kaydettikçe sayfayı yeniler. | Hafta 0 (evde) |
 | Chrome ya da Edge DevTools | Tarayıcının içindeki geliştirici araçları. Sayfanın kodunu ve hatalarını görürsün. | Hafta 0 (evde) |
-| GitHub Copilot | VS Code içindeki yapay zekâ yardımcısı. Copilot Chat her hafta, ajan modu Hafta 10'dan itibaren. | Hafta 0 (evde) |
-| GitHub ve GitHub Pages | Kodunu sakladığın ve sayfanı yayınladığın yer. Git'i Hafta 9'da bilgisayarına kurarsın. | Hafta 0 (hesap), Hafta 2 (yayın) |
-| Google Form | Haftalık lab teslimi | Hafta 2 |
-| Node.js ve Express | Sunucunu yazdığın ortam ve kütüphane | Hafta 7 |
-| SQLite | Verileri sakladığın veritabanı | Hafta 8 |
+| GitHub Copilot | VS Code içindeki yapay zekâ yardımcısı. Chat her hafta, ajan kipi Hafta 9'dan itibaren. | Hafta 0 (evde) |
+| GitHub ve GitHub Pages | Kodunu sakladığın ve sayfanı yayınladığın yer; takım kaydı ve haftalık teslim de burada | Hafta 1 |
+| Git | Değişikliklerin geçmişini tutan program | Hafta 5 |
+| Node.js ve Express | Sunucunu yazdığın ortam ve kütüphane | Hafta 6 |
+| SQLite ve bulut veritabanı | Verileri sakladığın veritabanı | Hafta 7 |
+| Barındırma servisi | Uygulamanı internete koyduğun yer | Hafta 8 |
+| Kodlama ajanı ve dil modeli API'si | Kod üreten ajan; uygulamana eklediğin yapay zekâ | Hafta 10, 11 |
