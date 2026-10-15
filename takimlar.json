@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-15T18:01:21.759Z",
+  "guncelleme": "2026-10-15T19:56:33.835Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -396,6 +396,39 @@
       "github": "https://github.com/cagrisahin58/2026-web/issues/16",
       "yazar": "emirhan3619",
       "guncelleme": "2026-10-15T18:01:07Z"
+    },
+    {
+      "id": 17,
+      "takim": "Novatech",
+      "uyeler": [
+        {
+          "no": "250912026",
+          "ad": "Yusuf İslam KAYA"
+        },
+        {
+          "no": "250912002",
+          "ad": "Enes BOZ"
+        },
+        {
+          "no": "250912005",
+          "ad": "Meltem YILDIZ"
+        },
+        {
+          "no": "250912036",
+          "ad": "Berkan ARIKBOĞA"
+        }
+      ],
+      "konu": "Projenin amacı: Kullanıcıların bilgisayar ekranlarındaki yabancı dildeki yazıları algılayarak Türkçeye çevirmelerine yardımcı olan, kişisel hesapları ve çeviri geçmişi bulunan bir web platformu geliştirmek.",
+      "site": "",
+      "klasor": "",
+      "olusturma": "2026-10-15T19:56:22.000Z",
+      "kilit": "2026-10-22T19:56:22.000Z",
+      "kilitli": false,
+      "durum": "gecerli",
+      "hatalar": [],
+      "github": "https://github.com/cagrisahin58/2026-web/issues/17",
+      "yazar": "ysf-ararat",
+      "guncelleme": "2026-10-15T19:56:22Z"
     }
   ]
 }
