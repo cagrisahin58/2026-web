@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-15T20:23:59.970Z",
+  "guncelleme": "2026-10-15T20:27:43.658Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -439,7 +439,7 @@
           "ad": "Reyhan Bürkek"
         }
       ],
-      "konu": "Kamera ve Web Tabanlı Akıllı Kütüphane Otomasyonu Proje Adı: SmartLib (Akıllı Kütüphane & Kamera Tabanlı Doluluk Takip Sistemi) Teknoloji Stack'i: Ön Yüz (Frontend): HTML, CSS, JavaScript (Dinamik interaktif kat planı / kroki). Arka Plan (Backend): Node.js & Express.js (REST API mimarisi). Veritaban",
+      "konu": "Kamera ve Web Tabanlı Akıllı Kütüphane Otomasyonu Projenin Amacı: Üniversite kütüphanelerinde yaşanan \"boş masa bulma karmaşasını\" ve geleneksel fiziksel sensörlerin (FSR vb.) yüksek maliyet/kablolama dezavantajını ortadan kaldırmak. Tavan kameraları ve görüntü işleme yardımıyla masaların anlık dolu",
       "site": "",
       "klasor": "",
       "olusturma": "2026-10-15T20:23:34.000Z",
@@ -451,7 +451,7 @@
       ],
       "github": "https://github.com/cagrisahin58/2026-web/issues/18",
       "yazar": "reyhanburkek",
-      "guncelleme": "2026-10-15T20:23:47Z"
+      "guncelleme": "2026-10-15T20:27:31Z"
     }
   ]
 }
