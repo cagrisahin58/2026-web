@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-15T20:00:15.514Z",
+  "guncelleme": "2026-10-15T20:23:45.327Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -429,6 +429,29 @@
       "github": "https://github.com/cagrisahin58/2026-web/issues/17",
       "yazar": "ysf-ararat",
       "guncelleme": "2026-10-15T20:00:05Z"
+    },
+    {
+      "id": 18,
+      "takim": "LİBYY",
+      "uyeler": [
+        {
+          "no": "240912536",
+          "ad": "Reyhan Bürkek"
+        }
+      ],
+      "konu": "Kamera ve Web Tabanlı Akıllı Kütüphane Otomasyonu Proje Adı: SmartLib (Akıllı Kütüphane & Kamera Tabanlı Doluluk Takip Sistemi) Teknoloji Stack'i: Ön Yüz (Frontend): HTML, CSS, JavaScript (Dinamik interaktif kat planı / kroki). Arka Plan (Backend): Node.js & Express.js (REST API mimarisi). Veritaban",
+      "site": "",
+      "klasor": "",
+      "olusturma": "2026-10-15T20:23:34.000Z",
+      "kilit": "2026-10-22T20:23:34.000Z",
+      "kilitli": false,
+      "durum": "hatali",
+      "hatalar": [
+        "Takım tam olarak 4 kişi olmalı (şu an 1 satır var)."
+      ],
+      "github": "https://github.com/cagrisahin58/2026-web/issues/18",
+      "yazar": "reyhanburkek",
+      "guncelleme": "2026-10-15T20:23:34Z"
     }
   ]
 }
