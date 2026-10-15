@@ -23,6 +23,7 @@
 .kodlu .d{color:var(--lab)}
 .kodlu .y{color:var(--muted)}
 .s pre.kod.kod-orta{font-size:clamp(.85rem,1.6vw,1.2rem)}
+.s pre.kod.kod-kucuk{font-size:clamp(.78rem,1.4vw,1.05rem)}
 .cizik{text-decoration:line-through;text-decoration-thickness:2px;opacity:.6}
 .ornek{display:inline-block;width:1em;height:1em;border-radius:.25em;background:var(--r);vertical-align:-.15em;margin-right:.35em;border:1px solid var(--line)}
 .kutu h3{margin-bottom:.6em}
@@ -48,12 +49,16 @@
 .s.sen pre.kod{font-size:clamp(.8rem,1.45vw,1.12rem);padding:1.1vh .8vw;line-height:1.45;margin-top:.7vh}
 .yan{display:grid;gap:1.8vh;align-content:start}
 .yan p{margin:0;font-size:var(--b2);line-height:1.4}
+.s .yan .yetis{font-size:clamp(.8rem,1.4vw,1.05rem);color:var(--muted);border-top:1px solid var(--line);padding-top:1.2vh}
 .ne{display:block;font:600 clamp(.68rem,1.05vw,.85rem)/1.5 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--lab)}
 .ne.dikkat{color:var(--ship)}
 .adimlar{margin:0;padding-left:1.4em;display:grid;gap:1.6vh;font-size:var(--b2);line-height:1.4;align-content:start}
 .s .adimlar li{margin:0;padding-left:.2em}
 .adimlar li::marker{font-weight:700;color:var(--lab)}
 .adimlar.iki-sutun{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);column-gap:2.4vw;align-items:start}
+.adimlar.iki-sutun.sol-agir{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);column-gap:1.8vw}
+.s.evde{background:linear-gradient(180deg,var(--surface-2),var(--ground) 40%)}
+.s.evde .etiket{--c:var(--muted)}
 .s.sen .ek{display:block;margin:1.4vh 0 0;font-size:var(--b2);color:var(--muted)}
 
 /* kontrol tablosu ve özet */
@@ -153,7 +158,8 @@
 .sahne.oynuyor .is-o1 path{animation:ciz .6s ease .3s both}
 .sahne.oynuyor .is-o2{animation:belir .3s ease 1.1s both}
 .sahne.oynuyor .is-o2 path{animation:ciz .6s ease 1.1s both}
-.sahne.oynuyor .is-sayfa{animation:belir .4s ease 1.7s both}
+.sahne.oynuyor .is-sayfa{animation:is-sayfa 4.6s linear both}
+@keyframes is-sayfa{0%,37%{opacity:0}40%,88%{opacity:.3}93%,100%{opacity:1}}
 .sahne.oynuyor .is-link{animation:belir .4s ease 2.1s both}
 .sahne.oynuyor .is-o3{animation:belir .3s ease 2.6s both}
 .sahne.oynuyor .is-o3 path{animation:ciz .6s ease 2.6s both}
@@ -390,9 +396,9 @@
 @keyframes md-d2{0%,59.9%{opacity:0}60%,100%{opacity:1}}
 
 /* O. viewport */
-.sahne.vp{height:54vh;display:flex;justify-content:center;align-items:center;gap:2.5vw;padding-top:3vh}
+.sahne.vp{height:56vh;display:flex;justify-content:center;align-items:flex-end;gap:2.5vw;padding-top:8vh}
 .vp-tel{margin:0;display:grid;gap:1vh;justify-items:center}
-.vp-ekran{width:20vh;height:38vh;border:.9vh solid #1d2535;border-radius:2.4vh;overflow:hidden;background:#fdf3e7;position:relative}
+.vp-ekran{width:19vh;height:36vh;border:.9vh solid #1d2535;border-radius:2.4vh;overflow:hidden;background:#fdf3e7;position:relative}
 .vp-tel figcaption{font:clamp(.7rem,1.15vw,.9rem) var(--mono);color:var(--muted);white-space:nowrap}
 .vp-masa{position:absolute;left:0;top:0;width:300%;padding:1.4vh;transform-origin:0 0;font:clamp(.75rem,1.3vw,1rem)/1.3 Arial,Helvetica,sans-serif;color:#2b2b2b;display:grid;gap:1vh}
 .vp-ust{display:flex;justify-content:space-between;background:#fff;border-radius:.6em;padding:.5em .8em}
@@ -458,7 +464,7 @@
     <li><span class="no">4</span>Kutu</li>
     <li><span class="no">5</span>Yan yana</li>
     <li><span class="no">6</span>Telefon</li>
-    <li><span class="no">7</span>Yayın</li>
+    <li><span class="no">7</span>Yayın (evde)</li>
   </ol>
 </section>
 
@@ -531,7 +537,7 @@
       <pre class="kod kod-orta"><span class="e">&lt;link</span> <span class="n">rel</span>=<span class="d">"stylesheet"</span>
       <span class="n">href</span>=<span class="d">"style.css"</span><span class="e">&gt;</span></pre>
       <p class="kucuk">Bu satır <code>head</code>'e, <code>title</code>'ın altına yazılır. HTML'i okuyan tarayıcı satıra gelince ikinci bir istek gönderir ve <code>href</code>'teki dosyayı ister.</p>
-      <p class="kucuk">DevTools'un Network panelinde bu iki istek alt alta görünür.</p>
+      <p class="kucuk">Tarayıcı stil dosyası gelene kadar sayfayı çizmeyi bekler. DevTools'un Network panelinde bu iki istek ilk iki satırda görünür.</p>
     </div>
     <div class="sahne is">
       <svg class="is-svg" viewBox="0 0 700 300" role="img" aria-label="Tarayıcı önce HTML dosyasını, link satırını görünce style.css dosyasını ister">
@@ -549,8 +555,8 @@
           <rect class="is-sat" x="60" y="158" width="36" height="6" rx="3"/>
           <rect class="is-sat" x="122" y="158" width="36" height="6" rx="3"/>
           <rect class="is-sat" x="184" y="158" width="36" height="6" rx="3"/>
-          <g class="is-link"><rect x="44" y="226" width="202" height="36" rx="6"/><text x="56" y="249">link: style.css</text></g>
         </g>
+        <g class="is-link"><rect x="44" y="226" width="202" height="36" rx="6"/><text x="56" y="249">link: style.css</text></g>
         <text class="is-bas" x="480" y="22">Sunucu</text>
         <rect class="is-pano" x="480" y="32" width="200" height="256" rx="12"/>
         <rect class="is-dosya" x="500" y="62" width="160" height="50" rx="8"/>
@@ -600,7 +606,7 @@
         <button class="secenek" type="button">Ortalı, ama rengi değişmez</button>
         <button class="secenek" data-dogru type="button">Ne gri olur ne ortalanır</button>
       </div>
-      <div class="cevap"><p>Noktalı virgül olmayınca tarayıcı iki satırı tek bir değer sanar: <code>gray text-align: center</code>. Böyle bir renk yok, satırın tamamını atlar ve hata mesajı göstermez.</p></div>
+      <div class="cevap"><p>Noktalı virgül olmayınca tarayıcı iki satırı tek bir değer sanar: <code>gray text-align: center</code>. Böyle bir renk yok, iki satırı birden atlar ve hata mesajı göstermez.</p></div>
     </div>
   </div>
 </section>
@@ -608,16 +614,15 @@
 <section class="s" id="sessiz">
   <header><h2>Tarayıcı hata mesajı göstermez</h2><span class="etiket">1 · Bağlama</span></header>
   <div class="govde iki">
-    <div class="kutu">
-      <h3>Aynı seçici iki kez</h3>
-      <pre class="kod kod-orta"><span class="e">h1</span> { <span class="n">color</span>: <span class="d">navy</span>; }
-<span class="e">h1</span> { <span class="n">color</span>: <span class="d">crimson</span>; }</pre>
-      <p class="kucuk" data-adim="1">Sonra yazılan kazanır, başlık <span class="ornek" style="--r:crimson"></span>crimson olur. Önceki kural silinmez, ezilir.</p>
+    <div class="metin">
+      <pre class="kod"><span class="e">h1</span> {
+  <span class="cizik"><span class="n">colour</span>: <span class="d">navy</span>;</span>
+  <span class="n">text-align</span>: <span class="d">center</span>;
+}</pre>
     </div>
-    <div class="kutu">
-      <h3>Yanlış yazılmış özellik</h3>
-      <pre class="kod kod-orta"><span class="e">h1</span> { <span class="cizik"><span class="n">colour</span>: <span class="d">navy</span>;</span> }</pre>
-      <p class="kucuk" data-adim="2">Tarayıcı anlamadığı satırı atlar ve sonrakine geçer. Sayfa yine açılır, hatayı sana söylemez. DevTools'ta bu satır üstü çizili görünür.</p>
+    <div class="metin">
+      <p>Tarayıcı anlamadığı satırı atlar ve sonrakine geçer. Başlık ortalanır, rengi değişmez.</p>
+      <p class="kucuk" data-adim="1">Sayfa yine açılır, hatayı sana kimse söylemez. DevTools'ta bu satır üstü çizili görünür.</p>
     </div>
   </div>
 </section>
@@ -641,6 +646,7 @@
         <div class="sayac" data-sure="180"></div>
         <p><span class="ne">Ekranda</span><code>index.html</code>'i Live Server ile aç. Zemin açık sarı, Projelerim'e geçince de.</p>
         <p><span class="ne dikkat">Olmadıysa</span><code>href</code>'teki adı soldaki dosya listesindeki adla harf harf karşılaştır.</p>
+        <p class="yetis">Yetişemediysen <a href="index.html#lab">ders notunda Lab 0. adımın</a> kodunu kopyala.</p>
       </div>
     </div>
   </div>
@@ -680,13 +686,13 @@
   <div class="govde iki">
     <div class="kutu">
       <h3>HTML</h3>
-      <pre class="kod kod-orta"><span class="e">&lt;li</span> <span class="n">class</span>=<span class="d">"<span class="vurgu">kart</span>"</span><span class="e">&gt;</span>Satranç<span class="e">&lt;/li&gt;</span>
+      <pre class="kod kod-kucuk"><span class="e">&lt;li</span> <span class="n">class</span>=<span class="d">"<span class="vurgu">kart</span>"</span><span class="e">&gt;</span>Satranç<span class="e">&lt;/li&gt;</span>
 <span class="e">&lt;li</span> <span class="n">class</span>=<span class="d">"kart onemli"</span><span class="e">&gt;</span>Futbol<span class="e">&lt;/li&gt;</span></pre>
       <p class="kucuk" data-adim="1">Bir öğeye birden çok sınıf verebilirsin. Adları boşlukla ayırırsın, virgül koymazsın.</p>
     </div>
     <div class="kutu">
       <h3>CSS</h3>
-      <pre class="kod kod-orta"><span class="e"><span class="vurgu">.</span>kart</span> {
+      <pre class="kod kod-kucuk"><span class="e"><span class="vurgu">.</span>kart</span> {
   <span class="n">background-color</span>: <span class="d">white</span>;
 }</pre>
       <p class="kucuk" data-adim="2">Nokta yalnız CSS'te yazılır. Noktayı unutursan (<code>kart {</code>) tarayıcı sayfada <code>&lt;kart&gt;</code> diye bir etiket arar ve kural hiçbir şeye uygulanmaz.</p>
@@ -724,12 +730,12 @@
   <div class="govde">
     <div class="gorev">
       <div>
-        <ol class="adimlar iki-sutun">
+        <ol class="adimlar iki-sutun sol-agir">
           <li><code>index.html</code>'deki ilgi alanları listene sınıfları ekle, maddeler seninki kalsın:
 <pre class="kod"><span class="e">&lt;ul</span> <span class="n">class</span>=<span class="d">"kartlar"</span><span class="e">&gt;</span>
-  <span class="e">&lt;li</span> <span class="n">class</span>=<span class="d">"kart"</span><span class="e">&gt;</span>Satranç<span class="e">&lt;/li&gt;</span>
-  <span class="e">&lt;li</span> <span class="n">class</span>=<span class="d">"kart"</span><span class="e">&gt;</span>Fotoğrafçılık<span class="e">&lt;/li&gt;</span>
-  <span class="e">&lt;li</span> <span class="n">class</span>=<span class="d">"kart"</span><span class="e">&gt;</span>Futbol<span class="e">&lt;/li&gt;</span>
+<span class="e">&lt;li</span> <span class="n">class</span>=<span class="d">"kart"</span><span class="e">&gt;</span>Satranç<span class="e">&lt;/li&gt;</span>
+<span class="e">&lt;li</span> <span class="n">class</span>=<span class="d">"kart"</span><span class="e">&gt;</span>Fotoğrafçılık<span class="e">&lt;/li&gt;</span>
+<span class="e">&lt;li</span> <span class="n">class</span>=<span class="d">"kart"</span><span class="e">&gt;</span>Futbol<span class="e">&lt;/li&gt;</span>
 <span class="e">&lt;/ul&gt;</span></pre></li>
           <li><code>style.css</code>'te <code>body</code> kuralının altına:
 <pre class="kod"><span class="e">h2</span> {
@@ -744,6 +750,7 @@
         <div class="sayac" data-sure="180"></div>
         <p><span class="ne">Ekranda</span>"İlgi alanlarım" başlığı kiremit rengi, üç madde açık sarı zeminde beyaz birer şerit.</p>
         <p><span class="ne dikkat">Olmadıysa</span>HTML'deki <code>class="kart"</code>'a ve CSS'teki noktaya bak.</p>
+        <p class="yetis">Yetişemediysen <a href="index.html#lab">ders notunda Lab 4. adımın</a> ilk kodunu (HTML) kopyala.</p>
       </div>
     </div>
   </div>
@@ -767,17 +774,17 @@
   <div class="govde">
     <div>
       <pre class="kod"><span class="e">h1</span> {
-  <span class="n">font-size</span>: <span class="d">32</span>;
+  <span class="n">font-size</span>: <span class="d">50</span>;
 }</pre>
     </div>
     <div>
       <div class="secenekler">
-        <button class="secenek" type="button">32 piksel olur</button>
+        <button class="secenek" type="button">50 piksel olur</button>
         <button class="secenek" data-dogru type="button">Hiç değişmez</button>
         <button class="secenek" type="button">Sayfada hata mesajı çıkar</button>
         <button class="secenek" type="button">Ekranı kaplayacak kadar büyür</button>
       </div>
-      <div class="cevap"><p>Birimsiz sayıyı tarayıcı anlamaz ve satırı atlar. Başlık eski büyüklüğünde kalır, hata mesajı da çıkmaz. Doğrusu <code>32px</code>, sayıya bitişik.</p></div>
+      <div class="cevap"><p>Birimsiz sayıyı tarayıcı anlamaz ve satırı atlar. Başlık eski büyüklüğünde kalır, hata mesajı da çıkmaz. Doğrusu <code>50px</code>, sayıya bitişik.</p></div>
     </div>
   </div>
 </section>
@@ -790,20 +797,18 @@
       <p class="kucuk">İngilizce adıyla ya da diyezle başlayan altı haneli kodla.</p>
       <p><span class="ornek" style="--r:navy"></span><code>navy</code> <span class="ornek" style="--r:crimson"></span><code>crimson</code></p>
       <p><span class="ornek" style="--r:#b5452b"></span><code>#b5452b</code></p>
-      <p class="kucuk" data-adim="1">İlk iki hane kırmızının, sonraki iki yeşilin, son iki mavinin miktarı. Kodu ezberlemezsin, renk seçiciden kopyalarsın.</p>
     </div>
     <div class="kutu">
       <h3>Uzunluk</h3>
       <p><code>18px</code> <span class="kucuk">sabit ölçü</span></p>
       <p><code>150%</code> <span class="kucuk">bir şeye göre oran</span></p>
-      <p class="kucuk"><code>line-height: 150%</code> yazı büyüklüğünün bir buçuk katı demek: 18 piksellik yazıda 27 piksel.</p>
-      <p class="kucuk" data-adim="2">Birim sayıya bitişik yazılır. Yalnız sıfırda gerekmez.</p>
+      <p class="kucuk" data-adim="1">Birim sayıya bitişik yazılır. Yalnız sıfırda gerekmez.</p>
     </div>
     <div class="kutu">
       <h3>Yazı tipi</h3>
       <p><code>Arial, sans-serif</code></p>
-      <p class="kucuk">"Arial kullan, yoksa herhangi bir tırnaksız yazı tipi kullan."</p>
-      <p class="kucuk" data-adim="3">Listenin sonuna her zaman <code>serif</code> ya da <code>sans-serif</code> gibi genel bir ad yaz ki tarayıcının eli boş kalmasın.</p>
+      <p class="kucuk">"Arial kullan, yoksa herhangi bir tırnaksız (<code>sans-serif</code>) yazı tipi kullan."</p>
+      <p class="kucuk" data-adim="2">Listenin sonuna her zaman genel bir ad yaz.</p>
     </div>
   </div>
 </section>
@@ -848,7 +853,7 @@
           <li>Dosyanın en altına:
 <pre class="kod"><span class="e">h1</span> {
   <span class="n">color</span>: <span class="d">#b5452b</span>;
-  <span class="n">font-size</span>: <span class="d">36px</span>;
+  <span class="n">font-size</span>: <span class="d">40px</span>;
 }
 <span class="e">a</span> {
   <span class="n">color</span>: <span class="d">#b5452b</span>;
@@ -859,6 +864,7 @@
         <div class="sayac" data-sure="240"></div>
         <p><span class="ne">Ekranda</span>Krem zemin, koyu gri ve tırnaksız yazı. Büyük başlık ve bağlantılar kiremit rengi.</p>
         <p><span class="ne dikkat">Olmadıysa</span>Tek satır çalışmıyorsa bir üstündeki noktalı virgüle ve <code>px</code> birimine bak.</p>
+        <p class="yetis">Yetişemediysen <a href="index.html#lab">ders notunda Lab 1. ve 2. adımların</a> kodunu kopyala.</p>
       </div>
     </div>
   </div>
@@ -970,8 +976,9 @@
       </div>
       <div class="yan">
         <div class="sayac" data-sure="240"></div>
-        <p><span class="ne">Ekranda</span>Üç madde içi ferah, ince kenarlıklı, köşeleri yuvarlak kart. Noktalar gitti, kartlar şimdilik alt alta.</p>
+        <p><span class="ne">Ekranda</span>Üç madde içi ferah, köşeleri yuvarlak kart. Kartlar şimdilik alt alta ve birbirine değiyor, aralarını 5. adımda <code>gap</code> açacak.</p>
         <p><span class="ne dikkat">Olmadıysa</span>Yazı kenarlığa yapışıksa <code>padding</code> satırındaki <code>px</code>'e bak.</p>
+        <p class="yetis">Yetişemediysen <a href="index.html#lab">ders notunda Lab 4. adımın</a> CSS kodunu kopyala.</p>
       </div>
     </div>
   </div>
@@ -1007,9 +1014,7 @@
   <header><h2>justify-content boşluğu dağıtır</h2><span class="etiket">5 · Flexbox</span></header>
   <div class="govde iki sag-genis">
     <div class="metin">
-      <p class="kucuk">Sıranın yönünde hizalar. <code>flex-start</code> başa toplar, <code>center</code> ortaya alır, <code>space-between</code> ilk kutuyu başa, sonuncuyu sona yaslar.</p>
-      <p class="kucuk" data-adim="1"><code>align-items: center</code> kutuları sıraya dik yönde ortalar. <code>flex-direction: column</code> sırayı alt alta çevirir, <code>flex-wrap: wrap</code> sığmayan kutuyu alt satıra geçirir.</p>
-    </div>
+      <p class="kucuk">Sıranın yönünde hizalar. <code>flex-start</code> başa toplar, <code>center</code> ortaya alır, <code>space-between</code> ilk kutuyu başa, sonuncuyu sona yaslar.</p>    </div>
     <div class="sahne js">
       <div class="js-deger">
         <code class="js-1">justify-content: flex-start</code>
@@ -1092,13 +1097,15 @@
           <li><code>.kartlar</code> kuralına üç satır ekle:
 <pre class="kod">  <span class="n">display</span>: <span class="d">flex</span>;
   <span class="n">flex-wrap</span>: <span class="d">wrap</span>;
-  <span class="n">gap</span>: <span class="d">12px</span>;</pre></li>
+  <span class="n">gap</span>: <span class="d">12px</span>;</pre>
+<span class="ek"><code>align-items: center</code> başlıkla menüyü dikeyde ortalar, <code>flex-wrap: wrap</code> sığmayan kartı alt satıra geçirir.</span></li>
         </ol>
       </div>
       <div class="yan">
         <div class="sayac" data-sure="300"></div>
-        <p><span class="ne">Ekranda</span>Solda adın, sağda menü, bağlantıların arası açık. Kartlar yan yana.</p>
-        <p><span class="ne dikkat">Olmadıysa</span>Menü sıkışıksa <code>class="menu"</code> iki dosyada da var mı, bak. Kartlar alt alta kaldıysa <code>display: flex</code> <code>.kartlar</code>'da mı?</p>
+        <p><span class="ne">Ekranda</span>Solda adın, sağda menü. Kartlar yan yana.</p>
+        <p><span class="ne dikkat">Olmadıysa</span>Menü sıkışıksa <code>class="menu"</code> iki dosyada da var mı? Kartlar alt alta kaldıysa üç satır <code>.kartlar</code>'ın parantezinde mi?</p>
+        <p class="yetis">Yetişemediysen <a href="index.html#lab">ders notunda Lab 3. ve 4. adımların</a> kodunu kopyala.</p>
       </div>
     </div>
   </div>
@@ -1137,9 +1144,9 @@
   <header><h2>Telefon için bir satır daha</h2><span class="etiket">6 · Telefon</span></header>
   <div class="govde iki sol-genis">
     <div class="metin">
-      <pre class="kod kod-orta"><span class="e">&lt;meta</span> <span class="n">name</span>=<span class="d">"viewport"</span>
+      <pre class="kod kod-kucuk"><span class="e">&lt;meta</span> <span class="n">name</span>=<span class="d">"viewport"</span>
   <span class="n">content</span>=<span class="d">"width=device-width, initial-scale=1"</span><span class="e">&gt;</span></pre>
-      <p class="kucuk">Bu satır yoksa telefon sayfayı geniş bir masaüstü ekranı varmış gibi çizer, sonra küçültüp ekrana sığdırır. Yazılar minicik kalır, medya sorgusu da hiç çalışmaz.</p>
+      <p class="kucuk">Bu satır yoksa telefon sayfayı geniş bir masaüstü ekranı varmış gibi çizer, sonra küçültüp ekrana sığdırır. Yazılar minicik kalır, 600 piksellik sorgu da telefonda tutmaz.</p>
       <p class="kucuk">Satır <code>head</code>'e, <code>meta charset</code>'in altına yazılır.</p>
     </div>
     <div class="sahne vp">
@@ -1162,6 +1169,20 @@
         <figcaption>viewport var</figcaption>
       </figure>
       <button class="yeniden" type="button">Yeniden oynat</button>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="siralama">
+  <header><h2>Aynı seçicide sonra yazılan kazanır</h2><span class="etiket">6 · Telefon</span></header>
+  <div class="govde iki">
+    <div class="metin">
+      <pre class="kod"><span class="e">h1</span> { <span class="n">color</span>: <span class="d">navy</span>; }
+<span class="e">h1</span> { <span class="n">color</span>: <span class="d">crimson</span>; }</pre>
+    </div>
+    <div class="metin">
+      <p>Başlık <span class="ornek" style="--r:crimson"></span>crimson olur. Önceki kural silinmez, ezilir.</p>
+      <p class="kucuk">Tarayıcı aynı seçicili iki kuralı dosyadaki sırasıyla okur ve sonuncusunun değerini kullanır.</p>
     </div>
   </div>
 </section>
@@ -1216,7 +1237,8 @@
       <div class="yan">
         <div class="sayac" data-sure="240"></div>
         <p><span class="ne">Ekranda</span>Pencereyi yavaş yavaş daralt. Bir noktada menü başlığın altına iner, kartlar alt alta dizilir.</p>
-        <p><span class="ne dikkat">Olmadıysa</span>Sorgu dosyanın en sonunda mı, iki kapanış parantezi yerinde mi? Pencere yeterince daralmıyorsa DevTools'u sağda aç.</p>
+        <p><span class="ne dikkat">Olmadıysa</span>Sorgu dosyanın en sonunda mı, iki kapanış parantezi yerinde mi? Pencere daralmıyorsa DevTools'u sağda aç.</p>
+        <p class="yetis">Yetişemediysen <a href="index.html#lab">ders notunda Lab 7. adımın</a> kodunu kopyala.</p>
       </div>
     </div>
   </div>
@@ -1260,24 +1282,21 @@
   </div>
 </section>
 
-<section class="s sen" id="sen-yayin">
-  <header><h2>Sayfanı yayına al</h2><span class="etiket">Şimdi sen · 7</span></header>
-  <div class="govde">
-    <div class="gorev">
-      <div>
-        <ol class="adimlar">
-          <li>github.com'da <code>kullaniciadi.github.io</code> deponu aç, <code>Add file</code> menüsünden <code>Upload files</code>'ı seç.</li>
-          <li><code>style.css</code>, <code>index.html</code> ve <code>projeler.html</code>'i yükleme alanına sürükle.</li>
-          <li>Mesaj kutusuna <code>CSS eklendi</code> yaz, alttaki <code>Commit changes</code> düğmesine bas.</li>
-          <li>Birkaç dakika sonra sayfanı telefonundan aç.</li>
-        </ol>
-        <p class="ek">Süre yetmezse aynı adımları evde yaparsın.</p>
-      </div>
-      <div class="yan">
-        <div class="sayac" data-sure="180"></div>
-        <p><span class="ne">Ekranda</span>Depoda <code>style.css</code> var, telefonda kartlar alt alta.</p>
-        <p><span class="ne dikkat">Olmadıysa</span>Eski görünüm geliyorsa birkaç dakika bekle, <kbd>Ctrl</kbd>+<kbd>F5</kbd> ile yenile. Dosyalar deponun en üst düzeyinde olmalı.</p>
-      </div>
+<section class="s evde" id="sen-yayin">
+  <header><h2>Bu adımı evde yap: sayfanı yayına al</h2><span class="etiket">Evde</span></header>
+  <div class="govde iki sol-genis">
+    <div>
+      <ol class="adimlar">
+        <li>github.com'da <code>kullaniciadi.github.io</code> deponu aç, <code>Add file</code> menüsünden <code>Upload files</code>'ı seç.</li>
+        <li><code>style.css</code>, <code>index.html</code> ve <code>projeler.html</code>'i yükleme alanına sürükle.</li>
+        <li>Mesaj kutusuna <code>CSS eklendi</code> yaz, alttaki <code>Commit changes</code> düğmesine bas.</li>
+        <li>Birkaç dakika sonra sayfanı telefonundan aç.</li>
+      </ol>
+    </div>
+    <div class="yan">
+      <p><span class="ne">Ekranda</span>Depoda <code>style.css</code> var, telefonda kartlar alt alta.</p>
+      <p><span class="ne dikkat">Olmadıysa</span>Eski görünüm geliyorsa birkaç dakika bekle, <kbd>Ctrl</kbd>+<kbd>F5</kbd> ile yenile. Dosyalar deponun en üst düzeyinde olmalı.</p>
+      <p class="yetis">Adımların ayrıntısı <a href="index.html#lab">ders notunda Lab 8. adımda</a>.</p>
     </div>
   </div>
 </section>
@@ -1303,7 +1322,7 @@
   <header><h2>Bugün sayfana yazdıkların</h2><span class="etiket">Özet</span></header>
   <div class="govde iki sol-genis">
     <div class="karolar">
-      <div class="karo"><span class="no">1 · Bağla</span><h3>Stil dosyası</h3><code>&lt;link rel="stylesheet"&gt;</code></div>
+      <div class="karo"><span class="no">1 · Bağla</span><h3>Stil dosyası</h3><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></div>
       <div class="karo"><span class="no">2 · Seç</span><h3>Etiket ve sınıf</h3><code>h2 { }  .kart { }</code></div>
       <div class="karo"><span class="no">3 · Renk ve yazı</span><h3>Palet</h3><code>color  font-family</code></div>
       <div class="karo"><span class="no">4 · Kutu</span><h3>Dört katman</h3><code>padding  border  margin</code></div>
@@ -1314,7 +1333,7 @@
       <h3>Teslim</h3>
       <p>Hafta 2 ve 3 için tek teslim var: stil uygulanmış kişisel sayfanın yayındaki adresi ve deposu.</p>
       <p class="kucuk"><a href="../../teslimler/">Lab teslimleri</a> sayfasındaki formda "Hafta 3 · CSS"yi seç. Son gün bu dersten sonraki Pazar, gün bitmeden.</p>
-      <p class="kucuk">Yetişmeyen "Şimdi sen" adımlarını ve <a href="index.html#lab">ders notunun Lab bölümündeki</a> kalanları evde tamamla. <a href="lab/bozuk-stil/">Bozuk stil sayfası</a> isteğe bağlı bir alıştırma.</p>
+      <p class="kucuk">Evde, <a href="index.html#lab">ders notunun Lab bölümünden</a>: yayına yükleme (8), görsel ve alt kısım (5 ve 6), isteğe bağlı olarak <a href="lab/bozuk-stil/">bozuk stil</a> (10–13).</p>
     </div>
   </div>
 </section>

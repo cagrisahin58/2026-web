@@ -45,6 +45,7 @@
     const a = adimlar(el);
     a.forEach((x) => x.classList.toggle("goster", !!sonAdim));
     $$(".secenekler", el).forEach((s) => s.classList.remove("acildi"));
+    $$(".cevap", el).forEach((c) => c.classList.remove("goster"));
     oynat(el);
     sayacEl = $(".sayac", el);
     if (sayacEl) sayacKur(sayacEl);
