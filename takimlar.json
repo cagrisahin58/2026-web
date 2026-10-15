@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-15T08:13:32.391Z",
+  "guncelleme": "2026-10-15T08:19:16.023Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -328,6 +328,39 @@
       "github": "https://github.com/cagrisahin58/2026-web/issues/14",
       "yazar": "harunyahyailcihan",
       "guncelleme": "2026-10-15T07:47:49Z"
+    },
+    {
+      "id": 15,
+      "takim": "İşaret Köprüsü",
+      "uyeler": [
+        {
+          "no": "250912046",
+          "ad": "Murat Erbaş"
+        },
+        {
+          "no": "250912021",
+          "ad": "Ayşe Nur Yıldız"
+        },
+        {
+          "no": "250912038",
+          "ad": "Evin Emin"
+        },
+        {
+          "no": "250912020",
+          "ad": "Elif Nur Uçar"
+        }
+      ],
+      "konu": "## İşaret Köprüsü – İşaret Dili ile İletişim Web Uygulaması **Projenin Amacı:** İşaret Köprüsü, işaret dili kullanan bireyler ile işaret dili bilmeyen kişiler arasındaki iletişim engellerini azaltmayı amaçlayan bir web uygulamasıdır. Proje; kamera aracılığıyla işaretlerin tanınarak metne ve sese dön",
+      "site": "",
+      "klasor": "",
+      "olusturma": "2026-10-15T08:19:05.000Z",
+      "kilit": "2026-10-22T08:19:05.000Z",
+      "kilitli": false,
+      "durum": "gecerli",
+      "hatalar": [],
+      "github": "https://github.com/cagrisahin58/2026-web/issues/15",
+      "yazar": "muraterbas13",
+      "guncelleme": "2026-10-15T08:19:05Z"
     }
   ]
 }
