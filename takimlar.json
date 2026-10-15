@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-15T00:52:54.352Z",
+  "guncelleme": "2026-10-15T07:47:35.773Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -268,6 +268,39 @@
       "github": "https://github.com/cagrisahin58/2026-web/issues/11",
       "yazar": "ozcanoksak",
       "guncelleme": "2026-10-12T14:09:38Z"
+    },
+    {
+      "id": 13,
+      "takim": "NextHUB",
+      "uyeler": [
+        {
+          "no": "250912045",
+          "ad": "Yunus Emre UNCUER"
+        },
+        {
+          "no": "250912003",
+          "ad": "Erkan USLU"
+        },
+        {
+          "no": "250912015",
+          "ad": "Alperen SEMERCİ"
+        },
+        {
+          "no": "250912052",
+          "ad": "Muhammed Enes KARA"
+        }
+      ],
+      "konu": "\"Yaşlı Bireylerde İlaç Kullanım Uyumunu Artırmaya Yönelik Sesli ve Görsel Bildirim Destekli Hatırlatma Sistemi Tasarımı\"",
+      "site": "",
+      "klasor": "",
+      "olusturma": "2026-10-15T07:47:24.000Z",
+      "kilit": "2026-10-22T07:47:24.000Z",
+      "kilitli": false,
+      "durum": "gecerli",
+      "hatalar": [],
+      "github": "https://github.com/cagrisahin58/2026-web/issues/13",
+      "yazar": "EMRE-seng",
+      "guncelleme": "2026-10-15T07:47:24Z"
     }
   ]
 }
