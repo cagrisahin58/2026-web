@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hafta 2 sunum · HTML: sayfanın iskeleti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/sunum.css">
+<style>
+/* Hafta 2 sunumuna özel: şemalar ve animasyonlar */
+.sahne{padding-top:6vh;padding-bottom:6.5vh}
+.alt-cumle{font-size:var(--b2);color:var(--muted);margin:0}
+.alt-cumle code{color:var(--ink)}
+.etk{font-family:var(--mono);font-size:clamp(.7rem,1.2vw,.95rem);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 .6vh;display:block}
+@keyframes belir{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+@keyframes yak{0%{background:transparent}20%{background:var(--ship-soft)}100%{background:transparent}}
+
+/* kapak */
+.s .ajanda{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:1.2vh 1vw;font-size:var(--b2)}
+.ajanda li{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.35em .95em}
+.ajanda b{font-family:var(--mono);color:var(--theory);margin-right:.45em}
+.s.kapak .buyuk{margin-top:2vh;max-width:40ch}
+
+/* Fikir 1: etiketin parçaları */
+.anatomi-govde{align-content:center;justify-items:center;gap:5vh}
+.anatomi{display:grid;grid-template-columns:repeat(3,auto);justify-content:center;column-gap:.45em;row-gap:1.4vh;font-size:calc(var(--kod)*1.35)}
+.an-p{grid-row:2;font-family:var(--mono);white-space:nowrap;padding:.25em .45em;border:2px solid var(--line);border-radius:.4em;background:var(--surface)}
+.an-p.p1{grid-column:1;color:var(--theory)}
+.an-p.p2{grid-column:2;color:var(--ink)}
+.an-p.p3{grid-column:3;color:var(--theory)}
+.an-nit{color:var(--ship);background:var(--ship-soft);border-radius:.3em;padding:0 .12em}
+.an-ust{grid-column:1;grid-row:1;justify-self:center;font-size:var(--b1);color:var(--ship);border-bottom:3px solid currentColor;padding:0 .4em .15em;white-space:nowrap}
+.an-alt{grid-row:3;font-size:var(--b1);text-align:center;color:var(--theory);border-top:3px solid currentColor;padding-top:.25em;white-space:nowrap}
+.an-alt.a1{grid-column:1}
+.an-alt.a2{grid-column:2;color:var(--ink)}
+.an-alt.a3{grid-column:3}
+.an-oge{grid-column:1/-1;grid-row:4;font-size:var(--b1);color:var(--lab);text-align:center}
+.an-oge i{display:block;height:.7em;border:3px solid currentColor;border-top:0;border-radius:0 0 .5em .5em;margin-bottom:.3em}
+.an-img{font-size:var(--b1);margin:0;text-align:center;max-width:none}
+
+/* Fikir 2: etiketten ağaca */
+.ikili{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2.5vw;align-items:start}
+.sahne pre.kod{background:var(--surface-2);border-color:transparent}
+pre.kod.agac-kod{font-size:calc(var(--kod)*.9)}
+.k{display:inline-block;width:100%;border-radius:.3em}
+.sahne.oynuyor .k{animation:yak 1.1s ease-out var(--t,0s) both}
+.agac,.agac ul{list-style:none;margin:0;padding:0}
+.agac ul{margin-left:1em;padding-left:1.1em;border-left:3px dashed var(--line)}
+.agac li{margin:.7vh 0}
+.dugum{display:inline-flex;align-items:baseline;gap:.5em;background:var(--theory-soft);border-radius:.5em;padding:.12em .65em;opacity:0}
+.dugum b{font-family:var(--mono);color:var(--theory)}
+.dugum span{font-size:var(--b2)}
+.sahne.oynuyor .dugum{animation:belir .45s ease-out var(--t,0s) both}
+.sahne.oynuyor .dal{animation:kapan .35s linear var(--t,0s) both}
+@keyframes kapan{from{border-left-color:var(--line);border-left-style:dashed}to{border-left-color:var(--theory);border-left-style:solid}}
+
+/* Fikir 3: kapanmayan etiket */
+pre.kod.yutma-kod{font-size:calc(var(--kod)*.84)}
+.acik-kalan{border-radius:.3em}
+.sahne.oynuyor .acik-kalan{animation:uyar .5s ease-out var(--t,0s) both}
+@keyframes uyar{from{background:transparent;outline:2px solid transparent}to{background:var(--err-soft);outline:2px solid var(--err)}}
+.sayfa-mock{background:#fff;color:#111;border:1px solid var(--line);border-radius:.8vw;padding:1.4vh 1.2vw;font-family:"Times New Roman",Times,serif;font-size:var(--b1)}
+.sayfa-mock p{margin:.15em 0;max-width:none}
+.kal{font-weight:400;border-radius:.2em}
+.sahne.oynuyor .kal{animation:kalin .5s ease-out var(--t,0s) both}
+@keyframes kalin{from{font-weight:400;background:transparent}to{font-weight:700;background:#FBE9E7}}
+.yt-agac{display:grid;gap:.8vh;margin-top:.4vh}
+.yt-satir{display:flex;align-items:center;gap:.4em;font-size:var(--b2)}
+.yt-satir .dugum{opacity:1}
+.yt-satir .cizgi{width:1.2em;height:3px;background:var(--line)}
+.dugum.kirmizi{background:var(--err-soft)}
+.dugum.kirmizi b{color:var(--err)}
+.yt-satir .gelen{opacity:0}
+.sahne.oynuyor .yt-satir .gelen{animation:belir .45s ease-out var(--t,0s) both}
+.sag-yigin{display:grid;gap:2vh}
+.dogrusu{margin-top:2.2vh}
+
+/* Sınıfça */
+.secenek code{font-size:.9em}
+.cevap{font-size:var(--b2);margin-top:1.4vh}
+.cevap p{margin:0;max-width:none}
+
+/* Fikir 4: iskelet */
+.govde.iki.iskelet-govde{grid-template-columns:minmax(0,1.8fr) minmax(0,1fr);align-items:center}
+.kodtab{display:grid;grid-template-columns:max-content minmax(0,1fr);column-gap:1.2em;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:1vw;padding:1.6vh 2vw;font-size:calc(var(--kod)*.85);line-height:1.45}
+.kt{display:contents}
+.kt code{background:none;padding:0;font-size:1em;white-space:pre;border-radius:0}
+.kodtab .e{color:var(--theory);font-weight:600}
+.kodtab .n{color:var(--ship)}
+.kodtab .d{color:var(--lab)}
+.yan{font-family:var(--body);font-size:var(--b2);color:var(--theory);white-space:nowrap}
+.ek{opacity:0;transition:opacity .3s}
+.s:has(.g1.goster) .ek.g1,.s:has(.g2.goster) .ek.g2,.s:has(.g3.goster) .ek.g3{opacity:1}
+.tarayici{border:1px solid var(--line);border-radius:1vw;overflow:hidden;background:#fff;color:#111}
+.sekmeler{background:#DEE3EB;padding:1vh .8vw 0}
+.sekme{display:inline-grid;background:#fff;border-radius:.6vw .6vw 0 0;padding:.5vh 1vw;font:500 var(--b2)/1.3 var(--body);min-width:60%}
+.sekme > span{grid-area:1/1;background:#fff}
+.sekme .varsayilan{color:#5B6577}
+.mock-sayfa{padding:1.6vh 1vw;display:grid;gap:1vh;min-height:30vh;align-content:start;font-family:"Times New Roman",Times,serif}
+.bolge{border:2px dashed #9AA5B8;border-radius:.6vw;padding:.6vh .7vw;font-size:var(--b2)}
+.bolge > b{display:block;font:500 clamp(.65rem,1.1vw,.9rem)/1.2 var(--mono);color:#5B6577;margin-bottom:.3vh}
+.bolge .m-h1{display:block;font-weight:700;font-size:1.3em}
+.bolge u{color:#0000EE;margin-right:.6em}
+.bolge.b2{transition-delay:.25s}
+.bolge.b3{transition-delay:.5s}
+
+/* Şimdi sen */
+.sen-ust{margin:0 0 1vh;max-width:none}
+.s .kontrol{list-style:none;margin:0 0 1.2vh;padding:0;display:grid;gap:.9vh}
+.s .kontrol li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.6em;align-items:start;margin:0}
+.kare{width:.9em;height:.9em;border:3px solid var(--lab);border-radius:.2em;margin-top:.25em;background:var(--surface)}
+.kontrol code{white-space:nowrap}
+.sen-alt{font-size:var(--b2);margin:0;max-width:none}
+
+/* Sınıfça 2 ve Fikir 5: dosya yolu */
+pre.kod.klasor-agaci{margin:0 0 1.6vh;font-size:calc(var(--kod)*.9)}
+pre.kod.yol-kod{font-size:calc(var(--kod)*.95);margin-bottom:2vh}
+.ys,.hf{border-radius:.25em}
+.sahne.oynuyor .ys{animation:isik .5s ease-out var(--t,0s) both}
+@keyframes isik{from{background:transparent}to{background:var(--theory-soft);outline:2px solid var(--theory)}}
+.sahne.oynuyor .hf{animation:yanlis .5s ease-out var(--t,0s) both}
+@keyframes yanlis{from{color:inherit;background:transparent}to{color:#fff;background:var(--err)}}
+.yol-izgara{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:2.5vw;align-items:start}
+.klasor{font-family:var(--mono);font-size:calc(var(--kod)*.9);display:grid;gap:.5vh}
+.kl{padding:.1em .45em;border-radius:.35em;justify-self:start;white-space:nowrap}
+.kl.i1{margin-left:1.4em}
+.kl.i2{margin-left:2.8em}
+.sahne.oynuyor .kl.yanar{animation:isik .5s ease-out var(--t,0s) both}
+.kl em{font:normal var(--b2) var(--body);color:var(--theory);margin-left:.5em;opacity:0}
+.sahne.oynuyor .kl em{animation:belir .45s ease-out var(--t,0s) both}
+.sonuclar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.4vw}
+.sonuc{border:2px solid var(--line);border-radius:1vw;padding:1.2vh 1vw;display:grid;gap:.8vh;font-size:var(--b2);opacity:0}
+.sonuc > b{font-family:var(--body)}
+.sonuc.iyi{border-color:var(--lab);background:var(--lab-soft)}
+.sonuc.kotu{border-color:var(--err);background:var(--err-soft)}
+.sahne.oynuyor .sonuc{animation:belir .5s ease-out var(--t,0s) both}
+.gorsel{background:#fff;border-radius:.6vw;min-height:12vh;display:grid;place-items:center;padding:.8vh}
+.gorsel svg{height:11vh;width:auto;display:block}
+.gorsel.kirik{place-items:center start;padding:.8vh .8vw;color:#111;font-family:"Times New Roman",Times,serif;font-size:var(--b2)}
+.gorsel.kirik span{display:inline-flex;align-items:center;gap:.4em}
+.gorsel.kirik svg{height:1.4em}
+
+/* Köprü */
+.kopru-sahne{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:3vw;align-items:center}
+.etk-ikili{display:grid}
+.etk-ikili > span{grid-area:1/1}
+.etk-sonra{opacity:0;color:var(--ai)}
+.sahne.oynuyor .etk-once{animation:sonsun .4s ease-out 1.3s both}
+.sahne.oynuyor .etk-sonra{animation:belir .4s ease-out 1.5s both}
+@keyframes sonsun{to{opacity:0}}
+.site{background:#fff;color:#111;border:1px solid var(--line);border-radius:.8vw;overflow:hidden;font-family:"Times New Roman",Times,serif;font-size:var(--b2)}
+.site-h{padding:1.2vh 1.2vw}
+.site-h h3{font:inherit;font-weight:700;font-size:1.5em;margin:0 0 .3em}
+.site-nav a{color:#0000EE;text-decoration:underline;margin-right:.5em;padding:.1em 0;border-radius:999px}
+.site-m{padding:1.2vh 1.2vw}
+.site-m p{margin:0 0 .4em;max-width:none}
+.site-m ul{margin:0;padding-left:1.2em}
+.site-f{padding:.8vh 1.2vw;font-size:.9em}
+.sahne.oynuyor .site{animation:yazitipi .01s linear 1.4s both}
+@keyframes yazitipi{to{font-family:"IBM Plex Sans",system-ui,sans-serif;background:#F5F7FB}}
+.sahne.oynuyor .site-h{animation:ust 1s ease-out 1.6s both}
+@keyframes ust{to{background:#2352D9;color:#fff}}
+.sahne.oynuyor .site-nav a{animation:menu .8s ease-out 2.3s both}
+@keyframes menu{to{background:#fff;color:#2352D9;text-decoration-color:transparent;padding:.1em .7em}}
+.sahne.oynuyor .site-m{animation:kart .8s ease-out 3s both}
+@keyframes kart{to{background:#fff;margin:1.2vh 1.2vw;border-radius:.8vw;box-shadow:0 2px 10px rgba(18,26,43,.12)}}
+.sahne.oynuyor .site-f{animation:alt .6s ease-out 3.6s both}
+@keyframes alt{to{color:#5B6577;text-align:center}}
+
+@media (prefers-reduced-motion:reduce){
+  .sahne.oynuyor *,.sahne.oynuyor *::before,.sahne.oynuyor *::after{animation-duration:1ms !important;animation-delay:0s !important}
+  .ek,.bolge{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="deste">
+
+  <!-- Kapak -->
+  <section class="s kapak" id="kapak">
+    <div class="baslik">
+      <span class="etiket">YZM205 · Hafta 2 · Toparlama</span>
+      <h1>HTML: sayfanın iskeleti</h1>
+      <p class="buyuk">CSS'e geçmeden önce elindeki <code>index.html</code>'in iskeletini tamamlıyoruz.</p>
+    </div>
+    <ol class="ajanda">
+      <li><b>1</b>Etiket ve ağaç</li>
+      <li><b>2</b>İskelet</li>
+      <li><b>3</b>Şimdi sen</li>
+      <li><b>4</b>Dosya yolu</li>
+      <li><b>5</b>Sırada CSS</li>
+    </ol>
+  </section>
+
+  <!-- 1. Etiket ve ağaç -->
+  <section class="s" id="etiket">
+    <header><span class="etiket">Fikir 1</span><h2>Etiket, öğe, nitelik: hangisi hangisi?</h2></header>
+    <div class="govde anatomi-govde">
+      <div class="anatomi">
+        <span class="an-ust" data-adim="2">nitelik: ad="değer"</span>
+        <span class="an-p p1">&lt;a <span class="an-nit">href="projeler.html"</span>&gt;</span>
+        <span class="an-p p2">Projelerim</span>
+        <span class="an-p p3">&lt;/a&gt;</span>
+        <span class="an-alt a1" data-adim="1">açılış etiketi</span>
+        <span class="an-alt a2" data-adim="3">içerik</span>
+        <span class="an-alt a3" data-adim="4">kapanış etiketi</span>
+        <div class="an-oge" data-adim="5"><i></i>öğe: üçü birlikte tek bir bağlantı</div>
+      </div>
+      <p class="an-img" data-adim="6"><code>img</code>'nin içeriği yok, kapanış etiketi de yok:<br><code>&lt;img src="img/avatar.svg" alt="Basit bir insan çizimi"&gt;</code></p>
+    </div>
+  </section>
+
+  <section class="s" id="agac">
+    <header><span class="etiket">Fikir 2</span><h2>Tarayıcı bu satırlardan ne kurar?</h2></header>
+    <div class="govde">
+      <div class="sahne">
+        <button class="yeniden" type="button">Yeniden oynat</button>
+        <div class="ikili">
+          <div>
+            <span class="etk">Senin yazdığın</span>
+<pre class="kod agac-kod"><span class="k" style="--t:.2s"><span class="e">&lt;body&gt;</span></span>
+<span class="k" style="--t:.9s">  <span class="e">&lt;h1&gt;</span>Satranç Kulübü<span class="e">&lt;/h1&gt;</span></span>
+<span class="k" style="--t:1.6s">  <span class="e">&lt;p&gt;</span>Getirmen gerekenler:<span class="e">&lt;/p&gt;</span></span>
+<span class="k" style="--t:2.3s">  <span class="e">&lt;ul&gt;</span></span>
+<span class="k" style="--t:3s">    <span class="e">&lt;li&gt;</span>Tahta<span class="e">&lt;/li&gt;</span></span>
+<span class="k" style="--t:3.6s">    <span class="e">&lt;li&gt;</span>Saat<span class="e">&lt;/li&gt;</span></span>
+<span class="k" style="--t:4.3s">  <span class="e">&lt;/ul&gt;</span></span>
+<span class="k" style="--t:5s"><span class="e">&lt;/body&gt;</span></span></pre>
+          </div>
+          <div>
+            <span class="etk">Tarayıcının kurduğu ağaç</span>
+            <ul class="agac">
+              <li><span class="dugum" style="--t:.2s"><b>body</b></span>
+                <ul class="dal" style="--t:5s">
+                  <li><span class="dugum" style="--t:.9s"><b>h1</b><span>Satranç Kulübü</span></span></li>
+                  <li><span class="dugum" style="--t:1.6s"><b>p</b><span>Getirmen gerekenler:</span></span></li>
+                  <li><span class="dugum" style="--t:2.3s"><b>ul</b></span>
+                    <ul class="dal" style="--t:4.3s">
+                      <li><span class="dugum" style="--t:3s"><b>li</b><span>Tahta</span></span></li>
+                      <li><span class="dugum" style="--t:3.6s"><b>li</b><span>Saat</span></span></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="not">F12 ile açılan panelde de aynı ağacı görürsün.</div>
+      </div>
+      <p class="alt-cumle">İçine yazdığın öğe bir dalın çocuğu olur: iki <code>li</code> <code>ul</code>'nin, hepsi <code>body</code>'nin. Kapanış etiketi dalın nerede bittiğini söyler.</p>
+    </div>
+  </section>
+
+  <section class="s" id="yutma">
+    <header><span class="etiket">Fikir 3</span><h2>Kapanmayan bir etiket neyi yutar?</h2></header>
+    <div class="govde">
+      <div class="sahne">
+        <button class="yeniden" type="button">Yeniden oynat</button>
+        <div class="ikili">
+          <div>
+            <span class="etk">Senin yazdığın</span>
+<pre class="kod yutma-kod"><span class="e">&lt;p&gt;</span>Toplantı <span class="e acik-kalan" style="--t:.3s">&lt;strong&gt;</span>Salı günü.<span class="e">&lt;/p&gt;</span>
+<span class="e">&lt;p&gt;</span>Herkes gelsin.<span class="e">&lt;/p&gt;</span>
+<span class="e">&lt;p&gt;</span>Tahtalar kulüpten.<span class="e">&lt;/p&gt;</span></pre>
+            <div class="dogrusu" data-adim="1">
+              <span class="etk">Doğrusu</span>
+<pre class="kod yutma-kod"><span class="e">&lt;p&gt;</span>Toplantı <span class="e">&lt;strong&gt;</span>Salı<span class="e vurgu">&lt;/strong&gt;</span>
+   günü.<span class="e">&lt;/p&gt;</span></pre>
+            </div>
+          </div>
+          <div class="sag-yigin">
+            <div>
+              <span class="etk">Ekranda</span>
+              <div class="sayfa-mock">
+                <p>Toplantı <span class="kal" style="--t:1s">Salı günü.</span></p>
+                <p><span class="kal" style="--t:2s">Herkes gelsin.</span></p>
+                <p><span class="kal" style="--t:3s">Tahtalar kulüpten.</span></p>
+              </div>
+            </div>
+            <div>
+              <span class="etk">Tarayıcının kurduğu ağaç</span>
+              <div class="yt-agac">
+                <div class="yt-satir"><span class="dugum"><b>p</b></span><span class="cizgi gelen" style="--t:1s"></span><span class="dugum kirmizi gelen" style="--t:1s"><b>strong</b><span>Salı günü.</span></span></div>
+                <div class="yt-satir"><span class="dugum"><b>p</b></span><span class="cizgi gelen" style="--t:2s"></span><span class="dugum kirmizi gelen" style="--t:2s"><b>strong</b><span>Herkes gelsin.</span></span></div>
+                <div class="yt-satir"><span class="dugum"><b>p</b></span><span class="cizgi gelen" style="--t:3s"></span><span class="dugum kirmizi gelen" style="--t:3s"><b>strong</b><span>Tahtalar kulüpten.</span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="not">Kalınlığın başladığı satırda açılan etiketleri tek tek say.</div>
+      </div>
+      <p class="alt-cumle">Tarayıcı hata göstermez, kapanmamış <code>strong</code>'u her yeni paragrafta yeniden açar. Ekrandaki tek belirti olması gerekenden kalın yazı.</p>    </div>
+  </section>
+
+  <section class="s sinifca" id="sinifca-head">
+    <header><span class="etiket">Sınıfça</span><h2><code>h1</code>'i yanlışlıkla <code>head</code>'e yazdın. Ekranda ne görürsün?</h2></header>
+    <div class="govde iki">
+<pre class="kod"><span class="e">&lt;head&gt;</span>
+  <span class="e">&lt;meta</span> <span class="n">charset</span>=<span class="d">"utf-8"</span><span class="e">&gt;</span>
+  <span class="e">&lt;title&gt;</span>Satranç Kulübü<span class="e">&lt;/title&gt;</span>
+  <span class="vurgu"><span class="e">&lt;h1&gt;</span>Bu haftaki etkinlikler<span class="e">&lt;/h1&gt;</span></span>
+<span class="e">&lt;/head&gt;</span>
+<span class="e">&lt;body&gt;</span>
+<span class="e">&lt;/body&gt;</span></pre>
+      <div>
+        <div class="secenekler">
+          <button class="secenek" type="button">Hiçbir şey, <code>head</code> ekrana çizilmez.</button>
+          <button class="secenek" type="button">Başlık sekmede, sayfanın adının yanında çıkar.</button>
+          <button class="secenek" data-dogru type="button">Başlık ekranda yine görünür.</button>
+          <button class="secenek" type="button">Tarayıcı hata verir, sayfa açılmaz.</button>
+        </div>
+        <div class="cevap"><p>Tarayıcı <code>head</code>'in içinde ekrana ait bir öğe bulunca <code>head</code>'i orada kapatır ve <code>h1</code>'i <code>body</code>'ye taşır. Sayfa doğru görünür ama kod yanlış kalır, <code>h1</code>'i sen <code>body</code>'ye taşı.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. İskelet -->
+  <section class="s" id="iskelet">
+    <header><span class="etiket">Fikir 4</span><h2>İskeletin her satırı ne iş görür?</h2></header>
+    <div class="govde iki iskelet-govde">
+      <div class="kodtab">
+        <div class="kt"><code><span class="e">&lt;!doctype html&gt;</span></code><span class="yan g1" data-adim="1">modern HTML</span></div>
+        <div class="kt"><code><span class="e">&lt;html</span> <span class="n">lang</span>=<span class="d">"tr"</span><span class="e">&gt;</span></code><span class="yan ek g1">sayfa Türkçe</span></div>
+        <div class="kt"><code><span class="e">&lt;head&gt;</span></code><span class="yan g2" data-adim="2">ekranda görünmez</span></div>
+        <div class="kt"><code>  <span class="e">&lt;meta</span> <span class="n">charset</span>=<span class="d">"utf-8"</span><span class="e">&gt;</span></code><span class="yan ek g2">ç, ş, ğ doğru çıkar</span></div>
+        <div class="kt"><code>  <span class="e">&lt;title&gt;</span>Ece'nin sayfası<span class="e">&lt;/title&gt;</span></code><span class="yan ek g2">sekmedeki ad</span></div>
+        <div class="kt"><code><span class="e">&lt;/head&gt;</span></code><span></span></div>
+        <div class="kt"><code><span class="e">&lt;body&gt;</span></code><span class="yan g3" data-adim="3">ekranda ne varsa</span></div>
+        <div class="kt"><code>  <span class="e">&lt;header&gt;</span>…<span class="e">&lt;/header&gt;</span></code><span class="yan ek g3">site adı, menü</span></div>
+        <div class="kt"><code>  <span class="e">&lt;main&gt;</span>…<span class="e">&lt;/main&gt;</span></code><span class="yan ek g3">asıl içerik</span></div>
+        <div class="kt"><code>  <span class="e">&lt;footer&gt;</span>…<span class="e">&lt;/footer&gt;</span></code><span class="yan ek g3">en alt satır</span></div>
+        <div class="kt"><code><span class="e">&lt;/body&gt;</span></code><span></span></div>
+        <div class="kt"><code><span class="e">&lt;/html&gt;</span></code><span></span></div>
+      </div>
+      <div class="tarayici" aria-label="Tarayıcıdaki görünüş">
+        <div class="sekmeler"><span class="sekme"><span class="varsayilan">index.html</span><span class="ek g2">Ece'nin sayfası</span></span></div>
+        <div class="mock-sayfa">
+          <div class="bolge b1 ek g3"><b>header</b><span class="m-h1">Merhaba, ben Ece</span><span><u>Ana sayfa</u><u>Projelerim</u></span></div>
+          <div class="bolge b2 ek g3"><b>main</b>Tanıtım, ilgi alanları, fotoğraf</div>
+          <div class="bolge b3 ek g3"><b>footer</b>Ece</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Şimdi sen -->
+  <section class="s sen" id="sen">
+    <header><span class="etiket">Şimdi sen · 5 dakika</span><h2>Kendi <code>index.html</code>'ini tamamla</h2></header>
+    <div class="govde">
+      <div class="gorev">
+        <div>
+          <p class="sen-ust">VS Code'da <code>kisisel-sayfa</code> klasörünü aç, <code>index.html</code>'de eksik olanı ekle ve kaydet.</p>
+          <ul class="kontrol">
+            <li><span class="kare"></span><span>En üstte <code>&lt;!doctype html&gt;</code></span></li>
+            <li><span class="kare"></span><span><code>&lt;html lang="tr"&gt;</code></span></li>
+            <li><span class="kare"></span><span><code>head</code>'de <code>&lt;meta charset="utf-8"&gt;</code></span></li>
+            <li><span class="kare"></span><span><code>head</code>'de <code>&lt;title&gt;Adın Soyadın&lt;/title&gt;</code></span></li>
+            <li><span class="kare"></span><span><code>header</code>'daki <code>nav</code>'da iki bağlantı:<br><code>&lt;a href="index.html"&gt;Ana sayfa&lt;/a&gt;</code><br><code>&lt;a href="projeler.html"&gt;Projelerim&lt;/a&gt;</code></span></li>
+          </ul>
+          <p class="sen-alt">Live Server'da sekmede adın görünmeli, menüdeki iki bağlantı da sayfayı açmalı. Değişiklik görünmüyorsa önce kaydettin mi, ona bak: VS Code sekmesindeki nokta kaydedilmemiş değişiklik demek.</p>
+        </div>
+        <div class="sayac" data-sure="300"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Dosya yolu -->
+  <section class="s sinifca" id="sinifca-harf">
+    <header><span class="etiket">Sınıfça</span><h2>Tek harf farkı: görsel nerede açılır?</h2></header>
+    <div class="govde iki sag-genis">
+      <div>
+<pre class="kod klasor-agaci">kisisel-sayfa/
+├─ index.html
+├─ projeler.html
+└─ img/
+   └─ <span class="vurgu">Afis.svg</span></pre>
+<pre class="kod klasor-agaci"><span class="e">&lt;img</span> <span class="n">src</span>=<span class="d">"img/<span class="vurgu">afis.svg</span>"</span>
+     <span class="n">alt</span>=<span class="d">"Kulüp afişi"</span><span class="e">&gt;</span></pre>
+      </div>
+      <div>
+        <div class="secenekler">
+          <button class="secenek" type="button">İkisinde de açılır, harf farkı önemsiz.</button>
+          <button class="secenek" type="button">İkisinde de kırık görünür.</button>
+          <button class="secenek" data-dogru type="button">Live Server'da açılır, GitHub Pages'te kırık.</button>
+          <button class="secenek" type="button">Live Server'da kırık, GitHub Pages'te açılır.</button>
+        </div>
+        <div class="cevap"><p>Windows dosya adında büyük ve küçük harfi ayırmaz, Live Server afişi bulur. GitHub Pages'in sunucusu ayırır, onun gözünde <code>afis.svg</code> diye bir dosya yoktur.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="kirik">
+    <header><span class="etiket">Fikir 5</span><h2>Tarayıcı <code>src</code>'deki yolu nasıl izler?</h2></header>
+    <div class="govde">
+      <div class="sahne">
+        <button class="yeniden" type="button">Yeniden oynat</button>
+<pre class="kod yol-kod"><span class="e">&lt;img</span> <span class="n">src</span>=<span class="d">"<span class="ys" style="--t:1.5s">img/</span><span class="ys" style="--t:2.5s"><span class="hf" style="--t:2.9s">a</span>fis.svg</span>"</span> <span class="n">alt</span>=<span class="d">"Kulüp afişi"</span><span class="e">&gt;</span></pre>
+        <div class="yol-izgara">
+          <div class="klasor">
+            <span class="kl yanar" style="--t:.8s">kisisel-sayfa/<em style="--t:.8s">yol buradan başlar</em></span>
+            <span class="kl i1 yanar" style="--t:.3s">index.html<em style="--t:.3s">kod bu dosyada</em></span>
+            <span class="kl i1">projeler.html</span>
+            <span class="kl i1 yanar" style="--t:1.5s">img/<em style="--t:1.5s">içine gir</em></span>
+            <span class="kl i2 yanar" style="--t:2.5s"><span class="hf" style="--t:2.9s">A</span>fis.svg<em style="--t:2.9s">A ile a aynı mı?</em></span>
+          </div>
+          <div class="sonuclar">
+            <div class="sonuc iyi" style="--t:3.6s">
+              <b>Live Server, Windows</b>
+              <div class="gorsel"><svg viewBox="0 0 120 80" role="img" aria-label="Kulüp afişi"><rect width="120" height="80" rx="8" fill="#FBEBD2"/><rect x="8" y="8" width="104" height="64" rx="5" fill="none" stroke="#8F5600" stroke-width="2"/><text x="60" y="38" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="700" fill="#8F5600">TURNUVA</text><text x="60" y="56" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#8F5600">Satranç kulübü</text></svg></div>
+              <span>Harf farkına bakmaz, afiş açılır.</span>
+            </div>
+            <div class="sonuc kotu" style="--t:4.4s">
+              <b>GitHub Pages</b>
+              <div class="gorsel kirik"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h14l-3 5 3 4-2 7H3z" fill="#fff" stroke="#5B6577" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 17l3-4 2 2 2-3" fill="none" stroke="#5B6577" stroke-width="1.6"/><path d="M19 6h2v14h-4" fill="none" stroke="#5B6577" stroke-width="1.6"/></svg>Kulüp afişi</span></div>
+              <span>404, dosya yok. Yerinde alt metni kalır.</span>
+            </div>
+          </div>
+        </div>
+        <div class="not">Göreli yol, kodun yazıldığı dosyanın klasöründen başlar.</div>
+      </div>
+      <p class="alt-cumle">Tarayıcı yolu harfi harfine izler. Görsel kırıksa <code>src</code>'de yazanı VS Code'daki dosya adıyla harf harf karşılaştır.</p>
+    </div>
+  </section>
+
+  <!-- 5. Sırada CSS -->
+  <section class="s ozet" id="kopru">
+    <header><span class="etiket">Sırada</span><h2>Sırada CSS: aynı iskelete görünüş</h2></header>
+    <div class="govde">
+      <div class="sahne kopru-sahne">
+        <button class="yeniden" type="button">Yeniden oynat</button>
+        <div>
+          <span class="etk etk-ikili"><span class="etk-once">Yalnız HTML</span><span class="etk-sonra">HTML ve CSS</span></span>
+          <div class="site">
+            <div class="site-h"><h3>Merhaba, ben Ece</h3><div class="site-nav"><a>Ana sayfa</a><a>Projelerim</a></div></div>
+            <div class="site-m"><p>Yazılım Mühendisliği 2. sınıftayım.</p><ul><li>Satranç</li><li>Fotoğrafçılık</li></ul></div>
+            <div class="site-f">Ece</div>
+          </div>
+        </div>
+        <div>
+          <p>HTML hangi parçanın başlık, hangisinin menü olduğunu söyledi. CSS o parçaların nasıl görüneceğini söyleyecek.</p>
+          <p class="kucuk">CSS dosyası da <code>kisisel-sayfa</code> klasörüne girecek ve <code>head</code>'e yazacağın tek satırla bağlanacak. O satırdaki yol, az önce izlediğin göreli yolun aynısı.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<script>
+window.SUNUM = {
+  baslik: "Hafta 2 sunum",
+  bolumler: [
+    { ad: "Etiket ve ağaç", ilk: "etiket" },
+    { ad: "İskelet", ilk: "iskelet" },
+    { ad: "Şimdi sen", ilk: "sen" },
+    { ad: "Dosya yolu", ilk: "sinifca-harf" },
+    { ad: "Sırada CSS", ilk: "kopru" }
+  ]
+};
+</script>
+<script src="../../assets/sunum.js"></script>
+</body>
+</html>

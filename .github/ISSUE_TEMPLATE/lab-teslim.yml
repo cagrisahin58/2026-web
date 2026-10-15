@@ -15,15 +15,16 @@ body:
       options:
         - "Hafta 2 · HTML"
         - "Hafta 3 · CSS"
-        - "Hafta 4 · JavaScript 1"
-        - "Hafta 5 · JavaScript 2"
-        - "Hafta 7 · Sunucu"
-        - "Hafta 8 · Veritabanı"
-        - "Hafta 9 · Git"
+        - "Hafta 4 · JavaScript ve DOM"
+        - "Hafta 5 · Git ve GitHub"
+        - "Hafta 6 · Sunucu"
+        - "Hafta 7 · Veritabanı"
+        - "Hafta 8 · Yayına alma ve güvenlik"
+        - "Hafta 9 · Modern web mimarileri"
         - "Hafta 10 · Yapay zekâ ile geliştirme"
-        - "Hafta 11 · Güvenlik"
-        - "Hafta 12 · Yapay zekâ API"
-        - "Hafta 13 · Yayına alma"
+        - "Hafta 11 · Uygulamaya yapay zekâ"
+        - "Hafta 12 · GitHub ekosistemi"
+        - "Hafta 13 · Kalite ve son hazırlık"
     validations:
       required: true
   - type: input
