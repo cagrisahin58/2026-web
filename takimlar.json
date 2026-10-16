@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-16T12:00:05.234Z",
+  "guncelleme": "2026-10-16T17:35:18.802Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -379,8 +379,8 @@
           "ad": "BİLAL SENDUR"
         },
         {
-          "no": "",
-          "ad": "250912*** MEHMET GÖKDENİZ"
+          "no": "250912032",
+          "ad": "MEHMET GÖKDENİZ"
         }
       ],
       "konu": "Yeni Nesil Dijital Restoran Yönetim ve Büyüme Platformu",
@@ -389,13 +389,11 @@
       "olusturma": "2026-10-15T18:00:46.000Z",
       "kilit": "2026-10-22T18:00:46.000Z",
       "kilitli": false,
-      "durum": "hatali",
-      "hatalar": [
-        "Öğrenci numarası rakamlardan oluşmalı ve satır \"numara ad soyad\" biçiminde olmalı: \"250912*** MEHMET GÖKDENİZ\"."
-      ],
+      "durum": "gecerli",
+      "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/16",
       "yazar": "emirhan3619",
-      "guncelleme": "2026-10-15T18:01:07Z"
+      "guncelleme": "2026-10-16T17:35:08Z"
     },
     {
       "id": 17,
