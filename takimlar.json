@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-16T08:06:31.701Z",
+  "guncelleme": "2026-10-16T12:00:05.234Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -192,7 +192,7 @@
         }
       ],
       "konu": "🚀 **KampüsCep | Kampüs Hayatı Artık Cebinde!** KampüsCep, Muş Alparslan Üniversitesi öğrencilerinin kampüs yaşamını kolaylaştırmak amacıyla geliştirilmiş modern ve yenilikçi bir öğrenci platformudur. 🚌 Canlı otobüs takibi, 🗺️ interaktif kampüs haritası, 📍 kampüs mekânları, 📚 sınav arşivi, 📊 no",
-      "site": "https://puritan-glider-movable.ngrok-free.dev",
+      "site": "https://kampuscep.com",
       "klasor": "",
       "olusturma": "2026-10-11T22:36:10.000Z",
       "kilit": "2026-10-18T22:36:10.000Z",
@@ -201,7 +201,7 @@
       "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/9",
       "yazar": "lcaraxesl",
-      "guncelleme": "2026-10-12T11:16:51Z"
+      "guncelleme": "2026-10-16T11:59:52Z"
     },
     {
       "id": 10,
