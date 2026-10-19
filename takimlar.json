@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-18T19:24:15.185Z",
+  "guncelleme": "2026-10-19T08:46:32.963Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -196,7 +196,7 @@
       "klasor": "",
       "olusturma": "2026-10-11T22:36:10.000Z",
       "kilit": "2026-10-18T22:36:10.000Z",
-      "kilitli": false,
+      "kilitli": true,
       "durum": "gecerli",
       "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/9",
@@ -229,7 +229,7 @@
       "klasor": "",
       "olusturma": "2026-10-12T06:43:48.000Z",
       "kilit": "2026-10-19T06:43:48.000Z",
-      "kilitli": false,
+      "kilitli": true,
       "durum": "gecerli",
       "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/10",
