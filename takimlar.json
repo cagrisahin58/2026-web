@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-19T08:46:32.963Z",
+  "guncelleme": "2026-10-20T08:27:20.402Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -201,7 +201,7 @@
       "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/9",
       "yazar": "lcaraxesl",
-      "guncelleme": "2026-10-17T14:29:04Z"
+      "guncelleme": "2026-10-19T08:46:35Z"
     },
     {
       "id": 10,
@@ -234,7 +234,7 @@
       "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/10",
       "yazar": "altasmerve6382-coder",
-      "guncelleme": "2026-10-12T06:44:02Z"
+      "guncelleme": "2026-10-19T08:46:37Z"
     },
     {
       "id": 11,
@@ -262,7 +262,7 @@
       "klasor": "https://github.com/ozcanoksak/sehir-rehberi-v2",
       "olusturma": "2026-10-12T13:57:40.000Z",
       "kilit": "2026-10-19T13:57:40.000Z",
-      "kilitli": false,
+      "kilitli": true,
       "durum": "gecerli",
       "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/11",
