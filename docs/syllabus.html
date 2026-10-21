@@ -212,15 +212,15 @@ footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--mute
 
 <script id="data">
 window.SYLLABUS = {
-  current: 3,
+  current: 4,
   course: {
     code: "YZM205",
     title: "YZM205 Web Tasarımı ve Programlama",
-    subtitle: "Ders planı",
+    subtitle: "Ders planı. Sabah 70 dakikalık sunum, ardından soru; öğleden sonra proje atölyesi.",
     institution: "Muş Alparslan Üniversitesi · Mühendislik-Mimarlık Fakültesi · Yazılım Mühendisliği 2. sınıf",
     term: "2026–2027 Güz",
     meta: [
-      {kind:"theory", text:"Sabah: konu ve birlikte kodlama"},
+      {kind:"theory", text:"Sabah: 70 dakika sunum, ardından soru"},
       {kind:"lab", text:"Öğleden sonra: proje atölyesi"},
       {text:"Derslik BLD-104"},
       {kind:"ship", text:"4 kişilik takım projesi"},
@@ -230,22 +230,22 @@ window.SYLLABUS = {
   },
 
   purpose: [
-    "WhatsApp Web, YouTube, e-Devlet: her gün açtığın bu sitelerin hepsi birer web uygulaması. Dönemin sonunda sen de takımınla birlikte küçük ama gerçek bir web uygulaması yapıp internete koymuş olacaksın. Sayfaları tarayıcıda açılan, arkasında bir sunucu ve bir veritabanı çalışan bir uygulama. Bugün kodun bir kısmını yapay zekâ yazabiliyor. Neyin yapılacağına karar vermek, çıkan kodu anlamak ve doğru çalışıp çalışmadığını kontrol etmek yine insanın işi. Bu derste o insan olmayı öğreneceksin.",
-    "Peki yapay zekâ bir sayfayı saniyeler içinde yazabiliyorsa HTML'i, CSS'i, JavaScript'i neden tek tek öğreniyoruz? Çünkü yapay zekâ çoğu zaman neredeyse doğru kod verir ve aradaki küçük hatayı ancak kodu okuyabilen biri fark eder. Bu yüzden ilk sekiz haftada temeli birlikte kurarız: her kavramı önce sen yazarsın. Temel oturunca dokuzuncu haftadan itibaren bugünün web dünyasına bakarız: modern mimariler, çerçeveler, kodlama ajanları, uygulamaya yapay zekâ eklemek, GitHub'ın otomasyon araçları. Kuralların ayrıntısı aşağıda, [Yapay zekâ kuralları](#yapay-zeka) başlığında."
+    "WhatsApp Web, YouTube, e-Devlet: her gün açtığın bu sitelerin hepsi birer web ürünü. Dönemin sonunda sen de takımınla birlikte küçük ama gerçek bir ürün yapıp internete koymuş olacaksın: arkasında bir veritabanı ve bir API çalışan, giriş akışı ve küçük bir yapay zekâ özelliği olan, canlı bir adreste açılan bir ürün. Bugün kodun büyük kısmını yapay zekâ kodlama araçları yazabiliyor. Neyin yapılacağına karar vermek, parçaları seçmek, çıkan kodu anlamak ve ürünün sağlam ve güvenli çalıştığını kontrol etmek yine insanın işi. Bu derste o insan olmayı öğreneceksin.",
+    "Peki HTML ve CSS'i neden öğrendik? İlk üç haftada temeli birlikte kurduk, çünkü bir sayfanın nasıl yazıldığını bilmeyen biri yapay zekânın verdiği kodu okuyamaz. Hafta 4'ten itibaren ders kodun dilbilgisini değil, ürünün parçalarını öğretir: mimari, GitHub takım akışı ve yapay zekâ ajanları, veri katmanı, API ve kimlik, bulut ve yayına alma, önbellek, güvenlik açıklarının analizi, kod analizi ve test, çapraz platform, pazara çıkış. Her haftanın sabahında 70 dakikalık bir sunum var, ardından sorular cevaplanır. Öğleden sonra takımınla ürününün üstünde çalışırsın. Kuralların ayrıntısı aşağıda, [Yapay zekâ kuralları](#yapay-zeka) başlığında."
   ],
 
   rhythm: {
-    theory: {when:"Sabah · 105 dakika", title:"Konu ve birlikte kodlama", text:"Hoca konuyu projeksiyondaki sunumdan anlatır: her ekranda tek bir fikir, hareketli bir şema, sınıfça bir tahmin ve birkaç dakikada bir \"şimdi sen\" adımı. Sen de kendi bilgisayarında aynı kodu yazarsın. Ortada 10 dakika ara verilir."},
-    lab: {when:"Öğleden sonra · 105 dakika", title:"Proje atölyesi", text:"Takımınla oturursun, o haftanın konusunu kendi projenize uygularsınız, hoca masaları gezer. Blok bitmeden o haftanın teslimini gönderirsin. Atölyenin üç durağı var."},
+    theory: {when:"Sabah · 70 dakika sunum, ardından soru", title:"Sunum", text:"Hoca konuyu projeksiyondaki sunumdan anlatır: her ekranda tek bir fikir, hareketli şemalar, kısa videolar, gerçek bir servis üstünde canlı gösteri ve sınıfça bir tahmin ya da oylama. Birkaç dakikada bir \"şimdi sen\" adımında kendi cihazında bir şeyi bulur, açar ya da ölçersin. Sunumun ardından 10 dakika soru-cevap yapılır."},
+    lab: {when:"Öğleden sonra", title:"Proje atölyesi", text:"Takımınla oturursun, o haftanın ürün görevini kendi ürününüzde yaparsınız. Hoca masaları gezer ve her takıma ayrı ayrı uğrar. Atölyenin üç durağı var."},
     steps: [
-      {k:"UYGULA", text:"Sabah gördüğün kavramı projenin bir ekranına ya da kendi sayfana uygularsın."},
+      {k:"UYGULA", text:"Sabah sunumda gördüğün şeyi ürününün bir parçasına uygularsın."},
       {k:"GÖSTER", text:"Yaptığını takımına ya da hocaya ekranda gösterirsin; takılan yeri birlikte çözersiniz."},
-      {k:"TESLİM", text:"Blok bitmeden Lab teslimleri sayfasındaki formla gönderirsin; bitmiş hâlini labı izleyen Pazar'a kadar yeniden gönderebilirsin."}
+      {k:"TESLİM", text:"Atölye bitmeden Lab teslimleri sayfasındaki formla gönderirsin; bitmiş hâlini bu dersi izleyen Pazar'a kadar yeniden gönderebilirsin."}
     ],
-    notes: "Her haftanın bir de uzun ders notu var: tarayıcıda açılan, içinde küçük denemeler (simülasyonlar), cevabı açıklanan sorular ve evde çalışmak isteyen için lab paketleri (Yap, Boz, Anlat) olan bir sayfa. Derste sunumu izlersin, evde notu okursun. Takvimi haftalarla sayarız, günle değil: bir hafta iki derse yayılabilir ya da iki hafta tek derste işlenebilir; hangi haftada olduğumuz derste ve sınıf kanalında söylenir."
+    notes: "Her haftanın bir de özet ve know-how notu var: sunumun özeti, araç tablosu, görev reçetesi, izlenecek videolar ve okunacak kaynaklar, sözlük ve sınav örneği. Derste sunumu izlersin, evde notu okursun. Takvimi haftalarla sayarız, günle değil: bir hafta iki derse yayılabilir ya da iki hafta tek derste işlenebilir; hangi haftada olduğumuz derste ve sınıf kanalında söylenir."
   },
 
-  planNote: "İlk sekiz hafta temel: sayfa, görünüş, davranış, takım çalışması, sunucu, veritabanı, yayın. Sonraki haftalar bugünün web'i. Ara sınav haftasında ders yok; sınav o güne kadar işlediğimiz konuları kapsar. Hafta 2'den 13'e kadar her haftanın bir teslimi var.",
+  planNote: "İlk üç hafta temeldi: tanışma, sayfa ve görünüş. Hafta 4'ten itibaren her hafta bir ürün katmanını işleriz: mimari, takım akışı, veri, API, bulut, önbellek, güvenlik, kalite, çapraz platform, pazara çıkış. Ara sınav haftasında ders yok; sınavın kapsamı sınava kadar işlenen konulardır. Hafta 2'den 13'e kadar her haftanın bir teslimi var; Hafta 2 ve 3 tek ortak teslimdir (kişisel sayfa), Hafta 4'ten itibaren teslim, takımın ürününde o haftanın görevidir.",
 
   weeks: [
     {n:1, title:"Tanışma: yapay zekâ çağında web yazılımcısı olmak",
@@ -264,68 +264,69 @@ window.SYLLABUS = {
       learn:"CSS'in ne olduğunu ve HTML'e nasıl bağlandığını öğrenirsin. Seçicilerle hangi öğeyi biçimlendireceğini söylersin. Renk, yazı tipi ve boşluk verirsin. Her öğenin bir kutu olduğunu görürsün: içerik, padding, border, margin. Flexbox ile öğeleri yan yana dizersin. Tek bir media sorgusuyla sayfanı telefonda da düzgün gösterirsin.",
       lab:"Kişisel sayfanı biçimlendirir, projenin ilk ekranına görünüş verirsin.",
       links:[{href:"../weeks/hafta-03/", label:"Hafta 3 ders notu"}]},
-    {n:4, title:"JavaScript ve DOM: sayfayı canlandırmak", graded:true,
-      tags:["değişken, koşul, döngü, fonksiyon","DOM","querySelector","olaylar","formdan değer","fetch fikri"],
-      learn:"YZM103'ten tanıdığın değişken, koşul, döngü, fonksiyon ve diziyi JavaScript'te hızlıca yazarsın. Sonra DOM'u öğrenirsin: tarayıcının sayfayı bellekte tuttuğu ağaç. Bir öğeyi seçer, metnini ve sınıfını değiştirir, tıklama ve yazma olaylarını dinler, formdan değer okur, listeye öğe eklersin. `fetch` ile sunucuya nasıl soru sorulduğunu görürsün.",
-      lab:"Projenin bir ekranını canlandırırsın."},
-    {n:5, title:"Git ve GitHub ile takım çalışması", graded:true,
-      tags:["commit, push, pull","dal","pull request","çakışma",".gitignore","takım deposu"],
-      learn:"Git, dosyalarında yaptığın her değişikliğin geçmişini tutan programdır. Değişikliği commit ile kaydeder, push ile GitHub'a gönderir, pull ile arkadaşının değişikliğini alırsın. Ana kodu bozmadan çalışmak için kendi dalını açar, işin bitince pull request ile takıma sunarsın. İki kişinin aynı satırı değiştirmesinden doğan çakışmayı çözersin.",
-      lab:"Takım deposu kurulur, herkes bir dal açıp pull request gönderir; proje takım deposundan yayınlanır.",
-      project:{code:"M1", text:"Takımın statik sayfalardan ve JavaScript'ten oluşan ilk sürümü takım deposundan yayında."}},
-    {n:6, title:"Sunucu: HTTP, Node.js ve Express", graded:true,
-      tags:["istek ve yanıt","GET, POST, 200, 404","JSON","Node.js","Express rota","fetch"],
-      learn:"HTTP, tarayıcı ile sunucunun konuşma kuralıdır: istek gider, yanıt gelir. GET ile POST'un, 200 ile 404'ün farkını görürsün. Verinin JSON biçiminde taşındığını öğrenirsin. Node.js ile JavaScript'i tarayıcının dışında çalıştırır, Express ile ilk sunucunu yazar, bir rota açıp JSON döndürürsün. Sayfandan `fetch` ile kendi sunucuna istek atarsın.",
-      lab:"Projene ilk API'ni eklersin."},
-    {n:7, title:"Veritabanı: SQL, SQLite ve bulutta veritabanı", graded:true,
-      tags:["tablo, satır, sütun","birincil anahtar","SQL","SQLite","bulut veritabanı"],
-      learn:"Tablo, satır, sütun ve birincil anahtarı öğrenirsin. SQL ile veri okur (SELECT), ekler (INSERT), süzer (WHERE), sıralar (ORDER BY), günceller ve silersin. Tek dosyada duran SQLite ile çalışırsın. Aynı fikrin buluttaki servislerine (Supabase, Turso, Firebase gibi) bakarsın: ne değişir, ne aynı kalır.",
-      lab:"Projenin verisi veritabanına taşınır."},
-    {n:8, title:"Yayına alma ve güvenlik temelleri", graded:true,
-      tags:["barındırma","ortam değişkeni","gizli anahtar","hash ve oturum","XSS, enjeksiyon"],
-      learn:"Sunucunu ve veritabanını internete koymayı öğrenirsin: barındırma servisi, ortam değişkeni, gizli anahtarın neden koda yazılmadığı, geçici disk. Parolanın neden düz saklanmadığını (hash), oturumun nasıl hatırlandığını (çerez) ve en bilinen iki açığı (XSS, SQL enjeksiyonu) tanırsın.",
-      lab:"Proje yayına alınır.",
-      project:{code:"M2", text:"Sunucusu ve veritabanı bağlı sürüm yayında."}},
-    {n:9, title:"Modern web mimarileri", graded:true,
-      tags:["SPA, SSR, SSG","API-first","React, Next.js","TypeScript"],
-      learn:"Sayfa tarayıcıda mı, sunucuda mı üretilir? SPA, SSR ve SSG'nin ne olduğunu, API-first yaklaşımı, bileşen tabanlı çerçeveleri (React, Next.js) ve TypeScript'in neden var olduğunu görürsün. Hangi projenin neyi seçtiğini konuşuruz.",
-      lab:"Kendi projenin mimarisini çizersin, küçük bir bileşen denersin."},
-    {n:10, title:"Yapay zekâ ile geliştirme", graded:true,
-      tags:["kodlama ajanı","istem","kodu okumak ve test etmek","MCP"],
-      learn:"Kodlama ajanları (GitHub Copilot, Claude Code, Cursor) nasıl çalışır, nerede yanılır? İyi istem yazmayı, üretilen kodu okumayı ve test etmeyi öğrenirsin. Ajanın araç kullanımına (MCP) bakarsın. Kural: açıklayamadığın kod senin değil.",
-      lab:"Projene ajanla bir özellik ekler, her satırını açıklarsın."},
-    {n:11, title:"Uygulamaya yapay zekâ eklemek", graded:true,
-      tags:["dil modeli API'si","anahtar sunucuda","sistem mesajı","çıktıyı doğrulamak","RAG fikri"],
-      learn:"Dil modeli API'sine sunucundan istek atarsın; anahtar sunucuda kalır. Sistem mesajı, hata ve zaman aşımı, çıktının doğrulanması. Modelin kendi belgelerinden cevap üretmesine (RAG) kısa bir bakış.",
-      lab:"Projene bir yapay zekâ özelliği eklersin."},
-    {n:12, title:"GitHub ekosistemi ve otomasyon", graded:true,
-      tags:["Actions","Issues, Projects","README, lisans","açık kaynak"],
-      learn:"GitHub Actions ile test ve yayın otomasyonu, Issues ve Projects ile iş takibi, iyi bir README ve lisans, açık kaynak projeye katkı. Depon senin CV'ndir.",
-      lab:"Projene bir otomasyon eklersin."},
-    {n:13, title:"Kalite ve son hazırlık", graded:true,
-      tags:["erişilebilirlik","performans","responsive","güvenlik kontrol listesi","prova"],
-      learn:"Erişilebilirlik, performans (Lighthouse), telefon ve masaüstü kontrolü, güvenlik kontrol listesi. Demo Günü provası.",
-      lab:"Prova.",
+    {n:4, title:"Uçtan uca ürün ve mimari", graded:true,
+      tags:["ürünün parçaları","isteğin yolu","çatılar","BaaS ve barındırma","yapay zekâ ile ürün geliştirme","önce yayınla"],
+      learn:"Bir 2026 web ürünü hangi parçalardan oluşur? Bir isteğin tarayıcıdan veritabanına gidip dönüşünü, çatıları, BaaS (hazır arka uç hizmeti) ve barındırma seçeneklerini, yapay zekâ ile ürün geliştirmeyi ve ürünü baştan yayında tutmayı (\"önce yayınla\") görürsün.",
+      lab:"Takımınla ürünün tek sayfasını (sorun, kullanıcı, üç özellik), mimari şemasını ve araç seçimini hazırlarsın; takım deposunu açar, yapay zekâ ile çıkardığın ilk iskeleti bir önizleme adresinde yayına alırsın.",
+      links:[{href:"../weeks/hafta-04/", label:"Hafta 4 ders notu"}]},
+    {n:5, title:"GitHub akışı ve yapay zekâ ajanları", graded:true,
+      tags:["dal ve pull request","inceleme","Issues ve Projects","Actions","Copilot, Claude Code, Cursor","MCP","yapay zekâ kodunu doğrulamak"],
+      learn:"Takım olarak nasıl çalışılır? Dal, pull request ve inceleme akışını, Issues ve Projects ile iş takibini, Actions ile otomasyonu görürsün. Copilot, Claude Code ve Cursor gibi kodlama ajanlarına, MCP'ye ve yapay zekânın yazdığı kodu nasıl doğrulayacağına bakarsın.",
+      lab:"Her üye bir Issue açar, bir dal çıkarır ve bir pull request gönderir; bir özelliği ajanla yazdırırsın, incelemesini bir insan yapar.",
+      project:{code:"M1", text:"İskelet takım deposundan yayında."}},
+    {n:6, title:"Veri katmanı: web VTYS", graded:true,
+      tags:["ilişkisel ve doküman modeli","yönetilen Postgres","Firestore, MongoDB Atlas","ORM","veri modelleme","RLS","migration","yedek"],
+      learn:"Ürünün verisi nerede ve nasıl saklanır? İlişkisel ve doküman modelini, yönetilen Postgres hizmetlerini (Supabase, Neon), Firestore ve MongoDB Atlas'ı, ORM'i, veri modellemeyi, satır düzeyinde erişim kuralını (RLS), migration'ı ve yedeklemeyi görürsün.",
+      lab:"Ürünün veri modelini çıkarır, çevrimiçi bir veritabanını bağlar ve RLS'yi açarsın."},
+    {n:7, title:"API, kimlik ve dil modeli API'leri", graded:true,
+      tags:["REST ve alternatifleri","sunucusuz ve edge","kimlik doğrulama","API güvenliği","ödeme ve e-posta API'leri","dil modeli API'si","streaming","maliyet","prompt injection"],
+      learn:"Ürünün iş mantığı nerede çalışır? REST ve alternatiflerini, sunucusuz ve edge fonksiyonları, kimlik doğrulamayı ve API güvenliğini, ödeme ve e-posta API'lerini, dil modeli API'sini, streaming'i, maliyeti ve prompt injection'ı görürsün.",
+      lab:"Giriş akışını kurar ve ürüne ilk yapay zekâ özelliğini eklersin; API anahtarı sunucuda kalır."},
+    {n:8, title:"Bulut ve yayına alma", graded:true,
+      tags:["AWS, GCP, Azure haritası","PaaS","konteyner","CI/CD","ortam değişkeni ve gizli anahtar","alan adı, DNS, HTTPS","izleme","maliyet"],
+      learn:"Ürün canlıya nasıl çıkar ve ayakta kalır? AWS, GCP ve Azure haritasını, PaaS'ı, konteyneri, CI/CD'yi, ortam değişkeni ve gizli anahtarı, alan adı, DNS ve HTTPS'i, izlemeyi ve fatura şokunu görürsün.",
+      lab:"Ürünü canlı bir adrese koyar, her gönderimde otomatik yayını kurar ve bir harcama sınırı koyarsın.",
+      project:{code:"M2", text:"Veri ve API bağlı sürüm yayında."}},
+    {n:9, title:"Önbellek ve performans", graded:true,
+      tags:["HTTP önbelleği","CDN ve edge","Redis","çatı önbelleği","geçersiz kılma","Core Web Vitals","Lighthouse","görsel optimizasyonu"],
+      learn:"Ürün neden yavaşlar, nasıl hızlanır? HTTP önbelleğini, CDN ve edge'i, Redis'i, çatı önbelleğini, önbelleği geçersiz kılmayı, Core Web Vitals ve Lighthouse ölçümlerini ve görsel optimizasyonunu görürsün.",
+      lab:"Ürününün Lighthouse ölçümünü önce ve sonra alırsın; bir önbellek katmanı eklersin."},
+    {n:10, title:"Güvenlik açıklarının analizi", graded:true,
+      tags:["OWASP Top 10 ve Mobile Top 10","XSS","enjeksiyon","IDOR","CSRF","gizli anahtar sızıntısı","bağımlılık açıkları","ZAP ve Snyk","sorumlu açıklama","KVKK"],
+      learn:"Ürünün açığı nerede olur? Web ve mobil için OWASP Top 10'u, XSS, enjeksiyon, IDOR ve CSRF'yi, gizli anahtar sızıntısını, bağımlılık açıklarını, ZAP ve Snyk ile taramayı, sorumlu açıklamayı ve KVKK'yı görürsün.",
+      lab:"Kendi ürününü taratır, üç bulgu çıkarır ve düzeltirsin."},
+    {n:11, title:"Kod analizi, test ve kalite", graded:true,
+      tags:["lint ve biçim","TypeScript","SonarCloud","CodeQL","test piramidi","kapsam","yapay zekâ kod incelemesi","CI kapıları","gözlemlenebilirlik"],
+      learn:"Kodun kalitesi nasıl ölçülür ve korunur? Lint ve biçimlendirmeyi, TypeScript'i, SonarCloud ve CodeQL'i, test piramidini ve kapsamı, yapay zekâ kod incelemesini, CI kapılarını ve gözlemlenebilirliği görürsün.",
+      lab:"CI'da lint, test ve CodeQL'i çalıştırır, bir uçtan uca test yazarsın."},
+    {n:12, title:"Çapraz platform", graded:true,
+      tags:["PWA","React Native ve Expo","Flutter","Capacitor","Tauri ve Electron","karar matrisi","mağazaya sarmak"],
+      learn:"Aynı ürün web, mobil ve masaüstünde nasıl çalışır? PWA'yı, React Native ve Expo'yu, Flutter'ı, Capacitor'ı, Tauri ve Electron'u, karar matrisini ve bir web uygulamasının mağazaya nasıl sarıldığını görürsün.",
+      lab:"Ürününü kurulabilir bir PWA yaparsın ya da Expo ile telefonda çalıştırırsın."},
+    {n:13, title:"Pazara çıkış", graded:true,
+      tags:["App Store ve Google Play","Chrome Web Store","SEO ve analitik","ödeme ve abonelik","KVKK ve GDPR","gizlilik politikası","sürümleme","lansman"],
+      learn:"Ürün kullanıcıya nasıl ulaşır? App Store ve Google Play süreçlerini, Chrome Web Store'u, SEO ve analitiği, ödeme ve aboneliği, KVKK ve GDPR'ı, gizlilik politikasını, sürümlemeyi ve lansmanı görürsün.",
+      lab:"Açılış sayfası, gizlilik politikası, analitik ve mağaza listesi taslağını hazırlarsın.",
       project:{code:"DONDURMA", text:"Kod dondurma: Demo Günü'nden önceki gün 23:59. Bu saatten sonra takım deposuna yapılan değişiklik değerlendirilmez."}},
     {n:14, title:"Demo Günü",
       tags:["Demo Günü"],
-      learn:"Sabah ve öğleden sonra blokları Demo Günü'ne ayrılır. Her takım 7 dakika demo yapar, 3 dakika soru alır.",
+      learn:"Sabah ve öğleden sonra blokları Demo Günü'ne ayrılır. Her takım 7 dakika demo yapar, 3 dakika soru alır. Demolardan sonra akran geri bildirimi alınır ve ödüller verilir.",
       project:{code:"M3", text:"Final teslimi."}}
   ],
 
   periods: [
-    {id:"vize", after:8, label:"ARA SINAV HAFTASI", dates:"ders yok", title:"Ara sınav", text:"Sınav o güne kadar işlediğimiz konuları kapsar. Sınavın biçimi [Değerlendirme](#degerlendirme) başlığında. Hazırlık için ara sınav sayfası."},
-    {id:"final", after:14, label:"FİNAL HAFTASI", dates:"", title:"Final sınavı ve kod savunmaları", text:"Final sınavı ve bireysel kod savunmaları final haftasında yapılır. Savunma öğrenci başına 15 dakikadır. Bütünleme sınavı final sınavının yerine geçer ve onunla aynı biçimdedir; proje ve savunma notların korunur."}
+    {id:"vize", after:8, label:"ARA SINAV HAFTASI", dates:"ders yok", title:"Ara sınav", text:"Sınavın kapsamı sınava kadar işlenen konulardır; biçimi sınavdan en az iki hafta önce duyurulur. Hazırlık için ara sınav sayfası."},
+    {id:"final", after:14, label:"FİNAL HAFTASI", dates:"", title:"Final sınavı ve kod savunmaları", text:"Final sınavı ve bireysel kod savunmaları final haftasında yapılır. Final sınavının biçimi sınavdan en az iki hafta önce duyurulur. Savunma öğrenci başına 15 dakikadır. Bütünleme sınavı final sınavının yerine geçer ve onunla aynı biçimdedir; proje ve savunma notların korunur."}
   ],
 
   project: {
     team: "Dört kişilik takımlar. Takımını [Lab grupları](../gruplar/) sayfasından kaydedersin; kayıt yedi gün düzenlenebilir, sonra kilitlenir.",
-    what: "Her takım gerçek bir kullanıcı için birkaç sayfalık bir web uygulaması yapar. Ön yüz HTML, CSS ve JavaScript ile yazılır. Arkada bir sunucu ve bir veritabanı çalışır. Uygulamada küçük bir yapay zekâ özelliği bulunur. Dönem sonunda uygulama yayındadır, yani herkes adresinden açabilir.",
+    what: "Her takım gerçek bir kullanıcı için bir web ürünü yapar. Kodu yapay zekâ kodlama araçlarıyla birlikte üretirsiniz; ders, ürünün parçalarını seçmeyi ve çıkan işin doğru çalıştığını doğrulamayı öğretir. Arkada bir veritabanı ve bir API çalışır, ürünün giriş akışı ve küçük bir yapay zekâ özelliği bulunur. Dönem sonunda ürün canlı bir adreste yayındadır, yani herkes adresinden açabilir.",
     ideas: "Fikir örnekleri: kulüp etkinliklerine kayıt, kayıp eşya panosu, ders notu paylaşımı, laboratuvar cihazı rezervasyonu. Yıl sonunda projeler bütün üniversitenin gezdiği bir proje sergisinde sergilenebilir; en iyi üç proje ödüllendirilir, ödüller Lab grupları sayfasında.",
     milestones: [
       {code:"M0", week:1, date:"Hafta 1", text:"Takım, proje fikri ve kullanıcı (Lab grupları sayfasında)"},
-      {code:"M1", week:5, date:"Hafta 5", text:"Statik sayfalar ve JavaScript ile ilk sürüm, takım deposundan yayında"},
-      {code:"M2", week:8, date:"Hafta 8", text:"Sunucusu ve veritabanı bağlı sürüm yayında"},
+      {code:"M1", week:5, date:"Hafta 5", text:"İskelet takım deposundan yayında"},
+      {code:"M2", week:8, date:"Hafta 8", text:"Veri ve API bağlı sürüm yayında"},
       {code:"M3", week:14, date:"Hafta 14", text:"Demo Günü ve final teslimi: yayındaki uygulama, README (projeyi tanıtan metin dosyası), kısa rapor"}
     ],
     freeze: "Final kodu Demo Günü'nden önceki gün 23:59'da dondurulur. Final raporunda yapay zekâ kullanımını anlatan bir bölüm zorunludur.",
@@ -341,10 +342,10 @@ window.SYLLABUS = {
 
   grading: {
     items: [
-      {name:"Ara sınav", points:15, color:"theory", group:"yil", desc:"60 dakika bilgisayarda uygulamalı (yapay zekâ kapalı, ders notları açık) ve 30 dakika kâğıt üzerinde kavram soruları. Kapsam: sınava kadar işlenen konular."},
-      {name:"Haftalık teslim", points:12, color:"lab", group:"yil", desc:"Hafta 2'den 13'e kadar her hafta bir teslim; en düşük iki notun silinir. Teslim, o haftanın konusunun kendi sayfanda ya da projende uygulanmış hâlidir; kısa bir yapay zekâ notu eklenir."},
+      {name:"Ara sınav", points:15, color:"theory", group:"yil", desc:"Kapsam: sınava kadar işlenen konular. Biçimi sınavdan en az iki hafta önce duyurulur."},
+      {name:"Haftalık teslim", points:12, color:"lab", group:"yil", desc:"Hafta 2'den 13'e kadar her hafta bir teslim (Hafta 2 ve 3 tek ortak teslim); en düşük iki notun silinir. Teslim, o haftanın görevinin takımın ürününde uygulanmış hâlidir; kısa bir yapay zekâ notu eklenir."},
       {name:"Proje ara teslimleri (M1, M2)", points:13, color:"ship", group:"yil", desc:"Takım notu, bireysel katkınla çarpılır."},
-      {name:"Final sınavı", points:25, color:"theory-dark", group:"son", desc:"80 dakika uygulamalı (yapay zekâ serbest) ve 40 dakika yazılı (yapay zekâ kapalı)."},
+      {name:"Final sınavı", points:25, color:"theory-dark", group:"son", desc:"Biçimi sınavdan en az iki hafta önce duyurulur."},
       {name:"Proje final teslimi (M3)", points:20, color:"ship-dark", group:"son", desc:"Demo Günü, yayındaki uygulama, README ve kısa rapor (yapay zekâ kullanımı bölümü zorunlu)."},
       {name:"Bireysel kod savunması", points:15, color:"ai", group:"son", desc:"15 dakika: projeni anlatırsın, bir kodu açıklarsın, küçük bir değişiklik yaparsın. 0–4 ölçeğiyle puanlanır."}
     ],
@@ -355,28 +356,26 @@ window.SYLLABUS = {
   submit: {
     intro: "Her hafta iki teslim var ve ikisi de [Lab teslimleri](../teslimler/) sayfasındaki formla yapılır (GitHub hesabınla). Aynı haftaya ikinci kez gönderdiğinde yenisi geçerli sayılır.",
     steps: [
-      {title:"Lab sonu teslimi", due:"Öğleden sonra bloğu bitmeden", text:"O ana kadar yaptığını gönderirsin. Bu teslim uygulama yoklaması sayılır."},
-      {title:"Tam teslim", due:"Labı izleyen Pazar 23:59", text:"Bitmiş hâlini gönderirsin."}
+      {title:"Atölye sonu teslimi", due:"Atölye bitmeden", text:"O ana kadar yaptığını gönderirsin. Bu teslim uygulama yoklaması sayılır."},
+      {title:"Tam teslim", due:"Bu dersi izleyen Pazar 23:59", text:"Bitmiş hâlini gönderirsin."}
     ],
     example: "Teslim gönderdikten sonra Lab teslimleri sayfasında listede görünür; eksik varsa kaydın altına ne düzeltileceği yazılır.",
-    fields: ["Hafta","Öğrenci numarası ve ad soyad","Yayındaki sayfanın adresi","Deponun adresi","Varsa düzelttiğin bozuk paketin adresi","Yapay zekâ notu"]
+    fields: ["Hafta","Öğrenci numarası ve ad soyad","Yayındaki sayfanın adresi (ürünün canlı adresi)","Deponun adresi (takım deposu)","Varsa düzelttiğin bozuk paketin adresi","Yapay zekâ notu: bu hafta kendin ne yaptın, yapay zekâ ne yaptı"]
   },
 
   ai: {
     paras: [
-      "Bu derste yapay zekâ yardımcındır. Her haftanın ders notunda “Yapay zekâyla çalış” kutusu var. O kutu, o hafta yapay zekâya ne sorabileceğini örnek istemlerle gösterir.",
-      "İlk sekiz haftada kodu önce sen yazarsın. Yapay zekâya bir satırın ne işe yaradığını sorabilirsin. Aldığın hata mesajını açıklatabilir, konuyu anlayıp anlamadığını görmek için seni sınamasını isteyebilirsin. Bütün sayfayı ya da bütün kodu ona yazdırmazsın.",
-      "Hafta 9'dan itibaren kodlama ajanıyla kod ürettirmek serbesttir. Tek şart, üretilen kodun her satırını açıklayabilmendir. Açıklayamadığın kod senin kodun değildir. Kod savunmasında da bu yüzden kendi projenden bir kodu açıklamanı ve üzerinde küçük bir değişiklik yapmanı isteriz."
+      "Bu derste yapay zekâ yardımcındır; ürünü yapan, kararı veren ve sorumluluğu taşıyan sensin.",
+      "Hafta 2 ve 3'te kodu önce sen yazarsın. Yapay zekâya bir satırın ne işe yaradığını sorabilirsin. Aldığın hata mesajını açıklatabilir, konuyu anlayıp anlamadığını görmek için seni sınamasını isteyebilirsin. Bütün sayfayı ya da bütün kodu ona yazdırmazsın.",
+      "Hafta 4'ten itibaren yapay zekâ kodlama araçlarıyla (Copilot, Claude Code, Cursor gibi) kod ürettirmek serbesttir. Tek şart, üretilen kodu açıklayabilmendir. Açıklayamadığın kod senin kodun değildir. Kod savunmasında da bu yüzden kendi projenden bir kodu açıklamanı ve üzerinde küçük bir değişiklik yapmanı isteriz."
     ],
     phases: [
-      {kind:"theory", when:"Hafta 2–8", title:"Önce sen yazarsın", text:"Yapay zekâ yol gösterir, kodu sen yazarsın."},
-      {kind:"ai", when:"Hafta 9–14", title:"Kodlama ajanı serbest", text:"Ajan kod üretebilir. Teslim ettiğin kodun sorumlusu yine sensin."}
+      {kind:"theory", when:"Hafta 2–3", title:"Önce sen yazarsın", text:"Yapay zekâ yol gösterir, kodu sen yazarsın."},
+      {kind:"ai", when:"Hafta 4–14", title:"Kodlama araçları serbest", text:"Yapay zekâ kodun büyük kısmını üretebilir. Teslim ettiğin ürünün sorumlusu yine sensin."}
     ],
     exams: [
-      {exam:"Ara sınav", part:"60 dakika bilgisayarda uygulamalı", ai:"Kapalı (ders notları açık)"},
-      {exam:"Ara sınav", part:"30 dakika kâğıt üzerinde kavram soruları", ai:"Kapalı"},
-      {exam:"Final sınavı", part:"80 dakika uygulamalı", ai:"Serbest"},
-      {exam:"Final sınavı", part:"40 dakika yazılı", ai:"Kapalı"}
+      {exam:"Ara sınav", part:"Biçimi sınavdan en az iki hafta önce duyurulur", ai:"Duyuruda belirtilir"},
+      {exam:"Final sınavı", part:"Biçimi sınavdan en az iki hafta önce duyurulur", ai:"Duyuruda belirtilir"}
     ],
     noteIntro: "Her haftalık teslime üç satırlık bir yapay zekâ notu eklersin:",
     noteTemplate: "Ne sordum:\nİşe yaradı mı, neyi değiştirdim:\nKendi başıma ne öğrendim:"
@@ -387,13 +386,14 @@ window.SYLLABUS = {
     {name:"VS Code", role:"Kodunu yazdığın editör", week:"Hafta 0 (evde)"},
     {name:"Live Server", role:"VS Code eklentisi. Sayfanı tarayıcıda açar, dosyayı kaydettikçe sayfayı yeniler.", week:"Hafta 0 (evde)"},
     {name:"Chrome ya da Edge DevTools", role:"Tarayıcının içindeki geliştirici araçları. Sayfanın kodunu ve hatalarını görürsün.", week:"Hafta 0 (evde)"},
-    {name:"GitHub Copilot", role:"VS Code içindeki yapay zekâ yardımcısı. Chat her hafta, ajan kipi Hafta 9'dan itibaren.", week:"Hafta 0 (evde)"},
+    {name:"GitHub Copilot", role:"VS Code içindeki yapay zekâ yardımcısı. Chat her hafta, kodlama ajanı olarak Hafta 4'ten itibaren.", week:"Hafta 0 (evde)"},
     {name:"GitHub ve GitHub Pages", role:"Kodunu sakladığın ve sayfanı yayınladığın yer; takım kaydı ve haftalık teslim de burada.", week:"Hafta 1"},
-    {name:"Git", role:"Değişikliklerin geçmişini tutan program", week:"Hafta 5"},
-    {name:"Node.js ve Express", role:"Sunucunu yazdığın ortam ve kütüphane", week:"Hafta 6"},
-    {name:"SQLite ve bulut veritabanı", role:"Verileri sakladığın veritabanı", week:"Hafta 7"},
+    {name:"Kodlama ajanı", role:"Kod üreten yapay zekâ aracı (Copilot, Claude Code, Cursor).", week:"Hafta 4, 5"},
+    {name:"Takım akışı (Git, GitHub)", role:"Git, değişikliklerin geçmişini tutan programdır; dal, pull request ve inceleme ile takım çalışması.", week:"Hafta 5"},
+    {name:"Web veritabanı hizmeti", role:"Ürünün verisini sakladığın çevrimiçi veritabanı (Supabase gibi).", week:"Hafta 6"},
+    {name:"Sunucusuz fonksiyon ve dil modeli API'si", role:"Ürünün iş mantığını çalıştıran fonksiyonlar; uygulamana eklediğin yapay zekâ özelliği.", week:"Hafta 7"},
     {name:"Barındırma servisi", role:"Uygulamanı internete koyduğun yer", week:"Hafta 8"},
-    {name:"Kodlama ajanı ve dil modeli API'si", role:"Kod üreten ajan; uygulamana eklediğin yapay zekâ", week:"Hafta 10, 11"}
+    {name:"Lighthouse, ZAP, Snyk, CodeQL", role:"Ürünün hızını, açıklarını ve kodunun kalitesini ölçen araçlar.", week:"Hafta 9–11"}
   ],
 
   footer: "YZM205 Web Tasarımı ve Programlama · Muş Alparslan Üniversitesi · Arş. Gör. Çağrı ŞAHİN"
@@ -445,7 +445,7 @@ window.SYLLABUS = {
       var w = next.ref;
       box = '<div class="eyebrow">Şu anki hafta</div>'+
         '<div class="row"><div class="big">'+w.n+'</div><div><div style="font-weight:600">'+esc(w.title)+'</div>'+
-        '<div class="muted" style="font-size:.9rem">Sabah konu ve birlikte kodlama · öğleden sonra proje atölyesi · BLD-104</div></div></div>'+
+        '<div class="muted" style="font-size:.9rem">Sabah 70 dakikalık sunum ve soru · öğleden sonra proje atölyesi · BLD-104</div></div></div>'+
         '<button class="btn primary" type="button" data-goto="'+w.n+'">Haftayı aç</button>';
     } else if(false){
       var p = next.ref;

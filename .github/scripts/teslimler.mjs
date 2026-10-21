@@ -10,16 +10,16 @@ const YENI_JSON = process.env.YENI_JSON || "teslimler.json";
 export const HAFTALAR = [
   "Hafta 2 · HTML",
   "Hafta 3 · CSS",
-  "Hafta 4 · JavaScript ve DOM",
-  "Hafta 5 · Git ve GitHub",
-  "Hafta 6 · Sunucu",
-  "Hafta 7 · Veritabanı",
-  "Hafta 8 · Yayına alma ve güvenlik",
-  "Hafta 9 · Modern web mimarileri",
-  "Hafta 10 · Yapay zekâ ile geliştirme",
-  "Hafta 11 · Uygulamaya yapay zekâ",
-  "Hafta 12 · GitHub ekosistemi",
-  "Hafta 13 · Kalite ve son hazırlık",
+  "Hafta 4 · Uçtan uca ürün ve mimari",
+  "Hafta 5 · GitHub akışı ve yapay zekâ ajanları",
+  "Hafta 6 · Veri katmanı: web VTYS",
+  "Hafta 7 · API, kimlik ve dil modeli API'leri",
+  "Hafta 8 · Bulut ve yayına alma",
+  "Hafta 9 · Önbellek ve performans",
+  "Hafta 10 · Güvenlik açıklarının analizi",
+  "Hafta 11 · Kod analizi, test ve kalite",
+  "Hafta 12 · Çapraz platform",
+  "Hafta 13 · Pazara çıkış",
 ];
 
 // ---------- ayrıştırma ----------

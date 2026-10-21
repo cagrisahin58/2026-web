@@ -1,30 +1,30 @@
-name: Lab teslimi
-description: Haftalık labda yaptığın sayfayı, kodunu ve yapay zekâ notunu teslim et.
+name: Haftalık teslim
+description: Haftanın görevini (Hafta 2 ve 3'te kişisel sayfan, Hafta 4'ten itibaren takım ürünündeki iş) ve yapay zekâ notunu teslim et.
 title: "Teslim: "
 labels: ["teslim"]
 body:
   - type: markdown
     attributes:
       value: |
-        Her lab için ayrı bir teslim gönderirsin. Aynı haftaya ikinci kez gönderirsen yenisi geçerli sayılır. Gönderdikten sonra düzeltmek için sağ üstteki üç noktadan **Edit** de.
+        Her hafta için ayrı bir teslim gönderirsin; takım işinde de her üye kendi adıyla gönderir. Aynı haftaya ikinci kez gönderirsen yenisi geçerli sayılır. Gönderdikten sonra düzeltmek için sağ üstteki üç noktadan **Edit** de.
   - type: dropdown
     id: hafta
     attributes:
       label: Hafta
-      description: Hangi labı teslim ediyorsun?
+      description: Hangi haftanın görevini teslim ediyorsun?
       options:
         - "Hafta 2 · HTML"
         - "Hafta 3 · CSS"
-        - "Hafta 4 · JavaScript ve DOM"
-        - "Hafta 5 · Git ve GitHub"
-        - "Hafta 6 · Sunucu"
-        - "Hafta 7 · Veritabanı"
-        - "Hafta 8 · Yayına alma ve güvenlik"
-        - "Hafta 9 · Modern web mimarileri"
-        - "Hafta 10 · Yapay zekâ ile geliştirme"
-        - "Hafta 11 · Uygulamaya yapay zekâ"
-        - "Hafta 12 · GitHub ekosistemi"
-        - "Hafta 13 · Kalite ve son hazırlık"
+        - "Hafta 4 · Uçtan uca ürün ve mimari"
+        - "Hafta 5 · GitHub akışı ve yapay zekâ ajanları"
+        - "Hafta 6 · Veri katmanı: web VTYS"
+        - "Hafta 7 · API, kimlik ve dil modeli API'leri"
+        - "Hafta 8 · Bulut ve yayına alma"
+        - "Hafta 9 · Önbellek ve performans"
+        - "Hafta 10 · Güvenlik açıklarının analizi"
+        - "Hafta 11 · Kod analizi, test ve kalite"
+        - "Hafta 12 · Çapraz platform"
+        - "Hafta 13 · Pazara çıkış"
     validations:
       required: true
   - type: input
@@ -45,7 +45,7 @@ body:
     id: yayin
     attributes:
       label: Yayındaki sayfanın adresi
-      description: GitHub Pages adresin. Sunucu haftalarında çalışan ekranın görüntüsünü depona koy, onun adresini yaz.
+      description: Hafta 2 ve 3'te kişisel sayfanın GitHub Pages adresi; Hafta 4'ten itibaren takım ürününün canlı adresi (önizleme adresi de olur).
       placeholder: "https://kullaniciadin.github.io/depo-adi/"
     validations:
       required: true
@@ -53,6 +53,7 @@ body:
     id: depo
     attributes:
       label: Deponun adresi
+      description: Hafta 4'ten itibaren takım deposunun adresi.
       placeholder: "https://github.com/kullaniciadin/depo-adi"
     validations:
       required: true
@@ -60,16 +61,16 @@ body:
     id: bozuk
     attributes:
       label: Düzeltilmiş bozuk paketin adresi
-      description: Labda bozuk bir paket verildiyse düzelttiğin sürümün adresi. Yoksa boş bırak.
+      description: Yalnız Hafta 2 ve 3 için, bozuk paketi düzelttiysen. Hafta 4'ten itibaren boş bırak.
       placeholder: "https://github.com/kullaniciadin/bozuk-paket"
   - type: textarea
     id: yz
     attributes:
       label: Yapay zekâ notu
-      description: Yapay zekâyı nerede, ne için kullandın, neyi kendin yazdın? Üç satır yeter.
+      description: Bu hafta kendin ne yaptın, yapay zekâ ne yaptı, ürettiği şeyde neyi değiştirmek zorunda kaldın? Üç dört satır yeter.
       placeholder: |
-        Menü düzenini yapay zekâya sordum, çıkan kodu sadeleştirdim.
-        Renkleri ve metinleri kendim yazdım.
+        Veri modelini ben çizdim, tabloları kodlama aracına yazdırdım.
+        Ürettiği politikayı test ettim, birini değiştirdim.
         Kullanmadığım yerde bunu da yaz.
     validations:
       required: true
