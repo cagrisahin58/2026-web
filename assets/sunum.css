@@ -211,5 +211,14 @@ pre.kod .satir{display:block}
 .onay li{padding-left:1.8em;position:relative}
 .onay li::before{content:"\2713";position:absolute;left:0;color:var(--lab);font-weight:700}
 
+/* anlatım kipi: alt yazı ve başlat düğmesi */
+.altyazi{position:fixed;left:50%;bottom:4.2vh;transform:translateX(-50%);width:max-content;max-width:min(1150px,86vw);background:rgba(10,14,24,.84);color:#fff;font:var(--b2)/1.45 var(--body);padding:.55em 1.1em;border-radius:.6em;z-index:6;display:none;text-align:center;pointer-events:none}
+.altyazi.acik{display:block}
+.altyazi.gizli{display:none!important}
+.anl-basla{font:600 var(--b1) var(--body);background:var(--theory);color:#fff;border:0;border-radius:999px;padding:.6em 1.4em;cursor:pointer;box-shadow:0 6px 20px color-mix(in srgb,var(--theory) 35%,transparent)}
+.anl-basla:hover{filter:brightness(1.08)}
+.video-kutu.kayit-kart::after{content:attr(data-kart);position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:2em;background:rgba(10,14,24,.88);color:#fff;font:600 var(--b1)/1.4 var(--body)}
+html.kayit .cerceve-sol,html.kayit .s.kapak .kucuk{display:none}
+
 @media (prefers-reduced-motion:reduce){ .s.aktif{animation:none} [data-adim]{transition:none} .sayac.bitti{animation:none} .rozet.canli{animation:none} .harita .katman,.zaman .adim{transition:none} }
 @media print{ body{overflow:visible} .deste{position:static} .s{position:static;display:grid;height:100vh;page-break-after:always} .ilerleme,.sayfa-no,.cerceve-sol,.bolum-cizgi,.yardim{display:none} [data-adim]{opacity:1;transform:none} }

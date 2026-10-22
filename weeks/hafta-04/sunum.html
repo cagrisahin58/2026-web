@@ -36,6 +36,53 @@
 
 .sayilar{display:grid;grid-template-columns:1fr 1fr;gap:2vw;align-content:center}
 .eski-yeni{display:grid;gap:1.5vh;align-content:start}
+.kiyas td:first-child{font-weight:600;white-space:nowrap}
+.kiyas tr.siz td{color:var(--theory);font-weight:600}
+
+/* benzetimler: JS ile adım adım dolar; her yeni öğe kısa bir belirme animasyonuyla gelir */
+@keyframes belir{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes imlec{50%{opacity:0}}
+.sim{display:grid;gap:1.5vw;padding:5vh 1.5vw 6vh;height:100%;align-items:start}
+.sim-net{grid-template-columns:1fr 1.5fr}
+.tarayici{background:var(--surface-2);border:1px solid var(--line);border-radius:.8vw;padding:1.4vh 1vw}
+.tarayici .ust{display:flex;gap:.4vw;margin-bottom:1.2vh}
+.tarayici .ust i{width:.8vw;height:.8vw;border-radius:50%;background:var(--line)}
+.arama-kutu{background:var(--surface);border:2px solid var(--theory);border-radius:.6vw;padding:.9vh .8vw;font-size:var(--b1);min-height:2.6em;font-family:var(--body)}
+.arama-kutu span::after{content:"|";margin-left:1px;color:var(--theory);animation:imlec 1s steps(2) infinite}
+.oneri{margin-top:.6vh;background:var(--surface);border:1px solid var(--line);border-radius:.6vw;overflow:hidden;font-size:var(--b2)}
+.oneri div{padding:.6vh .8vw;border-bottom:1px solid var(--line);animation:belir .3s ease-out}
+.oneri div:last-child{border-bottom:0}
+.ag{background:#121A2B;color:#E7ECF5;border-radius:.8vw;padding:1.2vh 1vw;font-family:var(--mono);font-size:var(--b2);min-width:0}
+.ag-bas,.ag-satir{display:grid;grid-template-columns:2.4fr .8fr .8fr;gap:.6vw;padding:.5vh .4vw}
+.ag-bas{color:#9AA5B8;border-bottom:1px solid #2A3345;font-size:.85em;text-transform:uppercase;letter-spacing:.06em}
+.ag-satir{animation:belir .35s ease-out;border-radius:.3vw}
+.ag-satir.son{background:#1B2545;outline:1px solid #7B97FF}
+.ag-satir .ok{color:#3FC4B0}
+.ag-cevap{margin-top:1vh;border-top:1px solid #2A3345;padding-top:.8vh;min-height:4.6em}
+.ag-cevap b{color:#F0A93B;font-weight:500;display:block;margin-bottom:.3vh}
+.ag-cevap code{background:none;color:#E7ECF5;padding:0;font-size:1em;animation:belir .4s ease-out;display:block;white-space:pre-wrap}
+.sim-yayin{grid-template-columns:1.6fr 1fr}
+.terminal{background:#121A2B;color:#E7ECF5;border-radius:.8vw;padding:1.4vh 1.2vw;font-family:var(--mono);font-size:var(--b2);min-height:34vh;line-height:1.6}
+.terminal div{animation:belir .3s ease-out}
+.terminal .komut{color:#F0A93B}
+.terminal .iyi{color:#3FC4B0;font-weight:600}
+.telefon{justify-self:center;margin-top:6vh;width:min(15vw,190px);aspect-ratio:9/17;border:3px solid var(--ink);border-radius:1.6vw;padding:2vh .8vw;background:var(--surface);display:grid;align-content:start;gap:1vh;transition:box-shadow .4s}
+.telefon.yeni{box-shadow:0 0 0 6px var(--lab-soft),0 0 0 9px var(--lab)}
+.telefon b{font-family:var(--display);font-size:var(--b1);line-height:1.15}
+.telefon small{color:var(--muted);font-size:.8em;line-height:1.3}
+.telefon .kart{background:var(--surface-2);border-radius:.5vw;height:3.4vh}
+.sim-sohbet{grid-template-columns:1.5fr 1fr}
+.mesajlar{display:grid;gap:1.2vh;align-content:start}
+.mesaj{max-width:92%;padding:1vh 1vw;border-radius:1vw;font-size:var(--b2);line-height:1.4;animation:belir .35s ease-out}
+.mesaj b{display:block;font-size:.8em;color:var(--muted);font-weight:600;margin-bottom:.2vh}
+.mesaj.ogr{justify-self:end;background:var(--theory-soft);border:1px solid var(--theory)}
+.mesaj.arac{justify-self:start;background:var(--surface-2);border:1px solid var(--line)}
+.degisiklik{background:var(--surface);border:1px solid var(--line);border-radius:.8vw;padding:1.2vh 1vw;font-size:var(--b2)}
+.degisiklik > b{font-family:var(--display);display:block;margin-bottom:.8vh}
+.degisiklik ul{list-style:none;margin:0;padding:0;display:grid;gap:.7vh}
+.degisiklik li{padding:.6vh .7vw;border-radius:.5vw;animation:belir .35s ease-out;font-family:var(--mono);font-size:.92em}
+.degisiklik li.art{background:var(--lab-soft);color:var(--lab)}
+.degisiklik li.eksi{background:var(--err-soft);color:var(--err);font-weight:600}
 </style>
 </head>
 <body>
@@ -49,7 +96,7 @@
     <p class="buyuk" data-adim="2">Hangi hazır servisin ne işe yaradığını bileceksin.</p>
     <p class="buyuk" data-adim="3">Takımının ürününün ilk sayfası canlı bir adreste olacak.</p>
   </div>
-  <p class="kucuk">Sağ ok ya da Boşluk ile ilerle · F tam ekran · ? tuşlar</p>
+  <p class="kucuk"><button class="anl-basla" type="button" data-anlatim>▶ Anlatımlı oynat (A)</button> &nbsp; ya da sağ ok ile kendin ilerle · F tam ekran · ? tuşlar</p>
 </section>
 
 <section class="s hikaye" id="hikaye">
@@ -99,6 +146,21 @@
   </div>
 </section>
 
+<section class="s" id="ornekler">
+  <header><span class="etiket">Fikir 1</span><h2>Aynı üç parça her uygulamada var</h2></header>
+  <div class="govde">
+    <table class="kiyas">
+      <thead><tr><th>Uygulama</th><th>Ekran</th><th>Program</th><th>Veritabanı</th></tr></thead>
+      <tbody>
+        <tr data-adim="1"><td>OBS</td><td>not sayfası</td><td>kim olduğuna bakar, notları ister</td><td>notlar</td></tr>
+        <tr data-adim="2"><td>Trendyol</td><td>sepet ve sipariş</td><td>stoğu ve ödemeyi kontrol eder</td><td>ürünler, siparişler</td></tr>
+        <tr data-adim="3"><td>Instagram</td><td>kalp düğmesi</td><td>beğeniyi kaydeder, bildirime karar verir</td><td>gönderiler, beğeniler</td></tr>
+        <tr data-adim="4" class="siz"><td>Sizin ürününüz</td><td>?</td><td>?</td><td>?</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
 <section class="s sinifca" id="sinifca-kontrol">
   <header><span class="etiket">Sınıfça</span><h2>Başkasının notunu görmeni engelleyen kontrol nerede olmalı?</h2></header>
   <div class="govde">
@@ -113,7 +175,7 @@
 </section>
 
 <section class="s gosteri" id="gosteri-network">
-  <header><span class="etiket">Canlı gösteri <span class="rozet canli">canlı</span></span><h2>Ekranın arkadaki programla konuşmasını görelim</h2></header>
+  <header><span class="etiket">Gösteri · kendin de dene</span><h2>Ekranın arkadaki programla konuşmasını görelim</h2></header>
   <div class="govde iki sol-genis">
     <ol class="numarali">
       <li>Türkçe Vikipedi'yi aç, F12'ye bas, Network sekmesine geç.</li>
@@ -121,7 +183,27 @@
       <li>Arama kutusuna yavaşça "Muş" yaz: her harfte listeye yeni bir satır düşer.</li>
       <li>Bir satıra tıkla, Response sekmesini aç: ekrandaki öneriler burada veri olarak duruyor.</li>
     </ol>
-    <div class="yedek"><b>İnternet yoksa:</b> bu ekranı atla, üç parça şemasını yeniden oynat; bir sonraki adımı evde denemelerini iste.</div>
+    <div class="yedek"><b>Sonraki ekran:</b> aynı şeyin benzetimi. İnternet olmasa da ne göreceğini oradan izleyebilirsin.</div>
+  </div>
+</section>
+
+<section class="s" id="network-sim">
+  <header><span class="etiket">Benzetim</span><h2>Her harf bir istek: Network sekmesinde ne görünür?</h2></header>
+  <div class="govde">
+    <div class="sahne sim sim-net">
+      <div class="tarayici">
+        <div class="ust"><i></i><i></i><i></i></div>
+        <div class="arama-kutu"><span data-yaz></span></div>
+        <div class="oneri" data-oneri></div>
+      </div>
+      <div class="ag">
+        <div class="ag-bas"><span>İstek</span><span>Durum</span><span>Süre</span></div>
+        <div data-liste></div>
+        <div class="ag-cevap"><b>Response</b><div data-cevap></div></div>
+      </div>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+      <div class="not">Benzetim: gerçek sitede adresler daha uzun, mantık aynı</div>
+    </div>
   </div>
 </section>
 
@@ -170,6 +252,15 @@
   </div>
 </section>
 
+<section class="s" id="ucretsiz">
+  <header><span class="etiket">Fikir 2</span><h2>Ücretsiz planların üç kuralı</h2></header>
+  <div class="govde uc">
+    <div class="kutu" data-adim="1"><h3>Uyur</h3><p>Hiç kullanılmayan ücretsiz veritabanı projesi bir süre sonra duraklatılır. Ürününe her hafta dokun.</p></div>
+    <div class="kutu" data-adim="2"><h3>Durur ya da fatura keser</h3><p>Ücretsiz plan sınırı aşınca durur. Kart bağlı plan durmaz, fatura keser. Bu derste kart bağlamıyoruz.</p></div>
+    <div class="kutu" data-adim="3"><h3>Ticari değil</h3><p>Ücretsiz planların çoğu kişisel kullanım içindir. Para kazanmaya başlayınca plan değişir.</p></div>
+  </div>
+</section>
+
 <section class="s" id="yayin-yolu">
   <header><span class="etiket">Fikir 2</span><h2>Bir değişiklik internete nasıl çıkar?</h2></header>
   <div class="govde">
@@ -180,6 +271,22 @@
       <div class="adim"><b>Aç</b><small>adres herkese açık, telefondan da</small></div>
     </div>
     <p class="buyuk orta" data-adim="1" style="margin-top:6vh">Elle dosya yükleme yok: GitHub'a gönderdiğin her şey birkaç dakikada canlı adreste.</p>
+  </div>
+</section>
+
+<section class="s" id="yayin-sim">
+  <header><span class="etiket">Benzetim</span><h2>Bir değişikliğin yayına çıkışı</h2></header>
+  <div class="govde">
+    <div class="sahne sim sim-yayin">
+      <div class="terminal" data-log></div>
+      <div class="telefon" data-telefon>
+        <b data-baslik>Kampüs Pano</b>
+        <small>öğrencilerin ilan panosu</small>
+        <div class="kart"></div><div class="kart"></div><div class="kart"></div>
+      </div>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+      <div class="not">Benzetim: gerçek yayın birkaç dakika sürer</div>
+    </div>
   </div>
 </section>
 
@@ -217,6 +324,17 @@
       <p data-adim="1">Supabase'de her tabloya bir kural yazılır: kim hangi satırı okuyabilir, kim yazabilir.</p>
       <p data-adim="2">Kural yoksa adresi bilen herkes bütün tabloyu okur. 170 uygulamada olan buydu.</p>
       <p data-adim="3">Yapay zekâ bu kuralı yazabilir. Yazıp yazmadığını kontrol etmek senin işin.</p>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="yz-sohbet">
+  <header><span class="etiket">Benzetim</span><h2>Yapay zekâyla çalışmak: araç yazar, sen kontrol edersin</h2></header>
+  <div class="govde">
+    <div class="sahne sim sim-sohbet">
+      <div class="mesajlar" data-mesajlar></div>
+      <div class="degisiklik"><b>Değişiklikler</b><ul data-degis></ul></div>
+      <button class="yeniden" type="button">Yeniden oynat</button>
     </div>
   </div>
 </section>
@@ -295,15 +413,84 @@
 
 </div>
 <script>
-window.SUNUM = {
-  baslik: "Hafta 4 · Bir web ürününün parçaları",
-  bolumler: [
-    { ad: "Açılış", ilk: "kapak" }, { ad: "Üç parça", ilk: "uc-parca" }, { ad: "Gösteri", ilk: "gosteri-network" },
-    { ad: "Hazır servisler", ilk: "hazir-servisler" }, { ad: "Yapay zekâ ve kontrol", ilk: "yz-sayilar" },
-    { ad: "Önce yayınla", ilk: "once-yayinla" }, { ad: "Görev", ilk: "gorev" }, { ad: "Özet", ilk: "ozet" }
-  ]
-};
+(function () {
+  // benzetimler: her girişte ve "Yeniden oynat"ta baştan çalışır
+  function zamanla(el, adimlar) {
+    (el._t || []).forEach(clearTimeout); el._t = [];
+    adimlar.forEach(function (a) { el._t.push(setTimeout(a[1], a[0])); });
+  }
+  function satir(ana, cls, html) { var d = document.createElement("div"); if (cls) d.className = cls; d.innerHTML = html; ana.appendChild(d); return d; }
+
+  function networkSim(el) {
+    var yaz = el.querySelector("[data-yaz]"), oneri = el.querySelector("[data-oneri]"), liste = el.querySelector("[data-liste]"), cevap = el.querySelector("[data-cevap]");
+    yaz.textContent = ""; oneri.innerHTML = ""; liste.innerHTML = ""; cevap.innerHTML = "";
+    var veri = [
+      ["M", ["Mustafa Kemal Atatürk", "Mısır", "Malatya"], "38 ms"],
+      ["Mu", ["Muğla", "Mustafa Kemal Atatürk", "Muş"], "41 ms"],
+      ["Muş", ["Muş", "Muş Alparslan Üniversitesi", "Muş Ovası"], "36 ms"]
+    ];
+    var adimlar = [];
+    veri.forEach(function (v, k) {
+      var t = 500 + k * 1600;
+      adimlar.push([t, function () { yaz.textContent = v[0]; }]);
+      adimlar.push([t + 350, function () {
+        Array.prototype.forEach.call(liste.children, function (c) { c.classList.remove("son"); });
+        satir(liste, "ag-satir son", "<span>search?q=" + v[0] + "</span><span class='ok'>200</span><span>" + v[2] + "</span>");
+      }]);
+      adimlar.push([t + 700, function () { oneri.innerHTML = ""; v[1].forEach(function (o) { satir(oneri, "", o); }); }]);
+    });
+    adimlar.push([500 + 3 * 1600 + 300, function () {
+      cevap.innerHTML = "<code>[\"Muş\",\n \"Muş Alparslan Üniversitesi\",\n \"Muş Ovası\"]</code>";
+    }]);
+    zamanla(el, adimlar);
+  }
+
+  function yayinSim(el) {
+    var log = el.querySelector("[data-log]"), tel = el.querySelector("[data-telefon]"), bas = el.querySelector("[data-baslik]");
+    log.innerHTML = ""; tel.classList.remove("yeni"); bas.textContent = "Kampüs Pano";
+    var satirlar = [
+      [400, "komut", "$ git push"],
+      [1300, "", "Takım deposuna gönderildi: main"],
+      [2400, "", "Vercel: yeni değişiklik algılandı, yayın başlıyor"],
+      [3400, "", "Kod indiriliyor..."],
+      [4400, "", "Gerekli paketler kuruluyor..."],
+      [5600, "", "Uygulama derleniyor..."],
+      [7000, "iyi", "Yayında: kampus-pano.vercel.app"]
+    ];
+    var adimlar = satirlar.map(function (s) { return [s[0], function () { satir(log, s[1], s[2]); }]; });
+    adimlar.push([7300, function () { bas.textContent = "Kampüs Pano · ilanlar"; tel.classList.add("yeni"); }]);
+    zamanla(el, adimlar);
+  }
+
+  function sohbetSim(el) {
+    var m = el.querySelector("[data-mesajlar]"), d = el.querySelector("[data-degis]");
+    m.innerHTML = ""; d.innerHTML = "";
+    function mesaj(kim, ad, metin) { var x = document.createElement("div"); x.className = "mesaj " + kim; x.innerHTML = "<b>" + ad + "</b>" + metin; m.appendChild(x); }
+    function degis(cls, metin) { var li = document.createElement("li"); li.className = cls; li.textContent = metin; d.appendChild(li); }
+    zamanla(el, [
+      [400, function () { mesaj("ogr", "Öğrenci", "İlanlar tablosunu ve ilanları listeleyen sayfayı yap."); }],
+      [1700, function () { mesaj("arac", "Kodlama aracı", "Tamam. Tabloyu oluşturdum, sayfayı ekledim. Çalışıyor."); }],
+      [2600, function () { degis("art", "+ ilanlar tablosu oluşturuldu"); }],
+      [3200, function () { degis("art", "+ ilan listesi sayfası eklendi"); }],
+      [4300, function () { degis("eksi", "! tabloya okuma ve yazma kuralı yazılmadı"); }],
+      [6000, function () { mesaj("ogr", "Öğrenci", "Tabloya kural ekle: herkes okuyabilsin, yalnız ilanın sahibi değiştirebilsin."); }],
+      [7400, function () { mesaj("arac", "Kodlama aracı", "Kuralı ekledim."); }],
+      [8000, function () { degis("art", "+ kural: okuma herkese, değiştirme yalnız sahibine"); }]
+    ]);
+  }
+
+  window.SUNUM = {
+    baslik: "Hafta 4 · Bir web ürününün parçaları",
+    bolumler: [
+      { ad: "Açılış", ilk: "kapak" }, { ad: "Üç parça", ilk: "uc-parca" }, { ad: "Gösteri", ilk: "gosteri-network" },
+      { ad: "Hazır servisler", ilk: "hazir-servisler" }, { ad: "Yapay zekâ ve kontrol", ilk: "yz-sayilar" },
+      { ad: "Önce yayınla", ilk: "once-yayinla" }, { ad: "Görev", ilk: "gorev" }, { ad: "Özet", ilk: "ozet" }
+    ],
+    girince: { "network-sim": networkSim, "yayin-sim": yayinSim, "yz-sohbet": sohbetSim }
+  };
+})();
 </script>
+<script src="anlatim.js"></script>
 <script src="../../assets/sunum.js"></script>
 </body>
 </html>

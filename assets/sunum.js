@@ -17,7 +17,7 @@
   sol.innerHTML = '<a href="index.html" title="Uzun ders notu">Ders notu</a><span>·</span><a href="#" data-yardim>? yardım</a>';
   document.body.appendChild(sol);
   const yardim = document.createElement("div"); yardim.className = "yardim";
-  yardim.innerHTML = '<div><h3 style="margin:0 0 .6em">Tuşlar</h3><p><kbd>→</kbd> <kbd>←</kbd> ekran · <kbd>Boşluk</kbd> sıradaki parça · <kbd>F</kbd> tam ekran · <kbd>T</kbd> sayacı başlat/durdur · <kbd>R</kbd> animasyonu yeniden oynat · <kbd>V</kbd> ekrandaki videoyu başlat · <kbd>D</kbd> koyu/açık · <kbd>1</kbd>…<kbd>9</kbd> bölüme atla · <kbd>Esc</kbd> kapat</p><p class="kucuk">Tıklama: sağ yarı ileri, sol yarı geri. Adres çubuğundaki #numara ekranı gösterir.</p></div>';
+  yardim.innerHTML = '<div><h3 style="margin:0 0 .6em">Tuşlar</h3><p><kbd>→</kbd> <kbd>←</kbd> ekran · <kbd>Boşluk</kbd> sıradaki parça · <kbd>F</kbd> tam ekran · <kbd>T</kbd> sayacı başlat/durdur · <kbd>R</kbd> animasyonu yeniden oynat · <kbd>V</kbd> ekrandaki videoyu başlat · <kbd>A</kbd> anlatımlı oynat/duraklat · <kbd>C</kbd> alt yazı · <kbd>D</kbd> koyu/açık · <kbd>1</kbd>…<kbd>9</kbd> bölüme atla · <kbd>Esc</kbd> kapat</p><p class="kucuk">Tıklama: sağ yarı ileri, sol yarı geri. Adres çubuğundaki #numara ekranı gösterir.</p></div>';
   document.body.appendChild(yardim);
   let cizgi = null;
   if (ayar.bolumler && ayar.bolumler.length) {
@@ -27,8 +27,10 @@
   }
 
   const adimlar = (el) => $$("[data-adim]", el).sort((a, b) => Number(a.dataset.adim) - Number(b.dataset.adim));
-  function oynat(el) {
+  function oynat(el, girisMi) {
     $$(".sahne, .harita, .zaman", el).forEach((s) => { s.classList.remove("oynuyor"); void s.offsetWidth; s.classList.add("oynuyor"); });
+    // JS ile sürülen benzetimler R ve "Yeniden oynat" ile de baştan başlar (girişte goster zaten çağırıyor)
+    if (!girisMi && ayar.girince && ayar.girince[el.id]) { try { ayar.girince[el.id](el); } catch (e) { console.error(e); } }
   }
   // video: tıklayınca ya da V ile YouTube klibi yüklenir; ekrandan çıkınca kaldırılır (ses kesilir)
   function videoAc(vk) {
@@ -53,6 +55,7 @@
   }
   function goster(k, sonAdim) {
     k = Math.max(0, Math.min(ekranlar.length - 1, k));
+    if (anl.acik && !anl.gecis) anlDur();
     if (sayacZaman) sayacDurdur();
     ekranlar.forEach((e, j) => e.classList.toggle("aktif", j === k));
     i = k;
@@ -62,7 +65,7 @@
     $$(".secenekler", el).forEach((s) => s.classList.remove("acildi"));
     $$(".cevap", el).forEach((c) => c.classList.remove("goster"));
     videoKapat();
-    oynat(el);
+    oynat(el, true);
     sayacEl = $(".sayac", el);
     if (sayacEl) sayacKur(sayacEl);
     ilerleme.style.width = ((i + 1) / ekranlar.length * 100) + "%";
@@ -83,6 +86,107 @@
     const acik = a.filter((x) => x.classList.contains("goster"));
     if (acik.length) { acik[acik.length - 1].classList.remove("goster"); return; }
     goster(i - 1, true);
+  }
+
+  // ===== anlatım kipi: sayfada window.ANLATIM varsa sunum sesli ve alt yazılı, kendi kendine akar =====
+  // ANLATIM = { klasor:"ses", ekranlar:{ "ekran-id":[ {m:"metin", adim:true, eylem:"cevap|oynat|sayac|video", sure:240, dusun:30, bekle:1}, … ] } }
+  // Ses dosyası: <klasor>/<ekran-id>-<sıra>.mp3 ; yoksa tarayıcının Türkçe sesiyle okunur.
+  const AN = window.ANLATIM || null;
+  const KAYIT = /[?&]kayit=1/.test(location.search);   // video kaydı kipi: kendiliğinden başlar, bitince window.__kayitBitti
+  const anl = { acik: false, gecis: false, j: 0, ses: null, zaman: null, geri: null, tur: 0 };
+  const altyazi = document.createElement("div"); altyazi.className = "altyazi"; document.body.appendChild(altyazi);
+  let altyaziAcik = true;
+  const hiz = () => (window.Sunum && window.Sunum.anlHiz) || 1;
+  if (AN) {
+    const a = document.createElement("span");
+    a.innerHTML = '<span>·</span> <a href="#" data-anlatim class="anl-link">▶ Anlatımlı oynat (A)</a>';
+    sol.appendChild(a);
+  }
+  function anlLinkYaz() { $$(".anl-link, [data-anlatim].anl-basla").forEach((x) => { x.textContent = anl.acik ? "❚❚ Anlatımı duraklat (A)" : "▶ Anlatımlı oynat (A)"; }); }
+  function altyaziYaz(t) { altyazi.textContent = t; altyazi.classList.add("acik"); }
+  function anlBekle(ms, sonra) { clearTimeout(anl.zaman); const tur = anl.tur; anl.zaman = setTimeout(() => { if (anl.acik && tur === anl.tur) sonra(); }, ms / hiz()); }
+  function anlDur() {
+    anl.acik = false; anl.tur++;
+    clearTimeout(anl.zaman); clearInterval(anl.geri);
+    if (anl.ses) { anl.ses.onended = null; anl.ses.onerror = null; anl.ses.pause(); anl.ses = null; }
+    try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) {}
+    altyazi.classList.remove("acik"); anlLinkYaz();
+  }
+  function anlDegistir() {
+    if (anl.acik) { anlDur(); return; }
+    anl.acik = true; anl.tur++; anlLinkYaz();
+    anl.gecis = true; goster(i, false); anl.gecis = false;   // bulunulan ekranı baştan anlat
+    anl.j = 0; anlAdim();
+  }
+  function segmentler() { return (AN && AN.ekranlar && AN.ekranlar[ekranlar[i].id]) || []; }
+  function sonrakiAdimiGoster() {
+    const gizli = adimlar(ekranlar[i]).filter((x) => !x.classList.contains("goster"));
+    if (!gizli.length) return;
+    const n = gizli[0].dataset.adim;
+    gizli.filter((x) => x.dataset.adim === n).forEach((x) => x.classList.add("goster"));
+  }
+  function sentez(metin, sonra) {
+    const s = window.speechSynthesis;
+    if (!s) { anlBekle(Math.max(2500, metin.split(/\s+/).length * 500), sonra); return; }
+    const u = new SpeechSynthesisUtterance(metin); u.lang = "tr-TR"; u.rate = hiz() > 1 ? 2 : 1;
+    const v = s.getVoices().find((x) => (x.lang || "").toLowerCase().startsWith("tr")); if (v) u.voice = v;
+    const tur = anl.tur; u.onend = u.onerror = () => { if (anl.acik && tur === anl.tur) sonra(); };
+    s.speak(u);
+  }
+  function konus(seg, k, sonra) {
+    if (seg.m) altyaziYaz(seg.m);
+    let bitti = false; const tek = () => { if (!bitti) { bitti = true; anl.ses = null; sonra(); } };
+    const yol = (AN.klasor || "ses") + "/" + ekranlar[i].id + "-" + k + ".mp3";
+    const a = new Audio(yol); anl.ses = a; a.playbackRate = Math.min(16, hiz());
+    if (KAYIT) a.addEventListener("playing", () => { (window.__kayit = window.__kayit || []).push({ ses: yol, t: Date.now() }); }, { once: true });
+    const tur = anl.tur;
+    a.onended = () => { if (anl.acik && tur === anl.tur) tek(); };
+    a.onerror = () => { if (anl.acik && tur === anl.tur && !bitti) { bitti = true; anl.ses = null; sentez(seg.m, sonra); } };
+    a.play().catch(() => { if (anl.acik && tur === anl.tur && !bitti) { bitti = true; anl.ses = null; sentez(seg.m, sonra); } });
+  }
+  function geriSay(n, sonra) {
+    let kalan = n; clearInterval(anl.geri);
+    altyaziYaz("Düşünme süresi: " + kalan + " saniye");
+    const tur = anl.tur;
+    anl.geri = setInterval(() => {
+      if (!anl.acik || tur !== anl.tur) { clearInterval(anl.geri); return; }
+      kalan--; altyaziYaz("Düşünme süresi: " + kalan + " saniye");
+      if (kalan <= 0) { clearInterval(anl.geri); sonra(); }
+    }, 1000 / hiz());
+  }
+  function anlAdim() {
+    if (!anl.acik) return;
+    const segs = segmentler(), k = anl.j, seg = segs[k];
+    if (!seg) {
+      adimlar(ekranlar[i]).forEach((x) => x.classList.add("goster"));
+      if (i >= ekranlar.length - 1) { altyazi.classList.remove("acik"); anlDur(); window.__kayitBitti = Date.now(); return; }
+      anlBekle(1200, () => { anl.gecis = true; goster(i + 1, false); anl.gecis = false; anl.j = 0; anlAdim(); });
+      return;
+    }
+    if (seg.adim) sonrakiAdimiGoster();
+    if (seg.eylem === "cevap") { const d = ekranlar[i].querySelector(".secenek[data-dogru]"); if (d) d.click(); }
+    if (seg.eylem === "oynat") oynat(ekranlar[i]);
+    const ilerle = () => { anl.j++; anlAdim(); };
+    const sonra = () => {
+      if (seg.eylem === "sayac" && sayacEl) {
+        if (!sayacZaman) sayacDegistir();
+        altyaziYaz("Süre işliyor. Sayaç bitince anlatım kendiliğinden devam eder.");
+        anlBekle((Number(sayacEl.dataset.sure || 180) + 1.5) * 1000, () => { sayacDurdur(); ilerle(); }); return;
+      }
+      if (seg.eylem === "video") {
+        if (KAYIT) {   // video dosyasına başkasının klibi gömülmez: bağlantı kartı gösterilir
+          const vk = $(".video-kutu", ekranlar[i]);
+          if (vk) { vk.classList.add("kayit-kart"); vk.setAttribute("data-kart", "Bu bölümdeki 4 dakikalık videoyu ders notundaki bağlantıdan izleyin"); }
+          altyaziYaz("Videoyu ders notundaki bağlantıdan izleyin, sonra devam edin.");
+          anlBekle(8000, () => { if (vk) vk.classList.remove("kayit-kart"); ilerle(); }); return;
+        }
+        videoAc($(".video-kutu", ekranlar[i])); altyaziYaz("Video oynuyor.");
+        anlBekle((seg.sure || 240) * 1000, () => { videoKapat(); ilerle(); }); return;
+      }
+      if (seg.dusun) { geriSay(seg.dusun, ilerle); return; }
+      anlBekle((seg.bekle != null ? seg.bekle : 0.8) * 1000, ilerle);
+    };
+    if (seg.m) konus(seg, k, sonra); else sonra();
   }
 
   // sayaç
@@ -115,6 +219,7 @@
     if (ev.target.closest(".yeniden")) { oynat(ekranlar[i]); return; }
     const vk = ev.target.closest(".video-kutu");
     if (vk) { videoAc(vk); return; }
+    if (ev.target.closest("[data-anlatim]")) { ev.preventDefault(); if (AN) anlDegistir(); return; }
     if (ev.target.closest("[data-yardim]")) { ev.preventDefault(); yardim.classList.toggle("acik"); return; }
     if (ev.target.closest(".yardim")) { yardim.classList.remove("acik"); return; }
     if (ev.target.closest("a, button, input, textarea, select, .sayac, pre, .sahne")) return;
@@ -132,6 +237,8 @@
     else if (k === "t" || k === "T") sayacDegistir();
     else if (k === "r" || k === "R") oynat(ekranlar[i]);
     else if (k === "v" || k === "V") videoAc($(".video-kutu", ekranlar[i]));
+    else if ((k === "a" || k === "A") && AN) anlDegistir();
+    else if ((k === "c" || k === "C") && AN) { altyaziAcik = !altyaziAcik; altyazi.classList.toggle("gizli", !altyaziAcik); }
     else if (k === "d" || k === "D") { const kok = document.documentElement; kok.dataset.theme = kok.dataset.theme === "dark" ? "light" : "dark"; try { localStorage.setItem("yzm205.sunum.tema", kok.dataset.theme); } catch (e) {} }
     else if (k === "?") yardim.classList.toggle("acik");
     else if (k === "Escape") yardim.classList.remove("acik");
@@ -141,5 +248,6 @@
 
   const bas = parseInt((location.hash || "#1").slice(1), 10);
   goster(isNaN(bas) ? 0 : bas - 1, false);
-  window.Sunum = { goster: (n) => goster(n - 1, false), ileri, geri, oynat: () => oynat(ekranlar[i]), videoAc, videoKapat, ekranlar };
+  if (KAYIT && AN) { document.documentElement.classList.add("kayit"); setTimeout(() => { window.__kayitBasladi = Date.now(); anlDegistir(); }, 2500); }
+  window.Sunum = { goster: (n) => goster(n - 1, false), ileri, geri, oynat: () => oynat(ekranlar[i]), videoAc, videoKapat, ekranlar, anlDegistir, anlDur, anlHiz: 1, anlDurum: () => ({ acik: anl.acik, ekran: i + 1, segment: anl.j }) };
 })();
