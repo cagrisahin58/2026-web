@@ -3,61 +3,39 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hafta 4 · Uçtan uca ürün: modern web mimarisi ve araç kutusu</title>
+<title>Hafta 4 · Bir web ürününün parçaları</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/sunum.css">
 <style>
-/* isteğin yolu: beş durak, turuncu istek, yeşil yanıt */
-.yol{display:grid;grid-template-columns:repeat(5,1fr);gap:1.2vw;align-items:center;height:100%;padding:3vh .5vw 4vh}
-.yol .dugum{background:var(--surface-2);border:2px solid var(--line);border-radius:1vw;padding:1.6vh .6vw;text-align:center;font-family:var(--display);font-weight:700;font-size:var(--b2);min-width:0}
-.yol .dugum small{display:block;font:var(--b2) var(--body);font-size:.85em;color:var(--muted);font-weight:400;line-height:1.25;margin-top:.3em}
-.sahne .paket{position:absolute;top:50%;left:10%;width:1.5vw;height:1.5vw;border-radius:50%;background:var(--ship);transform:translate(-50%,-50%);opacity:0}
-.sahne.oynuyor .paket{animation:yol 7s ease-in-out forwards}
-@keyframes yol{0%{opacity:0;left:10%}6%{opacity:1}22%{left:30%}40%{left:50%}58%{left:70%;background:var(--ship)}66%{left:90%}72%{background:var(--lab)}84%{left:50%}96%{left:10%;opacity:1}100%{left:10%;opacity:0}}
-.sahne.oynuyor .dugum:nth-child(2){animation:parla 7s ease-in-out .9s forwards}
-.sahne.oynuyor .dugum:nth-child(3){animation:parla 7s ease-in-out 2.2s forwards}
-.sahne.oynuyor .dugum:nth-child(4){animation:parla 7s ease-in-out 3.4s forwards}
-.sahne.oynuyor .dugum:nth-child(5){animation:parla 7s ease-in-out 4.3s forwards}
-@keyframes parla{8%{border-color:var(--theory);box-shadow:0 0 0 5px var(--theory-soft)}30%{border-color:var(--line);box-shadow:none}}
+/* üç parça: ekran, program, veritabanı; turuncu istek gider, yeşil cevap döner */
+.yol{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3vw;align-items:center;height:100%;padding:5vh 1vw 7vh}
+.yol .dugum{background:var(--surface-2);border:2px solid var(--line);border-radius:1vw;padding:2.2vh 1vw;text-align:center;font-family:var(--display);font-weight:700;font-size:calc(var(--b1)*1.1)}
+.yol .dugum small{display:block;font:var(--b2) var(--body);color:var(--muted);font-weight:400;line-height:1.3;margin-top:.4em}
+.sahne .paket{position:absolute;top:50%;left:18%;width:1.8vw;height:1.8vw;border-radius:50%;background:var(--ship);transform:translate(-50%,-50%);opacity:0}
+.sahne.oynuyor .paket{animation:yol 6s ease-in-out forwards}
+@keyframes yol{0%{opacity:0;left:18%}8%{opacity:1}30%{left:50%}50%{left:82%;background:var(--ship)}58%{background:var(--lab)}78%{left:50%}96%{left:18%;opacity:1}100%{left:18%;opacity:0;background:var(--lab)}}
+.sahne.oynuyor .yol .dugum:nth-child(2){animation:parla 6s ease-in-out .9s forwards}
+.sahne.oynuyor .yol .dugum:nth-child(3){animation:parla 6s ease-in-out 2.1s forwards}
+@keyframes parla{10%{border-color:var(--theory);box-shadow:0 0 0 5px var(--theory-soft)}35%{border-color:var(--line);box-shadow:none}}
 
-/* işleme biçimleri: üç şerit, içerik ne zaman görünür */
-.serit{display:grid;gap:1.6vh;height:100%;align-content:center;padding:4vh 9vw 7vh 0}
-.serit .satirr{display:grid;grid-template-columns:9ch 1fr;gap:1vw;align-items:center}
-.serit b{font-family:var(--display)}
-.cubuk{position:relative;height:4.2vh;background:var(--surface-2);border-radius:.6vw;overflow:hidden}
-.cubuk i{position:absolute;top:0;bottom:0;left:0;width:0;border-radius:.6vw}
-.cubuk .bos{background:var(--line)}
-.cubuk .html{background:var(--theory-soft);border-right:3px solid var(--theory)}
-.cubuk .js{background:var(--ship-soft)}
-.cubuk .hazir{background:var(--lab-soft);border-left:3px solid var(--lab)}
-.cubuk span{position:absolute;left:1vw;top:50%;transform:translateY(-50%);font-size:var(--b2);color:var(--ink);white-space:nowrap}
-.sahne.oynuyor .spa .bos{animation:gen 5s linear forwards;--w:45%}
-.sahne.oynuyor .spa .js{animation:gen 5s linear forwards;--w:75%}
-.sahne.oynuyor .spa .hazir{animation:gen 5s linear forwards;--w:100%}
-.sahne.oynuyor .ssr .html{animation:gen 5s linear forwards;--w:35%}
-.sahne.oynuyor .ssr .js{animation:gen 5s linear forwards;--w:70%}
-.sahne.oynuyor .ssr .hazir{animation:gen 5s linear forwards;--w:100%}
-.sahne.oynuyor .statik .html{animation:gen 5s linear forwards;--w:20%}
-.sahne.oynuyor .statik .hazir{animation:gen 5s linear forwards;--w:100%}
-@keyframes gen{to{width:var(--w)}}
-.serit .acik{font-size:var(--b2);color:var(--muted);display:flex;gap:2vw;justify-content:center}
-.serit .acik i{display:inline-block;width:1.2em;height:.8em;border-radius:.2em;margin-right:.4em;vertical-align:middle}
+/* kural yok / kural var */
+.iki-tablo{display:grid;grid-template-columns:1fr 1fr;gap:2vw;height:100%;align-content:center;padding:5vh 1vw 7vh}
+.iki-tablo h3{font-family:var(--display);font-size:var(--b1);margin:0 0 .4vh}
+.iki-tablo .sor{font-size:var(--b2);color:var(--muted);margin:0 0 1.2vh}
+.satirlar{display:grid;gap:.8vh}
+.satirlar div{padding:.9vh 1vw;border-radius:.6vw;background:var(--surface-2);border:2px solid var(--line);font-family:var(--mono);font-size:var(--b2);transition:background .4s,border-color .4s,opacity .4s}
+.sahne.oynuyor .acik .satirlar div{background:var(--err-soft);border-color:var(--err)}
+.sahne.oynuyor .acik .satirlar div:nth-child(1){transition-delay:.6s}
+.sahne.oynuyor .acik .satirlar div:nth-child(2){transition-delay:.9s}
+.sahne.oynuyor .acik .satirlar div:nth-child(3){transition-delay:1.2s}
+.sahne.oynuyor .acik .satirlar div:nth-child(4){transition-delay:1.5s}
+.sahne.oynuyor .kilitli .satirlar div{opacity:.3;transition-delay:2.4s}
+.sahne.oynuyor .kilitli .satirlar div.kendi{opacity:1;background:var(--lab-soft);border-color:var(--lab)}
 
-/* BaaS: Supabase'in içindeki parçalar sırayla yanar */
-.baas{display:grid;grid-template-columns:1fr 1fr;gap:1vw;height:100%;align-content:center;padding:3vh 0 5vh}
-.baas .parca{background:var(--surface-2);border:2px solid var(--line);border-radius:.9vw;padding:1.4vh 1.2vw;opacity:.25;transform:scale(.96);transition:opacity .4s,transform .4s,border-color .4s}
-.baas .parca b{display:block;font-family:var(--display)}
-.baas .parca small{font-size:var(--b2);color:var(--muted);line-height:1.25}
-.sahne.oynuyor .baas .parca{opacity:1;transform:none;border-color:var(--db)}
-.sahne.oynuyor .baas .parca:nth-child(1){transition-delay:.2s}
-.sahne.oynuyor .baas .parca:nth-child(2){transition-delay:.9s}
-.sahne.oynuyor .baas .parca:nth-child(3){transition-delay:1.6s}
-.sahne.oynuyor .baas .parca:nth-child(4){transition-delay:2.3s}
-.sahne.oynuyor .baas .parca:nth-child(5){transition-delay:3s}
-.sahne.oynuyor .baas .parca:nth-child(6){transition-delay:3.7s}
-.sayilar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2vw;align-content:center}
+.sayilar{display:grid;grid-template-columns:1fr 1fr;gap:2vw;align-content:center}
+.eski-yeni{display:grid;gap:1.5vh;align-content:start}
 </style>
 </head>
 <body>
@@ -65,399 +43,264 @@
 
 <section class="s kapak" id="kapak">
   <div class="baslik">
-    <span class="etiket">YZM205 · Hafta 4 · Uçtan uca ürün</span>
-    <h1>Kodu yapay zekâ yazıyorsa sen ne biliyor olmalısın?</h1>
-    <p class="buyuk" data-adim="1">Bu hafta sonunda: bir web ürününün beş parçasını ve bir isteğin yolunu çizebileceksin.</p>
-    <p class="buyuk" data-adim="2">Takımının araç yığınını gerekçesiyle seçebileceksin.</p>
-    <p class="buyuk" data-adim="3">Takımının ürün iskeleti bir önizleme adresinde açılıyor olacak.</p>
+    <span class="etiket">YZM205 · Hafta 4 · Bir web ürününün parçaları</span>
+    <h1>Kodu yapay zekâ yazıyorsa sen ne bilmelisin?</h1>
+    <p class="buyuk" data-adim="1">Bir web uygulamasının üç parçasını bir örnekle anlatabileceksin.</p>
+    <p class="buyuk" data-adim="2">Hangi hazır servisin ne işe yaradığını bileceksin.</p>
+    <p class="buyuk" data-adim="3">Takımının ürününün ilk sayfası canlı bir adreste olacak.</p>
   </div>
   <p class="kucuk">Sağ ok ya da Boşluk ile ilerle · F tam ekran · ? tuşlar</p>
 </section>
 
 <section class="s hikaye" id="hikaye">
-  <header><span class="etiket">Gerçek olay</span><h2>Sekiz ayda 100 milyon dolar ve 170 açık uygulama</h2></header>
+  <header><span class="etiket">Gerçek olay</span><h2>Çok hızlı büyüyen bir araç ve 170 açık uygulama</h2></header>
   <div class="govde iki sol-genis">
     <div>
-      <p class="alinti">"Fikrini yaz, uygulama hazır." Lovable bu sözle en hızlı büyüyen yazılım şirketi oldu.</p>
-      <p data-adim="1">Aynı bahar bir araştırmacı üretilen uygulamalara baktı: bazıları herkesin görebildiği bir anahtarla bütün veritabanını okutup yazdırıyordu. Telefonlar, ödeme durumları, başka servislerin anahtarları.</p>
-      <p class="kaynak" data-adim="2">Açığa resmi kimlik verildi, ağırlığı 10 üzerinden 9,3. Kaynaklar ders notunda.</p>
+      <p class="alinti">"Fikrini yaz, uygulama hazır."</p>
+      <p data-adim="1">Lovable, yazdığın fikirden kendiliğinden uygulama üreten bir araç. Sekiz ayda dünyanın en hızlı büyüyen yazılım şirketlerinden biri oldu.</p>
+      <p data-adim="2">Aynı bahar bir araştırmacı bu araçla yapılmış uygulamalara baktı. Bazılarında kullanıcıların telefonları ve ödeme bilgileri herkese açıktı.</p>
+      <p class="kaynak" data-adim="2">Kaynaklar ders notunda.</p>
     </div>
-    <div class="kutu sayi" data-adim="1"><b>170 / 1.645</b><small>incelenen uygulamadan açık olanlar</small></div>
+    <div class="kutu sayi" data-adim="2"><b>170</b><small>incelenen 1.645 uygulamadan açık olanlar</small></div>
   </div>
 </section>
 
 <section class="s sinifca" id="sinifca-acik">
-  <header><span class="etiket">Sınıfça</span><h2>Sence açık neredeydi?</h2></header>
+  <header><span class="etiket">Sınıfça</span><h2>Sence bu uygulamalarda sorun neydi?</h2></header>
   <div class="govde">
     <div class="secenekler">
-      <button class="secenek" type="button">Lovable'ın kendi sunucuları ele geçirildi</button>
+      <button class="secenek" type="button">Aracı yapan şirketin sunucuları ele geçirildi</button>
       <button class="secenek" type="button">Kullanıcılar zayıf şifre seçmişti</button>
-      <button class="secenek" data-dogru type="button">Uygulamaların veritabanı tabloları, tarayıcıya giden açık anahtarla korumasız okunup yazılabiliyordu</button>
-      <button class="secenek" type="button">Barındırma servisi çöktü, veri dışarı sızdı</button>
+      <button class="secenek" type="button">Kod hatalıydı, uygulamalar çalışmıyordu</button>
+      <button class="secenek" data-dogru type="button">Uygulamalar çalışıyordu ama veritabanında "kim neyi okuyabilir" kuralı yoktu</button>
     </div>
-    <div class="cevap">Kod yapay zekâ tarafından düzgün yazılmıştı; eksik olan mimari bir karardı: veritabanı tablolarında satır düzeyi güvenlik kuralı yoktu. Yazan el değişti, kapıyı kimin kilitleyeceği değişmedi. Bu ders o kapıları öğretiyor.</div>
+    <div class="cevap">Kodu yapay zekâ düzgün yazmıştı, uygulamalar çalışıyordu. Eksik olan bir kontroldü. Bu ders o kontrollerin nerede durduğunu öğretiyor.</div>
   </div>
 </section>
 
-<section class="s" id="harita">
-  <header><span class="etiket">Harita</span><h2>Bir web ürününün parçaları: bu dönem nereye gidiyoruz?</h2></header>
-  <div class="govde">
-    <div class="harita">
-      <div class="katmanlar">
-        <div class="katman"><b>Kullanıcı ve cihazlar</b><small>tarayıcı, telefon, masaüstü</small></div>
-        <div class="katman bu-hafta"><b>İstemci uygulaması</b><small>React, Next.js, PWA</small></div>
-        <div class="katman"><b>API ve iş mantığı</b><small>sunucusuz fonksiyonlar, kimlik, dil modeli API'si</small></div>
-        <div class="katman"><b>Veri</b><small>Postgres, depolama, önbellek</small></div>
-        <div class="katman"><b>Altyapı</b><small>bulut, CDN, alan adı, dağıtım hattı</small></div>
-      </div>
-      <div class="yan">
-        <div class="katman"><b>Takım ve araçlar</b><small>GitHub, yapay zekâ ajanları</small></div>
-        <div class="katman"><b>Güvenlik</b><small>açık analizi</small></div>
-        <div class="katman"><b>Kalite</b><small>test, kod analizi</small></div>
-        <div class="katman"><b>Pazar</b><small>mağaza, yasal, analitik</small></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="s" id="kampus-pano">
-  <header><span class="etiket">Fikir 1</span><h2>Bu dönemin örnek ürünü: Kampüs Pano</h2></header>
-  <div class="govde iki">
-    <div>
-      <p>Öğrencilerin kampüsteki etkinlik, ilan ve kayıp eşya duyurularını paylaştığı bir web ürünü.</p>
-      <ul>
-        <li data-adim="1">Giriş yap, ilan ver, fotoğraf ekle</li>
-        <li data-adim="2">İlanları listele ve ara</li>
-        <li data-adim="3">Yapay zekâ ilanı özetlesin, kategori önersin</li>
-      </ul>
-    </div>
-    <div class="kutu soft" data-adim="4">
-      <p><b>Her hafta aynı soru:</b> bu özellik ürünün hangi parçasında yaşar, hangi araç yapar, nerede bozulur?</p>
-      <p class="kucuk">Takımının ürünü farklı; Kampüs Pano ortak dilimiz.</p>
-    </div>
-  </div>
-</section>
-
-<section class="s" id="istek-yolu">
-  <header><span class="etiket">Fikir 2</span><h2>"İlanı kaydet" düğmesine basınca ne olur?</h2></header>
+<section class="s" id="uc-parca">
+  <header><span class="etiket">Fikir 1</span><h2>Her web uygulaması üç parçadır</h2></header>
   <div class="govde iki sol-genis">
     <div class="sahne">
       <div class="yol">
-        <div class="dugum">Tarayıcı<small>form, HTTPS isteği</small></div>
-        <div class="dugum">DNS ve CDN<small>adres çözülür, kenar sunucu</small></div>
-        <div class="dugum">API<small>sunucusuz fonksiyon</small></div>
-        <div class="dugum">Kimlik<small>oturum belirteci kontrol</small></div>
-        <div class="dugum">Veritabanı<small>Postgres, satır kuralı</small></div>
+        <div class="dugum">Ekran<small>OBS'de notlarını gördüğün sayfa</small></div>
+        <div class="dugum">Program<small>üniversitenin bilgisayarında: sen kimsin?</small></div>
+        <div class="dugum">Veritabanı<small>notların durduğu tablolar</small></div>
       </div>
       <div class="paket"></div>
       <button class="yeniden" type="button">Yeniden oynat</button>
-      <div class="not">Turuncu nokta istek, yeşil nokta yanıt</div>
+      <div class="not">Turuncu nokta istek, yeşil nokta cevap</div>
     </div>
     <div>
-      <p data-adim="1">Tarayıcı veritabanıyla doğrudan konuşmaz; arada her zaman bir kapı vardır.</p>
-      <p data-adim="2">Her durak bir şeyi kontrol eder: adres, oturum, satır kuralı.</p>
-      <p data-adim="3">Bu dönemin her haftası bu duraklardan birine ayrılmış.</p>
+      <p data-adim="1"><b>Ekran:</b> senin tarayıcında çalışır. "Notlarımı göster" dersin.</p>
+      <p data-adim="2"><b>Program:</b> isteği alır, önce kim olduğuna bakar.</p>
+      <p data-adim="3"><b>Veritabanı:</b> notlar tablolarda durur. Program oradan çeker, sana yollar.</p>
     </div>
   </div>
 </section>
 
-<section class="s" id="isleme">
-  <header><span class="etiket">Fikir 3</span><h2>Sayfa nerede oluşur: tarayıcıda, sunucuda, önceden?</h2></header>
-  <div class="govde iki sol-genis">
-    <div class="sahne">
-      <div class="serit">
-        <div class="satirr spa"><b>SPA</b><div class="cubuk"><i class="bos"></i><i class="js"></i><i class="hazir"></i><span>boş, JavaScript iner, sonra içerik</span></div></div>
-        <div class="satirr ssr"><b>SSR</b><div class="cubuk"><i class="html"></i><i class="js"></i><i class="hazir"></i><span>HTML hemen, düğmeler az sonra</span></div></div>
-        <div class="satirr statik"><b>Statik</b><div class="cubuk"><i class="html"></i><i class="hazir"></i><span>önceden üretilmiş, anında</span></div></div>
-      </div>
-      <button class="yeniden" type="button">Yeniden oynat</button>
-      <div class="not">gri bekleme · mavi HTML · turuncu JS · yeşil hazır</div>
-    </div>
-    <div>
-      <p data-adim="1"><b>SPA:</b> tek sayfa yüklenir, gerisi JavaScript ile çizilir. Akıcı, ama ilk açılış boş.</p>
-      <p data-adim="2"><b>SSR:</b> sunucu hazır HTML yollar; "göründü ama düğme çalışmıyor" anı buradan.</p>
-      <p data-adim="3"><b>Statik:</b> değişmeyen sayfalar önceden üretilir; en ucuz, en hızlı.</p>
-    </div>
-  </div>
-</section>
-
-<section class="s sinifca" id="sinifca-isleme">
-  <header><span class="etiket">Sınıfça</span><h2>Kampüs Pano'nun ilan listesi sayfası hangisi olmalı?</h2></header>
+<section class="s sinifca" id="sinifca-kontrol">
+  <header><span class="etiket">Sınıfça</span><h2>Başkasının notunu görmeni engelleyen kontrol nerede olmalı?</h2></header>
   <div class="govde">
     <div class="secenekler">
-      <button class="secenek" type="button">Statik: en hızlısı, önceden üretelim</button>
-      <button class="secenek" data-dogru type="button">SSR: ilanlar sık değişir ama arama motoru ve ilk açılış için hazır HTML gerekir</button>
-      <button class="secenek" type="button">SPA: her şey JavaScript olsun, tek dosya</button>
-      <button class="secenek" type="button">Fark etmez, çatı kendisi seçer</button>
+      <button class="secenek" type="button">Ekranda: başkasının notunu göstermeyen bir sayfa yeterli</button>
+      <button class="secenek" data-dogru type="button">Arkadaki programda ve veritabanında</button>
+      <button class="secenek" type="button">Tarayıcıda: sayfanın kaynağını gizleyerek</button>
+      <button class="secenek" type="button">Şifreyi uzun tutarak</button>
     </div>
-    <div class="cevap">Her dakika yeni ilan gelen bir liste önceden üretilemez; herkese açık ve paylaşılacak bir sayfa da boş HTML ile açılamaz. Sunucuda üretim doğal seçim. "Beğen" düğmesi gibi parçalar ise tarayıcıda yaşar. Soru "hangisi iyi" değil, "bu sayfa için hangisi".</div>
-  </div>
-</section>
-
-<section class="s" id="yigin">
-  <header><span class="etiket">Fikir 4</span><h2>Çerçeve, meta-çerçeve ve bizim yığın</h2></header>
-  <div class="govde iki sag-genis">
-    <div>
-      <p data-adim="1">React, Vue, Svelte yalnız arayüz çizer.</p>
-      <p data-adim="2">Next.js, Nuxt, SvelteKit, Astro bunların üstüne yönlendirme, sunucuda işleme ve yayın düzeni ekler: meta-çerçeve.</p>
-      <p data-adim="3">Sahada en yaygın ikili: React ve Next.js. TypeScript artık varsayılan.</p>
-    </div>
-    <div class="araclar">
-      <div class="arac secili"><b>Next.js</b><small>React üstünde meta-çerçeve</small></div>
-      <div class="arac secili"><b>TypeScript</b><small>tip hatalarını yazarken yakalar</small></div>
-      <div class="arac secili"><b>Supabase</b><small>Postgres, kimlik, dosya; servis olarak arka uç</small></div>
-      <div class="arac secili"><b>Vercel</b><small>GitHub'dan otomatik yayın</small></div>
-      <div class="arac secili"><b>GitHub</b><small>takım deposu, inceleme</small></div>
-      <div class="arac secili"><b>Kodlama ajanı</b><small>Copilot, Cursor ya da Claude Code</small></div>
-      <div class="arac"><b>Vite ile React</b><small>yalnız tarayıcı uygulaması için</small></div>
-      <div class="arac"><b>Firebase</b><small>mobil ağırlıklı, Google'a bağlı</small></div>
-    </div>
-  </div>
-</section>
-
-<section class="s" id="baas">
-  <header><span class="etiket">Fikir 5</span><h2>Sunucu yazmadan arka uç: Supabase'in içinde ne var?</h2></header>
-  <div class="govde iki sol-genis">
-    <div class="sahne">
-      <div class="baas">
-        <div class="parca"><b>Postgres</b><small>tablolar, ilişkiler, sorgular</small></div>
-        <div class="parca"><b>REST API</b><small>her tablo kendiliğinden bir adres</small></div>
-        <div class="parca"><b>Kimlik</b><small>kayıt, giriş, oturum belirteci</small></div>
-        <div class="parca"><b>Depolama</b><small>fotoğraf ve dosya</small></div>
-        <div class="parca"><b>Gerçek zamanlı</b><small>değişince herkese haber</small></div>
-        <div class="parca"><b>Kenar fonksiyonları</b><small>küçük sunucu kodu</small></div>
-      </div>
-      <button class="yeniden" type="button">Yeniden oynat</button>
-      <div class="not">Altı parça, tek pano</div>
-    </div>
-    <div>
-      <p data-adim="1">Takım tablo açar, giriş ekler, fotoğraf saklar; sunucu kurmaz.</p>
-      <p data-adim="2">Tarayıcıya giden anahtar gizli değildir. Veriyi koruyan şey tablo üstündeki satır kuralıdır (RLS).</p>
-      <p data-adim="3">Lovable olayındaki 170 uygulamada eksik olan tam bu kuraldı.</p>
-    </div>
-  </div>
-</section>
-
-<section class="s" id="ucretsiz">
-  <header><span class="etiket">Fikir 6</span><h2>Ücretsiz katman mimarinin parçasıdır: üç kural</h2></header>
-  <div class="govde uc">
-    <div class="kutu" data-adim="1"><h3>Uyur</h3><p>Hareketsiz kalan ücretsiz veritabanı projeleri bir süre sonra duraklatılır. Demo sabahı "uyumuş veritabanı" klasik hikâyedir.</p></div>
-    <div class="kutu" data-adim="2"><h3>Durur</h3><p>Ücretsiz barındırma planı kotayı aşınca ürünü durdurur; kart bağlı planlar durmaz, fatura keser.</p></div>
-    <div class="kutu" data-adim="3"><h3>Ticari değil</h3><p>Ücretsiz planların çoğu kişisel ve ticari olmayan kullanım içindir; para kazanmaya başlayınca plan değişir.</p></div>
+    <div class="cevap">Ekran senin bilgisayarında çalışır; isteyen onu değiştirebilir, isteği elle gönderebilir. Kontrol ancak senin dokunamadığın yerde güvenilirdir: programda ve veritabanında. Açılıştaki 170 uygulamada eksik olan tam buydu.</div>
   </div>
 </section>
 
 <section class="s gosteri" id="gosteri-network">
-  <header><span class="etiket">Canlı gösteri <span class="rozet canli">canlı</span></span><h2>Gerçek bir sitede isteklerin yolunu görelim</h2></header>
+  <header><span class="etiket">Canlı gösteri <span class="rozet canli">canlı</span></span><h2>Ekranın arkadaki programla konuşmasını görelim</h2></header>
   <div class="govde iki sol-genis">
     <ol class="numarali">
-      <li>Türkçe Vikipedi'yi aç; Ctrl+Shift+J, Network sekmesi.</li>
-      <li>Yenile; süzgeç Fetch/XHR. Aramaya "Muş" yaz: her harfte bir istek.</li>
-      <li>Bir isteğe tıkla: Headers, Payload, Response, Timing.</li>
-      <li>Status, Size, Time sütunları; Waterfall'da bekleme ve indirme.</li>
-      <li>Soru: bu istekler kime gidiyor, hangi parça cevaplıyor?</li>
+      <li>Türkçe Vikipedi'yi aç, F12'ye bas, Network sekmesine geç.</li>
+      <li>Üstteki süzgeçten Fetch/XHR'ı seç.</li>
+      <li>Arama kutusuna yavaşça "Muş" yaz: her harfte listeye yeni bir satır düşer.</li>
+      <li>Bir satıra tıkla, Response sekmesini aç: ekrandaki öneriler burada veri olarak duruyor.</li>
     </ol>
-    <div class="yedek"><b>İnternet yoksa:</b> dersten önce kaydedilmiş HAR dosyasını Network sekmesine sürükle; aynı istekler, aynı sekmeler.</div>
+    <div class="yedek"><b>İnternet yoksa:</b> bu ekranı atla, üç parça şemasını yeniden oynat; bir sonraki adımı evde denemelerini iste.</div>
   </div>
 </section>
 
 <section class="s sen" id="bak-network">
-  <header><span class="etiket">Şimdi bak · 3 dakika</span><h2>Kendi dizüstünde bir sitenin isteklerini yakala</h2></header>
+  <header><span class="etiket">Şimdi bak · 3 dakika</span><h2>Kendi dizüstünde bir sitenin isteklerini gör</h2></header>
   <div class="govde">
     <div class="gorev">
       <div>
         <ol>
-          <li>Sık kullandığın bir siteyi aç (Trendyol, YouTube, OBS, ne olursa). F12, Network, Fetch/XHR süzgeci, sayfayı yenile.</li>
-          <li>Bir isteğin adresini, durum kodunu ve süresini bir yere yaz.</li>
-          <li>Yan masadakiyle karşılaştır: aynı site farklı istek mi görüyor?</li>
+          <li>Sık kullandığın bir siteyi aç: YouTube, Trendyol, ne olursa. F12, Network, sayfayı yenile.</li>
+          <li>Altta kaç istek yazıyor? Yan masadakiyle karşılaştır.</li>
+          <li>Fetch/XHR süzgecini seç, bir satıra tıkla, Response'ta ne geldiğine bak.</li>
         </ol>
-        <p class="kucuk">Hiç istek görünmüyorsa süzgeci "All" yap; bazı siteler veriyi sayfanın içinde gömülü getirir.</p>
+        <p class="kucuk">Liste boşsa sayfayı yenile; Network açıkken yenilemek gerekir.</p>
       </div>
       <div class="sayac" data-sure="180"></div>
     </div>
   </div>
 </section>
 
-<section class="s" id="yz-sayilar">
-  <header><span class="etiket">Fikir 7</span><h2>Kodu yapay zekâ yazıyor; peki güveniyor muyuz?</h2></header>
-  <div class="govde">
-    <div class="sayilar">
-      <div class="kutu sayi" data-adim="1"><b>%84</b><small>geliştiricilerin yapay zekâ aracı kullanan ya da planlayan payı</small></div>
-      <div class="kutu sayi" data-adim="2" style="--c:var(--srv)"><b>%46</b><small>çıktının doğruluğuna güvenmeyenler</small></div>
-      <div class="kutu sayi" data-adim="3" style="--c:var(--ship)"><b>%66</b><small>en büyük dert: "neredeyse doğru ama tam değil"</small></div>
-    </div>
-    <p class="kucuk orta" data-adim="3" style="margin-top:3vh">Kaynak: yılın en büyük geliştirici anketi; ders notunda bağlantısı var.</p>
-  </div>
-</section>
-
-<section class="s video" id="video-vibe">
-  <header><span class="etiket">Video · 4 dakika</span><h2>"Vibe coding"in karanlık yüzü</h2></header>
+<section class="s video" id="video-istek">
+  <header><span class="etiket">Video · 4 dakika</span><h2>Bir web isteğinin yolculuğu</h2></header>
   <div class="govde iki sol-genis">
-    <div class="video-kutu" data-yt="tsm3wJzzU8Q" data-bas="0" data-son="240"><span class="sure">0:00–4:00</span></div>
+    <div class="video-kutu" data-yt="XhEr3WQMlOo" data-bas="0" data-son="240"><span class="sure">0:00–4:00</span></div>
     <div class="izlerken">
-      <div class="kutu vurgu"><b>Durdur ve tahmin et:</b> Konuşmacıya göre en büyük risk ne olacak: hız mı, maliyet mi, anlamadığın kod mu?</div>
-      <div class="kutu soft" data-adim="1"><b>İzlerken dikkat:</b> hangi cümle kanıt, hangi cümle görüş?</div>
-      <div class="kutu soft" data-adim="2"><b>Sonra:</b> Lovable olayıyla bağını bir cümleyle söyle.</div>
+      <div class="kutu vurgu"><b>Önce tahmin et:</b> adres çubuğuna yazdığın site adını bilgisayarın nasıl buluyor?</div>
+      <div class="kutu soft" data-adim="1"><b>İzlerken:</b> videodaki "istemci" bizim ekran, "sunucu" bizim program.</div>
+      <div class="kutu soft" data-adim="2"><b>Sonra:</b> OBS'de not ekranına bakarken bu yolun hangi adımları oluyor?</div>
     </div>
   </div>
 </section>
 
-<section class="s" id="ajan">
-  <header><span class="etiket">Fikir 8</span><h2>Kodlama ajanı ne yapar, ne yapmaz?</h2></header>
+<section class="s" id="hazir-servisler">
+  <header><span class="etiket">Fikir 2</span><h2>Eskiden kendin kurardın, bugün hazır servisler var</h2></header>
+  <div class="govde iki sag-genis">
+    <div class="eski-yeni">
+      <div class="kutu soft" data-adim="1"><h3>Eskiden</h3><p>Sunucu, veritabanı ve giriş sistemini kendin kurarsın. Haftalar sürer.</p></div>
+      <div class="kutu vurgu" data-adim="2"><h3>Bugün</h3><p>Her parça için hazır servis var; sunucu kurmadan ürün çıkar.</p></div>
+    </div>
+    <div class="araclar" data-adim="3">
+      <div class="arac secili"><b>GitHub</b><small>kodun durduğu yer, takımın ortak deposu</small></div>
+      <div class="arac secili"><b>Supabase</b><small>hazır veritabanı ve hazır giriş sistemi</small></div>
+      <div class="arac secili"><b>Vercel</b><small>GitHub'daki kodu internete koyar</small></div>
+      <div class="arac secili"><b>Kodlama aracı</b><small>Copilot, Cursor, Claude: kodu yazar</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="yayin-yolu">
+  <header><span class="etiket">Fikir 2</span><h2>Bir değişiklik internete nasıl çıkar?</h2></header>
   <div class="govde">
     <div class="zaman">
-      <div class="adim"><b>İstem</b><small>sen ne istediğini yazarsın</small></div>
-      <div class="adim"><b>Okur</b><small>kod tabanını tarar</small></div>
-      <div class="adim"><b>Düzenler</b><small>dosyaları değiştirir</small></div>
-      <div class="adim"><b>Çalıştırır</b><small>derleme ve test komutları</small></div>
-      <div class="adim"><b>Sen okursun</b><small>her satırı, bir PR gibi</small></div>
+      <div class="adim"><b>Yaz</b><small>kodlama aracıyla, kendi bilgisayarında</small></div>
+      <div class="adim"><b>Gönder</b><small>GitHub'daki takım deposuna</small></div>
+      <div class="adim"><b>Yayınla</b><small>Vercel kendiliğinden alır, kurar</small></div>
+      <div class="adim"><b>Aç</b><small>adres herkese açık, telefondan da</small></div>
     </div>
-    <div class="govde iki" style="margin-top:3vh">
-      <div class="kutu soft" data-adim="1"><p>Copilot'un ajan kipi, Cursor, Claude Code: hepsi bu döngüyü döner. Farkları fiyat ve terminal mi editör mü.</p></div>
-      <div class="kutu vurgu" data-adim="2"><p><b>Dersin kuralı:</b> açıklayamadığın kod senin kodun değildir. Savunmada o satırı sana soracağız.</p></div>
-    </div>
+    <p class="buyuk orta" data-adim="1" style="margin-top:6vh">Elle dosya yükleme yok: GitHub'a gönderdiğin her şey birkaç dakikada canlı adreste.</p>
   </div>
 </section>
 
-<section class="s" id="typescript">
-  <header><span class="etiket">Fikir 9</span><h2>Neden TypeScript varsayılan?</h2></header>
-  <div class="govde iki">
-    <div>
-      <p data-adim="1">Yapay zekânın ürettiği kodda hataların çoğu tip hatasıdır: "bu alan var sanmıştım".</p>
-      <p data-adim="2">TypeScript bu hatayı sen çalıştırmadan, yazarken yakalar. Ajanın "bitti" dediği kod derlenmiyorsa bitmemiştir.</p>
-      <p data-adim="3">Bu yıl GitHub'da en çok kullanılan dil oldu; çerçeveler projeyi TypeScript ile açıyor.</p>
+<section class="s" id="yz-sayilar">
+  <header><span class="etiket">Fikir 3</span><h2>Kodu yapay zekâ yazıyor; geliştiriciler ona güveniyor mu?</h2></header>
+  <div class="govde">
+    <div class="sayilar">
+      <div class="kutu sayi" data-adim="1"><b>%84</b><small>yapay zekâ aracı kullanan ya da kullanmayı planlayan geliştirici</small></div>
+      <div class="kutu sayi" data-adim="2" style="--c:var(--srv)"><b>%66</b><small>en büyük dert: "neredeyse doğru ama tam değil" çıktı</small></div>
     </div>
-    <pre class="kod"><span class="y">// ajan "sahip" yazdı,</span>
-<span class="y">// alanın adı "sahipId"</span>
-<span class="e">type</span> <span class="n">Ilan</span> = {
-  <span class="n">id</span>: <span class="d">string</span>
-  <span class="n">baslik</span>: <span class="d">string</span>
-  <span class="n">sahipId</span>: <span class="d">string</span>
-}
-<span class="e">const</span> <span class="n">ad</span> = <span class="n">ilan</span>.<span class="vurgu">sahip</span>
-<span class="y">// kırmızı çizgi: alan yok</span></pre>
+    <p class="kucuk orta" data-adim="2" style="margin-top:3vh">Kaynak: yılın en büyük geliştirici anketi; bağlantısı ders notunda.</p>
+  </div>
+</section>
+
+<section class="s" id="kural">
+  <header><span class="etiket">Fikir 3</span><h2>Kapıyı kilitlemek: kim hangi satırı görebilir?</h2></header>
+  <div class="govde iki sol-genis">
+    <div class="sahne">
+      <div class="iki-tablo">
+        <div class="acik">
+          <h3>Kural yok</h3>
+          <p class="sor">Mert: "notlarımı getir"</p>
+          <div class="satirlar"><div>Ece · 85</div><div>Mert · 72</div><div>Deniz · 90</div><div>Can · 64</div></div>
+        </div>
+        <div class="kilitli">
+          <h3>Kural var</h3>
+          <p class="sor">Mert: "notlarımı getir"</p>
+          <div class="satirlar"><div>Ece · 85</div><div class="kendi">Mert · 72</div><div>Deniz · 90</div><div>Can · 64</div></div>
+        </div>
+      </div>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+      <div class="not">Kırmızı: Mert'e giden satırlar</div>
+    </div>
+    <div>
+      <p data-adim="1">Supabase'de her tabloya bir kural yazılır: kim hangi satırı okuyabilir, kim yazabilir.</p>
+      <p data-adim="2">Kural yoksa adresi bilen herkes bütün tabloyu okur. 170 uygulamada olan buydu.</p>
+      <p data-adim="3">Yapay zekâ bu kuralı yazabilir. Yazıp yazmadığını kontrol etmek senin işin.</p>
+    </div>
   </div>
 </section>
 
 <section class="s sinifca" id="sinifca-ajan">
-  <header><span class="etiket">Sınıfça</span><h2>Ajan "özelliği ekledim, derleme geçti" dedi. İlk ne yaparsın?</h2></header>
+  <header><span class="etiket">Sınıfça</span><h2>Yapay zekâ "özelliği ekledim, çalışıyor" dedi. İlk ne yaparsın?</h2></header>
   <div class="govde">
     <div class="secenekler">
-      <button class="secenek" type="button">Commit atar, yayına alırım; derleme geçtiyse çalışıyordur</button>
-      <button class="secenek" data-dogru type="button">Değişen dosyaların farkını satır satır okurum, sonra çalıştırıp denerim</button>
-      <button class="secenek" type="button">Aynı istemi başka bir ajana verip ikisini karşılaştırırım</button>
-      <button class="secenek" type="button">Test yazmasını isterim, testler geçince yayınlarım</button>
+      <button class="secenek" type="button">Hemen yayına alırım; çalışıyorsa sorun yok</button>
+      <button class="secenek" data-dogru type="button">Neyi değiştirdiğine satır satır bakarım, sonra kendim denerim</button>
+      <button class="secenek" type="button">Aynı şeyi başka bir yapay zekâya sorarım</button>
     </div>
-    <div class="cevap">Derleme geçmesi "yanlış ama geçerli" kodu elemez; "neredeyse doğru" kod en çok burada çıkar. Fark okumak beş dakika, üretimde hata bulmak beş saat. Test iyi bir ikinci adımdır, ilk adım değil; ajanın yazdığı test de aynı yanlış varsayımı taşıyabilir.</div>
+    <div class="cevap">"Çalışıyor" ile "doğru" aynı şey değil. Kural eklemeyi unutmuş olabilir, bir şeyi silmiş olabilir. Bakmak beş dakika; yayındaki hatayı bulmak saatler. Bu derste kuralımız: açıklayamadığın kod senin kodun değildir.</div>
   </div>
 </section>
 
-<section class="s karar" id="karar-tablo">
-  <header><span class="etiket">Karar</span><h2>Takımın yığını: hangi durumda hangisi?</h2></header>
+<section class="s" id="once-yayinla">
+  <header><span class="etiket">Fikir 4</span><h2>Önce yayınla, sonra geliştir: ürün dönem içinde böyle büyüyecek</h2></header>
   <div class="govde">
-    <table class="kiyas">
-      <thead><tr><th>Yol</th><th>İlk yayına</th><th>Öğrenme yükü</th><th>Kontrol</th><th>Bu ders için</th></tr></thead>
-      <tbody>
-        <tr class="secili"><td><b>Next.js + Supabase + Vercel</b></td><td class="evet">bir atölye</td><td class="orta">orta</td><td class="evet">yüksek</td><td class="evet">varsayılan</td></tr>
-        <tr><td><b>Vite ile React + Firebase</b></td><td class="evet">bir atölye</td><td class="orta">orta</td><td class="orta">orta</td><td class="orta">mobil ağırlıklıysa</td></tr>
-        <tr><td><b>Lovable ya da v0 ile başla, kodu GitHub'a çek</b></td><td class="evet">bir saat</td><td class="evet">düşük</td><td class="hayir">düşük</td><td class="orta">ilk taslak için</td></tr>
-        <tr><td><b>Kendi sunucun, kendi veritabanın</b></td><td class="hayir">haftalar</td><td class="hayir">yüksek</td><td class="evet">tam</td><td class="hayir">hayır</td></tr>
-      </tbody>
-    </table>
+    <div class="zaman">
+      <div class="adim"><b>Hafta 4</b><small>ilk sayfa canlı adreste</small></div>
+      <div class="adim"><b>Hafta 5</b><small>takımla birlikte çalışma</small></div>
+      <div class="adim"><b>Hafta 6</b><small>veritabanı</small></div>
+      <div class="adim"><b>Hafta 7</b><small>giriş ve yapay zekâ özelliği</small></div>
+      <div class="adim"><b>Hafta 8</b><small>buluta tam yayın</small></div>
+      <div class="adim"><b>Hafta 9–13</b><small>hız, güvenlik, kalite, telefon, pazar</small></div>
+      <div class="adim"><b>Hafta 14</b><small>Demo Günü</small></div>
+    </div>
+    <p class="buyuk orta" data-adim="1" style="margin-top:6vh">Her hafta canlı bir adres olduğu için "bende çalışıyordu" cümlesi kalkar.</p>
   </div>
 </section>
 
 <section class="s karar" id="karar-senaryo">
   <header><span class="etiket">Karar · sınıfça</span><h2>Senaryo: hangisini seçersin?</h2></header>
   <div class="govde">
-    <p class="senaryo">Dört kişilik takım, kimse sunucu kurmadı. Ürün: fotoğraflı ilanlar, giriş, arama, yapay zekâ özeti. Dokuz hafta sonra Demo Günü.</p>
+    <p class="senaryo">Dört kişilik takım, kimse sunucu kurmadı. Ürün: fotoğraflı ilanlar, giriş, yapay zekâ ile özet. On hafta sonra Demo Günü.</p>
     <div class="secenekler">
-      <button class="secenek" type="button">Önce Lovable'da bitiririz, demoyu oradan yaparız</button>
-      <button class="secenek" data-dogru type="button">Next.js + Supabase + Vercel ile iskelet bu hafta yayında, her hafta bir parça</button>
-      <button class="secenek" type="button">Önce Figma'da tasarım, kod son üç haftaya</button>
+      <button class="secenek" type="button">Kendi sunucumuzu kurarız, her şeyi baştan yazarız</button>
+      <button class="secenek" data-dogru type="button">Bu hafta ilk sayfayı yayına alırız, her hafta hazır servislerle bir parça ekleriz</button>
+      <button class="secenek" type="button">Önce tasarımı bitiririz, kodu son üç haftaya bırakırız</button>
     </div>
-    <div class="cevap">Lovable taslak için iyi ama kodun ve verinin sahibi sen olmalısın; kodu sona bırakan takım Demo Günü'nde çalışmayan ürün gösterir. Önce yayınla, sonra geliştir.</div>
-  </div>
-</section>
-
-<section class="s sinifca" id="sinifca-mikro">
-  <header><span class="etiket">Sınıfça</span><h2>İlanlarda "mikroservis" yazıyor; Kampüs Pano'ya gerekir mi?</h2></header>
-  <div class="govde">
-    <div class="secenekler">
-      <button class="secenek" type="button">Evet, modern ürün böyle yapılır</button>
-      <button class="secenek" data-dogru type="button">Hayır; tek uygulama yeter, ekip ve trafik büyüyünce parçalanır</button>
-      <button class="secenek" type="button">Evet, yapay zekâ özelliği ayrı servis olmak zorunda</button>
-    </div>
-    <div class="cevap">Mikroservis, onlarca ekibin aynı ürünü birbirini beklemeden geliştirmesi için parçalamadır; dört kişilik takımda parçalama maliyeti faydasından büyüktür. İlanlarda geçmesinin nedeni büyük şirketlerin ihtiyacı. Terimi bil, ne zaman gerekmediğini de bil.</div>
-  </div>
-</section>
-
-<section class="s" id="how-to-know">
-  <header><span class="etiket">How to know</span><h2>Sahadakiler bu alanı nasıl takip ediyor?</h2></header>
-  <div class="govde iki">
-    <ul class="onay">
-      <li data-adim="1">Resmi belge önce; blog ve video sonra.</li>
-      <li data-adim="2">Yılda dört anket: State of JS, Stack Overflow, Octoverse, JetBrains. Orada yoksa "yaygın" değil.</li>
-      <li data-adim="3">Haftada bir bülten: This Week in React ya da Bytes.</li>
-      <li data-adim="4">Deneme ortamı ücretsiz: her dal için önizleme, öğrenci paketi.</li>
-    </ul>
-    <div class="kutu soft" data-adim="5"><b>Kalite üç soruyla ayırt edilir:</b><p>Kaynak birincil mi? Tarih ve sürüm yazıyor mu? İddia ölçülebilir mi, yoksa "herkes kullanıyor" mu?</p></div>
-  </div>
-</section>
-
-<section class="s gosteri" id="gosteri-vercel">
-  <header><span class="etiket">Canlı gösteri <span class="rozet canli">canlı</span></span><h2>Bir şablonu üç dakikada yayına alalım</h2></header>
-  <div class="govde iki sol-genis">
-    <ol class="numarali">
-      <li>Vercel'e GitHub ile gir; "New Project", depo listesinden hazır Next.js ve Supabase şablon deposunu seç.</li>
-      <li>Çatı kendiliğinden tanınır; ortam değişkenlerini gir, "Deploy".</li>
-      <li>Derleme günlüğünü birlikte okuyalım: ne indiriyor, ne derliyor?</li>
-      <li>Verilen adresi telefondan aç. Bir sözcük değiştir, yeni dala gönder: önizleme adresi gelir.</li>
-    </ol>
-    <div class="yedek"><b>İnternet ya da hesap sorun çıkarırsa:</b> önceden yapılmış yayının "Deployments" ekran görüntüsünü anlat ve ders notundaki 3,5 dakikalık Türkçe yayın videosunu oynat.</div>
+    <div class="cevap">Sunucu kurmayı öğrenmek bu dönemin işi değil; hazır servisler o yükü alıyor. Kodu sona bırakan takım Demo Günü'nde çalışmayan ürün gösterir. Önce yayınla, sonra geliştir.</div>
   </div>
 </section>
 
 <section class="s sen" id="gorev">
-  <header><span class="etiket">Bu haftanın görevi</span><h2>Ürün iskeleti ve ilk yayın</h2></header>
+  <header><span class="etiket">Bu haftanın görevi</span><h2>Ürününün ilk sayfası canlı adreste</h2></header>
   <div class="govde iki">
     <ol class="numarali">
-      <li>README'ye tek sayfa ürün tanımı: kim için, hangi sorun, ilk üç ekran, yapay zekâ özelliği; istemci, Supabase ve Vercel kutularıyla mimari şema.</li>
-      <li>Supabase şablonuyla Next.js projesi aç, takım deposuna gönder; her üyeden en az bir commit.</li>
-      <li>Supabase'de ürüne ait bir tablo; RLS açık, bir okuma politikası. Anahtar dosyası depoya girmez.</li>
-      <li>Vercel'e bağla; bir sayfa tablodan veri listeler; üretim adresi README'de.</li>
+      <li>README'ye ürün tanımı: kim için, hangi sorun, ilk üç ekran, yapay zekâ ne yapacak.</li>
+      <li>Altına üç kutu: ekran, program, veritabanı. Her kutuya sizin üründe ne olacağı.</li>
+      <li>Kodlama aracına ürünün tanıtım sayfasını yaptırın, takım deposuna gönderin.</li>
+      <li>Vercel ya da GitHub Pages ile yayına alın; adres README'nin en üstünde.</li>
     </ol>
     <div>
       <div class="kutu vurgu"><b>Kabul ölçütleri</b>
-        <ul class="onay"><li>Adres herkese açık ve veri gösteriyor</li><li>Tabloda "herkese açık" uyarısı yok</li><li>Depoda gizli anahtar yok</li><li>Dört üyeden commit var</li></ul>
+        <ul class="onay"><li>Adres telefondan açılıyor</li><li>README'de tanım, üç kutu ve adres var</li><li>Dört üyeden en az birer commit var</li></ul>
       </div>
-      <p class="kucuk" style="margin-top:1.5vh">Teslim: haftalık teslim sayfasındaki form, bu dersi izleyen Pazar 23:59; yapay zekâ notuna kendi yaptığın kısmı yaz.</p>
+      <p class="kucuk" style="margin-top:1.5vh">Teslim: haftalık teslim sayfasındaki form, her üye kendi adıyla, bu dersi izleyen Pazar 23:59.</p>
     </div>
   </div>
 </section>
 
 <section class="s ozet" id="ozet">
-  <header><span class="etiket">Özet kartı</span><h2>Bu haftadan cebine koyacağın beş şey</h2></header>
+  <header><span class="etiket">Özet</span><h2>Bu haftadan aklında kalacak dört şey</h2></header>
   <div class="govde iki sol-genis">
     <ul class="onay">
-      <li data-adim="1">Tarayıcı veritabanıyla doğrudan konuşmaz; arada kapılar var ve kapıyı sen kilitlersin.</li>
-      <li data-adim="2">Sayfa tarayıcıda, sunucuda ya da önceden oluşur; soru "bu sayfa için hangisi".</li>
-      <li data-adim="3">Bizim yığın: Next.js, TypeScript, Supabase, Vercel, GitHub, bir kodlama ajanı.</li>
-      <li data-adim="4">Ajanın kodu bir PR gibi okunur; açıklayamadığın kod senin değil.</li>
-      <li data-adim="5">Önce yayınla, sonra geliştir: iskelet bu hafta canlı adreste.</li>
+      <li data-adim="1">Her web uygulaması üç parçadır: ekran, program, veritabanı.</li>
+      <li data-adim="2">Bugün bu parçalar için hazır servisler var: GitHub, Supabase, Vercel.</li>
+      <li data-adim="3">Yapay zekâ kodu yazar, kapıyı kilitlemeyi unutabilir; kontrol senin işin.</li>
+      <li data-adim="4">Önce yayınla, sonra geliştir.</li>
     </ul>
-    <div class="kutu vurgu" data-adim="6"><b>Çıkış sorusu</b><p>Takımının ürününde ilk hangi parça seni korkutuyor: istemci, API, veri, altyapı? Tek sözcük, çıkarken söyle.</p></div>
+    <div class="kutu vurgu" data-adim="5"><b>Çıkış sorusu</b><p>Takımının ürününde ekran, program ve veritabanı ne olacak? Her birine bir sözcük, çıkarken söyle.</p></div>
   </div>
 </section>
 
 </div>
 <script>
 window.SUNUM = {
-  baslik: "Hafta 4 · Uçtan uca ürün",
+  baslik: "Hafta 4 · Bir web ürününün parçaları",
   bolumler: [
-    { ad: "Açılış", ilk: "kapak" }, { ad: "Harita", ilk: "harita" }, { ad: "Parçalar", ilk: "kampus-pano" },
-    { ad: "Gösteri", ilk: "gosteri-network" }, { ad: "Yapay zekâ ile", ilk: "yz-sayilar" }, { ad: "Karar", ilk: "karar-tablo" },
-    { ad: "How to know", ilk: "how-to-know" }, { ad: "Görev", ilk: "gosteri-vercel" }, { ad: "Özet", ilk: "ozet" }
+    { ad: "Açılış", ilk: "kapak" }, { ad: "Üç parça", ilk: "uc-parca" }, { ad: "Gösteri", ilk: "gosteri-network" },
+    { ad: "Hazır servisler", ilk: "hazir-servisler" }, { ad: "Yapay zekâ ve kontrol", ilk: "yz-sayilar" },
+    { ad: "Önce yayınla", ilk: "once-yayinla" }, { ad: "Görev", ilk: "gorev" }, { ad: "Özet", ilk: "ozet" }
   ]
 };
 </script>

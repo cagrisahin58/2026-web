@@ -3,28 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hafta 4 · Uçtan uca ürün: modern web mimarisi ve araç kutusu</title>
+<title>Hafta 4 · Bir web ürününün parçaları</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/ders.css">
 <style>
-.katmanlar{display:grid;gap:8px}
-.katman{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
-.katman b{font-family:var(--display)}
-.katman span{color:var(--muted);font-size:.93rem;text-align:right}
-.katman.bu{border-color:var(--theory);background:var(--theory-soft)}
-.katman.bu span::after{content:" · bu hafta";color:var(--theory);font-weight:600}
 .istem{background:var(--code-bg);color:var(--code-ink);border-radius:10px;padding:12px 14px;font:.92rem/1.5 var(--mono);white-space:pre-wrap;margin:8px 0 0}
+.uc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:720px){.uc{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body data-week="4">
 
 <header class="top">
   <div class="wrap">
-    <div class="brand"><span class="dot" aria-hidden="true"></span>YZM205 · Hafta 4<span class="long">&nbsp;· Uçtan uca ürün</span></div>
+    <div class="brand"><span class="dot" aria-hidden="true"></span>YZM205 · Hafta 4<span class="long">&nbsp;· Bir web ürününün parçaları</span></div>
     <nav class="jump" aria-label="Bölümler">
-      <a href="#harita">Harita</a><a href="#ozet">Özet</a><a href="#olay">Olay</a><a href="#araclar">Araçlar</a><a href="#karar">Karar</a><a href="#gorev">Görev</a><a href="#izle">İzle</a><a href="#oku">Oku</a><a href="#sozluk">Sözlük</a><a href="#sinav">Sınav</a>
+      <a href="#fikirler">Dört fikir</a><a href="#olay">Olay</a><a href="#dene">Kendin dene</a><a href="#gorev">Görev</a><a href="#izle">İzle ve oku</a><a href="#sozluk">Sözlük</a><a href="#sinav">Sınav</a>
     </nav>
     <button class="themebtn" id="themeBtn" type="button">Koyu tema</button>
   </div>
@@ -35,10 +31,10 @@
   <section class="hero" aria-labelledby="baslik">
     <div>
       <div class="eyebrow">YZM205 Web Tasarımı ve Programlama · Hafta 4</div>
-      <h1 id="baslik">Uçtan uca ürün: modern web mimarisi ve araç kutusu</h1>
-      <p class="lede">Bu haftadan itibaren ders değişiyor: kodu yapay zekâ kodlama araçlarıyla üreteceksin, biz ürünün parçalarını, araçları ve kararları konuşacağız. Bu sayfa sunumun özetidir; evde 20 dakikada okunur, görev yapılırken yanında durur, sınavdan önce tekrar edilir.</p>
+      <h1 id="baslik">Bir web ürününün parçaları</h1>
+      <p class="lede">Bu haftadan itibaren kodu yapay zekâ kodlama araçlarıyla üreteceksin. Derste kodun yazımını değil, ürünün parçalarını, hazır servisleri ve kararları konuşacağız. Bu sayfa sunumun özetidir; evde 15 dakikada okunur.</p>
       <div class="meta">
-        <span class="chip theory">Sunum 70 dk</span>
+        <span class="chip theory">Sunum yaklaşık 50 dk</span>
         <span class="chip lab">Proje atölyesi</span>
         <span class="chip ship">Teslim: dersi izleyen Pazar 23:59</span>
       </div>
@@ -48,251 +44,150 @@
       </div>
     </div>
     <div class="grid3">
-      <div class="card"><h3>1</h3><p>Bir web ürününün beş parçasını ve bir isteğin yolunu çizebileceksin.</p></div>
-      <div class="card"><h3>2</h3><p>Takımının araç yığınını gerekçesiyle seçebileceksin.</p></div>
-      <div class="card"><h3>3</h3><p>Takımının ürün iskeleti bir önizleme adresinde açılıyor olacak.</p></div>
+      <div class="card"><h3>1</h3><p>Bir web uygulamasının üç parçasını bir örnekle anlatabileceksin.</p></div>
+      <div class="card"><h3>2</h3><p>Hangi hazır servisin ne işe yaradığını bileceksin.</p></div>
+      <div class="card"><h3>3</h3><p>Takımının ürününün ilk sayfası canlı bir adreste olacak.</p></div>
     </div>
   </section>
 
-  <section id="harita" aria-labelledby="harita-h">
-    <div class="section-head"><h2 id="harita-h">Ürünün neresindeyiz?</h2><span class="muted">her hafta aynı harita</span></div>
-    <p class="prose">Bir web ürünü beş katmandan ve dört kesen işten oluşur. Bu hafta haritanın tamamını tanıyor, istemci katmanına odaklanıyoruz. Sonraki haftalar sırayla öteki kutulara iner.</p>
-    <div class="grid2">
-      <div class="katmanlar">
-        <div class="katman"><b>Kullanıcı ve cihazlar</b><span>tarayıcı, telefon, masaüstü</span></div>
-        <div class="katman bu"><b>İstemci uygulaması</b><span>React, Next.js, PWA</span></div>
-        <div class="katman"><b>API ve iş mantığı</b><span>sunucusuz fonksiyonlar, kimlik, dil modeli API'si</span></div>
-        <div class="katman"><b>Veri</b><span>Postgres, depolama, önbellek</span></div>
-        <div class="katman"><b>Altyapı</b><span>bulut, CDN, alan adı, dağıtım hattı</span></div>
-      </div>
-      <div class="katmanlar">
-        <div class="katman"><b>Takım ve araçlar</b><span>GitHub, yapay zekâ ajanları</span></div>
-        <div class="katman"><b>Güvenlik</b><span>açık analizi</span></div>
-        <div class="katman"><b>Kalite</b><span>test, kod analizi</span></div>
-        <div class="katman"><b>Pazar</b><span>mağaza, yasal, analitik</span></div>
-      </div>
+  <section id="fikirler" aria-labelledby="fikirler-h">
+    <div class="section-head"><h2 id="fikirler-h">Bu haftanın dört fikri</h2></div>
+
+    <h3>1. Her web uygulaması üç parçadır</h3>
+    <p class="prose">OBS'yi düşün. Notlarını gördüğün sayfa senin tarayıcında çalışır; buna <b>ekran</b> diyoruz, kitaplarda "ön yüz" ya da "istemci" diye geçer. "Notlarımı göster" dediğinde istek üniversitenin bilgisayarına gider. Orada çalışan <b>program</b> önce senin kim olduğuna bakar; kitaplarda "arka uç" ya da "sunucu" diye geçer. Sonra notlarını tablolardan, yani <b>veritabanından</b> çeker ve sana yollar. Ekran, program, veritabanı. Dönem boyunca konuşacağımız her şey bu üç parçadan birine aittir.</p>
+    <div class="uc">
+      <div class="card"><h3>Ekran</h3><p>Senin tarayıcında çalışır. Gördüğün ve tıkladığın her şey.</p></div>
+      <div class="card"><h3>Program</h3><p>Başka bir bilgisayarda çalışır. İsteği alır, kim olduğuna bakar, karar verir.</p></div>
+      <div class="card"><h3>Veritabanı</h3><p>Bilgilerin tablolarda durduğu yer. Program oradan okur, oraya yazar.</p></div>
     </div>
-    <div class="callout info" style="margin-top:14px">Dönemin ortak örneği <b>Kampüs Pano</b>: öğrencilerin kampüsteki etkinlik, ilan ve kayıp eşya duyurularını paylaştığı bir ürün. Giriş, fotoğraflı ilan, arama, yapay zekâ ile özet. Takımının ürünü farklı; Kampüs Pano her hafta aynı soruyu sormak için var: bu özellik hangi parçada yaşar, hangi araç yapar, nerede bozulur?</div>
-  </section>
+    <div class="callout warn" style="margin-top:14px">Önemli kural: başkasının bilgisini görmeni engelleyen kontrol ekranda değil, program ve veritabanında olmalı. Ekran senin bilgisayarında çalışır; isteyen onu değiştirebilir.</div>
 
-  <section id="ozet" aria-labelledby="ozet-h">
-    <div class="section-head"><h2 id="ozet-h">Özet: bu haftanın kavramları</h2><span class="muted">sunumla aynı sıra</span></div>
+    <h3>2. Bugün bu parçalar için hazır servisler var</h3>
+    <p class="prose">Eskiden sunucuyu, veritabanını ve giriş sistemini kendin kurardın; haftalar sürerdi. Bugün her parça için hazır bir servis var ve öğrenciye ücretsiz başlangıç katmanı sunuyor. <b>GitHub</b> kodun ve takımın ortak deposunun durduğu yer. <b>Supabase</b> hazır bir veritabanı ve hazır bir giriş sistemi verir: tablo açarsın, kullanıcı kaydı hazır gelir. <b>Vercel</b> GitHub'daki kodu alıp internete koyar ve her güncellemede kendiliğinden yeniden yayınlar. Kodu ise bir <b>kodlama aracı</b> yazar: Copilot, Cursor ya da Claude.</p>
+    <p class="prose">Bir değişiklik şu yolla internete çıkar: kodlama aracıyla kendi bilgisayarında yazarsın, GitHub'daki takım deposuna gönderirsin, Vercel bunu kendiliğinden alıp kurar, birkaç dakika sonra adres herkese açıktır. Elle dosya yükleme yoktur.</p>
+    <div class="quiz" data-quiz="parcalar"></div>
 
-    <h3>1. Bir isteğin yolu</h3>
-    <p class="prose">"İlanı kaydet" düğmesine basınca tarayıcı önce alan adını bir IP adresine çevirir (DNS), isteği HTTPS ile gönderir, istek çoğu zaman kullanıcıya yakın bir kenar sunucudan (CDN) geçer, bir API'ye ulaşır, orada oturum belirteci kontrol edilir ve en sonunda veritabanı satır kuralına bakarak yazar ya da reddeder. Tarayıcı veritabanıyla doğrudan konuşmaz; arada her zaman bir kapı vardır ve kapıyı kilitleyen sensin. Tarayıcının Network sekmesi bu yolu her gün gösterir: her satır bir istek, her isteğin bir adresi, durum kodu ve süresi vardır.</p>
+    <h3>3. Yapay zekâ kodu yazar, kontrol senin işin</h3>
+    <p class="prose">Yılın en büyük geliştirici anketine göre geliştiricilerin yüzde 84'ü yapay zekâ aracı kullanıyor ya da kullanmayı planlıyor; ama en büyük dert, yüzde 66 ile, "neredeyse doğru ama tam değil" çıktılar. Yapay zekâ çalışan kod yazar, ama bir kontrolü unutabilir. Örneğin Supabase'de her tabloya bir kural yazılır: kim hangi satırı okuyabilir, kim yazabilir. Kural yoksa adresi bilen herkes bütün tabloyu okur. Yapay zekâ bu kuralı yazabilir; yazıp yazmadığını kontrol etmek senin işin. Bu dersin kuralı: <b>açıklayamadığın kod senin kodun değildir</b>. Yapay zekâ "bitti" dediğinde neyi değiştirdiğine satır satır bakar, sonra kendin denersin.</p>
 
-    <h3>2. Sayfa nerede oluşur: tarayıcıda, sunucuda, önceden?</h3>
-    <p class="prose">Üç ana biçim var. <b>SPA</b> (tek sayfa uygulaması) tek bir HTML yükler, gerisini JavaScript ile çizer; akıcıdır ama ilk açılış boştur ve arama motoru içeriği geç görür. <b>SSR</b> (sunucuda işleme) sunucunun hazır HTML yollamasıdır; sayfa hemen görünür, düğmeler JavaScript gelip bağlanınca çalışır. "Sayfa göründü ama düğme çalışmıyor" anının adı hidrasyondur. <b>Statik üretim</b> değişmeyen sayfaları önceden üretip CDN'e koyar; en ucuz ve en hızlı seçenek. Soru "hangisi iyi" değil, "bu sayfa için hangisi": Kampüs Pano'nun ilan listesi sunucuda üretilir, "beğen" düğmesi tarayıcıda yaşar, "hakkında" sayfası statiktir.</p>
-
-    <h3>3. Çerçeve, meta-çerçeve ve bizim yığın</h3>
-    <p class="prose">React, Vue ve Svelte yalnız arayüz çizer. Next.js, Nuxt, SvelteKit ve Astro bunların üstüne yönlendirme, sunucuda işleme ve yayın düzeni ekler; buna meta-çerçeve denir. Sahada en yaygın ikili React ve Next.js. Bu dersin varsayılan yığını: Next.js, TypeScript, Supabase, Vercel, GitHub ve bir kodlama ajanı. Alternatifleri karar tablosunda göreceksin; varsayılanı seçmenin nedeni, dokuz haftada en az sürprizle Demo Günü'ne ulaşmak.</p>
-    <div class="quiz" data-quiz="yol"></div>
-
-    <h3>4. Sunucu yazmadan arka uç: servis olarak arka uç ve satır kuralı</h3>
-    <p class="prose">Supabase gibi servisler, Postgres veritabanının çevresine hazır parçalar koyar: her tabloya kendiliğinden bir REST adresi, kayıt ve giriş, fotoğraf ve dosya depolama, değişince herkese haber veren gerçek zamanlı kanal, küçük sunucu kodu için kenar fonksiyonları. Takım sunucu kurmadan tablo açar, giriş ekler, dosya saklar. Burada en önemli cümle şu: tarayıcıya giden anahtar gizli değildir; veriyi koruyan şey tablonun üstündeki satır düzeyi güvenlik kuralıdır (RLS, row level security). Kural yoksa adresi bilen herkes bütün tabloyu okur ve yazar. Bu haftanın olayındaki 170 uygulamada eksik olan tam buydu.</p>
-
-    <h3>5. Ücretsiz katman mimarinin parçasıdır</h3>
-    <p class="prose">Üç kural: hareketsiz kalan ücretsiz veritabanı projeleri bir süre sonra uyur (Demo Günü sabahı klasik hikâye); ücretsiz barındırma planı kotayı aşınca ürünü durdurur, kart bağlı plan ise durmaz, fatura keser; ücretsiz planların çoğu ticari kullanıma kapalıdır. Sayıları her servisin kendi fiyat sayfasından okursun, bu sayfada yazmıyor; önemli olan davranışı bilmek.</p>
-
-    <h3>6. Yapay zekâ ile ürün geliştirme</h3>
-    <p class="prose">Yılın en büyük geliştirici anketine göre geliştiricilerin yüzde 84'ü yapay zekâ aracı kullanıyor ya da planlıyor; ama yüzde 46'sı çıktının doğruluğuna güvenmiyor ve en büyük dert yüzde 66 ile "neredeyse doğru ama tam değil" cevaplar. Kodlama ajanı (Copilot'un ajan kipi, Cursor, Claude Code) hep aynı döngüyü döner: sen istemi yazarsın, ajan kod tabanını okur, dosyaları düzenler, derleme ve test komutlarını çalıştırır, sonra sen her satırı bir pull request gibi okursun. Dersin kuralı: açıklayamadığın kod senin kodun değildir; savunmada o satırı sana soracağız.</p>
-
-    <h3>7. Neden TypeScript varsayılan?</h3>
-    <p class="prose">Yapay zekânın ürettiği kodda hataların çoğu tip hatasıdır: "bu alan var sanmıştım". TypeScript bu hatayı sen çalıştırmadan, yazarken yakalar; ajanın "bitti" dediği kod derlenmiyorsa bitmemiştir. Bu yıl GitHub'da en çok kullanılan dil oldu ve çatılar projeyi TypeScript ile açıyor. Senin için maliyet değil, erken uyarı sistemi.</p>
-
-    <h3>8. Önce yayınla, sonra geliştir</h3>
-    <p class="prose">Modern ekipler ürünü ilk gün boş hâliyle yayına alır, sonra her değişikliği aynı hatta gönderir. GitHub'a her gönderim otomatik yayınlanır; üretim dalı dışındaki her dal kendi önizleme adresini alır. Böylece "bende çalışıyordu" cümlesi kalkar, her hafta canlı bir adres vardır. Bu haftanın görevi bu yüzden iskeleti canlı adrese koymak.</p>
-    <div class="quiz" data-quiz="yz"></div>
+    <h3>4. Önce yayınla, sonra geliştir</h3>
+    <p class="prose">Takım ürünün ilk sayfasını bu hafta internete koyar ve her hafta üstüne bir parça ekler: Hafta 5'te takımla birlikte çalışma, Hafta 6'da veritabanı, Hafta 7'de giriş ve yapay zekâ özelliği, Hafta 8'de buluta tam yayın, sonra hız, güvenlik, kalite, telefon ve pazara çıkış, en sonda Demo Günü. Her hafta canlı bir adres olduğu için "bende çalışıyordu" cümlesi kalkar.</p>
+    <div class="quiz" data-quiz="kontrol"></div>
   </section>
 
   <section id="olay" aria-labelledby="olay-h">
     <div class="section-head"><h2 id="olay-h">Gerçek olay: 170 açık uygulama</h2></div>
-    <p class="prose">Lovable, "fikrini yaz, uygulama hazır" vaadiyle sekiz ayda 100 milyon dolar yıllık gelire ulaşıp en hızlı büyüyen yazılım şirketi sayıldı. Aynı bahar bir araştırmacı, Lovable ile üretilmiş uygulamaları taradı: incelenen 1.645 uygulamanın 170'inde veritabanı tabloları, tarayıcıya giden açık anahtarla korumasız okunup yazılabiliyordu; telefon numaraları, ödeme durumları ve başka servislerin anahtarları sızdırılabiliyordu. Açığa resmi bir kimlik verildi (CVE-2025-48757), ağırlık puanı 10 üzerinden 9,3. Kodu yapay zekâ düzgün yazmıştı; eksik olan mimari bir karardı, satır kuralı. Kaynak: <a href="https://www.superblocks.com/blog/lovable-rls-breach" target="_blank" rel="noopener">Superblocks'un olay yazısı</a> ve <a href="https://tech.eu/2025/07/23/lovable-becomes-fastest-software-company-ever-to-reach-100m-arr/" target="_blank" rel="noopener">tech.eu'nun büyüme haberi</a>.</p>
-    <div class="callout warn">Benzer bir olay bir ajanın elinden de çıkabilir: bir yatırımcının denemesinde kodlama ajanı, "değişiklik yapma" talimatına rağmen üretim veritabanını sildi. Ajanın erişebildiği her şey ajanın yetkisidir; üretim anahtarı ajanın gördüğü dosyada durmaz.</div>
+    <p class="prose">Lovable, yazdığın fikirden kendiliğinden uygulama üreten bir araç; sekiz ayda dünyanın en hızlı büyüyen yazılım şirketlerinden biri oldu. Aynı bahar bir araştırmacı bu araçla yapılmış uygulamalara baktı: incelenen 1.645 uygulamanın 170'inde kullanıcıların telefonları, ödeme bilgileri ve başka servislerin anahtarları herkese açıktı. Uygulamalar çalışıyordu; kodu yapay zekâ düzgün yazmıştı. Eksik olan, veritabanındaki "kim neyi okuyabilir" kuralıydı. Kaynak: <a href="https://www.superblocks.com/blog/lovable-rls-breach" target="_blank" rel="noopener">Superblocks'un olay yazısı</a>.</p>
   </section>
 
-  <section id="araclar" aria-labelledby="araclar-h">
-    <div class="section-head"><h2 id="araclar-h">Araç tablosu</h2><span class="muted">bizim yığın işaretli</span></div>
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>Araç</th><th>Ne işe yarar</th><th>Ne zaman seçilir</th><th>Belge</th></tr></thead>
-        <tbody>
-          <tr><td><b>Next.js</b> ✓</td><td>React üstünde meta-çerçeve: yönlendirme, sunucuda işleme, yayın düzeni</td><td>Varsayılan; sunucuda işleme ve arama görünürlüğü gerekiyorsa</td><td><a href="https://nextjs.org/learn" target="_blank" rel="noopener">Next.js Learn</a></td></tr>
-          <tr><td><b>Vite ile React</b></td><td>Yalnız tarayıcıda çalışan uygulama</td><td>Sunucu tarafı hiç yoksa, iç araç yapıyorsan</td><td><a href="https://developer.mozilla.org/en-US/docs/Glossary/SPA" target="_blank" rel="noopener">MDN: SPA</a></td></tr>
-          <tr><td><b>TypeScript</b> ✓</td><td>JavaScript'e tip ekler, hatayı yazarken yakalar</td><td>Her zaman; özellikle kodu ajan yazıyorsa</td><td><a href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/" target="_blank" rel="noopener">Octoverse</a></td></tr>
-          <tr><td><b>Supabase</b> ✓</td><td>Postgres, kimlik, depolama, REST; servis olarak arka uç</td><td>Varsayılan; ilişkili veri ve SQL öğrenmek için</td><td><a href="https://supabase.com/docs/guides/getting-started/quickstarts/nextjs" target="_blank" rel="noopener">Supabase + Next.js</a></td></tr>
-          <tr><td><b>Firebase</b></td><td>Belge tabanlı veritabanı ve kimlik</td><td>Mobil ağırlıklı, Google servislerine bağlı ürün</td><td></td></tr>
-          <tr><td><b>Vercel</b> ✓</td><td>GitHub'dan otomatik yayın, her dala önizleme</td><td>Varsayılan; Next.js için sıfır ayar</td><td><a href="https://vercel.com/docs/deployments/environments" target="_blank" rel="noopener">Yayın ortamları</a></td></tr>
-          <tr><td><b>GitHub</b> ✓</td><td>Takım deposu, inceleme, otomasyon</td><td>Her zaman; öğrenci paketi ek araçlar verir</td><td><a href="https://education.github.com/pack" target="_blank" rel="noopener">Student Developer Pack</a></td></tr>
-          <tr><td><b>Kodlama ajanı</b> ✓</td><td>Copilot'un ajan kipi, Cursor ya da Claude Code</td><td>Her özellikte; çıktı okunur, çalıştırılır, denenir</td><td><a href="https://docs.github.com/en/copilot/get-started/plans" target="_blank" rel="noopener">Copilot planları</a></td></tr>
-          <tr><td><b>Lovable, v0, Bolt</b></td><td>Tarayıcıda uygulama üreticileri</td><td>İlk taslağı bir saatte görmek; sonra kodu GitHub'a çekmek</td><td></td></tr>
-          <tr><td><b>Chrome DevTools</b></td><td>Network sekmesi: isteklerin yolu, durum ve süre</td><td>Her hata aramasında ilk açılan şey</td><td><a href="https://developer.chrome.com/docs/devtools/network" target="_blank" rel="noopener">Network paneli</a></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section id="karar" aria-labelledby="karar-h">
-    <div class="section-head"><h2 id="karar-h">Hangi durumda hangisi?</h2></div>
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>Yol</th><th>İlk yayına</th><th>Öğrenme yükü</th><th>Kontrol</th><th>Bu ders için</th></tr></thead>
-        <tbody>
-          <tr><td><b>Next.js + Supabase + Vercel</b></td><td>bir atölye</td><td>orta</td><td>yüksek</td><td>varsayılan</td></tr>
-          <tr><td><b>Vite ile React + Firebase</b></td><td>bir atölye</td><td>orta</td><td>orta</td><td>mobil ağırlıklıysa</td></tr>
-          <tr><td><b>Lovable ya da v0 ile başla, kodu GitHub'a çek</b></td><td>bir saat</td><td>düşük</td><td>düşük</td><td>ilk taslak için</td></tr>
-          <tr><td><b>Kendi sunucun, kendi veritabanın</b></td><td>haftalar</td><td>yüksek</td><td>tam</td><td>hayır</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <details class="faq">
-      <summary>Senaryo: dört kişilik takım, kimse sunucu kurmadı; fotoğraflı ilanlar, giriş, arama, yapay zekâ özeti; dokuz hafta sonra Demo Günü. Ne seçersin?</summary>
-      <div class="ans"><p>Next.js, Supabase ve Vercel ile iskeleti bu hafta yayına al, her hafta bir parça ekle. Lovable ilk taslak için iyidir ama kodun ve verinin sahibi sen olmalısın; kendi sunucu dokuz haftada öğrenilip işletilmez; kodu sona bırakan takım Demo Günü'nde çalışmayan ürün gösterir.</p></div>
-    </details>
-    <details class="faq">
-      <summary>İş ilanlarında "mikroservis" yazıyor; Kampüs Pano'ya gerekir mi?</summary>
-      <div class="ans"><p>Hayır. Mikroservis, onlarca ekibin aynı ürünü birbirini beklemeden geliştirmesi için parçalamadır; dört kişilik takımda parçalama maliyeti faydasından büyüktür. Terimi bil, ne zaman gerekmediğini de bil.</p></div>
-    </details>
+  <section id="dene" aria-labelledby="dene-h">
+    <div class="section-head"><h2 id="dene-h">Kendin dene: ekranın arkadaki programla konuşması</h2><span class="muted">3 dakika</span></div>
+    <ol class="prose">
+      <li>Chrome'da sık kullandığın bir siteyi aç; F12'ye bas, Network sekmesine geç, sayfayı yenile.</li>
+      <li>Listede her satır, ekranın bir yere gönderdiği bir istektir. Altta kaç istek yazıyor?</li>
+      <li>Üstteki süzgeçten Fetch/XHR'ı seç, bir satıra tıkla, Response sekmesini aç: ekranda gördüğün bilgiler burada veri olarak geliyor.</li>
+    </ol>
+    <p class="prose">Türkçe Vikipedi'de arama kutusuna yavaşça bir sözcük yazarsan her harfte listeye yeni bir istek düştüğünü görürsün. Ayrıntı: <a href="https://developer.chrome.com/docs/devtools/network" target="_blank" rel="noopener">Chrome DevTools Network paneli</a>.</p>
   </section>
 
   <section id="gorev" aria-labelledby="gorev-h">
-    <div class="section-head"><h2 id="gorev-h">Bu haftanın görevi: ürün iskeleti ve ilk yayın</h2><span class="progress-pill" id="labProg" aria-live="polite">0 / 5 adım</span></div>
-    <p class="prose">Takım işi; her üye kendi değişikliğini kendi hesabından gönderir. Kodlama ajanı serbest, ama ürettiği her şeyi okuyup çalıştırırsın. Adımların sonundaki kutuları işaretle; işaretler yalnız senin tarayıcında saklanır.</p>
+    <div class="section-head"><h2 id="gorev-h">Bu haftanın görevi: ürününün ilk sayfası canlı adreste</h2><span class="progress-pill" id="labProg" aria-live="polite">0 / 4 adım</span></div>
+    <p class="prose">Takım işi; her üye kendi değişikliğini kendi GitHub hesabından gönderir. Kodlama aracı serbest, ama ürettiği her şeyi okursun. Kutular yalnız senin tarayıcında saklanır.</p>
     <div class="steps">
       <article class="step">
         <div class="sn">1</div>
         <div class="sb">
-          <h3>Ürün tanımı ve mimari şema</h3>
+          <h3>Ürün tanımı</h3>
           <div class="row4">
-            <div><b>Ne yapacaksın</b><span>Takım deposunun README'sine tek sayfa ürün tanımı: kim için, hangi sorun, ilk üç ekran, yapay zekâ özelliği. Altına istemci, Supabase ve Vercel kutularını oklarla gösteren bir şema (elle çizip fotoğrafı da olur).</span></div>
-            <div><b>Neden</b><span>Yapay zekâ kodu yazar ama ürünün ne olduğuna sen karar verirsin; yazılı olmayan tanım her hafta değişir.</span></div>
-            <div><b>Ekranda</b><span>README'nin üstünde tanım ve şema görünüyor.</span></div>
+            <div><b>Ne yapacaksın</b><span>Takım deposunun README dosyasına yaz: ürün kim için, hangi sorunu çözüyor, ilk üç ekranı ne, yapay zekâ ne yapacak.</span></div>
+            <div><b>Neden</b><span>Kodu yapay zekâ yazar ama ürünün ne olduğuna siz karar verirsiniz.</span></div>
           </div>
-          <label class="check"><input type="checkbox" data-done="g1"> Tanım ve şema depoda.</label>
+          <label class="check"><input type="checkbox" data-done="g1"> Tanım README'de.</label>
         </div>
       </article>
       <article class="step">
         <div class="sn">2</div>
         <div class="sb">
-          <h3>Projeyi aç, depoya gönder</h3>
+          <h3>Üç kutu</h3>
           <div class="row4">
-            <div><b>Ne yapacaksın</b><span>Terminalde <code>npx create-next-app@latest kampus-pano -e with-supabase</code> (adı kendi ürünün olsun); projeyi takım deposuna gönder. Her üye en az bir commit atar: README'ye bir satır da olur.</span></div>
-            <div><b>Neden</b><span>Şablon, Supabase bağlantısı ve giriş ekranlarıyla gelir; sıfırdan başlamak bu hafta zaman kaybı.</span></div>
-            <div><b>Olmadıysa</b><span>Node kurulu değilse Hafta 0 kurulum sayfası; <code>npx</code> hata veriyorsa terminali kapatıp yeniden aç.</span></div>
+            <div><b>Ne yapacaksın</b><span>Tanımın altına üç kutu çizin: ekran, program, veritabanı. Her kutuya sizin üründe ne olacağını yazın. Kâğıda çizip fotoğrafını koymak da olur.</span></div>
+            <div><b>Ekranda</b><span>Örnek: ekran "ilan listesi ve ilan ver sayfası", program "giriş kontrolü, yapay zekâ ile özet", veritabanı "ilanlar ve kullanıcılar tablosu".</span></div>
           </div>
-          <label class="check"><input type="checkbox" data-done="g2"> Proje depoda, dört üyeden commit var.</label>
+          <label class="check"><input type="checkbox" data-done="g2"> Üç kutu README'de.</label>
         </div>
       </article>
       <article class="step">
         <div class="sn">3</div>
         <div class="sb">
-          <h3>Supabase'de tablo, satır kuralı açık</h3>
+          <h3>Tanıtım sayfası</h3>
           <div class="row4">
-            <div><b>Ne yapacaksın</b><span>Supabase'de proje aç; Table Editor'da ürüne ait bir tablo oluştur (örneğin <code>ilanlar</code>: id, baslik, aciklama, created_at). RLS açık kalsın; Authentication altındaki Policies'ten herkese okuma izni veren bir politika ekle. Üç satır elle gir.</span></div>
-            <div><b>Neden</b><span>Kural olmadan tablo, adresi bilen herkese açıktır; bu haftanın olayı.</span></div>
-            <div><b>Ekranda</b><span>Advisors altındaki Security Advisor'da tablon için "publicly accessible" uyarısı yok.</span></div>
+            <div><b>Ne yapacaksın</b><span>Kodlama aracına ürününüzün tanıtım sayfasını yaptırın ve takım deposuna gönderin. Her üye en az bir commit atsın; README'ye kendi rolünü yazmak da sayılır.</span></div>
+            <div><b>Olmadıysa</b><span>Araç karmaşık bir proje kurduysa "tek bir index.html ve style.css olsun" diye yeniden iste.</span></div>
           </div>
-          <label class="check"><input type="checkbox" data-done="g3"> Tablo var, kural açık, okuma politikası yazılı.</label>
+          <pre class="istem">Ürünümüzün adı: [ad]. [Bir cümleyle ne yaptığı]. Bunun için tek sayfalık bir tanıtım sayfası yap: index.html ve style.css. Üstte ürünün adı ve bir cümle, altında üç özellik kartı, en altta takım üyelerinin adları olsun. Telefonda da düzgün görünsün. Dış kütüphane kullanma.</pre>
+          <label class="check"><input type="checkbox" data-done="g3"> Sayfa depoda, dört üyeden commit var.</label>
         </div>
       </article>
       <article class="step">
         <div class="sn">4</div>
         <div class="sb">
-          <h3>Anahtarlar yerinde, depoda değil</h3>
+          <h3>Yayına al</h3>
           <div class="row4">
-            <div><b>Ne yapacaksın</b><span>Proje ayarlarından adresi ve açık anahtarı <code>.env.local</code> dosyasına yaz; dosyanın <code>.gitignore</code>'da olduğunu kontrol et. Bir sayfa tablodan veri listelesin; ajana şu istemi verebilirsin.</span></div>
-            <div><b>Neden</b><span>Depoya giren anahtar sızmış sayılır; açık anahtar bile olsa alışkanlık baştan kurulur.</span></div>
-            <div><b>Ekranda</b><span>Yerelde sayfa üç satırı gösteriyor; Network'te <code>rest/v1/ilanlar</code> isteği 200 dönüyor.</span></div>
+            <div><b>Ne yapacaksın</b><span>İki yoldan biri: Vercel'e GitHub hesabınla gir, "Add New Project", takım deposunu seç, "Deploy". Ya da Hafta 2'deki gibi GitHub Pages. Çıkan adresi README'nin en üstüne yaz.</span></div>
+            <div><b>Neden Vercel</b><span>Önümüzdeki haftalarda veritabanı ve giriş eklenince aynı yerden devam edeceğiz. GitHub Pages bu hafta için de yeter.</span></div>
+            <div><b>Ekranda</b><span>Adres telefondan açılıyor.</span></div>
           </div>
-          <pre class="istem">Bu proje Next.js ve Supabase kullanıyor. app/ilanlar/page.tsx adında bir sayfa ekle: sunucu bileşeni olsun, "ilanlar" tablosundan baslik ve aciklama alanlarını çekip liste olarak göstersin. Anahtarları .env.local'dan okusun, hiçbir anahtarı koda yazma. Sonra npm run build çalıştır ve çıktıyı göster.</pre>
-          <label class="check"><input type="checkbox" data-done="g4"> Veri yerelde listeleniyor, anahtar dosyası depoda değil.</label>
-        </div>
-      </article>
-      <article class="step">
-        <div class="sn">5</div>
-        <div class="sb">
-          <h3>Vercel'e bağla, adresi yaz</h3>
-          <div class="row4">
-            <div><b>Ne yapacaksın</b><span>Vercel'e GitHub ile gir, New Project, takım deposunu seç, ortam değişkenlerini gir, Deploy. Üretim adresini README'nin en üstüne yaz. Bir sözcük değiştirip yeni dala gönder: önizleme adresinin geldiğini gör.</span></div>
-            <div><b>Neden</b><span>Önce yayınla, sonra geliştir; Demo Günü'ne kadar her hafta canlı bir adres olacak.</span></div>
-            <div><b>Olmadıysa</b><span>Derleme günlüğünü oku: kırmızı satır genelde eksik ortam değişkeni ya da tip hatasıdır; ajana günlüğü yapıştırıp "bu hatayı açıkla" de, düzeltmeyi kendin uygula.</span></div>
-          </div>
-          <label class="check"><input type="checkbox" data-done="g5"> Adres telefondan açılıyor ve veriyi gösteriyor.</label>
+          <label class="check"><input type="checkbox" data-done="g4"> Adres telefondan açılıyor.</label>
         </div>
       </article>
     </div>
-    <div class="callout lab"><b>Kabul ölçütleri:</b> üretim adresi herkese açık ve tablodaki veriyi gösteriyor; Security Advisor'da tablo için "publicly accessible" uyarısı yok; depoda gizli anahtar yok; README'de tanım, şema ve adresler var; dört farklı üyeden commit var.</div>
-    <div class="callout"><b>Teslim nasıl yapılır:</b> <a href="../../teslimler/">haftalık teslim sayfasındaki</a> formu her üye kendi adıyla doldurur. Hafta: "Hafta 4 · Uçtan uca ürün ve mimari". Yayındaki adres: ürünün üretim adresi. Depo: takım deposu. Yapay zekâ notu: bu hafta kendin ne yaptın, ajan ne yaptı, ürettiği şeyde neyi değiştirmek zorunda kaldın; bir de Network'te gördüğün bir isteğin adresi ve durum kodu. Süre: bu dersi izleyen Pazar 23:59.</div>
-    <p class="prose">Puan 0 ile 3 arasında: 3, ölçütlerin hepsi tam ve notun somut; 2, bir ölçüt eksik ya da not yüzeysel; 1, yayın var ama veri gelmiyor, kural kapalı ya da anahtar depoya girmiş; 0, teslim yok ya da adres açılmıyor. 1 alan öğrenci bir hafta içinde düzeltip 2'ye çıkabilir.</p>
+    <div class="callout lab"><b>Kabul ölçütleri:</b> adres telefondan açılıyor; README'de tanım, üç kutu ve adres var; dört üyeden en az birer commit var.</div>
+    <div class="callout"><b>Teslim:</b> <a href="../../teslimler/">haftalık teslim sayfasındaki</a> formu her üye kendi adıyla doldurur. Hafta "Hafta 4 · Uçtan uca ürün ve mimari"; yayındaki adres ürünün adresi; depo takım deposu; yapay zekâ notuna bu hafta kendin ne yaptığını, aracın ne yaptığını ve ürettiği şeyde neyi değiştirdiğini yaz. Süre: bu dersi izleyen Pazar 23:59. Puan 0 ile 3 arası: 3 eksiksiz, 2 bir eksik, 1 kısmen, 0 yok.</div>
   </section>
 
   <section id="izle" aria-labelledby="izle-h">
-    <div class="section-head"><h2 id="izle-h">İzle</h2><span class="muted">kısa, seçilmiş</span></div>
+    <div class="section-head"><h2 id="izle-h">İzle ve oku</h2></div>
     <div class="grid2">
-      <div class="card"><h3><a href="https://www.youtube.com/watch?v=XhEr3WQMlOo" target="_blank" rel="noopener">Bir Web İsteğinin Yolculuğu</a></h3><p>Turkish CEng · 6 dakika · Türkçe · ilk 4 dakika yeter. Sunumdaki "isteğin yolu" şemasının anlatımlı hâli.</p></div>
-      <div class="card"><h3><a href="https://www.youtube.com/watch?v=TE074wDzlH0" target="_blank" rel="noopener">Next.js Projeni 3 Dakikada Vercel'de Yayına Al</a></h3><p>Yusuf İzzet · 3,5 dakika · Türkçe. Görevin 5. adımı, düğme düğme.</p></div>
-      <div class="card"><h3><a href="https://www.youtube.com/watch?v=tsm3wJzzU8Q" target="_blank" rel="noopener">Vibe Coding'in Karanlık Yüzü</a></h3><p>Yusuf İpek · 16 dakika · Türkçe · sunumda ilk 4 dakikasını izledik. Kanıt ile görüşü ayırarak izle.</p></div>
-      <div class="card"><h3><a href="https://www.youtube.com/watch?v=hwIZHSiCNmk" target="_blank" rel="noopener">Yeni Başlayanlar için Claude Code nasıl kullanılır?</a></h3><p>Doruk Yalçınsoy · 5 dakika · Türkçe. Ajanın izin istediği anlara dikkat et.</p></div>
-      <div class="card"><h3><a href="https://www.youtube.com/watch?v=Dkx5ydvtpCA" target="_blank" rel="noopener">10 Rendering Patterns for Web Apps</a></h3><p>Beyond Fireship · 7 dakika · İngilizce · ilk 4,5 dakika. SPA, SSR, statik ve hidrasyon tek videoda; hızlı konuşur, durdurup düşün.</p></div>
+      <div class="card"><h3><a href="https://www.youtube.com/watch?v=XhEr3WQMlOo" target="_blank" rel="noopener">Bir Web İsteğinin Yolculuğu</a></h3><p>Turkish CEng · 6 dakika · Türkçe. Sunumda ilk 4 dakikasını izledik; "istemci" bizim ekran, "sunucu" bizim program.</p></div>
+      <div class="card"><h3><a href="https://www.youtube.com/watch?v=TE074wDzlH0" target="_blank" rel="noopener">Projeni 3 Dakikada Vercel'de Yayına Al</a></h3><p>Yusuf İzzet · 3,5 dakika · Türkçe. Görevin 4. adımı düğme düğme.</p></div>
     </div>
-  </section>
-
-  <section id="oku" aria-labelledby="oku-h">
-    <div class="section-head"><h2 id="oku-h">Oku</h2><span class="muted">resmi belge önce</span></div>
-    <ul class="prose">
-      <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works" target="_blank" rel="noopener">MDN: Web nasıl çalışır</a>: isteğin yolunun dört adımı, en sade anlatım.</li>
-      <li><a href="https://web.dev/articles/rendering-on-the-web" target="_blank" rel="noopener">web.dev: Rendering on the web</a>: SSR, CSR ve statik üretimin ölçülebilir farkları.</li>
-      <li><a href="https://nextjs.org/docs/app/getting-started/server-and-client-components" target="_blank" rel="noopener">Next.js: sunucu ve istemci bileşenleri</a>: hangi parça sunucuda, hangisi tarayıcıda; <code>'use client'</code> ne zaman.</li>
-      <li><a href="https://supabase.com/docs/guides/database/postgres/row-level-security" target="_blank" rel="noopener">Supabase: satır düzeyi güvenlik</a>: bu haftanın en önemli sayfası; politikanın nasıl yazıldığı.</li>
-      <li><a href="https://github.com/vercel/next.js/tree/canary/examples/with-supabase" target="_blank" rel="noopener">Next.js with-supabase şablonu</a>: görevde açtığın projenin kaynağı.</li>
-      <li><a href="https://vercel.com/docs/deployments/environments" target="_blank" rel="noopener">Vercel: yayın ortamları</a>: üretim, önizleme ve yerel ortam farkı.</li>
-      <li><a href="https://survey.stackoverflow.co/2025/ai" target="_blank" rel="noopener">Stack Overflow Developer Survey, yapay zekâ bölümü</a>: sunumdaki yüzdelerin kaynağı.</li>
-      <li><a href="https://www.infoq.com/news/2024/06/vercel-serverless-scale-expenses/" target="_blank" rel="noopener">InfoQ: Cara ve sunucusuz fatura</a>: bir haftada 98 bin dolarlık fatura; Hafta 8'in ön okuması.</li>
+    <ul class="prose" style="margin-top:14px">
+      <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works" target="_blank" rel="noopener">MDN: Web nasıl çalışır</a>: ekran ve programın konuşmasının en sade anlatımı.</li>
+      <li><a href="https://vercel.com/docs/getting-started-with-vercel" target="_blank" rel="noopener">Vercel: başlangıç</a>: görevin 4. adımının resmi belgesi.</li>
+      <li><a href="https://docs.github.com/en/pages/quickstart" target="_blank" rel="noopener">GitHub Pages: hızlı başlangıç</a>: Vercel yerine bunu seçersen.</li>
+      <li><a href="https://survey.stackoverflow.co/2025/ai" target="_blank" rel="noopener">Stack Overflow geliştirici anketi, yapay zekâ bölümü</a>: sunumdaki yüzdelerin kaynağı.</li>
     </ul>
-  </section>
-
-  <section id="nasil" aria-labelledby="nasil-h">
-    <div class="section-head"><h2 id="nasil-h">How to know: sahadakiler nasıl takip ediyor?</h2></div>
-    <p class="prose">Resmi belge önce gelir: çatının ve servisin kendi "docs" sayfası, blog ve video sonra. Yılda dört anket vardır: State of JS, Stack Overflow, Octoverse ve JetBrains; bir araç bunlardan birinde görünmüyorsa "yaygın" değildir. Haftada bir bülten yeter: <a href="https://thisweekinreact.com/" target="_blank" rel="noopener">This Week in React</a> ya da <a href="https://bytes.dev/" target="_blank" rel="noopener">Bytes</a>. Deneme ortamı ücretsizdir: her dal için önizleme adresi, ücretsiz veritabanı projesi, öğrenci paketi. Kaliteyi üç soruyla ayırt edersin: kaynak birincil mi, aktarım mı; tarih ve sürüm yazıyor mu; iddia ölçülebilir mi, yoksa "herkes kullanıyor" mu?</p>
   </section>
 
   <section id="sozluk" aria-labelledby="sozluk-h">
     <div class="section-head"><h2 id="sozluk-h">Sözlük</h2><span class="muted">karta tıkla</span></div>
     <div class="kartlar">
-      <button class="kart" type="button"><span class="kart-on">SPA</span><span class="kart-arka">Tek sayfa uygulaması: tek HTML yüklenir, gerisi JavaScript ile çizilir.</span></button>
-      <button class="kart" type="button"><span class="kart-on">SSR</span><span class="kart-arka">Sunucuda işleme: sunucu hazır HTML yollar, düğmeler JavaScript gelince çalışır.</span></button>
-      <button class="kart" type="button"><span class="kart-on">Hidrasyon</span><span class="kart-arka">Sunucudan gelen HTML'e tarayıcıda etkileşim bağlanması.</span></button>
-      <button class="kart" type="button"><span class="kart-on">Meta-çerçeve</span><span class="kart-arka">Arayüz kütüphanesinin üstüne yönlendirme, sunucu ve yayın düzeni ekleyen katman: Next.js.</span></button>
-      <button class="kart" type="button"><span class="kart-on">BaaS</span><span class="kart-arka">Servis olarak arka uç: veritabanı, kimlik ve depolamayı hazır veren servis: Supabase.</span></button>
-      <button class="kart" type="button"><span class="kart-on">RLS</span><span class="kart-arka">Satır düzeyi güvenlik: tablodaki her satırı kimin okuyup yazabileceğini söyleyen kural.</span></button>
-      <button class="kart" type="button"><span class="kart-on">CDN</span><span class="kart-arka">Kullanıcıya yakın kenar sunucular; statik dosyaları oradan verir.</span></button>
-      <button class="kart" type="button"><span class="kart-on">Önizleme yayını</span><span class="kart-arka">Üretim dışı her dal için üretilen geçici adres.</span></button>
-      <button class="kart" type="button"><span class="kart-on">Ortam değişkeni</span><span class="kart-arka">Kodun dışında tutulan ayar ve anahtar; yerelde dosyada, yayında panelde.</span></button>
-      <button class="kart" type="button"><span class="kart-on">Kodlama ajanı</span><span class="kart-arka">Kod tabanını okuyan, dosya düzenleyen, komut çalıştıran yapay zekâ aracı.</span></button>
+      <button class="kart" type="button"><span class="kart-on">Ön yüz (istemci)</span><span class="kart-arka">Kullanıcının tarayıcısında çalışan kısım; derste "ekran".</span></button>
+      <button class="kart" type="button"><span class="kart-on">Arka uç (sunucu)</span><span class="kart-arka">Başka bir bilgisayarda çalışan, isteği alıp karar veren program.</span></button>
+      <button class="kart" type="button"><span class="kart-on">Veritabanı</span><span class="kart-arka">Bilgilerin tablolarda durduğu yer.</span></button>
+      <button class="kart" type="button"><span class="kart-on">İstek</span><span class="kart-arka">Ekranın programa gönderdiği mesaj; Network sekmesinde her satır bir istek.</span></button>
+      <button class="kart" type="button"><span class="kart-on">Yayın (deploy)</span><span class="kart-arka">Kodun internette herkesin açabileceği bir adrese konması.</span></button>
+      <button class="kart" type="button"><span class="kart-on">Kodlama aracı</span><span class="kart-arka">Kodu senin isteğine göre yazan yapay zekâ: Copilot, Cursor, Claude.</span></button>
     </div>
   </section>
 
   <section id="sinav" aria-labelledby="sinav-h">
     <div class="section-head"><h2 id="sinav-h">Sınavda nasıl sorulur?</h2><span class="muted">önce kendin cevapla</span></div>
     <details class="faq">
-      <summary>1. Takımınız kulüp etkinlik takvimi yapıyor; sayfalar çoğunlukla okunuyor, günde birkaç kişi etkinlik ekliyor. Statik üretim, SPA ve SSR arasında seçin, gerekçelendirin.</summary>
-      <div class="ans"><p>Seyrek güncellenen içerik için statik üretim en ucuz ve hızlıdır; ekleme formu tarayıcıda çalışan küçük bir parça olur. Saf SPA, JavaScript yüklenmeden hiçbir şey göstermediği için ilk açılış ve arama açısından en zayıf seçenektir. SSR sık değişen ve paylaşılan sayfalar için anlamlıdır; burada gerek yok.</p></div>
+      <summary>1. Bir yemek sipariş uygulamasında kullanıcı "siparişlerim" düğmesine bastı. Ekran, program ve veritabanı bu sırada ne yapar?</summary>
+      <div class="ans"><p>Ekran isteği gönderir ve gelen listeyi gösterir. Program isteği alır, kullanıcının kim olduğuna bakar, yalnız onun siparişlerini ister. Veritabanı siparişler tablosundan o kullanıcıya ait satırları verir. Başkasının siparişini görmeyi engelleyen kontrol program ve veritabanında durur.</p></div>
     </details>
     <details class="faq">
-      <summary>2. Arkadaşınız "açık anahtar zaten herkese görünüyor, satır kuralını açmadım, adresi kimse bilmiyor" diyor. Riski ve düzeltmeyi anlatın.</summary>
-      <div class="ans"><p>Anahtar tarayıcı kaynağında ve Network sekmesinde görünür; kuralsız tablo adresi bilen herkese okunur ve yazılır. Düzeltme: her tabloda satır kuralı açık, yalnız gereken işlem için politika, Security Advisor'da uyarı sıfır; sunucu anahtarı yalnız sunucuda ve tarayıcıya giden önekle adlandırılmamış.</p></div>
-    </details>
-    <details class="faq">
-      <summary>3. Demo Günü sabahı yayın yeşil ama sayfa hata gösteriyor. İlk beş dakikada hangi sırayla bakarsınız?</summary>
-      <div class="ans"><p>Network'te başarısız isteğin durumu ve cevabı; veritabanı isteği bağlantı hatası veriyorsa ücretsiz projenin hareketsizlikten uyuyup uyumadığı; yetki hatası ya da boş veri geliyorsa üretim ortam değişkenleri ve politika; sonra iki servisin durum sayfaları.</p></div>
+      <summary>2. Arkadaşın "kodu yapay zekâ yazdı, çalışıyor, hemen yayına alalım" diyor. Ne dersin?</summary>
+      <div class="ans"><p>Önce yapay zekânın neyi değiştirdiğine satır satır bakarız ve kendimiz deneriz. "Çalışıyor" ile "doğru" aynı şey değil: bir kontrolü, örneğin veritabanındaki okuma kuralını, unutmuş olabilir. 170 açık uygulama olayında uygulamalar çalışıyordu ama veriler herkese açıktı.</p></div>
     </details>
   </section>
 
   <section id="gelecek" aria-labelledby="gelecek-h">
     <div class="next">
       <span class="lbl">Gelecek hafta</span>
-      <h3>GitHub takım akışı ve yapay zekâ kodlama ajanları</h3>
-      <p>Dal, pull request, inceleme ve otomasyon; ajana bir özellik yaptırıp insan gözüyle incelemek. Gelmeden önce takım deposunda herkesin en az bir commit'i olsun ve üretim adresi README'de yazsın.</p>
+      <h3>GitHub'da takımla birlikte çalışmak ve yapay zekâ kodlama araçları</h3>
+      <p>Aynı depoda dört kişi nasıl birbirinin işini bozmadan çalışır, yapay zekânın yazdığı kod nasıl incelenir. Gelmeden önce ürününün adresi README'de yazsın.</p>
     </div>
   </section>
 
@@ -308,33 +203,33 @@
 <script src="../../assets/ders.js"></script>
 <script>
 window.QUIZ = {
-  yol: {
-    title: "Kendini sına: isteğin yolu ve sayfa biçimleri",
+  parcalar: {
+    title: "Kendini sına: üç parça ve hazır servisler",
     qs: [
-      { q: "Kampüs Pano'da kullanıcı 'ilanı kaydet' dedi. İstek hangi sırayla ilerler?",
-        o: ["Tarayıcı → DNS ve CDN → API → kimlik kontrolü → veritabanı satır kuralı", "Tarayıcı → veritabanı → API → kimlik kontrolü", "Tarayıcı → kimlik kontrolü → DNS → veritabanı", "Veritabanı → API → tarayıcı"],
-        a: 0, e: "Tarayıcı veritabanıyla doğrudan konuşmaz; arada adres çözümü, API ve kimlik kapıları vardır, veritabanı en sonda satır kuralına bakar." },
-      { q: "Bir ürünün 'hakkında' sayfası ayda bir değişiyor. En uygun biçim hangisi?",
-        o: ["Statik üretim: önceden üretilir, CDN'den anında gelir", "SPA: her açılışta JavaScript ile çizilir", "SSR: her istekte sunucu yeniden üretir", "Hiçbiri; sayfa veritabanından okunmalı"],
-        a: 0, e: "Seyrek değişen sayfa için statik üretim en ucuz ve hızlı yol. SSR her istekte sunucuyu çalıştırır, SPA ilk açılışı boş bırakır." },
-      { q: "'Sayfa göründü ama düğme çalışmıyor' şikâyeti hangi anın belirtisidir?",
-        o: ["Hidrasyon henüz bitmedi: HTML geldi, JavaScript bağlanmadı", "Veritabanı uyudu", "Alan adı çözülmedi", "Önizleme yayını silindi"],
-        a: 0, e: "Sunucuda işlenen sayfa önce HTML olarak görünür; etkileşim JavaScript gelip olay dinleyicilerini bağlayınca başlar." }
+      { q: "OBS'de notlarına bakıyorsun. Notların nerede durur?",
+        o: ["Veritabanında, tablolarda", "Ekranda, sayfanın içinde", "Senin tarayıcının hafızasında", "GitHub'da"],
+        a: 0, e: "Notlar üniversitenin veritabanında durur. Ekran yalnız program aracılığıyla gelen notları gösterir." },
+      { q: "Takımın kodunu internete koyan, her güncellemede kendiliğinden yeniden yayınlayan servis hangisi?",
+        o: ["Vercel", "Supabase", "Copilot", "Network sekmesi"],
+        a: 0, e: "Vercel GitHub'daki kodu alıp yayınlar. Supabase veritabanı ve giriş verir, Copilot kodu yazar." },
+      { q: "Bir değişiklik internete hangi sırayla çıkar?",
+        o: ["Yaz, GitHub'a gönder, Vercel yayınlar, adres açılır", "Vercel yayınlar, sonra kod yazılır", "Dosyalar her seferinde elle sunucuya yüklenir", "Veritabanına yazılır, oradan yayınlanır"],
+        a: 0, e: "GitHub'a gönderdiğin her şeyi Vercel kendiliğinden alıp yayınlar; elle yükleme yoktur." }
     ]
   },
-  yz: {
-    title: "Kendini sına: arka uç, yapay zekâ ve yayın",
+  kontrol: {
+    title: "Kendini sına: kontrol ve yayın",
     start: 4,
     qs: [
-      { q: "Tarayıcıya giden Supabase anahtarı herkesin görebileceği bir yerde duruyor. Veriyi ne korur?",
-        o: ["Tablonun üstündeki satır düzeyi güvenlik kuralı ve politikalar", "Anahtarın uzun olması", "Adresin kimseye söylenmemesi", "Vercel'in ücretli planı"],
-        a: 0, e: "Açık anahtar kapıya kadar götürür; tabloyu kural korur. Kural yoksa adresi bilen herkes okur ve yazar." },
-      { q: "Ajan 'özelliği ekledim, derleme geçti' dedi. İlk adım?",
-        o: ["Değişen dosyaların farkını satır satır okumak, sonra çalıştırıp denemek", "Hemen üretime göndermek", "Aynı istemi başka ajana vermek", "Test yazmasını isteyip testler geçince yayınlamak"],
-        a: 0, e: "Derleme geçmesi 'yanlış ama geçerli' kodu elemez; en yaygın sorun 'neredeyse doğru' kod. Fark okumak beş dakika, üretimde hata bulmak beş saat." },
-      { q: "Demo Günü sabahı ücretsiz veritabanı projesi cevap vermiyor. En olası neden?",
-        o: ["Proje bir süre hareketsiz kaldığı için duraklatıldı", "Alan adı süresi doldu", "TypeScript hatası", "Tarayıcı önbelleği"],
-        a: 0, e: "Ücretsiz katmanın kuralı: hareketsiz proje uyur. Demo öncesi panelden uyandırmak ve bir hafta boyunca ürüne dokunmak gerekir." }
+      { q: "Başkasının bilgisini görmeni engelleyen kontrol nerede olmalı?",
+        o: ["Programda ve veritabanında", "Yalnız ekranda", "Sayfanın kaynağını gizleyerek tarayıcıda", "Şifrenin uzunluğunda"],
+        a: 0, e: "Ekran senin bilgisayarında çalışır, değiştirilebilir. Kontrol ancak kullanıcının dokunamadığı yerde güvenilirdir." },
+      { q: "Yapay zekâ \"özelliği ekledim, çalışıyor\" dedi. İlk adım?",
+        o: ["Neyi değiştirdiğine satır satır bakıp kendin denemek", "Hemen yayına almak", "Aynı şeyi başka bir yapay zekâya sormak"],
+        a: 0, e: "\"Çalışıyor\" ile \"doğru\" aynı değil; bir kontrolü unutmuş olabilir. Açıklayamadığın kod senin kodun değildir." },
+      { q: "\"Önce yayınla, sonra geliştir\" ne demek?",
+        o: ["İlk sayfayı hemen internete koyup her hafta üstüne bir parça eklemek", "Her şeyi bitirip son hafta yayınlamak", "Önce tasarımı bitirip sonra kod yazmak"],
+        a: 0, e: "Her hafta canlı bir adres olduğu için sorunlar erken görülür, Demo Günü'ne çalışan bir ürünle gelinir." }
     ]
   }
 };
