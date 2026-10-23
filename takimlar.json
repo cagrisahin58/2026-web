@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-10-22T08:32:30.986Z",
+  "guncelleme": "2026-10-23T08:28:32.108Z",
   "ayar": {
     "takimBoyu": 4,
     "kilitGun": 7
@@ -300,7 +300,7 @@
       "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/13",
       "yazar": "EMRE-seng",
-      "guncelleme": "2026-10-15T07:47:36Z"
+      "guncelleme": "2026-10-22T08:32:32Z"
     },
     {
       "id": 14,
@@ -327,7 +327,7 @@
       ],
       "github": "https://github.com/cagrisahin58/2026-web/issues/14",
       "yazar": "harunyahyailcihan",
-      "guncelleme": "2026-10-15T07:47:49Z"
+      "guncelleme": "2026-10-22T08:32:34Z"
     },
     {
       "id": 15,
@@ -360,7 +360,7 @@
       "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/15",
       "yazar": "muraterbas13",
-      "guncelleme": "2026-10-15T08:19:16Z"
+      "guncelleme": "2026-10-22T08:32:36Z"
     },
     {
       "id": 16,
@@ -388,7 +388,7 @@
       "klasor": "",
       "olusturma": "2026-10-15T18:00:46.000Z",
       "kilit": "2026-10-22T18:00:46.000Z",
-      "kilitli": false,
+      "kilitli": true,
       "durum": "gecerli",
       "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/16",
@@ -421,7 +421,7 @@
       "klasor": "",
       "olusturma": "2026-10-15T19:56:22.000Z",
       "kilit": "2026-10-22T19:56:22.000Z",
-      "kilitli": false,
+      "kilitli": true,
       "durum": "gecerli",
       "hatalar": [],
       "github": "https://github.com/cagrisahin58/2026-web/issues/17",
@@ -442,7 +442,7 @@
       "klasor": "",
       "olusturma": "2026-10-15T20:23:34.000Z",
       "kilit": "2026-10-22T20:23:34.000Z",
-      "kilitli": false,
+      "kilitli": true,
       "durum": "hatali",
       "hatalar": [
         "Takım tam olarak 4 kişi olmalı (şu an 1 satır var)."
