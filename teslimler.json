@@ -1,4 +1,25 @@
 {
-  "guncelleme": "2026-10-24T08:03:47.815Z",
-  "teslimler": []
+  "guncelleme": "2026-10-24T15:07:29.861Z",
+  "teslimler": [
+    {
+      "id": 19,
+      "hafta": 3,
+      "haftaAd": "Hafta 3 · CSS",
+      "numara": "250912024",
+      "ad": "Dilara Bozkurt",
+      "yayin": "https://github.com/dilaracod.github.io",
+      "depo": "https://github.com/dilaracod/dilaracod.github.io",
+      "bozuk": "https://github.com/dilaracod/dilaracod.github.io/tree/86cfa931ebc7141a8c718266e1289b91e7a6ac05/bozuk-stil",
+      "yzNotu": "Yapay zekadan yardım aldım.",
+      "takildigi": "",
+      "birlikte": "",
+      "olusturma": "2026-10-24T15:07:16.000Z",
+      "guncelleme": "2026-10-24T15:07:16Z",
+      "durum": "gecerli",
+      "hatalar": [],
+      "gecerli_son": true,
+      "github": "https://github.com/cagrisahin58/2026-web/issues/19",
+      "yazar": "dilaracod"
+    }
+  ]
 }
