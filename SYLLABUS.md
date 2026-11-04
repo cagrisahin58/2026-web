@@ -58,6 +58,8 @@ Takım olarak nasıl çalışılır? Dal, pull request ve inceleme akışını, 
 
 Proje: M1. İskelet takım deposundan yayında.
 
+[Hafta 5 ders notu](https://cagrisahin58.github.io/2026-web/weeks/hafta-05/)
+
 ### Hafta 6 · Veri katmanı: web VTYS
 
 Ürünün verisi nerede ve nasıl saklanır? İlişkisel ve doküman modelini, yönetilen Postgres hizmetlerini (Supabase, Neon), Firestore ve MongoDB Atlas'ı, ORM'i, veri modellemeyi, satır düzeyinde erişim kuralını (RLS), migration'ı ve yedeklemeyi görürsün. Ürünün veri modelini çıkarır, çevrimiçi bir veritabanını bağlar ve RLS'yi açarsın.

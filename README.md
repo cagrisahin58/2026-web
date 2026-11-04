@@ -19,6 +19,7 @@ Bu ders uçtan uca web ürünü geliştirmeyi öğretir: araçlar, mimari, veri,
 | Hafta 2 · HTML | <https://cagrisahin58.github.io/2026-web/weeks/hafta-02/> |
 | Hafta 3 · CSS | <https://cagrisahin58.github.io/2026-web/weeks/hafta-03/> |
 | Hafta 4 · Uçtan uca ürün ve mimari | <https://cagrisahin58.github.io/2026-web/weeks/hafta-04/> |
+| Hafta 5 · GitHub akışı ve yapay zekâ ajanları | <https://cagrisahin58.github.io/2026-web/weeks/hafta-05/> |
 
 ## Klasörler
 

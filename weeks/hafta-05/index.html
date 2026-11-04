@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hafta 5 · GitHub takım akışı ve yapay zekâ kodlama ajanları</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/ders.css">
+<style>
+.katmanlar{display:grid;gap:8px}
+.katman{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.katman b{font-family:var(--display)}
+.katman span{color:var(--muted);font-size:.93rem;text-align:right}
+.katman.bu{border-color:var(--theory);background:var(--theory-soft)}
+.katman.bu span::after{content:" · bu hafta";color:var(--theory);font-weight:600}
+.katman.gecti{border-style:dashed}
+.katman.gecti span::after{content:" · işlendi";color:var(--lab);font-weight:600}
+.istem{background:var(--code-bg);color:var(--code-ink);border-radius:10px;padding:12px 14px;font:.92rem/1.5 var(--mono);white-space:pre-wrap;margin:8px 0 0}
+.evet{color:var(--lab);font-weight:600}
+</style>
+</head>
+<body data-week="5">
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="dot" aria-hidden="true"></span>YZM205 · Hafta 5<span class="long">&nbsp;· GitHub akışı ve ajanlar</span></div>
+    <nav class="jump" aria-label="Bölümler">
+      <a href="#harita">Harita</a><a href="#ozet">Özet</a><a href="#olay">Olay</a><a href="#araclar">Araçlar</a><a href="#karar">Karar</a><a href="#gorev">Görev</a><a href="#izle">İzle</a><a href="#oku">Oku</a><a href="#sozluk">Sözlük</a><a href="#sinav">Sınav</a>
+    </nav>
+    <button class="themebtn" id="themeBtn" type="button">Koyu tema</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" aria-labelledby="baslik">
+    <div>
+      <div class="eyebrow">YZM205 Web Tasarımı ve Programlama · Hafta 5 · GitHub akışı ve yapay zekâ ajanları</div>
+      <h1 id="baslik">GitHub takım akışı ve yapay zekâ kodlama ajanları</h1>
+      <p class="lede">Bu hafta takım deponuza bir kapı kuruyorsun: main'e giren her satır bir pull request'ten geçecek, ajanın yazdığı kod da aynı kapıdan girecek. Sunumun özeti; evde 20 dakikada okunur, görev yapılırken yanında durur.</p>
+      <div class="meta">
+        <span class="chip theory">Sunum 70 dk</span>
+        <span class="chip lab">Proje atölyesi</span>
+        <span class="chip ship">Teslim: dersi izleyen Pazar 23:59</span>
+      </div>
+      <div class="meta">
+        <a class="btn primary" href="sunum.html">Sunum</a>
+        <a class="btn" href="../../teslimler/">Haftalık teslim</a>
+      </div>
+    </div>
+    <div class="grid3">
+      <div class="card"><h3>1</h3><p>Issue'dan birleştirmeye GitHub akışını kurup takımının main dalını koruyabileceksin.</p></div>
+      <div class="card"><h3>2</h3><p>Bir kodlama ajanına Issue verip gelen PR'yi satır satır inceleyebileceksin.</p></div>
+      <div class="card"><h3>3</h3><p>Takım deposunda ilk özellik ajanla yazılmış, incelemesi insanla yapılmış olacak.</p></div>
+    </div>
+  </section>
+
+  <section id="harita" aria-labelledby="harita-h">
+    <div class="section-head"><h2 id="harita-h">Ürünün neresindeyiz?</h2><span class="muted">her hafta aynı harita</span></div>
+    <p class="prose">Geçen hafta istemci katmanı; bu hafta yan sütun: takım ve araçlar. Kod hangi katmanda yaşarsa yaşasın depoya bu sütundaki kurallarla girer.</p>
+    <div class="grid2">
+      <div class="katmanlar">
+        <div class="katman"><b>Kullanıcı ve cihazlar</b><span>tarayıcı, telefon, masaüstü</span></div>
+        <div class="katman gecti"><b>İstemci uygulaması</b><span>React, Next.js, PWA</span></div>
+        <div class="katman"><b>API ve iş mantığı</b><span>sunucusuz fonksiyonlar, kimlik, dil modeli API'si</span></div>
+        <div class="katman"><b>Veri</b><span>Postgres, depolama, önbellek</span></div>
+        <div class="katman"><b>Altyapı</b><span>bulut, CDN, alan adı, dağıtım hattı</span></div>
+      </div>
+      <div class="katmanlar">
+        <div class="katman bu"><b>Takım ve araçlar</b><span>GitHub, yapay zekâ ajanları</span></div>
+        <div class="katman"><b>Güvenlik</b><span>açık analizi</span></div>
+        <div class="katman"><b>Kalite</b><span>test, kod analizi</span></div>
+        <div class="katman"><b>Pazar</b><span>mağaza, yasal, analitik</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ozet" aria-labelledby="ozet-h">
+    <div class="section-head"><h2 id="ozet-h">Özet: bu haftanın kavramları</h2><span class="muted">sunumla aynı sıra</span></div>
+
+    <h3>1. main'e giren her satır aynı yoldan geçer</h3>
+    <p class="prose">GitHub flow yedi duraktır: Issue, dal (branch), küçük commit'ler, pull request (PR), başka bir üyenin incelemesi, otomatik denetim (CI: lint, derleme, test), birleştirme ve Issue'nun kapanması. Dört kişilik takımda her Issue bir dal, her dal bir PR, her PR bir inceleyici demektir. main hiç bozulmaz, her adım geri alınabilir. Ajan da aynı yoldan geçer; ona ayrı kapı yok.</p>
+
+    <h3>2. İyi Issue, ajana verilen görev tanımının kendisidir</h3>
+    <p class="prose">İki satırlık Issue'ya ajan iki satırlık cevap verir; kabul ölçütü yazılmış Issue'ya PR. Şöyle yaz: başlık ("İlan kartına fotoğraf ekle"), kabul ölçütleri (ilk fotoğraf listede, fotoğrafsız ilanda yer tutucu, lint ve build geçer), kapsam dışı (fotoğraf yükleme formu). Büyük özellik önce belirtime, sonra plana, sonra küçük Issue'lara bölünür. Projects panosu Issue'ları sütunlarda izler.</p>
+
+    <h3>3. PR bir tartışma alanıdır</h3>
+    <p class="prose">PR'de özet, Issue bağlantısı, satır yorumları ve karar birikir. İnceleyicinin üç kararı var: yorum, onay, değişiklik iste. Değişiklik istendiyse aynı dala yeni bir commit atarsın; PR kendiliğinden güncellenir. Kaç onay gerektiğini koruma kuralı belirler; açanın kendi onayı sayılmaz. İnceleme Files changed sekmesinde, başlığa değil değişen satırlara bakarak yapılır.</p>
+    <div class="quiz" data-quiz="akis"></div>
+
+    <h3>4. Koruma kuralı: main'e doğrudan push neden reddedilir?</h3>
+    <p class="prose">Ruleset (koruma kuralı) sunucuda çalışır: main için PR zorunlu, en az bir onay, durum denetimleri yeşil, zorla push yasak. Doğrudan push'u sunucu reddeder; dal, PR, onay ve CI yolu geçer. Kimse istisna değildir, depo sahibi de dal açar. Herkese açık depoda kurallar ücretsizdir; depoyu açık tutmanın nedeni bu.</p>
+
+    <h3>5. Commit mesajı ve "Closes #12": makinenin de okuduğu iki cümle</h3>
+    <p class="prose">Conventional Commits mesajı tür(kapsam): açıklama biçimine bağlar: feat yeni özellik, fix düzeltme, ünlem (feat!) geriye uyumsuz değişiklik. Sürüm numarası ve değişiklik günlüğü bu düzenden otomatik üretilir; commitlint kuralı commit anında denetler. PR açıklamasının son satırına "Closes #12" yazarsan PR main'e birleşince Issue kendiliğinden kapanır.</p>
+
+    <h3>6. Aynı satırı ikiniz değiştirince: çatışma</h3>
+    <p class="prose">Sen dalında başlığı "İlanlar" yaptın, arkadaşın main'de aynı satırı "Kampüs Pano İlanları" yaptı. Git karar vermez; dosyaya <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> ve <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> işaretleriyle iki sürümü yazar, birleştirme düğmesi çözülene kadar kapanır, satırı sen seçersin. Basit çatışma tarayıcıda, karmaşığı yerel klonda çözülür. Azaltmanın yolu küçük PR ve dalı main ile sık güncelleme.</p>
+    <div class="quiz" data-quiz="koruma"></div>
+
+    <h3>7. Bulut ajanı nerede çalışır, yetkisi nereye kadar?</h3>
+    <p class="prose">Yerel ajan editöründe, gözünün önünde, izin isteyerek çalışır. Bulut ajanı Issue'yu alır, geçici bir bulut ortamında depoyu klonlar, talimat dosyasını okur, kodu değiştirir, lint ve testi koşar, yalnız copilot/ önekli bir dala yazar ve taslak PR açar. O PR'deki iş akışları bir insan onaylamadan çalışmaz; birleştiren de sensin. Yetki alanı dar diye inceleme gevşemez: kontrollü deneyde deneyimli geliştiriciler ajanla yüzde 19 yavaşladı ama yüzde 20 hızlandıklarını sandı.</p>
+
+    <h3>8. Talimat dosyası: kısa, koddan çıkarılamayan, sürümlenen</h3>
+    <p class="prose">AGENTS.md, CLAUDE.md ya da .github/copilot-instructions.md, ajanın her oturumda okuduğu kısa kural metnidir: kurulum, test ve derleme komutları, dal adlandırması, "yeni bağımlılık eklemeden önce sor". Her oturumda bağlam penceresine yüklenir; uzadıkça asıl kurallar gürültüde kaybolur. Ölçü tek soru: bu satırı silsem ajan hata yapar mı? Microsoft'un dotnet/runtime deposunda iyi bir talimat dosyasından sonra ajan PR'lerinin birleşme başarısı yüzde 38'den 69'a çıktı (<a href="https://devblogs.microsoft.com/dotnet/ten-months-with-cca-in-dotnet-runtime/" target="_blank" rel="noopener">on aylık deneyim yazısı</a>).</p>
+
+    <h3>9. MCP: ajanı dış sistemlere bağlayan ortak fiş</h3>
+    <p class="prose">Model Context Protocol bir model ya da marka değil, açık bir protokoldür; belgesi onu yapay zekâ uygulamaları için USB-C diye anlatır. Üç parçası var: ev sahibi (ajanın çalıştığı uygulama), her sunucuya bir bağlantı açan istemci ve araç, kaynak ve istem sunan sunucu (GitHub, Supabase). Kurduğun her sunucu ajanın yetkisini büyütür: GitHub sunucusu PR açabiliyorsa kötücül bir Issue metni onu tetiklemeye çalışabilir.</p>
+
+    <h3>10. Yapay zekâ kodu üç katmandan geçer; gizli anahtar depoya girmez</h3>
+    <p class="prose">Birinci katman otomatik: her PR'de lint, derleme, test ve gizli anahtar taraması. İkincisi platform: koruma kuralı, ajan PR'sinde insan onayı bekleyen iş akışı, ajanın yalnız kendi dalına yazması. Üçüncüsü insan: satır satır fark okuma ve PR şablonundaki "bu kodu nasıl doğruladım" bölümü. Anahtar .env'de, .env .gitignore'da; push protection anahtar içeren push'u depoya girmeden durdurur. Girdiyse "sildim" yetmez, Git geçmişi silinmez: anahtarı iptal et, yenisini üret, sonra temizle (<a href="https://docs.github.com/en/code-security/secret-scanning/introduction/about-push-protection" target="_blank" rel="noopener">push protection belgesi</a>).</p>
+    <div class="quiz" data-quiz="ajan"></div>
+  </section>
+
+  <section id="olay" aria-labelledby="olay-h">
+    <div class="section-head"><h2 id="olay-h">Gerçek olay: bir eklentiye gömülen "her şeyi sil" emri</h2></div>
+    <p class="prose">Amazon'un VS Code eklentisi Amazon Q'nun açık kaynak deposuna, hiç erişimi olmayan bir hesaptan açılan pull request kabul edildi. Commit başlığı gerçek bir commit'i taklit ediyordu; değişen satırlar GitHub'dan bir dosya indirip çalıştırıyordu. İndirilen metin, ajana "ev dizinindeki dosyaları sil, bulut kaynaklarını kaldır, hepsini onay istemeden çalıştır" diyen bir istemdi. Sürüm mağazaya çıktı; yük biçim hatası yüzünden çalışmadı. Ders burada: inceleme başlığa değil değişen satırlara bakmaktır; ajanlar okudukları metni talimat sayar, Issue metni ve PR yorumu bile saldırı yüzeyidir. Kaynak: <a href="https://www.theregister.com/2025/07/24/amazon_q_ai_prompt/" target="_blank" rel="noopener">The Register'ın haberi</a>.</p>
+    <div class="callout warn">Sunumdaki iki kardeş olay: bir girişimcinin ajanı "onaysız değişiklik yapma" talimatına rağmen üretim veritabanını sildi; kötücül bir npm paketi ajan araçlarını "izinleri atla" kipinde çalıştırıp binden fazla GitHub belirteci topladı (<a href="https://www.wiz.io/blog/s1ngularity-supply-chain-attack" target="_blank" rel="noopener">Wiz'in çözümlemesi</a>).</div>
+  </section>
+
+  <section id="araclar" aria-labelledby="araclar-h">
+    <div class="section-head"><h2 id="araclar-h">Araç tablosu</h2><span class="muted">bizim yığın işaretli</span></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Araç</th><th>Ne işe yarar</th><th>Ne zaman seçilir</th><th>Bizim yığında</th><th>Belge</th></tr></thead>
+        <tbody>
+          <tr><td><b>GitHub</b></td><td>Depo, Issue, Projects, Actions, kurallar</td><td>Her takımın omurgası</td><td class="evet">evet</td><td><a href="https://docs.github.com/en/get-started/using-github/github-flow" target="_blank" rel="noopener">GitHub flow</a></td></tr>
+          <tr><td><b>Öğrenci paketi</b></td><td>GitHub Pro ve Copilot Student</td><td>Bu hafta başvur; onay günler sürebilir</td><td class="evet">evet</td><td><a href="https://education.github.com/pack" target="_blank" rel="noopener">Student Developer Pack</a></td></tr>
+          <tr><td><b>Copilot</b></td><td>Editörde ve bulutta ajan; Issue'dan PR</td><td>Varsayılan ajan</td><td class="evet">evet</td><td><a href="https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-coding-agent" target="_blank" rel="noopener">Bulut ajanı</a></td></tr>
+          <tr><td><b>Claude Code</b></td><td>Terminal ajanı; CLAUDE.md, MCP, Actions ile PR</td><td>Ücretli plan alan üye</td><td>hayır</td><td><a href="https://code.claude.com/docs/en/overview" target="_blank" rel="noopener">Claude Code belgeleri</a></td></tr>
+          <tr><td><b>Codex</b></td><td>Terminal, editör ve bulut ajanı; AGENTS.md buradan çıktı</td><td>ChatGPT aboneliği olan üye</td><td>hayır</td><td><a href="https://github.com/openai/codex" target="_blank" rel="noopener">Codex deposu</a></td></tr>
+          <tr><td><b>Antigravity</b></td><td>Google hesabıyla terminal ajanı</td><td>Ücretsiz ajan isteyen takım; sık değişiyor</td><td>hayır</td><td><a href="https://antigravity.google/" target="_blank" rel="noopener">Antigravity</a></td></tr>
+          <tr><td><b>Cursor</b></td><td>Yapay zekâ editörü; .cursor/rules</td><td>Editör içi ajan isteyen üye</td><td>hayır</td><td><a href="https://cursor.com/docs/context/rules" target="_blank" rel="noopener">Cursor rules</a></td></tr>
+          <tr><td><b>commitlint ve husky</b></td><td>Commit mesajını commit anında denetler</td><td>Conventional Commits'i alışkanlık yapmak</td><td>hayır</td><td><a href="https://commitlint.js.org/" target="_blank" rel="noopener">commitlint</a></td></tr>
+          <tr><td><b>Spec Kit</b></td><td>Önce belirtim, sonra plan, görev, kod</td><td>Büyük özellikte</td><td>hayır</td><td><a href="https://github.com/github/spec-kit" target="_blank" rel="noopener">Spec Kit deposu</a></td></tr>
+          <tr><td><b>Vercel önizleme</b></td><td>Her PR'ye otomatik adres</td><td>Kodu okuma, ürünü tıkla</td><td class="evet">evet</td><td><a href="https://vercel.com/docs/deployments/environments" target="_blank" rel="noopener">Yayın ortamları</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="karar" aria-labelledby="karar-h">
+    <div class="section-head"><h2 id="karar-h">Hangi durumda hangisi?</h2><span class="muted">takımın ajanı</span></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Araç</th><th>Nerede çalışır</th><th>Öğrenciye ücretsiz</th><th>Talimat dosyası</th><th>Bu ders için</th></tr></thead>
+        <tbody>
+          <tr><td><b>Copilot</b> (Student planı)</td><td>editör ve bulut</td><td class="evet">evet, öğrenci paketiyle</td><td>copilot-instructions.md, AGENTS.md</td><td class="evet">varsayılan</td></tr>
+          <tr><td><b>Claude Code</b></td><td>terminal, editör, web</td><td>hayır, ücretli plan</td><td>CLAUDE.md, AGENTS.md</td><td>bütçesi olan takım</td></tr>
+          <tr><td><b>Codex</b></td><td>terminal, editör, bulut</td><td>ChatGPT aboneliğiyle</td><td>AGENTS.md</td><td>aboneliği olan üye</td></tr>
+          <tr><td><b>Antigravity</b></td><td>terminal</td><td class="evet">evet, Google hesabıyla</td><td>belgeye bak, sık değişiyor</td><td>ikinci seçenek</td></tr>
+          <tr><td><b>Cursor</b></td><td>editör</td><td>sınırlı ücretsiz plan</td><td>.cursor/rules, AGENTS.md</td><td>editör içi ajan isteyen</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <details class="faq">
+      <summary>Senaryo: bütçe sıfır; herkeste öğrenci paketi, bir üyede ChatGPT aboneliği. Görevdeki iki ajan PR'sini nasıl üretirsiniz?</summary>
+      <div class="ans"><p>İki üye Issue'sunu Copilot bulut ajanına atar, inceleme diğer ikisinde kalır: herkesin ücretsiz eriştiği araç işi dağıtır, açan ile inceleyen ayrılır. Bütün PR'leri Codex'li arkadaşın açması inceleme döngüsünü bozar.</p></div>
+    </details>
+  </section>
+
+  <section id="gorev" aria-labelledby="gorev-h">
+    <div class="section-head"><h2 id="gorev-h">Bu haftanın görevi: takım akışını kur, ilk özelliği ajanla getir</h2><span class="progress-pill" id="labProg" aria-live="polite">0 / 6 adım</span></div>
+    <p class="prose">Takım işi; her üye kendi Issue'sunu, dalını ve PR'sini kendi hesabından yürütür. Kutular yalnız senin tarayıcında saklanır.</p>
+    <div class="steps">
+      <article class="step">
+        <div class="sn">1</div>
+        <div class="sb">
+          <h3>Depo herkese açık, main korumalı</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Depoyu herkese açık yap. Settings, Rules, Rulesets altından main için dal kuralı: PR zorunlu ve bir onay, durum denetimi, zorla push kapalı; durumu Active. Bir üye yerel klondan main'e push denesin; reddin ekran görüntüsünü depoya koyun.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="g1"> Kural aktif, red ekran görüntüsü depoda.</label>
+        </div>
+      </article>
+      <article class="step">
+        <div class="sn">2</div>
+        <div class="sb">
+          <h3>Her PR'de lint ve build; sözleşme dosyaları</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span><code>.github/workflows/ci.yml</code> (pull_request olayında checkout, Node kurulumu, <code>npm ci</code>, lint, build), kısa bir <code>CONTRIBUTING.md</code>, "Bu kodu nasıl doğruladım" bölümlü PR şablonu ve en çok 40 satırlık <code>AGENTS.md</code>. İstem aşağıda. Sonra kuralın durum denetimine CI işini ekle.</span></div>
+          </div>
+          <pre class="istem">"Bu depo Vite ile React kullanıyor. Üç dosya ekle: .github/workflows/ci.yml (yalnız pull_request olayında; checkout, setup-node, npm ci, npm run lint, npm run build), 'Bu kodu nasıl doğruladım' başlıklı .github/pull_request_template.md ve en fazla 40 satırlık AGENTS.md (kurulum, test, derleme komutları; dal adı issue-12-kisa-ad; yeni bağımlılık eklemeden önce sor; testsiz PR açma; .env'e dokunma). Bağımlılık ekleme."</pre>
+          <label class="check"><input type="checkbox" data-done="g2"> CI her PR'de koşuyor; üç dosya depoda.</label>
+        </div>
+      </article>
+      <article class="step">
+        <div class="sn">3</div>
+        <div class="sb">
+          <h3>Özelliği dört Issue'ya böl</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Ürünün bir sonraki küçük özelliğini dört Issue'ya böl; her birinde başlık, kabul ölçütleri ve kapsam dışı yazsın, her üye birini alsın. Dal adı Issue numarasıyla başlasın.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="g3"> Dört Issue yazıldı ve dağıtıldı.</label>
+        </div>
+      </article>
+      <article class="step">
+        <div class="sn">4</div>
+        <div class="sb">
+          <h3>En az iki PR ajandan</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>İki üye Issue'sunu bulut ajanına atasın: Issue sayfasında Assignees listesinden Copilot'u seç, isteğe bağlı istem alanına aşağıdaki cümleyi yaz. Claude Code, Codex ya da Antigravity kullanan üye aynı işi terminalden dalda yapıp PR açar. Diğer iki Issue elle ya da yerel ajanla. Her PR açıklamasında "Closes #n".</span></div>
+            <div><b>Olmadıysa</b><span>Ajan PR getirmediyse Issue'yu küçültüp yeniden ata; Copilot onayı gelmediyse onayı gelen arkadaşın atasın.</span></div>
+          </div>
+          <pre class="istem">"Küçük tut, yeni bağımlılık ekleme, AGENTS.md'deki komutlarla lint ve build çalıştır, PR açıklamasına neyi nasıl doğruladığını yaz."</pre>
+          <label class="check"><input type="checkbox" data-done="g4"> Dört PR açık; en az ikisi ajandan.</label>
+        </div>
+      </article>
+      <article class="step">
+        <div class="sn">5</div>
+        <div class="sb">
+          <h3>Başka bir üye inceler, sonra birleştirir</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Her PR'yi açmayan bir üye inceler: Files changed sekmesinde satır satır oku, Vercel önizleme adresini tıkla, en az bir satıra yorum yaz, gerekiyorsa değişiklik iste. Ajan PR'sinde iş akışını onayla; CI yeşil ve onay gelince Squash and merge.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="g5"> Dört PR birleşti, hepsi incelenmiş.</label>
+        </div>
+      </article>
+      <article class="step">
+        <div class="sn">6</div>
+        <div class="sb">
+          <h3>Son kontrol: anahtar yok, talimat kısa</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span><code>.env</code> dosyası <code>.gitignore</code>'da, push protection açık, hiçbir commit'te anahtar yok; <code>AGENTS.md</code>'de "silersem hata yapar mı" sorusuna hayır dediğin satırları çıkar.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="g6"> Sızmış anahtar yok; talimat dosyası 40 satırın altında.</label>
+        </div>
+      </article>
+    </div>
+    <h3>Kabul ölçütleri</h3>
+    <ul class="prose">
+      <li>main'e doğrudan push reddinin ekran görüntüsü depoda.</li>
+      <li>Dört PR birleşmiş; her birinde inceleme yorumu ve yeşil CI.</li>
+      <li>Ajan PR'lerinde "Bu kodu nasıl doğruladım" bölümü dolu.</li>
+      <li>AGENTS.md 40 satırı geçmiyor; derleme, test ve stil komutları içinde.</li>
+      <li>Depoda sızmış anahtar yok.</li>
+    </ul>
+    <h3>Teslim nasıl yapılır</h3>
+    <p class="prose"><a href="../../teslimler/">Haftalık teslim sayfasındaki</a> formu her üye kendi adıyla doldurur: hafta alanında Hafta 5, numara, ad, ürünün canlı adresi, takım deposu ve yapay zekâ notu. Nota: çözdüğün Issue ve PR; kullandığın ajan ve istem; ajan çıktısında elinle değiştirdiğin bir şey ve nedeni; incelediğin PR ve yorumun; süre tahminin ve güvenin. Süre: bu dersi izleyen Pazar 23:59.</p>
+    <h3>Puan ne demek</h3>
+    <p class="prose">0: main korumasız ya da PR'siz birleştirme. 1: kural ve CI var, inceleme ya da ajan PR'si eksik. 2: hepsi var, incelemeler "LGTM" düzeyinde. 3: somut hata yakalanıp düzeltilmiş, ajan PR'sinde doğrulama kanıtı var. 1 alan bir hafta içinde düzeltip 2'ye çıkabilir.</p>
+  </section>
+
+  <section id="izle" aria-labelledby="izle-h">
+    <div class="section-head"><h2 id="izle-h">İzle</h2><span class="muted">kısa, seçilmiş</span></div>
+    <div class="grid2">
+      <div class="card"><h3><a href="https://www.youtube.com/watch?v=sn8z3YBh6Xo" target="_blank" rel="noopener">Yapay Zekayla Nasıl Daha İyi Kod Yazıyorum? (8 Adım)</a></h3><p>Yusuf İpek · 12 dakika · Türkçe · sunumda 5:35 ile 9:42 arasını izledik: temiz bağlam ve AGENTS.md.</p></div>
+      <div class="card"><h3><a href="https://www.youtube.com/watch?v=1GVBRhDI5No" target="_blank" rel="noopener">How the GitHub Copilot coding agent works</a></h3><p>GitHub · 7 dakika · İngilizce, otomatik Türkçe altyazı · tamamı. Videodaki "coding agent" belgede artık "cloud agent".</p></div>
+      <div class="card"><h3><a href="https://www.youtube.com/watch?v=tXGNDqdF5gs" target="_blank" rel="noopener">Git ve GitHub ile Ortak Proje Çalışması Nasıl Yapılır?</a></h3><p>Hüseyin Karabulut · 11 dakika · Türkçe · tamamı. Katkıcı, klon ve dal; arayüz eski, akış aynı.</p></div>
+      <div class="card"><h3><a href="https://www.youtube.com/watch?v=Lak1VPfxb5c" target="_blank" rel="noopener">GitHub Copilot Pro ÜCRETSİZ! VS Code Agent + GitHub Student Pack Nasıl Alınır?</a></h3><p>Ephe · 7,5 dakika · Türkçe · tamamı. Öğrenci paketi başvurusu adım adım.</p></div>
+      <div class="card"><h3><a href="https://www.youtube.com/watch?v=yEvG_wCG26g" target="_blank" rel="noopener">MCP Nedir ve Nasıl Kurulur?</a></h3><p>İsa Nurdoğdu · 18 dakika · Türkçe · ilk 5,5 dakika yeter. Ev sahibi, istemci ve sunucu.</p></div>
+    </div>
+  </section>
+
+  <section id="oku" aria-labelledby="oku-h">
+    <div class="section-head"><h2 id="oku-h">Oku</h2><span class="muted">resmi belge önce</span></div>
+    <ul class="prose">
+      <li><a href="https://docs.github.com/en/get-started/using-github/github-flow" target="_blank" rel="noopener">GitHub flow</a>: akışın resmi tanımı; takım sözleşmesine olduğu gibi kopyalanabilir.</li>
+      <li><a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets" target="_blank" rel="noopener">Rulesets hakkında</a>: koruma kuralının neleri zorlayabildiği; görevin ilk adımı.</li>
+      <li><a href="https://docs.github.com/en/actions/get-started/understand-github-actions" target="_blank" rel="noopener">GitHub Actions'ı anlamak</a>: iş akışı, olay, iş, adım ve koşucu tek sayfada.</li>
+      <li><a href="https://www.conventionalcommits.org/en/v1.0.0/" target="_blank" rel="noopener">Conventional Commits 1.0.0</a>: sözleşmenin tamamı iki ekran.</li>
+      <li><a href="https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions" target="_blank" rel="noopener">Copilot için depo talimatları</a>: hangi dosya nerede okunur, ne yazılır.</li>
+      <li><a href="https://docs.github.com/en/copilot/responsible-use/copilot-coding-agent" target="_blank" rel="noopener">Bulut ajanı için sorumlu kullanım</a>: ajan neden kendi PR'sini onaylayamaz.</li>
+      <li><a href="https://code.claude.com/docs/en/best-practices" target="_blank" rel="noopener">Claude Code en iyi uygulamalar</a>: doğrulama aracı ver, önce keşfet, bağlamı temiz tut; araçtan bağımsız.</li>
+      <li><a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" rel="noopener">MCP'ye giriş</a>: USB-C benzetmesinin kaynağı.</li>
+    </ul>
+  </section>
+
+  <section id="nasil" aria-labelledby="nasil-h">
+    <div class="section-head"><h2 id="nasil-h">How to know: sahadakiler nasıl takip ediyor?</h2></div>
+    <p class="prose">Bu alanda bilgi ayda bir eskiyor. Sahadakiler "en iyi 10 araç" yazısı değil değişiklik günlüğü okur: <a href="https://github.blog/changelog/" target="_blank" rel="noopener">GitHub Changelog</a> her gün güncellenir, Claude Code'un günlüğü düz metindir. Manzarayı yılda dört anket verir: Stack Overflow, JetBrains, Octoverse, DORA. <a href="https://learn.github.com/skills" target="_blank" rel="noopener">GitHub Skills</a> kursları ücretsizdir ve kendi kendini denetler. En ucuz deneme ortamı kendi hesabında açtığın herkese açık bir deneme deposudur: kural, ajan ve MCP sunucusu önce orada. Kalite dört soruyla ayırt edilir: kaynak birincil mi; tarih ve sürüm var mı; iddia ölçüme mi dayanıyor; kendi deponda 15 dakikada yeniden üretebiliyor musun?</p>
+  </section>
+
+  <section id="sozluk" aria-labelledby="sozluk-h">
+    <div class="section-head"><h2 id="sozluk-h">Sözlük</h2><span class="muted">karta tıkla</span></div>
+    <div class="kartlar">
+      <button class="kart" type="button"><span class="kart-on">Branch</span><span class="kart-arka">Dal: ana koddan ayrılan çalışma hattı. Derste "dal".</span></button>
+      <button class="kart" type="button"><span class="kart-on">Pull request</span><span class="kart-arka">Birleştirme isteği: dalın başka dala alınması için inceleme alanı. Derste "PR".</span></button>
+      <button class="kart" type="button"><span class="kart-on">Issue</span><span class="kart-arka">İş kaydı: kabul ölçütüyle yazılan iş ya da hata. Derste "Issue".</span></button>
+      <button class="kart" type="button"><span class="kart-on">Ruleset</span><span class="kart-arka">Koruma kuralı: main'e giriş şartlarını sunucuda zorlayan ayar. Derste "koruma kuralı".</span></button>
+      <button class="kart" type="button"><span class="kart-on">CI</span><span class="kart-arka">Sürekli bütünleştirme: her PR'de lint, derleme ve testin kendiliğinden koşması. Derste "CI".</span></button>
+      <button class="kart" type="button"><span class="kart-on">Merge conflict</span><span class="kart-arka">Çatışma: aynı satırın iki dalda farklı değişmesi. Derste "çatışma".</span></button>
+      <button class="kart" type="button"><span class="kart-on">Cloud agent</span><span class="kart-arka">Bulut ajanı: Issue'yu alıp arka planda çalışan, PR getiren ajan; agent mode yerel ajandır. Derste Türkçeleri.</span></button>
+      <button class="kart" type="button"><span class="kart-on">AGENTS.md</span><span class="kart-arka">Talimat dosyası: ajanın her oturumda okuduğu kısa kural metni. Derste "talimat dosyası".</span></button>
+      <button class="kart" type="button"><span class="kart-on">MCP</span><span class="kart-arka">Model Context Protocol: ajanı dış araç ve veriye bağlayan açık protokol. Derste "MCP".</span></button>
+      <button class="kart" type="button"><span class="kart-on">Push protection</span><span class="kart-arka">Anahtar içeren push'u depoya girmeden durduran koruma. Derste İngilizcesi.</span></button>
+    </div>
+  </section>
+
+  <section id="sinav" aria-labelledby="sinav-h">
+    <div class="section-head"><h2 id="sinav-h">Sınavda nasıl sorulur?</h2><span class="muted">önce kendin cevapla</span></div>
+    <details class="faq">
+      <summary>1. Bir arkadaşınız ajanın ürettiği 900 satırlık PR'yi "testler geçiyor" diyerek kendi onayıyla main'e birleştirdi; ertesi gün üretimde kayıt formu bozuldu. Hangi üç kural bunu teknik olarak engellerdi, her birini hangi GitHub ayarıyla kurarsınız?</summary>
+      <div class="ans"><p>main'e ruleset ile PR zorunluluğu ve en az bir onay (açanın onayı sayılmaz); CI durum denetiminin zorunlu olması; ajan PR'lerinde iş akışlarının insan onayıyla çalışması. Ek: 900 satırlık PR baştan küçük Issue'lara bölünmeliydi.</p></div>
+    </details>
+    <details class="faq">
+      <summary>2. Bir Issue'yu Copilot'a atadınız; gelen PR'de ajan yeni bir npm paketi eklemiş ve paketin kurulum betiği var. Birleştirmeden önce hangi sorulara cevap ararsınız?</summary>
+      <div class="ans"><p>Paket gerekli mi; sürüm sabitlenmiş mi; kurulum betiği ne çalıştırıyor; CI geçti mi; talimat dosyasında "yeni bağımlılık eklemeden önce sor" kuralı var mı.</p></div>
+    </details>
+    <details class="faq">
+      <summary>3. Ürününüzün PR'sinde "feat: ödeme sayfası" başlıklı bir commit, üretimde kullanılan Supabase anahtarını .env dosyasıyla birlikte içeriyor; push protection uyarısı bypass ile geçilmiş. İlk üç adımınız nedir ve commit türü neden yanıltıcıdır?</summary>
+      <div class="ans"><p>Anahtarı Supabase panelinde iptal edip yenisini üretmek; .env'i .gitignore'a alıp geçmişi temizlemek; bypass yetkisini kısıtlamak. Commit "feat" görünse de güvenlik açığı taşır; "sildim" commit'i geçmişi silmez.</p></div>
+    </details>
+  </section>
+
+  <section id="gelecek" aria-labelledby="gelecek-h">
+    <div class="next">
+      <span class="lbl">Gelecek hafta</span>
+      <h3>Veri katmanı: web veritabanı yönetim sistemleri</h3>
+      <p>İlişkisel ve doküman modeli, yönetilen Postgres, satır kuralları, şema değişikliği ve yedek. Gelmeden önce takım deponuzda main korumalı ve dört PR birleşmiş olsun.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><a href="../hafta-04/">Önceki hafta: Hafta 4</a> · <a href="../../">Ders ana sayfası</a></div>
+    <div>YZM205 Web Tasarımı ve Programlama · Muş Alparslan Üniversitesi · Arş. Gör. Çağrı ŞAHİN</div>
+  </div>
+</footer>
+
+<script src="../../assets/ders.js"></script>
+<script>
+window.QUIZ = {
+  akis: {
+    title: "Kendini sına: akış, Issue ve PR",
+    qs: [
+      { q: "Arkadaşın \"PR bürokrasi, doğrudan main'e push daha hızlı\" diyor. Push geçerse ne kaybedersin?",
+        o: ["İncelemeyi, CI'ı ve Issue bağlantısını; hata main'e girer, geri almak zorlaşır", "Hiçbir şey; testler yerelde geçtiyse sorun yok", "Yalnız commit geçmişinin düzenini", "Vercel önizleme adresini; başka bir şey değişmez"],
+        a: 0, e: "Akışın her adımı geri alınabilirlik içindir. Yerelde geçen test takım arkadaşının gözünü ve CI'ı yerine koymaz; görevdeki kural doğrudan push'u zaten reddedecek." },
+      { q: "Ajana vereceğin Issue için hangi metin daha iyi?",
+        o: ["Başlık, kabul ölçütleri ve kapsam dışı yazılmış kısa bir Issue", "\"Fotoğraf ekle\" diye tek satır; ajan gerisini anlar", "Özelliğin tamamını anlatan 900 satırlık belge", "Issue yerine PR yorumunda anlatmak"],
+        a: 0, e: "Kabul ölçütü ajanın \"bitti\" demesinin tanımıdır. Tek satır belirsizdir, 900 satır tek PR'ye sığmaz; büyük özellik küçük Issue'lara bölünür." },
+      { q: "İnceleyici \"değişiklik iste\" dedi. Düzeltmeyi nasıl gönderirsin?",
+        o: ["Aynı dala yeni bir commit atarım; PR kendiliğinden güncellenir", "PR'yi kapatıp yenisini açarım", "Düzeltmeyi doğrudan main'e push ederim", "İnceleyiciyi değiştiririm"],
+        a: 0, e: "PR dalı izler; dala giden her commit PR'ye eklenir, inceleme aynı yerde sürer. Yeni PR tartışmayı sıfırlar, main'e push kuralla reddedilir." }
+    ]
+  },
+  koruma: {
+    title: "Kendini sına: koruma, commit ve çatışma",
+    start: 4,
+    qs: [
+      { q: "Ajan PR açtı, CI yeşil. Birleştirme düğmesine kim basar?",
+        o: ["PR'yi açmayan bir takım üyesi, satırları okuyup onayladıktan sonra", "Ajan; işi o yaptı, testler geçti", "PR'yi açan üye; işi en iyi o biliyor", "Kimse; doğrudan main'e push daha hızlı"],
+        a: 0, e: "Ajan kendi PR'sini onaylayamaz, iş akışları bile insan onayı bekler; açanın onayı sayılmaz. Kural en az bir başka üyenin onayını ister." },
+      { q: "\"feat!: ilan tablosunu yeni şemaya taşı\" mesajındaki ünlem ne söyler?",
+        o: ["Geriye uyumsuz değişiklik; sürüm numarasının ilk hanesi artar", "Acil düzeltme, önce birleştirilsin", "Mesaj hatalı; commitlint reddeder", "Ajan yazdı, insan incelemesi istiyor"],
+        a: 0, e: "Conventional Commits'te ünlem ve BREAKING CHANGE altbilgisi büyük sürüm demektir; feat küçük sürümü, fix yama sürümünü artırır." },
+      { q: "Üç arkadaş aynı Header bileşeninde çalışıyor; ikinci PR birleşince üçüncüsü çatışma verdi. Neden?",
+        o: ["Aynı satırlar iki dalda farklı değiştirildi; Git seçimi sana bırakır", "CI bozuldu", "Ajan hatalı kod yazdı", "GitHub aynı dosyada iki PR'ye izin vermez"],
+        a: 0, e: "Çatışma Git'in karar verememesidir, hata değil. Azaltmanın yolu küçük PR, dalı main ile sık güncelleme, bileşeni dosya bazında ayrı Issue'lara bölmek." }
+    ]
+  },
+  ajan: {
+    title: "Kendini sına: ajan, talimat dosyası ve MCP",
+    start: 7,
+    qs: [
+      { q: "Deneyimli geliştiriciler ajanla gerçek görevlerde ne kadar hızlandı?",
+        o: ["Yüzde 19 yavaşladılar ama yüzde 20 hızlandıklarını sandılar", "Yarı yarıya hızlandılar", "Beşte bir hızlandılar", "Değişmedi"],
+        a: 0, e: "Rastgele kontrollü deneyin bulgusu. Kazanım göreve ve hazırlığa bağlı; teslim formunda süre tahminini ve ona güvenini bu yüzden soruyoruz." },
+      { q: "İki depo: birinde 120 satırlık CLAUDE.md her mimari kararı anlatıyor, diğerinde 25 satır yalnız komutlar, dal adı ve \"testsiz PR açma\". Ajan hangisinde daha tutarlı?",
+        o: ["25 satırlık; dosya her oturumda bağlama yüklenir, kısa olunca kurallar gürültüye gömülmez", "120 satırlık; ajan ne kadar çok bilirse o kadar iyi", "Fark etmez; ajan ikisini de ezberler", "Talimat dosyası gereksiz; Issue yeter"],
+        a: 0, e: "Koddan çıkarılabilen bilgi yazılmaz; ölçü \"bu satırı silsem ajan hata yapar mı\". Uzun dosyada asıl kurallar kaybolur." },
+      { q: "MCP nedir?",
+        o: ["Ajanı dış araç ve veri kaynaklarına bağlayan açık bir protokol", "Yeni bir dil modeli", "Copilot'un bulut ajanının adı", "Bir kod editörü"],
+        a: 0, e: "USB-C gibi ortak bir fiş: ev sahibi, istemci ve sunucudan oluşur; model seçimiyle ilgisi yok. Kurduğun her sunucu ajanın yetkisini büyütür." }
+    ]
+  }
+};
+</script>
+</body>
+</html>
