@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hafta 8 · Bulut ve yayına alma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/ders.css">
+<style>
+/* Hafta 8'e özel: harita katmanları, araç tablosu işareti, istem kutusu */
+.katmanlar{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px;align-items:start}
+.katman-sutun{display:grid;gap:8px}
+.katman{border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface);min-width:0}
+.katman b{display:block}
+.katman small{color:var(--muted)}
+.katman.gecti{border-style:dashed}
+.katman.gecti b::after{content:" · işlendi";font-weight:500;color:var(--muted);font-size:.82em}
+.katman.bu-hafta{border-color:var(--theory);background:var(--theory-soft)}
+.katman.bu-hafta b::after{content:" · bu hafta";font-weight:600;color:var(--theory);font-size:.82em}
+@media (max-width:720px){.katmanlar{grid-template-columns:minmax(0,1fr)}}
+.yigin{font-weight:600;color:var(--lab);white-space:nowrap}
+.istem{white-space:pre-wrap;font-size:.9rem;line-height:1.5}
+.ogren{margin:0;padding-left:1.2em}
+.ogren li+li{margin-top:6px}
+.video-liste{display:grid;gap:10px}
+.video-liste .card p{margin:4px 0 0}
+</style>
+<style>.kilitli{opacity:.6;cursor:not-allowed;text-decoration:none}a.kilitli,span.kilitli.btn{pointer-events:none}</style>
+</head>
+<body data-week="8">
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="dot" aria-hidden="true"></span>YZM205 · Hafta 8<span class="long">&nbsp;· Bulut ve yayına alma</span></div>
+    <nav class="jump" aria-label="Bölümler">
+      <a href="#harita">Harita</a><a href="#ozet">Özet</a><a href="#olay">Olay</a><a href="#araclar">Araçlar</a><a href="#karar">Karar</a><a href="#gorev">Görev</a><a href="#izle">İzle</a><a href="#oku">Oku</a><a href="#nasil">How to know</a><a href="#sozluk">Sözlük</a><a href="#sinav">Sınav</a>
+    </nav>
+    <button class="themebtn" id="themeBtn" type="button">Koyu tema</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" aria-labelledby="baslik">
+    <div>
+      <div class="eyebrow">YZM205 Web Tasarımı ve Programlama · Hafta 8</div>
+      <h1 id="baslik">Bulut ve yayına alma</h1>
+      <p class="lede">Takımının ürünü bu hafta GitHub'dan çıkıp canlı bir adrese yerleşiyor: her gönderim kendiliğinden yayınlanır, anahtarlar ve bölge doğru yerde durur, site düşerse ziyaretçiden önce sen öğrenirsin.</p>
+      <div class="card">
+        <h3>Bu hafta ne öğreniyorsun</h3>
+        <ol class="ogren">
+          <li>"Deploy" düğmesine basınca arkada ne olduğunu çizebileceksin.</li>
+          <li>Gizli anahtarı, bölgeyi ve harcama tavanını doğru yere koyabileceksin.</li>
+          <li>Takımının ürünü kendi adresinde olacak; her gönderim kendiliğinden yayınlanacak.</li>
+        </ol>
+      </div>
+      <div class="btnrow">
+        <a class="btn primary" href="sunum.html">Sunum</a>
+        <a class="btn" href="../../teslimler/">Haftalık teslim</a>
+        <span class="chip ship">Teslim: bu dersi izleyen Pazar 23:59</span>
+      </div>
+      <div class="meta">
+        <div class="ring" id="ring"><span data-pct>%0</span></div>
+        <span class="badge" id="badge" hidden data-text="Ürün yayında"></span>
+        <span class="small muted">İlerlemen tarayıcında saklanır, puan değildir.</span>
+      </div>
+    </div>
+    <div class="hero-demo">
+      <span class="lbl">Dağıtım hattı</span>
+      <div class="flow">
+        <div class="node-box theory"><span class="nt">GitHub</span><span class="small muted">gönderim</span></div>
+        <div class="lane auto"><div class="packet">kod</div></div>
+        <div class="node-box srv"><span class="nt">Build</span><span class="small muted">platform</span></div>
+        <div class="lane auto"><div class="packet">yayın</div></div>
+        <div class="node-box db"><span class="nt">Canlı adres</span><span class="small muted">uç noktalar</span></div>
+      </div>
+      <p class="small muted">Her gönderim bu hattı baştan çalıştırır.</p>
+    </div>
+  </section>
+
+  <section id="harita" aria-labelledby="harita-h">
+    <div class="section-head"><h2 id="harita-h">Ürünün neresindeyiz</h2></div>
+    <p class="prose">Dört haftadır üst katları kurdun: ekranlar, takım akışı, veri, API. Bu hafta en alt kata iniyoruz: kodun koştuğu makine, alan adı, fatura.</p>
+    <div class="katmanlar" style="margin-top:14px">
+      <div class="katman-sutun">
+        <div class="katman"><b>Kullanıcı ve cihazlar</b><small>tarayıcı, telefon, masaüstü</small></div>
+        <div class="katman gecti"><b>İstemci uygulaması</b><small>React, Next.js, PWA</small></div>
+        <div class="katman gecti"><b>API ve iş mantığı</b><small>sunucusuz fonksiyonlar, kimlik, dil modeli API'si</small></div>
+        <div class="katman gecti"><b>Veri</b><small>Postgres, depolama, önbellek</small></div>
+        <div class="katman bu-hafta"><b>Altyapı</b><small>bulut, CDN, alan adı, dağıtım hattı</small></div>
+      </div>
+      <div class="katman-sutun">
+        <div class="katman gecti"><b>Takım ve araçlar</b><small>GitHub, yapay zekâ ajanları</small></div>
+        <div class="katman"><b>Güvenlik</b><small>açık analizi</small></div>
+        <div class="katman"><b>Kalite</b><small>test, kod analizi</small></div>
+        <div class="katman"><b>Pazar</b><small>mağaza, yasal, analitik</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ozet" aria-labelledby="ozet-h">
+    <div class="section-head"><h2 id="ozet-h">Özet</h2><span class="time">evde · 20 dk</span></div>
+    <div class="prose">
+      <h3>1. Bulut kimin elinde, sen ne kadarını yönetiyorsun?</h3>
+      <p>Bulut altyapısının büyük bölümü üç şirketin elinde: Amazon (AWS), Microsoft (Azure), Google Cloud. Senin ilk gün dokunduğun katman ise Vercel, Cloudflare, Netlify ve Render gibi platformlar: kodunu alır, büyük bulutu senden saklar. Hizmetler "ne kadarını sen yönetiyorsun" sorusuna göre üç kata ayrılır: sanal makinede (IaaS) işletim sistemi ve Node kurulumu sende; platformda (PaaS) yalnız kodu verirsin; sunucusuz katmanda kod yalnız istek gelince çalışır ve istek başına ücretlenir. Her bulut dört şey satar: hesaplama, depolama, veritabanı, ağ. Türkiye'de üç devin de bölgesi yok; en yakınları Avrupa'da ve Orta Doğu'da, bizim yığında Frankfurt seçiyoruz. Cloudflare'in İstanbul ve İzmir'de ucu var.</p>
+
+      <h3>2. "Deploy"a basınca arkada ne olur?</h3>
+      <p>Gönderim yapınca GitHub bir webhook ile, yani otomatik bir web isteğiyle Vercel'e haber verir. Vercel kodu bir build kabına çeker, ortam değişkenlerini içine koyar, build komutunu çalıştırır. Çıktı ikiye ayrılır: statik dosyalar dünyadaki uç noktalara dağılır ve en yakın yerden sunulur; API rotaları tek bölgede fonksiyon olur. Statik sayfa bu yüzden her yerde hızlı, veritabanına giden sayfa bölgeye bağlıdır. Her gönderim yeni ve değişmez bir dağıtımdır; alan adı yalnız hangisini gösterdiğini değiştirir, geri alma bu yüzden saniyeler sürer.</p>
+
+      <h3>3. Her dal bir adres: önizleme, inceleme, üretim</h3>
+      <p>Vercel her dala yapılan her gönderim için geçici bir önizleme adresi üretir ve pull request'e bot yorumu olarak yazar; kod incelemesi artık canlı sayfa üzerinden yapılır. main dalına birleşen değişiklik üretim dağıtımı olur. Buna CI/CD denir: her değişiklik otomatik test edilir ve otomatik yayınlanır. Bizde lint, en az bir otomatik test ve build GitHub Actions'ta, yayın Vercel'in Git bağlantısında. Vercel testi beklemez, önizleme Actions kırmızıyken de çıkar; "test geçmeden yayın yok" kuralı bu yüzden GitHub'da kurulur: Hafta 5'te main dalına koyduğun kurala Actions iş akışını zorunlu durum denetimi olarak eklersin (Require status checks to pass), kırmızı testle birleştirme düğmesi kapanır. Üretim yalnız main'den çıktığından kırmızı test üretime ulaşamaz.</p>
+    </div>
+    <div class="quiz" data-quiz="hat"></div>
+
+    <div class="prose" style="margin-top:28px">
+      <h3>4. Anahtar nereye gider: tarayıcıya mı, sunucuya mı?</h3>
+      <p>Yapılandırma koddan ayrı durur: anahtar dosyada değil, platformun panelinde. Turnusol sorusu: "Depo yarın herkese açılsa bir şifre sızar mı?" Kural kesin: NEXT_PUBLIC_ (Vite'ta VITE_) önekli her değişken build anında tarayıcı paketine sabit metin olarak yazılır, herkes okur. Supabase'in anon anahtarı oraya gidebilir, çünkü satır güvenliği (RLS) onu sınırlar; service role anahtarı asla, çünkü satır güvenliğini aşar. Öneksiz değişken yalnız sunucu fonksiyonuna gider, istek anında okunur; panelde değeri değiştirince yeni dağıtım gerekir. Depoya bir kez giren anahtar git geçmişinde kalır; tek çare onu döndürmek, yani eskisini geçersiz kılıp yenisini almak.</p>
+
+      <h3>5. Alan adı, DNS ve sertifika</h3>
+      <p>DNS, insanın okuduğu adı IP adresine çeviren dağıtık bir dizindir. Tarayıcı app.ornek.me için çözümleyiciye sorar, o da yetkili sunucudan senin girdiğin kaydı bulur. Alt alan adı (app ya da www) CNAME kaydıyla Vercel'in adına işaret eder; kök alan adı CNAME alamaz, A kaydı ister. Sertifikayı sen almazsın: platform, alan adını denetlediğini ACME protokolüyle kanıtlar, sertifikayı alır ve süresi dolmadan yeniler. Sertifika ömürleri kısalıyor; elle yenileme dönemi kapandı. Adres çubuğundaki kilit sertifikayı kimin verdiğini ve kaç gün kaldığını gösterir. Bir uyarı: A ya da CNAME kaydı girmek yerine alan adının isim sunucularını (nameserver) Vercel'e taşırsan bütün kayıtlar yeni sağlayıcıya geçer; e-posta kaydı (MX) oraya kopyalanmazsa alan adındaki e-posta durur.</p>
+
+      <h3>6. Bölge: fonksiyon ve veritabanı aynı şehirde</h3>
+      <p>Bölge, sağlayıcının belli bir coğrafyadaki veri merkezi kümesidir. Supabase projeni açarken bölge seçtin; sonradan değişmez, yanlışsa yeni projeyle taşınır. Vercel fonksiyonu varsayılan olarak Washington'a koyar; veritabanın Frankfurt'taysa her sorgu Atlantik'i iki kez geçer, statik sayfalar hızlı ama ilan listesi yavaş olur. Çözüm tek satır: fonksiyon bölgesi fra1, panelden ya da vercel.json ile. Frankfurt da yurt dışıdır: kişisel veri tutuyorsan gizlilik metnine sunucu konumunu yaz, gereksiz veriyi hiç toplama.</p>
+    </div>
+    <div class="quiz" data-quiz="anahtar"></div>
+
+    <div class="prose" style="margin-top:28px">
+      <h3>7. Kart yoksa ne olur, kart varsa ne olur?</h3>
+      <p>Kart girmediğin ücretsiz planda tavanı plan koyar: sınır dolunca proje duraklatılır, ziyaretçi hata sayfası görür, yeniden açılması günler sürebilir; ücretsiz ama kapalı. Kart girip tavan koymadığında ise istek ve GB başına ücret trafikle büyür: trafik yüz kat, fatura yüz kat. Ücretsiz plandaki küçük bir site yüz bin doları aşan bir fatura bildirimi aldı; viral olan bir sosyal ağ yaklaşık yüz bin dolarlık sunucusuz faturayla karşılaştı: başarı da fatura getirir. Tavan ürünün parçasıdır: kart girdiğin her hesapta (Vercel Pro, AWS, Google Cloud) ilk iş harcama sınırı ve uyarıdır. Vercel'de bu ayar Pro planındaki Spend Management'tır; "aşınca üretimi duraklat" seçeneği vardır, kontrol birkaç dakikada bir yapıldığından fatura fark edildiği anda durur, aşıldığı anda değil. Hobby'de kaldığın sürece panelde tavan ekranı yoktur; tavanı plan koyar, sınırda proje duraklar.</p>
+
+      <h3>8. Deploy ettim, bitti mi?</h3>
+      <p>Ücretsiz planda çalışma zamanı günlükleri kısa süre saklanır; gece düşen site sabaha kadar kimseye haber vermez. Dış nabız gerekir: UptimeRobot adresini birkaç dakikada bir yoklar, cevap gelmeyince e-posta atar; Sentry tarayıcıdaki ve fonksiyondaki hataları toplar. Ücretsizin bir gizli bedeli daha var, uyku: Render'daki ücretsiz hizmet boşta uyur ve ilk istek bekler; Supabase'in ücretsiz projesi bir hafta hareketsiz kalınca duraklatılır. Demo Günü sabahı panelden projenin açık olduğuna bak, uyuyorsa uyandır.</p>
+
+      <h3>9. Docker, Kubernetes, Terraform: bilmen gereken kadarı</h3>
+      <p>Konteyner, uygulamayı bağımlılıklarıyla tek pakete koyar; aynı paket dizüstünde ve bulutta çalışır, "benim makinemde çalışıyordu" sorunu biter. İmaj salt okunur şablon, konteyner onun çalışan örneğidir. Kubernetes yüzlerce konteyneri yönetir, düşeni kaldırır; sahada azınlık kullanır. Terraform ve OpenTofu altyapıyı tıklayarak değil sürümlenen dosyayla kurar: yaz, planla, uygula. Vercel üçünü de senden saklar. Bu dönem Dockerfile yazmayacaksın; ilanda görünce ne olduğunu bil, yeter.</p>
+    </div>
+    <div class="quiz" data-quiz="isletme"></div>
+  </section>
+
+  <section id="olay" aria-labelledby="olay-h">
+    <div class="section-head"><h2 id="olay-h">Gerçek olay</h2></div>
+    <div class="prose">
+      <p>Amazon'un en yoğun bölgesinde (us-east-1) bir gece veritabanı hizmetinin adresi boş kaldı. Kod değişmemişti, saldırı yoktu: DNS kayıtlarını yöneten iki otomatik yazıcı aynı kayda yarıştı, biri diğerinin planını silince kayıt boş kaldı (yarış koşulu). Sunucu başlatma, yük dengeleyici ve fonksiyonlar peş peşe durdu; kesinti yaklaşık on beş saat sürdü. Dünyanın dört yanındaki uygulamalar o gece "küresel" sandıkları hizmetin tek bölgeye bağlı olduğunu öğrendi. Ders basit: bulut düşer, ürün buna göre tasarlanır; bölgeni bilerek seç, "site düşerse ne yaparız" paragrafını README'ye yaz. Saat saat anlatım Amazon'un kendi raporunda: <a href="https://aws.amazon.com/message/101925/" target="_blank" rel="noopener">AWS us-east-1 kesinti raporu</a>. Bu tür raporlara post-mortem denir.</p>
+    </div>
+  </section>
+
+  <section id="araclar" aria-labelledby="araclar-h">
+    <div class="section-head"><h2 id="araclar-h">Araç tablosu</h2></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Araç</th><th>Ne işe yarar</th><th>Ne zaman seçilir</th><th>Bizim yığında mı</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://vercel.com/docs/git" target="_blank" rel="noopener">Vercel</a></td><td>Git'ten yayın, önizleme, fonksiyonlar, CDN</td><td>Next.js ya da Vite ön yüz ve kısa API'ler; ücretsiz başlangıç katmanı var</td><td><span class="yigin">evet</span></td></tr>
+          <tr><td><a href="https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions" target="_blank" rel="noopener">GitHub Actions</a> <span class="small muted">(gizli anahtar belgesi)</span></td><td>Her pull request'te lint, test ve build</td><td>Her takımda; herkese açık depoda ücretsiz</td><td><span class="yigin">evet</span></td></tr>
+          <tr><td><a href="https://uptimerobot.com/pricing/" target="_blank" rel="noopener">UptimeRobot</a> <span class="small muted">(plan sayfası)</span></td><td>Adresi düzenli yoklar, düşünce e-posta atar</td><td>Her takımın üretim adresi için</td><td><span class="yigin">evet</span></td></tr>
+          <tr><td><a href="https://developers.cloudflare.com/pages/get-started/git-integration/" target="_blank" rel="noopener">Cloudflare Pages</a></td><td>Statik site barındırma ve uç fonksiyonlar</td><td>Trafiği yüksek statik site; Türkiye'ye yakın uç</td><td>alternatif</td></tr>
+          <tr><td><a href="https://docs.netlify.com/site-deploys/create-deploys/" target="_blank" rel="noopener">Netlify</a></td><td>Git'ten yayın ya da sürükle-bırak yayın (Netlify Drop)</td><td>Hesap açmadan bir klasörü yayınlamak</td><td>alternatif</td></tr>
+          <tr><td><a href="https://render.com/docs/free" target="_blank" rel="noopener">Render</a></td><td>Uzun süre çalışan Node ya da Python arka ucu, konteyner</td><td>Sunucusuz süre sınırına sığmayan iş; ücretsiz hizmet boşta uyur</td><td>alternatif</td></tr>
+          <tr><td><a href="https://railway.com/pricing" target="_blank" rel="noopener">Railway</a> <span class="small muted">(plan sayfası)</span></td><td>Arka uç, veritabanı ve kuyruk tek panelde</td><td>Birkaç servisi birlikte yönetmek</td><td>alternatif</td></tr>
+          <tr><td><a href="https://sentry.io/pricing/" target="_blank" rel="noopener">Sentry</a> <span class="small muted">(plan sayfası)</span></td><td>Tarayıcıdaki ve fonksiyondaki hataları toplar</td><td>Demo Günü öncesi hata yakalamak</td><td>isteğe bağlı</td></tr>
+          <tr><td><a href="https://docs.docker.com/get-started/docker-overview/" target="_blank" rel="noopener">Docker</a></td><td>Uygulamayı bağımlılıklarıyla paketler</td><td>Bu dönem yalnız tanı; Render ve Railway arkada kullanır</td><td>hayır</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="karar" aria-labelledby="karar-h">
+    <div class="section-head"><h2 id="karar-h">Hangi durumda hangisi</h2></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Seçenek</th><th>Kurulum</th><th>Uzun süren arka uç işi</th><th>Ücretsiz başlangıç</th><th>Ne zaman seçilir</th></tr></thead>
+        <tbody>
+          <tr><td><b>Vercel</b> (PaaS)</td><td>dakikalar</td><td>süre sınırlı</td><td>var; sınırı aşınca duraklar</td><td>Next.js ön yüz ve API rotaları; bizim yığın</td></tr>
+          <tr><td><b>Cloudflare Pages ve Workers</b></td><td>dakikalar</td><td>hayır</td><td>var; günlük istek sınırı</td><td>Trafiği yüksek statik site; İstanbul ve İzmir ucu</td></tr>
+          <tr><td><b>Render ya da Railway</b> (konteyner PaaS)</td><td>bir saat</td><td>evet</td><td>boşta uyur ya da kısa deneme</td><td>Uzun çalışan Node ya da Python arka ucu, kuyruk</td></tr>
+          <tr><td><b>Kendi sanal makinen</b> (DigitalOcean, EC2)</td><td>günler</td><td>evet</td><td>öğrenci kredisiyle var; çoğu sağlayıcı kart ister</td><td>Linux deneyimi isteyen takım; tam kontrol</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <details class="faq" style="margin-top:14px">
+      <summary>Senaryo: Takımın ürünü Next.js, veritabanı Supabase Frankfurt. Yeni özellik, her gece bütün ilanları yapay zekâyla yeniden özetleyen ve yirmi dakika süren bir iş. Bütçe küçük, dört kişisiniz. Hangisini seçersin?</summary>
+      <div class="ans"><p>Ön yüz ve kısa API'ler Vercel'de kalır; uzun iş Render ya da Railway'de konteyner olarak çalışır, ikisi aynı Supabase'e bağlanır. Sunucusuz fonksiyonun süresi sınırlıdır, yirmi dakikalık iş yarıda kesilir; sanal makine dört kişiye işletim yükü getirir; Kubernetes bu ölçekte gereksizdir. Parçayı ayırmak en az emek. Küçük bütçe tam buraya gider: Render'ın ücretsiz hizmeti boşta uyuduğu için istek almayan gece işine güvenilmez, Railway'in deneme süresi biter, dil modeli çağrıları da ayrıca fatura. Ücretsiz katmana güvenip "bedava" diye plan yapma.</p></div>
+    </details>
+  </section>
+
+  <section id="gorev" aria-labelledby="gorev-h">
+    <div class="section-head"><h2 id="gorev-h">Bu haftanın görevi</h2><span class="chip ship">Takımının ürünü canlı adreste</span></div>
+    <p class="prose">Bu hafta ikinci kilometre taşı (M2): veri ve API bağlı sürüm yayında, yani canlı adreste giriş, ilan listesi ve yapay zekâ özelliği çalışıyor. Vercel bağlantısını Hafta 4'te kurduysan bu hafta onu doğrular, üstüne haftanın yeni işlerini koyarsın: fonksiyon bölgesi, anahtar ayrımı, test kapısı, harcama tavanı ve dış nabız. Gerekçesi README'de yazılıysa Cloudflare Pages de olur.</p>
+    <div class="subhead"><h3>Reçete</h3><span class="chip lab">takım masasında</span></div>
+    <div class="prose">
+      <ol>
+        <li>Vercel bağlantını doğrula: takım deposu bağlı mı, main dalı üretim mi, her pull request önizleme adresi alıyor mu. Henüz yoksa Vercel'de "New Project" ile takım deposunu seç; depo kişisel hesapta ya da herkese açık olmalı.</li>
+        <li>Anahtarları ayır: Environment Variables'ta Supabase URL'si ve anon anahtarı NEXT_PUBLIC_ ya da VITE_ önekiyle; service role ve dil modeli anahtarı yalnız öneksiz ve yalnız panelde. Depoda .env yok.</li>
+        <li>Yapılandırma dosyalarını yapay zekâ kodlama aracına yazdır, sen doğrula. Örnek istem:</li>
+      </ol>
+      <pre class="code hascopy istem">"Bu projede şunları yap: (1) vercel.json oluştur, fonksiyon bölgesini fra1 yap. (2) .gitignore dosyasına .env, .env.local ve .env.*.local satırlarını ekle. (3) En az bir otomatik test yaz: örneğin ilan listesi bileşeninin boş listeyle hata vermeden çizildiğini sınayan küçük bir birim testi; test komutunu package.json'a ekle. (4) .github/workflows/ci.yml adlı bir GitHub Actions iş akışı yaz: her pull request'te ve main dalına her gönderimde bağımlılıkları kurup lint, test ve build çalıştırsın. (5) README'ye 'Dağıtım' başlıklı bölüm ekle: Vercel'e bağlama adımları, ortam değişkenlerinin yalnız adları, bölge kararı, harcama tavanı durumu ve 'site düşerse ne yaparız' için boş şablon. Hiçbir dosyaya gerçek anahtar değeri yazma."</pre>
+      <ol start="4">
+        <li>Üretilen dosyaları satır satır oku: bölge gerçekten fra1 mi, test gerçekten bir şeyi sınıyor mu, iş akışı pull request'te de tetikleniyor mu. Daha önce itilmiş bir .env varsa .gitignore onu geçmişten silmez; anahtarı döndür.</li>
+        <li>Test kapısını kur: Hafta 5'te main dalına koyduğun kuralda ci iş akışını zorunlu durum denetimi yap. Bir dalda testi kasıtlı bozup pull request aç: Actions kırmızı, birleştirme düğmesi kapalı, önizleme adresi yine de gelmiş. Testi düzelt, yeşili ve açılan düğmeyi gör, birleştir.</li>
+        <li>Supabase bölgesine bak (Project Settings &gt; General); Frankfurt ise README'ye yaz, değilse taşıma kararını gerekçesiyle yaz.</li>
+        <li>Tavanı yaz: ürün kartsız Hobby'de mi kalıyor, yoksa kart girilen bir hesapta Spend Management tavanı mı açık; hangisi olduğunu README'nin Dağıtım bölümüne yaz.</li>
+        <li>UptimeRobot'ta üretim adresi için monitör aç, uyarıyı bir üyenin e-postasına bağla, monitör ekranının görüntüsünü README'ye koy. Alan adın varsa Settings &gt; Domains'ten bağla; yoksa vercel.app adresi kabul.</li>
+      </ol>
+    </div>
+    <div class="subhead"><h3>Kabul ölçütleri</h3><span class="chip lab">onay listesi</span></div>
+    <div class="card">
+      <label class="check"><input type="checkbox" data-done="k1"> Canlı adreste giriş, ilan listesi ve yapay zekâ özelliği çalışıyor (M2: veri ve API bağlı sürüm yayında).</label>
+      <label class="check"><input type="checkbox" data-done="k2"> Üretim adresi herkese açık ve HTTPS ile açılıyor; main dalına gönderim otomatik dağıtım tetikliyor; en az bir pull request önizleme adresi almış.</label>
+      <label class="check"><input type="checkbox" data-done="k3"> En az bir otomatik test Actions'ta koşuyor; main için durum denetimi zorunlu; iş akışı yeşil.</label>
+      <label class="check"><input type="checkbox" data-done="k4"> Depoda hiçbir anahtar yok, git geçmişi dahil; fonksiyon bölgesi fra1.</label>
+      <label class="check"><input type="checkbox" data-done="k5"> Ürün kartsız Hobby'de ya da Spend Management tavanı açık; README'de hangisi olduğu yazıyor.</label>
+      <label class="check"><input type="checkbox" data-done="k6"> README'de dağıtım adımları, bölge kararı ve "site düşerse ne yaparız" paragrafı var.</label>
+      <label class="check"><input type="checkbox" data-done="k7"> UptimeRobot monitörü çalışıyor, uyarı bir üyeye gidiyor; monitörün ekran görüntüsü README'de.</label>
+    </div>
+    <div class="subhead"><h3>Teslim nasıl yapılır</h3><span class="chip ship">bu dersi izleyen Pazar 23:59</span></div>
+    <div class="prose">
+      <p>Her üye <a href="../../teslimler/">haftalık teslim sayfasındaki</a> formdan kendi adıyla gönderir: hafta "Hafta 8 · Bulut ve yayına alma", numara, ad, yayındaki sayfa alanına ürünün canlı adresi (vercel.app ya da kendi alan adın), depo alanına takım deposu. Yapay zekâ notuna üç şey yaz: kendin yaptığın somut iş ("monitörü ben kurdum, uyarı benim e-postama geliyor" gibi), yapay zekâ aracından aldığın bir yapılandırma parçasını neden kabul ya da ret ettiğin, öğrendiğin bir sınır ve kaynağı. "Düzeltilmiş bozuk paket" alanı boş kalır.</p>
+      <p>Puan 0 ile 3 arasında. 3 (tam): bütün ölçütler var ve README'deki kesinti planı Hafta 4'teki mimari şemana atıf yapıyor; bağlı alan adı artı değer, şart değil. 2 (eksik): bir ölçüt eksik, örneğin bölge kararı yazılmamış ya da monitör uyarısı bağlanmamış. 1 (zayıf): site yayında ama test kapısı, önizleme ya da izleme yok. 0 (yok): üretim adresi yok, M2 özellikleri çalışmıyor ya da depoda anahtar var.</p>
+    </div>
+  </section>
+
+  <section id="izle" aria-labelledby="izle-h">
+    <div class="section-head"><h2 id="izle-h">İzle</h2><span class="time">toplam 17 dk</span></div>
+    <div class="video-liste">
+      <div class="card"><h3><a href="https://www.youtube.com/watch?v=SCIfWhAheVw" target="_blank" rel="noopener">when your serverless computing bill goes parabolic...</a></h3><p class="small muted">Fireship · 3:51 · tamamı · İngilizce, otomatik altyazı</p><p>Sunumdaki klip; iki fatura olayını mizahla anlatır. "Ücret neye göre hesaplanıyor" sorusunu aklında tut.</p></div>
+      <div class="card"><h3><a href="https://www.youtube.com/watch?v=QupPTc-_6-c" target="_blank" rel="noopener">Şirketlerde nasıl kod yazılıyor? DevOps nedir?</a></h3><p class="small muted">Barış Dere · 26:01 · 05:00 ile 09:42 arası · Türkçe, el yapımı altyazı</p><p>Sürekli entegrasyon ve dağıtımı Türkçe anlatır; test kapısını kurmadan önce izle. 15:17 ile 19:51 arasında geliştirme, test ve canlı ortam ayrımı da var.</p></div>
+      <div class="card"><h3><a href="https://www.youtube.com/watch?v=bb2Z8ru-yqA" target="_blank" rel="noopener">Geliştirdiğimiz Uygulamaları Nasıl Canlıya Alabiliriz? Vercel + Github</a></h3><p class="small muted">Koray Aslan · 6:43 · 01:38 ile 06:18 arası · Türkçe, otomatik altyazı</p><p>Depoyu Vercel'e bağlayıp yayınlamanın tamamı; bağlantıyı yeniden kuracaksan ya da Hafta 4'te atladıysan.</p></div>
+      <div class="card"><h3><a href="https://www.youtube.com/watch?v=-_vpoayWTps" target="_blank" rel="noopener">Soft and hard spend limits for Vercel projects</a></h3><p class="small muted">Vercel · 10:59 · ilk dört dakika · İngilizce</p><p>Tavan ve "aşınca üretimi duraklat" ayarı platformun kendi anlatımıyla; Pro planına özgü, Hobby'de bu ekran yok.</p></div>
+    </div>
+  </section>
+
+  <section id="oku" aria-labelledby="oku-h">
+    <div class="section-head"><h2 id="oku-h">Oku</h2><span class="time">resmi belgeler önce</span></div>
+    <div class="prose">
+      <ol>
+        <li><a href="https://vercel.com/docs/git" target="_blank" rel="noopener">Vercel: Git ile dağıtım</a>. Önizleme ve üretim akışı tek sayfada; takımın ilk okuması.</li>
+        <li><a href="https://vercel.com/docs/environment-variables" target="_blank" rel="noopener">Vercel: ortam değişkenleri</a>. Ortam ayrımı ve Secret türü; anahtar hatalarının çoğunu önler.</li>
+        <li><a href="https://vercel.com/docs/domains/working-with-domains/add-a-domain" target="_blank" rel="noopener">Vercel: alan adı ekleme</a>. A, CNAME ve TXT kayıtlarını ekran görüntüleriyle verir.</li>
+        <li><a href="https://vercel.com/docs/functions/configuring-functions/region" target="_blank" rel="noopener">Vercel: fonksiyon bölgesi</a>. fra1 kararının belgesi; vercel.json örneği içinde.</li>
+        <li><a href="https://nextjs.org/docs/app/guides/environment-variables" target="_blank" rel="noopener">Next.js: ortam değişkenleri</a> ve <a href="https://vite.dev/guide/env-and-mode" target="_blank" rel="noopener">Vite: env ve mode</a>. Hangi değişken tarayıcıya gider, çerçevenin kendi belgesinden.</li>
+        <li><a href="https://12factor.net/config" target="_blank" rel="noopener">On iki faktör: yapılandırma</a>. "Yapılandırma koddan ayrı durur" ilkesinin en kısa anlatımı.</li>
+        <li><a href="https://letsencrypt.org/how-it-works/" target="_blank" rel="noopener">Let's Encrypt: nasıl çalışır</a>. Sertifikanın kendiliğinden nasıl alınıp yenilendiği.</li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Glossary/DNS" target="_blank" rel="noopener">MDN: DNS</a>. Alan adı çözümlemesinin kısa tanımı.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="nasil" aria-labelledby="nasil-h">
+    <div class="section-head"><h2 id="nasil-h">How to know</h2></div>
+    <div class="prose">
+      <p>Bu konu kitaptan öğrenilmiyor; üç kaynak türü var. Birincisi sağlayıcının kendi belgesi ve değişiklik günlüğü: Vercel belgelerinin her sayfasında "son güncelleme" satırı var. İkincisi kesinti raporları: her büyük kesintiden sonra resmî raporu oku ve "bizim projede aynı şey nasıl olurdu" diye sor; bir <a href="https://axis-intelligence.com/cloud-outage-tracker/" target="_blank" rel="noopener">kesinti takipçisi</a> resmî raporu olan olayları tek yerde toplar. Üçüncüsü anketler ve topluluk: <a href="https://survey.stackoverflow.co/2025/technology" target="_blank" rel="noopener">Stack Overflow geliştirici anketi</a> hangi aracın gerçekten kullanıldığını gösterir; Hacker News tartışmaları fatura olaylarında sağlayıcı politikasını değiştirebilir.</p>
+      <p>Kalite nasıl ayırt edilir: tarihsiz belge okunmaz; "geçen yıl böyleydi" diyen blog yazısı fiyat ve sınır için kaynak değildir; iki kaynak çelişiyorsa sağlayıcının kendi fiyat sayfası esas alınır. Bütçe uyarısı kurmadan hiçbir bulut hesabına kart bağlama. Kredi kartsız başlangıç için <a href="https://azure.microsoft.com/en-us/free/students" target="_blank" rel="noopener">Azure for Students</a> ve <a href="https://aws.amazon.com/education/awseducate/" target="_blank" rel="noopener">AWS Educate</a> en az riskli yol; <a href="https://education.github.com/pack" target="_blank" rel="noopener">GitHub Student Developer Pack</a> içindeki bir yıllık alan adını takımın Vercel'e bağlayabilir.</p>
+    </div>
+  </section>
+
+  <section id="sozluk" aria-labelledby="sozluk-h">
+    <div class="section-head"><h2 id="sozluk-h">Sözlük</h2></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>İngilizce</th><th>Türkçe karşılığı</th><th>Derste</th></tr></thead>
+        <tbody>
+          <tr><td>region</td><td>bölge</td><td>bölge</td></tr>
+          <tr><td>IaaS, PaaS, serverless</td><td>altyapı hizmeti, platform hizmeti, sunucusuz</td><td>sanal makine, platform, sunucusuz</td></tr>
+          <tr><td>CDN, edge</td><td>içerik dağıtım ağı, uç</td><td>CDN, uç nokta</td></tr>
+          <tr><td>build, deployment, preview, rollback</td><td>derleme, dağıtım, önizleme, geri alma</td><td>build, dağıtım, önizleme adresi, geri alma</td></tr>
+          <tr><td>CI/CD</td><td>sürekli bütünleştirme ve teslim</td><td>CI/CD</td></tr>
+          <tr><td>environment variable, secret</td><td>ortam değişkeni, gizli değer</td><td>ortam değişkeni, gizli anahtar</td></tr>
+          <tr><td>service role key, anon key</td><td>servis rolü anahtarı, anonim anahtar</td><td>service role, anon anahtarı</td></tr>
+          <tr><td>DNS, CNAME, A, MX record</td><td>alan adı sistemi, takma ad kaydı, adres kaydı, posta kaydı</td><td>DNS, CNAME, A kaydı, MX</td></tr>
+          <tr><td>TLS certificate, ACME</td><td>sertifika, otomatik sertifika protokolü</td><td>sertifika, kilit</td></tr>
+          <tr><td>post-mortem</td><td>olay sonrası rapor</td><td>kesinti raporu</td></tr>
+          <tr><td>container, image</td><td>konteyner, imaj</td><td>konteyner, imaj</td></tr>
+          <tr><td>race condition</td><td>yarış koşulu</td><td>yarış koşulu</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="sinav" aria-labelledby="sinav-h">
+    <div class="section-head"><h2 id="sinav-h">Sınavda nasıl sorulur</h2></div>
+    <details class="faq">
+      <summary>Ürününüz Demo Günü'nden bir gün önce sosyal medyada paylaşıldı ve trafik yüz kat arttı. Vercel'in ücretsiz planındasınız, kart yok. Ne olur, ne yapmalıydınız?</summary>
+      <div class="ans"><p>Sınır aşılınca proje duraklatılır; ziyaretçi hata sayfası görür, yeniden açılması günler alabilir. Önceden yapılacaklar: statik içeriği Cloudflare gibi ücretsiz bir CDN'e almak, görsel optimizasyonunu sınırlamak, ücretli plana geçilecekse tavan koyup "aşınca üretimi duraklat" ayarını açmak.</p></div>
+    </details>
+    <details class="faq">
+      <summary>Alan adınızı Vercel'e bağladınız, iki saat sonra hâlâ "Invalid Configuration" görüyorsunuz; e-postanız da gelmemeye başladı. Ne oldu?</summary>
+      <div class="ans"><p>Büyük olasılıkla A ya da CNAME kaydı yerine alan adının isim sunucuları (nameserver) Vercel'e taşındı ve eski e-posta (MX) kayıtları kopyalanmadı. Çözüm: eski DNS kayıtlarını Vercel DNS'e eklemek ya da isim sunucularını geri alıp yalnız web için A veya CNAME kaydı girmek.</p></div>
+    </details>
+    <details class="faq">
+      <summary>Projeniz kullanıcı adı, e-posta ve konum tutuyor; veritabanı Frankfurt'ta. "KVKK açısından ne yaptınız" sorusuna ne cevap verirsiniz?</summary>
+      <div class="ans"><p>Frankfurt yurt dışıdır; aktarım için yeterlilik kararı, standart sözleşme gibi bir güvence ya da arızi hâl gerekir. Savunulabilir cevap: gereksiz kişisel veriyi (konum gibi) hiç toplamamak, gizlilik metninde sunucu konumunu yazmak, ürün gerçek kullanıcıya açılırsa sağlayıcıyla standart sözleşme yapıp Kurum'a bildirmek.</p></div>
+    </details>
+  </section>
+
+  <section id="gelecek" aria-labelledby="gelecek-h">
+    <div class="next">
+      <span class="lbl">Sonraki hafta</span>
+      <h2 id="gelecek-h">Ara sınav haftası, sonra Hafta 9 · Önbellek ve performans</h2>
+      <p>Ara sınav Hafta 1 ila 8'i kapsar; biçim ve örnek sorular <span class="kilitli" title="Sınavdan önce açılır">ara sınav sayfasında</span>. Sonraki derste yayındaki ürünün hızını ölçüp önbellekle hızlandıracaksın; gelmeden önce üretim adresinin açıldığından emin ol.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><span class="kilitli" title="Sırası gelince açılır">Önceki hafta: Hafta 7</span> · <a href="../../">Ders ana sayfası</a></div>
+    <div>YZM205 Web Tasarımı ve Programlama · Muş Alparslan Üniversitesi · Arş. Gör. Çağrı ŞAHİN</div>
+  </div>
+</footer>
+
+<script src="../../assets/ders.js"></script>
+<script>
+window.QUIZ = {
+  hat: {
+    title: "Kendini sına: bulut ve dağıtım hattı",
+    start: 1,
+    qs: [
+      { d: 1, tag: "karar", q: "Takımının Next.js ürününü ilk gün yayına almak için hangi katmana dokunursun?",
+        o: ["Vercel ya da Cloudflare gibi bir platforma; altındaki büyük bulutu o yönetir", "Doğrudan AWS'de sanal makine kiralayıp Node kurarım; başka yolu yok", "Önce Docker ve Kubernetes öğrenirim, yoksa yayın yapılamaz"], a: 0,
+        e: "Platform kodu alır, sunucuyu senden saklar. Sanal makine tam kontrol verir ama işletim yükü getirir, tek yol değildir. Konteyneri platform zaten arkada kullanır; sahada azınlık doğrudan Kubernetes yönetir." },
+      { tag: "mekanizma", q: "main dalına gönderim yaptın. Build bitince statik sayfalar ve API rotaları nereye gider?",
+        o: ["Statik dosyalar dünyadaki uç noktalara dağılır; API rotaları tek bölgede fonksiyon olur", "İkisi de tek bir sunucuya kopyalanır ve oradan sunulur", "Hepsi kullanıcının tarayıcısına indirilir, sunucu gerekmez"], a: 0,
+        e: "Statik dosyalar CDN'den, en yakın uçtan gelir; sunucu tarafı kod tek bölgede fonksiyon olarak yalnız istek gelince çalışır. Tek sunucu sanal makine modelidir. API rotası tarayıcıya inmez; inseydi anahtarlar sızardı." },
+      { tag: "neden", q: "Üretimdeki son dağıtım bozuk çıktı. Geri almak neden saniyeler sürer?",
+        o: ["Her dağıtım değişmez bir kopyadır; alan adı yalnız hangisini gösterdiğini değiştirir", "Platform eski kodu yeniden build eder, build hızlıdır", "Geri alma yoktur; düzeltip yeniden gönderirsin"], a: 0,
+        e: "Eski dağıtım silinmez, duruyordur; geri alma yalnız alan adını önceki dağıtıma çevirir. Yeniden build dakikalar sürerdi. Düzeltip göndermek de bir yol ama en yavaşı." }
+    ]
+  },
+  anahtar: {
+    title: "Kendini sına: anahtar ve alan adı",
+    start: 4,
+    qs: [
+      { d: 1, tag: "karar", q: "Bir üye service role anahtarını `NEXT_PUBLIC_SUPABASE_SERVICE_KEY` adıyla Vercel'e ekledi, türünü Secret seçti; panelde artık okunmuyor. Güvende mi?",
+        o: ["Değil: NEXT_PUBLIC_ öneki onu tarayıcı paketine gömdü; Secret yalnız paneli gizler", "Güvende: Secret türü panelde bile okunamıyor", "Güvende: Vercel gizli değişkenleri tarayıcıya hiç göndermez"], a: 0,
+        e: "Önek belirleyicidir, tür değil: önekli değer build anında pakete sabit metin olarak yazılır, Secret yalnız panel görünümünü kapatır. Yapılacak üç şey: değişkeni öneksiz adla yeniden tanımla, anahtarı Supabase'de döndür, yeni dağıtım yap. Service role anahtarı satır güvenliğini aşar; sızarsa bütün veritabanı açıktır." },
+      { tag: "hata bulma", q: "`.env` dosyasını bugün `.gitignore`'a ekledin; ama dosya bir hafta önce depoya itilmişti. Durum ne?",
+        o: ["Anahtar git geçmişinde duruyor; anahtarı döndürmen gerekir", ".gitignore'a eklenince dosya geçmişten de silinir", "Depo özel olduğu için sorun yok"], a: 0,
+        e: ".gitignore yalnız bundan sonraki gönderimleri etkiler; geçmişteki commit'ler durur ve klonlayan herkes okur. Özel depo da bir gün açılabilir ya da bir üyenin hesabı sızabilir. Kabul ölçütü bu yüzden \"geçmiş dahil\" diyor." },
+      { tag: "uygulama", q: "`app.ornek.me` alt alan adını Vercel'e bağlıyorsun. Hangi kaydı girersin, sertifikayı kim alır?",
+        o: ["CNAME kaydı; sertifikayı platform kendisi alır ve yeniler", "A kaydı; sertifikayı satın alıp panele yüklerim", "MX kaydı; HTTPS için sertifika gerekmez"], a: 0,
+        e: "Alt alan adı CNAME ile Vercel'in adına işaret eder; kök alan adı CNAME alamadığı için A kaydı ister. Sertifikayı platform ACME ile alır ve yeniler. MX kaydı e-posta içindir; HTTPS her zaman sertifika ister." }
+    ]
+  },
+  isletme: {
+    title: "Kendini sına: bölge, fatura, izleme",
+    start: 7,
+    qs: [
+      { d: 1, tag: "karar", q: "Statik sayfalar hızlı, ilan listesi yavaş. Supabase projesi Frankfurt'ta. En olası neden?",
+        o: ["Fonksiyon varsayılan bölgede, Washington'da; her sorgu Atlantik'i iki kez geçiyor", "Supabase'in ücretsiz planı yavaştır; ücretli plana geç", "React paketi çok büyük; kodu küçült"], a: 0,
+        e: "Statik sayfalar CDN'den geldiği için hızlı; liste sayfası fonksiyondan veritabanına gidiyor ve fonksiyon başka kıtada. Çözüm fonksiyon bölgesini fra1 yapmak. Paket boyutu açılış sayfasını da yavaşlatırdı; ücretli plan yolu kısaltmaz." },
+      { tag: "mekanizma", q: "Kredi kartı girmediğin ücretsiz projede trafik sınırı aştı. Ne olur?",
+        o: ["Proje duraklatılır; ziyaretçi hata sayfası görür, fatura gelmez", "Fatura kesilir, ödeyene kadar site açık kalır", "Hiçbir şey olmaz; ücretsiz katman sınırsızdır"], a: 0,
+        e: "Kart yoksa ücret yerine duraklama gelir; ücretsiz ama kapalı. Fatura yalnız kart girilen hesapta büyür, tavan konmadıysa sınırsız büyür. \"Ücretsiz sınırsızdır\" bu haftanın ilk yanılgısı." },
+      { tag: "neden", q: "Site gece düştü. Bunu sabah ziyaretçiden önce senin öğrenmen için hangisi gerekli?",
+        o: ["Dış bir nabız izleyicisi ve bir üyeye bağlı e-posta uyarısı", "Platformun günlükleri; ücretsiz planda hep saklanır", "Hiçbiri; dağıtım başarılıysa site düşmez"], a: 0,
+        e: "Ücretsiz planda günlükler kısa süre saklanır ve kimseye haber vermez. Dışarıdan yoklayan monitör cevap alamayınca e-posta atar; uyarı bağlı değilse yine kimse öğrenmez. Bölge kesintisi, uyuyan veritabanı ya da duraklatılan proje başarılı dağıtımı da düşürür." }
+    ]
+  }
+};
+</script>
+</body>
+</html>

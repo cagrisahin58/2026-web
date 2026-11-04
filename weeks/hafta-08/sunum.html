@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hafta 8 sunum · Bulut ve yayına alma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/sunum.css">
+<style>
+/* Hafta 8 sunumuna özel düzen ve şemalar */
+.s > header h2{min-width:0}
+.s.kapak h1{font-size:clamp(2.2rem,6.2vw,5rem)}
+.s.kapak .buyuk{font-size:calc(var(--b1)*1.1);margin-bottom:.45em}
+.kartlar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5vw;align-items:stretch}
+.kartlar .kutu b{display:block;font-family:var(--display);font-size:calc(var(--b1)*1.08);line-height:1.2}
+.kartlar .kutu p{margin:.35em 0 0;font-size:var(--b2);max-width:none;line-height:1.4}
+.kutu.vurgu p,.kutu.soft p{margin:.4em 0 0}
+.yan-metin p{font-size:clamp(.9rem,1.7vw,1.3rem);line-height:1.38;margin:0 0 .5em}
+.s.sinifca .govde{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:start}
+.s.sinifca .govde.ters{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+.s.karar .govde.iki{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:start}
+.s.sinifca .secenek,.s.karar .secenek{padding:1.1vh 1.3vw;font-size:clamp(1rem,1.9vw,1.4rem)}
+.s.sinifca .cevap,.s.karar .cevap{font-size:var(--b2);line-height:1.4;margin-top:1.4vh}
+.s.sinifca .senaryo,.s.karar .senaryo{font-size:var(--b2);line-height:1.4}
+.s.gosteri .numarali,.s.sen .numarali{font-size:clamp(.85rem,1.55vw,1.2rem)}
+.s.gosteri .numarali li,.s.sen .numarali li{margin:0;line-height:1.4}
+.s.gosteri .yedek{font-size:clamp(.85rem,1.5vw,1.15rem)}
+.s.sen .onay,.s.sen ol{font-size:var(--b2)}
+.s.sen ol li{line-height:1.4}
+.izlerken .kutu{font-size:var(--b2);line-height:1.4;padding:1.5vh 1.4vw}
+.s.ozet .onay{font-size:var(--b2)}
+.s.ozet .onay li{line-height:1.4}
+#gorev-olcut .onay{font-size:clamp(.8rem,1.4vw,1.1rem)}
+#gorev-olcut .onay li{line-height:1.32}
+#gorev-olcut .govde p{font-size:var(--b2);line-height:1.4;margin:0}
+#onizleme .zaman{margin-top:.6vh}
+#onizleme .kucuk{margin-bottom:0;line-height:1.35}
+.s.karar .kiyas{font-size:clamp(.85rem,1.55vw,1.2rem)}
+.s.karar .kiyas th{font-size:var(--b2)}
+
+/* şema ortak parçaları */
+.sahne{font-size:var(--b2)}
+.sahne .yeniden{z-index:4;font-size:clamp(.7rem,1.1vw,.9rem);padding:.2em .7em}
+.sahne .not{font-size:clamp(.75rem,1.3vw,1rem);max-width:62%;line-height:1.25}
+.sahne.dp,.sahne.ga,.sahne.dn,.sahne.bo{height:48vh;padding:0}
+.sahne.fa{height:46vh;padding:0}
+.sema-cizgi{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.sema-cizgi line{stroke:var(--line);stroke-width:2;vector-effect:non-scaling-stroke}
+.sema-cizgi line.kesik{stroke-dasharray:6 6}
+.sahne .dugum{position:absolute;transform:translateY(-50%);background:var(--surface-2);border:2px solid var(--line);border-radius:.9vw;padding:1vh .8vw;text-align:center;font:700 clamp(.85rem,1.45vw,1.2rem)/1.15 var(--display);z-index:1}
+.sahne .dugum.kilitli{padding-right:2.4vw}
+.sahne .dugum small{display:block;font:400 clamp(.68rem,1.15vw,.95rem)/1.25 var(--body);color:var(--muted);margin-top:.25em}
+.sahne .dugum code{display:block;font-size:clamp(.58rem,.95vw,.8rem);background:var(--surface);border-radius:.3em;padding:.15em .3em;margin-top:.35em;word-break:break-all;text-align:left;font-weight:500}
+.sahne .paket{position:absolute;width:clamp(12px,1.4vw,22px);height:clamp(12px,1.4vw,22px);border-radius:50%;background:var(--ship);transform:translate(-50%,-50%);opacity:0;z-index:2;box-shadow:0 0 0 3px var(--ship-soft)}
+.sahne .etk{position:absolute;font:600 clamp(.68rem,1.15vw,.95rem)/1.3 var(--mono);color:var(--lab);opacity:0;z-index:3;max-width:40%}
+.sahne .etk.kirmizi{color:var(--srv)}
+.sahne.oynuyor .etk{animation:belir .5s ease var(--g,0s) forwards}
+.kilit{position:absolute;width:clamp(16px,1.9vw,30px);height:clamp(12px,1.5vw,24px);background:var(--lab);border-radius:.25em;opacity:0;transform:scale(.4)}
+.kilit::before{content:"";position:absolute;left:50%;top:0;transform:translate(-50%,-80%);width:60%;height:70%;border:3px solid var(--lab);border-bottom:0;border-radius:1em 1em 0 0;box-sizing:border-box}
+@keyframes belir{to{opacity:1}}
+@keyframes kilit-gel{to{opacity:1;transform:scale(1)}}
+@keyframes parla-lab{to{border-color:var(--lab);box-shadow:0 0 0 4px var(--lab-soft)}}
+@keyframes parla-srv{to{border-color:var(--srv);box-shadow:0 0 0 4px var(--srv-soft)}}
+
+/* şema 1: deploy hattı */
+.dp-git{left:3%;top:50%;width:20%}
+.dp-build{left:36%;top:50%;width:24%}
+.dp-cdn{left:72%;top:30%;width:25%}
+.dp-fn{left:72%;top:76%;width:25%}
+.dp-bar{display:block;height:.7vh;min-height:5px;background:var(--line);border-radius:999px;margin-top:.6em;overflow:hidden}
+.dp-bar i{display:block;height:100%;width:0;background:var(--theory)}
+.dp-ucs{display:flex;justify-content:center;gap:.5em;margin-top:.5em}
+.dp-ucs i{width:.9em;height:.9em;border-radius:50%;background:var(--line);display:block}
+.dp-hazir{left:3%;top:8%;--g:5.6s;max-width:60%}
+.sahne.oynuyor .dp-p1{animation:dp-p1 1.2s ease-in-out .2s forwards}
+.sahne.oynuyor .dp-bar i{animation:dolu 1.8s ease-in-out 1.3s forwards}
+.sahne.oynuyor .dp-p2{animation:dp-p2 1.2s ease-in-out 3.1s forwards}
+.sahne.oynuyor .dp-p3{animation:dp-p3 1.2s ease-in-out 3.1s forwards}
+.sahne.oynuyor .dp-cdn,.sahne.oynuyor .dp-fn{animation:parla-lab .6s ease 4.3s forwards}
+.sahne.oynuyor .dp-ucs i:nth-child(1){animation:uc-yan .4s ease 4.4s forwards}
+.sahne.oynuyor .dp-ucs i:nth-child(2){animation:uc-yan .4s ease 4.7s forwards}
+.sahne.oynuyor .dp-ucs i:nth-child(3){animation:uc-yan .4s ease 5s forwards}
+.sahne.oynuyor .dp-ucs i:nth-child(4){animation:uc-yan .4s ease 5.3s forwards}
+@keyframes dp-p1{0%{opacity:0;left:13%;top:50%}15%{opacity:1}85%{opacity:1}100%{opacity:0;left:48%;top:50%}}
+@keyframes dolu{to{width:100%}}
+@keyframes dp-p2{0%{opacity:0;left:48%;top:50%}15%{opacity:1}85%{opacity:1}100%{opacity:0;left:84%;top:30%}}
+@keyframes dp-p3{0%{opacity:0;left:48%;top:50%}15%{opacity:1}85%{opacity:1}100%{opacity:0;left:84%;top:76%}}
+@keyframes uc-yan{to{background:var(--lab)}}
+
+/* şema 2: anahtar nereye gider */
+.ga-panel{left:2%;top:50%;width:34%}
+.ga-build{left:42%;top:50%;width:15%}
+.ga-paket{left:63%;top:30%;width:35%}
+.ga-fn{left:63%;top:76%;width:35%}
+.sahne .dugum .ga-k1{border-left:3px solid var(--lab)}
+.sahne .dugum .ga-k2{border-left:3px solid var(--srv)}
+.sahne .dugum .ga-yazi{opacity:0;color:var(--lab);border-left:3px solid var(--lab)}
+.ga-p1{background:var(--lab);box-shadow:0 0 0 3px var(--lab-soft)}
+.ga-p2{background:var(--srv);box-shadow:0 0 0 3px var(--srv-soft)}
+.ga-n1{left:63%;top:48%;--g:3.6s;max-width:35%}
+.ga-n2{left:63%;top:92%;--g:4.2s}
+.ga-kilit{right:.6vw;top:.9vh}
+.sahne.oynuyor .ga-p1{animation:ga-p1 3s ease-in-out .3s forwards}
+.sahne.oynuyor .ga-p2{animation:ga-p2 3s ease-in-out .5s forwards}
+.sahne.oynuyor .ga-yazi{animation:belir .5s ease 3.4s forwards}
+.sahne.oynuyor .ga-paket{animation:parla-lab .6s ease 3.4s forwards}
+.sahne.oynuyor .ga-fn{animation:parla-srv .6s ease 3.6s forwards}
+.sahne.oynuyor .ga-kilit{animation:kilit-gel .5s ease 3.6s forwards}
+@keyframes ga-p1{0%{opacity:0;left:19%;top:44%}10%{opacity:1}45%{left:49%;top:50%}55%{left:49%;top:50%}90%{opacity:1}100%{opacity:0;left:80%;top:30%}}
+@keyframes ga-p2{0%{opacity:0;left:19%;top:58%}10%{opacity:1}45%{left:49%;top:50%}55%{left:49%;top:50%}90%{opacity:1}100%{opacity:0;left:80%;top:76%}}
+
+/* şema 3: alan adı ve sertifika */
+.dn-tar{left:3%;top:30%;width:22%}
+.dn-coz{left:37%;top:30%;width:26%}
+.dn-kay{left:74%;top:30%;width:24%}
+.dn-ver{left:37%;top:80%;width:26%}
+.dn-l1{left:14%;top:6%;--g:.4s;color:var(--ship)}
+.dn-l2{left:50%;top:52%;--g:2.5s;max-width:48%}
+.dn-l3{left:4%;top:52%;--g:3.6s}
+.dn-l4{left:66%;top:76%;--g:5.6s;max-width:32%}
+.dn-kilit{right:.6vw;top:.9vh}
+.dn-p3,.dn-p4{background:var(--lab);box-shadow:0 0 0 3px var(--lab-soft)}
+.sahne.oynuyor .dn-p1{animation:dn-p1 1s ease-in-out .2s forwards}
+.sahne.oynuyor .dn-p2{animation:dn-p2 1s ease-in-out 1.3s forwards}
+.sahne.oynuyor .dn-p3{animation:dn-p3 1s ease-in-out 2.4s forwards}
+.sahne.oynuyor .dn-p4{animation:dn-p4 1s ease-in-out 3.5s forwards}
+.sahne.oynuyor .dn-p5{animation:dn-p5 1s ease-in-out 4.6s forwards}
+.sahne.oynuyor .dn-ver{animation:parla-lab .6s ease 5.5s forwards}
+.sahne.oynuyor .dn-kilit{animation:kilit-gel .5s ease 5.5s forwards}
+@keyframes dn-p1{0%{opacity:0;left:14%;top:30%}15%{opacity:1}85%{opacity:1}100%{opacity:0;left:50%;top:30%}}
+@keyframes dn-p2{0%{opacity:0;left:50%;top:30%}15%{opacity:1}85%{opacity:1}100%{opacity:0;left:86%;top:30%}}
+@keyframes dn-p3{0%{opacity:0;left:86%;top:30%}15%{opacity:1}85%{opacity:1}100%{opacity:0;left:50%;top:30%}}
+@keyframes dn-p4{0%{opacity:0;left:50%;top:30%}15%{opacity:1}85%{opacity:1}100%{opacity:0;left:14%;top:30%}}
+@keyframes dn-p5{0%{opacity:0;left:14%;top:30%}15%{opacity:1}85%{opacity:1}100%{opacity:0;left:50%;top:80%}}
+
+/* şema 4: bölge ve isteğin yolu */
+.bo-kul{left:2%;top:50%;width:17%}
+.bo-cdn{left:24%;top:50%;width:19%}
+.bo-fra{left:49%;top:24%;width:22%}
+.bo-was{left:49%;top:76%;width:22%}
+.bo-db{left:77%;top:50%;width:21%}
+.bo-pa{background:var(--srv);box-shadow:0 0 0 3px var(--srv-soft)}
+.bo-pb{background:var(--lab);box-shadow:0 0 0 3px var(--lab-soft)}
+.bo-l1{left:73%;top:78%;--g:4.3s;max-width:26%}
+.bo-l2{left:73%;top:20%;--g:6s;max-width:26%}
+.sahne.oynuyor .bo-pa{animation:bo-a 4s ease-in-out .2s forwards}
+.sahne.oynuyor .bo-pb{animation:bo-b 1.6s ease-in-out 4.4s forwards}
+.sahne.oynuyor .bo-was{animation:parla-srv .6s ease 1.2s forwards}
+.sahne.oynuyor .bo-fra{animation:parla-lab .6s ease 4.9s forwards}
+@keyframes bo-a{0%{opacity:0;left:10%;top:50%}5%{opacity:1}14%{left:33%;top:50%}36%{left:60%;top:76%}50%{left:87%;top:50%}64%{left:60%;top:76%}86%{left:33%;top:50%}95%{opacity:1}100%{opacity:0;left:10%;top:50%}}
+@keyframes bo-b{0%{opacity:0;left:10%;top:50%}8%{opacity:1}16%{left:33%;top:50%}38%{left:60%;top:24%}52%{left:87%;top:50%}66%{left:60%;top:24%}86%{left:33%;top:50%}94%{opacity:1}100%{opacity:0;left:10%;top:50%}}
+
+/* şema 5: kart yok, kart var */
+.fa-panel{position:absolute;top:12%;bottom:14%;width:45%;border:1px solid var(--line);border-radius:.9vw;background:var(--surface-2)}
+.fa-sol{left:3%}
+.fa-sag{left:52%}
+.fa-panel h4{margin:0;position:absolute;left:0;right:0;top:4%;text-align:center;font:700 clamp(.8rem,1.35vw,1.1rem)/1.2 var(--display)}
+.fa-bars{position:absolute;left:10%;right:10%;top:30%;bottom:8%;display:flex;align-items:flex-end;gap:5%}
+.fa-bars i{flex:1;display:block;background:var(--theory);border-radius:.2em .2em 0 0;height:0}
+.fa-cap{position:absolute;left:6%;right:6%;bottom:43%;border-top:2px dashed var(--err)}
+.fa-cap span{position:absolute;left:0;top:.2em;font:500 clamp(.62rem,1.05vw,.85rem) var(--mono);color:var(--err)}
+.fa-panel .etk{max-width:84%}
+.fa-dur{left:8%;top:30%;--g:2.7s}
+.fa-fat{left:8%;top:17%;--g:2.9s}
+.sahne.oynuyor .fa-bars i:nth-child(1){animation:buyu .6s ease .3s forwards}
+.sahne.oynuyor .fa-bars i:nth-child(2){animation:buyu .6s ease .8s forwards}
+.sahne.oynuyor .fa-bars i:nth-child(3){animation:buyu .6s ease 1.3s forwards}
+.sahne.oynuyor .fa-bars i:nth-child(4){animation:buyu .6s ease 1.8s forwards}
+.sahne.oynuyor .fa-bars i:nth-child(5){animation:buyu .6s ease 2.3s forwards}
+.sahne.oynuyor .fa-sol .fa-bars i:nth-child(4){animation:buyu-kes .8s ease 1.8s forwards}
+@keyframes buyu{to{height:var(--h)}}
+@keyframes buyu-kes{60%{height:var(--h);background:var(--theory)}100%{height:var(--h);background:var(--err)}}
+</style>
+</head>
+<body>
+<div class="deste">
+
+<section class="s kapak" id="kapak">
+  <div class="baslik">
+    <span class="etiket">YZM205 · Hafta 8 · Bulut ve yayına alma</span>
+    <h1>Ürünün canlı adrese nasıl çıkar, orada nasıl ayakta kalır?</h1>
+    <p class="buyuk" data-adim="1">Bu hafta sonunda: "Deploy" düğmesine basınca arkada ne olduğunu çizebileceksin.</p>
+    <p class="buyuk" data-adim="2">Gizli anahtarı, bölgeyi ve harcama tavanını doğru yere koyabileceksin.</p>
+    <p class="buyuk" data-adim="3">Takımının ürünü kendi adresinde olacak; her gönderim kendiliğinden yayınlanacak.</p>
+  </div>
+  <p class="kucuk">Sağ ok ya da Boşluk ile ilerle · F tam ekran · ? tuşlar</p>
+</section>
+
+<section class="s hikaye" id="hikaye-kesinti">
+  <header><span class="etiket">Gerçek olay</span><h2>Bir gece dünyanın dört yanında uygulamalar neden açılmadı?</h2></header>
+  <div class="govde iki sol-genis">
+    <div>
+      <p class="alinti">Bir adres bir gece boş kaldı.</p>
+      <p data-adim="1">Amazon'un en yoğun bölgesinde (us-east-1) veritabanı hizmetinin adresi bir gece boş kaldı. Sunucu başlatma, yük dengeleyici, fonksiyonlar ve yönetim paneli peş peşe durdu.</p>
+      <p data-adim="2">Dünyanın dört yanındaki uygulamalar o gece "küresel" sandıkları hizmetin tek bir bölgeye bağlı olduğunu öğrendi.</p>
+      <p class="kaynak" data-adim="2">Amazon'un kendi raporundan; bağlantısı ders notunda.</p>
+    </div>
+    <div class="kutu sayi" data-adim="1"><b>15 saat</b><small>yaklaşık; tek bölgede başladı, dünya çapında hissedildi</small></div>
+  </div>
+</section>
+
+<section class="s sinifca" id="sinifca-kesinti">
+  <header><span class="etiket">Sınıfça</span><h2>Sence o adresi ne sildi?</h2></header>
+  <div class="govde">
+    <div class="secenekler">
+      <button class="secenek" type="button">Veri merkezinde elektrik kesildi, sunucular kapandı</button>
+      <button class="secenek" type="button">Saldırganlar DNS sunucusunu ele geçirdi</button>
+      <button class="secenek" data-dogru type="button">İki otomasyon aynı DNS kaydına yarıştı; kayıt boş kaldı</button>
+      <button class="secenek" type="button">Yeni sürümdeki bir kod hatası yanlış adres yazdı</button>
+    </div>
+    <div class="cevap">Amazon'un raporundan: "Kök neden: DNS yönetim sistemindeki gizli bir yarış koşulu." Kod değişmemişti, saldırı yoktu: iki bağımsız DNS yazıcısı farklı planları uygularken biri diğerininkini silince kayıt boş kaldı. Bulut düşer; ürün buna göre tasarlanır: bölgeni bilerek seç, "site düşerse ne yaparız" paragrafını bu hafta README'ye yaz.</div>
+  </div>
+</section>
+
+<section class="s" id="harita">
+  <header><span class="etiket">Harita</span><h2>Ürünün parçaları: bu hafta en alt katta, altyapıdayız</h2></header>
+  <div class="govde">
+    <div class="harita">
+      <div class="katmanlar">
+        <div class="katman"><b>Kullanıcı ve cihazlar</b><small>tarayıcı, telefon, masaüstü</small></div>
+        <div class="katman gecti"><b>İstemci uygulaması</b><small>React, Next.js, PWA</small></div>
+        <div class="katman gecti"><b>API ve iş mantığı</b><small>sunucusuz fonksiyonlar, kimlik, dil modeli API'si</small></div>
+        <div class="katman gecti"><b>Veri</b><small>Postgres, depolama, önbellek</small></div>
+        <div class="katman bu-hafta"><b>Altyapı</b><small>bulut, CDN, alan adı, dağıtım hattı</small></div>
+      </div>
+      <div class="yan">
+        <div class="katman gecti"><b>Takım ve araçlar</b><small>GitHub, yapay zekâ ajanları</small></div>
+        <div class="katman"><b>Güvenlik</b><small>açık analizi</small></div>
+        <div class="katman"><b>Kalite</b><small>test, kod analizi</small></div>
+        <div class="katman"><b>Pazar</b><small>mağaza, yasal, analitik</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="uc-dev">
+  <header><span class="etiket">Fikir 1</span><h2>Bulut kimin elinde, sen nereye dokunuyorsun?</h2></header>
+  <div class="govde">
+    <div class="kartlar">
+      <div class="kutu"><b>Amazon · AWS</b><p>En büyük; staj ilanlarının dili.</p></div>
+      <div class="kutu"><b>Microsoft · Azure</b><p>İkinci; öğrenciye kredi kartsız deneme hesabı.</p></div>
+      <div class="kutu"><b>Google Cloud</b><p>Üçüncü ve en hızlı büyüyen.</p></div>
+    </div>
+    <div class="kutu vurgu" data-adim="1"><b>Üçü birlikte kamu bulutunun üçte ikisini tutuyor.</b> Senin ilk gün dokunduğun katman bunlar değil: Vercel, Cloudflare, Netlify, Render gibi platformlar kodunu alır, altındaki büyük bulutu senden saklar.</div>
+    <div class="kutu soft" data-adim="2">Türkiye'de üç devin de bölgesi yok; en yakınları Avrupa'da ve Orta Doğu'da, bizim yığında Frankfurt seçiyoruz. Cloudflare'in İstanbul ve İzmir'de uç noktası var. Bu haritayı bölge seçerken hatırla.</div>
+  </div>
+</section>
+
+<section class="s" id="katmanlar">
+  <header><span class="etiket">Fikir 2</span><h2>Ne kadarını sen yönetiyorsun?</h2></header>
+  <div class="govde">
+    <div class="kartlar">
+      <div class="kutu" data-adim="1"><b>Sanal makine (IaaS)</b><p>İşletim sistemi, güncelleme, Node kurulumu sende. AWS EC2, DigitalOcean Droplet.</p></div>
+      <div class="kutu" data-adim="2"><b>Platform (PaaS)</b><p>Yalnız kodu verirsin; sunucuyu hiç görmezsin. Vercel, Render, Cloudflare Pages.</p></div>
+      <div class="kutu" data-adim="3"><b>Sunucusuz</b><p>Kod yalnız istek gelince çalışır, istek başına ücretlenir. Vercel fonksiyonları.</p></div>
+    </div>
+    <div class="kutu vurgu" data-adim="4"><b>Bizim yığın:</b> Next.js API rotan Vercel'de sunucusuz fonksiyon olarak koşar, Supabase yönetilen veritabanıdır. Sunucu yönetmek yok; bölge, anahtar ve tavan var.</div>
+    <div class="kutu soft" data-adim="5">Her bulut dört şey satar: hesaplama, depolama, veritabanı, ağ. Bizde karşılığı Vercel (hesaplama ve CDN), Supabase (veritabanı ve depolama), alan adı sağlayıcısı (DNS).</div>
+  </div>
+</section>
+
+<section class="s" id="deploy-hatti">
+  <header><span class="etiket">Fikir 3</span><h2>"Deploy"a basınca arkada ne olur?</h2></header>
+  <div class="govde iki sol-genis">
+    <div class="sahne dp">
+      <svg class="sema-cizgi" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <line x1="23" y1="50" x2="36" y2="50"/>
+        <line x1="60" y1="50" x2="72" y2="30"/>
+        <line x1="60" y1="50" x2="72" y2="76"/>
+      </svg>
+      <div class="dugum dp-git">GitHub<small>main dalına gönderim</small></div>
+      <div class="dugum dp-build">Build kabı<small>bağımlılıklar, next build</small><span class="dp-bar"><i></i></span></div>
+      <div class="dugum dp-cdn">CDN<small>statik dosyalar, her uç noktada</small><span class="dp-ucs"><i></i><i></i><i></i><i></i></span></div>
+      <div class="dugum dp-fn">Fonksiyon<small>API rotaları, tek bölgede</small></div>
+      <i class="paket dp-p1"></i><i class="paket dp-p2"></i><i class="paket dp-p3"></i>
+      <span class="etk dp-hazir">Dağıtım hazır: alan adı artık bunu gösteriyor</span>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+      <div class="not">Gönderim, build, iki çıktı: CDN ve fonksiyon</div>
+    </div>
+    <div class="yan-metin">
+      <p data-adim="1">GitHub gönderimi bir webhook ile, yani otomatik bir web isteğiyle Vercel'e haber verir. Vercel kodu bir build kabına çeker, ortam değişkenlerini içine koyar, build komutunu çalıştırır.</p>
+      <p data-adim="2">Çıktı ikiye ayrılır: statik dosyalar dünyadaki bütün uç noktalara dağılır; API rotaları tek bölgede fonksiyon olur.</p>
+      <p data-adim="3">Her gönderim yeni ve değişmez bir dağıtımdır. Alan adı yalnız "hangisini gösterdiğini" değiştirir; geri almak bu yüzden saniyeler sürer.</p>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="onizleme">
+  <header><span class="etiket">Fikir 4</span><h2>Her dal bir adres: önizleme, inceleme, üretim</h2></header>
+  <div class="govde">
+    <div class="zaman">
+      <div class="adim"><b>Gönderim</b><small>kendi dalına commit</small></div>
+      <div class="adim"><b>Actions ve Önizleme</b><small>aynı anda: test koşar, geçici adres çıkar</small></div>
+      <div class="adim"><b>İnceleme</b><small>takım önizleme adresini telefonda açar</small></div>
+      <div class="adim"><b>Birleşme</b><small>main dalına, Actions yeşilse</small></div>
+      <div class="adim"><b>Üretim</b><small>canlı adres yeni dağıtımı gösterir</small></div>
+    </div>
+    <div class="kutu soft" data-adim="1">Buna CI/CD denir: her değişiklik otomatik test edilir (CI) ve otomatik yayınlanır (CD). Test ve lint GitHub Actions'ta, yayın Vercel'in Git bağlantısında; iki araç, iki iş. Vercel testi beklemez: önizleme Actions kırmızıyken de çıkar.</div>
+    <p class="kucuk" data-adim="2">"Test geçmeden yayın yok" kuralını main'e birleşmeyi Actions durum denetimine bağlayarak kurarsın (Hafta 5'teki main kuralı: Require status checks to pass). Üretim yalnız main'den çıktığından kırmızı test üretime ulaşamaz.</p>
+  </div>
+</section>
+
+<section class="s" id="gizli-anahtar">
+  <header><span class="etiket">Fikir 5</span><h2>Anahtar nereye gider: tarayıcıya mı, sunucuya mı?</h2></header>
+  <div class="govde iki sol-genis">
+    <div class="sahne ga">
+      <svg class="sema-cizgi" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <line x1="36" y1="50" x2="42" y2="50"/>
+        <line x1="57" y1="50" x2="63" y2="30"/>
+        <line x1="57" y1="50" x2="63" y2="76"/>
+      </svg>
+      <div class="dugum ga-panel">Vercel paneli<small>ortam değişkenleri</small><code class="ga-k1">NEXT_PUBLIC_SUPABASE_URL</code><code class="ga-k2">SUPABASE_SERVICE_ROLE_KEY</code></div>
+      <div class="dugum ga-build">Build<small>değerleri okur</small></div>
+      <div class="dugum ga-paket">Tarayıcı paketi<small>herkes indirir, herkes okur</small><code class="ga-yazi">https://xyz.supabase.co</code></div>
+      <div class="dugum kilitli ga-fn">Sunucu fonksiyonu<small>değeri istek anında ortamdan okur</small><span class="kilit ga-kilit"></span></div>
+      <i class="paket ga-p1"></i><i class="paket ga-p2"></i>
+      <span class="etk ga-n1">pakete sabit metin olarak gömüldü</span>
+      <span class="etk kirmizi ga-n2">tarayıcıya hiç gitmez</span>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+      <div class="not">Yeşil: tarayıcıya gider; kırmızı: yalnız sunucuda</div>
+    </div>
+    <div class="yan-metin">
+      <p data-adim="1">Yapılandırma koddan ayrı durur: anahtar dosyada değil, platformun panelinde. Turnusol sorusu: "Depo yarın herkese açılsa bir şifre sızar mı?"</p>
+      <p data-adim="2">NEXT_PUBLIC_ (Vite'ta VITE_) önekli her değişken build anında tarayıcı paketine sabit metin olarak yazılır. Supabase'in anon anahtarı oraya gidebilir; service role anahtarı asla.</p>
+      <p data-adim="3">Öneksiz değişken yalnız sunucu fonksiyonuna gider. Panelde değeri değiştirince yeni dağıtım gerekir: eski paket eski değeri taşır.</p>
+    </div>
+  </div>
+</section>
+
+<section class="s sinifca" id="sinifca-anahtar">
+  <header><span class="etiket">Sınıfça</span><h2>Service role anahtarı "Secret" olarak kaydedildi. Güvende mi?</h2></header>
+  <div class="govde ters">
+    <div>
+      <p class="senaryo">Bir üye anahtarı NEXT_PUBLIC_SUPABASE_SERVICE_KEY adıyla Vercel'e ekledi, türünü "Secret" seçti; panelde artık okunmuyor. "Hallettim" diyor.</p>
+      <div class="cevap">Önek belirleyicidir, tür değil: Secret yalnız panel görünümünü kapatır, NEXT_PUBLIC_ önekli değer build anında tarayıcı paketine sabit metin olarak gömülür. Yapılacak üç şey: değişkeni öneksiz adla yeniden tanımla, anahtarı Supabase'de döndür (eskisini geçersiz kıl), yeni dağıtım yap. Service role anahtarı satır güvenliğini (RLS) aşar; sızarsa bütün veritabanı açıktır.</div>
+    </div>
+    <div class="secenekler">
+      <button class="secenek" type="button">Güvende: Secret türü panelde bile okunamıyor</button>
+      <button class="secenek" type="button">Güvende: Vercel gizli değişkenleri tarayıcıya hiç göndermez</button>
+      <button class="secenek" data-dogru type="button">Değil: NEXT_PUBLIC_ öneki onu tarayıcı paketine gömdü</button>
+      <button class="secenek" type="button">Değil ama önemsiz: anon ve service role anahtarının yetkisi aynı</button>
+    </div>
+  </div>
+</section>
+
+<section class="s gosteri" id="gosteri-vercel">
+  <header><span class="etiket">Canlı gösteri <span class="rozet canli">canlı</span></span><h2>Kampüs Pano'ya sunucu anahtarını ekleyip yeniden dağıtalım</h2></header>
+  <div class="govde iki sol-genis">
+    <ol class="numarali">
+      <li>Projede Settings &gt; Environment Variables: NEXT_PUBLIC_ önekli URL ve anon anahtarı listede; service role satırı yok. Soru: hangisi tarayıcıya gidiyor?</li>
+      <li>Listede yeni bir satır: öneksiz dil modeli anahtarı, türü Secret, değeri okunmuyor. Dersten önce eklendi, henüz yeni dağıtım yapılmadı.</li>
+      <li>Canlı adreste "Özetle"ye bas: hata. Çalışan dağıtım yeni değişkeni görmüyor; değişiklik yalnız yeni dağıtımda geçerli.</li>
+      <li>README'de bir satır değiştir, gönder; yeni dağıtım kendiliğinden başlar. Günlük akarken soru: şu satırda hangi adım çalışıyor?</li>
+      <li>"Özetle" artık çalışıyor. Geliştirici araçlarında bütün dosyalarda "supabase.co" ara: NEXT_PUBLIC_ değer pakette sabit metin; yeni anahtarın adı bile yok.</li>
+    </ol>
+    <div class="yedek"><b>İnternet zayıfsa:</b> Environment Variables ve Deployments ekranlarının önceden alınmış görüntüleri gösterilir; önceden hazırlanmış statik kopya app.netlify.com/drop sayfasına sürüklenir, hesap bile gerekmez. <b>İnternet hiç yoksa:</b> önceden kaydedilmiş 90 saniyelik ekran videosu oynatılır, build günlüğünün satırlarını sınıf okur.</div>
+  </div>
+</section>
+
+<section class="s gosteri" id="gosteri-alanadi">
+  <header><span class="etiket">Canlı gösteri <span class="rozet canli">canlı</span></span><h2>Alan adını bağlayalım: kayıt önceden girildi, sonucu görelim</h2></header>
+  <div class="govde iki sol-genis">
+    <ol class="numarali">
+      <li><span>Projede Settings &gt; Domains &gt; Add Domain: <code>app.ornek.me</code>.</span></li>
+      <li>Vercel'in verdiği CNAME değeri alan adı sağlayıcısının DNS paneline dersten önce girildi; yayılması dakikalar alır.</li>
+      <li>Vercel'de durum "Valid Configuration": sertifika kendiliğinden geldi, kimse satın almadı.</li>
+      <li>Adresi aç, kilide tıkla: sertifikayı kim verdi, kaç gün ömrü kaldı?</li>
+    </ol>
+    <div class="yedek"><b>DNS henüz yayılmadıysa:</b> DNS panelinin ve "Valid Configuration" ekranının önceden alınmış görüntüleri gösterilir. Kök alan adı (www'suz) CNAME alamaz, A kaydı ister; Cloudflare Pages'te kök alan adı için DNS'in Cloudflare'de olması gerekir.</div>
+  </div>
+</section>
+
+<section class="s sen" id="bak-kilit">
+  <header><span class="etiket">Şimdi bak · 2,5 dakika</span><h2>Kendi adresinin kilidine ve bölgesine bak</h2></header>
+  <div class="govde">
+    <div class="gorev">
+      <div>
+        <ol>
+          <li>Dizüstünde takımının canlı ya da önizleme adresini aç; adres çubuğundaki kilide tıkla. Sertifikayı kim vermiş, kaç gün kalmış?</li>
+          <li>Supabase panelinde Project Settings &gt; General: projenin bölgesi hangi şehir?</li>
+          <li>Vercel'de Settings &gt; Functions: fonksiyon bölgesi hangi şehir? Projenin sahibiysen kendi panelinden, değilsen sahibinin ekranından bak; yan masayla karşılaştır.</li>
+        </ol>
+        <p class="kucuk">Henüz adresin yoksa yan masadakinin adresiyle çalış; bulduğunuz şehir adlarını az sonra sınıfça sayacağız.</p>
+      </div>
+      <div class="sayac" data-sure="150"></div>
+    </div>
+  </div>
+</section>
+
+<section class="s sinifca" id="sinifca-yavas">
+  <header><span class="etiket">Sınıfça</span><h2>Statik sayfalar hızlı, ilan listesi yavaş. En olası neden?</h2></header>
+  <div class="govde ters">
+    <div>
+      <p class="senaryo">Takımın Next.js uygulaması Vercel'de, Supabase projesi Frankfurt'ta. Kullanıcılar ilan listesinin geç açıldığını söylüyor; açılış sayfası ve görseller hızlı.</p>
+      <div class="cevap">Statik sayfalar CDN'den geldiği için hızlı; liste sayfası fonksiyondan veritabanına gidiyor ve fonksiyon varsayılan bölgede, Washington'da. Settings &gt; Functions'ta bölgeyi fra1 yap ya da vercel.json'a <code>"regions": ["fra1"]</code> yaz, yeniden dağıt. Bu haftanın görevinde bu satır var.</div>
+    </div>
+    <div class="secenekler">
+      <button class="secenek" type="button">Supabase'in ücretsiz planı yavaştır; ücretli plana geç</button>
+      <button class="secenek" data-dogru type="button">Fonksiyon başka kıtada; her sorgu Atlantik'i iki kez geçiyor</button>
+      <button class="secenek" type="button">CDN önbelleği kapalı; liste sayfası da statik olmalı</button>
+      <button class="secenek" type="button">React paketi çok büyük; kodu küçültüp yeniden dağıt</button>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="bolge-sahne">
+  <header><span class="etiket">Fikir 6</span><h2>Veritabanı Frankfurt'ta; isteğin nereden dolaşıyor?</h2></header>
+  <div class="govde iki sol-genis">
+    <div class="sahne bo">
+      <svg class="sema-cizgi" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <line x1="19" y1="50" x2="24" y2="50"/>
+        <line x1="43" y1="47" x2="49" y2="33"/>
+        <line class="kesik" x1="43" y1="53" x2="49" y2="67"/>
+        <line x1="71" y1="33" x2="77" y2="47"/>
+        <line class="kesik" x1="71" y1="67" x2="77" y2="53"/>
+      </svg>
+      <div class="dugum bo-kul">Kullanıcı<small>Muş</small></div>
+      <div class="dugum bo-cdn">CDN ucu<small>İstanbul</small></div>
+      <div class="dugum bo-fra">Fonksiyon<small>Frankfurt, fra1: seçince</small></div>
+      <div class="dugum bo-was">Fonksiyon<small>Washington: varsayılan</small></div>
+      <div class="dugum bo-db">Veritabanı<small>Supabase, Frankfurt</small></div>
+      <i class="paket bo-pa"></i><i class="paket bo-pb"></i>
+      <span class="etk kirmizi bo-l1">Atlantik iki kez: yavaş</span>
+      <span class="etk bo-l2">tek satır: bölge fra1</span>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+      <div class="not">Kırmızı: varsayılan bölge; yeşil: fra1</div>
+    </div>
+    <div class="yan-metin">
+      <p data-adim="1">Statik dosyalar en yakın uçtan gelir; fonksiyon tek bölgede koşar; veritabanı tek diskte durur.</p>
+      <p data-adim="2">Vercel fonksiyonu varsayılan olarak Washington'a koyar; veritabanın Frankfurt'taysa her sorgu Atlantik'i iki kez geçer.</p>
+      <p data-adim="3">Çözüm tek satır: fonksiyon bölgesi fra1. Supabase bölgesi sonradan değişmez; yanlışsa yeni projeyle taşınır.</p>
+      <p data-adim="4">Frankfurt da yurt dışı: kişisel veri tutuyorsan gizlilik metnine sunucu konumunu yaz, gereksizini toplama.</p>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="dns-sahne">
+  <header><span class="etiket">Fikir 7</span><h2>Alan adını yazınca tarayıcı seni nasıl buluyor?</h2></header>
+  <div class="govde iki sol-genis">
+    <div class="sahne dn">
+      <svg class="sema-cizgi" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <line x1="25" y1="30" x2="37" y2="30"/>
+        <line x1="63" y1="30" x2="74" y2="30"/>
+        <line class="kesik" x1="14" y1="44" x2="46" y2="68"/>
+      </svg>
+      <div class="dugum dn-tar">Tarayıcı<small>app.ornek.me yazdın</small></div>
+      <div class="dugum dn-coz">DNS çözümleyici<small>soruyu zincirde dolaştırır</small></div>
+      <div class="dugum dn-kay">Alan adı kayıtları<small>senin girdiğin CNAME</small></div>
+      <div class="dugum kilitli dn-ver">Vercel uç noktası<small>HTTPS ile cevap verir</small><span class="kilit dn-kilit"></span></div>
+      <i class="paket dn-p1"></i><i class="paket dn-p2"></i><i class="paket dn-p3"></i><i class="paket dn-p4"></i><i class="paket dn-p5"></i>
+      <span class="etk dn-l1">app.ornek.me nerede?</span>
+      <span class="etk dn-l2">CNAME: ....vercel-dns.com</span>
+      <span class="etk dn-l3">IP adresi geldi</span>
+      <span class="etk dn-l4">sertifika geçerli, kendiliğinden yenilenir</span>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+      <div class="not">Soru, kayıt, adres, kilit</div>
+    </div>
+    <div class="yan-metin">
+      <p data-adim="1">DNS, insanın okuduğu adı IP adresine çeviren dağıtık bir dizindir. Tarayıcı çözümleyiciye sorar, o da alan adının yetkili sunucusuna.</p>
+      <p data-adim="2">Alt alan adı (app.) CNAME kaydıyla Vercel'in adına işaret eder; kök alan adı CNAME alamaz, A kaydı ister. Senin işin bu kaydı doğru girmek.</p>
+      <p data-adim="3">Sertifikayı sen almazsın: platform, alan adını denetlediğini ACME ile kanıtlar, sertifikayı alır, süresi dolmadan yeniler. Sertifika ömürleri kısalıyor; elle yenileme dönemi kapandı.</p>
+    </div>
+  </div>
+</section>
+
+<section class="s video" id="video-fatura">
+  <header><span class="etiket">Video · 4 dakika</span><h2>Sunucusuz fatura nasıl bir gecede yüz katına çıkar?</h2></header>
+  <div class="govde iki sol-genis">
+    <div class="video-kutu" data-yt="SCIfWhAheVw" data-bas="0" data-son="231"><span class="sure">0:00–3:51</span></div>
+    <div class="izlerken">
+      <div class="kutu vurgu"><b>Durdur ve tahmin et:</b> Günde 200 ziyaretçisi olan, ücretsiz plandaki küçük bir site nasıl 100 bin dolarlık fatura üretir?</div>
+      <div class="kutu soft" data-adim="1"><b>İzlerken dikkat:</b> İki olayda da ücret neye göre hesaplanıyor: istek sayısı mı, dışarı giden veri mi? Altyazıyı aç.</div>
+      <div class="kutu soft" data-adim="2"><b>Sonra:</b> Bizim yığında tavanı kim koyuyor: sen mi, plan mı?</div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="fatura">
+  <header><span class="etiket">Fikir 8</span><h2>Kart yoksa ne olur, kart varsa ne olur?</h2></header>
+  <div class="govde iki sol-genis">
+    <div class="sahne fa">
+      <div class="fa-panel fa-sol">
+        <h4>Kart yok</h4>
+        <div class="fa-cap"><span>ücretsiz sınırı</span></div>
+        <div class="fa-bars"><i style="--h:12%"></i><i style="--h:24%"></i><i style="--h:40%"></i><i style="--h:55%"></i><i style="--h:0%"></i></div>
+        <span class="etk kirmizi fa-dur">site duraklatıldı; ziyaretçi hata görür</span>
+      </div>
+      <div class="fa-panel fa-sag">
+        <h4>Kart var, tavan yok</h4>
+        <div class="fa-bars"><i style="--h:12%"></i><i style="--h:24%"></i><i style="--h:40%"></i><i style="--h:70%"></i><i style="--h:100%"></i></div>
+        <span class="etk kirmizi fa-fat">trafik yüz kat, fatura yüz kat</span>
+      </div>
+      <button class="yeniden" type="button">Yeniden oynat</button>
+      <div class="not">Çubuklar: günlük trafik; kesik çizgi: ücretsiz sınır</div>
+    </div>
+    <div class="yan-metin">
+      <p data-adim="1">Kart yok: sınır dolunca proje duraklar, ziyaretçi hata sayfası görür. Ücretsiz ama kapalı; yeniden açılması günler sürebilir.</p>
+      <p data-adim="2">Kart var, tavan yok: istek ve GB başına ücret trafikle birlikte yüz kat büyür. Netlify ve Cara faturaları böyle geldi; başarı da fatura getirir.</p>
+      <p data-adim="3">Tavanı kim koyar? Kartsız Hobby'de plan: sınırda proje duraklar, panelde tavan ayarı yoktur. Kart girdiğin her hesapta (Vercel Pro, AWS, Google Cloud) ilk iş tavan ve uyarıdır; kontrol birkaç dakikada bir yapılır, fatura fark edildiği anda durur, aşıldığı anda değil.</p>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="izleme">
+  <header><span class="etiket">Fikir 9</span><h2>Deploy ettim, bitti mi?</h2></header>
+  <div class="govde iki">
+    <div>
+      <p data-adim="1">Ücretsiz planda çalışma zamanı günlükleri kısa süre saklanır. Gece düşen site sabaha kadar kimseye haber vermez.</p>
+      <p data-adim="2">Dış nabız: UptimeRobot adresini birkaç dakikada bir yoklar, cevap gelmeyince e-posta atar. Hata takibi: Sentry tarayıcıdaki ve fonksiyondaki hataları toplar.</p>
+      <p data-adim="3">Ücretsizin gizli bedeli uyku: Render'daki ücretsiz hizmet boşta uyur, ilk istek bekler; Supabase'in ücretsiz projesi bir hafta hareketsiz kalınca duraklatılır. Demo Günü sabahı "panelden projeye bak, uyuyorsa uyandır" görev listesinde olsun.</p>
+    </div>
+    <div class="kutu vurgu" data-adim="4"><b>Hedef</b><p>Site düştüğünde bunu ziyaretçiden önce senin telefonun söylesin. Bu hafta monitörü kuruyorsun; uyarı bir üyenin e-postasına gider.</p></div>
+  </div>
+</section>
+
+<section class="s karar" id="karar-tablo">
+  <header><span class="etiket">Karar</span><h2>Hangi durumda hangisi?</h2></header>
+  <div class="govde">
+    <table class="kiyas">
+      <thead><tr><th>Seçenek</th><th>Kurulum</th><th>Uzun süren arka uç işi</th><th>Ücretsiz başlangıç</th><th>Ne zaman seçilir</th></tr></thead>
+      <tbody>
+        <tr class="secili"><td><b>Vercel</b> (PaaS)</td><td class="evet">dakikalar</td><td class="orta">süre sınırlı</td><td class="orta">var; sınırı aşınca duraklar</td><td>Next.js ön yüz ve API rotaları; bizim yığın</td></tr>
+        <tr><td><b>Cloudflare Pages ve Workers</b></td><td class="evet">dakikalar</td><td class="hayir">hayır</td><td class="evet">var; günlük istek sınırı</td><td>Trafiği yüksek statik site; İstanbul ve İzmir ucu</td></tr>
+        <tr><td><b>Render ya da Railway</b> (konteyner PaaS)</td><td class="orta">bir saat</td><td class="evet">evet</td><td class="orta">boşta uyur ya da kısa deneme</td><td>Uzun çalışan Node ya da Python arka ucu, kuyruk</td></tr>
+        <tr><td><b>Kendi sanal makinen</b> (DigitalOcean, EC2)</td><td class="hayir">günler</td><td class="evet">evet</td><td class="orta">öğrenci kredisiyle var; çoğu sağlayıcı kart ister</td><td>Linux deneyimi isteyen takım; tam kontrol</td></tr>
+      </tbody>
+    </table>
+    <p class="kucuk" data-adim="1">Bizim yığın Vercel; ön yüz ve kısa API'ler için yeter. Uzun süren bir iş çıkarsa o parça Render ya da Railway'e gider, ön yüz yerinde kalır.</p>
+  </div>
+</section>
+
+<section class="s karar" id="karar-senaryo">
+  <header><span class="etiket">Karar · sınıfça</span><h2>Senaryo: hangisini seçersin?</h2></header>
+  <div class="govde iki">
+    <div>
+      <p class="senaryo">Takımın ürünü Next.js, veritabanı Supabase Frankfurt. Yeni özellik: her gece bütün ilanları yapay zekâyla yeniden özetleyen, 20 dakika süren bir iş. Bütçe küçük, dört kişisiniz.</p>
+      <div class="cevap">Sunucusuz fonksiyonun çalışma süresi sınırlıdır; 20 dakikalık iş orada yarıda kesilir. Sanal makine dört kişilik ekibe işletim yükü getirir; Kubernetes bu ölçekte gereksiz. Parçayı ayırmak en az emek: ön yüz yerinde, uzun iş konteynerde, ikisi aynı Supabase'e bağlı. Küçük bütçe buraya gider: Render'ın ücretsiz hizmeti boşta uyur ve gece işi için güvenilmez, Railway'in denemesi biter, dil modeli çağrıları da ayrıca fatura.</div>
+    </div>
+    <div class="secenekler">
+      <button class="secenek" type="button">Hepsi Vercel'de kalsın; işi bir API rotasına koyar, 20 dakika çalıştırırım</button>
+      <button class="secenek" data-dogru type="button">Ön yüz Vercel'de kalır; uzun iş Render ya da Railway'de ayrı çalışır</button>
+      <button class="secenek" type="button">Her şeyi bir sanal makineye taşırım; tam kontrol bende olur</button>
+      <button class="secenek" type="button">Önce Docker ve Kubernetes öğrenirim, yayını sonraya bırakırım</button>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="araclar">
+  <header><span class="etiket">How to know</span><h2>Bu haftanın araçları; bizim yığın işaretli</h2></header>
+  <div class="govde">
+    <div class="araclar">
+      <div class="arac secili"><b>Vercel</b><small>Git'ten yayın, önizleme, fonksiyon bölgesi</small></div>
+      <div class="arac secili"><b>GitHub Actions</b><small>her PR'da lint ve build</small></div>
+      <div class="arac secili"><b>UptimeRobot</b><small>adresi yoklar, düşünce e-posta atar</small></div>
+      <div class="arac"><b>Cloudflare Pages</b><small>statik site, Türkiye'ye yakın uç</small></div>
+      <div class="arac"><b>Netlify</b><small>sürükle-bırak yayın; gösteri yedeği</small></div>
+      <div class="arac"><b>Render</b><small>uzun çalışan arka uç, konteyner</small></div>
+      <div class="arac"><b>Railway</b><small>arka uç, veritabanı, kuyruk tek panelde</small></div>
+      <div class="arac"><b>Sentry</b><small>tarayıcı ve fonksiyon hatalarını toplar</small></div>
+      <div class="arac"><b>Docker</b><small>uygulamayı paketler; bu dönem yalnız tanı, ders notunda</small></div>
+    </div>
+    <p class="kucuk" data-adim="1">Büyük bulut (AWS, Azure, Google Cloud) bu listede yok; ilk gün dokunduğun katman değil. Kredi kartsız denemek istersen öğrenci programlarına ders notundan bak.</p>
+  </div>
+</section>
+
+<section class="s" id="nasil-ogrenilir">
+  <header><span class="etiket">How to know</span><h2>Bu konuyu sahada çalışanlar nasıl takip ediyor?</h2></header>
+  <div class="govde iki">
+    <ul class="onay">
+      <li data-adim="1">Önce sağlayıcının kendi belgesi ve değişiklik günlüğü; her sayfanın "son güncelleme" satırına bak.</li>
+      <li data-adim="2">Her büyük kesintiden sonra resmî raporu oku; "bizim projede aynı şey nasıl olurdu" diye sor.</li>
+      <li data-adim="3">Hangi araç gerçekten kullanılıyor: yıllık geliştirici anketi. Politika değiştiren tartışmalar: Hacker News.</li>
+      <li data-adim="4">Bütçe uyarısı kurmadan hiçbir bulut hesabına kart bağlama; öğrenci kredileri kartsız başlangıçtır.</li>
+    </ul>
+    <div class="kutu soft" data-adim="5"><b>Kalite nasıl ayırt edilir?</b><p>Tarihsiz belge okunmaz. "Geçen yıl böyleydi" diyen blog yazısı fiyat ve sınır için kaynak değildir; iki kaynak çelişiyorsa sağlayıcının kendi fiyat sayfası esas alınır.</p></div>
+  </div>
+</section>
+
+<section class="s sen" id="gorev">
+  <header><span class="etiket">Bu haftanın görevi</span><h2>Takımının ürünü bu hafta canlı adreste: ne yapacaksın?</h2></header>
+  <div class="govde iki sol-genis">
+    <ol class="numarali">
+      <li>Vercel bağlantını doğrula: takım deposu bağlı, main üretim, her PR önizleme (Hafta 4'te kurduysan yalnız kontrol et).</li>
+      <li>Anahtarları ayır: NEXT_PUBLIC_ ya da VITE_ önekliler tarayıcıya gidebilir; service role ve dil modeli anahtarı yalnız panelde, öneksiz.</li>
+      <li>Yapay zekâ aracına yazdır, sen doğrula: vercel.json'da bölge fra1; .gitignore'da .env; en az bir otomatik test; Actions'ta her PR'da lint, test ve build; README'ye "Dağıtım" bölümü.</li>
+      <li>Test kapısı: main kuralında Actions'ı zorunlu durum denetimi yap; kırmızı testle birleştirme düğmesinin kapandığını bir PR'da gör.</li>
+      <li>Tavan ve nabız: kartsız Hobby'de kal ya da Spend Management tavanını aç, hangisi olduğunu README'ye yaz; UptimeRobot monitörü aç, uyarı bir üyenin e-postasına, ekran görüntüsü README'de. Alan adın varsa bağla.</li>
+    </ol>
+    <div class="kutu vurgu"><b>İkinci kilometre taşı (M2)</b><p>Veri ve API bağlı sürüm yayında: canlı adreste giriş, ilan listesi ve yapay zekâ özelliği çalışıyor. Supabase bölgen Frankfurt mu, README'ye yaz.</p></div>
+  </div>
+</section>
+
+<section class="s sen" id="gorev-olcut">
+  <header><span class="etiket">Bu haftanın görevi</span><h2>Kabul ölçütleri ve teslim</h2></header>
+  <div class="govde iki sol-genis">
+    <div class="kutu vurgu"><b>Kabul ölçütleri</b>
+      <ul class="onay">
+        <li>Canlı adreste giriş, ilan listesi ve yapay zekâ özelliği çalışıyor (M2)</li>
+        <li>Üretim adresi herkese açık ve HTTPS; main'e gönderim otomatik dağıtım, en az bir PR önizleme almış</li>
+        <li>En az bir test Actions'ta koşuyor; main için durum denetimi zorunlu; Actions yeşil</li>
+        <li>Depoda hiçbir anahtar yok, geçmiş dahil; fonksiyon bölgesi fra1</li>
+        <li>Kartsız Hobby ya da tavan açık; README'de hangisi olduğu yazıyor</li>
+        <li>README: dağıtım adımları, bölge kararı, "site düşerse ne yaparız"; monitör ekran görüntüsü</li>
+      </ul>
+    </div>
+    <div>
+      <p>Her üye kendi adıyla gönderir. Yapay zekâ notuna üç şey: kendin yaptığın somut iş, aracın ürettiği bir yapılandırma parçasını neden kabul ya da ret ettiğin, öğrendiğin bir sınır ve kaynağı.</p>
+      <p class="kucuk" style="margin-top:1.5vh">Teslim: haftalık teslim sayfasındaki form, bu dersi izleyen Pazar 23:59; yapay zekâ notuna kendi yaptığın kısmı yaz.</p>
+    </div>
+  </div>
+</section>
+
+<section class="s ozet" id="ozet">
+  <header><span class="etiket">Özet kartı</span><h2>Bu haftadan cebine koyacağın beş şey</h2></header>
+  <div class="govde iki sol-genis">
+    <ul class="onay">
+      <li data-adim="1">Gönderim build'i tetikler; statik dosyalar her uç noktaya, fonksiyon tek bölgeye gider. Üretim yalnız main'den, main'e yalnız yeşil testle.</li>
+      <li data-adim="2">NEXT_PUBLIC_ önekli her şey tarayıcıya gider; service role anahtarı yalnız sunucuda ve yalnız panelde.</li>
+      <li data-adim="3">Fonksiyon ve veritabanı aynı bölgede: Frankfurt. Bölge sonradan değişmez.</li>
+      <li data-adim="4">Kart yoksa tavanı plan koyar ve proje duraklar; kart girdiğin her hesapta ilk iş tavan ve uyarıdır.</li>
+      <li data-adim="5">Deploy bitiş değil: dış nabız ve hata takibi olmadan site gece sessizce düşer.</li>
+    </ul>
+    <div class="kutu vurgu" data-adim="6"><b>Çıkış sorusu</b><p>Ürünün bu gece düşse bunu ilk kim öğrenir: ziyaretçi mi, sen mi? Tek cümle, çıkarken söyle.</p></div>
+  </div>
+</section>
+
+</div>
+<script>
+window.SUNUM = {
+  baslik: "Hafta 8 · Bulut ve yayına alma",
+  bolumler: [
+    { ad: "Açılış", ilk: "kapak" },
+    { ad: "Gerçek olay", ilk: "hikaye-kesinti" },
+    { ad: "Harita", ilk: "harita" },
+    { ad: "Kavramlar 1", ilk: "uc-dev" },
+    { ad: "Canlı gösteri", ilk: "gosteri-vercel" },
+    { ad: "Şimdi bak", ilk: "bak-kilit" },
+    { ad: "Kavramlar 2", ilk: "sinifca-yavas" },
+    { ad: "Karar", ilk: "karar-tablo" },
+    { ad: "How to know", ilk: "araclar" },
+    { ad: "Görev", ilk: "gorev" },
+    { ad: "Özet", ilk: "ozet" }
+  ]
+};
+</script>
+<script src="../../assets/sunum.js"></script>
+</body>
+</html>

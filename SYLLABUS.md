@@ -76,6 +76,8 @@ Proje: M1. İskelet takım deposundan yayında.
 
 Proje: M2. Veri ve API bağlı sürüm yayında.
 
+[Hafta 8 ders notu](https://cagrisahin58.github.io/2026-web/weeks/hafta-08/)
+
 ### Ara sınav haftası · ders yok
 
 Sınavın kapsamı sınava kadar işlenen konulardır; biçimi sınavdan en az iki hafta önce duyurulur.

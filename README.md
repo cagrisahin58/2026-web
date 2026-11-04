@@ -21,6 +21,7 @@ Bu ders uçtan uca web ürünü geliştirmeyi öğretir: araçlar, mimari, veri,
 | Hafta 4 · Uçtan uca ürün ve mimari | <https://cagrisahin58.github.io/2026-web/weeks/hafta-04/> |
 | Hafta 5 · GitHub akışı ve yapay zekâ ajanları | <https://cagrisahin58.github.io/2026-web/weeks/hafta-05/> |
 | Hafta 6 · Veri katmanı: web VTYS | <https://cagrisahin58.github.io/2026-web/weeks/hafta-06/> |
+| Hafta 8 · Bulut ve yayına alma | <https://cagrisahin58.github.io/2026-web/weeks/hafta-08/> |
 
 ## Klasörler
 
