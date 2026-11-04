@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ara sınav çalışma soruları · 100 soru</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/ders.css">
+<style>
+/* yalnız bu sayfaya özel parçalar */
+.ozet{display:grid;gap:10px;align-content:start}
+.ozet .sayi{font:700 clamp(2.4rem,7vw,3.4rem)/1 var(--display);color:var(--ink);letter-spacing:-.01em}
+.ozet .sayi small{font:500 .95rem/1 var(--mono);color:var(--muted);margin-left:6px}
+.cubuk{height:10px;border-radius:6px;background:var(--surface-2);border:1px solid var(--line);overflow:hidden}
+.cubuk>span{display:block;height:100%;width:0;background:var(--lab);transition:width .4s}
+.konu-ozet{display:grid;gap:6px;font-size:.9rem}
+.konu-ozet .satir{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center}
+.konu-ozet .satir a{color:var(--ink);text-decoration:none}
+.konu-ozet .satir a:hover{text-decoration:underline}
+.konu-ozet .skor{font-family:var(--mono);font-size:.82rem;color:var(--muted);white-space:nowrap}
+
+.filtre{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 4px}
+.filtre .chip{cursor:pointer;user-select:none}
+.filtre .chip.on{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.filtre .ayrac{width:1px;height:20px;background:var(--line);margin:0 4px}
+
+.soru-liste{display:grid;gap:14px;margin-top:14px}
+.soru{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:12px;min-width:0;scroll-margin-top:70px}
+.soru.gizli{display:none}
+.soru .ust{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.soru .no{font:600 .84rem/1 var(--mono);color:var(--muted)}
+.soru .zor{font-family:var(--mono);font-size:.74rem;color:var(--muted);display:inline-flex;align-items:center;gap:4px;margin-left:auto}
+.soru .zor i{width:7px;height:7px;border-radius:50%;background:var(--line);display:inline-block}
+.soru .zor i.dolu{background:var(--muted)}
+.soru .zor.z3 i.dolu{background:var(--err)}
+.soru .metin{font-weight:500;font-size:1.02rem;line-height:1.55}
+.soru .secenekler{display:grid;gap:6px}
+.soru .sec{appearance:none;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:.95rem;line-height:1.5;padding:9px 12px;border-radius:10px;cursor:pointer;display:grid;grid-template-columns:1.6em minmax(0,1fr);gap:8px;align-items:start}
+.soru .sec:hover{background:var(--surface-2)}
+.soru .sec .k{font-family:var(--mono);color:var(--muted);font-weight:500}
+.soru .sec.dogru{border-color:var(--lab);background:var(--lab-soft)}
+.soru .sec.yanlis{border-color:var(--err);background:var(--err-soft)}
+.soru.bitti .sec{cursor:default}
+.soru.bitti .sec:not(.dogru):not(.yanlis){opacity:.65}
+.soru .alt{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.86rem}
+.soru .alt .goster{background:none;border:0;padding:0;color:var(--muted);font:inherit;font-size:.86rem;cursor:pointer;text-decoration:underline}
+.soru.bitti .alt .goster{display:none}
+.soru .hukum{font-family:var(--mono);font-weight:500;font-size:.8rem;display:none}
+.soru.bitti .hukum{display:inline}
+.soru.dogru-cevap .hukum{color:var(--lab)}
+.soru.yanlis-cevap .hukum{color:var(--err)}
+.soru .neden{display:none;background:var(--surface-2);border-radius:12px;padding:12px 14px;gap:8px;font-size:.92rem;line-height:1.55}
+.soru.bitti .neden{display:grid}
+.soru .neden .lbl{margin-bottom:0}
+.soru .neden .satir{display:grid;grid-template-columns:1.6em 5.2em minmax(0,1fr);gap:8px;align-items:start}
+.soru .neden .satir .k{font-family:var(--mono);color:var(--muted);font-weight:500}
+.soru .neden .satir .h{font-family:var(--mono);font-size:.78rem;font-weight:500;padding-top:2px}
+.soru .neden .satir.d .h{color:var(--lab)}
+.soru .neden .satir.y .h{color:var(--err)}
+.soru .neden .satir.d{background:color-mix(in srgb,var(--lab-soft) 55%,transparent);border-radius:8px;padding:6px 8px;margin:0 -8px}
+
+.soru .kaynak{display:grid;gap:5px;margin-top:6px;padding-top:10px;border-top:1px solid var(--line);font-size:.88rem}
+.soru .kaynak .lbl{margin-bottom:2px}
+.soru .kaynak a,.soru .kaynak .kapali{display:inline-flex;align-items:baseline;gap:6px;text-decoration:none;color:var(--ink);line-height:1.4}
+.soru .kaynak a:hover{text-decoration:underline}
+.soru .kaynak .ic::before{content:"Ders notu";font:500 .68rem/1.3 var(--mono);color:var(--lab);background:var(--lab-soft);padding:2px 7px;border-radius:999px;white-space:nowrap}
+.soru .kaynak .kapali{color:var(--muted)}
+.soru .kaynak .kapali::before{content:"Yakında";background:var(--surface);color:var(--muted);border:1px solid var(--line)}
+.soru .kaynak .dis::before{content:"Dış kaynak";font:500 .68rem/1.3 var(--mono);color:var(--theory);background:var(--theory-soft);padding:2px 7px;border-radius:999px;white-space:nowrap}
+
+/* sınıf kipi: projeksiyonda büyük yazı, ilerleme gizli */
+body.sinif .soru .metin{font-size:1.25rem}
+body.sinif .soru .sec{font-size:1.1rem;padding:11px 14px}
+body.sinif .soru .neden{font-size:1.05rem}
+body.sinif .ozet,body.sinif .konu-ozet{display:none}
+body.sinif .hero{grid-template-columns:minmax(0,1fr)}
+
+.nasil{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:720px){
+  .nasil{grid-template-columns:minmax(0,1fr)}
+  .soru .neden .satir{grid-template-columns:1.6em minmax(0,1fr)}
+  .soru .neden .satir .h{grid-column:2}
+  .soru .neden .satir .m{grid-column:2}
+}
+@media print{
+  .filtre,.soru .alt,.ozet .btnrow{display:none!important}
+  .soru{break-inside:avoid}
+  .soru .neden{display:grid}
+  .soru.gizli{display:grid}
+}
+</style>
+</head>
+<body data-week="sinav">
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="dot" aria-hidden="true"></span>YZM205 · Ara sınav<span class="long">&nbsp;· Çalışma soruları</span></div>
+    <nav class="jump" aria-label="Bölümler">
+      <a href="#nasil">Nasıl çalışılır</a><a href="#k-html">HTML ve CSS</a><a href="#k-web">Web</a><a href="#k-kod">Kod</a><a href="#k-urun">Ürün</a><a href="#k-arac">Araçlar</a><a href="#k-etki">Etki</a>
+    </nav>
+    <button class="themebtn" id="themeBtn" type="button">Koyu tema</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" aria-labelledby="baslik">
+    <div>
+      <div class="eyebrow">YZM205 Web Tasarımı ve Programlama · Ara sınav hazırlığı</div>
+      <h1 id="baslik">100 çalışma sorusu</h1>
+      <p class="lede">Sınavın konusu yalnız HTML ve CSS değil. Bu havuz dersin asıl sorusunu çalıştırır: web nasıl çalışır, yapay zekâ ile kod nasıl yazılır, bir ürüne yapay zekâ nasıl eklenir, çevrimiçi araçlar ne işe yarar ve yapay zekâ web'i nasıl değiştiriyor. Her sorunun altında dört seçeneğin de neden doğru ya da yanlış olduğu, konuyu ders notunun hangi bölümünden ve hangi dış kaynaktan çalışacağın yazıyor. Asıl öğrenme orada.</p>
+      <div class="meta">
+        <span class="chip theory">6 konu</span>
+        <span class="chip lab"><span id="toplamChip">100</span> soru</span>
+        <span class="chip ai">Her seçeneğin gerekçesi var</span>
+        <span class="chip ship">Ders notu ve dış kaynak bağlantıları</span>
+      </div>
+      <div class="meta">
+        <button class="btn" id="sinifBtn" type="button">Sınıf kipi</button>
+        <button class="btn" id="sifirlaBtn" type="button">İlerlemeyi sıfırla</button>
+      </div>
+    </div>
+    <div class="hero-demo ozet" aria-live="polite">
+      <span class="lbl">İlerlemen</span>
+      <div class="sayi"><span id="dogruSayi">0</span><small>/ <span id="toplam">100</span> doğru</small></div>
+      <div class="cubuk"><span id="cubuk"></span></div>
+      <div class="muted small" id="kalan">100 soru cevaplanmadı</div>
+      <div class="konu-ozet" id="konuOzet"></div>
+    </div>
+  </section>
+
+  <section id="nasil" aria-labelledby="nasil-h">
+    <div class="section-head"><h2 id="nasil-h">Nasıl çalışılır</h2></div>
+    <div class="nasil">
+      <div class="card"><h3>1 · Önce kendin cevapla</h3><p>Seçeneği tıklamadan önce karar ver. Yanlış cevap vermek öğrenmenin parçası; sayfa yalnız senin tarayıcında sayar, kimse görmez.</p></div>
+      <div class="card"><h3>2 · Dört gerekçeyi oku</h3><p>Doğru şıkkı bilmek yetmez. Yanlış şıkların neden yanlış olduğunu anlayan kişi, aynı konu başka sözcüklerle sorulunca da çözer.</p></div>
+      <div class="card"><h3>3 · Bağlantıdan konuya git</h3><p>Her cevabın altında "Daha iyi öğren" var: konunun ders notundaki bölümü ve bir iki dış kaynak. Bilsen de bilmesen de oraya bir bak. Sınav soruları bu havuzun kopyası olmayacak; aynı konuları aynı düşünme biçimiyle soracak.</p></div>
+    </div>
+    <div class="filtre" id="filtre" role="group" aria-label="Soru süzgeci">
+      <span class="chip on" data-f="hepsi">Hepsi</span>
+      <span class="chip" data-f="cevapsiz">Cevaplamadıklarım</span>
+      <span class="chip" data-f="yanlis">Yanlış yaptıklarım</span>
+      <span class="ayrac" aria-hidden="true"></span>
+      <span class="chip" data-z="1">Kolay</span>
+      <span class="chip" data-z="2">Orta</span>
+      <span class="chip" data-z="3">Zor</span>
+    </div>
+  </section>
+
+  <div id="bolumler"></div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><a href="../../">Ders ana sayfası</a> · <a href="../../docs/syllabus.html">Ders planı</a></div>
+    <div>YZM205 Web Tasarımı ve Programlama · Muş Alparslan Üniversitesi · Arş. Gör. Çağrı ŞAHİN</div>
+  </div>
+</footer>
+
+<script src="../../assets/ders.js"></script>
+<script src="sorular.js"></script>
+<script src="sorular2.js"></script>
+<script src="sorular3.js"></script>
+<script>
+(function () {
+  var D = window.Ders, $ = D.$, $$ = D.$$, el = D.el, esc = D.esc, fmt = D.fmt, store = D.store;
+  var LET = 'ABCD', KEY = 'yzm205.havuz.';
+  var sorular = window.SORULAR, konular = window.KONULAR;
+  var durum = {};          // soru no -> seçilen indis
+  var filtre = 'hepsi', zorluk = 0;
+
+  function oku() {
+    var s = store(KEY + 'durum');
+    try { durum = s ? JSON.parse(s) : {}; } catch (e) { durum = {}; }
+  }
+  function yaz() { store(KEY + 'durum', JSON.stringify(durum)); }
+
+  /* tohumlu karıştırma: seçeneklerin sırası her açılışta ve herkeste aynı, ama doğru şık hep aynı harfte değil */
+  function sira(n) {
+    var ord = [0, 1, 2, 3], seed = (n * 2654435761) >>> 0, i, j, t;
+    for (i = 3; i > 0; i--) {
+      seed = (Math.imul(seed, 1103515245) + 12345) >>> 0;
+      j = (seed >>> 8) % (i + 1); t = ord[i]; ord[i] = ord[j]; ord[j] = t;
+    }
+    return ord;   // ord[pozisyon] = özgün indis
+  }
+
+  /* "Daha iyi öğren" bloğu: ders içi bölümler ve dış kaynaklar; bilsen de bilmesen de görünür */
+  function kaynakHTML(s) {
+    var h = '<div class="kaynak"><span class="lbl">Daha iyi öğren</span>';
+    (s.ref || []).forEach(function (r) {
+      if (r[2]) h += '<a class="ic" href="' + esc(r[2]) + '"><b>' + esc(r[0]) + '</b> · ' + esc(r[1]) + '</a>';
+      else h += '<span class="ic kapali"><b>' + esc(r[0]) + '</b> · ' + esc(r[1]) + '</span>';
+    });
+    (s.dis || []).forEach(function (r) {
+      h += '<a class="dis" href="' + esc(r[1]) + '" target="_blank" rel="noopener">' + esc(r[0]) + '</a>';
+    });
+    return h + '</div>';
+  }
+
+  function zorHTML(z) {
+    var h = '<span class="zor z' + z + '" aria-label="Zorluk ' + z + '">';
+    for (var i = 1; i <= 3; i++) h += '<i class="' + (i <= z ? 'dolu' : '') + '"></i>';
+    return h + ' ' + (z === 1 ? 'kolay' : z === 2 ? 'orta' : 'zor') + '</span>';
+  }
+
+  function kart(s) {
+    var k = konular.filter(function (x) { return x.k === s.konu; })[0] || {};
+    var kutu = el('article', 'soru');
+    kutu.id = 's' + s.n;
+    kutu.setAttribute('data-n', s.n);
+    kutu.setAttribute('data-z', s.zorluk);
+    var h = '<div class="ust"><span class="no">Soru ' + s.n + '</span><span class="chip tag">' + esc(k.ad || s.konu) + '</span>' + zorHTML(s.zorluk) + '</div>';
+    h += '<div class="metin">' + fmt(s.q) + '</div>';
+    h += '<div class="secenekler" role="group" aria-label="Seçenekler"></div>';
+    h += '<div class="alt"><span class="hukum"></span><button class="goster" type="button">Cevabı ve gerekçeleri göster</button></div>';
+    var ord = sira(s.n);
+    h += '<div class="neden"><span class="lbl">Neden?</span>';
+    ord.forEach(function (i, pos) {
+      var d = i === s.a;
+      h += '<div class="satir ' + (d ? 'd' : 'y') + '"><span class="k">' + LET.charAt(pos) + ')</span><span class="h">' + (d ? 'Doğru' : 'Yanlış') + '</span><span class="m">' + fmt(s.neden[i]) + '</span></div>';
+    });
+    h += kaynakHTML(s);
+    h += '</div>';
+    kutu.innerHTML = h;
+    var sec = $('.secenekler', kutu);
+    ord.forEach(function (i, pos) {
+      var b = el('button', 'sec'); b.type = 'button';
+      b.setAttribute('data-i', i);
+      b.innerHTML = '<span class="k">' + LET.charAt(pos) + '</span><span>' + fmt(s.o[i]) + '</span>';
+      b.addEventListener('click', function () { cevapla(s, kutu, i); });
+      sec.appendChild(b);
+    });
+    $('.goster', kutu).addEventListener('click', function () { cevapla(s, kutu, -1); });
+    if (durum[s.n] !== undefined) boya(s, kutu, durum[s.n], false);
+    return kutu;
+  }
+
+  function cevapla(s, kutu, i) {
+    if (kutu.classList.contains('bitti')) return;
+    durum[s.n] = i; yaz();
+    boya(s, kutu, i, true);
+    ozet();
+  }
+
+  function boya(s, kutu, i, canli) {
+    kutu.classList.add('bitti');
+    var secler = $$('.sec', kutu), hukum = $('.hukum', kutu);
+    var harf = LET.charAt(sira(s.n).indexOf(s.a));
+    secler.forEach(function (b) {
+      var bi = +b.getAttribute('data-i');
+      b.setAttribute('aria-disabled', 'true');
+      if (bi === s.a) b.classList.add('dogru');
+      if (bi === i && i !== s.a) b.classList.add('yanlis');
+    });
+    if (i === s.a) { kutu.classList.add('dogru-cevap'); hukum.textContent = 'Doğru.'; }
+    else if (i < 0) { hukum.textContent = 'Doğru cevap: ' + harf + ' (göstererek açıldı)'; }
+    else { kutu.classList.add('yanlis-cevap'); hukum.textContent = 'Yanlış. Doğru cevap: ' + harf + '.'; }
+    if (canli && D.ring) D.ring();
+  }
+
+  function ozet() {
+    var dogru = 0, cevaplanan = 0, yanlis = 0;
+    var perKonu = {};
+    konular.forEach(function (k) { perKonu[k.k] = { t: 0, d: 0 }; });
+    sorular.forEach(function (s) {
+      perKonu[s.konu].t++;
+      var v = durum[s.n];
+      if (v === undefined) return;
+      cevaplanan++;
+      if (v === s.a) { dogru++; perKonu[s.konu].d++; } else yanlis++;
+    });
+    $('#dogruSayi').textContent = dogru;
+    $('#toplam').textContent = sorular.length; $('#toplamChip').textContent = sorular.length;
+    $('#cubuk').style.width = (dogru / sorular.length * 100) + '%';
+    var kalan = sorular.length - cevaplanan;
+    $('#kalan').textContent = kalan ? kalan + ' soru cevaplanmadı' + (yanlis ? ' · ' + yanlis + ' yanlış' : '') : 'Hepsi cevaplandı · ' + yanlis + ' yanlış';
+    var ko = $('#konuOzet'); ko.innerHTML = '';
+    konular.forEach(function (k) {
+      var r = el('div', 'satir');
+      r.innerHTML = '<a href="#k-' + k.k + '">' + esc(k.ad) + '</a><span class="skor">' + perKonu[k.k].d + ' / ' + perKonu[k.k].t + '</span>';
+      ko.appendChild(r);
+    });
+    suz();
+  }
+
+  function suz() {
+    $$('.soru').forEach(function (kutu) {
+      var n = +kutu.getAttribute('data-n'), z = +kutu.getAttribute('data-z'), s = sorular[n - 1];
+      var v = durum[n], gizle = false;
+      if (filtre === 'cevapsiz' && v !== undefined) gizle = true;
+      if (filtre === 'yanlis' && !(v !== undefined && v !== s.a)) gizle = true;
+      if (zorluk && z !== zorluk) gizle = true;
+      kutu.classList.toggle('gizli', gizle);
+    });
+    $$('section.bolum').forEach(function (b) {
+      var gorunen = $$('.soru:not(.gizli)', b).length;
+      $('.bos', b).style.display = gorunen ? 'none' : 'block';
+    });
+  }
+
+  function kur() {
+    oku();
+    var kap = $('#bolumler');
+    konular.forEach(function (k, ki) {
+      var sec = el('section', 'bolum');
+      sec.id = 'k-' + k.k;
+      sec.setAttribute('aria-labelledby', 'k-' + k.k + '-h');
+      var ks = sorular.filter(function (s) { return s.konu === k.k; });
+      var ilk = ks[0] ? ks[0].n : 0, son = ks.length ? ks[ks.length - 1].n : 0;
+      sec.innerHTML = '<div class="section-head"><span class="num">' + (ki + 1) + '</span><h2 id="k-' + k.k + '-h">' + esc(k.ad) + '</h2><span class="muted">' + ks.length + ' soru</span></div><p class="prose">' + esc(k.aciklama) + '</p><div class="soru-liste"></div><p class="muted small bos" style="display:none">Bu süzgeçle burada gösterilecek soru yok.</p>';
+      var liste = $('.soru-liste', sec);
+      ks.forEach(function (s) { liste.appendChild(kart(s)); });
+      kap.appendChild(sec);
+    });
+
+    $$('#filtre .chip[data-f]').forEach(function (c) {
+      c.addEventListener('click', function () {
+        $$('#filtre .chip[data-f]').forEach(function (x) { x.classList.remove('on'); });
+        c.classList.add('on'); filtre = c.getAttribute('data-f'); suz();
+      });
+    });
+    $$('#filtre .chip[data-z]').forEach(function (c) {
+      c.addEventListener('click', function () {
+        var z = +c.getAttribute('data-z');
+        zorluk = zorluk === z ? 0 : z;
+        $$('#filtre .chip[data-z]').forEach(function (x) { x.classList.toggle('on', +x.getAttribute('data-z') === zorluk); });
+        suz();
+      });
+    });
+    $('#sifirlaBtn').addEventListener('click', function () {
+      if (!confirm('Bütün cevapların silinsin mi?')) return;
+      durum = {}; yaz();
+      $$('.soru').forEach(function (kutu) {
+        var s = sorular[+kutu.getAttribute('data-n') - 1];
+        kutu.replaceWith(kart(s));
+      });
+      ozet();
+    });
+    $('#sinifBtn').addEventListener('click', function () {
+      var on = document.body.classList.toggle('sinif');
+      $('#sinifBtn').textContent = on ? 'Çalışma kipi' : 'Sınıf kipi';
+      store(KEY + 'sinif', on ? '1' : null);
+    });
+    if (store(KEY + 'sinif') === '1') { document.body.classList.add('sinif'); $('#sinifBtn').textContent = 'Çalışma kipi'; }
+    ozet();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', kur);
+  else kur();
+})();
+</script>
+</body>
+</html>
