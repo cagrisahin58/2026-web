@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hafta 6 · Veri katmanı: web veritabanı yönetim sistemleri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/ders.css">
+<style>
+.katmanlar{display:grid;gap:8px}
+.katman{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.katman b{font-family:var(--display)}
+.katman span{color:var(--muted);font-size:.93rem;text-align:right}
+.katman.bu{border-color:var(--theory);background:var(--theory-soft)}
+.katman.bu span::after{content:" · bu hafta";color:var(--theory);font-weight:600}
+.katman.gecti{border-style:dashed}
+.katman.gecti span::after{content:" · işlendi";color:var(--lab);font-weight:600}
+.istem{background:var(--code-bg);color:var(--code-ink);border-radius:10px;padding:12px 14px;font:.92rem/1.5 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0 0}
+.onay{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px}
+.onay li{padding-left:1.6em;position:relative}
+.onay li::before{content:"✓";position:absolute;left:0;color:var(--lab);font-weight:600}
+.hero .lbl{margin-bottom:8px}
+</style>
+</head>
+<body data-week="6">
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="dot" aria-hidden="true"></span>YZM205 · Hafta 6<span class="long">&nbsp;· Veri katmanı</span></div>
+    <nav class="jump" aria-label="Bölümler">
+      <a href="#harita">Harita</a><a href="#ozet">Özet</a><a href="#olay">Olay</a><a href="#araclar">Araçlar</a><a href="#karar">Karar</a><a href="#gorev">Görev</a><a href="#izle">İzle</a><a href="#oku">Oku</a><a href="#nasil">How to know</a><a href="#sozluk">Sözlük</a><a href="#sinav">Sınav</a>
+    </nav>
+    <button class="themebtn" id="themeBtn" type="button">Koyu tema</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" aria-labelledby="baslik">
+    <div>
+      <div class="eyebrow">YZM205 Web Tasarımı ve Programlama · Hafta 6</div>
+      <h1 id="baslik">Veri katmanı: web veritabanı yönetim sistemleri</h1>
+      <p class="lede">Anahtar herkeste; veriyi ne koruyor? Sunumun özeti: evde 20 dakikada okunur, görev yapılırken yanında durur, sınavdan önce tekrar edilir.</p>
+      <div class="meta">
+        <span class="chip theory">Sunum 70 dk</span>
+        <span class="chip lab">Proje atölyesi</span>
+        <span class="chip ship">Teslim: dersi izleyen Pazar 23:59</span>
+      </div>
+      <div class="meta">
+        <a class="btn primary" href="sunum.html">Sunum</a>
+        <a class="btn" href="../../teslimler/">Haftalık teslim</a>
+      </div>
+    </div>
+    <div>
+      <span class="lbl">Bu hafta ne öğreniyorsun</span>
+      <div class="grid3">
+        <div class="card"><h3>1</h3><p>Ürününün tablolarını ve aralarındaki bağları çizebileceksin.</p></div>
+        <div class="card"><h3>2</h3><p>Tarayıcıya giden anahtarla veriyi neyin koruduğunu söyleyebileceksin.</p></div>
+        <div class="card"><h3>3</h3><p>Şemayı dosyadan kuracak, her tabloda RLS'i açacak, yedek alacaksın.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="harita" aria-labelledby="harita-h">
+    <div class="section-head"><h2 id="harita-h">Ürünün neresindeyiz?</h2><span class="muted">her hafta aynı harita</span></div>
+    <p class="prose">İstemci katmanını ve takım araçlarını geçtik. Bu hafta verinin durduğu, kuralın yazıldığı katmandayız.</p>
+    <div class="grid2">
+      <div class="katmanlar">
+        <div class="katman"><b>Kullanıcı ve cihazlar</b><span>tarayıcı, telefon, masaüstü</span></div>
+        <div class="katman gecti"><b>İstemci uygulaması</b><span>React, Next.js, PWA</span></div>
+        <div class="katman"><b>API ve iş mantığı</b><span>sunucusuz fonksiyonlar, kimlik, dil modeli API'si</span></div>
+        <div class="katman bu"><b>Veri</b><span>Postgres, depolama, önbellek</span></div>
+        <div class="katman"><b>Altyapı</b><span>bulut, CDN, alan adı, dağıtım hattı</span></div>
+      </div>
+      <div class="katmanlar">
+        <div class="katman gecti"><b>Takım ve araçlar</b><span>GitHub, yapay zekâ ajanları</span></div>
+        <div class="katman"><b>Güvenlik</b><span>açık analizi</span></div>
+        <div class="katman"><b>Kalite</b><span>test, kod analizi</span></div>
+        <div class="katman"><b>Pazar</b><span>mağaza, yasal, analitik</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ozet" aria-labelledby="ozet-h">
+    <div class="section-head"><h2 id="ozet-h">Özet: bu haftanın kavramları</h2><span class="muted">sunumla aynı sıra</span></div>
+
+    <h3>1. İlişkisel model: tablo, satır, kimlik ve bağ</h3>
+    <p class="prose">Veritabanı yönetim sistemi verini tablolarda tutar ve kurallı erişim verir; bizim yığında Postgres. Her tablonun satırı tek başına tanımlayan bir birincil anahtarı (id) vardır ve tablolar adla değil kimlikle bağlanır: Kampüs Pano'da ilan satırı sahibinin adını değil <code>kullanici_id</code> değerini taşır, buna yabancı anahtar denir. "Bu ilanı kim verdi" sorusu iki tabloyu birleştiren tek sorguyla (join) yanıtlanır. Aynı bilgiyi iki yerde tutmamak normalizasyondur: ad tek yerde durur, değişince yüzlerce satır güncellenmez; bilinçli tekrar ayrı bir karardır.</p>
+
+    <h3>2. Kısıtlar: veritabanının kendi kalkanı</h3>
+    <p class="prose">Tablo tanımına yazılan kurallara kısıt denir: <code>not null</code> boş bırakılamaz, <code>unique</code> tekrar edemez, <code>check</code> verilen koşulu sağlamalı, yabancı anahtar karşı tabloda var olmalı. Her yazmada çalışırlar; uygulama kodu ne yaparsa yapsın yanlış veri içeri girmez. Yapay zekânın ürettiği kod var olmayan bir kategoriye ilan eklemeye kalkınca hatayı kod değil veritabanı verir; mesaj kuralı ve sütunu söyler. Bu hafta bir tanesini bilerek tetikleyeceksin.</p>
+
+    <h3>3. Tablo mu doküman mı?</h3>
+    <p class="prose">İlişkisel modelde satır ve sütun, sabit şema, kimlikle bağ vardır. Doküman modelinde (Firestore, MongoDB) veri JSON benzeri belgelerde durur, şema yoktur; başta esnek gelir ama ilişkiler ve tutarlılık uygulama koduna yüklenir. Farkı "hangi takım hangi görevi yaptı" diye sormaya başladığın an hissedersin: tabloda join, dokümanda ya tekrarlı veri ya çoklu okuma; doküman veritabanlarının çoğu okuma başına sayar. Sahada ilişkisel model açık ara önde; bizim yığın da burada.</p>
+    <div class="quiz" data-quiz="model"></div>
+
+    <h3>4. Tabloyu açtın, adres hazır: otomatik API</h3>
+    <p class="prose">Supabase tabloyu açtığın anda ona bir HTTP adresi verir: <code>https://&lt;proje&gt;.supabase.co/rest/v1/ilanlar</code>. Bunu yapan PostgREST şemayı okur, adresteki <code>select</code>, <code>order</code> ve <code>eq</code> parametrelerini SQL'e çevirir ve isteği anahtarın taşıdığı rolle (giriş yoksa anon) veritabanının içinde çalıştırır. Sunucu kodu yazmadan okur ve yazarsın; supabase-js'de aynı şey <code>from('ilanlar').select('*, kategoriler(*)')</code> çağrısıdır ve ilişkiyi de tek istekte getirir.</p>
+
+    <h3>5. RLS: aynı istek, üç farklı cevap</h3>
+    <p class="prose">Satır düzeyi güvenlik (RLS) açıkken Postgres her sorguya görünmez bir süzgeç ekler: politika ne diyorsa o satırlar geçer. RLS kapalıysa anahtarı olan herkes bütün satırları okur ve yazar. RLS açık ama politika yoksa sorgu çalışır, boş dizi döner; ekleme 42501 koduyla reddedilir. Politika varsa, örneğin <code>auth.uid() = kullanici_id</code>, giriş yapan yalnız kendi satırlarını görür. En çok şaşırtan an ikincisi: "ekleme çalışmıyor" diye kodu kurcalarsın, eksik olan politikadır. Kural: her tabloda RLS açık, her işlem için ayrı politika, her politika rol taklidiyle sınanmış.</p>
+    <div class="quiz" data-quiz="rls"></div>
+
+    <h3>6. İki anahtar: hangisi tarayıcıda durabilir?</h3>
+    <p class="prose"><code>sb_publishable_</code> ile başlayan yayımlanabilir anahtar tarayıcıda, mobil uygulamada ve kaynak kodda durabilir; gizli değildir, veriyi o değil RLS korur. <code>sb_secret_</code> ile başlayan gizli anahtar her politikayı atlar; yalnız sunucuda, ortam değişkeninde yaşar ve tarayıcıdan çağrılınca 401 döner. .env dosyası GitHub'a giderse hangisinin sızdığı her şeyi değiştirir: yayımlanabilir için panik yok, gizli sızdıysa hemen iptal edip yenisini üretirsin. Eski projelerde ve videolarda adları anon ve service_role; görevleri aynı.</p>
+
+    <h3>7. Şemayı kim değiştirir? Panelden değil, dosyadan</h3>
+    <p class="prose">Migration, şemayı değiştiren SQL'in zaman damgalı dosyalar halinde depoda tutulmasıdır. <code>supabase migration new ilanlar</code> ile dosya açılır, <code>supabase db reset</code> ile yerelde sıfırdan kurulur, pull request ile incelenir, uzak veritabanına yalnız bir kişi <code>supabase db push</code> ile iter; yerel panelden elle yapılmış değişikliği <code>supabase db diff</code>, uzak projedekini <code>supabase db pull</code> dosyaya alır. Altın kural uzak veritabanını doğrudan değiştirmemek: biri paneli elle değiştirince diğer üçünün yerel ortamı bozulur. Drizzle seçen takım aynı disiplini drizzle-kit generate ve migrate ile yaşar.</p>
+
+    <h3>8. Yüz istek, yüz bağlantı mı? Bağlantı havuzu</h3>
+    <p class="prose">Postgres'te her istemci bağlantısı sunucuda ayrı bir süreçtir; küçük bir makinede bağlantı sınırı birkaç yüzü geçmez. Sunucusuz fonksiyonlar istek başına kendi bağlantısını açar; yüz eş zamanlı istek yüz bağlantıdır ve "too many connections" hatası gelir. Bağlantı havuzu (Supabase'de Supavisor) binlerce kısa bağlantıyı kabul edip veritabanına birkaç kalıcı bağlantı üstünden sırayla geçirir. Kural: sunucusuz kod 6543 portundaki işlem modu havuzundan bağlanır; migration ve dump 5432'deki doğrudan bağlantıyı kullanır.</p>
+
+    <h3>9. Demo Günü sabahı: uyuyan proje ve olmayan yedek</h3>
+    <p class="prose">Ücretsiz Supabase projesi bir süre dokunulmayınca duraklatılır: API hata verir, veri yerindedir, panelden Resume ile dakikalar içinde döner. Neon'da proje uyumaz, boşta hesaplama kapanır ve ilk sorgu bir an gecikir. Ücretsiz planda otomatik yedek yoktur; <code>supabase db dump</code> şemayı ve veriyi SQL metni olarak dışarı çıkarır: depoda BACKUP.md, haftada bir dosya, yerel veritabanına bir kez geri yükleme denemesi. Yönetilen veritabanı bakım yükünü alır, bölge bağımlılığını almaz; dışa aktarılmış verisi hazır takım bölge çökse de demoyu yapar.</p>
+    <div class="quiz" data-quiz="isletme"></div>
+  </section>
+
+  <section id="olay" aria-labelledby="olay-h">
+    <div class="section-head"><h2 id="olay-h">Gerçek olay: ajanların sosyal ağı, bir gecede kapatılan açık</h2></div>
+    <p class="prose">Moltbook, paylaşım yapanların insan değil yapay zekâ ajanları olduğu bir sosyal ağdı; kodu da yapay zekâ ile yazılmıştı. Güvenlik araştırmacıları sayfanın JavaScript'ine gömülü Supabase anahtarını buldu. Sorun anahtar değildi, o zaten tarayıcıya gitmek için tasarlanmıştı; tablolarda RLS yoktu ve anahtar bütün veritabanını okutup yazdırıyordu: 1,5 milyon ajan API jetonu, on binlerce e-posta, başka servislerin anahtarlarını içeren özel mesajlar. Birincil kaynak: <a href="https://www.wiz.io/blog/exposed-moltbook-database-reveals-millions-of-api-keys" target="_blank" rel="noopener">Wiz'in Moltbook raporu</a>.</p>
+    <p class="prose">Tek olay değil. Tea'de yanlış ayarlanmış bir Firebase depolama kovasından 72.000 görsel açıldı (<a href="https://cyberinsider.com/tea-app-suffers-data-breach-exposing-72000-users-photos-and-private-messages/" target="_blank" rel="noopener">haber</a>); Lovable ile üretilen 1.645 uygulamanın 170'inde RLS eksiği yüzünden tablolar herkese açıktı (<a href="https://www.superblocks.com/blog/lovable-vulnerabilities" target="_blank" rel="noopener">olay yazısı</a>). Üçünde de kod çalışıyordu; eksik olan aynı türdendi: veritabanının ya da depolamanın erişim kuralı.</p>
+  </section>
+
+  <section id="araclar" aria-labelledby="araclar-h">
+    <div class="section-head"><h2 id="araclar-h">Araç tablosu</h2><span class="muted">bizim yığın ✓ ile işaretli</span></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Araç</th><th>Ne işe yarar</th><th>Ne zaman seçilir</th><th>Belge</th></tr></thead>
+        <tbody>
+          <tr><td><b>Supabase</b> ✓</td><td>Yönetilen Postgres; kimlik, dosya, otomatik API ve RLS tek panelde</td><td>Varsayılan; ücretsiz başlangıç katmanı var</td><td><a href="https://supabase.com/docs/guides/database/tables" target="_blank" rel="noopener">Tablolar</a></td></tr>
+          <tr><td><b>Neon</b></td><td>Sunucusuz Postgres; dal başına kopya</td><td>Kendi API'sini yazan takım</td><td><a href="https://neon.com/docs/introduction/branching" target="_blank" rel="noopener">Dallanma</a></td></tr>
+          <tr><td><b>Firebase Firestore</b></td><td>Doküman veritabanı, gerçek zamanlı senkron</td><td>Gerçek zamanlı mobil, ilişkisi az veri</td><td><a href="https://firebase.google.com/docs/firestore/data-model" target="_blank" rel="noopener">Veri modeli</a></td></tr>
+          <tr><td><b>MongoDB Atlas</b></td><td>Doküman veritabanı</td><td>Belge yapısı çok değişkense</td><td><a href="https://www.mongodb.com/docs/atlas/reference/free-shared-limitations/" target="_blank" rel="noopener">Atlas belgesi</a></td></tr>
+          <tr><td><b>Turso</b></td><td>SQLite bulutta ve gömülü</td><td>Kenar, kullanıcı başına veritabanı, çevrimdışı</td><td><a href="https://docs.turso.tech/introduction" target="_blank" rel="noopener">Giriş</a></td></tr>
+          <tr><td><b>Cloudflare D1</b></td><td>SQLite semantikli sunucusuz veritabanı</td><td>Uygulama Cloudflare Workers üstündeyse</td><td><a href="https://developers.cloudflare.com/d1/" target="_blank" rel="noopener">D1</a></td></tr>
+          <tr><td><b>supabase-js</b> ✓</td><td>Otomatik API'nin istemcisi</td><td>Varsayılan sorgu yolu; sunucu kodu yazmadan CRUD</td><td><a href="https://supabase.com/docs/guides/api" target="_blank" rel="noopener">API</a></td></tr>
+          <tr><td><b>Drizzle ORM</b></td><td>SQL'e yakın TypeScript ORM</td><td>Sunucu tarafı sorgu, hafif paket</td><td><a href="https://orm.drizzle.team/docs/migrations" target="_blank" rel="noopener">Migration</a></td></tr>
+          <tr><td><b>Prisma ORM</b></td><td>Şema dosyalı ORM, tip üretimi</td><td>Şema odaklı ekip</td><td><a href="https://www.prisma.io/blog/announcing-prisma-orm-7-0-0" target="_blank" rel="noopener">Sürüm duyurusu</a></td></tr>
+          <tr><td><b>Supabase CLI</b> ✓</td><td>Yerel kopya; migration, reset, push, dump</td><td>Takım çalışması ve şema disiplini</td><td><a href="https://supabase.com/docs/guides/local-development" target="_blank" rel="noopener">Yerel geliştirme</a></td></tr>
+          <tr><td><b>database.build</b></td><td>Tarayıcıda Postgres kum havuzu</td><td>Şema denemek, projesi olmayan masa</td><td><a href="https://github.com/supabase-community/database-build" target="_blank" rel="noopener">Depo</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="karar" aria-labelledby="karar-h">
+    <div class="section-head"><h2 id="karar-h">Hangi durumda hangisi?</h2></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Seçenek</th><th>Model</th><th>İlişki ve rapor</th><th>Kimlik, dosya, satır kuralı</th><th>Takım projesi</th></tr></thead>
+        <tbody>
+          <tr><td><b>Supabase</b> (Postgres)</td><td>ilişkisel</td><td>join doğal</td><td>tek panelde</td><td>varsayılan</td></tr>
+          <tr><td><b>Neon</b> (Postgres)</td><td>ilişkisel</td><td>join doğal</td><td>kimlik ve dosya ayrı</td><td>kendi API'sini yazan takım</td></tr>
+          <tr><td><b>Firebase Firestore</b></td><td>doküman</td><td>ilişki kodda</td><td>kural dosyasıyla</td><td>gerçek zamanlı mobilse</td></tr>
+          <tr><td><b>MongoDB Atlas</b></td><td>doküman</td><td>ilişki kodda</td><td>kimlik ayrı</td><td>belge yapısı çok değişkense</td></tr>
+          <tr><td><b>Turso, Cloudflare D1</b> (SQLite)</td><td>ilişkisel, kenar</td><td>join var</td><td>kimlik ayrı</td><td>kenar ve çevrimdışı için</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <details class="faq">
+      <summary>Senaryo: kullanıcı notları ve etiketler; "en çok etiketlenen notlar" listesi; yapay zekâ özeti. Dört kişi, bütçe sıfır, sekiz hafta sonra Demo Günü. Bir üye Firestore'u "şemasız, esnek" diye öneriyor. Ne seçersin?</summary>
+      <div class="ans"><p>Supabase Postgres: notlar, etiketler ve not_etiket tabloları; RLS ve kimlik aynı panelde. Ölçüt üç tane: ilişkilerin sayısı, rapor ihtiyacı, okuma maliyeti. "En çok etiketlenen" doküman modelinde ya tekrarlı veri ya çoklu okuma ister, ilişkisel modelde tek join. Firestore ancak gerçek zamanlı mobil senkron temel gereksinimse.</p></div>
+    </details>
+  </section>
+
+  <section id="gorev" aria-labelledby="gorev-h">
+    <div class="section-head"><h2 id="gorev-h">Bu haftanın görevi: veri katmanı sözleşmesi</h2><span class="progress-pill" id="labProg" aria-live="polite">0 / 5 adım</span></div>
+    <p class="prose">Takımının ürününde yapılır; her üye bir tablo ya da politika sahiplenir. Yapay zekâ şemayı ve politikayı yazabilir, ama her satırını okur, çalıştırır ve rol taklidiyle sınarsın.</p>
+    <div class="steps">
+      <article class="step">
+        <div class="sn">1</div>
+        <div class="sb">
+          <h3>Şemayı çiz, migration dosyasına yaz</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Depoda önce <code>npx supabase init</code>. Hafta 4'te panelden açtığın tablo uzak projede duruyor: <code>npx supabase login</code>, <code>npx supabase link</code> (listeden takımın projesini seç) ve <code>npx supabase db pull</code> o şemayı ilk migration dosyasına çeker. Yeni tabloları <code>npx supabase migration new baslangic</code> ile açılan ikinci dosyaya yaz: en az dört tablo, her tabloda birincil anahtar, en az iki yabancı anahtar, en az iki check ya da unique kısıtı; kullanıcı kimliği uuid ve auth.users(id)'ye bağlı. Ajana şu istemi verebilirsin.</span></div>
+          </div>
+          <pre class="istem">supabase/migrations altındaki ikinci migration dosyasına şu şemayı yaz: profiller (id uuid, birincil anahtar, auth.users(id)'ye yabancı anahtar), kategoriler, ilanlar ve mesajlar tabloları; her tabloda birincil anahtar; ilanlar.kullanici_id uuid ve auth.users(id)'ye bağlı, ilanlar.kategori_id kategoriler(id)'ye bağlı; mesajlar.gonderen_id uuid ve auth.users(id)'ye bağlı; ilanlar.baslik not null; kategoriler.ad unique; mesajlar.icerik için bir check kısıtı. Hafta 4'ten gelen tablo ilk dosyada zaten varsa create yerine alter table ile sütun ekle. Her tabloda RLS'i aç, politika yazma. Sonra npx supabase db reset çalıştır, çıktıyı göster.</pre>
+          <label class="check"><input type="checkbox" data-done="g1"> Şema dosyada; dört tablo, iki yabancı anahtar, iki kısıt.</label>
+        </div>
+      </article>
+      <article class="step">
+        <div class="sn">2</div>
+        <div class="sb">
+          <h3>Yerelde sıfırdan kur</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Docker açıkken <code>npx supabase start</code>, sonra <code>npx supabase db reset</code>; yerel Studio'da tabloları gör. Drizzle seçen takım <code>drizzle-kit generate</code> ve <code>migrate</code> çıktısını kullanır.</span></div>
+            <div><b>Olmadıysa</b><span>Hata mesajındaki satıra git; çoğu zaman yabancı anahtar, karşı tablodan önce yaratılmıştır. "already exists" diyorsa aynı tablo iki dosyada var: ikinci dosyadaki create satırını sil.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="g2"> Temiz kopyada <code>npx supabase db reset</code> hatasız çalışıyor.</label>
+        </div>
+      </article>
+      <article class="step">
+        <div class="sn">3</div>
+        <div class="sb">
+          <h3>Her tabloda RLS ve politikalar</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Kullanıcıya ait tablolarda select, insert, update ve delete için auth.uid() tabanlı ayrı politika, yeni bir migration dosyasında. Supabase'in RLS istemini (Oku bölümünde) araca ver, altına şu isteği ekle. Her politikayı rol taklidiyle anon ve authenticated gözünden sına, görüntüsünü depoya koy; herkese açık tablonun gerekçesi README'de.</span></div>
+            <div><b>Neden</b><span>RLS açık, politika yok: boş dizi. Politika var, test yok: Lovable. Kimlik uuid değilse auth.uid() ile hiç eşleşmez.</span></div>
+          </div>
+          <pre class="istem">ilanlar ve mesajlar için politikaları yaz: giriş yapmış kullanıcı yalnız kendi satırlarını görsün, eklesin, güncellesin, silsin; sahiplik ilanlar.kullanici_id ve mesajlar.gonderen_id sütunlarının auth.uid() ile karşılaştırılmasıyla; auth.uid() çağrısını select ile sar; her işlem için ayrı politika, TO ile rol belirt. kategoriler tablosunu herkes okusun, kimse yazmasın; profiller tablosunu herkes okusun, yalnız sahibi güncellesin.</pre>
+          <label class="check"><input type="checkbox" data-done="g3"> Her tabloda RLS açık, politikalar iki rolle sınandı.</label>
+        </div>
+      </article>
+      <article class="step">
+        <div class="sn">4</div>
+        <div class="sb">
+          <h3>Örnek veri ve bilerek üretilmiş hata</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span><code>supabase/seed.sql</code> ile en az 20 satır; <code>db reset</code> seed'i de yükler. Sonra var olmayan bir kategori kimliğiyle ilan eklemeyi dene, yabancı anahtar hatasının ekran görüntüsünü depoya koy.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="g4"> Seed ile 20 satır geliyor; hata görüntüsü depoda.</label>
+        </div>
+      </article>
+      <article class="step">
+        <div class="sn">5</div>
+        <div class="sb">
+          <h3>Uzak veritabanına it, yedek al, danışmanı temizle</h3>
+          <div class="row4">
+            <div><b>Ne yapacaksın</b><span>Proje 1. adımda bağlandı; tek kişi <code>npx supabase db push</code> ile dosyaları takımın projesine iter. Canlı adresteki ürün artık veriyi bu projeden, dosyadan kurulmuş şemadan okumalı; Hafta 4'teki bağlantıyı yeni tablolara çevir. BACKUP.md'ye <code>npx supabase db dump</code> komutunu, çıktının yerini ve bir geri yükleme denemesini yaz; denemeyi yerel veritabanında yap, uzak projeye yükleme. Security Advisor'da "error" kalmayınca ekran görüntüsünü depoya koy.</span></div>
+            <div><b>Olmadıysa</b><span>push hata veriyorsa ya iki kişi push yapmıştır ya da uzak projede panelden elle değişiklik vardır: <code>npx supabase db pull</code> ile dosyaya al, tek kişi yeniden itsin.</span></div>
+          </div>
+          <label class="check"><input type="checkbox" data-done="g5"> Uzak şema dosyadan kuruldu; canlı ürün bu projeden okuyor; BACKUP.md ve Advisor görüntüsü depoda.</label>
+        </div>
+      </article>
+    </div>
+    <div class="callout lab"><b>Kabul ölçütleri</b>
+      <ul class="onay">
+        <li>Temiz bir kopyada <code>npx supabase db reset</code> hatasız çalışıyor; en az dört tablo, iki yabancı anahtar, iki check ya da unique kısıtı.</li>
+        <li>Her tabloda RLS açık; Security Advisor'da "error" yok, ekran görüntüsü depoda.</li>
+        <li>Kullanıcıya ait her tabloda select, insert, update, delete için auth.uid() tabanlı ayrı politika; anon ve authenticated taklidiyle sınanmış, görüntüsü depoda.</li>
+        <li>Canlı adresteki ürün veriyi takımın Supabase projesinden okuyor.</li>
+        <li>Seed ile en az 20 satır geliyor.</li>
+        <li>BACKUP.md var, geri yükleme yerel veritabanında bir kez denenmiş.</li>
+        <li>Bir yabancı anahtar hatası bilerek tetiklenmiş, ekran görüntüsü alınmış.</li>
+      </ul>
+    </div>
+    <div class="callout"><b>Teslim nasıl yapılır:</b> <a href="../../teslimler/">haftalık teslim sayfasındaki</a> formu her üye kendi adıyla doldurur. Hafta: "Hafta 6 · Veri katmanı: web VTYS"; numara, ad, ürünün canlı adresi, takım deposu. Yapay zekâ notuna dört şey: sahiplendiğin tablo ya da politika; bir RLS testinin ekran görüntüsü (hangi rol, ne gördü); araca verdiğin bir istem ve çıktısında değiştirmek zorunda kaldığın tek şey; haftanın "bunu bilmiyordum" cümlesi. Süre: bu dersi izleyen Pazar 23:59.</div>
+    <p class="prose">Puan 0 ile 3 arasında. 3: bütün ölçütler tam, politikaların gerekçesi README'de, yabancı anahtar hatası bilerek tetiklenmiş. 2: auth.uid() tabanlı politikalar çalışıyor, Advisor temiz, seed ve yedek var; kısıtlar eksik ya da bir politika sınanmamış. 1: migration ve RLS var ama politikalar <code>using (true)</code> ile açık, test kanıtı yok. 0: migration yok ya da RLS kapalı tablo var. 1 alan bir hafta içinde düzeltip 2'ye çıkabilir.</p>
+  </section>
+
+  <section id="izle" aria-labelledby="izle-h">
+    <div class="section-head"><h2 id="izle-h">İzle</h2><span class="muted">kısa, seçilmiş</span></div>
+    <div class="grid2">
+      <div class="card"><h3><a href="https://www.youtube.com/watch?v=v-G6aT0j35w" target="_blank" rel="noopener">Supabase Öğren (Firebase Alternatifi)</a></h3><p>Eray Hamurlu · 13 dakika · Türkçe · sunumdaki klip 5:05 ile 8:43 arası. Tablo oluşturma, unique ve default, RLS kutusu.</p></div>
+      <div class="card"><h3><a href="https://www.youtube.com/watch?v=vHGc8iV1cd4" target="_blank" rel="noopener">Supabase RLS Nedir? Soru/Cevap</a></h3><p>Poyraz Avsever · 6 dakika · Türkçe · tamamı. Takım projelerinde en çok atlanan ayar.</p></div>
+      <div class="card"><h3><a href="https://www.youtube.com/watch?v=M9mWi8SlWRs" target="_blank" rel="noopener">Database: Veritabanı nedir? NoSQL, SQL nedir?</a></h3><p>Barış Dere · 13 dakika · Türkçe, el yapımı altyazı · 3:48 ile 8:10 arası. İlişkisel modelin neden böyle olduğu.</p></div>
+      <div class="card"><h3><a href="https://www.youtube.com/watch?v=hu2SQjvCXIw" target="_blank" rel="noopener">Use AI to enable and generate RLS policies</a></h3><p>Supabase (resmi) · 7 dakika · İngilizce · 0:16 ile 4:44 arası. Gösterideki "boş dizi" anı birebir.</p></div>
+    </div>
+  </section>
+
+  <section id="oku" aria-labelledby="oku-h">
+    <div class="section-head"><h2 id="oku-h">Oku</h2><span class="muted">resmi belge önce</span></div>
+    <ul class="prose">
+      <li><a href="https://supabase.com/docs/guides/database/postgres/row-level-security" target="_blank" rel="noopener">Supabase: Row Level Security</a>: haftanın çekirdek metni.</li>
+      <li><a href="https://supabase.com/docs/guides/getting-started/ai-prompts/database-rls-policies" target="_blank" rel="noopener">Supabase: RLS politikaları için yapay zekâ istemi</a>: görevin 3. adımındaki istem.</li>
+      <li><a href="https://supabase.com/docs/guides/getting-started/tutorials/with-nextjs" target="_blank" rel="noopener">Supabase: Next.js ile kullanıcı yönetimi öğreticisi</a>: profiles tablosu ve ilk politika; görevin şemasına en yakın yürüyüş.</li>
+      <li><a href="https://supabase.com/docs/guides/api/api-keys" target="_blank" rel="noopener">Supabase: API anahtarları</a>: yayımlanabilir ve gizli anahtarın farkı.</li>
+      <li><a href="https://supabase.com/docs/guides/deployment/database-migrations" target="_blank" rel="noopener">Supabase: veritabanı migration'ları</a>: takımın şema disiplini komut komut.</li>
+      <li><a href="https://supabase.com/docs/guides/database/connecting-to-postgres" target="_blank" rel="noopener">Supabase: Postgres'e bağlanma</a>: 5432 ile 6543 farkı.</li>
+      <li><a href="https://supabase.com/docs/guides/platform/backups" target="_blank" rel="noopener">Supabase: yedekler</a>: ücretsiz planda yedeğin neden senin işin olduğu.</li>
+      <li><a href="https://www.postgresql.org/docs/current/ddl-constraints.html" target="_blank" rel="noopener">PostgreSQL: kısıtlar</a>: altı kısıt türü, örnekli.</li>
+    </ul>
+  </section>
+
+  <section id="nasil" aria-labelledby="nasil-h">
+    <div class="section-head"><h2 id="nasil-h">How to know: sahadakiler nasıl takip ediyor?</h2></div>
+    <p class="prose">Resmi belge önce gelir, çünkü ücretsiz katman sınırları ve varsayılanlar sık değişir ve yalnız sağlayıcının sayfası günceldir. Değişiklikleri <a href="https://supabase.com/changelog" target="_blank" rel="noopener">Supabase changelog</a> ve <a href="https://neon.com/docs/changelog" target="_blank" rel="noopener">Neon changelog</a> taşır; Supabase'in haftalık güvenlik e-postasını takım adresine yönlendir. Postgres'in geneli için <a href="https://postgresweekly.com/" target="_blank" rel="noopener">Postgres Weekly</a> ve <a href="https://planet.postgresql.org/" target="_blank" rel="noopener">Planet PostgreSQL</a> yeter; soru için <a href="https://github.com/orgs/supabase/discussions" target="_blank" rel="noopener">Supabase Discussions</a>. Deneme ortamı: database.build tarayıcıda, Supabase CLI Docker'da; önce yerelde dene, sonra migration ile it. Kalite: tarihsiz ya da "en iyi ücretsiz veritabanı" başlıklı sayfa fiyat sayfasıyla karşılaştırılmadan alınmaz; olayda birincil kaynak aranır (araştırmacının yazısı, durum sayfası, CVE kaydı); "biri X'te yazdı" onay gelene dek iddiadır.</p>
+  </section>
+
+  <section id="sozluk" aria-labelledby="sozluk-h">
+    <div class="section-head"><h2 id="sozluk-h">Sözlük</h2><span class="muted">karta tıkla</span></div>
+    <div class="kartlar">
+      <button class="kart" type="button"><span class="kart-on">primary key</span><span class="kart-arka">Satırı tek başına tanımlayan sütun. Derste "birincil anahtar", kısaca "id".</span></button>
+      <button class="kart" type="button"><span class="kart-on">foreign key</span><span class="kart-arka">Başka tablonun kimliğini taşıyan sütun. Derste "yabancı anahtar".</span></button>
+      <button class="kart" type="button"><span class="kart-on">normalization</span><span class="kart-arka">Her bilgi tek yerde, diğerleri kimlikle bağlı. Derste "normalizasyon".</span></button>
+      <button class="kart" type="button"><span class="kart-on">constraint</span><span class="kart-arka">Tablo tanımına yazılan, her yazmada çalışan kural. Derste "kısıt".</span></button>
+      <button class="kart" type="button"><span class="kart-on">document model</span><span class="kart-arka">JSON benzeri belgeler, koleksiyonlar, şema yok. Derste "doküman modeli".</span></button>
+      <button class="kart" type="button"><span class="kart-on">row level security</span><span class="kart-arka">Her satırı kimin görüp değiştireceğini söyleyen kural. Derste "RLS".</span></button>
+      <button class="kart" type="button"><span class="kart-on">policy</span><span class="kart-arka">RLS'in bir işlem ve bir rol için yazılmış kuralı. Derste "politika".</span></button>
+      <button class="kart" type="button"><span class="kart-on">publishable / secret key</span><span class="kart-arka">İlki tarayıcıda durabilir; ikincisi her politikayı atlar, yalnız sunucuda. Eski adları anon ve service_role. Derste İngilizce adlarıyla.</span></button>
+      <button class="kart" type="button"><span class="kart-on">migration</span><span class="kart-arka">Zaman damgalı şema değişiklik dosyası, depoda. Derste "migration".</span></button>
+      <button class="kart" type="button"><span class="kart-on">connection pool</span><span class="kart-arka">Çok istemci, az kalıcı bağlantı. Derste "bağlantı havuzu".</span></button>
+      <button class="kart" type="button"><span class="kart-on">dump / seed</span><span class="kart-arka">Dump veriyi SQL olarak dışarı çıkarır; seed örnek veriyi yükler. Derste İngilizce adlarıyla.</span></button>
+    </div>
+  </section>
+
+  <section id="sinav" aria-labelledby="sinav-h">
+    <div class="section-head"><h2 id="sinav-h">Sınavda nasıl sorulur?</h2><span class="muted">önce kendin cevapla</span></div>
+    <details class="faq">
+      <summary>1. Takımınız "siparisler" tablosunu açtı, uygulama yayında, yayımlanabilir anahtar tarayıcı kodunda. Bir arkadaşınız "anahtar zaten herkese açık, RLS'i kapatıp hız kazandım" diyor. Ne olur, ne yaparsınız?</summary>
+      <div class="ans"><p>RLS kapalı tabloyu anahtarı olan herkes okur ve yazar; adres çubuğuna rest/v1/siparisler yazan bütün siparişleri çeker, hatta satır ekler. RLS yeniden açılır, select için auth.uid() = kullanici_id politikası yazılır, Advisor'da uyarı kalmadığı doğrulanır; hız için fonksiyon select ile sarmalanır, kullanici_id sütununa indeks konur.</p></div>
+    </details>
+    <details class="faq">
+      <summary>2. Takımın üç üyesi şemayı panelden elle değiştiriyor, dördüncü üyenin yerel ortamı sürekli bozuluyor. Süreci nasıl düzeltirsiniz?</summary>
+      <div class="ans"><p>Uzak veritabanı doğrudan değiştirilmez. Her değişiklik supabase migration new ile dosya olur, yerelde db reset ile sınanır, depoya girer; uzak veritabanına yalnız bir kişi db push ile iter. Elle yapılmış değişiklikler db diff ile dosyaya alınır; dördüncü üye git pull ve db reset ile aynı şemaya kavuşur.</p></div>
+    </details>
+    <details class="faq">
+      <summary>3. Next.js API yolunuz her istekte yeni bir Postgres bağlantısı açıyor; yük testinde "too many connections" geldi. Neden, hangi bağlantı dizesini seçersiniz?</summary>
+      <div class="ans"><p>Sunucusuz ortamda her fonksiyon örneği kendi bağlantısını açar ve duraklatılmış örnekler bağlantıyı tutar; küçük bir Postgres'in limiti yüzlerle sınırlıdır. Çözüm 6543 portundaki işlem modu havuzu; hazırlanmış ifadeler sürücüde kapatılır. Migration ve dump doğrudan bağlantıyla.</p></div>
+    </details>
+  </section>
+
+  <section id="gelecek" aria-labelledby="gelecek-h">
+    <div class="next">
+      <span class="lbl">Gelecek hafta</span>
+      <h3>API katmanı: sunucusuz fonksiyonlar, kimlik, üçüncü taraf ve dil modeli API'leri</h3>
+      <p>Giriş akışı ve ilk yapay zekâ özelliği, anahtar sunucuda. Gelmeden önce şeman migration dosyasından kalkıyor ve her tabloda RLS açık olsun.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><a href="../hafta-05/">Önceki hafta: Hafta 5</a> · <a href="../../">Ders ana sayfası</a></div>
+    <div>YZM205 Web Tasarımı ve Programlama · Muş Alparslan Üniversitesi · Arş. Gör. Çağrı ŞAHİN</div>
+  </div>
+</footer>
+
+<script src="../../assets/ders.js"></script>
+<script>
+window.QUIZ = {
+  model: {
+    title: "Kendini sına: model, kısıt, doküman",
+    qs: [
+      { q: "Kullanıcının adını her ilan satırına da yazsak ne olur?",
+        o: ["Kullanıcı adını değiştirince yüzlerce satır güncellenir, biri unutulur", "Hiçbir şey; okuma hızlanır, bağ kurmaya gerek kalmaz", "Veritabanı tekrar eden değeri kendiliğinden reddeder", "Supabase tekrarı fark edip tek yere taşır"],
+        a: 0, e: "Aynı bilgi iki yerde durursa bir gün ikisi farklı olur; normalizasyon her bilgiyi tek yerde tutup kimlikle bağlar. Rapor için bilinçli tekrar ayrı bir karardır, kendiliğinden olmaz." },
+      { q: "`ilanlar.kategori_id references kategoriler(id)` varken var olmayan 99 numaralı kategoriyle satır eklenmek istendi. Ne olur?",
+        o: ["Veritabanı yabancı anahtar hatasıyla reddeder; hangi kural, hangi sütun mesajda yazar", "Satır girer, kategori boş kalır", "Panel uyarı gösterir ama satırı yazar", "Uygulama kodu kontrol etmediyse satır girer"],
+        a: 0, e: "Kısıt tablo tanımındadır ve her yazmada çalışır; uygulama kodu ne yaparsa yapsın veritabanı reddeder. Hata mesajını okumak bu yüzden öğrenilir." },
+      { q: "\"En çok etiketlenen notlar\" listesi hangi modelde tek sorguyla çıkar?",
+        o: ["İlişkisel: not_etiket ara tablosu ve join", "Doküman: etiketler belgenin içinde, tek okuma yeter", "İkisinde de aynı maliyet", "Hiçbirinde; önbellek gerekir"],
+        a: 0, e: "Çoktan çoğa ilişki ara tabloyla kurulur ve rapor join ile tek sorgudur. Doküman modelinde ya etiket bilgisi tekrar eder ya da liste için çoklu okuma yapılır ve okuma başına sayılır." }
+    ]
+  },
+  rls: {
+    title: "Kendini sına: otomatik API ve RLS",
+    start: 4,
+    qs: [
+      { q: "RLS'i az önce açtın, politika yazmadın. Adres çubuğundaki rest/v1/ilanlar isteğinden ne döner?",
+        o: ["Boş bir dizi: politika yazılana kadar hiçbir satır geçmez", "Aynı satırlar; anahtar geçerli olduğu sürece veri gelir", "401: anahtar reddedilir, giriş istenir", "Hata: önce politika yazmadan RLS açılamaz"],
+        a: 0, e: "Okuma reddedilmez, süzülür: 200 ve boş dizi gelir. Yazma reddedilince 401 ya da 403 görebilirsin; gövdedeki 42501 izin hatasıdır, anahtar sorunu değil." },
+      { q: "Adres çubuğuna `?select=*&order=created_at.desc` ekledin. Bunu kim işler?",
+        o: ["PostgREST SQL'e çevirir; istek anon rolüyle veritabanının içinde koşar", "Tarayıcı JSON'u kendisi sıralar", "Supabase bunun için sunucu kodu yazmanı ister", "Yalnız supabase-js ile çalışır, adres çubuğundan olmaz"],
+        a: 0, e: "Otomatik API şemayı okuyup her tabloyu adrese çevirir; parametreler SQL olur ve sorgu anahtarın taşıdığı rolle çalışır. supabase-js aynı adresi senin yerine kurar." },
+      { q: "Politika yazdın ama tabloda RLS kapalı. Ne olur?",
+        o: ["Politika hiç çalışmaz, tablo herkese açık kalır; Security Advisor bunu işaretler", "Politika yine çalışır, RLS yalnız hız ayarıdır", "Supabase RLS'i kendiliğinden açar", "Yalnız yazma korunur, okuma açık kalır"],
+        a: 0, e: "Süzgeç ancak RLS açıkken eklenir; kapalıyken politika kâğıt üstünde kalır. Advisor'daki \"policy exists, RLS disabled\" uyarısı tam bu durumdur." }
+    ]
+  },
+  isletme: {
+    title: "Kendini sına: anahtar, migration, uyku",
+    start: 7,
+    qs: [
+      { q: ".env dosyası yanlışlıkla GitHub'a gitti; içinde hem sb_publishable_ hem sb_secret_ anahtar var. İlk ne yaparsın?",
+        o: ["Gizli anahtarı hemen iptal edip yenisini üretirim; yayımlanabilir anahtar için panik yok", "İkisini de bırakırım, RLS zaten korur", "Yalnız dosyayı depodan silerim, geçmişte kalsa da olur", "Yayımlanabilir anahtarı değiştiririm, gizli olan zaten sunucuda"],
+        a: 0, e: "Gizli anahtar her politikayı atlar; sızdıysa kopyalanmış sayılır ve iptal edilir. Yayımlanabilir anahtar tarayıcıda durmak için tasarlanmıştır, veriyi RLS korur." },
+      { q: "Takımdan biri şemayı panelden elle değiştirdi, diğerlerinin yerel ortamı bozuldu. Doğru yol?",
+        o: ["supabase db diff ile değişikliği dosyaya almak, herkesin db reset yapması", "Herkesin aynı değişikliği kendi panelinde elle yapması", "Uzak veritabanını silip yeniden kurmak", "ORM'e geçmek; panel sorununu yalnız ORM çözer"],
+        a: 0, e: "Şema dosyada yaşar; elle yapılan değişiklik diff ile dosyaya alınır, uzak veritabanına yalnız bir kişi push ile iter. ORM seçmek disiplini değiştirmez, komut adlarını değiştirir." },
+      { q: "İki haftadır kimse dokunmadı; sabah \"project is paused\". Veri ne oldu?",
+        o: ["Yerinde; proje duraklatıldı, panelden Resume ile dakikalar içinde döner", "Silindi; şemayı migration dosyasından yeniden kurarız", "Bölge çöktü; beklemekten başka çare yok", "Anahtarın süresi doldu; yeni anahtar üretiriz"],
+        a: 0, e: "Ücretsiz proje hareketsiz kalınca duraklar, veri kaybolmaz. Kalıcı çözüm: her gün birkaç gerçek istek üreten bir sağlık kontrolü, uyarı e-postası takım adresine, haftalık db dump." }
+    ]
+  }
+};
+</script>
+</body>
+</html>

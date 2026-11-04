@@ -64,6 +64,8 @@ Proje: M1. İskelet takım deposundan yayında.
 
 Ürünün verisi nerede ve nasıl saklanır? İlişkisel ve doküman modelini, yönetilen Postgres hizmetlerini (Supabase, Neon), Firestore ve MongoDB Atlas'ı, ORM'i, veri modellemeyi, satır düzeyinde erişim kuralını (RLS), migration'ı ve yedeklemeyi görürsün. Ürünün veri modelini çıkarır, çevrimiçi bir veritabanını bağlar ve RLS'yi açarsın.
 
+[Hafta 6 ders notu](https://cagrisahin58.github.io/2026-web/weeks/hafta-06/)
+
 ### Hafta 7 · API, kimlik ve dil modeli API'leri
 
 Ürünün iş mantığı nerede çalışır? REST ve alternatiflerini, sunucusuz ve edge fonksiyonları, kimlik doğrulamayı ve API güvenliğini, ödeme ve e-posta API'lerini, dil modeli API'sini, streaming'i, maliyeti ve prompt injection'ı görürsün. Giriş akışını kurar ve ürüne ilk yapay zekâ özelliğini eklersin; API anahtarı sunucuda kalır.
