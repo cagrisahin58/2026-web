@@ -6,7 +6,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Daha büyük bir model; büyük model hızlı cevap verir.", "Bekleme göstergesi, zaman aşımı, hata mesajı ve yeniden deneme.", "Düğmeyi kaldırmak; özellik sorun çıkarıyor.", "Cevabı sayfa açılırken önceden üretmek."],
     a: 1,
     ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"], ["Hafta 8", "Özet, 8: deploy ettim, bitti mi?", "../hafta-08/#ozet"]],
-    dis: [["MDN: fetch ve zaman aşımı (AbortController)", "https://developer.mozilla.org/en-US/docs/Web/API/AbortController"]],
+    dis: [["Vikipedi: Kullanıcı deneyimi", "https://tr.wikipedia.org/wiki/Kullan%C4%B1c%C4%B1_deneyimi"], ["Vikipedi: Zamanaşımı (bilgisayar)", "https://tr.wikipedia.org/wiki/Zamana%C5%9F%C4%B1m%C4%B1_%28bilgisayar%29"], ["MDN: fetch ve zaman aşımı (AbortController) (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/API/AbortController"]],
     neden: [
       "Model büyüdükçe cevap genelde yavaşlar; sorun hız değil, beklemenin yönetilmemesi.",
       "Her dış çağrı üç durumla gelir: bekliyor, başarılı, başarısız. Üçünü de ekranda göstermeyen ürün bozuk hissettirir. Streaming de bekleme hissini azaltır.",
@@ -18,7 +18,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Her cevabı sabit metin olarak koda gömmek.", "Sık soruların cevabını önbelleğe alıp modele gitmeden vermek.", "Daha kısa cevap istemek; token azalır.", "Botu gece kapatmak; gece istek gelmesin."],
     a: 1,
     ref: [["Hafta 9", "Önbellek ve performans; sırası gelince açılır"], ["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"]],
-    dis: [["Anthropic: istem önbellekleme", "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"]],
+    dis: [["Vikipedi: Önbellek", "https://tr.wikipedia.org/wiki/%C3%96nbellek"], ["Vikipedi: Web önbelleği", "https://tr.wikipedia.org/wiki/Web_%C3%B6nbelle%C4%9Fi"], ["Anthropic: istem önbellekleme (İngilizce)", "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"]],
     neden: [
       "Koda gömmek bakımı zorlaştırır; yeni soru gelince bot işe yaramaz.",
       "Önbellek web'in en eski hilesidir ve yapay zekâ için de geçerlidir: aynı girdi, aynı çıktı, sıfır maliyet. Sağlayıcıların \"istem önbellekleme\" özelliği de uzun sistem istemini her seferinde yeniden ücretlendirmemek içindir.",
@@ -30,7 +30,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["İkisi için de en büyük ve en pahalı model.", "Basit ve sık işe küçük model, nitelikli yazıya güçlü model.", "İkisi için de en küçük model; para önemli.", "Model fark etmez; hepsi aynı sonucu verir."],
     a: 1,
     ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"], ["Hafta 8", "Özet, 7: kart yoksa ne olur, kart varsa ne olur?", "../hafta-08/#ozet"]],
-    dis: [["Anthropic: model seçimi", "https://platform.claude.com/docs/en/about-claude/models/choosing-a-model"]],
+    dis: [["AWS (Türkçe): Büyük dil modeli", "https://aws.amazon.com/tr/what-is/large-language-model/"], ["Vikipedi: Büyük dil modeli", "https://tr.wikipedia.org/wiki/B%C3%BCy%C3%BCk_dil_modeli"], ["Anthropic: model seçimi (İngilizce)", "https://platform.claude.com/docs/en/about-claude/models/choosing-a-model"]],
     neden: [
       "Günde bin sınıflama için büyük model israftır; aynı doğruluğu küçük model verir.",
       "Sağlayıcılar modelleri boy boy sunar. Kural: işin zorluğuna göre seç, küçükle başla, ölç, yetmezse büyüt. Maliyet ve hız farkı kat kat olabilir.",
@@ -42,7 +42,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Evet; model bozuk, sağlayıcıya bildirmelisin.", "Hayır; model olasılıksal çalışır, çıktı değişebilir; doğrulama gerekir.", "Evet; API anahtarı yanlış girilmiş.", "Hayır; ama bu yüzden model çıktısı hiçbir işe yaramaz."],
     a: 1,
     ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"], ["Hafta 1", "Yapay zekâ çağında yazılımcı olmak: neredeyse doğru", "../hafta-01/#yapay-zeka"]],
-    dis: [["Anthropic: temperature ve örnekleme parametreleri", "https://platform.claude.com/docs/en/api/messages"]],
+    dis: [["Vikipedi: Büyük dil modeli", "https://tr.wikipedia.org/wiki/B%C3%BCy%C3%BCk_dil_modeli"], ["Vikipedi: Halüsinasyon (yapay zekâ)", "https://tr.wikipedia.org/wiki/Hal%C3%BCsinasyon_%28yapay_zek%C3%A2%29"], ["Anthropic: temperature ve örnekleme parametreleri (İngilizce)", "https://platform.claude.com/docs/en/api/messages"]],
     neden: [
       "Değişkenlik tasarım gereğidir, arıza değil.",
       "Model her sözcüğü olasılıkla seçer. Yaratıcı iş için bu iyidir; JSON çıkarma gibi işlerde \"temperature\" benzeri ayarı düşürmek ve çıktıyı şemayla doğrulamak gerekir. Geleneksel kod gibi \"aynı girdi, aynı çıktı\" varsayımı yapılmaz.",
@@ -54,7 +54,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Hiçbir şey; model düzgün ve güvenli yazar.", "Çıktıyı veri gibi ele al: metin olarak bas, süz, gerekirse onay koy.", "Yalnız yazım denetimi yeter.", "Yorumu doğrudan `innerHTML` ile sayfaya eklemek."],
     a: 1,
     ref: [["Hafta 10", "Güvenlik açıklarının analizi; sırası gelince açılır"], ["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"]],
-    dis: [["OWASP: XSS", "https://community.owasp.org/attacks/xss/"], ["OWASP: dil modeli uygulamaları için ilk 10 risk", "https://owasp.org/projects/top-10-for-large-language-model-applications"]],
+    dis: [["Vikipedi: Siteler arası betik çalıştırma", "https://tr.wikipedia.org/wiki/Siteler_aras%C4%B1_betik_%C3%A7al%C4%B1%C5%9Ft%C4%B1rma"], ["Vikipedi: Owasp", "https://tr.wikipedia.org/wiki/Owasp"], ["OWASP: XSS (İngilizce)", "https://community.owasp.org/attacks/xss/"]],
     neden: [
       "Model kullanıcıdan gelen metni işler; kullanıcı metne kötü niyetli kod ya da talimat gömmüş olabilir.",
       "Model çıktısı da kullanıcı girdisi kadar güvensizdir. Metin olarak bas, süz, gerekirse insan onayı koy. OWASP'ın dil modeli listesinde \"güvensiz çıktı işleme\" ayrı bir maddedir.",
@@ -66,7 +66,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Her şeyi: istemler, cevaplar, kullanıcı kimlikleri; ne kadar çok veri o kadar iyi.", "Ölçüleri (istek, token, maliyet, süre, hata) kaydet; kişisel içeriği kaydetme ya da maskele.", "Hiçbir şey; gizlilik için hiçbir günlük tutulmaz, fatura yeter.", "Yalnız fatura toplamını; gerisi gereksiz."],
     a: 1,
     ref: [["Hafta 8", "Özet, 8: deploy ettim, bitti mi?", "../hafta-08/#ozet"], ["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"]],
-    dis: [["KVKK resmî sitesi", "https://www.kvkk.gov.tr/"], ["OpenTelemetry: gözlemlenebilirlik nedir", "https://opentelemetry.io/docs/concepts/observability-primer/"]],
+    dis: [["KVKK resmî sitesi", "https://www.kvkk.gov.tr/"], ["Vikipedi: Günlük dosyası", "https://tr.wikipedia.org/wiki/G%C3%BCnl%C3%BCk_dosyas%C4%B1"], ["KVKK resmî sitesi (İngilizce)", "https://www.kvkk.gov.tr/"]],
     neden: [
       "Her istemi kimlikle birlikte saklamak kişisel veri yığını oluşturur; sızarsa en büyük zarar budur.",
       "Ölçü kaydet, içerik kaydetme. Sayılarla hangi özelliğin pahalı, hangi istemin başarısız olduğunu görürsün; kişisel içerik için maskeleme ve kısa saklama süresi gerekir.",
@@ -78,7 +78,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Metnin yapay zekâ ürünü olduğunu gizlemek; kullanıcı fark etmesin.", "Metni öneri olarak göster, kullanıcı düzenleyip onaylasın; yapay zekâ notu koy.", "Kullanıcının düzenlemesini engellemek; model daha iyi yazar.", "Yayınlamadan önce metni modele \"doğru mu\" diye yeniden sormak yeter."],
     a: 1,
     ref: [["Hafta 4", "Dört fikir, 3: kontrol senin işin", "../hafta-04/#fikirler"], ["Hafta 1", "Yapay zekâ çağında yazılımcı olmak", "../hafta-01/#yapay-zeka"]],
-    dis: [["AB Yapay Zekâ Yasası: şeffaflık yükümlülükleri (madde 50)", "https://artificialintelligenceact.eu/article/50/"]],
+    dis: [["Vikipedi: Üretken yapay zeka", "https://tr.wikipedia.org/wiki/%C3%9Cretken_yapay_zeka"], ["Vikipedi: Yapay Zekâ Yasası", "https://tr.wikipedia.org/wiki/Yapay_Zek%C3%A2_Yasas%C4%B1"], ["AB Yapay Zekâ Yasası: şeffaflık yükümlülükleri (madde 50) (İngilizce)", "https://artificialintelligenceact.eu/article/50/"]],
     neden: [
       "Gizlemek güveni bozar ve bazı ülkelerde yasal yükümlülüğe aykırıdır.",
       "İnsan son sözü söyler: öneri, düzenleme, onay. Yanlış tarih ya da uydurma ayrıntı yayına girmeden yakalanır. Şeffaflık notu da kullanıcının içeriği doğru değerlendirmesini sağlar.",
@@ -90,7 +90,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Model bütün araçlara tam yetkiyle erişsin; böylece her isteği karşılar.", "Yalnız gereken araçlar, geri alınamaz işte onay, sunucuda yetki kontrolü.", "Araç çağırma kullanma; model yalnız metin üretsin.", "Silme aracını modelden gizlemek yeter."],
     a: 1,
     ref: [["Hafta 5", "Özet, 7: bulut ajanı nerede çalışır, yetkisi nereye kadar?", "../hafta-05/#ozet"], ["Hafta 5", "Gerçek olay: eklentiye gömülen emir", "../hafta-05/#olay"]],
-    dis: [["Anthropic: araç kullanımı", "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview"], ["OWASP: dil modeli uygulamaları için ilk 10 risk", "https://owasp.org/projects/top-10-for-large-language-model-applications"]],
+    dis: [["Microsoft Learn (Türkçe): en az ayrıcalıklı erişim", "https://learn.microsoft.com/tr-tr/entra/identity-platform/secure-least-privileged-access"], ["Vikipedi: Ayrıcalıklı erişim yönetimi", "https://tr.wikipedia.org/wiki/Ayr%C4%B1cal%C4%B1kl%C4%B1_eri%C5%9Fim_y%C3%B6netimi"], ["Anthropic: araç kullanımı (İngilizce)", "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview"]],
     neden: [
       "Tam yetki artı istem enjeksiyonu, bütün verinin silinmesi demektir.",
       "Üç katman: en az yetki, geri alınamaz işte insan onayı, sunucuda yetki kontrolü. Model \"kullanıcı X'in etkinliğini sil\" dese bile sunucu bu kullanıcının buna hakkı var mı diye bakar; model yetkinin kaynağı değildir.",
@@ -102,7 +102,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Birkaç kez deneyip hisse göre karar vererek; göz yanılmaz.", "Beklenen cevabı belli bir soru kümesi (değerlendirme seti) ile her değişiklikte ölçmek.", "Modele \"bu daha iyi mi\" diye sorarak; model kendini bilir.", "Kullanıcılar şikâyet edene kadar bekleyerek."],
     a: 1,
     ref: [["Hafta 11", "Kod analizi, test ve kalite; sırası gelince açılır"], ["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"]],
-    dis: [["Anthropic: değerlendirme (eval) oluşturmak", "https://platform.claude.com/docs/en/test-and-evaluate/develop-tests"]],
+    dis: [["Vikipedi: Yazılım testi", "https://tr.wikipedia.org/wiki/Yaz%C4%B1l%C4%B1m_testi"], ["Vikipedi: Büyük dil modeli", "https://tr.wikipedia.org/wiki/B%C3%BCy%C3%BCk_dil_modeli"], ["Anthropic: değerlendirme (eval) oluşturmak (İngilizce)", "https://platform.claude.com/docs/en/test-and-evaluate/develop-tests"]],
     neden: [
       "His yanıltır; model olasılıksal olduğu için üç deneme hiçbir şey kanıtlamaz.",
       "Yazılımda test neyse, yapay zekâ özelliğinde değerlendirme seti odur: 30 ila 50 örnek soru ve beklenen cevap, her istem değişikliğinde aynı set, karşılaştırılabilir sayı. Geriye gidişi anında görürsün.",
@@ -116,7 +116,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Aynı şeydir; iki ad vardır.", "`commit` yerel depoya kaydeder; `push` GitHub'a gönderir.", "`commit` GitHub'a gönderir, `push` yerel kaydeder.", "`push` dosyayı siler."],
     a: 1,
     ref: [["Hafta 5", "Özet, 1: main'e giren her satır aynı yoldan geçer", "../hafta-05/#ozet"], ["Hafta 5", "Özet, 5: commit mesajı ve Closes", "../hafta-05/#ozet"]],
-    dis: [["GitHub Docs: Git hakkında", "https://docs.github.com/en/get-started/using-git/about-git"], ["Git kitabı (Türkçe)", "https://git-scm.com/book/tr/v2"]],
+    dis: [["Pro Git kitabı (Türkçe)", "https://git-scm.com/book/tr/v2"], ["Vikipedi: Git", "https://tr.wikipedia.org/wiki/Git"], ["GitHub Docs: Git hakkında (İngilizce)", "https://docs.github.com/en/get-started/using-git/about-git"]],
     neden: [
       "İki ayrı adımdır; biri yerel, biri uzak.",
       "Commit anlık fotoğraf, push o fotoğrafları takımla paylaşmaktır. Push etmeden takım ve yayın hizmeti değişikliğini görmez; commit etmeden push edecek bir şey yoktur.",
@@ -128,7 +128,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Dal açmak zorunlu değildir; alışkanlıktır.", "Yarım iş `main`'i bozmaz; bitince PR ile incelenip birleşir.", "Dal, kodun yedeğidir.", "GitHub dalı olmayan depoyu yayınlamaz."],
     a: 1,
     ref: [["Hafta 5", "Özet, 1 ve 4: main'e giden yol, koruma kuralı", "../hafta-05/#ozet"]],
-    dis: [["GitHub Docs: dallar hakkında", "https://docs.github.com/en/pull-requests/reference/branches"]],
+    dis: [["Pro Git kitabı (Türkçe)", "https://git-scm.com/book/tr/v2"], ["Vikipedi: Dallanma (sürüm kontrolü)", "https://tr.wikipedia.org/wiki/Dallanma_%28s%C3%BCr%C3%BCm_kontrol%C3%BC%29"], ["GitHub Docs: dallar hakkında (İngilizce)", "https://docs.github.com/en/pull-requests/reference/branches"]],
     neden: [
       "Küçük tek kişilik projede bile dal, yarım işi canlıdan ayırır; takımda zorunludur.",
       "`main` her an yayınlanabilir hâlde kalır. Dal, inceleme ve birleştirme üçlüsü takım çalışmasının omurgasıdır; ajanlar da aynı yoldan geçer.",
@@ -140,7 +140,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["\"Etkinlik sayfası bozuk, bir bakın.\"", "\"Geçmiş etkinlikler listede görünmesin. Kabul: tarihi bugünden eski kayıt gizlenir; liste boşsa 'Yaklaşan etkinlik yok' yazar.\"", "\"Acil!!! Sayfayı düzelt, yarın etkinlik var.\"", "\"Etkinlik sayfasını daha iyi yap, modern olsun.\""],
     a: 1,
     ref: [["Hafta 5", "Özet, 2: iyi Issue, ajana verilen görev tanımının kendisidir", "../hafta-05/#ozet"]],
-    dis: [["GitHub Docs: Issues hakkında", "https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues"]],
+    dis: [["Vikipedi: GitHub", "https://tr.wikipedia.org/wiki/GitHub"], ["GitHub Docs: Issues hakkında (İngilizce)", "https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues"]],
     neden: [
       "Ne bozuk, nasıl anlaşılır, ne olmalı? Hiçbiri yok.",
       "Ne isteniyor, bitince nasıl anlaşılacak (kabul ölçütü), nereye bakılacak. Bu üçlü insan için de ajan için de aynıdır; iyi Issue iyi istemdir.",
@@ -152,7 +152,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["İkisi de; Supabase zaten güvenlidir.", "Yalnız anon anahtar, o da RLS açıksa; servis anahtarı sunucuda kalır.", "Yalnız servis anahtarı; daha güçlü olduğu için.", "Hiçbiri; Supabase tarayıcıdan kullanılamaz."],
     a: 1,
     ref: [["Hafta 6", "Özet, 6: iki anahtar, hangisi tarayıcıda durabilir?", "../hafta-06/#ozet"], ["Hafta 6", "Özet, 5: RLS, aynı istek üç farklı cevap", "../hafta-06/#ozet"]],
-    dis: [["Supabase: API anahtarları", "https://supabase.com/docs/guides/getting-started/api-keys"], ["Supabase: satır düzeyi güvenlik (RLS)", "https://supabase.com/docs/guides/database/postgres/row-level-security"]],
+    dis: [["Vikipedi: PostgreSQL", "https://tr.wikipedia.org/wiki/PostgreSQL"], ["Vikipedi: Geçiş Kontrol Sistemi", "https://tr.wikipedia.org/wiki/Ge%C3%A7i%C5%9F_Kontrol_Sistemi"], ["Supabase: API anahtarları (İngilizce)", "https://supabase.com/docs/guides/getting-started/api-keys"]],
     neden: [
       "Servis anahtarı tarayıcıya girerse herkes bütün veriyi okuyup silebilir.",
       "Anon anahtar \"ben bu projenin istemcisiyim\" der; kim neyi görür sorusunu RLS politikaları cevaplar. RLS kapalıysa anon anahtar da bütün tabloyu açar. Hafta 6'daki gerçek olay tam bu hata.",
@@ -164,7 +164,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Herkes paneli aynı anda açıp aynı sütunu eklemeli.", "Değişiklik migration dosyasına yazılır, depoya girer, herkes onu çalıştırır.", "Veritabanı değişiklikleri sözlü duyurulmalı.", "Yerel kopya kullanılmamalı, herkes canlı veritabanında çalışmalı."],
     a: 1,
     ref: [["Hafta 6", "Özet, 7: şemayı kim değiştirir? Panelden değil, dosyadan", "../hafta-06/#ozet"], ["Hafta 6", "Bu haftanın görevi: veri katmanı sözleşmesi", "../hafta-06/#gorev"]],
-    dis: [["Supabase: migration'lar", "https://supabase.com/docs/guides/deployment/database-migrations"]],
+    dis: [["Vikipedi: Sürüm kontrol sistemi", "https://tr.wikipedia.org/wiki/S%C3%BCr%C3%BCm_kontrol_sistemi"], ["Vikipedi: DevOps", "https://tr.wikipedia.org/wiki/DevOps"], ["Supabase: migration'lar (İngilizce)", "https://supabase.com/docs/guides/deployment/database-migrations"]],
     neden: [
       "Elle tekrar hata üretir ve kimse neyin ne zaman değiştiğini bilmez.",
       "Migration, şemanın commit'idir: tarihli, sıralı, geri alınabilir. Yerel, önizleme ve canlı veritabanları aynı dosyalardan kurulur.",
@@ -176,7 +176,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Canlı siteyi o adrese taşır.", "O dalın önizleme adresi; değişiklik canlıya dokunmadan görülür.", "Hata raporudur; dağıtım başarısız olmuştur.", "Ücretli bir ek hizmettir; tıklama para harcar."],
     a: 1,
     ref: [["Hafta 8", "Özet, 3: her dal bir adres: önizleme, inceleme, üretim", "../hafta-08/#ozet"], ["Hafta 4", "Dört fikir, 4: önce yayınla, sonra geliştir", "../hafta-04/#fikirler"]],
-    dis: [["Vercel: önizleme dağıtımları", "https://vercel.com/docs/deployments/environments"]],
+    dis: [["Microsoft Learn (Türkçe): sürekli teslim nedir", "https://learn.microsoft.com/tr-tr/devops/deliver/what-is-continuous-delivery"], ["AWS (Türkçe): sürekli teslim", "https://aws.amazon.com/tr/devops/continuous-delivery/"], ["Vercel: önizleme dağıtımları (İngilizce)", "https://vercel.com/docs/deployments/environments"]],
     neden: [
       "Canlı adres `main` dalına bağlıdır; önizleme ayrı yaşar.",
       "Her PR'nin kendi adresi olunca inceleme \"kodu okudum\" olmaktan çıkıp \"tıkladım, çalışıyor\" olur. Demo Günü provası da buradan yapılır.",
@@ -188,7 +188,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Kart yoksa fatura gelir; kart varsa gelmez.", "Kartsız hizmet kota dolunca durur; kartlı devam eder ama aşım faturalanır.", "Fark yoktur; kota dolunca ikisinde de hizmet durur.", "Kart bağlamak her zaman daha güvenlidir."],
     a: 1,
     ref: [["Hafta 8", "Özet, 7: kart yoksa ne olur, kart varsa ne olur?", "../hafta-08/#ozet"]],
-    dis: [["Vercel: harcama yönetimi", "https://vercel.com/docs/spend-management"]],
+    dis: [["Azure sözlüğü (Türkçe): Bulut bilişim nedir", "https://azure.microsoft.com/tr-tr/resources/cloud-computing-dictionary/what-is-cloud-computing"], ["Vikipedi: Bulut bilişim", "https://tr.wikipedia.org/wiki/Bulut_bili%C5%9Fim"], ["Vercel: harcama yönetimi (İngilizce)", "https://vercel.com/docs/spend-management"]],
     neden: [
       "Kart yoksa faturalanacak bir yol yoktur; hizmet durur.",
       "İki rejim: kartsız, sert sınır ve kesinti; kartlı, süreklilik ve fatura riski. Öğrenci projesinde kartsız kalmak ya da sıkı tavan koymak doğrudur.",
@@ -200,7 +200,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Daha büyük sunucu; küçük sunucu gece çöker.", "İzleme: çalışıyor mu kontrolü, hata günlüğü ve uyarı.", "Daha fazla test; test edilen kod çökmez.", "Gece siteyi kapatmak; kimse kullanmıyor."],
     a: 1,
     ref: [["Hafta 8", "Özet, 8: deploy ettim, bitti mi?", "../hafta-08/#ozet"]],
-    dis: [["Google SRE kitabı: izleme", "https://sre.google/sre-book/monitoring-distributed-systems/"]],
+    dis: [["Microsoft Learn (Türkçe): izleme nedir", "https://learn.microsoft.com/tr-tr/devops/operate/what-is-monitoring"], ["Microsoft Learn (Türkçe): Azure Monitor", "https://learn.microsoft.com/tr-tr/azure/azure-monitor/fundamentals/overview"], ["Google SRE kitabı: izleme (İngilizce)", "https://sre.google/sre-book/monitoring-distributed-systems/"]],
     neden: [
       "Çökme nedeni çoğu zaman kapasite değildir; haberin olmaması asıl sorundur.",
       "Yayın bir başlangıçtır. Beş dakikada bir siteye bakan ücretsiz bir izleyici ve barındırma panelinin hata günlüğü, öğrenci projesi için bile yeterli ilk adımdır.",
@@ -214,7 +214,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Hiçbir zaman haklı değil; gerçek site yalnız kodla yazılır, kodsuz araç oyuncaktır.", "İçerik ağırlıklı, özel mantık gerektirmeyen site için haklı; veri ve özel akış gerekince kod gerekir.", "Her zaman haklı; kod artık gereksiz.", "Yalnız ücretsizse haklı."],
     a: 1,
     ref: [["Hafta 4", "Dört fikir, 2: bugün bu parçalar için hazır servisler var", "../hafta-04/#fikirler"], ["Hafta 13", "Pazara çıkış; sırası gelince açılır"]],
-    dis: [["Webflow Üniversitesi", "https://university.webflow.com/"]],
+    dis: [["Vikipedi: Webflow", "https://tr.wikipedia.org/wiki/Webflow"], ["Webflow Üniversitesi (İngilizce)", "https://university.webflow.com/"]],
     neden: [
       "Kodsuz araçlar milyonlarca gerçek siteyi taşıyor; doğru iş için doğru araçtır.",
       "Soru \"kod mu kodsuz mu\" değil, \"bu ürün ne gerektiriyor\". Araç seçimi dersin ana becerilerinden biri.",
@@ -226,7 +226,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Hiçbir şeye; görünüm aynıysa iş bitmiştir.", "Kodun yapısına: anlamlı etiketler, başlık sırası, alt metin, form etiketleri, klavye.", "Yalnız dosya boyutuna; büyük dosya yavaş açılır.", "Yalnız renklerin doğru olup olmadığına."],
     a: 1,
     ref: [["Hafta 2", "Sayfa bölümleri: header, nav, main, footer (neden hepsine div demiyoruz?)", "../hafta-02/#bolumler"], ["Hafta 3", "Yapay zekâyla çalış", "../hafta-03/#yapay-zeka"]],
-    dis: [["web.dev: erişilebilirlik", "https://web.dev/learn/accessibility"], ["Figma: tasarımdan koda", "https://help.figma.com/hc/en-us/articles/15023124644247-Guide-to-Dev-Mode-in-Figma"]],
+    dis: [["Vikipedi: Figma", "https://tr.wikipedia.org/wiki/Figma"], ["Vikipedi: Web erişilebilirliği", "https://tr.wikipedia.org/wiki/Web_eri%C5%9Filebilirli%C4%9Fi"], ["web.dev: erişilebilirlik (İngilizce)", "https://web.dev/learn/accessibility"]],
     neden: [
       "Ekranda aynı görünen iki sayfa, ekran okuyucu ve arama motoru için bambaşka olabilir.",
       "Tasarım araçları piksel üretir, anlam değil. Semantik yapıyı kontrol etmek ilk haftalarda öğrendiğin HTML'in tam da işe yaradığı yerdir.",
@@ -238,7 +238,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Yalnız daha hızlı kod yazmak; araçlar hızı ödüllendirir.", "Mimari anlayışı, kod inceleme, güvenlik ve maliyet bilinci, araçları güvenli kullanma, ürün anlayışı.", "Belirli bir çatının sözdizimini ezberlemek.", "Hiçbir beceri; ilanlar azalıyor, meslek bitiyor."],
     a: 1,
     ref: [["Hafta 1", "Yapay zekâ çağında yazılımcı olmak: kim yapar?", "../hafta-01/#yapay-zeka"], ["Hafta 13", "Pazara çıkış; sırası gelince açılır"]],
-    dis: [["Stack Overflow 2025 geliştirici anketi: yapay zekâ", "https://survey.stackoverflow.co/2025/ai"]],
+    dis: [["Vikipedi: Yazılım mühendisliği", "https://tr.wikipedia.org/wiki/Yaz%C4%B1l%C4%B1m_m%C3%BChendisli%C4%9Fi"], ["Vikipedi: Yazılım geliştirici", "https://tr.wikipedia.org/wiki/Yaz%C4%B1l%C4%B1m_geli%C5%9Ftirici"], ["Stack Overflow 2025 geliştirici anketi: yapay zekâ (İngilizce)", "https://survey.stackoverflow.co/2025/ai"]],
     neden: [
       "Hız artık araçtan geliyor; farkı yaratan yargıdır.",
       "Yazma emeği ucuzlayınca değer, neyin yazılacağına ve yazılanın doğru olup olmadığına karar verene kayar. Bu dersin Hafta 4'ten sonraki bütün planı bu listedir.",
@@ -250,7 +250,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Evet; yapay zekâ her özelliği iyileştirir, kullanıcı bunu bekler.", "Kuralla çözüleni kuralla çöz; yapay zekâ belirsiz ve dilsel işlerde değer katar.", "Hayır; yapay zekâ hiçbir ürüne konmamalı, riski büyük.", "Yalnız pazarlama için \"yapay zekâ destekli\" yazmak yeter."],
     a: 1,
     ref: [["Hafta 4", "Dört fikir, 2 ve 3", "../hafta-04/#fikirler"], ["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"]],
-    dis: [["Google PAIR: insan odaklı yapay zekâ rehberi", "https://pair.withgoogle.com/guidebook/"]],
+    dis: [["Vikipedi: Üretken yapay zeka", "https://tr.wikipedia.org/wiki/%C3%9Cretken_yapay_zeka"], ["Vikipedi: Yapay zekâ", "https://tr.wikipedia.org/wiki/Yapay_zek%C3%A2"], ["Google PAIR: insan odaklı yapay zekâ rehberi (İngilizce)", "https://pair.withgoogle.com/guidebook/"]],
     neden: [
       "Tarihe göre sıralamak için modele gitmek yavaş, pahalı ve bazen yanlıştır.",
       "Yapay zekâ bir araçtır, her işe uygun değildir. Deterministik kod ucuz, hızlı ve öngörülebilirdir; modeli belirsizliğin olduğu yere koy.",
@@ -262,7 +262,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Sohbet botu koymamak; risk almaya değmez.", "Botun sözü şirketin sözüdür: belgeye dayandır, bilmiyorum diyebilsin, insana yönlendirsin.", "Bota \"söylediklerim bağlayıcı değildir\" yazdırmak yeter.", "Botu yalnız İngilizce çalıştırmak; yabancı dil bağlamaz."],
     a: 1,
     ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"], ["Hafta 4", "Dört fikir, 3: kontrol senin işin", "../hafta-04/#fikirler"]],
-    dis: [["BBC haberi: Air Canada sohbet botu kararı", "https://www.bbc.com/travel/article/20240222-air-canada-chatbot-misinformation-what-travellers-should-know"]],
+    dis: [["Vikipedi: Sohbet robotu", "https://tr.wikipedia.org/wiki/Sohbet_robotu"], ["Vikipedi: Halüsinasyon (yapay zekâ)", "https://tr.wikipedia.org/wiki/Hal%C3%BCsinasyon_%28yapay_zek%C3%A2%29"], ["BBC haberi: Air Canada sohbet botu kararı (İngilizce)", "https://www.bbc.com/travel/article/20240222-air-canada-chatbot-misinformation-what-travellers-should-know"]],
     neden: [
       "Bot yararlıdır; mesele sınırlarıdır.",
       "Bu gerçek bir dava. Model uydurduğunda sorumluluk siteyi işletene aittir. Çözüm teknik: belgeye dayalı cevap, bilinmeyende dürüst \"bilmiyorum\", insan kaçış yolu ve hassas konu listesi.",
@@ -274,7 +274,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Kilit varsa site güvenlidir; tarayıcı sahte siteye kilit vermez.", "Kilit şifrelemeyi gösterir, kimliği değil; alan adını oku, ek doğrulama kur.", "HTTPS artık anlamsız; sahte siteler de kullandığına göre kaldırılmalı.", "Sahte siteleri yalnız devlet engelleyebilir; geliştiriciye iş düşmez."],
     a: 1,
     ref: [["Hafta 8", "Özet, 5: alan adı, DNS ve sertifika", "../hafta-08/#ozet"], ["Hafta 10", "Güvenlik açıklarının analizi; sırası gelince açılır"]],
-    dis: [["USOM: Ulusal Siber Olaylara Müdahale Merkezi", "https://www.usom.gov.tr/"], ["Wikipedia: Oltalama (phishing)", "https://tr.wikipedia.org/wiki/Oltalama"]],
+    dis: [["Vikipedi: Oltalama", "https://tr.wikipedia.org/wiki/Oltalama"], ["USOM", "https://www.usom.gov.tr/"], ["USOM: Ulusal Siber Olaylara Müdahale Merkezi (İngilizce)", "https://www.usom.gov.tr/"]],
     neden: [
       "Sahte site de ücretsiz sertifika alır; kilit kimlik garantisi değildir.",
       "HTTPS \"araya kimse girmedi\" der, \"bu gerçekten bankan\" demez. Yapay zekâ sahte siteyi ucuzlattı; savunma alan adı okuryazarlığı ve ek doğrulama katmanlarıdır.",
@@ -286,7 +286,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Gerekli değil; istem yazmak yeter, gerisini araç yapar.", "Kodu okuyamayan kişi yapay zekânın verdiğini değerlendiremez ve düzeltemez.", "Yalnız sınav için gerekli; iş hayatında kullanılmaz.", "Yapay zekâ HTML yazamaz; o yüzden öğrenmek şart."],
     a: 1,
     ref: [["Hafta 1", "Yapay zekâ çağında yazılımcı olmak", "../hafta-01/#yapay-zeka"], ["Hafta 4", "Dört fikir, 3: yapay zekâ kodu yazar, kontrol senin işin", "../hafta-04/#fikirler"]],
-    dis: [["MDN: web geliştirmeyi öğren", "https://developer.mozilla.org/en-US/docs/Learn_web_development"]],
+    dis: [["Vikipedi: HTML", "https://tr.wikipedia.org/wiki/HTML"], ["Vikipedi: CSS", "https://tr.wikipedia.org/wiki/CSS"], ["MDN: web geliştirmeyi öğren (İngilizce)", "https://developer.mozilla.org/en-US/docs/Learn_web_development"]],
     neden: [
       "İstem yazıp çıktıyı okuyamamak, pilot olmadan uçağa talimat vermeye benzer.",
       "Ders planının ilk üç haftası bu yüzden var: okuyabilmek, değiştirebilmek, doğrulayabilmek. Sonraki haftalar bu temelin üstüne kuruldu.",
@@ -298,7 +298,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Botu insan gibi tanıtmak, her soruya cevap vermek, insan desteğini kaldırmak.", "Yapay zekâ olduğunu söylemek, bilmediğini söyleyebilmek, insana ulaşma yolu bırakmak.", "Botu gizli tutmak, yalnız İngilizce konuşturmak, kayıt tutmamak.", "Botu her sayfada açılır pencereyle zorlamak."],
     a: 1,
     ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"], ["Hafta 1", "Yapay zekâ çağında yazılımcı olmak", "../hafta-01/#yapay-zeka"]],
-    dis: [["AB Yapay Zekâ Yasası: şeffaflık yükümlülükleri (madde 50)", "https://artificialintelligenceact.eu/article/50/"], ["Google PAIR: insan odaklı yapay zekâ rehberi", "https://pair.withgoogle.com/guidebook/"]],
+    dis: [["Vikipedi: Sohbet robotu", "https://tr.wikipedia.org/wiki/Sohbet_robotu"], ["Vikipedi: Yapay Zekâ Yasası", "https://tr.wikipedia.org/wiki/Yapay_Zek%C3%A2_Yasas%C4%B1"], ["AB Yapay Zekâ Yasası: şeffaflık yükümlülükleri (madde 50) (İngilizce)", "https://artificialintelligenceact.eu/article/50/"]],
     neden: [
       "İnsan gibi tanıtmak aldatmadır; her soruya cevap vermek uydurmaya kapı açar.",
       "Şeffaflık, dürüst belirsizlik ve insan kaçış yolu: üçü birlikte hem güveni hem yasal uyumu sağlar. Hafta 7'de ürüne eklediğin ilk yapay zekâ özelliğinde bu üçlüyü uygulayacaksın.",

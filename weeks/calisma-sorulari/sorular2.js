@@ -6,7 +6,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["`<head>` içinde.", "`<body>` içinde, en üstte; tarayıcı önce onları okur.", "`<footer>` içinde; sayfa yüklendikten sonra işlenir.", "`<html>` etiketinin dışında, dosyanın en başında."],
     a: 0,
     ref: [["Hafta 2", "Belge iskeleti satır satır", "../hafta-02/#iskelet"], ["Hafta 3", "CSS nedir, sayfaya nasıl bağlanır", "../hafta-03/#kural"]],
-    dis: [["MDN: head öğesi", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/head"]],
+    dis: [["Vikipedi: HTML", "https://tr.wikipedia.org/wiki/HTML"], ["Vikipedi: HTML element", "https://tr.wikipedia.org/wiki/HTML_element"], ["MDN: head öğesi (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/head"]],
     neden: [
       "`head` sayfanın görünmeyen kimlik kartıdır: başlık, karakter kümesi, görünüm alanı ayarı ve stil dosyası bağlantısı burada durur. Tarayıcı bunları gövdeyi çizmeden önce okur.",
       "`body` görünen içeriğin yeridir. Oraya konan `title` çalışmaz, `link` çalışsa da yanlış yerdedir.",
@@ -18,7 +18,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Bağlantının mavi renkte görünmesini sağlar.", "Yeni sekmedeki sayfanın senin sayfana erişmesini engeller.", "Bağlantıyı arama motorlarından gizler.", "Sayfanın daha hızlı yüklenmesini sağlar."],
     a: 1,
     ref: [["Hafta 2", "Bağlantı, görsel ve dosya yolu", "../hafta-02/#yol"]],
-    dis: [["MDN: rel=noopener", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/noopener"]],
+    dis: [["Vikipedi: Köprü", "https://tr.wikipedia.org/wiki/K%C3%B6pr%C3%BC"], ["Vikipedi: Bağlantı (internet)", "https://tr.wikipedia.org/wiki/Ba%C4%9Flant%C4%B1_%28internet%29"], ["MDN: rel=noopener (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/noopener"]],
     neden: [
       "Renk CSS'in işidir; `rel` niteliği görünümü değiştirmez.",
       "Yeni sekmede açılan sayfa, `window.opener` üzerinden seni açan sayfayı başka bir adrese yönlendirebilir. `noopener` bu kapıyı kapatır. Modern tarayıcılar `_blank` için bunu varsayılan yapmaya başladı ama açıkça yazmak hâlâ iyi alışkanlıktır.",
@@ -30,7 +30,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["`label` içine `style` eklemek.", "`input`'a `id`, `label`'a aynı değerle `for` vermek.", "`label` yerine `<b>` kullanmak.", "`input`'a `placeholder` yazmak yeterlidir."],
     a: 1,
     ref: [["Hafta 2", "Etiket, öğe, nitelik", "../hafta-02/#etiket"]],
-    dis: [["MDN: label öğesi", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label"], ["web.dev: erişilebilir formlar", "https://web.dev/learn/accessibility/forms"]],
+    dis: [["Vikipedi: Web erişilebilirliği", "https://tr.wikipedia.org/wiki/Web_eri%C5%9Filebilirli%C4%9Fi"], ["MDN: label öğesi (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label"]],
     neden: [
       "Görünüm bağ kurmaz; `label` yan yana dursa bile tarayıcı ikisinin ilişkisini bilmez.",
       "`for` ve `id` eşleşince etikete tıklamak alanı odaklar, ekran okuyucu alanın adını söyler, yapay zekâ ajanları da hangi alana ne yazılacağını anlar. Tek satırlık iş, üç kazanç.",
@@ -42,7 +42,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["`<section>`; sayfanın her bölümü için kullanılır.", "`<article>`; kendi başına anlamlı içerik içindir.", "`<main>`; her yazı sayfanın ana içeriğidir.", "`<aside>`; yazılar kenarda durur."],
     a: 1,
     ref: [["Hafta 2", "Sayfa bölümleri: header, nav, main, footer", "../hafta-02/#bolumler"]],
-    dis: [["MDN: article öğesi", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/article"]],
+    dis: [["Vikipedi: HTML5", "https://tr.wikipedia.org/wiki/HTML5"], ["MDN: article öğesi (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/article"]],
     neden: [
       "`section` tematik bir bölümdür ama bağımsızlık anlamı taşımaz. Blog yazısı gibi tek başına yaşayabilen içerik için `article` daha doğrudur.",
       "Blog yazısı, forum gönderisi, yorum ve haber kartı `article` için ders kitabı örnekleridir. Arama motoru ve yapay zekâ ajanı \"bu bir içerik birimi\" diye okur.",
@@ -54,7 +54,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Her öğeye `style` niteliği; en kesin yöntem budur.", "Her sayfanın `head`'ine aynı `<style>` bloğunu kopyalamak.", "Tek bir `.css` dosyası, her sayfadan `<link>` ile bağlanır.", "CSS'i JavaScript ile her sayfada yeniden üretmek."],
     a: 2,
     ref: [["Hafta 3", "CSS nedir, sayfaya nasıl bağlanır (neden ayrı bir dosya?)", "../hafta-03/#kural"]],
-    dis: [["MDN: CSS'i HTML'e uygulamanın yolları", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Getting_started"]],
+    dis: [["Vikipedi: CSS", "https://tr.wikipedia.org/wiki/CSS"], ["MDN: CSS'i HTML'e uygulamanın yolları (İngilizce)", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Getting_started"]],
     neden: [
       "Satır içi stil her öğede tekrar eder, değiştirmesi zordur ve en yüksek öncelikte olduğu için sonradan ezilemez.",
       "Kopyalanan blok ilk değişiklikte tutarsızlaşır: bir sayfada düzeltir, ötekini unutursun.",
@@ -66,7 +66,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["10, 20, 10, 20", "10, 10, 20, 20", "20, 10, 20, 10", "10, 20, 20, 10"],
     a: 0,
     ref: [["Hafta 3", "Kutu modeli", "../hafta-03/#kutu"], ["Hafta 3", "Renk, yazı ve boşluk", "../hafta-03/#renk"]],
-    dis: [["MDN: margin kısayolu", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin"]],
+    dis: [["Vikipedi: CSS", "https://tr.wikipedia.org/wiki/CSS"], ["MDN: margin kısayolu (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin"]],
     neden: [
       "İki değerli kısayolda ilk değer üst ve alt, ikinci değer sağ ve sol içindir. Dört değer verilirse sıra saat yönündedir: üst, sağ, alt, sol.",
       "Bu sıralama kısayolun kuralına uymaz.",
@@ -78,7 +78,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["`flex-wrap: wrap` ve kartlara en küçük genişlik.", "`display: none` ile fazla kartları gizlemek.", "`overflow: hidden` ile taşanı kesmek.", "`font-size` küçültmek; kartlar sığar."],
     a: 0,
     ref: [["Hafta 3", "Flexbox", "../hafta-03/#flex"], ["Hafta 3", "Telefon için tek bir medya sorgusu", "../hafta-03/#telefon"]],
-    dis: [["MDN: flex-wrap", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-wrap"]],
+    dis: [["web.dev (Türkçe): duyarlı web tasarımının temelleri", "https://web.dev/articles/responsive-web-design-basics?hl=tr"], ["Vikipedi: Mobil web", "https://tr.wikipedia.org/wiki/Mobil_web"], ["MDN: flex-wrap (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-wrap"]],
     neden: [
       "Varsayılan `nowrap` bütün kartları tek satıra sıkıştırır. `wrap` ile sığmayan kart alt satıra iner; `min-width` ya da `flex-basis` kartın ne kadar daralabileceğini söyler.",
       "İçeriği gizlemek sorunu çözmez; telefon kullanıcısı o etkinlikleri göremez.",
@@ -90,7 +90,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["`<meta name=\"viewport\">` satırı.", "Telefon için ayrı bir HTML dosyası.", "`<!DOCTYPE html>` satırı.", "Daha büyük `font-size` değerleri."],
     a: 0,
     ref: [["Hafta 3", "Telefon için tek bir medya sorgusu (bir satır daha: viewport)", "../hafta-03/#telefon"]],
-    dis: [["MDN: viewport meta etiketi", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/viewport"]],
+    dis: [["web.dev (Türkçe): duyarlı web tasarımının temelleri", "https://web.dev/articles/responsive-web-design-basics?hl=tr"], ["Chrome DevTools (Türkçe): cihaz kipi", "https://developer.chrome.com/docs/devtools/device-mode?hl=tr"], ["MDN: viewport meta etiketi (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/viewport"]],
     neden: [
       "Bu satır yoksa telefon tarayıcısı sayfayı yaklaşık 980 piksel genişlikte masaüstü sayfası gibi çizip küçültür; media sorguları da gerçek ekran genişliğini görmez.",
       "Ayrı dosya eski yöntemdir; tek sayfa ve media sorgusu bugün standarttır.",
@@ -104,7 +104,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["`GET` doğrudur; HTTPS olduğu sürece adres görünmez.", "`POST`; veri adreste değil isteğin gövdesinde gider.", "`PUT` kullanılmalı; şifreler için özel yöntemdir.", "Fark etmez; ikisi de aynı sunucuya gider."],
     a: 1,
     ref: [["Hafta 4", "Kendin dene: ekranın arkadaki programla konuşması", "../hafta-04/#dene"], ["Hafta 1", "Adres çubuğuna yazınca ne olur?", "../hafta-01/#adres"]],
-    dis: [["MDN: HTTP istek yöntemleri", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods"], ["MDN: form verisi göndermek", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Sending_and_retrieving_form_data"]],
+    dis: [["Vikipedi: Hypertext Transfer Protocol", "https://tr.wikipedia.org/wiki/Hypertext_Transfer_Protocol"], ["Vikipedi: HTTP", "https://tr.wikipedia.org/wiki/HTTP"], ["MDN: HTTP istek yöntemleri (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods"]],
     neden: [
       "HTTPS yolu şifreler ama adres çubuğunda görünen şifre tarayıcı geçmişine, yer imine ve sunucu günlüklerine düz metin olarak girer.",
       "`GET` bir şey istemek, `POST` bir şey göndermek içindir. Şifre, kayıt, mesaj gibi veri değiştiren işler `POST` ile gider.",
@@ -116,7 +116,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Tarayıcı şifreyi her istekte yeniden gönderir.", "Sunucu girişte bir oturum kimliği verir; tarayıcı çerezde saklar ve her istekle yollar.", "Sunucu IP adresinden tanır; aynı adresten gelen istek aynı kişidir.", "Sayfa yenilenmediği için bağlantı hiç kopmaz."],
     a: 1,
     ref: [["Hafta 4", "Dört fikir, 1: her web uygulaması üç parçadır (program)", "../hafta-04/#fikirler"], ["Hafta 6", "Özet, 5: RLS, aynı istek üç farklı cevap", "../hafta-06/#ozet"]],
-    dis: [["MDN: HTTP çerezleri", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies"]],
+    dis: [["Vikipedi: Çerez (İnternet)", "https://tr.wikipedia.org/wiki/%C3%87erez_%28%C4%B0nternet%29"], ["Vikipedi: Oturum açma", "https://tr.wikipedia.org/wiki/Oturum_a%C3%A7ma"], ["MDN: HTTP çerezleri (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies"]],
     neden: [
       "Şifre yalnız girişte gönderilir; her istekte taşımak hem güvensiz hem gereksizdir.",
       "Çerez ya da token \"ben az önce giriş yapan kişiyim\" demenin yoludur. Hazır kimlik hizmetleri (Supabase Auth, Firebase Auth) bu işi senin yerine yapar; sen token'ın nerede durduğunu bilmelisin.",
@@ -128,7 +128,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["GitHub değişikliği reddetmiş; yeniden yüklemen gerekir.", "Tarayıcın eski dosyayı önbellekten gösteriyor.", "CSS dosyaları bir kez yüklenince asla değişmez.", "Arkadaşının tarayıcısı daha yeni."],
     a: 1,
     ref: [["Hafta 3", "Yayın: yükle ve telefonda bak", "../hafta-03/#yayin"], ["Hafta 9", "Önbellek ve performans; sırası gelince açılır"]],
-    dis: [["MDN: HTTP önbelleği", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching"]],
+    dis: [["Vikipedi: Web önbelleği", "https://tr.wikipedia.org/wiki/Web_%C3%B6nbelle%C4%9Fi"], ["Vikipedi: Önbellek", "https://tr.wikipedia.org/wiki/%C3%96nbellek"], ["MDN: HTTP önbelleği (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching"]],
     neden: [
       "Arkadaşında yeni hâl görünüyorsa yayın tamamdır; sorun senin tarayıcında.",
       "Tarayıcı CSS ve görselleri hız için saklar. Ctrl+F5 ile yenilemek ya da `stil.css?v=2` gibi sürüm eklemek yeni dosyayı aldırır. Hafta 9'da önbelleği bilinçli yönetmeyi göreceksin.",
@@ -140,7 +140,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Sayfanın yaptığı her isteği: adres, durum kodu, süre, cevap.", "Yalnız internet hızını ölçer, istekleri göstermez.", "Sunucunun kaynak kodunu ve veritabanını gösterir.", "Diğer kullanıcıların isteklerini."],
     a: 0,
     ref: [["Hafta 4", "Kendin dene: ekranın arkadaki programla konuşması", "../hafta-04/#dene"]],
-    dis: [["Chrome DevTools: Network paneli", "https://developer.chrome.com/docs/devtools/network"]],
+    dis: [["Google (Türkçe): Network paneli", "https://developer.chrome.com/docs/devtools/network?hl=tr"], ["Vikipedi: Google Chrome", "https://tr.wikipedia.org/wiki/Google_Chrome"], ["Chrome DevTools: Network paneli (İngilizce)", "https://developer.chrome.com/docs/devtools/network"]],
     neden: [
       "Bu sekme web'in röntgenidir. Hangi API'ye gidildiğini, 404 mü 500 mü döndüğünü, JSON'un içini ve kaç milisaniye sürdüğünü görürsün. Hata ayıklamanın ilk durağıdır.",
       "Hız ölçümü ayrı araçların işidir; Network isteğin ayrıntısını gösterir.",
@@ -152,7 +152,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["`{ ad: \"Satranç\", gun: \"Salı\" }`", "`{ \"ad\": \"Satranç\", \"gun\": \"Salı\" }`", "`{ \"ad\": 'Satranç', \"gun\": 'Salı' }`", "`{ \"ad\": \"Satranç\", \"gun\": \"Salı\", }`"],
     a: 1,
     ref: [["Hafta 6", "Özet, 4: tabloyu açtın, adres hazır: otomatik API", "../hafta-06/#ozet"], ["Hafta 4", "Kendin dene: ekranın arkadaki programla konuşması", "../hafta-04/#dene"]],
-    dis: [["MDN: JSON ile çalışmak", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/JSON"], ["json.org", "https://www.json.org/json-tr.html"]],
+    dis: [["json.org (Türkçe)", "https://www.json.org/json-tr.html"], ["Vikipedi: JSON", "https://tr.wikipedia.org/wiki/JSON"], ["MDN: JSON ile çalışmak (İngilizce)", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/JSON"]],
     neden: [
       "JSON'da anahtarlar mutlaka çift tırnak içindedir; tırnaksız anahtar JavaScript nesnesinde geçer, JSON'da geçmez.",
       "Çift tırnaklı anahtar ve değer, sonda fazladan virgül yok: JSON'un kuralı bu kadar sıkıdır. API'lerin dili budur; modelden yapılandırılmış çıktı isterken de bu kurallar geçerlidir.",
@@ -164,7 +164,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Yalnız alan adını satın almak yeter; site kendiliğinden açılır.", "Alan adı, barındırma ve DNS kaydı; üçü ayrı ayarlanır.", "Alan adı ve iyi bir Wi-Fi bağlantısı yeter.", "Yalnız GitHub hesabı; adres oradan alınır."],
     a: 1,
     ref: [["Hafta 8", "Özet, 5: alan adı, DNS ve sertifika", "../hafta-08/#ozet"]],
-    dis: [["MDN sözlük: DNS", "https://developer.mozilla.org/en-US/docs/Glossary/DNS"]],
+    dis: [["Vikipedi: DNS", "https://tr.wikipedia.org/wiki/DNS"], ["Vikipedi: Barındırma hizmeti", "https://tr.wikipedia.org/wiki/Bar%C4%B1nd%C4%B1rma_hizmeti"], ["MDN sözlük: DNS (İngilizce)", "https://developer.mozilla.org/en-US/docs/Glossary/DNS"]],
     neden: [
       "Alan adı yalnız bir isimdir; neyi göstereceği söylenmeden boş kalır.",
       "Alan adı tabela, barındırma bina, DNS ise tabeladan binaya giden yol tarifi. GitHub Pages ya da Vercel barındırmayı ve sertifikayı verir; alan adını ayrıca alıp DNS kaydıyla bağlarsın.",
@@ -176,7 +176,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Sayfa bozuk; tarayıcı tahmin ederek çiziyor.", "İçeriği JavaScript tarayıcıda üretiyor; veri API'den geliyor.", "Sunucu HTML'i gizlemiş; kaynak görüntüleme engellenmiş.", "Tarayıcı içeriği önbellekten çıkarmış."],
     a: 1,
     ref: [["Hafta 4", "Dört fikir, 1: her web uygulaması üç parçadır", "../hafta-04/#fikirler"], ["Hafta 4", "Kendin dene: ekranın arkadaki programla konuşması", "../hafta-04/#dene"]],
-    dis: [["MDN: istemci tarafı çatılara giriş", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Frameworks_libraries/Introduction"]],
+    dis: [["Vikipedi: Tek sayfa uygulaması", "https://tr.wikipedia.org/wiki/Tek_sayfa_uygulamas%C4%B1"], ["Vikipedi: React", "https://tr.wikipedia.org/wiki/React"], ["MDN: istemci tarafı çatılara giriş (İngilizce)", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Frameworks_libraries/Introduction"]],
     neden: [
       "Tarayıcı tahmin etmez; ne yazıldıysa onu çizer. Boş `div` dolduysa onu dolduran bir kod vardır.",
       "React, Vue gibi çatılarla yazılan uygulamalar böyle çalışır: boş iskelet gelir, JavaScript API'den veri çekip sayfayı kurar. Bedeli: JavaScript kapalıysa ya da hata verirse sayfa boş kalır; arama motoru ve yapay zekâ botları için de içerik daha zor okunur. Bu yüzden bazı çatılar sayfayı sunucuda çizip gönderir.",
@@ -188,7 +188,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["İnternet kesik; biraz sonra tekrar dene.", "Tarayıcı izinsiz çapraz kaynak cevabını vermez; isteği kendi sunucundan geçir.", "API anahtarı yanlış; anahtarı yenilemelisin.", "JavaScript başka siteye hiç istek atamaz; bu özellik tarayıcıda kapalıdır."],
     a: 1,
     ref: [["Hafta 8", "Özet, 4: anahtar nereye gider, tarayıcıya mı sunucuya mı?", "../hafta-08/#ozet"], ["Hafta 4", "Kendin dene: ekranın arkadaki programla konuşması", "../hafta-04/#dene"]],
-    dis: [["MDN: CORS", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS"]],
+    dis: [["Vikipedi: Kökler arası kaynak paylaşımı", "https://tr.wikipedia.org/wiki/K%C3%B6kler_aras%C4%B1_kaynak_payla%C5%9F%C4%B1m%C4%B1"], ["Vikipedi: Aynı Kök Politikası", "https://tr.wikipedia.org/wiki/Ayn%C4%B1_K%C3%B6k_Politikas%C4%B1"], ["MDN: CORS (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS"]],
     neden: [
       "CORS hatası bağlantıyla ilgili değildir; cevap gelmiş ama tarayıcı sayfaya vermemiştir.",
       "CORS, tarayıcının güvenlik kuralıdır: `a.com` sayfası `b.com` verisini ancak `b.com` \"olur\" derse okuyabilir. Dil modeli API'lerine tarayıcıdan doğrudan gitmemenin bir nedeni de budur; sunucun aracı olur ve anahtar da orada kalır.",
@@ -202,7 +202,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Her istemin başına kuralları elle yapıştırmak.", "Depoya kısa bir talimat dosyası koymak (`AGENTS.md` gibi).", "Daha pahalı bir model seçmek; büyük model kuralları tahmin eder.", "Ajanı bırakıp kodu elle yazmak; ajanlar kural öğrenemez."],
     a: 1,
     ref: [["Hafta 5", "Özet, 8: talimat dosyası: kısa, koddan çıkarılamayan, sürümlenen", "../hafta-05/#ozet"]],
-    dis: [["GitHub Docs: Copilot için depo talimatları", "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions"], ["AGENTS.md açık biçimi", "https://agents.md/"]],
+    dis: [["Vikipedi: GitHub Copilot", "https://tr.wikipedia.org/wiki/GitHub_Copilot"], ["Vikipedi: Markdown", "https://tr.wikipedia.org/wiki/Markdown"], ["GitHub Docs: Copilot için depo talimatları (İngilizce)", "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions"]],
     neden: [
       "Her seferinde yapıştırmak unutulur ve takım üyeleri farklı şeyler yapıştırır.",
       "Talimat dosyası depoda durur, sürümlenir, takımın tamamı için aynıdır. Kural: kısa tut, koddan zaten anlaşılanı yazma, yasakları açık yaz. Yapay zekânın verdiği kodu doğrulama rutinin de buraya yazılabilir.",
@@ -214,7 +214,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Hiçbir şey; ajan hızlı çalışmış ve iş bitmiş.", "Ajan ayrı dalda çalışmalı; değişiklik PR ile incelenip birleşmeli.", "Ajana yalnız CSS değiştirme izni verilmeli.", "Ajan değil, yalnız insanlar `main`'e gönderebilmeli; ajan hiç kod yazmamalı."],
     a: 1,
     ref: [["Hafta 5", "Özet, 1 ve 4: main'e giren her satır aynı yoldan geçer, koruma kuralı", "../hafta-05/#ozet"], ["Hafta 5", "Bu haftanın görevi", "../hafta-05/#gorev"]],
-    dis: [["GitHub Docs: korumalı dallar", "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches"]],
+    dis: [["Pro Git kitabı (Türkçe)", "https://git-scm.com/book/tr/v2"], ["Vikipedi: Git", "https://tr.wikipedia.org/wiki/Git"], ["GitHub Docs: korumalı dallar (İngilizce)", "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches"]],
     neden: [
       "Hız değil güvenlik sorunu var: incelenmemiş kod canlıya gidebilir.",
       "Ajanın yazdığı kod da insan kodu gibi aynı kapıdan geçer: dal, PR, inceleme, test. `main` korumalıysa ajan isteyerek de olsa doğrudan gönderemez.",
@@ -226,7 +226,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Daha sert bir dille \"düzelt\" demek.", "Hatayı yeniden üreten bir test yazıp \"bu test geçene kadar\" demek.", "Başka bir modele aynı istemi atmak.", "Dosyayı silip baştan yazdırmak."],
     a: 1,
     ref: [["Hafta 5", "Özet, 10: yapay zekâ kodu üç katmandan geçer", "../hafta-05/#ozet"], ["Hafta 11", "Kod analizi, test ve kalite; sırası gelince açılır"]],
-    dis: [["Anthropic: Claude Code ile yaygın iş akışları", "https://code.claude.com/docs/en/common-workflows"]],
+    dis: [["Vikipedi: Test güdümlü geliştirme", "https://tr.wikipedia.org/wiki/Test_g%C3%BCd%C3%BCml%C3%BC_geli%C5%9Ftirme"], ["Vikipedi: Birim testi", "https://tr.wikipedia.org/wiki/Birim_testi"], ["Anthropic: Claude Code ile yaygın iş akışları (İngilizce)", "https://code.claude.com/docs/en/common-workflows"]],
     neden: [
       "Ton değişince sonuç değişmez; model neyin \"düzelmiş\" sayılacağını hâlâ bilmiyor.",
       "Test, beklentiyi makinenin anlayacağı dile çevirir. Ajan testi çalıştırıp kırmızıyı görür, düzeltir, yeşili görür. \"Çalışmıyor\" öznel, \"bu test kırmızı\" nesneldir.",
@@ -238,7 +238,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Bilgisayarın yavaş; fonksiyon zamanında yüklenmemiş.", "Model fonksiyonu uydurmuş ya da eski sürümden hatırlıyor.", "Kütüphane bozuk; yeniden kurmak gerekir.", "Hata mesajı yanlış; fonksiyon aslında var."],
     a: 1,
     ref: [["Hafta 4", "Dört fikir, 3: yapay zekâ kodu yazar, kontrol senin işin", "../hafta-04/#fikirler"], ["Hafta 5", "Özet, 9: MCP, ajanı dış sistemlere bağlayan ortak fiş", "../hafta-05/#ozet"]],
-    dis: [["MDN: web geliştirmeyi öğren", "https://developer.mozilla.org/en-US/docs/Learn_web_development"]],
+    dis: [["Vikipedi: Halüsinasyon (yapay zekâ)", "https://tr.wikipedia.org/wiki/Hal%C3%BCsinasyon_%28yapay_zek%C3%A2%29"], ["Vikipedi: API", "https://tr.wikipedia.org/wiki/API"], ["MDN: web geliştirmeyi öğren (İngilizce)", "https://developer.mozilla.org/en-US/docs/Learn_web_development"]],
     neden: [
       "\"Tanımlı değil\" hatası hızla ilgisi olmayan bir ad hatasıdır.",
       "Modeller eğitim tarihine kadar gördükleri sürümleri bilir ve bazen gerçekçi görünen ad uydurur. Belgeye bakmak dakikalar alır. Bazı ajanlar güncel belgeyi MCP ya da web aramasıyla okuyabilir; o zaman \"belgeye bak\" demek işe yarar.",
@@ -250,7 +250,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Çok iş yapmış; hemen birleştir.", "Küçük istek, büyük değişiklik şüphelidir; kapsamı daraltmasını iste.", "Dosya sayısı önemli değildir; testler yeşilse yeter.", "Ajanı kapat, kodu elle yaz; ajanlar hep büyük PR açar."],
     a: 1,
     ref: [["Hafta 5", "Özet, 3: PR bir tartışma alanıdır", "../hafta-05/#ozet"], ["Hafta 5", "Özet, 2: iyi Issue, ajana verilen görev tanımı", "../hafta-05/#ozet"]],
-    dis: [["Google mühendislik uygulamaları: küçük değişiklikler", "https://google.github.io/eng-practices/review/developer/small-cls.html"]],
+    dis: [["Pro Git kitabı (Türkçe)", "https://git-scm.com/book/tr/v2"], ["Vikipedi: Yazılım bakımı", "https://tr.wikipedia.org/wiki/Yaz%C4%B1l%C4%B1m_bak%C4%B1m%C4%B1"], ["Google mühendislik uygulamaları: küçük değişiklikler (İngilizce)", "https://google.github.io/eng-practices/review/developer/small-cls.html"]],
     neden: [
       "Değişiklik büyüklüğü başarı ölçüsü değildir; inceleyemediğin kodu onaylamış olursun.",
       "Küçük istek, küçük değişiklik. Fazlalık ya görevin yanlış anlaşıldığını ya da ajanın kendi kendine \"iyileştirme\" yaptığını gösterir. Her yeni kütüphane bakım ve güvenlik yüküdür; gerekçesi olmalı.",
@@ -262,7 +262,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Hiçbir şey; ajan seçmişse uygundur.", "Var mı, bakımlı mı, lisansı uygun mu, açığı var mı, gerekli mi.", "Yalnız indirme sayısına bakmak yeter.", "Yalnız paket adının güzel olup olmadığına."],
     a: 1,
     ref: [["Hafta 5", "Özet, 10: yapay zekâ kodu üç katmandan geçer", "../hafta-05/#ozet"], ["Hafta 10", "Güvenlik açıklarının analizi; sırası gelince açılır"]],
-    dis: [["npm Docs: npm audit", "https://docs.npmjs.com/cli/v10/commands/npm-audit"], ["choosealicense.com: lisanslar", "https://choosealicense.com/"]],
+    dis: [["Vikipedi: Yazılım lisansı", "https://tr.wikipedia.org/wiki/Yaz%C4%B1l%C4%B1m_lisans%C4%B1"], ["npm Docs: npm audit (İngilizce)", "https://docs.npmjs.com/cli/v10/commands/npm-audit"]],
     neden: [
       "Ajan paket seçerken senin lisans ve güvenlik kısıtlarını bilmez.",
       "Beş soru: var mı, yaşıyor mu, lisansı ne, açığı var mı, gerekli mi. Her bağımlılık, başkasının kodunu ürününe almaktır; sorumluluk sende kalır.",
@@ -274,7 +274,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Hız için bütün komutları otomatik onaylamak.", "Geri alınamayan işlemde onay zorunlu; ajan kısıtlı ortamda, en az yetkiyle.", "Ajanın komut çalıştırmasını tamamen yasaklamak.", "Önce yedek al, sonra her şeyi onayla."],
     a: 1,
     ref: [["Hafta 5", "Gerçek olay: bir eklentiye gömülen \"her şeyi sil\" emri", "../hafta-05/#olay"], ["Hafta 5", "Özet, 7: bulut ajanı nerede çalışır, yetkisi nereye kadar?", "../hafta-05/#ozet"]],
-    dis: [["Anthropic: Claude Code güvenlik ve izinler", "https://code.claude.com/docs/en/security"]],
+    dis: [["Vikipedi: Sandbox (bilgisayar güvenliği)", "https://tr.wikipedia.org/wiki/Sandbox_%28bilgisayar_g%C3%BCvenli%C4%9Fi%29"], ["Microsoft Learn (Türkçe): en az ayrıcalıklı erişim", "https://learn.microsoft.com/tr-tr/entra/identity-platform/secure-least-privileged-access"], ["Anthropic: Claude Code güvenlik ve izinler (İngilizce)", "https://code.claude.com/docs/en/security"]],
     neden: [
       "Otomatik onay, enjeksiyonla ya da yanlış anlamayla gelen tek bir komutun projeyi silmesine izin verir.",
       "Kural basit: geri alınabilen iş serbest, geri alınamayan iş onaylı. Ajanı ayrı kullanıcı, konteyner ya da kısıtlı klasörde çalıştırmak hasarı sınırlar. Hafta 5'teki gerçek olay tam bu konu.",
@@ -286,7 +286,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["\"Çalışmıyor, düzelt. Hemen.\"", "\"Konsolda şu hata var: [hata]. Kod: [parça]. Beklenen: kayıt listeye eklensin.\"", "\"Kodumda bir sorun var sanırım, bakar mısın?\"", "\"Bu projeyi baştan yaz, bu sefer hatasız olsun.\""],
     a: 1,
     ref: [["Hafta 5", "Özet, 2: iyi Issue, ajana verilen görev tanımı", "../hafta-05/#ozet"], ["Hafta 2", "Yapay zekâyla çalış", "../hafta-02/#yapay-zeka"]],
-    dis: [["Stack Overflow: iyi soru nasıl sorulur", "https://stackoverflow.com/help/how-to-ask"]],
+    dis: [["Vikipedi: Hata ayıklama", "https://tr.wikipedia.org/wiki/Hata_ay%C4%B1klama"], ["Vikipedi: Stack Overflow", "https://tr.wikipedia.org/wiki/Stack_Overflow"], ["Stack Overflow: iyi soru nasıl sorulur (İngilizce)", "https://stackoverflow.com/help/how-to-ask"]],
     neden: [
       "Hiçbir bilgi yok: hangi dosya, hangi hata, ne bekleniyor?",
       "Dört parça: hata metni, ilgili kod, beklenen davranış, gerçekleşen davranış. Bu, insana da yapay zekâya da sorulacak iyi hata raporunun biçimidir.",
@@ -298,7 +298,7 @@ window.SORULAR = window.SORULAR.concat([
     o: ["Çalıştığına göre görmezden gel.", "Güncel belgeye bakıp önerilen yeni yolu kullan.", "Uyarıları kapatan bir ayar ekle.", "Kütüphaneyi tamamen sil."],
     a: 1,
     ref: [["Hafta 4", "Dört fikir, 3: kontrol senin işin", "../hafta-04/#fikirler"], ["Hafta 5", "Özet, 10: yapay zekâ kodu üç katmandan geçer", "../hafta-05/#ozet"]],
-    dis: [["MDN sözlük: deprecated", "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Experimental_deprecated_obsolete"]],
+    dis: [["Vikipedi: API", "https://tr.wikipedia.org/wiki/API"], ["Vikipedi: Deprecation", "https://tr.wikipedia.org/wiki/Deprecation"], ["MDN sözlük: deprecated (İngilizce)", "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Experimental_deprecated_obsolete"]],
     neden: [
       "Bugün çalışan yarın kırılır; uyarı bunun için var.",
       "Modelin bilgisi bir tarihte donmuştur; kütüphaneler ilerler. Uyarıyı okumak ve belgedeki güncel yolu uygulamak birkaç dakikalık iştir ve gelecekteki acil düzeltmeyi önler.",

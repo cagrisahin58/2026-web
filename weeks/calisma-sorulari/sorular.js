@@ -18,7 +18,7 @@ window.SORULAR = [
     o: ["`<div class=\"menu\">`", "`<nav>`", "`<header>`", "`<span>`"],
     a: 1,
     ref: [["Hafta 2", "Sayfa bölümleri: header, nav, main, footer", "../hafta-02/#bolumler"]],
-    dis: [["MDN: nav öğesi", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav"]],
+    dis: [["Vikipedi: HTML", "https://tr.wikipedia.org/wiki/HTML"], ["Vikipedi: HTML element", "https://tr.wikipedia.org/wiki/HTML_element"], ["MDN: nav öğesi (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav"]],
     neden: [
       "`div` çalışır ama hiçbir anlam taşımaz. Tarayıcı, ekran okuyucu ve arama motoru bu kutunun bir menü olduğunu class adından anlayamaz.",
       "`nav`, sayfanın gezinme bağlantılarını işaretleyen anlamlı etikettir. Ekran okuyucu menüye doğrudan atlayabilir; arama motoru ve yapay zekâ tarayıcıları sayfanın yapısını daha doğru çıkarır.",
@@ -30,7 +30,7 @@ window.SORULAR = [
     o: ["Tarayıcıya HTML'in güncel sürümünü internetten indirmesini söyler.", "Sayfadaki yazım hatalarını denetler ve uyarı verir.", "Tarayıcıya belgenin türünü bildirir.", "Sayfanın başlığını tarayıcı sekmesinde gösterir."],
     a: 2,
     ref: [["Hafta 2", "Belge iskeleti satır satır", "../hafta-02/#iskelet"]],
-    dis: [["MDN sözlük: Doctype", "https://developer.mozilla.org/en-US/docs/Glossary/Doctype"]],
+    dis: [["Vikipedi: HTML", "https://tr.wikipedia.org/wiki/HTML"], ["Vikipedi: Belge türü beyanı", "https://tr.wikipedia.org/wiki/Belge_t%C3%BCr%C3%BC_beyan%C4%B1"], ["MDN sözlük: Doctype (İngilizce)", "https://developer.mozilla.org/en-US/docs/Glossary/Doctype"]],
     neden: [
       "Tarayıcı hiçbir şey indirmez. HTML'i çizme kuralları zaten tarayıcının içindedir.",
       "DOCTYPE bir denetim aracı değildir. Yazım hatalarını bulmak için editörün uyarıları ya da bir doğrulayıcı kullanılır.",
@@ -42,7 +42,7 @@ window.SORULAR = [
     o: ["`img/afis.png`", "`../img/afis.png`", "`/img/afis.png`", "`site/img/afis.png`"],
     a: 1,
     ref: [["Hafta 2", "Bağlantı, görsel ve dosya yolu", "../hafta-02/#yol"]],
-    dis: [["MDN: bağlantı oluşturmak ve dosya yolları", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Creating_links"]],
+    dis: [["Vikipedi: URL", "https://tr.wikipedia.org/wiki/URL"], ["MDN: bağlantı oluşturmak ve dosya yolları (İngilizce)", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Creating_links"]],
     neden: [
       "Bu yol sayfanın bulunduğu klasörden başlar, yani `site/etkinlikler/img/afis.png` arar. Orada görsel yok.",
       "`..` bir üst klasöre çıkar: `etkinlikler` klasöründen `site` klasörüne, oradan `img` içine. Göreli yol, site hangi adreste yayınlanırsa yayınlansın çalışır.",
@@ -54,7 +54,7 @@ window.SORULAR = [
     o: ["Görseli daha hızlı yükler.", "Görsel yüklenmezse ve ekran okuyucuda görselin yerine okunur.", "Görselin genişliğini ve yüksekliğini belirler.", "Görsele tıklanınca açılacak bağlantıyı belirler."],
     a: 1,
     ref: [["Hafta 2", "Bağlantı, görsel ve dosya yolu (iyi bir alt metni)", "../hafta-02/#yol"]],
-    dis: [["MDN: img öğesi ve alt", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"], ["web.dev: erişilebilir görseller", "https://web.dev/learn/accessibility/images"]],
+    dis: [["Vikipedi: Alt etiketi", "https://tr.wikipedia.org/wiki/Alt_etiketi"], ["Vikipedi: Web erişilebilirliği", "https://tr.wikipedia.org/wiki/Web_eri%C5%9Filebilirli%C4%9Fi"], ["MDN: img öğesi ve alt (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"]],
     neden: [
       "`alt` yüklemeyle ilgili değildir. Hız için görselin boyutu ve biçimi küçültülür.",
       "Alt metin erişilebilirliğin temelidir ve bugün ikinci bir işi daha var: sayfayı okuyan arama motorları ve yapay zekâ ajanları görselin ne olduğunu bu metinden öğrenir.",
@@ -66,7 +66,7 @@ window.SORULAR = [
     o: ["200", "240", "250", "270"],
     a: 2,
     ref: [["Hafta 3", "Kutu modeli", "../hafta-03/#kutu"]],
-    dis: [["MDN: kutu modeli", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Box_model"]],
+    dis: [["Vikipedi: CSS", "https://tr.wikipedia.org/wiki/CSS"], ["MDN: kutu modeli (İngilizce)", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Box_model"]],
     neden: [
       "Varsayılan `content-box` kipinde `width` yalnız içeriğin genişliğidir; padding ve border üstüne eklenir.",
       "Padding iki yandan 40 eder ama kenarlık unutulmuş. Kenarlık da iki yandan 10 ekler.",
@@ -78,7 +78,7 @@ window.SORULAR = [
     o: ["Her karta `float: left` vermek; kartlar yan yana gelir, boşluk kendiliğinden eşitlenir.", "Kapsayıcıya `display: flex; justify-content: space-between` vermek.", "Her karta `text-align: center` vermek; içerik ortalanınca kartlar da ortalanır.", "Kapsayıcıya `display: block`, kartlara `width: 33%` vermek."],
     a: 1,
     ref: [["Hafta 3", "Flexbox", "../hafta-03/#flex"]],
-    dis: [["MDN: Flexbox", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox"], ["CSS-Tricks: Flexbox rehberi", "https://css-tricks.com/snippets/css/a-guide-to-flexbox/"]],
+    dis: [["Vikipedi: CSS", "https://tr.wikipedia.org/wiki/CSS"], ["MDN: Flexbox (İngilizce)", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox"]],
     neden: [
       "`float` eski yöntemdir; kartları yan yana getirir ama boşluk dağıtımı ve hizalama için ek hileler gerekir.",
       "Flexbox tam bu iş içindir. Kapsayıcı `flex` olunca çocuklar yan yana dizilir, `space-between` boşluğu aralarına eşit paylaştırır.",
@@ -90,7 +90,7 @@ window.SORULAR = [
     o: ["Ekran 600 pikselden genişse.", "Ekran genişliği 600 piksel ve altındaysa.", "Yalnız sayfa yazdırılırken.", "Her zaman; sıra önemli değildir."],
     a: 1,
     ref: [["Hafta 3", "Telefon için tek bir medya sorgusu", "../hafta-03/#telefon"]],
-    dis: [["MDN: media sorguları", "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries/Using"]],
+    dis: [["web.dev (Türkçe): duyarlı web tasarımının temelleri", "https://web.dev/articles/responsive-web-design-basics?hl=tr"], ["Chrome DevTools (Türkçe): cihaz kipi", "https://developer.chrome.com/docs/devtools/device-mode?hl=tr"], ["MDN: media sorguları (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries/Using"]],
     neden: [
       "`max-width` \"en fazla şu kadar\" demektir, yani üst sınır. Geniş ekranda kural devre dışıdır.",
       "`max-width: 600px` koşulu, görünüm alanı 600 piksel ya da daha darken sağlanır. Telefon ekranında menü alt alta dizilir.",
@@ -102,7 +102,7 @@ window.SORULAR = [
     o: ["Mavi, çünkü sonra yazılan kural öncekini ezer.", "Kırmızı, çünkü sınıf seçicisi öğe seçicisinden daha özgüldür.", "Mor, çünkü tarayıcı çakışan iki rengi karıştırır.", "Kırmızı, çünkü stil dosyasında önce yazılan kural kazanır."],
     a: 1,
     ref: [["Hafta 3", "Seçiciler", "../hafta-03/#secici"]],
-    dis: [["MDN: özgüllük (specificity)", "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Specificity"]],
+    dis: [["Vikipedi: CSS", "https://tr.wikipedia.org/wiki/CSS"], ["MDN: özgüllük (specificity) (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Specificity"]],
     neden: [
       "\"Sonra yazılan kazanır\" yalnız iki seçici eşit güçteyse geçerlidir. Burada eşit değiller.",
       "Özgüllük (specificity) sırası: satır içi stil, id, sınıf, öğe. `.uyari` bir sınıf seçicisidir ve `p` öğe seçicisini yener; sıra fark etmez.",
@@ -116,7 +116,7 @@ window.SORULAR = [
     o: ["Tarayıcı DNS'ten sunucunun adresini öğrenir, HTTP isteği gönderir, sunucu HTML döndürür.", "Sunucu, tarayıcının bağlı olduğunu görür ve sayfayı kendiliğinden gönderir.", "Tarayıcı sayfayı önceki ziyaretten kalan bellekten üretir, sunucuya gitmez.", "Google alan adını arayıp sayfayı bulur ve tarayıcıya iletir."],
     a: 0,
     ref: [["Hafta 1", "Adres çubuğuna yazınca ne olur?", "../hafta-01/#adres"], ["Hafta 4", "Dört fikir, 1: her web uygulaması üç parçadır", "../hafta-04/#fikirler"]],
-    dis: [["MDN: web nasıl çalışır (Türkçe)", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works"]],
+    dis: [["Vikipedi: World Wide Web", "https://tr.wikipedia.org/wiki/World_Wide_Web"], ["Vikipedi: Hypertext Transfer Protocol", "https://tr.wikipedia.org/wiki/Hypertext_Transfer_Protocol"], ["MDN: web nasıl çalışır (Türkçe) (İngilizce)", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works"]],
     neden: [
       "Sıra tam budur: ad çözümleme (DNS), istek, cevap, çizim. Her web ürünü bu yolun üstünde kurulur.",
       "Sunucu hiçbir zaman önce davranmaz. Her zaman tarayıcı (istemci) ister, sunucu cevap verir.",
@@ -128,7 +128,7 @@ window.SORULAR = [
     o: ["HTTPS yalnız şifre girilen sayfalarda gerekir; tanıtım sayfası için HTTP yeter.", "Trafiği şifreler ve sunucunun kimliğini doğrular; bugün her sitede beklenir.", "HTTPS sayfayı sıkıştırıp daha hızlı yükler; güvenlikle doğrudan ilgisi yoktur.", "HTTPS yalnız banka ve e-Devlet gibi resmî sitelerde zorunludur."],
     a: 1,
     ref: [["Hafta 8", "Özet, 5: alan adı, DNS ve sertifika", "../hafta-08/#ozet"]],
-    dis: [["Cloudflare: HTTPS nedir", "https://developer.mozilla.org/en-US/docs/Glossary/HTTPS"], ["Let's Encrypt: nasıl çalışır", "https://letsencrypt.org/how-it-works/"]],
+    dis: [["Vikipedi: HTTPS", "https://tr.wikipedia.org/wiki/HTTPS"], ["Vikipedi: Transport Layer Security", "https://tr.wikipedia.org/wiki/Transport_Layer_Security"], ["Cloudflare: HTTPS nedir (İngilizce)", "https://developer.mozilla.org/en-US/docs/Glossary/HTTPS"]],
     neden: [
       "Şifresiz bir sayfada araya giren biri içeriği değiştirebilir, örneğin sahte bir form ekleyebilir. Bütün sayfalar korunmalıdır.",
       "Şifreleme, araya girenin okumasını ve değiştirmesini engeller; sertifika ise doğru sunucuyla konuştuğunu gösterir. Tarayıcılar HTTP sayfalarını artık \"güvenli değil\" diye işaretler.",
@@ -152,7 +152,7 @@ window.SORULAR = [
     o: ["Hazır bir HTML sayfası; tarayıcı onu olduğu gibi gösterir.", "JSON biçiminde veri; görünümü senin kodun kurar.", "Bir görsel dosyası; hava durumu simgesi olarak sayfaya konur.", "Bir CSS dosyası; sıcaklığa göre renk kuralı taşır."],
     a: 1,
     ref: [["Hafta 4", "Kendin dene: ekranın arkadaki programla konuşması", "../hafta-04/#dene"], ["Hafta 6", "Özet, 4: otomatik API", "../hafta-06/#ozet"]],
-    dis: [["MDN: JSON ile çalışmak", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/JSON"]],
+    dis: [["json.org (Türkçe)", "https://www.json.org/json-tr.html"], ["AWS (Türkçe): API", "https://aws.amazon.com/tr/what-is/api/"], ["MDN: JSON ile çalışmak (İngilizce)", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/JSON"]],
     neden: [
       "API insan için değil program için cevap verir. HTML döndürse her ürün aynı görünümü kullanmak zorunda kalırdı.",
       "API, veriyi anahtar ve değer çiftleri hâlinde (JSON) verir: sıcaklık, nem, şehir. Kodun bu veriyi alıp sayfadaki uygun yere yazar.",
@@ -164,7 +164,7 @@ window.SORULAR = [
     o: ["404 ve 500", "200 ve 404", "500 ve 404", "301 ve 200"],
     a: 0,
     ref: [["Hafta 4", "Kendin dene: Network sekmesi", "../hafta-04/#dene"], ["Hafta 1", "Adres çubuğuna yazınca ne olur?", "../hafta-01/#adres"]],
-    dis: [["MDN: HTTP durum kodları", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status"]],
+    dis: [["Vikipedi: HTTP durum kodları", "https://tr.wikipedia.org/wiki/HTTP_durum_kodlar%C4%B1"], ["Vikipedi: HTTP 404", "https://tr.wikipedia.org/wiki/HTTP_404"], ["MDN: HTTP durum kodları (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status"]],
     neden: [
       "4 ile başlayan kodlar istemci tarafındaki sorunu (yanlış adres), 5 ile başlayanlar sunucu tarafındaki sorunu anlatır. 404 bulunamadı, 500 sunucu hatası.",
       "200 \"her şey yolunda\" demektir; hata durumunda dönmez.",
@@ -176,7 +176,7 @@ window.SORULAR = [
     o: ["Yok; tarayıcı denetimi kullanıcıyı durdurduğu için yeterlidir.", "Var; tarayıcı denetimi atlanabilir, asıl denetim sunucuda olmalı.", "Var, çünkü JavaScript şifre gibi gizli alanları ölçemez.", "Var, çünkü sunucuda ikinci denetim siteyi ölçülür biçimde yavaşlatır."],
     a: 1,
     ref: [["Hafta 6", "Özet, 2 ve 5: kısıtlar ve RLS", "../hafta-06/#ozet"], ["Hafta 4", "Dört fikir, 3: kontrol senin işin", "../hafta-04/#fikirler"]],
-    dis: [["MDN: form doğrulama (sunucu tarafı bölümü)", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Form_validation"], ["OWASP: girdi doğrulama", "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"]],
+    dis: [["Vikipedi: Siteler arası betik çalıştırma", "https://tr.wikipedia.org/wiki/Siteler_aras%C4%B1_betik_%C3%A7al%C4%B1%C5%9Ft%C4%B1rma"], ["MDN: form doğrulama (sunucu tarafı bölümü) (İngilizce)", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Form_validation"]],
     neden: [
       "Tarayıcıdaki her şey kullanıcının elindedir. Geliştirici araçlarıyla denetim satırı silinir ya da istek doğrudan sunucuya atılır.",
       "Kural: istemciye asla güvenme. Tarayıcı denetimi hızlı geri bildirim verir, sunucu denetimi güvenliği sağlar. İkisi birlikte olur, ama sunucudaki şarttır.",
@@ -190,7 +190,7 @@ window.SORULAR = [
     o: ["Ajan aynı öneriyi daha hızlı ve daha uzun üretir; başka fark yoktur.", "Ajan dosyaları okuyup değiştirir, komut çalıştırır, sonucu test eder; tamamlama yalnız imlece öneri verir.", "Tamamlama ücretsiz, ajan ücretlidir; kavramsal fark ücret modelidir.", "Ajan yalnız Python gibi arka uç dilleriyle çalışır; HTML'de tamamlama kullanılır."],
     a: 1,
     ref: [["Hafta 5", "Özet, 7: bulut ajanı nerede çalışır", "../hafta-05/#ozet"], ["Hafta 5", "Araç tablosu", "../hafta-05/#araclar"]],
-    dis: [["GitHub Docs: Copilot", "https://docs.github.com/en/copilot"], ["Claude Code belgeleri", "https://code.claude.com/docs/en/overview"]],
+    dis: [["Vikipedi: GitHub Copilot", "https://tr.wikipedia.org/wiki/GitHub_Copilot"], ["GitHub Docs: Copilot (İngilizce)", "https://docs.github.com/en/copilot"]],
     neden: [
       "Hız değil, iş biçimi farklıdır. Ajan bazen daha yavaştır çünkü birkaç adım atar.",
       "Tamamlama bir \"öneri\" aracıdır, sen yazarsın. Ajan ise \"bu özelliği ekle\" gibi bir görevi uçtan uca yürütür: dosya açar, değiştirir, testi çalıştırır, hatayı görüp düzeltir. Bu yüzden ajan çıktısını incelemek daha önemlidir.",
@@ -202,7 +202,7 @@ window.SORULAR = [
     o: ["\"Bana bir site yap, gerisini sen bilirsin.\"", "\"Kulüp sitesi için güzel bir etkinlik kartı yap, modern olsun, renkleri uyumlu olsun.\"", "\"Kulüp sitemizin `index.html` dosyasına üç etkinlik kartı ekle; mevcut `stil.css` sınıflarını kullan, yeni kütüphane ekleme, kartlar 600 pikselin altında alt alta dizilsin.\"", "\"En iyi siteyi en güzel şekilde yap, çok önemli, hata olmasın, profesyonel dursun.\""],
     a: 2,
     ref: [["Hafta 5", "Özet, 2: iyi Issue, ajana verilen görev tanımı", "../hafta-05/#ozet"], ["Hafta 1", "Yapay zekâ çağında yazılımcı olmak: iki istek, iki sonuç", "../hafta-01/#yapay-zeka"]],
-    dis: [["Anthropic: istem mühendisliği", "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview"]],
+    dis: [["Vikipedi: İstem mühendisliği", "https://tr.wikipedia.org/wiki/%C4%B0stem_m%C3%BChendisli%C4%9Fi"], ["AWS (Türkçe): İstem mühendisliği", "https://aws.amazon.com/tr/what-is/prompt-engineering/"], ["Anthropic: istem mühendisliği (İngilizce)", "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview"]],
     neden: [
       "Hiçbir bağlam yok. Model ne sitesi, hangi dosya, hangi stil bilmediği için rastgele bir şey üretir.",
       "Biraz daha iyi ama hâlâ eksik: hangi dosyaya, hangi stil kurallarıyla, telefonda nasıl?",
@@ -214,7 +214,7 @@ window.SORULAR = [
     o: ["Evet; hata yoksa kod doğrudur.", "Hayır; kodu okuyup anlamak, uç durumları denemek ve test yazmak gerekir.", "Hayır; yapay zekâ kodu her zaman silinip baştan yazılmalıdır.", "Evet; modeller kodu zaten test etmiş olur."],
     a: 1,
     ref: [["Hafta 4", "Dört fikir, 3: yapay zekâ kodu yazar, kontrol senin işin", "../hafta-04/#fikirler"], ["Hafta 5", "Özet, 10: yapay zekâ kodu üç katmandan geçer", "../hafta-05/#ozet"]],
-    dis: [["GitHub Docs: Copilot", "https://docs.github.com/en/copilot"]],
+    dis: [["Vikipedi: Yazılım testi", "https://tr.wikipedia.org/wiki/Yaz%C4%B1l%C4%B1m_testi"], ["Vikipedi: Birim testi", "https://tr.wikipedia.org/wiki/Birim_testi"], ["GitHub Docs: Copilot (İngilizce)", "https://docs.github.com/en/copilot"]],
     neden: [
       "Hatasız açılan bir form yanlış adrese veri gönderebilir, boş kaydı kabul edebilir ya da şifreyi düz metin saklayabilir. Sessizlik doğruluk değildir.",
       "Doğrulama üç katmanlıdır: oku ve anla, uç durumları dene, testle güvence altına al. Yapay zekâ kodu bu süzgeçten geçmeden ürüne girmez.",
@@ -226,7 +226,7 @@ window.SORULAR = [
     o: ["Yapay zekâ önerdiyse paket vardır; kur ve devam et.", "Önce paketin npm'de var olduğuna, yazarına ve kullanımına bak; model paket adı uydurabilir.", "Adı Türkçe ve açıklayıcı olduğu için güvenilir bir pakettir.", "Kur; çalışmazsa ya da hata verirse hemen silersin, zarar olmaz."],
     a: 1,
     ref: [["Hafta 5", "Özet, 10: yapay zekâ kodu üç katmandan geçer", "../hafta-05/#ozet"], ["Hafta 5", "Gerçek olay: eklentiye gömülen emir", "../hafta-05/#olay"]],
-    dis: [["Wikipedia: Slopsquatting", "https://en.wikipedia.org/wiki/Slopsquatting"], ["npm belgeleri", "https://docs.npmjs.com/"]],
+    dis: [["Vikipedi: Halüsinasyon (yapay zekâ)", "https://tr.wikipedia.org/wiki/Hal%C3%BCsinasyon_%28yapay_zek%C3%A2%29"], ["Wikipedia: Slopsquatting (İngilizce)", "https://en.wikipedia.org/wiki/Slopsquatting"]],
     neden: [
       "Modeller bazen gerçekçi görünen ama var olmayan paket adları üretir. Her öneri doğrulanmalıdır.",
       "Buna uydurma paket (hallucinated package) sorunu denir ve bilinen bir saldırı biçimi doğurdu: saldırgan, modellerin sık uydurduğu adlarla gerçek paketler yayınlar; kuran herkes kötü kodu çalıştırır. Kaynağına bakmak dakikalar alır, sızıntı aylar sürer.",
@@ -238,7 +238,7 @@ window.SORULAR = [
     o: ["Yapay zekâ ajanlarını yazmak için tasarlanmış yeni bir programlama dili.", "Ajanların dış araçlara ve veri kaynaklarına ortak biçimde bağlanmasını sağlayan açık protokol.", "Yapay zekânın ürettiği arayüzler için bir CSS çerçevesi.", "Yapay zekâ uygulamalarını yayınlamak için bir barındırma hizmeti."],
     a: 1,
     ref: [["Hafta 5", "Özet, 9: MCP, ajanı dış sistemlere bağlayan ortak fiş", "../hafta-05/#ozet"]],
-    dis: [["Model Context Protocol resmî sitesi", "https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro"]],
+    dis: [["Vikipedi: Model Context Protocol", "https://tr.wikipedia.org/wiki/Model_Context_Protocol"], ["Vikipedi: Büyük dil modeli", "https://tr.wikipedia.org/wiki/B%C3%BCy%C3%BCk_dil_modeli"], ["Model Context Protocol resmî sitesi (İngilizce)", "https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro"]],
     neden: [
       "MCP kod yazmak için bir dil değil, araçların konuşması için bir kuraldır.",
       "Her araç için ayrı eklenti yazmak yerine, araç bir MCP sunucusu olarak kendini tanıtır ve her uyumlu ajan onu kullanabilir. Böylece ajan deponu okuyabilir, veritabanına sorgu atabilir, tarayıcıyı açabilir.",
@@ -250,7 +250,7 @@ window.SORULAR = [
     o: ["Çok pahalı olmaları.", "Yalnız İngilizce istem kabul etmeleri.", "Kodun ne yaptığını anlamadan yayınlamak.", "Ürettikleri sitelerin çirkin olması."],
     a: 2,
     ref: [["Hafta 4", "Gerçek olay: 170 açık uygulama", "../hafta-04/#olay"], ["Hafta 4", "Dört fikir, 3: kontrol senin işin", "../hafta-04/#fikirler"]],
-    dis: [["Wikipedia: Vibe coding", "https://en.wikipedia.org/wiki/Vibe_coding"]],
+    dis: [["Vikipedi: Vibe coding", "https://tr.wikipedia.org/wiki/Vibe_coding"], ["Wikipedia: Vibe coding (İngilizce)", "https://en.wikipedia.org/wiki/Vibe_coding"]],
     neden: [
       "Çoğunun ücretsiz katmanı var; maliyet asıl risk değildir.",
       "Türkçe istemle de çalışırlar.",
@@ -262,6 +262,7 @@ window.SORULAR = [
     o: ["Yapay zekâ şirketinde.", "Kodu ürüne koyan geliştiricide.", "Kimsede; yazılım hataları kaçınılmazdır.", "Yalnız barındırma hizmetinde."],
     a: 1,
     ref: [["Hafta 4", "Dört fikir, 3: kontrol senin işin", "../hafta-04/#fikirler"], ["Hafta 1", "Yapay zekâ çağında yazılımcı olmak: kim yapar?", "../hafta-01/#yapay-zeka"]],
+    dis: [["Vikipedi: Yazılım mühendisliği", "https://tr.wikipedia.org/wiki/Yaz%C4%B1l%C4%B1m_m%C3%BChendisli%C4%9Fi"], ["KVKK resmî sitesi", "https://www.kvkk.gov.tr/"]],
     neden: [
       "Araç şirketleri kullanım koşullarında çıktının sorumluluğunu kullanıcıya bırakır. Hukuken ve mesleken sorumlu sensin.",
       "Yapay zekâ bir araçtır, kalem gibi. İmza seninse sorumluluk senindir. Bu yüzden ürüne giren her satırı anlamak ve doğrulamak ders kuralıdır.",
@@ -273,7 +274,7 @@ window.SORULAR = [
     o: ["Olduğu gibi yapıştır; görünüyorsa yeter.", "Satır satır açıklamasını iste, bir değeri değiştirip sonucu gör.", "Sil ve CSS'i hiç kullanma.", "Başka bir modele de sor, iki cevabın ortalamasını al."],
     a: 1,
     ref: [["Hafta 3", "Yapay zekâyla çalış", "../hafta-03/#yapay-zeka"], ["Hafta 2", "Yapay zekâyla çalış", "../hafta-02/#yapay-zeka"]],
-    dis: [["MDN: web geliştirmeyi öğren", "https://developer.mozilla.org/en-US/docs/Learn_web_development"]],
+    dis: [["Vikipedi: CSS", "https://tr.wikipedia.org/wiki/CSS"], ["Vikipedi: Web development", "https://tr.wikipedia.org/wiki/Web_development"], ["MDN: web geliştirmeyi öğren (İngilizce)", "https://developer.mozilla.org/en-US/docs/Learn_web_development"]],
     neden: [
       "Anlamadığın kodu sonradan değiştiremezsin; ilk sorunda çaresiz kalırsın.",
       "Yapay zekâ en iyi öğretmenlerden biridir, yeter ki soruyu \"neden\" diye sor. Değiştir ve gözle döngüsü kavramı hafızana yerleştirir.",
@@ -285,7 +286,7 @@ window.SORULAR = [
     o: ["Sorun değil; tarayıcı destekliyor ve sayfa doğru görünüyor.", "Kuralların doğal öncelik sırasını devre dışı bırakır; stil dosyası yönetilemez olur.", "Sayfayı yavaşlatır, çünkü tarayıcı her kuralı iki kez hesaplar.", "Telefonda çalışmaz, çünkü mobil tarayıcılar `!important` desteklemez."],
     a: 1,
     ref: [["Hafta 3", "Seçiciler", "../hafta-03/#secici"], ["Hafta 3", "Yapay zekâyla çalış", "../hafta-03/#yapay-zeka"]],
-    dis: [["MDN: !important", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/important"]],
+    dis: [["Vikipedi: CSS", "https://tr.wikipedia.org/wiki/CSS"], ["MDN: !important (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/important"]],
     neden: [
       "Desteklenmek ile doğru kullanılmak aynı şey değildir. `!important` nadir ve bilinçli durumlar içindir.",
       "Özgüllük sırası (öğe, sınıf, id) CSS'in düzenidir. Her satıra `!important` koymak bu düzeni bozar; bir hafta sonra kimse neyin neyi ezdiğini bilemez. Doğrusu seçiciyi düzeltmektir.",
@@ -297,7 +298,7 @@ window.SORULAR = [
     o: ["Sorun yok; sohbet yalnız sana özeldir ve kimse okuyamaz.", "Sırları maskeleyip paylaşmalıydın; şimdi anahtarları yenilemelisin.", "Yalnız ücretsiz sohbetlerde sorundur; ücretli hesap veriyi saklamaz.", "Sorun yok; model konuşma bitince her şeyi unutur."],
     a: 1,
     ref: [["Hafta 5", "Özet, 10: gizli anahtar depoya girmez", "../hafta-05/#ozet"], ["Hafta 8", "Özet, 4: anahtar nereye gider", "../hafta-08/#ozet"]],
-    dis: [["GitHub Docs: gizli anahtar taraması", "https://docs.github.com/en/code-security/concepts/secret-security/secret-scanning"]],
+    dis: [["KVKK resmî sitesi", "https://www.kvkk.gov.tr/"], ["Vikipedi: Uygulama programlama arayüzü anahtarı", "https://tr.wikipedia.org/wiki/Uygulama_programlama_aray%C3%BCz%C3%BC_anahtar%C4%B1"], ["GitHub Docs: gizli anahtar taraması (İngilizce)", "https://docs.github.com/en/code-security/concepts/secret-security/secret-scanning"]],
     neden: [
       "Sohbet senin için özel görünse de bir dış hizmete gönderildi, kaydedilmiş olabilir.",
       "Kural: sır bir kez dışarı çıktıysa sızmış sayılır. Anahtarı iptal edip yenisini almak (rotate) tek güvenli yoldur. Paylaşırken `sk-...` gibi değerleri `***` ile değiştirmek alışkanlık olmalıdır.",
@@ -311,7 +312,7 @@ window.SORULAR = [
     o: ["Tarayıcıdaki JavaScript dosyasında, karışık bir değişken adıyla.", "HTML'de gizli bir `input` alanında; görünmediği için güvenlidir.", "Yalnız sunucu tarafında bir ortam değişkeninde.", "GitHub deposunda README içinde, takım kolay bulsun diye."],
     a: 2,
     ref: [["Hafta 8", "Özet, 4: anahtar tarayıcıya mı, sunucuya mı?", "../hafta-08/#ozet"], ["Hafta 6", "Özet, 6: iki anahtar, hangisi tarayıcıda durabilir?", "../hafta-06/#ozet"]],
-    dis: [["Vercel: ortam değişkenleri", "https://vercel.com/docs/environment-variables"], ["Supabase: API anahtarları", "https://supabase.com/docs/guides/getting-started/api-keys"]],
+    dis: [["Vikipedi: Ortam değişkeni", "https://tr.wikipedia.org/wiki/Ortam_de%C4%9Fi%C5%9Fkeni"], ["Vikipedi: Çevre değişkeni", "https://tr.wikipedia.org/wiki/%C3%87evre_de%C4%9Fi%C5%9Fkeni"], ["Vercel: ortam değişkenleri (İngilizce)", "https://vercel.com/docs/environment-variables"]],
     neden: [
       "Tarayıcıya giden her dosya herkesin elindedir. Anahtar dakikalar içinde okunur ve faturası sana yazılır.",
       "\"Gizli\" alan yalnız görünmezdir; kaynak kodda açık durur.",
@@ -323,7 +324,7 @@ window.SORULAR = [
     o: ["Kayıtlı kullanıcı sayısına göre.", "Gönderilen ve alınan metin miktarına (token) göre.", "Sitenin CSS dosyasının boyutuna göre.", "Tek seferlik lisans ücreti vardır, sonra ücretsizdir."],
     a: 1,
     ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"], ["Hafta 8", "Özet, 7: kart yoksa ne olur, kart varsa ne olur?", "../hafta-08/#ozet"]],
-    dis: [["OpenAI: token sayacı", "https://platform.claude.com/docs/en/build-with-claude/token-counting"]],
+    dis: [["Vikipedi: Büyük dil modeli", "https://tr.wikipedia.org/wiki/B%C3%BCy%C3%BCk_dil_modeli"], ["AWS (Türkçe): Büyük dil modeli", "https://aws.amazon.com/tr/what-is/large-language-model/"], ["OpenAI: token sayacı (İngilizce)", "https://platform.claude.com/docs/en/build-with-claude/token-counting"]],
     neden: [
       "Kullanıcı sayısı dolaylı etkiler; asıl ölçü her isteğin taşıdığı metindir.",
       "Modeller metni token denen parçalara böler ve giren ile çıkan token sayısına göre ücretlendirir. Sohbet geçmişinin tamamını her seferinde göndermek maliyeti katlar; bu yüzden geçmişi kısaltmak ve önbellek kullanmak önemlidir.",
@@ -335,7 +336,7 @@ window.SORULAR = [
     o: ["Model yavaş olduğu için zorunludur; başka seçenek yoktur.", "Cevap üretilirken parça parça gösterilir; kullanıcı ilk sözcüğü hemen görür.", "İnternet bağlantısı kötü olduğunda kendiliğinden devreye girer.", "Daha ucuzdur, çünkü parça parça gönderilen metin daha az token tutar."],
     a: 1,
     ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"]],
-    dis: [["MDN: Server-sent events", "https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events"]],
+    dis: [["Vikipedi: Büyük dil modeli", "https://tr.wikipedia.org/wiki/B%C3%BCy%C3%BCk_dil_modeli"], ["Vikipedi: Gerçek zamanlı veri akışı", "https://tr.wikipedia.org/wiki/Ger%C3%A7ek_zamanl%C4%B1_veri_ak%C4%B1%C5%9F%C4%B1"], ["MDN: Server-sent events (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events"]],
     neden: [
       "Zorunlu değildir; cevabı tek parça beklemek de mümkündür. Tercih meselesidir.",
       "Kullanıcı deneyimi için yapılır. On saniye boş ekran yerine ilk saniyede akan metin görmek bekleme hissini ortadan kaldırır. ChatGPT ve benzeri arayüzler bu yüzden akar.",
@@ -347,7 +348,7 @@ window.SORULAR = [
     o: ["Model bunu yapamaz; dil modelleri yalnız özet üretir, sorun yok.", "Bu bir istem enjeksiyonudur; kullanıcı metni veri sayılmalı, modele e-posta erişimi verilmemeli.", "Kullanıcıyı yasaklamak yeterlidir; sorun bu kişiyle sınırlıdır.", "Duyurulara \"talimat\" kelimesinin girilmesi yasaklanır."],
     a: 1,
     ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"], ["Hafta 5", "Gerçek olay: eklentiye gömülen \"her şeyi sil\" emri", "../hafta-05/#olay"]],
-    dis: [["OWASP: dil modeli uygulamaları için ilk 10 risk", "https://owasp.org/projects/top-10-for-large-language-model-applications"], ["Simon Willison: prompt injection yazı dizisi", "https://simonwillison.net/series/prompt-injection/"]],
+    dis: [["Microsoft Learn (Türkçe): İstem enjeksiyonu", "https://learn.microsoft.com/tr-tr/azure/ai-services/openai/concepts/prompt-engineering"], ["Vikipedi: Büyük dil modeli", "https://tr.wikipedia.org/wiki/B%C3%BCy%C3%BCk_dil_modeli"], ["OWASP: dil modeli uygulamaları için ilk 10 risk (İngilizce)", "https://owasp.org/projects/top-10-for-large-language-model-applications"]],
     neden: [
       "Model, metindeki talimatı gerçek talimattan ayırt edemeyebilir. Erişimi varsa yapabilir; bu yüzden erişim verilmez.",
       "Savunma üç katmanlıdır: kullanıcı metnini açıkça \"veri\" olarak çerçevele, modele yalnız gereken veriyi ve aracı ver (en az yetki), modelin çıktısını doğrudan işlem yapan bir komut gibi çalıştırma. Enjeksiyon tamamen engellenemez, zararı sınırlanır.",
@@ -359,7 +360,7 @@ window.SORULAR = [
     o: ["Modele \"uydurma\" demek yeterlidir.", "Belgeden ilgili parçaları bulup isteme ekleyen RAG yaklaşımı.", "Modeli kulüp belgeleriyle sıfırdan eğitmek.", "Botu yalnız \"evet\" ve \"hayır\" cevabıyla sınırlamak."],
     a: 1,
     ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"]],
-    dis: [["Wikipedia: Retrieval-augmented generation", "https://en.wikipedia.org/wiki/Retrieval-augmented_generation"]],
+    dis: [["AWS (Türkçe): RAG", "https://aws.amazon.com/tr/what-is/retrieval-augmented-generation/"], ["Microsoft Learn (Türkçe): RAG", "https://learn.microsoft.com/tr-tr/azure/search/retrieval-augmented-generation-overview"], ["Wikipedia: Retrieval-augmented generation (İngilizce)", "https://en.wikipedia.org/wiki/Retrieval-augmented_generation"]],
     neden: [
       "Talimat uydurmayı azaltır ama model bilmediği şeyi bilmez; tüzük modelin eğitiminde yoktur.",
       "RAG iki adımdır: ara ve üret. Soru gelince tüzükten ilgili paragraflar bulunur, istemin içine konur, model o metne dayanarak cevaplar. Belge değişince yalnız belge güncellenir, model değil.",
@@ -371,7 +372,7 @@ window.SORULAR = [
     o: ["Kelime kelime metin araması; `LIKE` sorgusu iki ilanı bulur.", "Anlam vektörlerine (embedding) dayalı vektör arama.", "Büyük ve küçük harf duyarsız arama; yazım farkı böyle çözülür.", "Düzenli ifade (regex) ile arama; kalıp her iki ilana uyar."],
     a: 1,
     ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"], ["Hafta 6", "Özet, 3: tablo mu doküman mı?", "../hafta-06/#ozet"]],
-    dis: [["OpenAI: embedding rehberi", "https://developers.openai.com/api/docs/guides/embeddings"], ["Supabase: yapay zekâ ve vektörler", "https://supabase.com/docs/guides/ai"]],
+    dis: [["AWS (Türkçe): Gömme (embedding)", "https://aws.amazon.com/tr/what-is/embeddings-in-machine-learning/"], ["AWS (Türkçe): Vektör veritabanı", "https://aws.amazon.com/tr/what-is/vector-databases/"], ["OpenAI: embedding rehberi (İngilizce)", "https://developers.openai.com/api/docs/guides/embeddings"]],
     neden: [
       "\"Cüzdan\" ve \"para çantası\" ortak sözcük içermez; kelime araması ikisini bulamaz.",
       "Embedding, bir metni sayı dizisine çevirir; anlamca yakın metinlerin sayıları birbirine yakın düşer. Vektör veritabanı bu yakınlığa göre arar. RAG'ın arama adımı da aynı tekniği kullanır.",
@@ -383,7 +384,7 @@ window.SORULAR = [
     o: ["Kullanıcının asla göremediği, sızmayan gizli bir alandır; şifre koyulabilir.", "Ürünün rolünü ve sınırlarını belirleyen, her istekte giden talimat; sızabilir, içine sır koyulmaz.", "Modelin eğitim verisidir.", "Model hata verince gösterilen mesajdır."],
     a: 1,
     ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"], ["Hafta 5", "Özet, 8: talimat dosyası", "../hafta-05/#ozet"]],
-    dis: [["Anthropic: sistem istemleri", "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"]],
+    dis: [["Vikipedi: İstem mühendisliği", "https://tr.wikipedia.org/wiki/%C4%B0stem_m%C3%BChendisli%C4%9Fi"], ["AWS (Türkçe): İstem mühendisliği", "https://aws.amazon.com/tr/what-is/prompt-engineering/"], ["Anthropic: sistem istemleri (İngilizce)", "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"]],
     neden: [
       "Kullanıcılar çeşitli yollarla sistem istemini modele söyletebilir. Şifre ya da anahtar asla buraya yazılmaz.",
       "Sistem istemi \"sen bir kulüp asistanısın, yalnız kulüp konularında cevap ver, Türkçe yaz\" gibi çerçevedir. Davranışı şekillendirir ama güvenlik duvarı değildir.",
@@ -395,7 +396,7 @@ window.SORULAR = [
     o: ["Serbest metin cevabı olduğu gibi kaydetmek.", "JSON gibi yapılandırılmış biçim istemek ve kaydetmeden önce şemayla doğrulamak.", "Modelin çıktısını doğrudan kod olarak çalıştırmak.", "Tarih alanını kullanıcı elle yazsın, geri kalanını model üretsin."],
     a: 1,
     ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"], ["Hafta 6", "Özet, 2: kısıtlar, veritabanının kendi kalkanı", "../hafta-06/#ozet"]],
-    dis: [["OpenAI: yapılandırılmış çıktı", "https://developers.openai.com/api/docs/guides/structured-outputs"], ["JSON Schema", "https://json-schema.org/"]],
+    dis: [["json.org (Türkçe)", "https://www.json.org/json-tr.html"], ["Vikipedi: JSON", "https://tr.wikipedia.org/wiki/JSON"], ["OpenAI: yapılandırılmış çıktı (İngilizce)", "https://developers.openai.com/api/docs/guides/structured-outputs"]],
     neden: [
       "Serbest metin veritabanına sığmaz; \"tarih\" alanını ayıklamak her seferinde ayrı sorun olur.",
       "Modern API'ler yapılandırılmış çıktı destekler. Yine de gelen JSON'u kontrol etmeden güvenme: tarih biçimi bozuk olabilir, alan eksik olabilir. Doğrula, sonra kaydet.",
@@ -419,7 +420,7 @@ window.SORULAR = [
     o: ["Metni olduğu gibi dış API'ye göndermek; özet için bütün bağlam gerekir.", "Göndermeden önce kişisel veriyi çıkarmak ya da maskelemek, hizmetin veri politikasına bakmak.", "Adları küçük harfe çevirmek; bu anonimleştirme için yeterlidir.", "Önlem gerekmez; yapay zekâ servisleri kişisel veriyi saklamaz."],
     a: 1,
     ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"], ["Hafta 6", "Özet, 5: RLS, aynı istek üç farklı cevap", "../hafta-06/#ozet"]],
-    dis: [["KVKK resmî sitesi", "https://www.kvkk.gov.tr/"]],
+    dis: [["KVKK resmî sitesi", "https://www.kvkk.gov.tr/"], ["Vikipedi: Genel Veri Koruma Tüzüğü", "https://tr.wikipedia.org/wiki/Genel_Veri_Koruma_T%C3%BCz%C3%BC%C4%9F%C3%BC"], ["KVKK resmî sitesi (İngilizce)", "https://www.kvkk.gov.tr/"]],
     neden: [
       "Kişisel veriyi üçüncü bir tarafa göndermek veri aktarımıdır ve kurala bağlıdır.",
       "Özet için ad ve telefon gerekmez; göndermeden sil ya da `[AD]` gibi yer tutucuyla değiştir. Veri en az ilkesi hem hukuken hem güvenlik açısından doğru yoldur.",
@@ -445,7 +446,7 @@ window.SORULAR = [
     o: ["Her gönderimde site otomatik yeniden kurulur ve yayınlanır.", "Site yalnız bir kez yüklenir, sonra elle güncellenir.", "Depo Vercel'e taşınır ve GitHub'dan silinir.", "Yalnız ücretli hesaplarda yayın yapılır."],
     a: 0,
     ref: [["Hafta 4", "Dört fikir, 4: önce yayınla, sonra geliştir", "../hafta-04/#fikirler"], ["Hafta 8", "Özet, 2 ve 3: deploy'a basınca ne olur, her dal bir adres", "../hafta-08/#ozet"]],
-    dis: [["Vercel: dağıtımlar", "https://vercel.com/docs/deployments"], ["Netlify belgeleri", "https://docs.netlify.com/"]],
+    dis: [["Vikipedi: Sürekli entegrasyon", "https://tr.wikipedia.org/wiki/S%C3%BCrekli_entegrasyon"], ["AWS (Türkçe): sürekli teslim", "https://aws.amazon.com/tr/devops/continuous-delivery/"], ["Vercel: dağıtımlar (İngilizce)", "https://vercel.com/docs/deployments"]],
     neden: [
       "Bu \"sürekli dağıtım\" (CD) kavramıdır. Kodu gönderirsin, dakikalar içinde canlı adres güncellenir. Dersin \"önce yayınla\" kuralı bu kolaylığa dayanır.",
       "Elle yükleme eski yöntemdir; bu hizmetlerin varlık nedeni otomasyondur.",
@@ -457,7 +458,7 @@ window.SORULAR = [
     o: ["Yalnız alan adı ve HTTPS sertifikası verir.", "Veritabanı, kimlik doğrulama, depolama ve API'yi hazır verir; erişim kuralları sana kalır.", "Sitenin tasarımını ve sayfalarını otomatik üretir.", "Senin verinle bir yapay zekâ modeli eğitir ve sunar."],
     a: 1,
     ref: [["Hafta 4", "Dört fikir, 2: hazır servisler", "../hafta-04/#fikirler"], ["Hafta 6", "Özet, 4 ve 5: otomatik API ve RLS", "../hafta-06/#ozet"]],
-    dis: [["Supabase belgeleri", "https://supabase.com/docs"], ["Firebase belgeleri", "https://firebase.google.com/docs"]],
+    dis: [["Vikipedi: Firebase", "https://tr.wikipedia.org/wiki/Firebase"], ["Azure sözlüğü (Türkçe): PaaS nedir", "https://azure.microsoft.com/tr-tr/resources/cloud-computing-dictionary/what-is-paas"], ["Supabase belgeleri (İngilizce)", "https://supabase.com/docs"]],
     neden: [
       "Alan adı ayrı bir iştir; BaaS verinin ve kimliğin arkasındaki programı verir.",
       "Dört parça hazır gelir, sen tarayıcıdan bağlanırsın. Tuzak: varsayılan ayarlarla herkes her veriyi okuyabilir. Satır düzeyinde erişim kuralı (RLS) yazmak senin işindir.",
@@ -469,7 +470,7 @@ window.SORULAR = [
     o: ["Sunucu olmadan çalışan bir yöntemdir; hiçbir makine kullanılmaz.", "İstek gelince bulutta kısa süre çalışıp biten kod; anahtar saklamak için uygun yer.", "Yalnız Python ile yazılır.", "Bir veritabanı türüdür."],
     a: 1,
     ref: [["Hafta 8", "Özet, 4 ve 6: anahtar nereye gider, bölge", "../hafta-08/#ozet"], ["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"]],
-    dis: [["Wikipedia: Serverless computing", "https://en.wikipedia.org/wiki/Serverless_computing"], ["Vercel: fonksiyonlar", "https://vercel.com/docs/functions"]],
+    dis: [["AWS (Türkçe): Sunucusuz bilişim", "https://aws.amazon.com/tr/what-is/serverless-computing/"], ["Azure sözlüğü (Türkçe): Sunucusuz bilişim nedir", "https://azure.microsoft.com/tr-tr/resources/cloud-computing-dictionary/what-is-serverless-computing"], ["Wikipedia: Serverless computing (İngilizce)", "https://en.wikipedia.org/wiki/Serverless_computing"]],
     neden: [
       "Sunucu vardır ama sen görmezsin; bulut sağlayıcı yönetir. \"Sunucusuz\" adı yanıltıcıdır.",
       "Vercel ve Netlify'daki fonksiyonlar, Supabase Edge Functions bu türdür. Tarayıcı fonksiyona gider, fonksiyon ortam değişkenindeki anahtarla dış API'ye gider. Statik site ile tam arka uç arasındaki boşluğu doldurur.",
@@ -481,7 +482,7 @@ window.SORULAR = [
     o: ["Yeni bir veritabanı türü; verileri dünyaya dağıtır.", "Dosyaların kopyalarını dünyaya dağıtır, kullanıcıya en yakın yerden verir.", "Alan adı kaydeder ve DNS ayarlarını yönetir.", "Tarayıcıya kurulan, sayfaları önbelleğe alan bir eklenti."],
     a: 1,
     ref: [["Hafta 8", "Özet, 1: bulut kimin elinde", "../hafta-08/#ozet"], ["Hafta 9", "Önbellek ve performans; sırası gelince açılır"]],
-    dis: [["Wikipedia: İçerik dağıtım ağı", "https://tr.wikipedia.org/wiki/%C4%B0%C3%A7erik_da%C4%9F%C4%B1t%C4%B1m_a%C4%9F%C4%B1"]],
+    dis: [["AWS (Türkçe): CDN", "https://aws.amazon.com/tr/what-is/cdn/"], ["Vikipedi: İçerik dağıtım ağı", "https://tr.wikipedia.org/wiki/%C4%B0%C3%A7erik_da%C4%9F%C4%B1t%C4%B1m_a%C4%9F%C4%B1"], ["Wikipedia: İçerik dağıtım ağı (İngilizce)", "https://tr.wikipedia.org/wiki/%C4%B0%C3%A7erik_da%C4%9F%C4%B1t%C4%B1m_a%C4%9F%C4%B1"]],
     neden: [
       "CDN veri saklamaz, dosya dağıtır.",
       "Muş'taki öğrenci siteyi Frankfurt'taki sunucudan değil en yakın kopyadan alır. Görseller, CSS ve JavaScript için büyük fark yaratır. GitHub Pages ve Vercel dosyalarını zaten CDN üstünden verir.",
@@ -493,7 +494,7 @@ window.SORULAR = [
     o: ["Her gönderimde test koşan, siteyi kuran, hatada birleştirmeyi engelleyen otomasyon.", "GitHub'ın takım içi sohbet ve bildirim özelliğidir.", "Tarayıcıda çalışan, depoyu düzenleyen kod editörüdür.", "GitHub Pages'in yeniden adlandırılmış hâlidir."],
     a: 0,
     ref: [["Hafta 5", "Özet, 1 ve 4: main'e giden yol, koruma kuralı", "../hafta-05/#ozet"], ["Hafta 8", "Özet, 2: deploy'a basınca arkada ne olur?", "../hafta-08/#ozet"]],
-    dis: [["GitHub Docs: Actions", "https://docs.github.com/en/actions"]],
+    dis: [["Vikipedi: Sürekli entegrasyon", "https://tr.wikipedia.org/wiki/S%C3%BCrekli_entegrasyon"], ["Vikipedi: GitHub", "https://tr.wikipedia.org/wiki/GitHub"], ["GitHub Docs: Actions (İngilizce)", "https://docs.github.com/en/actions"]],
     neden: [
       "Bu \"sürekli entegrasyon\" (CI) kavramıdır: her değişiklikte testler kendiliğinden koşar, kırmızıysa pull request birleştirilmez. Takım çalışmasının güvenlik ağıdır.",
       "Sohbet için Discussions ve Issues var; Actions otomasyondur.",
@@ -505,7 +506,7 @@ window.SORULAR = [
     o: ["Hemen birleştirmek; yapay zekâ incelemesi insan incelemesinin yerini tutar.", "Yardımcı olarak kullanmak; en az bir insan incelemesi ve yeşil testler gerekir.", "Yapay zekâ incelemesine hiç güvenmemek ve özelliği kapatmak.", "Testleri atlayıp yalnız yapay zekâ raporuna bakmak."],
     a: 1,
     ref: [["Hafta 5", "Özet, 3 ve 10: PR bir tartışma alanıdır, kod üç katmandan geçer", "../hafta-05/#ozet"]],
-    dis: [["GitHub Docs: pull request incelemeleri", "https://docs.github.com/en/pull-requests/reference/pull-request-reviews"]],
+    dis: [["Vikipedi: GitHub Copilot", "https://tr.wikipedia.org/wiki/GitHub_Copilot"], ["GitHub Docs: pull request incelemeleri (İngilizce)", "https://docs.github.com/en/pull-requests/reference/pull-request-reviews"]],
     neden: [
       "\"Sorun yok\" demesi, modelin bakmadığı yerde sorun olmadığı anlamına gelmez.",
       "Yapay zekâ incelemesi yazım hatası, unutulmuş kontrol ve bilinen kalıpları iyi yakalar. Bu özelliğin takımın kararına uyup uymadığını, kullanıcıya ne yapacağını insan bilir. İkisi birlikte güçlüdür.",
@@ -517,7 +518,7 @@ window.SORULAR = [
     o: ["`.env` depoya konur ki takım anahtarları görsün.", "Gizli anahtarları tutar ve `.gitignore` ile depodan dışlanır.", "`.env` CSS ayarlarını tutar.", "`.gitignore` yapay zekâ ajanının ayar dosyasıdır."],
     a: 1,
     ref: [["Hafta 5", "Özet, 10: gizli anahtar depoya girmez", "../hafta-05/#ozet"], ["Hafta 8", "Özet, 4: anahtar nereye gider", "../hafta-08/#ozet"]],
-    dis: [["GitHub Docs: dosyaları yok saymak (.gitignore)", "https://docs.github.com/en/get-started/git-basics/ignoring-files"]],
+    dis: [["Pro Git kitabı (Türkçe)", "https://git-scm.com/book/tr/v2"], ["Vikipedi: Git", "https://tr.wikipedia.org/wiki/Git"], ["GitHub Docs: dosyaları yok saymak (.gitignore) (İngilizce)", "https://docs.github.com/en/get-started/git-basics/ignoring-files"]],
     neden: [
       "Depo özel olsa bile geçmişte kalan anahtar bir gün herkese açık olabilir. Takım paylaşımı için şifre yöneticisi ya da barındırma paneli kullanılır.",
       "Örnek dosya olarak `.env.example` depoya girer (anahtarsız), gerçek `.env` girmez. Vercel ya da Supabase panelinde aynı değişkenler tanımlanır.",
@@ -531,7 +532,7 @@ window.SORULAR = [
     o: ["`robots.txt` sitenin yönetici şifresini saklayan dosyadır.", "Botlara hangi sayfaları taramamalarını söyler; nezaket kuralıdır, zorlayıcı değildir.", "`robots.txt` yazmak siteyi arama sonuçlarından tamamen siler.", "Yalnız robot ve otomasyon konulu sitelerde kullanılır."],
     a: 1,
     ref: [["Hafta 1", "Yapay zekâ çağında yazılımcı olmak", "../hafta-01/#yapay-zeka"], ["Bu havuz", "Derste ayrıca işlenmedi; gerekçeyi oku"]],
-    dis: [["Google: robots.txt'ye giriş", "https://developers.google.com/search/docs/crawling-indexing/robots/intro"], ["OpenAI: tarayıcı botları", "https://developers.openai.com/api/docs/bots"]],
+    dis: [["Google (Türkçe): robots.txt'ye giriş", "https://developers.google.com/search/docs/crawling-indexing/robots/intro?hl=tr"], ["Vikipedi: Robot engelleme standardı", "https://tr.wikipedia.org/wiki/Robot_engelleme_standard%C4%B1"], ["Google: robots.txt'ye giriş (İngilizce)", "https://developers.google.com/search/docs/crawling-indexing/robots/intro"]],
     neden: [
       "Şifreyle ilgisi yoktur; herkesin okuyabildiği bir metin dosyasıdır.",
       "Yapay zekâ şirketlerinin tarayıcıları (GPTBot, ClaudeBot gibi) kendilerini bir adla tanıtır; `robots.txt` o ada \"girme\" diyebilir. Uyan uyar, uymayanı ancak sunucu kuralları ya da CDN engeli durdurur. Bu konu bugün içerik üreticilerinin en çok tartıştığı başlıklardan biridir.",
@@ -543,7 +544,7 @@ window.SORULAR = [
     o: ["Hiçbir etkisi yoktur; özet de siteye bağlantı verir.", "Kullanıcı özette cevabı bulunca siteye tıklamayabilir; ziyaretçi azalabilir.", "Bütün bilgi siteleri kapanacaktır; içerik üretmenin anlamı kalmaz.", "Yalnız reklam gelirlerini etkiler, içeriği etkilemez."],
     a: 1,
     ref: [["Hafta 1", "Yapay zekâ çağında yazılımcı olmak", "../hafta-01/#yapay-zeka"], ["Bu havuz", "Derste ayrıca işlenmedi; gerekçeyi oku"]],
-    dis: [["Google Arama: yapay zekâ özellikleri ve siteniz", "https://developers.google.com/search/docs/appearance/ai-features"]],
+    dis: [["Google (Türkçe): Yapay zekâ özellikleri ve siteniz", "https://developers.google.com/search/docs/appearance/ai-features?hl=tr"], ["Vikipedi: Arama motoru optimizasyonu", "https://tr.wikipedia.org/wiki/Arama_motoru_optimizasyonu"], ["Google Arama: yapay zekâ özellikleri ve siteniz (İngilizce)", "https://developers.google.com/search/docs/appearance/ai-features"]],
     neden: [
       "Arama, çoğu sitenin ana ziyaretçi kaynağıdır; oradaki değişim doğrudan etkiler.",
       "Arama motoru optimizasyonunun yanına \"üretken motor optimizasyonu\" diye yeni bir kavram girdi: açık yapı, doğru alt metin, yapılandırılmış veri ve güvenilir kaynak gösterimi, özetlerde anılmak için önemlidir.",
@@ -555,7 +556,7 @@ window.SORULAR = [
     o: ["Her sayfaya eklenmesi zorunlu yeni bir HTML etiketidir.", "Sitenin kökünde, dil modellerine içeriği özetleyen Markdown dosya önerisi; henüz standart değil.", "Açık kaynaklı bir yapay zekâ modelinin adıdır.", "Yapay zekâ ile yazılan CSS dosyalarının yeni uzantısıdır."],
     a: 1,
     ref: [["Hafta 2", "Yayın: GitHub Pages (kök klasör ve dosya mantığı)", "../hafta-02/#yayin"], ["Bu havuz", "Derste ayrıca işlenmedi; gerekçeyi oku"]],
-    dis: [["llms.txt önerisi", "https://llmstxt.org/"]],
+    dis: [["Vikipedi: Markdown", "https://tr.wikipedia.org/wiki/Markdown"], ["Vikipedi: Büyük dil modeli", "https://tr.wikipedia.org/wiki/B%C3%BCy%C3%BCk_dil_modeli"], ["llms.txt önerisi (İngilizce)", "https://llmstxt.org/"]],
     neden: [
       "HTML etiketi değil, ayrı bir dosyadır.",
       "Fikir basit: sayfalar insan için tasarlanır, modeller için kısa ve temiz bir harita ver. Bazı belgeleme siteleri uyguluyor; etkisi ve yaygınlığı tartışılıyor. Bilmen gereken: var, isteğe bağlı, standart olma yolunda.",
@@ -567,7 +568,7 @@ window.SORULAR = [
     o: ["Avantajı yoktur; her zaman sunucu kullanılır.", "Veri cihazdan çıkmaz ve fatura yok; bedeli küçük model ve cihaz gücüne bağımlılık.", "Her zaman sunucudaki modelden daha güçlüdür.", "Yalnız telefonlarda çalışır; masaüstü tarayıcı desteklemez."],
     a: 1,
     ref: [["Hafta 12", "Çapraz platform; sırası gelince açılır"], ["Bu havuz", "Derste ayrıca işlenmedi; gerekçeyi oku"]],
-    dis: [["Chrome: tarayıcıya gömülü yapay zekâ", "https://developer.chrome.com/docs/ai/built-in"], ["Transformers.js", "https://huggingface.co/docs/transformers.js/index"]],
+    dis: [["Google (Türkçe): Tarayıcıya gömülü yapay zekâ", "https://developer.chrome.com/docs/ai/built-in?hl=tr"], ["Chrome: tarayıcıya gömülü yapay zekâ (İngilizce)", "https://developer.chrome.com/docs/ai/built-in"]],
     neden: [
       "Gizlilik ve maliyet açısından ciddi avantajı vardır; doğru yerde kullanılır.",
       "Tarayıcılar artık grafik kartına erişebiliyor; küçük modeller sayfada çalışıyor. Yazım düzeltme, görsel sınıflama, basit özet gibi işler için uygundur. Büyük model gerektiren işler sunucuda kalır.",
@@ -579,7 +580,7 @@ window.SORULAR = [
     o: ["Hiçbir şey; ajanlar insan gibi tıklar, sayfa yapısı önemli değildir.", "Anlamlı HTML, etiketli formlar ve makine okunur veri artık ajanlar için de gerekir.", "Siteler ajanlara tamamen kapatılmalıdır; başka yol yoktur.", "Her sayfaya CAPTCHA koymak yeterlidir; ajan geçemez."],
     a: 1,
     ref: [["Hafta 2", "Sayfa bölümleri: header, nav, main, footer", "../hafta-02/#bolumler"], ["Hafta 2", "İyi bir alt metni", "../hafta-02/#yol"]],
-    dis: [["web.dev: erişilebilirlik", "https://web.dev/learn/accessibility"], ["schema.org: yapılandırılmış veri", "https://schema.org/"]],
+    dis: [["Vikipedi: Web erişilebilirliği", "https://tr.wikipedia.org/wiki/Web_eri%C5%9Filebilirli%C4%9Fi"], ["web.dev: erişilebilirlik (İngilizce)", "https://web.dev/learn/accessibility"]],
     neden: [
       "Ajan, sayfayı bir ekran okuyucu gibi yapısından okur. Yapısız sayfada takılır.",
       "Erişilebilirlik için yapılan her şey ajanlara da hizmet eder: `label` ile bağlı form alanları, `nav` ve `main`, alt metinler, temiz API. Aynı zamanda ajan trafiği insan trafiğinden ayrılmalı; aksi hâlde sınırlar ve faturalar şaşar.",
@@ -591,7 +592,7 @@ window.SORULAR = [
     o: ["Hiçbir şey değişmez; okuyucu ikisini ayırt edemez.", "İçeriğin kaynağını belirtmek ve özgün içerik üretmek önem kazanır.", "Görseller web'den kaldırılacak, yalnız metin kalacaktır.", "Yalnız metin etkilenir, görsel etkilenmez."],
     a: 1,
     ref: [["Hafta 1", "Yapay zekâ çağında yazılımcı olmak", "../hafta-01/#yapay-zeka"], ["Bu havuz", "Derste ayrıca işlenmedi; gerekçeyi oku"]],
-    dis: [["C2PA: içerik kaynağı standardı", "https://c2pa.org/"], ["Content Credentials", "https://contentcredentials.org/"]],
+    dis: [["Vikipedi: Deepfake", "https://tr.wikipedia.org/wiki/Deepfake"], ["Vikipedi: Üretken yapay zeka", "https://tr.wikipedia.org/wiki/%C3%9Cretken_yapay_zeka"], ["C2PA: içerik kaynağı standardı (İngilizce)", "https://c2pa.org/"]],
     neden: [
       "Okuyucunun güveni ve arama görünürlüğü doğrudan etkilenir.",
       "İki eğilim birlikte: içerik kaynağını belgeleyen standartlar (örneğin kamera ve düzenleme geçmişini taşıyan kimlik bilgileri) ve özgün, deneyime dayalı içeriğin öne çıkması. Kopyanın kopyası olan içerik hem okuyucu hem model için değersizleşir.",
@@ -603,7 +604,7 @@ window.SORULAR = [
     o: ["Yapay zekâ alt metinleri otomatik yazdığı için erişilebilirlik artık gereksizdir.", "Yapay zekâ alt metin yazmayı kolaylaştırır ama çıktı kontrol edilmeli; erişilebilir site herkese hizmet eder.", "Erişilebilirlik yalnız yasal bir zorunluluktur; kullanıcıya katkısı yoktur.", "Erişilebilirlik yalnız renk körlüğü ve kontrastla ilgilidir."],
     a: 1,
     ref: [["Hafta 2", "İyi bir alt metni", "../hafta-02/#yol"], ["Hafta 2", "Sayfa bölümleri", "../hafta-02/#bolumler"]],
-    dis: [["W3C WAI: erişilebilirliğe giriş", "https://www.w3.org/WAI/fundamentals/accessibility-intro/"]],
+    dis: [["Vikipedi: Web erişilebilirliği", "https://tr.wikipedia.org/wiki/Web_eri%C5%9Filebilirli%C4%9Fi"], ["Vikipedi: Erişilebilirlik", "https://tr.wikipedia.org/wiki/Eri%C5%9Filebilirlik"], ["W3C WAI: erişilebilirliğe giriş (İngilizce)", "https://www.w3.org/WAI/fundamentals/accessibility-intro/"]],
     neden: [
       "Otomatik alt metin \"bir görsel\" gibi boş ya da yanlış olabilir. Araç yardım eder, sorumluluğu almaz.",
       "Bir işi üç kazanç: aynı yapı insan, bot ve ajan için okunur. Bu yüzden derste semantik HTML'i ilk haftadan önemsiyoruz.",
@@ -615,7 +616,7 @@ window.SORULAR = [
     o: ["İş kalmaz; ürünü baştan sona yapay zekâ yapar.", "Karar vermek, parçaları seçmek, üretilen kodu anlamak ve doğrulamak.", "Yalnız istem yazmak; çıktıyı okumak gerekmez.", "Yalnız görsel tasarım yapmak; kodla ilgili kararlar araçta kalır."],
     a: 1,
     ref: [["Hafta 1", "Yapay zekâ çağında yazılımcı olmak", "../hafta-01/#yapay-zeka"], ["Hafta 4", "Dört fikir, 3: kontrol senin işin", "../hafta-04/#fikirler"]],
-    dis: [["Stack Overflow 2025 geliştirici anketi: yapay zekâ", "https://survey.stackoverflow.co/2025/ai"]],
+    dis: [["Vikipedi: Yazılım mühendisliği", "https://tr.wikipedia.org/wiki/Yaz%C4%B1l%C4%B1m_m%C3%BChendisli%C4%9Fi"], ["Vikipedi: Üretken yapay zeka", "https://tr.wikipedia.org/wiki/%C3%9Cretken_yapay_zeka"], ["Stack Overflow 2025 geliştirici anketi: yapay zekâ (İngilizce)", "https://survey.stackoverflow.co/2025/ai"]],
     neden: [
       "Yazma işi azalıyor; karar, doğrulama ve sorumluluk işi artıyor. İş değişiyor, bitmiyor.",
       "Bu dersin ana fikri: HTML ve CSS'i kodu okuyabilmek için öğrendin; asıl iş ürünün parçalarını seçmek, yapay zekânın ürettiğini anlamak ve doğrulamak, güvenli ve ucuz çalıştırmak.",
