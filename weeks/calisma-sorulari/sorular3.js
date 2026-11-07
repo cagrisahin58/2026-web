@@ -5,7 +5,7 @@ window.SORULAR = window.SORULAR.concat([
     q: "\"Açıklama yaz\" düğmesine basınca ekran 8 saniye donuyor, bazen de hiç cevap gelmiyor. Kullanıcı deneyimi için ne eksik?",
     o: ["Daha büyük bir model; büyük model hızlı cevap verir.", "Bekleme göstergesi, zaman aşımı, hata mesajı ve yeniden deneme.", "Düğmeyi kaldırmak; özellik sorun çıkarıyor.", "Cevabı sayfa açılırken önceden üretmek."],
     a: 1,
-    ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"], ["Hafta 8", "Özet, 8: deploy ettim, bitti mi?", "../hafta-08/#ozet"]],
+    ref: [["Hafta 7", "Özet: dört fikir", "../hafta-07/#ozet"], ["Hafta 8", "Özet, 8: deploy ettim, bitti mi?", "../hafta-08/#ozet"]],
     dis: [["Vikipedi: Kullanıcı deneyimi", "https://tr.wikipedia.org/wiki/Kullan%C4%B1c%C4%B1_deneyimi"], ["Vikipedi: Zamanaşımı (bilgisayar)", "https://tr.wikipedia.org/wiki/Zamana%C5%9F%C4%B1m%C4%B1_%28bilgisayar%29"], ["MDN: fetch ve zaman aşımı (AbortController) (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/API/AbortController"]],
     neden: [
       "Model büyüdükçe cevap genelde yavaşlar; sorun hız değil, beklemenin yönetilmemesi.",
@@ -17,7 +17,7 @@ window.SORULAR = window.SORULAR.concat([
     q: "SSS botuna her gün yüzlerce kez aynı on soru soruluyor ve her biri modele gidiyor. Maliyeti düşürmenin en etkili yolu?",
     o: ["Her cevabı sabit metin olarak koda gömmek.", "Sık soruların cevabını önbelleğe alıp modele gitmeden vermek.", "Daha kısa cevap istemek; token azalır.", "Botu gece kapatmak; gece istek gelmesin."],
     a: 1,
-    ref: [["Hafta 9", "Önbellek ve performans; sırası gelince açılır"], ["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"]],
+    ref: [["Hafta 9", "Önbellek ve performans; sırası gelince açılır"], ["Hafta 7", "Özet, Fikir 2: her çağrı token sayar, faturayı üç fren durdurur", "../hafta-07/#ozet"]],
     dis: [["Vikipedi: Önbellek", "https://tr.wikipedia.org/wiki/%C3%96nbellek"], ["Vikipedi: Web önbelleği", "https://tr.wikipedia.org/wiki/Web_%C3%B6nbelle%C4%9Fi"], ["Anthropic: istem önbellekleme (İngilizce)", "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"]],
     neden: [
       "Koda gömmek bakımı zorlaştırır; yeni soru gelince bot işe yaramaz.",
@@ -29,7 +29,7 @@ window.SORULAR = window.SORULAR.concat([
     q: "Ürününde iki yapay zekâ işi var: gelen mesajı \"şikâyet, öneri, soru\" diye sınıflamak ve haftalık bülten yazmak. Model seçimi için hangisi mantıklı?",
     o: ["İkisi için de en büyük ve en pahalı model.", "Basit ve sık işe küçük model, nitelikli yazıya güçlü model.", "İkisi için de en küçük model; para önemli.", "Model fark etmez; hepsi aynı sonucu verir."],
     a: 1,
-    ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"], ["Hafta 8", "Özet, 7: kart yoksa ne olur, kart varsa ne olur?", "../hafta-08/#ozet"]],
+    ref: [["Hafta 7", "Özet, Fikir 2: her çağrı token sayar, faturayı üç fren durdurur", "../hafta-07/#ozet"], ["Hafta 8", "Özet, 7: kart yoksa ne olur, kart varsa ne olur?", "../hafta-08/#ozet"]],
     dis: [["AWS (Türkçe): Büyük dil modeli", "https://aws.amazon.com/tr/what-is/large-language-model/"], ["Vikipedi: Büyük dil modeli", "https://tr.wikipedia.org/wiki/B%C3%BCy%C3%BCk_dil_modeli"], ["Anthropic: model seçimi (İngilizce)", "https://platform.claude.com/docs/en/about-claude/models/choosing-a-model"]],
     neden: [
       "Günde bin sınıflama için büyük model israftır; aynı doğruluğu küçük model verir.",
@@ -41,7 +41,7 @@ window.SORULAR = window.SORULAR.concat([
     q: "Aynı istemi iki kez gönderdin, model iki farklı cevap verdi. Bu bir hata mı?",
     o: ["Evet; model bozuk, sağlayıcıya bildirmelisin.", "Hayır; model olasılıksal çalışır, çıktı değişebilir; doğrulama gerekir.", "Evet; API anahtarı yanlış girilmiş.", "Hayır; ama bu yüzden model çıktısı hiçbir işe yaramaz."],
     a: 1,
-    ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"], ["Hafta 1", "Yapay zekâ çağında yazılımcı olmak: neredeyse doğru", "../hafta-01/#yapay-zeka"]],
+    ref: [["Hafta 7", "Özet: dört fikir", "../hafta-07/#ozet"], ["Hafta 1", "Yapay zekâ çağında yazılımcı olmak: neredeyse doğru", "../hafta-01/#yapay-zeka"]],
     dis: [["Vikipedi: Büyük dil modeli", "https://tr.wikipedia.org/wiki/B%C3%BCy%C3%BCk_dil_modeli"], ["Vikipedi: Halüsinasyon (yapay zekâ)", "https://tr.wikipedia.org/wiki/Hal%C3%BCsinasyon_%28yapay_zek%C3%A2%29"], ["Anthropic: temperature ve örnekleme parametreleri (İngilizce)", "https://platform.claude.com/docs/en/api/messages"]],
     neden: [
       "Değişkenlik tasarım gereğidir, arıza değil.",
@@ -53,7 +53,7 @@ window.SORULAR = window.SORULAR.concat([
     q: "Kullanıcıların yazdığı yorumları yapay zekâ ile düzenleyip sitede yayınlayan özellik yaptın. Model çıktısını ekrana basmadan önce ne gerekir?",
     o: ["Hiçbir şey; model düzgün ve güvenli yazar.", "Çıktıyı veri gibi ele al: metin olarak bas, süz, gerekirse onay koy.", "Yalnız yazım denetimi yeter.", "Yorumu doğrudan `innerHTML` ile sayfaya eklemek."],
     a: 1,
-    ref: [["Hafta 10", "Güvenlik açıklarının analizi; sırası gelince açılır"], ["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"]],
+    ref: [["Hafta 10", "Güvenlik açıklarının analizi; sırası gelince açılır"], ["Hafta 7", "Özet, Fikir 4: model talimatla veriyi aynı kanaldan okur", "../hafta-07/#ozet"]],
     dis: [["Vikipedi: Siteler arası betik çalıştırma", "https://tr.wikipedia.org/wiki/Siteler_aras%C4%B1_betik_%C3%A7al%C4%B1%C5%9Ft%C4%B1rma"], ["Vikipedi: Owasp", "https://tr.wikipedia.org/wiki/Owasp"], ["OWASP: XSS (İngilizce)", "https://community.owasp.org/attacks/xss/"]],
     neden: [
       "Model kullanıcıdan gelen metni işler; kullanıcı metne kötü niyetli kod ya da talimat gömmüş olabilir.",
@@ -65,7 +65,7 @@ window.SORULAR = window.SORULAR.concat([
     q: "Yapay zekâ özelliğin canlıda; neyin iyi gittiğini, neyin pahalı olduğunu bilmek istiyorsun. Ne kaydetmelisin, ne kaydetmemelisin?",
     o: ["Her şeyi: istemler, cevaplar, kullanıcı kimlikleri; ne kadar çok veri o kadar iyi.", "Ölçüleri (istek, token, maliyet, süre, hata) kaydet; kişisel içeriği kaydetme ya da maskele.", "Hiçbir şey; gizlilik için hiçbir günlük tutulmaz, fatura yeter.", "Yalnız fatura toplamını; gerisi gereksiz."],
     a: 1,
-    ref: [["Hafta 8", "Özet, 8: deploy ettim, bitti mi?", "../hafta-08/#ozet"], ["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"]],
+    ref: [["Hafta 8", "Özet, 8: deploy ettim, bitti mi?", "../hafta-08/#ozet"], ["Hafta 7", "Özet, Fikir 2: her çağrı token sayar, faturayı üç fren durdurur", "../hafta-07/#ozet"]],
     dis: [["KVKK resmî sitesi", "https://www.kvkk.gov.tr/"], ["Vikipedi: Günlük dosyası", "https://tr.wikipedia.org/wiki/G%C3%BCnl%C3%BCk_dosyas%C4%B1"], ["KVKK resmî sitesi (İngilizce)", "https://www.kvkk.gov.tr/"]],
     neden: [
       "Her istemi kimlikle birlikte saklamak kişisel veri yığını oluşturur; sızarsa en büyük zarar budur.",
@@ -101,7 +101,7 @@ window.SORULAR = window.SORULAR.concat([
     q: "İstemi değiştirdin, \"sanki daha iyi oldu\" diyorsun ama emin değilsin. Yapay zekâ özelliğinin kalitesini nasıl ölçersin?",
     o: ["Birkaç kez deneyip hisse göre karar vererek; göz yanılmaz.", "Beklenen cevabı belli bir soru kümesi (değerlendirme seti) ile her değişiklikte ölçmek.", "Modele \"bu daha iyi mi\" diye sorarak; model kendini bilir.", "Kullanıcılar şikâyet edene kadar bekleyerek."],
     a: 1,
-    ref: [["Hafta 11", "Kod analizi, test ve kalite; sırası gelince açılır"], ["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"]],
+    ref: [["Hafta 11", "Kod analizi, test ve kalite; sırası gelince açılır"], ["Hafta 7", "Özet: dört fikir", "../hafta-07/#ozet"]],
     dis: [["Vikipedi: Yazılım testi", "https://tr.wikipedia.org/wiki/Yaz%C4%B1l%C4%B1m_testi"], ["Vikipedi: Büyük dil modeli", "https://tr.wikipedia.org/wiki/B%C3%BCy%C3%BCk_dil_modeli"], ["Anthropic: değerlendirme (eval) oluşturmak (İngilizce)", "https://platform.claude.com/docs/en/test-and-evaluate/develop-tests"]],
     neden: [
       "His yanıltır; model olasılıksal olduğu için üç deneme hiçbir şey kanıtlamaz.",
@@ -249,7 +249,7 @@ window.SORULAR = window.SORULAR.concat([
     q: "Takım \"her yere yapay zekâ koyalım\" diyor: arama kutusuna, tarih seçiciye, sıralamaya. Doğru değerlendirme hangisi?",
     o: ["Evet; yapay zekâ her özelliği iyileştirir, kullanıcı bunu bekler.", "Kuralla çözüleni kuralla çöz; yapay zekâ belirsiz ve dilsel işlerde değer katar.", "Hayır; yapay zekâ hiçbir ürüne konmamalı, riski büyük.", "Yalnız pazarlama için \"yapay zekâ destekli\" yazmak yeter."],
     a: 1,
-    ref: [["Hafta 4", "Dört fikir, 2 ve 3", "../hafta-04/#fikirler"], ["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"]],
+    ref: [["Hafta 4", "Dört fikir, 2 ve 3", "../hafta-04/#fikirler"], ["Hafta 7", "Özet: dört fikir", "../hafta-07/#ozet"]],
     dis: [["Vikipedi: Üretken yapay zeka", "https://tr.wikipedia.org/wiki/%C3%9Cretken_yapay_zeka"], ["Vikipedi: Yapay zekâ", "https://tr.wikipedia.org/wiki/Yapay_zek%C3%A2"], ["Google PAIR: insan odaklı yapay zekâ rehberi (İngilizce)", "https://pair.withgoogle.com/guidebook/"]],
     neden: [
       "Tarihe göre sıralamak için modele gitmek yavaş, pahalı ve bazen yanlıştır.",
@@ -261,7 +261,7 @@ window.SORULAR = window.SORULAR.concat([
     q: "Bir havayolunun sitesindeki sohbet botu yolcuya var olmayan bir indirim kuralı anlattı; şirket \"botun sözleri bizi bağlamaz\" dedi, mahkeme şirketi sorumlu tuttu. Ürün geliştirici için ders nedir?",
     o: ["Sohbet botu koymamak; risk almaya değmez.", "Botun sözü şirketin sözüdür: belgeye dayandır, bilmiyorum diyebilsin, insana yönlendirsin.", "Bota \"söylediklerim bağlayıcı değildir\" yazdırmak yeter.", "Botu yalnız İngilizce çalıştırmak; yabancı dil bağlamaz."],
     a: 1,
-    ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"], ["Hafta 4", "Dört fikir, 3: kontrol senin işin", "../hafta-04/#fikirler"]],
+    ref: [["Hafta 7", "Özet, Fikir 4: model talimatla veriyi aynı kanaldan okur", "../hafta-07/#ozet"], ["Hafta 4", "Dört fikir, 3: kontrol senin işin", "../hafta-04/#fikirler"]],
     dis: [["Vikipedi: Sohbet robotu", "https://tr.wikipedia.org/wiki/Sohbet_robotu"], ["Vikipedi: Halüsinasyon (yapay zekâ)", "https://tr.wikipedia.org/wiki/Hal%C3%BCsinasyon_%28yapay_zek%C3%A2%29"], ["BBC haberi: Air Canada sohbet botu kararı (İngilizce)", "https://www.bbc.com/travel/article/20240222-air-canada-chatbot-misinformation-what-travellers-should-know"]],
     neden: [
       "Bot yararlıdır; mesele sınırlarıdır.",
@@ -297,7 +297,7 @@ window.SORULAR = window.SORULAR.concat([
     q: "Sitene bir sohbet botu ekliyorsun. Kullanıcıya karşı dürüst ve işe yarar tasarım için hangi üçlü doğrudur?",
     o: ["Botu insan gibi tanıtmak, her soruya cevap vermek, insan desteğini kaldırmak.", "Yapay zekâ olduğunu söylemek, bilmediğini söyleyebilmek, insana ulaşma yolu bırakmak.", "Botu gizli tutmak, yalnız İngilizce konuşturmak, kayıt tutmamak.", "Botu her sayfada açılır pencereyle zorlamak."],
     a: 1,
-    ref: [["Hafta 7", "API, kimlik ve dil modeli API'leri; sırası gelince açılır"], ["Hafta 1", "Yapay zekâ çağında yazılımcı olmak", "../hafta-01/#yapay-zeka"]],
+    ref: [["Hafta 7", "Özet, Fikir 4: model talimatla veriyi aynı kanaldan okur", "../hafta-07/#ozet"], ["Hafta 1", "Yapay zekâ çağında yazılımcı olmak", "../hafta-01/#yapay-zeka"]],
     dis: [["Vikipedi: Sohbet robotu", "https://tr.wikipedia.org/wiki/Sohbet_robotu"], ["Vikipedi: Yapay Zekâ Yasası", "https://tr.wikipedia.org/wiki/Yapay_Zek%C3%A2_Yasas%C4%B1"], ["AB Yapay Zekâ Yasası: şeffaflık yükümlülükleri (madde 50) (İngilizce)", "https://artificialintelligenceact.eu/article/50/"]],
     neden: [
       "İnsan gibi tanıtmak aldatmadır; her soruya cevap vermek uydurmaya kapı açar.",

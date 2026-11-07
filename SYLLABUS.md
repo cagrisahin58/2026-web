@@ -70,6 +70,8 @@ Proje: M1. İskelet takım deposundan yayında.
 
 Ürünün iş mantığı nerede çalışır? REST ve alternatiflerini, sunucusuz ve edge fonksiyonları, kimlik doğrulamayı ve API güvenliğini, ödeme ve e-posta API'lerini, dil modeli API'sini, streaming'i, maliyeti ve prompt injection'ı görürsün. Giriş akışını kurar ve ürüne ilk yapay zekâ özelliğini eklersin; API anahtarı sunucuda kalır.
 
+[Hafta 7 ders notu](https://cagrisahin58.github.io/2026-web/weeks/hafta-07/)
+
 ### Hafta 8 · Bulut ve yayına alma
 
 Ürün canlıya nasıl çıkar ve ayakta kalır? AWS, GCP ve Azure haritasını, PaaS'ı, konteyneri, CI/CD'yi, ortam değişkeni ve gizli anahtarı, alan adı, DNS ve HTTPS'i, izlemeyi ve fatura şokunu görürsün. Ürünü canlı bir adrese koyar, her gönderimde otomatik yayını kurar ve bir harcama sınırı koyarsın.
