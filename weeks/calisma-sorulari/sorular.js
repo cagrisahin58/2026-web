@@ -87,7 +87,7 @@ window.SORULAR = [
     ] },
   { n: 7, konu: "html", zorluk: 1,
     q: "`@media (max-width: 600px) { nav { flex-direction: column; } }` kuralı ne zaman uygulanır?",
-    o: ["Ekran 600 pikselden genişse.", "Ekran genişliği 600 piksel ve altındaysa.", "Yalnız sayfa yazdırılırken.", "Her zaman; sıra önemli değildir."],
+    o: ["Tarayıcı penceresi 600 pikselden genişse.", "Tarayıcı penceresinin (görüntü alanının) genişliği 600 piksel ve altındaysa.", "Yalnız sayfa yazdırılırken.", "Her zaman; sıra önemli değildir."],
     a: 1,
     ref: [["Hafta 3", "Telefon için tek bir medya sorgusu", "../hafta-03/#telefon"]],
     dis: [["web.dev (Türkçe): duyarlı web tasarımının temelleri", "https://web.dev/articles/responsive-web-design-basics?hl=tr"], ["Chrome DevTools (Türkçe): cihaz kipi", "https://developer.chrome.com/docs/devtools/device-mode?hl=tr"], ["MDN: media sorguları (İngilizce)", "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries/Using"]],
